@@ -1,0 +1,181 @@
+M9.5 — NEXT.JS PLAYBOOK (v2)
+==============================
+
+OBJETIVO
+--------
+Definir patrones técnicos concretos dentro de Next.js y recetas completas por tipo de proyecto.
+No enseña Next.js desde cero.
+Toma lo que M8.1 decidió y lo lleva a implementación concreta.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Arquitectura aprobada de M8.1 (rendering strategy, CMS, auth ya decididos)
+- Tipo de proyecto
+- Necesidad de SEO
+- Necesidad de auth
+- Necesidad de CMS
+- Necesidad de animación e interactividad
+
+NOTA SOBRE EL PROCESO
+----------------------
+La rendering strategy (SSG/ISR/SSR) y el server/client split ya se decidieron en M8.1.
+M9.5 no los redecide. M9.5 los refina y los lleva a patrones concretos de implementación.
+Si algo de M8.1 no está claro, volver a M8.1 antes de continuar.
+
+ARCHITECTURE RECIPES
+---------------------
+Recetas completas por tipo de proyecto.
+Cada receta indica: rendering, server/client split, data, CMS, metadata y qué evitar.
+
+RECETA 1 — MARKETING SITE SIN CMS
+  Cuándo usar: landing, portfolio, sitio de servicios con contenido estático.
+  Rendering: SSG (Static Site Generation). Build time.
+  Server Components: todo el contenido (no necesita interactividad).
+  Client Components: solo formularios con estado, carousels, modales.
+  Data: MDX o JSON para contenido. No DB.
+  CMS: no necesario. El equipo edita los archivos directamente.
+  Metadata: generateMetadata() en cada page.tsx.
+  Images: next/image con priority en el hero. Lazy loading en el resto.
+  Evitar: SSR para contenido que no cambia. App Router complejo para sitio simple.
+    Agregar auth, DB o Server Actions si no hay formularios dinámicos.
+
+RECETA 2 — MARKETING SITE CON SANITY CMS
+  Cuándo usar: marketing site donde el cliente necesita editar contenido sin dev.
+  Rendering: ISR (Incremental Static Regeneration). revalidate: 60 o On-Demand.
+  Server Components: fetch de Sanity en Server Components.
+    No hacer fetch en Client Components para contenido del sitio.
+  Client Components: solo UI interactiva (formularios, menús animados).
+  Data: GROQ queries a Sanity. Portable Text para cuerpo de contenido.
+  CMS: Sanity Studio deployado en /studio (next-sanity).
+  Metadata: generateMetadata() con datos de Sanity.
+  Images: Sanity Image URL Builder + next/image.
+  Evitar: hacer fetch de Sanity en el cliente. Usar client-side fetching para
+    contenido editorial aumenta TTI y crea flash de contenido.
+  Patrón de revalidación:
+    On-demand revalidation via webhook de Sanity → API route → revalidatePath().
+    Más eficiente que revalidate: 60 para sitios de bajo tráfico.
+
+RECETA 3 — SAAS CON AUTENTICACIÓN
+  Cuándo usar: producto digital con usuarios, dashboard, datos por usuario.
+  Rendering: SSR para páginas con datos de usuario. SSG para páginas de marketing.
+    Separar claramente las rutas de marketing (/ /pricing /about) de las de app (/dashboard).
+  Server Components: todo lo que no necesita estado o browser APIs.
+  Client Components: dashboard interactivo, formularios con validación real-time,
+    gráficos, modales, notificaciones en tiempo real.
+  Auth: NextAuth.js o Clerk. Middleware para proteger rutas de /dashboard.
+  Data: Server Actions para mutaciones. fetch en Server Components para lectura.
+    No usar useEffect + fetch para datos protegidos → SSR o Server Components.
+  CMS: no necesario para la app. Sanity solo si hay blog o marketing integrado.
+  Metadata: estática para marketing, dinámica para páginas de app si aplica.
+  Evitar: hacer todo Client Component porque "es más fácil". SSR/Server Components
+    reducen el bundle y mejoran SEO sin costo visible para el dev.
+    Usar getServerSideProps — en App Router no existe. Migrar a Server Components.
+
+RECETA 4 — PORTFOLIO PREMIUM / AGENCIA
+  Cuándo usar: portfolio personal, estudio creativo, agencia de diseño.
+  Rendering: SSG. El contenido no cambia frecuentemente.
+  Server Components: todo el contenido.
+  Client Components: animaciones GSAP, cursor custom, page transitions.
+  Data: MDX o JSON para casos. Sanity si hay blog o el cliente actualiza casos.
+  CMS: opcional. Evaluar si el cliente necesita editar o si el dev lo hace.
+  Metadata: generateMetadata() con OG images personalizadas por caso.
+  GSAP: Client Components. Ver M9.4 para compatibilidad con App Router.
+  Evitar: SSR para un portfolio estático. Sobrecomplicar con features que no se usan.
+
+PATRONES DE IMPLEMENTACIÓN
+----------------------------
+
+Server / Client Split
+  Regla: empezar en Server Component. Solo mover a Client si hay necesidad concreta.
+  Necesidades concretas para Client Component:
+    - useState o useReducer
+    - useEffect
+    - event listeners (onClick con lógica compleja, onScroll)
+    - browser APIs (localStorage, window, navigator)
+    - GSAP o librerías de animación que necesitan el DOM
+
+Nested Layouts
+  Cuando usar: sitio con múltiples secciones que comparten estructura.
+  Ejemplo:
+    app/layout.tsx → navbar + footer global
+    app/(marketing)/layout.tsx → layout de marketing site
+    app/(app)/layout.tsx → sidebar de la app autenticada
+  Evitar route groups innecesarios para proyectos simples de 1 layout.
+
+Loading & Error Boundaries
+  loading.tsx: muestra durante la carga de la página (streaming con Suspense).
+    Usar para páginas que hacen fetch lento. No usar si el SSG es rápido.
+  error.tsx: captura errores en las páginas hijas.
+    Siempre tener un error.tsx en /app y en las rutas críticas.
+  not-found.tsx: página 404 personalizada.
+    Siempre implementar. La 404 de Next.js por defecto rompe la percepción premium.
+
+Metadata Pattern
+  generateMetadata() por página para title, description, OG image.
+  OG image: /app/opengraph-image.tsx con next/og para generación dinámica.
+  Canonical: siempre configurar para evitar contenido duplicado.
+  Robots: configurar en /app/robots.ts.
+
+Image Optimization
+  Siempre usar next/image. Nunca <img>.
+  priority en el hero (LCP element). No en imágenes below the fold.
+  sizes: definir siempre para evitar que Next.js descargue imágenes demasiado grandes.
+  placeholder="blur" con blurDataURL para imágenes de Sanity o externas.
+
+Server Actions
+  Cuándo usar: formularios de contacto, mutaciones de datos, revalidación.
+  Definir en archivos separados con 'use server'.
+  No mezclar Server Actions con Client Components de animación.
+
+CÓMO NO SOBRECOMPLICAR NEXT.JS
+--------------------------------
+Estos son los errores más comunes de over-engineering.
+
+"Usar App Router con todas sus features para un sitio de 3 páginas"
+  → Un marketing site simple no necesita nested layouts, route groups, ni streaming.
+  → Un page.tsx + layout.tsx es suficiente.
+
+"Usar SSR para contenido que no cambia"
+  → Un sitio de servicios sin login ni datos dinámicos no necesita SSR.
+  → SSG es más rápido, más barato y más fácil de mantener.
+
+"Mover todo a Client Component para evitar pensar en el split"
+  → El bundle crece, el TTI aumenta y el SEO puede sufrir.
+  → Empezar en Server Component. Client solo si hay razón concreta.
+
+"Agregar auth cuando no hay login"
+  → NextAuth agrega complejidad. Solo si el proyecto lo necesita.
+
+"Usar getServerSideProps en el App Router"
+  → No existe. Usar Server Components con async/await directamente.
+
+TESTS
+-----
+- ¿La rendering strategy viene de M8.1 y no fue redecidida aquí?
+- ¿La recipe elegida corresponde al tipo de proyecto?
+- ¿El server/client split tiene una regla clara?
+- ¿Se configuró Metadata en todas las páginas?
+- ¿Se usó next/image en todas las imágenes?
+- ¿Se identificaron los errores de over-engineering a evitar?
+
+OUTPUT
+------
+- Architecture recipe seleccionada
+- Server/client split documentado
+- Metadata strategy
+- Image strategy
+- Loading/error boundary strategy
+- CMS recipe (si aplica)
+- Over-engineering evitado (lista de lo que NO se va a agregar)
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como arquitecto Next.js senior.
+Lee lo que ya decidió M8.1 sobre stack, CMS y rendering. No lo redecidas.
+Elegí la Architecture Recipe que corresponde al tipo de proyecto.
+Documentá el server/client split con la regla concreta de este proyecto.
+Definí metadata, images, loading/error boundaries.
+Indicá qué features de Next.js NO se van a usar y por qué.
+No me expliques Next.js desde cero.
+Quiero decisiones concretas y la lista de lo que vamos a evitar.

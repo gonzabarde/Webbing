@@ -1,0 +1,198 @@
+M13.4 — CLOSING & ONBOARDING (v1)
+==================================
+
+OBJETIVO
+--------
+Convertir un "sí" en un proyecto que arranca bien.
+Y convertir un proyecto entregado en un cliente que se queda.
+
+Este módulo cubre dos momentos:
+1. Del "sí" al inicio del trabajo (cierre y onboarding).
+2. Del deploy al retainer (conversión post-proyecto).
+
+SECCIÓN A — CIERRE
+--------------------
+
+CUÁNDO ACTIVAR
+Cuando el cliente aprueba la propuesta de M13.2/M13.3.
+
+PROCESO DE CIERRE
+1. Confirmar la aprobación por escrito.
+2. Enviar el contrato o acuerdo de trabajo.
+3. Emitir la factura del primer pago.
+4. Esperar el pago confirmado.
+5. Agendar el kickoff.
+6. No arrancar ningún trabajo antes de estos 5 pasos.
+
+CONTRATO MÍNIMO
+---------------
+No necesita ser un contrato legal elaborado.
+Necesita cubrir estos puntos por escrito (puede ser un email de confirmación):
+
+ALCANCE:
+  ¿Qué se entrega?
+  ¿Cuántas páginas o secciones?
+  ¿Qué funcionalidades están incluidas?
+
+PLAZOS:
+  ¿Cuándo empieza?
+  ¿Cuándo se entrega cada hito?
+  ¿Cuándo se hace el deploy?
+
+REVISIONES:
+  ¿Cuántas rondas de revisión incluye?
+  ¿Qué pasa si se piden más revisiones?
+
+PAGOS:
+  ¿Cuánto es cada cuota?
+  ¿Cuándo se paga cada una?
+  ¿En qué moneda?
+
+PROPIEDAD:
+  El código y el diseño pasan a ser propiedad del cliente una vez recibido el pago final.
+  Webbing puede mostrar el proyecto en su portfolio salvo acuerdo en contrario.
+
+CANCELACIÓN:
+  Si el cliente cancela: los pagos realizados no se devuelven.
+  Si Webbing cancela: se devuelven los pagos correspondientes al trabajo no entregado.
+
+Formato aceptable: email de confirmación donde el cliente responde "confirmo" o "de acuerdo".
+Formato ideal: documento PDF firmado digitalmente.
+
+SECCIÓN B — ONBOARDING
+-----------------------
+
+KICKOFF MEETING
+---------------
+Objetivo: alinear expectativas, conocerse, aclarar lo que la propuesta dejó vago.
+Duración: 30-45 minutos.
+Formato: videollamada.
+
+Qué cubrir en el kickoff:
+
+1. CONTEXTO DEL NEGOCIO (10 min)
+   ¿Qué hace la empresa / el profesional?
+   ¿Quién es su cliente ideal?
+   ¿Cuál es el principal problema que el sitio debe resolver?
+   ¿Qué hace diferente a esta marca de la competencia?
+
+2. REFERENCIAS Y GUSTOS (10 min)
+   ¿Hay sitios que les gustan? ¿Por qué?
+   ¿Hay sitios que definitivamente no les gustan?
+   ¿Hay restricciones de imagen o tono?
+
+3. PROCESO Y COMUNICACIÓN (10 min)
+   ¿Cómo prefieren comunicarse? (email, WhatsApp, Notion)
+   ¿Con qué frecuencia quieren actualizaciones?
+   ¿Quién es el punto de contacto principal?
+   ¿Hay otras personas que van a participar en las revisiones?
+
+4. MATERIALES Y ACCESOS (5 min)
+   ¿Qué materiales puede proveer el cliente? (logo, fotos, textos, videos)
+   ¿Cuándo los puede tener?
+   ¿Qué accesos necesita Webbing? (dominio, hosting, CMS anterior)
+
+BRIEF INTERNO POST-KICKOFF
+---------------------------
+Después del kickoff, documentar en el Brief Interno antes de activar M0.
+
+CLIENTE: [nombre / empresa]
+PROBLEMA PRINCIPAL: [en 1-2 líneas]
+CLIENTE IDEAL DEL CLIENTE: [a quién le habla este sitio]
+DIFERENCIAL: [qué lo hace distinto]
+RESTRICCIONES: [tono, imagen, colores, palabras que no usar]
+MATERIALES DISPONIBLES: [qué tiene / qué falta / cuándo llega]
+PUNTO DE CONTACTO: [nombre + canal preferido]
+OTRAS PERSONAS EN EL PROCESO: [quiénes y en qué etapas]
+FECHA DE INICIO: [fecha]
+FECHAS DE HITO: [dirección visual / staging / deploy]
+
+Este Brief Interno es el input de M0.
+No activar M0 sin tener este documento completo.
+
+SECCIÓN C — CONVERSIÓN POST-PROYECTO (RETAINER)
+-------------------------------------------------
+
+CUÁNDO ACTIVAR
+Al entregar el sitio en producción. No después.
+En el mismo email o llamada de entrega.
+
+PROTOCOLO DE PROPUESTA DE RETAINER
+1. Entregar el sitio con un mensaje de celebración genuino.
+2. En el mismo mensaje, incluir la propuesta de retainer.
+3. No enviar la propuesta de retainer días después. La ventana de mayor disposición
+   del cliente es justo después de recibir el trabajo y estar satisfecho.
+
+TEMPLATE DE EMAIL DE ENTREGA + RETAINER
+
+---
+Asunto: [Nombre del proyecto] está live 🚀
+
+[Nombre],
+
+El sitio ya está en producción: [URL]
+
+[1-2 líneas sobre lo que se logró y por qué importa]
+
+Ahora que está live, te quiero proponer algo para que el sitio siga funcionando bien:
+
+PLAN DE MANTENIMIENTO MENSUAL
+
+Tier 1 — Mantenimiento técnico: USD [precio]/mes
+  Actualizaciones de seguridad, monitoring y backups.
+  El sitio siempre actualizado y seguro sin que tengas que pensar en eso.
+
+Tier 2 — Mantenimiento + cambios: USD [precio]/mes
+  Todo lo anterior + hasta 3 horas de cambios de contenido por mes.
+  Ideal si actualizás información, precios o fotos regularmente.
+
+Si te interesa alguno, avisame y lo activamos.
+
+Un gusto trabajar en esto,
+[nombre]
+---
+
+SEÑALES DE QUE UN CLIENTE ES CANDIDATO A RETAINER
+---------------------------------------------------
+- Preguntó durante el proyecto cómo actualizar el contenido
+- Tiene un negocio que cambia regularmente (productos, precios, eventos)
+- Mencionó querer agregar cosas "en el futuro"
+- Quedó muy satisfecho con el proceso
+
+SEÑALES DE QUE NO VALE LA PENA PROPONER RETAINER
+--------------------------------------------------
+- El cliente fue difícil durante el proyecto
+- El cliente quiere manejar todo solo
+- El sitio es completamente estático y no va a cambiar
+
+GATES
+-----
+GATE 13.4-A — ¿El primer pago fue recibido antes de arrancar?
+  Falla → no arrancar. Sin excepción.
+
+GATE 13.4-B — ¿El kickoff meeting tuvo lugar y el Brief Interno está completo?
+  Falla → no activar M0.
+
+GATE 13.4-C — ¿El deploy ocurrió con el pago final confirmado?
+  Falla → no hacer deploy.
+
+GATE 13.4-D — ¿Se propuso el retainer en el email de entrega?
+  Falla → proponer antes de cerrar el proyecto. La ventana se cierra rápido.
+
+OUTPUT
+------
+- Confirmación de cierre por escrito
+- Contrato o acuerdo documentado
+- Primer pago confirmado
+- Kickoff realizado y documentado
+- Brief Interno completo → input de M0
+- Propuesta de retainer enviada al entregar
+
+PROMPT PARA CLAUDE
+------------------
+No arrancar ningún trabajo sin pago confirmado.
+No activar M0 sin el Brief Interno completo post-kickoff.
+No hacer deploy sin el pago final confirmado.
+Al entregar el proyecto: proponer el retainer en el mismo mensaje.
+La conversión de proyecto a retainer es más fácil que conseguir un cliente nuevo.
+No dejarlo para después.

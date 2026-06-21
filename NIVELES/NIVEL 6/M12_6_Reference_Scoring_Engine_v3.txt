@@ -1,0 +1,140 @@
+M12.6 — REFERENCE SCORING ENGINE (v3)
+=====================================
+
+OBJETIVO
+--------
+Puntuar cada referencia para decidir si merece conservarse, degradarse o descartarse.
+El scoring evita guardar referencias bonitas pero inútiles.
+Versión corregida: el score usa promedio de dimensiones (escala 1-10) para mayor claridad.
+
+DIMENSIONES DE SCORE CON CRITERIOS
+-------------------------------------
+
+1. CLARIDAD VISUAL (1-10)
+   Qué mide: qué tan clara es la jerarquía y la intención visual.
+   8-10: se entiende la intención sin leer nada. Jerarquía impecable.
+   5-7: la intención es visible pero requiere atención.
+   1-4: confusa, saturada o sin jerarquía clara.
+
+2. INNOVACIÓN (1-10)
+   Qué mide: qué tan lejos está de los patrones estándar de su categoría.
+   8-10: rompe con el patrón dominante de la categoría de manera significativa.
+   5-7: diferente pero dentro del rango esperado.
+   1-4: sigue los clichés de categoría sin variación.
+
+3. FIRMA VISUAL (1-10)
+   Qué mide: qué tan reconocible es la marca sin el logo.
+   8-10: identificable a primer vistazo sin logo.
+   5-7: tiene carácter pero no es inconfundible.
+   1-4: podría ser de cualquier marca de esa categoría.
+
+4. UX / EXPERIENCIA (1-10)
+   Qué mide: qué tan bien guía la experiencia del usuario.
+   8-10: flujo impecable, fricción mínima, decisiones de UX claras.
+   5-7: funciona bien pero con oportunidades de mejora.
+   1-4: confunde al usuario o tiene problemas de usabilidad notables.
+
+5. STORYTELLING (1-10)
+   Qué mide: qué tan bien construye la narrativa visual de la marca.
+   8-10: la página cuenta una historia sin necesitar que el usuario lea todo.
+   5-7: tiene estructura narrativa pero no es memorable.
+   1-4: es un catálogo de información sin hilo conductor.
+
+6. ESCALABILIDAD (1-10)
+   Qué mide: qué tan bien funciona el sistema en múltiples aplicaciones.
+   8-10: el sistema se sostiene en más de 5 secciones sin perder coherencia.
+   5-7: funciona bien en las secciones principales, inconsistente en las secundarias.
+   1-4: el sistema depende de una sección estrella; el resto es genérico.
+
+7. ORIGINALIDAD (1-10)
+   Qué mide: qué tan difícil sería que otro estudio produjera esto.
+   8-10: difícilmente podría ser de otro estudio.
+   5-7: tiene identidad pero podría replicarse con trabajo.
+   1-4: cualquier estudio competente podría producir algo igual.
+
+8. MEMORABILIDAD (1-10)
+   Qué mide: si alguien la recordaría 24 horas después.
+   8-10: genera una imagen mental específica y duradera.
+   5-7: es agradable pero no deja una imagen mental fuerte.
+   1-4: no deja ninguna imagen mental específica.
+
+9. RIESGO (1-10, invertido)
+   Qué mide: qué tan riesgoso es inspirarse en esta referencia.
+   NOTA: en esta dimensión, 10 = bajo riesgo, 1 = alto riesgo.
+   8-10: bajo riesgo de copia; principios bien abstraíbles.
+   5-7: riesgo medio; requiere transformación consciente.
+   1-4: alto riesgo de copia directa; difícil de abstraer sin clonar.
+
+10. REUTILIZACIÓN (1-10)
+    Qué mide: cuántos proyectos distintos podrían aprender de esta referencia.
+    8-10: los patrones sirven para múltiples categorías e industrias.
+    5-7: útil para proyectos similares al de la referencia.
+    1-4: muy específico; difícil de reutilizar fuera de ese contexto exacto.
+
+11. APLICABILIDAD AL PROYECTO ACTUAL (1-10)
+    Qué mide: qué tan relevante es para el tipo de trabajo en curso.
+    8-10: directamente aplicable a un proyecto activo.
+    5-7: relevante pero no de aplicación inmediata.
+    1-4: interesante pero no aplicable en ningún proyecto actual.
+
+CÁLCULO DEL SCORE
+-----------------
+Score = promedio de las 11 dimensiones (suma / 11)
+Resultado en escala 1-10.
+
+UMBRALES — ESCALA 1-10
+-----------------------
+8.0-10.0: referencia principal (entra a la biblioteca principal)
+6.5-7.9:  referencia útil (entra como referencia secundaria)
+5.0-6.4:  referencia menor (archivar, no usar como guía primaria)
+< 5.0:    descartar
+
+REGLAS DE INTERPRETACIÓN
+-------------------------
+Score alto + riesgo bajo (dim. 9 ≥ 7): referencia ideal para usar como guía.
+Score alto + riesgo alto (dim. 9 ≤ 4): útil pero delicada. Requiere Transformation Test de M12.5.
+Score medio + firma fuerte (dim. 3 ≥ 8): útil como referencia de identidad.
+Score bajo en todas: no entra, independientemente del argumento.
+
+PROCESO CLAUDE
+--------------
+1. Puntuar cada una de las 11 dimensiones con los criterios.
+2. Calcular el promedio.
+3. Verificar si supera el umbral mínimo (5.0).
+4. Determinar el nivel de la referencia.
+5. Registrar por qué la puntuación salió así (dimensión más alta y más baja).
+
+GATES
+-----
+GATE 12.6-A — ¿El score supera 5.0?
+  Falla → descartar.
+
+GATE 12.6-B — ¿Cada dimensión fue puntuada con criterios, no por gusto?
+  Falla → revisar la puntuación de las dimensiones sin criterio.
+
+GATE 12.6-C — ¿Si el riesgo (dim. 9) es ≤ 4, se ejecutó el Transformation Test de M12.5?
+  Falla → no usar como referencia principal sin ese check.
+
+OUTPUT
+------
+- score por dimensión (con nota breve de 1 línea)
+- score total promedio
+- nivel de prioridad
+- dimensión más fuerte y más débil
+- acción: conservar como principal / secundaria / archivar / descartar
+- si riesgo es bajo: aclarar que requiere Transformation Test
+
+FAIL CONDITIONS
+---------------
+- score arbitrario sin criterios
+- puntuar por gusto estético
+- no aplicar el check de riesgo cuando la dimensión 9 es baja
+- conservar referencias con score < 5.0
+
+PROMPT PARA CLAUDE
+------------------
+Puntuá cada dimensión usando los criterios definidos, no por gusto.
+Calculá el promedio.
+Si el score es < 5.0: descartar.
+Si la dimensión de Riesgo es ≤ 4: marcar para Transformation Test.
+Registrá la dimensión más fuerte y más débil para entender por qué la referencia vale lo que vale.

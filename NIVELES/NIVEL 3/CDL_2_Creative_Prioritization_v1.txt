@@ -1,0 +1,126 @@
+CDL-2 — CREATIVE PRIORITIZATION (v1)
+=====================================
+
+OBJETIVO
+--------
+Decidir dónde poner la energía creativa.
+No todos los proyectos requieren el mismo peso en cada dimensión.
+Este módulo distribuye el esfuerzo según el tipo de proyecto
+y produce una instrucción directa para CDL-3 y CDL-4.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Project Profile de CDL-1
+- Campo DIMENSIONES PRIORITARIAS de CDL-1
+
+OPCIONALES:
+- Brief
+- Presupuesto
+- Timeline
+- Nivel de riesgo aceptado por el cliente
+
+PESO RECOMENDADO POR TIPO DE PROYECTO
+--------------------------------------
+Usar como punto de partida. Ajustar según el Project Profile específico.
+
+SaaS / producto digital
+  Positioning: Crítico | Perception: Alto | Process: Alto
+  Concept: Medio | Visual Direction: Medio | Innovation: Medio
+  Brand Translation: Medio | Discovery: Alto
+
+Marca de lujo
+  Concept: Crítico | Perception: Crítico | Visual Direction: Crítico
+  Innovation: Alto | Positioning: Alto
+  Brand Translation: Medio | Process: Medio | Discovery: Medio
+
+Clínica / salud / servicios de confianza
+  Positioning: Crítico | Brand Translation: Crítico | Perception: Alto
+  Process: Alto | Visual Direction: Medio-Alto
+  Innovation: Bajo | Concept: Medio | Discovery: Alto
+
+Estudio creativo / agencia
+  Concept: Crítico | Visual Direction: Crítico | Innovation: Alto
+  Positioning: Alto | Process: Alto | Perception: Medio-Alto
+  Brand Translation: Medio | Discovery: Medio
+
+Portfolio personal
+  Concept: Crítico | Visual Direction: Crítico | Innovation: Medio-Alto
+  Positioning: Medio | Perception: Medio | Process: Medio | Discovery: Bajo
+
+Landing de conversión
+  Positioning: Crítico | Process: Crítico | Perception: Alto
+  Brand Translation: Alto | Concept: Medio | Visual Direction: Medio
+  Innovation: Bajo | Discovery: Alto
+
+PROCESO CLAUDE
+--------------
+1. Leer el Project Profile y el campo DIMENSIONES PRIORITARIAS de CDL-1.
+2. Elegir el perfil de peso recomendado que corresponde al tipo de proyecto.
+3. Ajustar el perfil según las particularidades del Project Profile.
+4. Identificar las 1-2 dimensiones donde el error sería letal.
+5. Identificar las dimensiones que no requieren sobreinversión.
+6. Regla para proyectos híbridos:
+   Usar el perfil del tipo de mayor complejidad operativa como base.
+   Incorporar como "Alto" las dimensiones críticas del segundo tipo.
+7. Producir el Creative Priority Map.
+8. Producir la Instrucción para CDL-3.
+
+CREATIVE PRIORITY MAP
+---------------------
+Formato de salida:
+
+Dimensión         | Intensidad | Razón
+------------------|------------|-------
+Discovery         | [nivel]    | [una línea]
+Positioning       | [nivel]    | [una línea]
+Brand Translation | [nivel]    | [una línea]
+Concept           | [nivel]    | [una línea]
+Perception        | [nivel]    | [una línea]
+Visual Direction  | [nivel]    | [una línea]
+Innovation        | [nivel]    | [una línea]
+Process           | [nivel]    | [una línea]
+
+INSTRUCCIÓN PARA CDL-3 [campo obligatorio de output]
+-----------------------------------------------------
+Este campo se pasa directamente al Creative Critic.
+
+"CDL-3: aplicar crítica exigente en [dimensiones Críticas/Altas].
+Aplicar crítica ligera en [dimensiones Bajas].
+No-negociables del proyecto: [listar lo que no puede fallar]."
+
+TESTS
+-----
+- ¿El peso de cada dimensión corresponde al tipo de proyecto?
+- ¿Las dimensiones Críticas son las que el cliente/negocio no puede perder?
+- ¿Hay alguna dimensión con sobreinversión injustificada?
+- ¿La Instrucción para CDL-3 está completa y es utilizable?
+- ¿Si hay híbrido, está documentada la lógica de combinación?
+
+OUTPUT
+------
+1. Creative Priority Map (tabla completa con razones).
+2. Non-negociables del proyecto.
+3. Dimensiones para simplificar.
+4. Instrucción para CDL-3 [obligatoria].
+
+DEPENDENCIAS
+------------
+Requiere: CDL-1 (Project Profile + DIMENSIONES PRIORITARIAS)
+Bloquea: CDL-3, CDL-4, CDL-5
+
+DELIVERABLES
+------------
+- Creative Priority Map
+- Instrucción para CDL-3
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como director creativo que asigna energía de manera estratégica.
+Leé el Project Profile y el campo DIMENSIONES PRIORITARIAS de CDL-1.
+Elegí el perfil de peso que corresponde al tipo de proyecto.
+Ajustá según las particularidades del caso.
+Producí el Creative Priority Map con la razón de cada nivel.
+Al final, escribí la Instrucción para CDL-3: qué dimensiones critique duro,
+qué dimensiones critique liviano, y qué no puede fallar.
+No critiques todavía. No propongas diseño. Solo priorizá.

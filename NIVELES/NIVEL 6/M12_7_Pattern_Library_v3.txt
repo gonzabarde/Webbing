@@ -1,0 +1,319 @@
+M12.7 — PATTERN LIBRARY (v3)
+============================
+
+OBJETIVO
+--------
+Biblioteca de patrones visuales reutilizables a partir de referencias validadas.
+No es una lista de estilos. Es una biblioteca de decisiones aplicables.
+Cada patrón tiene: percepción, decisiones típicas, categorías, riesgos, anti-patterns y combinaciones.
+
+PATRONES DESARROLLADOS
+-----------------------
+
+──────────────────────────────────────────────────────────
+PATRÓN 1: PREMIUM MINIMAL
+──────────────────────────────────────────────────────────
+
+PERCEPCIÓN QUE GENERA:
+  Control, exclusividad, sofisticación silenciosa.
+  La marca confía en que el usuario se va a quedar aunque haya poco.
+
+PATTERN FORMULA:
+  Cuando proyecto busca percepción de lujo o premium silencioso
+  + densidad baja (pocas palabras por pantalla, márgenes > 15% del viewport)
+  + tipografía con carácter pero sin exceso ornamental
+  → exclusividad y control percibidos antes de leer el copy.
+
+DECISIONES TÍPICAS:
+  - Márgenes laterales de 15-20% del viewport
+  - Máximo 2-3 elementos por bloque
+  - Espacio vertical entre bloques: 160-240px
+  - Tipografía con tracking ajustado en headings
+  - Paleta de 2-3 colores máximo, baja saturación
+  - Motion: lento y selectivo (solo hero o transiciones específicas)
+  - Copy: corto, editado, sin explicación redundante
+  - CTA: discreto, de bajo compromiso, sin urgencia
+
+CATEGORÍAS DONDE FUNCIONA:
+  luxury, consulting premium, portfolio de autor, marca personal de alto perfil,
+  arquitectura, editorial de alta gama.
+
+CATEGORÍAS DONDE FALLA:
+  SaaS (necesita demostrar valor con contenido), ecommerce (requiere abundancia de producto),
+  healthcare (necesita más información y accesibilidad), startup MVP (necesita demostrar).
+
+UMBRAL DE USO:
+  Requiere copy de alta calidad. Sin copy editado, el espacio amplifica el vacío.
+  Requiere assets de alta calidad (fotografía propia o tipografía como protagonista).
+
+RIESGOS:
+  - Puede sentirse vacío si el copy es genérico.
+  - Puede parecer incompleto a audiencias que esperan más información.
+  - Sobreusado en clínicas estéticas → ya es un cliché en esa categoría específica.
+
+ANTI-PATTERNS:
+  - Aplicar este patrón con stock photography → inmediatamente genérico.
+  - Aplicar con tipografía sobreusada (Canela, Cormorant en clínica estética) → cliché.
+  - Reducir el espacio "para meter más contenido" → destruye el patrón completo.
+
+COMBINACIONES ÚTILES:
+  + Bold Typography (como firma dentro del minimal): funciona bien.
+  + Slow Motion: amplifica la percepción ceremonial.
+  + Image Signature: si las imágenes tienen grading consistente, refuerza el sistema.
+
+──────────────────────────────────────────────────────────
+PATRÓN 2: BOLD EDITORIAL
+──────────────────────────────────────────────────────────
+
+PERCEPCIÓN QUE GENERA:
+  Criterio, punto de vista fuerte, autoría, confianza en el propio trabajo.
+  La marca no necesita convencer; demuestra.
+
+PATTERN FORMULA:
+  Cuando proyecto busca comunicar criterio y autoría
+  + escala tipográfica extrema en el hero (headline domina el 60-80% del viewport)
+  + contraste fuerte de pesos (ultra-thin vs bold o black)
+  → percepción de punto de vista fuerte y confianza creativa.
+
+DECISIONES TÍPICAS:
+  - Titular a escala extrema (80-140px en desktop)
+  - Ausencia de imagen en el hero (o imagen como soporte, no protagonista)
+  - Contraste de pesos: 2-3 pesos distintos visibles en la misma sección
+  - Poco copy por pantalla (el tipo hace el trabajo de la imagen)
+  - Ritmo editorial: secciones con composición distinta, no módulos iguales
+  - Color usado como acento, no como fondo
+  - Motion: entrada del texto con reveal o mask (lento, 600-900ms)
+
+CATEGORÍAS DONDE FUNCIONA:
+  agencia creativa, estudio de diseño, portfolio de autor, consultoría estratégica,
+  marca personal de diseñador o directivo creativo.
+
+CATEGORÍAS DONDE FALLA:
+  healthcare, educación, ecommerce de producto masivo, SaaS B2B de alto volumen.
+  Cualquier categoría donde la accesibilidad o la claridad inmediata es crítica.
+
+UMBRAL DE USO:
+  Requiere un concepto fuerte detrás. Sin concepto, la escala extrema amplifica el vacío.
+  Requiere tipografía con carácter real (no Montserrat ni Raleway — son demasiado neutras).
+
+RIESGOS:
+  - Puede sentirse pretencioso si el copy es genérico.
+  - Puede reducir la legibilidad en mobile si no se ajusta la escala.
+  - Sobreusado en agencias → requiere una variante específica para no ser cliché.
+
+ANTI-PATTERNS:
+  - Titular bold + tipografía de body igual de dominante → sin jerarquía.
+  - Escala extrema + fondo muy texturado → guerra de protagonistas.
+  - Aplicar a una landing de conversión directa → la escala distrae del CTA.
+
+COMBINACIONES ÚTILES:
+  + Motion Signature (reveal de texto): amplifica el impacto.
+  + Premium Minimal (en secciones secundarias): equilibra el bold del hero.
+  + Image Signature: funciona si las imágenes son editoriales, no si son de stock.
+
+──────────────────────────────────────────────────────────
+PATRÓN 3: TECH PRECISION
+──────────────────────────────────────────────────────────
+
+PERCEPCIÓN QUE GENERA:
+  Control, sistema, eficiencia, confianza funcional.
+  La interfaz comunica que el producto funciona antes de que el usuario lo use.
+
+PATTERN FORMULA:
+  Cuando proyecto es SaaS o producto digital que vende control o eficiencia
+  + grilla estricta con módulos regulares visibles
+  + tipografía neo-grotesk en múltiples pesos con jerarquía clara
+  → percepción de sistema ordenado, confianza técnica.
+
+DECISIONES TÍPICAS:
+  - Grid de 12 columnas con reglas estrictas (no romper sin intención)
+  - Tipografía: neo-grotesk (Inter, Söhne, DM Sans) en pesos 400, 500, 700
+  - Color: paleta reducida, acento único, fondos neutros o ligeramente oscuros
+  - Densidad: media (suficiente información sin abrumar)
+  - Motion: funcional y preciso (100-250ms, ease-out, sin rebote)
+  - Capturas del producto visibles en el hero o en la primera sección
+  - Prueba social técnica (métricas, logos de clientes reconocibles)
+  - CTA directo con valor claro
+
+CATEGORÍAS DONDE FUNCIONA:
+  SaaS B2B, herramientas de productividad, fintech, plataformas de datos,
+  developer tools, productos de infraestructura.
+
+CATEGORÍAS DONDE FALLA:
+  luxury, marcas emocionales, editorial, portfolio creativo, servicios humanos.
+
+UMBRAL DE USO:
+  Requiere que el producto exista y tenga capturas reales.
+  Sin producto visible, el patrón pierde su razón de ser.
+
+RIESGOS:
+  - Puede sentirse frío sin elementos de humanidad.
+  - Sobreusado con Inter → necesita diferenciación tipográfica o de color.
+  - Dashboard en mockup de dispositivo → cliché directo de la categoría.
+
+ANTI-PATTERNS:
+  - Tech Precision + dark mode + gradiente morado-azul → cliché máximo de SaaS 2022.
+  - Grid estricto + motion agresivo → contradicción de percepción.
+  - Sin capturas del producto → la percepción de precisión queda sin evidencia.
+
+COMBINACIONES ÚTILES:
+  + Interaction Signature (hover states consistentes): refuerza la sensación de sistema.
+  + Data Visualization como elemento visual: reemplaza las imágenes de lifestyle.
+
+──────────────────────────────────────────────────────────
+PATRÓN 4: WARM AUTHORITY
+──────────────────────────────────────────────────────────
+
+PERCEPCIÓN QUE GENERA:
+  Confianza, cercanía, expertise sin distancia.
+  La marca sabe lo que hace y también te cuida.
+
+PATTERN FORMULA:
+  Cuando proyecto necesita combinar credibilidad con calidez
+  + tipografía humanist sans (legible y sin frialdad geométrica)
+  + fotografía de personas reales en contexto cotidiano (no aspiracional)
+  → autoridad accesible y confianza sin distancia institucional.
+
+DECISIONES TÍPICAS:
+  - Tipografía: humanist sans (Frutiger, Gill Sans o equivalentes)
+  - Color: neutros cálidos + un acento de baja saturación
+  - Fotografía: planos medios de personas reales, no staging evidente
+  - Densidad: media con respiro suficiente para no abrumar
+  - Proof block: testimonios con nombre, cargo y resultado específico (no genérico)
+  - Proceso visible: sección que explica cómo se trabaja antes de pedir acción
+  - CTA de bajo compromiso inicial ("Hablemos" o "Consultá")
+  - Motion: suave y funcional (fade-in, no reveals dramáticos)
+
+CATEGORÍAS DONDE FUNCIONA:
+  healthcare, educación, consulting, servicios profesionales de alto valor,
+  psicología, coaching, servicios de bienestar.
+
+CATEGORÍAS DONDE FALLA:
+  luxury (la calidez puede reducir la percepción de exclusividad),
+  agencias creativas que quieren demostrar criterio fuerte,
+  tech products (la calidez puede reducir la percepción de precisión).
+
+UMBRAL DE USO:
+  Requiere fotografía propia o de alta calidad con personas reales.
+  Stock genérico destruye la percepción de calidez inmediatamente.
+
+RIESGOS:
+  - Puede caer en clichés de salud si se usa serif + rosa + blanco.
+  - Puede perder credibilidad si el copy es demasiado coloquial.
+
+ANTI-PATTERNS:
+  - Warm Authority + Didone serif + paleta rosa + foto de mujer en blanco → cliché de clínica.
+  - Testimonios sin nombre ni cargo real → destruye la autoridad.
+  - Proceso de trabajo con íconos genéricos en lugar de descripción real → pierde autenticidad.
+
+COMBINACIONES ÚTILES:
+  + Proof Pattern (métricas o testimonios fuertes): amplifica la autoridad.
+  + Process Block: refuerza la transparencia y reduce la objeción.
+
+──────────────────────────────────────────────────────────
+PATRÓN 5: EXPERIMENTAL MOTION
+──────────────────────────────────────────────────────────
+
+PERCEPCIÓN QUE GENERA:
+  Creatividad técnica, sofisticación, diferenciación máxima.
+  La marca tiene criterio y también puede ejecutarlo.
+
+PATTERN FORMULA:
+  Cuando proyecto puede usar motion como firma de marca
+  + secuencias de entrada orquestadas (no solo fade-in)
+  + sistema de motion coherente con un vocabulario específico de easing y timing
+  → identidad de marca reconocible sin logo, percepción de cuidado extremo.
+
+DECISIONES TÍPICAS:
+  - GSAP o Framer Motion con sistema de motion custom
+  - Easing específico y consistente (no ease-out genérico)
+  - Stagger entre elementos: 60-120ms según el tipo
+  - Transitions de página: morphing o slide con elementos compartidos
+  - Scroll storytelling en sección clave (máximo 1 por página)
+  - Cursor custom si refuerza la identidad
+  - prefers-reduced-motion siempre implementado
+  - Motion como narrativa, no como decoración
+
+CATEGORÍAS DONDE FUNCIONA:
+  agencia creativa, estudio de diseño, portfolio de desarrollador o director creativo,
+  producto digital de alto perfil, experiencias de marca.
+
+CATEGORÍAS DONDE FALLA:
+  healthcare (el motion excesivo puede generar ansiedad o desconfianza),
+  SaaS funcional (el motion distrae de la claridad del producto),
+  ecommerce (el motion ralentiza el proceso de conversión),
+  institucional o corporativo estricto.
+
+UMBRAL DE USO:
+  El concepto debe justificar el motion. Sin concepto que respalde la decisión,
+  el motion es solo efectismo.
+  Budget de performance: verificar que no degrada LCP ni CLS.
+
+RIESGOS:
+  - Motion sin sistema coherente = ruido visual.
+  - Motion que compite con el contenido = destruye la jerarquía.
+  - Overuse: más de 1 patrón narrativo de motion por proyecto.
+
+ANTI-PATTERNS:
+  - Motion en cada elemento de cada sección → fatiga visual extrema.
+  - Dark mode + palabra animada en el hero + cursor custom → cliché de agencia 2023.
+  - Motion sin fallback de prefers-reduced-motion → inaccesible.
+
+COMBINACIONES ÚTILES:
+  + Bold Editorial (como base tipográfica): el motion amplifica el punto de vista fuerte.
+  + Image Signature (grading consistente): ambas firmas refuerzan el sistema.
+
+──────────────────────────────────────────────────────────
+PATRONES PENDIENTES DE DESARROLLO
+──────────────────────────────────────────────────────────
+
+Los siguientes patrones están identificados pero sin contenido desarrollado.
+No usar hasta que sean desarrollados con el formato completo.
+
+- Corporate Clarity: para marcas institucionales que necesitan orden y seriedad.
+- Playful Functional: para productos de consumo que combinan utilidad con carácter.
+- Data-Driven: para productos que tienen datos como activo principal de comunicación.
+- Narrative Depth: para proyectos con storytelling como diferencial central.
+- Conversion Focus: para landings de alta conversión donde claridad > estética.
+
+CLASIFICACIÓN DE PATRONES
+--------------------------
+Para buscar el patrón correcto:
+
+Por percepción:
+  Exclusividad → Premium Minimal, Bold Editorial
+  Control → Tech Precision, Premium Minimal
+  Confianza → Warm Authority
+  Creatividad → Bold Editorial, Experimental Motion
+  Energía / Diferenciación → Experimental Motion, Bold Editorial
+
+Por tipo de proyecto:
+  Luxury / High-End → Premium Minimal
+  SaaS / Producto → Tech Precision
+  Agencia / Portfolio → Bold Editorial, Experimental Motion
+  Healthcare / Consulting → Warm Authority
+  Personal Brand → Bold Editorial, Premium Minimal
+
+GATES
+-----
+GATE 12.7-A — ¿El patrón tiene Pattern Formula completa?
+GATE 12.7-B — ¿Tiene categorías donde funciona Y donde falla?
+GATE 12.7-C — ¿Tiene anti-patterns específicos?
+GATE 12.7-D — ¿Tiene umbral de uso?
+GATE 12.7-E — ¿Tiene combinaciones útiles con otros patrones?
+
+Si falla cualquier gate: el patrón está incompleto. No usar hasta desarrollar.
+
+FAIL CONDITIONS
+---------------
+- listar nombres de patrones sin desarrollo
+- no definir cuándo evitar un patrón
+- convertir la biblioteca en un catálogo de adjetivos
+- usar un patrón "pendiente de desarrollo" como guía de decisión
+
+PROMPT PARA CLAUDE
+------------------
+Antes de referenciar un patrón, verificar que está desarrollado (no "pendiente").
+Para cada patrón: identificar la percepción, las decisiones típicas, las categorías y los límites.
+Si el patrón no tiene anti-patterns definidos, no está completo.
+Si necesitás un patrón que no existe: marcarlo como pendiente y desarrollarlo antes de usar.

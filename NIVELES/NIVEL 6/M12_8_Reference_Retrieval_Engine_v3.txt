@@ -1,0 +1,193 @@
+M12.8 — REFERENCE RETRIEVAL ENGINE (v3)
+=======================================
+
+OBJETIVO
+--------
+Recuperar referencias por intención, no solo por nombre o categoría.
+Este módulo hace que Claude encuentre la referencia correcta para el problema correcto.
+Agrega: Query Translation Matrix y protocolo de "sin resultados".
+
+INPUTS
+------
+- intención de diseño (en lenguaje natural o técnico)
+- categoría del proyecto
+- percepción buscada
+- tipo de layout o decisión específica
+- nivel de innovación requerido
+- restricciones del proyecto
+
+QUERY TRANSLATION MATRIX
+--------------------------
+Traducir intenciones en lenguaje natural a criterios de búsqueda concretos.
+Si la intención no está en la matriz, usar el proceso de traducción manual.
+
+INTENCIONES FRECUENTES → CRITERIOS DE BÚSQUEDA
+
+"Quiero algo más premium"
+  → Industria: luxury / consulting / portfolio
+  → Nivel de firma: fuerte o dominante
+  → Nivel de innovación: medio o alto
+  → Patrón: Premium Minimal o Bold Editorial
+  → Score mínimo en firma visual: ≥ 7
+
+"Quiero algo más limpio / más claro"
+  → Tipo de UX: informativa o transaccional
+  → Tipo de layout: modular, grid, stacked narrative
+  → Densidad: baja o media
+  → Patrón: Tech Precision o Premium Minimal
+  → Score mínimo en claridad: ≥ 7
+
+"Quiero algo con más personalidad"
+  → Nivel de firma: fuerte o dominante
+  → Nivel de innovación: alto
+  → Patrón: Bold Editorial o Experimental Motion
+  → Score mínimo en originalidad: ≥ 7
+
+"Quiero algo más humano / más cercano"
+  → Industria: healthcare, education, consulting
+  → Tipo de UX: storytelling, conversacional
+  → Patrón: Warm Authority
+  → Score mínimo en UX: ≥ 6
+
+"Quiero algo más dinámico / con más movimiento"
+  → Tipo de motion: narrativa o experimental
+  → Patrón: Experimental Motion
+  → Solo proyectos con score en firma visual ≥ 7
+
+"Quiero algo diferente a lo que hace la competencia en [categoría X]"
+  → Verificar Anti-Pattern Library de M12.5 para esa categoría
+  → Buscar referencias con nivel de innovación alto en esa misma categoría
+  → Priorizar referencias clasificadas como emergent o validated (no standard)
+
+"Quiero algo que convierta bien"
+  → Tipo de UX: transaccional o informativa
+  → Patrón: (ninguno en la biblioteca principal aún, usar "Conversion Focus" cuando esté desarrollado)
+  → Mientras tanto: usar Tech Precision o Warm Authority según la categoría
+
+PROCESO DE TRADUCCIÓN MANUAL (si la intención no está en la matriz)
+---------------------------------------------------------------------
+Paso 1: ¿Qué percepción busca el proyecto? (M4.5: calma, control, deseo, confianza, etc.)
+Paso 2: ¿Qué tipo de proyecto es? (SaaS, luxury, healthcare, etc.)
+Paso 3: ¿Cuál es el nivel de innovación requerido? (bajo, medio, alto)
+Paso 4: ¿Hay alguna restricción específica? (sin motion, sin serif, sin dark mode)
+Paso 5: Traducir esas 4 variables a etiquetas de búsqueda del M12.2.
+
+MODOS DE BÚSQUEDA
+-----------------
+Búsqueda por categoría:
+  SaaS, luxury, healthcare, etc.
+
+Búsqueda por intención (usando Query Translation Matrix):
+  "quiero algo más premium"
+  "quiero algo más claro"
+  "quiero algo con más personalidad"
+
+Búsqueda por decisión específica:
+  hero, grid, CTA, motion, tipografía, storytelling, imagen
+
+Búsqueda por percepción:
+  confianza, control, deseo, precisión, calma, tensión
+
+Búsqueda por riesgo:
+  bajo riesgo + alta firma, alta innovación, bajo riesgo de copia
+
+PROCESO CLAUDE
+--------------
+1. Recibir la intención del humano.
+2. Traducirla a criterios usando la Query Translation Matrix.
+3. Si no está en la matriz: proceso de traducción manual (4 pasos).
+4. Verificar si hay referencias en la biblioteca que coincidan.
+5. Si hay resultados: recuperar las 3 más útiles y distintas entre sí.
+6. Si no hay resultados: aplicar el protocolo de "sin resultados".
+7. Para cada referencia: extraer el patrón aplicable.
+8. Indicar qué no copiar de cada una.
+
+PROTOCOLO DE "SIN RESULTADOS"
+--------------------------------
+Si no hay referencias en la biblioteca que coincidan con la intención:
+
+Paso 1: Ampliar los criterios. ¿Hay referencias en una categoría adyacente?
+  Ejemplo: si busco luxury y no hay, ¿hay en consulting premium o editorial de alta gama?
+
+Paso 2: Bajar el nivel de innovación requerido. ¿Hay referencias validated o standard que sirvan?
+
+Paso 3: Si todavía no hay resultados → declararlo explícitamente:
+  "La biblioteca no tiene referencias específicas para esta intención.
+  Las más cercanas son: [lista con justificación].
+  Recomendación: agregar referencias de [categoría/intención] a la colección."
+
+Paso 4: Registrar el gap para que M12.9 lo tome como input de evolución.
+
+No fabricar resultados. Si la biblioteca no tiene lo que se necesita: decirlo y registrar el gap.
+
+FORMATO DE OUTPUT DE RETRIEVAL
+--------------------------------
+Para cada búsqueda, entregar en este formato:
+
+BÚSQUEDA:
+  Intención: [lo que el humano quería]
+  Criterios usados: [etiquetas de la Query Translation Matrix]
+
+REFERENCIA 1: [nombre o descripción]
+  Por qué fue elegida: [una línea]
+  Patrón a extraer: [Pattern Formula]
+  Qué no copiar: [una línea]
+  Score: [score del M12.6]
+
+REFERENCIA 2: [nombre o descripción]
+  Por qué fue elegida: [una línea]
+  Patrón a extraer: [Pattern Formula]
+  Qué no copiar: [una línea]
+  Score: [score del M12.6]
+
+REFERENCIA 3: [nombre o descripción]
+  Por qué fue elegida: [una línea]
+  Patrón a extraer: [Pattern Formula]
+  Qué no copiar: [una línea]
+  Score: [score del M12.6]
+
+DECISIÓN HABILITADA:
+  [qué puede decidir el humano con estas 3 referencias]
+
+GATES
+-----
+GATE 12.8-A — ¿La intención fue traducida a criterios concretos (no solo "busqué premium")?
+  Falla → usar la Query Translation Matrix o el proceso manual.
+
+GATE 12.8-B — ¿Las 3 referencias son suficientemente distintas entre sí?
+  Falla → reemplazar la más similar por una de otra categoría o patrón.
+
+GATE 12.8-C — ¿Cada referencia tiene un patrón extraíble?
+  Falla → la referencia no debería estar en la biblioteca o necesita más descomposición.
+
+GATE 12.8-D — ¿La respuesta habilita una decisión concreta?
+  Falla → la búsqueda no fue útil. Revisar criterios.
+
+GATE 12.8-E — Si no hay resultados: ¿se declaró el gap y se registró?
+  Falla → no fabricar resultados.
+
+OUTPUT
+------
+- criterios de búsqueda usados
+- 3 referencias priorizadas con formato completo
+- patrón a extraer de cada una
+- qué no copiar de cada una
+- decisión que habilitan
+- gap detectado (si aplica)
+
+FAIL CONDITIONS
+---------------
+- buscar solo por industria ignorando la intención
+- devolver referencias redundantes o muy similares entre sí
+- no traducir la intención a criterios
+- fabricar referencias que no existen en la biblioteca
+- no registrar el gap cuando no hay resultados
+
+PROMPT PARA CLAUDE
+------------------
+Recibí la intención, traducila a criterios con la Query Translation Matrix.
+Si no está en la matriz: proceso manual de 4 pasos.
+Buscá 3 referencias distintas entre sí que coincidan con los criterios.
+Si no hay: declarar el gap y registrarlo. No fabricar resultados.
+Entregá cada referencia con el patrón a extraer y qué no copiar.
+La respuesta debe habilitar una decisión concreta, no solo mostrar referencias.

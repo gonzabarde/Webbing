@@ -1,0 +1,161 @@
+M13.1 — CLIENT QUALIFICATION ENGINE (v1)
+==========================================
+
+OBJETIVO
+--------
+Decidir si un lead merece tiempo y energía antes de hacer nada.
+Un lead no calificado que entra al sistema es peor que no tener leads.
+Consume tiempo, genera expectativas incorrectas y puede producir un proyecto
+que no se puede mostrar en el portfolio.
+
+CUÁNDO ACTIVAR
+--------------
+Siempre que llegue una consulta nueva, independientemente del canal.
+Antes de responder con detalle, antes de presentar precio, antes de M0.
+
+PROCESO
+-------
+1. Completar el BRIEF DE CALIFICACIÓN con la información disponible.
+2. Ejecutar el QUALIFICATION SCORE.
+3. Verificar las RED FLAGS.
+4. Tomar la decisión: avanzar / avanzar con condiciones / declinar.
+
+BRIEF DE CALIFICACIÓN
+---------------------
+Completar antes de evaluar. Si no se puede completar, pedir la información faltante.
+
+CLIENTE:
+  Nombre / empresa: [dato]
+  Tipo: PyME AR / empresa mediana AR / internacional / startup / profesional
+  Canal de llegada: referido / redes / web / frío / otro
+
+PROYECTO:
+  Qué necesita: [descripción en 2-3 líneas]
+  Para cuándo lo necesita: [fecha o "no definido"]
+  Tiene presupuesto en mente: sí / no / no lo dice
+
+CONTEXTO:
+  Tiene algo existente (sitio, marca, materiales): sí / no
+  Sabe lo que quiere o viene con una idea vaga: idea clara / vaga / sin idea
+  Tiene autonomía para decidir o depende de otros: autónomo / depende de otro
+
+SEÑALES POSITIVAS:
+  [ ] llegó por referido
+  [ ] tiene presupuesto en mente y es razonable
+  [ ] tiene timeline realista (más de 3 semanas)
+  [ ] sabe describir el problema, no solo el entregable
+  [ ] toma decisiones solo o en equipo pequeño
+
+QUALIFICATION SCORE
+--------------------
+Puntuar de 1 a 5 cada dimensión.
+
+PRESUPUESTO (1-5)
+  5: tiene presupuesto definido y razonable (compatible con M13.3)
+  3: no tiene número pero el proyecto y el contexto sugieren capacidad
+  1: señales de que el presupuesto es muy ajustado o no quiere pagar bien
+
+TIMELINE (1-5)
+  5: timeline realista (3+ semanas para proyectos simples, 6+ para complejos)
+  3: timeline ajustado pero negociable
+  1: "lo necesito para la semana que viene" sin justificación real
+
+CLARIDAD DEL PROBLEMA (1-5)
+  5: describe el problema de negocio, no solo el entregable
+  3: sabe lo que quiere pero no por qué
+  1: "quiero una web" sin más contexto
+
+AUTONOMÍA PARA DECIDIR (1-5)
+  5: decide solo o en equipo de 2 personas máximo
+  3: hay otro decisor pero está presente en el proceso
+  1: hay un comité, un jefe lejano, o alguien que "tiene que aprobar todo"
+
+POTENCIAL DE PORTFOLIO (1-5)
+  5: el proyecto es del tipo que Webbing quiere mostrar
+  3: es un buen trabajo aunque no sea showcase
+  1: el proyecto no suma al portfolio por categoría, calidad esperada o restricciones del cliente
+
+TOTAL: /25
+
+INTERPRETACIÓN
+  20-25: cliente ideal. Avanzar con energía.
+  14-19: cliente viable. Avanzar con condiciones claras.
+  8-13: cliente de riesgo. Evaluar si las condiciones lo hacen viable.
+  <8: declinar o derivar.
+
+RED FLAGS — SEÑALES DE PROBLEMA
+---------------------------------
+Si aparece cualquiera de estas, evaluar con más cuidado antes de seguir.
+
+"¿Podés hacer algo económico?" en el primer mensaje
+  → el precio va a ser un problema durante todo el proyecto.
+
+"El último diseñador me dejó colgado"
+  → o el cliente es difícil o tuvo mala suerte. Preguntar qué pasó.
+
+"Es urgente, lo necesito ya"
+  → urgencia sin razón real = o hay un problema de planificación o hay expectativas irreales.
+
+"Quiero algo como [referencia exacta de un competidor conocido]"
+  → riesgo de scope creep y frustración si el resultado no es idéntico.
+
+"No sé muy bien lo que quiero, vos decime"
+  → puede ser una oportunidad creativa o puede ser interminable. Evaluar el score de claridad.
+
+"El presupuesto lo definimos después"
+  → si lo dice al inicio, en general significa que no tiene o que va a comparar precios.
+
+"Somos muchos los que decidimos"
+  → el proceso de aprobación va a ser lento y contradictorio.
+
+DECISIONES POSIBLES
+-------------------
+
+AVANZAR
+  Score ≥ 20, sin red flags críticas.
+  Acción: ir directo a M13.2 para definir scope.
+
+AVANZAR CON CONDICIONES
+  Score 14-19 o hay 1-2 red flags menores.
+  Condiciones típicas: pago adelantado mayor, timeline no negociable, scope cerrado antes de empezar.
+  Acción: comunicar las condiciones antes de continuar. Si el cliente las acepta, ir a M13.2.
+
+EVALUAR MÁS
+  Score 8-13 o hay red flags importantes.
+  Acción: hacer una llamada de 20-30 minutos para resolver las dudas clave.
+  Si después de la llamada el score sube a ≥14: avanzar con condiciones.
+  Si no: declinar.
+
+DECLINAR
+  Score <8 o hay red flags críticas.
+  Cómo declinar: educado, corto, sin excusas elaboradas.
+  Ejemplo: "En este momento no tengo disponibilidad para el tipo de proyecto que necesitás,
+  pero te puedo recomendar [referido si existe]."
+
+GATES
+-----
+GATE 13.1-A — ¿El Brief de Calificación está completo?
+  Falla → pedir la información faltante antes de puntuar.
+
+GATE 13.1-B — ¿El score supera 14?
+  Falla → evaluar condiciones o declinar. No avanzar a M13.2 sin este gate.
+
+GATE 13.1-C — ¿Hay red flags críticas sin resolver?
+  Falla → resolver antes de avanzar o declinar.
+
+OUTPUT
+------
+- Brief de calificación completo
+- Qualification Score con dimensiones
+- Red flags detectadas
+- Decisión: avanzar / avanzar con condiciones / evaluar más / declinar
+- Condiciones si aplica
+
+PROMPT PARA CLAUDE
+------------------
+Cuando llega un lead, completar el Brief de Calificación primero.
+Puntuar las 5 dimensiones del Qualification Score.
+Verificar red flags.
+Dar una recomendación clara: avanzar, avanzar con condiciones, evaluar más o declinar.
+No romantizar el lead. Un cliente difícil que paga poco
+cuesta más de lo que rinde.

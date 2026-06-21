@@ -1,0 +1,18 @@
+# --- Sistema operativo ---
+# Basura que genera Windows/Mac y no debe entrar al repo
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.DS_Store
+
+# --- Editores ---
+# Configuración local de VS Code / editores (es de tu máquina, no del proyecto)
+.vscode/
+*.swp
+*.swo
+*~
+
+# --- Temporales ---
+*.tmp
+*.bak
+*.log

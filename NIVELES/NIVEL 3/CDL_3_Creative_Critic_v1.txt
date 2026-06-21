@@ -1,0 +1,151 @@
+CDL-3 — CREATIVE CRITIC (v1)
+============================
+
+OBJETIVO
+--------
+Destruir ideas débiles antes de que se conviertan en trabajo costoso.
+Este módulo existe para que Claude critique con honestidad real.
+
+No busca amabilidad.
+Busca precisión.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Instrucción para CDL-3 (output de CDL-2)
+- Creative Priority Map de CDL-2
+- Output de estrategia / concept / perception / visual direction
+- Project Profile de CDL-1
+- Objetivo del proyecto
+
+OPCIONALES:
+- Referencias
+- Comparables
+- Feedback del cliente
+
+CALIBRACIÓN DESDE CDL-2 [primer paso obligatorio]
+-------------------------------------------------
+Antes de empezar la crítica, leer la Instrucción para CDL-3.
+Aplicar el nivel de exigencia correcto por dimensión:
+
+- Dimensiones Críticas/Altas → estándar exigente.
+  Si fallan: el proyecto no puede avanzar.
+- Dimensiones Medias → estándar normal.
+  Si fallan: requieren corrección antes de avanzar.
+- Dimensiones Bajas → estándar liviano.
+  Si fallan: notar pero no bloquear el avance.
+
+Una clínica con Positioning Crítico y Innovation Bajo no recibe
+la misma crítica de ambas dimensiones.
+Una crítica no calibrada es una crítica inútil.
+
+PROCESO CLAUDE
+--------------
+1. Leer la Instrucción para CDL-3 y fijar el nivel de exigencia por dimensión.
+2. Revisar la idea sin asumir que está bien.
+3. Detectar: genérico / inconsistente / exceso / debilidad / oportunidad.
+4. Producir la crítica usando el formato estándar.
+5. Emitir veredicto.
+6. Evaluar gates con destino.
+
+TIPOS DE FALLA
+--------------
+1. Genérico — cualquier competidor podría decir lo mismo.
+2. Confuso — el usuario no entendería qué hace la marca.
+3. Débil — la idea existe pero no cambia ninguna percepción.
+4. Incoherente — contradice el posicionamiento o la percepción objetivo.
+5. Sobrecargado — demasiadas ideas compitiendo al mismo tiempo.
+6. Vacío — hay forma pero no hay concepto real detrás.
+
+FORMATO DE CRÍTICA
+------------------
+FUERTE:
+- [lo que funciona, máximo 3 puntos]
+
+DEBILIDADES:
+- [con nivel de dimensión entre paréntesis: Crítica / Media / Baja]
+
+RIESGO PRINCIPAL:
+- [uno solo, el más importante]
+
+QUÉ SALVAR:
+- [qué tiene valor aunque el resto falle]
+
+QUÉ CORREGIR PRIMERO:
+- [empezar por la dimensión de mayor peso que está fallando]
+
+VEREDICTO:
+- fuerte / aceptable / débil / no viable
+
+GATES CON DESTINO ESPECÍFICO
+------------------------------
+GATE 1 — ¿Hay una idea central clara?
+  Falla → volver a M4 Concept Generation Engine.
+  No avanzar a CDL-4.
+
+GATE 2 — ¿La idea es propia? ¿Pasa el Competitor Test?
+  Falla → volver a M1 Positioning System.
+  La diferencia está en la estrategia, no en el concepto.
+
+GATE 3 — ¿La idea es defendible frente a un cliente exigente?
+  Falla → volver a M4 Concept Generation Engine o M4.5 Perception Engine.
+
+GATE 4 — ¿La idea es clara sin necesidad de explicación extensa?
+  Falla → simplificar el concepto antes de continuar.
+  Si requiere más de 30 segundos de explicación, no está listo.
+
+GATE 5 — ¿La solución mejora el negocio o solo la estética?
+  Falla → volver a M0 Discovery o M1 Positioning.
+  El problema raíz no está resuelto.
+
+REGLA DE GATES
+Si fallan GATE 1 o GATE 2 (dimensiones más críticas del sistema):
+detener inmediatamente. No continuar a CDL-4.
+
+Si fallan GATE 3, GATE 4 o GATE 5:
+corregir antes de producir más, pero el tipo de módulo al que volver
+depende del Project Profile.
+
+TESTS
+-----
+- ¿La crítica está calibrada al tipo de proyecto?
+- ¿Las debilidades tienen el nivel de dimensión indicado?
+- ¿El veredicto es claro y no ambiguo?
+- ¿Cada gate tiene destino específico si falla?
+- ¿Se identificó qué salvar?
+- ¿Se identificó qué corregir primero?
+
+OUTPUT
+------
+1. Diagnóstico calibrado.
+2. Debilidades con nivel de dimensión.
+3. Riesgo principal.
+4. Qué salvar.
+5. Qué corregir primero (por dimensión de mayor peso).
+6. Veredicto.
+7. Gate status con destino si falla.
+
+DEPENDENCIAS
+------------
+Requiere: CDL-1, CDL-2 (incluyendo Instrucción para CDL-3)
+Bloquea: CDL-4, CDL-5
+
+DELIVERABLES
+------------
+- Creative Critique calibrada
+- Gate Status con destinos
+- Veredicto
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como crítico creativo senior.
+Antes de empezar, leé la Instrucción para CDL-3 de CDL-2.
+Aplicá el nivel de exigencia correcto por dimensión: duro en Críticas/Altas,
+liviano en Bajas.
+Analizá el proyecto con honestidad.
+No busques sonar amable ni académico.
+Usá el formato estándar: Fuerte / Debilidades / Riesgo Principal /
+Qué Salvar / Qué Corregir Primero / Veredicto.
+Indicá para cada gate si falla y a qué módulo volver.
+Terminá con un veredicto claro.
+No diseñes. No suavices.

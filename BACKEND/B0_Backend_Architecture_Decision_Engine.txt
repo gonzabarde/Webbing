@@ -1,0 +1,547 @@
+B0 — BACKEND ARCHITECTURE DECISION ENGINE (v1)
+==============================================
+
+UBICACIÓN EN EL SISTEMA
+-----------------------
+Capa: NIVEL 4 — Ejecución (extensión backend).
+Activación: condicional. Se activa desde M8.1 cuando el proyecto se clasifica
+como "SaaS / producto web con auth", "Ecommerce", o cualquier proyecto que
+requiera autenticación, base de datos, lógica de servidor o pagos.
+
+B0 NO reemplaza a M8.1. M8.1 sigue siendo el punto de entrada técnico.
+M8.1 decide el stack general y detecta la necesidad de backend.
+B0 resuelve el detalle de backend que M8.1 deja abierto.
+
+Relación con el resto de la capa:
+- M8.1 deriva a B0 cuando hay backend.
+- B0 alimenta el gate de aprobación de arquitectura (mismo gate de M8.1, ampliado).
+- B0 entrega decisiones cerradas a B1 (Auth/Data/API), B2 (Payments), B3 (Integrations), B4 (Standards).
+- B1–B4 no redeciden lo que B0 cerró. Lo implementan.
+
+
+OBJETIVO
+--------
+Elegir la arquitectura de backend correcta antes de escribir una línea de servidor.
+B0 decide, en este orden y sin saltearse pasos:
+
+1. Modelo de datos (relacional vs documento) y motor de base de datos.
+2. ORM / capa de acceso a datos.
+3. Estrategia de autenticación y proveedor.
+4. Modelo de autorización (roles y permisos).
+5. Capa de API (Server Actions vs Route Handlers vs API dedicada).
+6. Multi-tenancy (si aplica) — la decisión más cara de revertir.
+7. Estrategia de deploy del backend y entornos.
+
+La salida es UNA arquitectura concreta y defendible, no un menú de opciones.
+
+PRINCIPIO CENTRAL
+-----------------
+El backend se elige por la forma de los datos y la responsabilidad sobre ellos,
+no por moda ni por lo que se usó en el último proyecto.
+
+Tres preguntas gobiernan todo B0:
+- ¿Qué pasa si estos datos se pierden o se filtran? (responsabilidad)
+- ¿Qué tan relacionados están entre sí? (forma)
+- ¿Quién puede ver o tocar qué? (acceso)
+
+Si una decisión de backend no cambia la respuesta a una de esas tres, no es una decisión: es una preferencia. Las preferencias se resuelven con el default del sistema, no se debaten.
+
+
+INPUTS
+------
+OBLIGATORIOS (heredados de M8.1 y capas previas):
+- Project Profile (CDL-1) y tipo de proyecto
+- Clasificación de M8.1 (perfil de stack elegido: SaaS / Ecommerce / etc.)
+- Objetivo del proyecto y objetivo técnico dominante
+- Naturaleza de los datos: ¿hay datos personales? ¿de pago? ¿de salud? ¿financieros?
+- Necesidad de auth confirmada en M8.1 (sí/no)
+- Necesidad de pagos confirmada en M8.1 (sí/no)
+- Presupuesto y timeline
+- Nivel de riesgo aceptable
+- Quién mantiene el sistema post-launch
+
+OPCIONALES:
+- Stack o proveedores preexistentes del cliente
+- Escala esperada (usuarios, requests, volumen de datos)
+- Necesidad de exponer API a terceros o a una app mobile
+- Restricciones de hosting o jurisdicción de datos (ej: datos deben quedar en una región)
+- Equipo técnico del cliente para mantenimiento
+
+Si falta un OBLIGATORIO, no avanzar. Volver a M8.1 o al intake (M10.2) a buscarlo.
+El dato faltante más peligroso es la naturaleza de los datos: define todo lo demás.
+
+
+PROCESO CLAUDE
+--------------
+Ejecutar en orden. Cada paso cierra una decisión que el siguiente hereda.
+
+PASO 1 — CLASIFICAR LA FORMA Y LA RESPONSABILIDAD DE LOS DATOS
+  Antes de tocar tecnología, responder:
+  a. ¿Los datos son altamente relacionales? (usuarios → proyectos → tareas → etc.)
+     Casi siempre SÍ en SaaS y ecommerce. Default: relacional.
+  b. ¿Qué nivel de responsabilidad tienen?
+     Ver TABLA DE SENSIBILIDAD DE DATOS abajo. Determina el rigor de todo lo demás.
+  c. ¿Hay datos que NO encajan en tablas? (logs, eventos, blobs, contenido flexible)
+     Si sí: identificar si van en columnas JSON, en una tabla aparte, o en otro store.
+  d. CLASIFICAR LA SUPERFICIE DE ATAQUE (threat model liviano).
+     Antes de decidir tecnología, mapear de dónde viene el riesgo. No es un análisis
+     de seguridad exhaustivo (eso lo dan los patrones concretos de B1/B3): es el paso
+     de clasificación que define CUÁNTO hardening necesita este proyecto.
+     Responder, en una línea cada una:
+       - ¿Qué dato es el premio? Lo más valioso/sensible que un atacante querría
+         (el nivel más alto de la TABLA DE SENSIBILIDAD ya lo dice).
+       - ¿Quién es el atacante plausible? Usuario común que intenta ver datos de otro
+         (caso más frecuente: IDOR), bot que abusa de endpoints públicos, o atacante
+         dirigido (raro salvo NIVEL 3-4).
+       - ¿Cuál es la superficie expuesta? Listar lo que recibe input externo:
+         endpoints públicos, formularios, subida de archivos, webhooks entrantes,
+         cualquier API pública.
+       - ¿Qué pasa si esta superficie cae? Define la criticidad y, con ella, el nivel
+         de gobernanza de M10.0 y el rigor de observabilidad/recuperación (B5/B6).
+     SALIDA: una clasificación de riesgo (bajo / medio / alto) que acompaña al nivel
+     de sensibilidad de datos hasta el final. Un proyecto NIVEL 1 con superficie chica
+     no necesita el mismo hardening que un SaaS NIVEL 3 con API pública. Esta
+     clasificación evita tanto el sub-hardening (peligroso) como el over-engineering
+     de seguridad (deuda). Los controles concretos para cada vector salen de B1 y B3;
+     B0 solo decide cuánta de esa artillería se activa.
+
+PASO 2 — ELEGIR MOTOR DE BASE DE DATOS
+  Usar el ÁRBOL DE DECISIÓN DE BASE DE DATOS abajo.
+  Default del sistema: PostgreSQL gestionado (Supabase o Neon).
+  Justificar cualquier desvío del default.
+
+PASO 3 — ELEGIR ORM / CAPA DE ACCESO
+  Usar la TABLA DE ORM abajo.
+  Default del sistema: Prisma (salvo razón concreta para Drizzle).
+
+PASO 4 — DECIDIR AUTENTICACIÓN
+  Usar el ÁRBOL DE DECISIÓN DE AUTH abajo.
+  Cerrar: proveedor, métodos de login, dónde vive la sesión, si hay self-hosting.
+
+PASO 5 — DECIDIR AUTORIZACIÓN (roles y permisos)
+  Usar el MODELO DE AUTORIZACIÓN abajo.
+  Cerrar: ¿hay roles? ¿cuántos? ¿permisos por recurso? ¿quién puede ver qué fila?
+  Si hay multi-tenancy, este paso depende del Paso 6: resolver 6 primero.
+
+PASO 6 — DECIDIR MULTI-TENANCY (si aplica)
+  Usar el ÁRBOL DE DECISIÓN DE MULTI-TENANCY abajo.
+  Esta es la decisión IRREVERSIBLE por excelencia. Cambiarla post-launch puede
+  significar reescribir el modelo de datos entero. Decidir con la máxima información
+  disponible y aprobación explícita.
+
+PASO 7 — DECIDIR CAPA DE API
+  Usar el ÁRBOL DE DECISIÓN DE CAPA DE API abajo.
+  Cerrar: ¿Server Actions? ¿Route Handlers? ¿API dedicada? ¿necesita exponerse afuera?
+
+PASO 8 — DEFINIR DEPLOY Y ENTORNOS DEL BACKEND
+  Plataforma + entornos (dev / staging / prod) + dónde corre el backend
+  (mismo Vercel, o servicio separado tipo Railway/Render/Fly).
+  Definir dónde viven los secrets de cada entorno.
+
+PASO 9 — EVALUAR COSTO DE COMPLEJIDAD
+  No elegir una arquitectura más compleja de la necesaria.
+  Regla: cada pieza de infra agregada debe justificar su costo de mantenimiento.
+  Un proyecto que se resuelve con Postgres + Prisma + Server Actions NO necesita
+  una API dedicada, una cola de mensajes ni microservicios. Agregar eso es deuda.
+  Además del costo de COMPLEJIDAD (mantenimiento), estimar el costo ECONÓMICO mensual
+  de la arquitectura elegida: hosting, DB, terceros, y IA si aplica (el más volátil).
+  Una arquitectura no se aprueba sin una idea de lo que cuesta sostenerla por mes. El
+  detalle de budgets de costo (techos por request, por acción) lo desarrolla B5-PERF-12;
+  acá basta la estimación gruesa que evita elegir algo caro de mantener sin saberlo.
+
+PASO 10 — PRODUCIR RECOMENDACIÓN FINAL
+  Completar el OUTPUT DEL MÓDULO con todas las decisiones cerradas.
+  Verificar el GATE DE APROBACIÓN antes de pasar a B1.
+
+
+TABLA DE SENSIBILIDAD DE DATOS
+------------------------------
+Define el rigor de seguridad, backup y compliance del proyecto entero.
+Identificar el nivel MÁS ALTO presente en el proyecto y aplicar ese.
+
+NIVEL 1 — PÚBLICO / NO SENSIBLE
+  Ejemplos: contenido de marketing, catálogo de productos sin datos de cliente.
+  Rigor: backups básicos. Sin requisitos especiales.
+
+NIVEL 2 — DATOS PERSONALES (PII)
+  Ejemplos: nombre, email, teléfono, dirección de usuarios.
+  Rigor: auth obligatoria, encriptación en tránsito (HTTPS), control de acceso por fila,
+  backups, política de borrado. Considerar GDPR/normativa local si hay usuarios en esas
+  jurisdicciones.
+
+NIVEL 3 — DATOS DE PAGO
+  Ejemplos: tarjetas, transacciones, datos de facturación.
+  Rigor: NUNCA almacenar datos de tarjeta directamente. Delegar a Stripe u otro PSP
+  (que es PCI-compliant). El backend guarda referencias (customer_id, payment_intent_id),
+  no números de tarjeta. Webhooks verificados con firma. Ver B2.
+
+NIVEL 4 — DATOS CRÍTICOS (salud, financieros, legales)
+  Ejemplos: historia clínica, datos financieros sensibles.
+  Rigor: máximo. Encriptación en reposo, auditoría de accesos, jurisdicción de datos,
+  posible requisito de compliance específico (HIPAA, etc.).
+  REGLA: si el proyecto toca NIVEL 4, no improvisar. Frenar y escalar al humano para
+  validar requisitos legales ANTES de definir arquitectura.
+
+BORDE NIVEL 2 vs NIVEL 4 — DATOS CUASI-MÉDICOS (criterio para no quedar en la duda):
+  Muchos proyectos rozan datos de salud sin ser historias clínicas: turnos de una
+  clínica estética, una app de fitness, un registro de alergias en un ecommerce de comida.
+  ¿NIVEL 2 o NIVEL 4? Criterio práctico:
+    - El METADATO de que existe un turno/servicio (fecha, profesional, que la persona es
+      cliente) es PII → NIVEL 2.
+    - El CONTENIDO clínico del servicio (diagnóstico, condición médica, tratamiento de
+      una patología, datos que revelan estado de salud) → NIVEL 4.
+    - El borde: "depilación, fecha X, profesional Y" es NIVEL 2 (es un servicio estético,
+      no un dato de salud). "Tratamiento de [condición dermatológica diagnosticada]" es
+      NIVEL 4 (revela estado de salud).
+  REGLA DE DECISIÓN: si el dato, filtrado, permitiría inferir una condición de salud de
+  la persona, es NIVEL 4. Si solo dice que usó un servicio sin revelar condición, es NIVEL 2.
+  Ante duda genuina sobre el borde, tratar como NIVEL 4 y escalar al humano — el costo de
+  sobre-proteger es bajo; el de sub-proteger un dato de salud es legal y reputacional.
+
+SUJETOS DE DATOS QUE NO SON USUARIOS (categoría transversal):
+  No todo el que tiene datos en el sistema es un usuario que se loguea. Ejemplos: el
+  cliente final de una clínica (recibe recordatorios, no usa el sistema), el destinatario
+  de un envío, un contacto cargado por el staff. Sus datos cuentan para la sensibilidad
+  (su PII es PII aunque no tengan cuenta) pero NO son usuarios autenticados: no tienen
+  login, rol ni sesión. Clasificarlos explícitamente como "sujeto de datos / contacto",
+  no como usuario. El acceso a SUS datos lo gobierna el staff (vía A4), no ellos mismos.
+
+Regla operativa: el nivel de datos determina el nivel de gobernanza de M10.0.
+NIVEL 3 o 4 → gobernanza COMPLETA sin excepción.
+
+
+ÁRBOL DE DECISIÓN DE BASE DE DATOS
+----------------------------------
+¿Los datos son relacionales? (entidades conectadas entre sí)
+  SÍ (caso típico de SaaS/ecommerce) → base relacional. Continuar.
+  NO (documentos sueltos, schema muy variable) → evaluar documento (raro; justificar).
+
+Para base relacional, elegir motor:
+
+POSTGRESQL GESTIONADO — DEFAULT DEL SISTEMA
+  Opciones: Supabase / Neon.
+  Cuándo: la enorme mayoría de proyectos SaaS y ecommerce.
+  Supabase: cuando además querés auth, storage y realtime integrados en una sola plataforma.
+    Resuelve auth + DB + storage + APIs autogeneradas. Reduce piezas a mantener.
+  Neon: cuando querés Postgres puro, serverless, con branching de DB por entorno,
+    y el auth lo resolvés aparte (Clerk, NextAuth). Más desacoplado.
+  Complejidad: baja-media. Mantenimiento: bajo (gestionado).
+
+POSTGRESQL EN PLANETSCALE / OTRO MYSQL GESTIONADO
+  Cuándo: solo si el cliente ya lo usa o hay una razón concreta de escala/sharding.
+  No es el default. Justificar.
+
+SQLITE (vía Turso o similar)
+  Cuándo: proyectos muy chicos, edge-first, lectura intensiva, escritura baja.
+  No para SaaS multi-usuario con escritura concurrente alta. Justificar.
+
+BASE DOCUMENTO (MongoDB, etc.)
+  Cuándo: schema genuinamente variable e impredecible, o el cliente ya tiene el ecosistema.
+  REGLA: no elegir documento "porque es más flexible". La flexibilidad sin schema es
+  deuda de integridad. En SaaS/ecommerce relacionales, documento casi siempre es error.
+  Justificar con un caso de uso real que lo demande.
+
+QUÉ NO HACER:
+- No elegir el motor por familiaridad si el proyecto pide otra cosa.
+- No usar dos bases distintas si una resuelve (duplica fuente de verdad).
+- No meter Redis/colas/search engines en el día 1 sin necesidad demostrada.
+  Esos se agregan cuando un problema real aparece, no preventivamente.
+
+
+TABLA DE ORM / CAPA DE ACCESO
+-----------------------------
+PRISMA — DEFAULT DEL SISTEMA
+  Cuándo: la mayoría de proyectos. Schema declarativo, migraciones gestionadas,
+  type-safety, gran ergonomía, ecosistema maduro.
+  Costo: capa de abstracción más pesada; queries muy complejas pueden requerir SQL crudo.
+  Mantenimiento: bajo. Curva de entrada: baja.
+
+DRIZZLE
+  Cuándo: querés control fino del SQL, bundle más liviano, edge runtime,
+  o el equipo prefiere SQL-first con type-safety.
+  Costo: más verboso, ecosistema más nuevo.
+  Elegir Drizzle por una razón concreta (edge, control de queries), no por moda.
+
+SQL CRUDO / QUERY BUILDER LIVIANO
+  Cuándo: casi nunca en estos proyectos. Solo si hay una razón de performance
+  extrema y un equipo que sabe lo que hace.
+
+Regla: un solo ORM por proyecto. No mezclar Prisma y Drizzle en el mismo backend.
+
+
+ÁRBOL DE DECISIÓN DE AUTH
+-------------------------
+¿El proyecto necesita autenticación de usuarios?
+  NO → no hay auth. Saltear a Paso 5 solo si hay roles internos; si no, saltear a Paso 7.
+  SÍ → continuar.
+
+¿Es B2C (consumidores) o B2B (empresas con equipos)?
+
+  B2C (usuarios individuales):
+    ¿Necesita social login (Google, Apple, etc.)?
+      → Clerk o NextAuth resuelven ambos. Ver criterio de proveedor abajo.
+
+  B2B (organizaciones, equipos, multi-usuario por cuenta):
+    → casi siempre implica multi-tenancy (Paso 6) y roles (Paso 5).
+    → considerar proveedores con soporte de organizaciones nativo (Clerk tiene Organizations).
+    ¿Necesita SSO / SAML (clientes enterprise)?
+      SÍ → Clerk (planes con SSO) o WorkOS. NextAuth requiere más trabajo manual.
+      NO → Clerk o NextAuth.
+
+CRITERIO DE PROVEEDOR:
+
+CLERK — recomendado cuando querés velocidad y menos código de auth
+  Pros: UI de auth lista, gestión de usuarios y organizaciones, MFA, SSO en planes pagos.
+  Contras: costo por usuario activo a escala, dependencia de tercero, datos de usuario
+    viven parcialmente en Clerk.
+  Cuándo: B2B con organizaciones, o cuando el tiempo de desarrollo importa más que
+    el control total.
+
+NEXTAUTH / AUTH.JS — recomendado cuando querés control y costo cero de licencia
+  Pros: open source, datos de usuario en TU base, sin costo por usuario, flexible.
+  Contras: más código para mantener, MFA y organizaciones se construyen a mano,
+    SSO enterprise es trabajo extra.
+  Cuándo: B2C, control de datos importante, presupuesto ajustado, equipo cómodo
+    construyendo flujos de auth.
+
+SUPABASE AUTH — recomendado si ya elegiste Supabase como DB
+  Pros: integrado con la DB y con Row Level Security, sin pieza extra.
+  Contras: te acopla al ecosistema Supabase.
+  Cuándo: elegiste Supabase en Paso 2 y no necesitás features de auth muy específicas.
+
+CERRAR EN ESTE PASO:
+- Proveedor de auth.
+- Métodos de login (email/password, magic link, social, SSO).
+- Dónde vive la sesión (JWT, cookie de sesión, session store).
+- Si los datos de usuario viven en tu DB, en el proveedor, o sincronizados.
+
+QUÉ NO HACER:
+- No construir auth a mano desde cero (hashing, tokens, reset de password manual).
+  Es la fuente número uno de vulnerabilidades. Usar un proveedor o librería probada.
+- No guardar passwords en texto plano jamás (obvio, pero se sigue viendo).
+- No inventar tu propio esquema de tokens si una librería estándar lo resuelve.
+
+
+MODELO DE AUTORIZACIÓN (roles y permisos)
+-----------------------------------------
+Autenticación = quién sos. Autorización = qué podés hacer. Son distintas. Cerrar ambas.
+
+NIVEL 0 — SIN ROLES
+  Todos los usuarios autenticados pueden hacer lo mismo.
+  Cuándo: apps muy simples, single-player (cada usuario solo ve lo suyo).
+  Implementación: filtrar por user_id. No hace falta sistema de roles.
+
+NIVEL 1 — ROLES SIMPLES (RBAC básico)
+  Pocos roles fijos (ej: admin / member / viewer).
+  Cuándo: la mayoría de SaaS B2B y paneles de administración.
+  Implementación: campo `role` en user o en la relación user-organización.
+  Chequeo de rol en middleware y en cada acción sensible.
+
+NIVEL 2 — PERMISOS POR RECURSO (RBAC granular)
+  Permisos específicos por tipo de recurso y acción (ej: puede_editar_facturas).
+  Cuándo: SaaS con necesidades de control fino, equipos grandes, roles personalizados.
+  Implementación: tabla de permisos, roles que agrupan permisos. Más complejo.
+  No elegir este nivel si NIVEL 1 alcanza. La granularidad sin necesidad es deuda.
+
+NIVEL 3 — ABAC / POLÍTICAS (atributos y reglas)
+  Acceso basado en atributos y reglas complejas.
+  Cuándo: casos enterprise específicos. Raro en proyectos de agencia.
+  Justificar fuertemente. Casi siempre NIVEL 1 o 2 alcanzan.
+
+REGLA DE ACCESO A FILAS (row-level):
+  En multi-tenancy o datos por usuario, NO alcanza con chequear el rol.
+  Hay que garantizar que un usuario solo accede a SUS filas / las de SU organización.
+  Opciones:
+    - Filtrado explícito en cada query (where organization_id = ...).
+    - Row Level Security a nivel DB (Postgres RLS, nativo en Supabase).
+  RLS es más seguro (la DB lo garantiza aunque el código tenga un bug) pero más complejo.
+  Filtrado explícito es más simple pero depende de que ningún query se olvide del filtro.
+  Decidir cuál y aplicarlo de forma consistente. Documentarlo para B1.
+
+
+ÁRBOL DE DECISIÓN DE MULTI-TENANCY
+----------------------------------
+DECISIÓN IRREVERSIBLE. Resolver antes que roles (Paso 5) si aplica.
+
+¿El producto sirve a múltiples organizaciones/empresas, cada una con sus propios
+usuarios y datos aislados entre sí?
+  NO → no hay multi-tenancy. Cada usuario es individual. Saltear a Paso 7.
+       (Ojo: un ecommerce con muchos clientes NO es multi-tenant. Los clientes
+        compran del mismo catálogo. Multi-tenant es cuando cada "tenant" tiene
+        su propio espacio aislado, como un Slack por empresa.)
+  SÍ → multi-tenant. Elegir modelo de aislamiento:
+
+MODELO A — TENANT POR COLUMNA (shared database, shared schema)
+  Cada tabla tiene una columna organization_id. Todos los tenants comparten tablas.
+  Aislamiento: lógico (por query o RLS).
+  Pros: simple, barato, fácil de mantener, escala bien para la mayoría.
+  Contras: un bug de filtrado puede filtrar datos entre tenants → RLS mitiga esto.
+  Cuándo: DEFAULT para multi-tenancy en proyectos de agencia. Empezar acá.
+
+MODELO B — SCHEMA POR TENANT
+  Cada tenant tiene su propio schema en la misma base.
+  Pros: mayor aislamiento.
+  Contras: migraciones se complican (correr en N schemas), más operación.
+  Cuándo: requisito de aislamiento fuerte, pocos tenants grandes. Justificar.
+
+MODELO C — BASE POR TENANT
+  Cada tenant tiene su propia base de datos.
+  Pros: aislamiento máximo, útil para compliance estricto.
+  Contras: operación pesada, costo alto, complejidad de mantenimiento alta.
+  Cuándo: enterprise, compliance NIVEL 4, pocos tenants que pagan mucho. Raro en agencia.
+
+REGLA: empezar con MODELO A salvo que un requisito concreto (compliance, aislamiento
+contractual) obligue a B o C. Migrar de A a B/C después es costoso pero posible;
+migrar de B/C a A casi nunca tiene sentido. La elección de A no cierra puertas; la de
+C las cierra en costo desde el día 1.
+
+
+ÁRBOL DE DECISIÓN DE CAPA DE API
+--------------------------------
+¿Cómo se comunica el frontend con el backend?
+
+¿El backend solo lo consume el propio frontend Next.js de este proyecto?
+  SÍ → no necesitás una API pública. Usar lo nativo de Next.js:
+
+    SERVER ACTIONS — para mutaciones (crear, editar, borrar)
+      Cuándo: forms, mutaciones disparadas desde la UI.
+      Pros: type-safe, sin escribir endpoints, integrado con React.
+      Default para mutaciones internas.
+
+    ROUTE HANDLERS (app/api/.../route.ts) — para todo lo demás
+      Cuándo: webhooks entrantes (Stripe, etc.), endpoints que consume un cliente
+        no-React, respuestas que no son para un form (ej: descargar un archivo),
+        o cuando necesitás un endpoint HTTP con verbo y URL explícitos.
+      Pros: control total del request/response HTTP.
+
+  NO → necesitás una API consumible desde afuera (app mobile, integraciones de
+       terceros, otro frontend, clientes públicos):
+
+    ¿Necesitás type-safety end-to-end y el consumidor también es TypeScript?
+      SÍ → considerar tRPC (si consumidor y server son del mismo monorepo TS).
+      NO → API REST con Route Handlers documentada, o GraphQL si las relaciones
+           de datos lo justifican (raro; justificar).
+
+    REGLA: exponer una API pública es una responsabilidad grande (versionado,
+    rate limiting, auth de API, documentación). No exponer API "por si acaso".
+    Solo si hay un consumidor externo real y conocido.
+
+CERRAR EN ESTE PASO:
+- Mecanismo de mutaciones (Server Actions por default).
+- Mecanismo de endpoints HTTP (Route Handlers para webhooks y casos no-form).
+- Si hay API pública: protocolo, auth de API, versionado, rate limiting → detallar en B1/B3.
+
+
+OUTPUT DEL MÓDULO
+-----------------
+Al completar, llenar este handoff. B1–B4 lo heredan sin redecidir.
+
+Tipo de proyecto: [SaaS / Ecommerce / otro]
+Nivel de sensibilidad de datos: [1 / 2 / 3 / 4]
+Forma de los datos: [relacional / documento / mixto]
+
+BASE DE DATOS:
+  Motor: [PostgreSQL gestionado (Supabase/Neon) / otro + justificación]
+  Por qué: [una línea]
+
+CAPA DE ACCESO:
+  ORM: [Prisma / Drizzle / otro + justificación]
+
+AUTENTICACIÓN:
+  ¿Hay auth?: [sí/no]
+  Proveedor: [Clerk / NextAuth / Supabase Auth / otro]
+  Métodos de login: [email/pass, magic link, social, SSO]
+  Dónde vive la sesión: [JWT / cookie de sesión / session store]
+  Dónde viven los datos de usuario: [tu DB / proveedor / sincronizados]
+
+AUTORIZACIÓN:
+  Nivel: [0 sin roles / 1 RBAC simple / 2 RBAC granular / 3 ABAC]
+  Roles definidos: [listar si aplica]
+  Acceso a filas: [filtrado explícito / RLS]
+
+MULTI-TENANCY:
+  ¿Aplica?: [sí/no]
+  Modelo: [A columna / B schema / C base — si aplica]
+
+CAPA DE API:
+  Mutaciones: [Server Actions / otro]
+  Endpoints HTTP: [Route Handlers para qué casos]
+  ¿API pública?: [no / sí + protocolo y consumidor]
+
+DEPLOY DEL BACKEND:
+  Dónde corre: [mismo Vercel / Railway / Render / Fly / otro]
+  Entornos: [dev / staging / prod]
+  Dónde viven los secrets: [por entorno]
+
+COMPLEJIDAD ESTIMADA: [baja / media / alta]
+MANTENIMIENTO: [quién mantiene, con qué nivel técnico]
+DEPENDENCIAS CRÍTICAS DE TERCEROS: [listar]
+QUÉ NO USAR Y POR QUÉ: [listar]
+RIESGOS DE LA ELECCIÓN: [listar]
+DECISIONES IRREVERSIBLES TOMADAS: [multi-tenancy, motor de DB, modelo de datos]
+
+
+GATE DE APROBACIÓN [obligatorio antes de B1]
+--------------------------------------------
+Este gate amplía el gate de aprobación de arquitectura de M8.1.
+La arquitectura de backend se aprueba JUNTO con la de M8.1, no por separado.
+
+Antes de avanzar a B1, verificar:
+"¿La arquitectura de backend fue revisada y aprobada por el cliente y/o el equipo
+técnico, incluyendo explícitamente las decisiones IRREVERSIBLES (motor de DB,
+modelo de datos, multi-tenancy)?"
+
+Falla → no avanzar. Una decisión irreversible cambiada post-B1 puede invalidar
+el schema entero y el trabajo de B1–B4.
+
+Conexión con M10.2: las decisiones irreversibles de B0 se clasifican como
+IRREVERSIBLES en el Rework Prevention de M10.2 y requieren aprobación explícita
+documentada antes de construir.
+
+
+TESTS
+-----
+- ¿El motor de DB corresponde a la forma de los datos?
+- ¿Es la arquitectura más simple que resuelve el problema?
+- ¿El nivel de sensibilidad de datos está identificado y el rigor corresponde?
+- ¿La decisión de multi-tenancy se tomó con información suficiente?
+- ¿Auth y autorización están ambas resueltas (no solo auth)?
+- ¿Se evitó exponer una API pública sin un consumidor real?
+- ¿Quién mantiene esto puede hacerlo sin reescribir la arquitectura?
+- ¿Cada pieza de infra agregada justifica su costo de mantenimiento?
+- ¿El gate de aprobación se ejecutó sobre las decisiones irreversibles?
+
+
+FAIL CONDITIONS
+---------------
+- Motor de DB o ORM elegido por moda o costumbre.
+- Base documento elegida para datos claramente relacionales "por flexibilidad".
+- Auth construida a mano desde cero sin librería/proveedor probado.
+- Autorización ignorada (se resolvió auth pero no quién puede ver qué).
+- Multi-tenancy decidida sin aprobación, o cambiada después de empezar el schema.
+- Datos de pago almacenados directamente en la DB (debe delegarse al PSP).
+- Datos NIVEL 4 (salud/financiero) arquitectados sin validar requisitos legales.
+- API pública expuesta sin consumidor real, versionado ni rate limiting.
+- Infra preventiva (Redis, colas, microservicios) agregada sin necesidad demostrada.
+- Se avanzó a B1 sin aprobar las decisiones irreversibles.
+
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como arquitecto de backend.
+Tomá la clasificación de M8.1 y resolvé el detalle de backend que dejó abierto.
+Seguí los 10 pasos en orden. No saltees la clasificación de sensibilidad de datos
+ni la de superficie de ataque: juntas definen el rigor de todo lo demás (incluido
+cuánto activás de B5 performance y B6 recuperación).
+En el threat model, no asumas que el atacante siempre es "un usuario que ve datos de
+otro" (IDOR): en ecommerce con guest checkout el vector principal es la manipulación de
+precio y stock en el checkout, no el IDOR. Identificá el vector real de ESTE proyecto.
+Definí QUIÉN se autentica antes de elegir proveedor: no todos los usuarios se loguean
+(en ecommerce los compradores suelen ser anónimos y solo el panel tiene auth).
+Resolvé multi-tenancy antes que roles si el proyecto es multi-tenant — es la decisión
+más cara de revertir.
+Elegí los defaults del sistema (PostgreSQL gestionado, Prisma, Server Actions) salvo
+que haya una razón concreta y defendible para desviarte. Justificá cada desvío.
+No me des una lista de opciones: entregá una arquitectura concreta y defendible.
+No agregues infraestructura que no resuelva un problema real del proyecto.
+Antes de cerrar, completá el handoff y verificá el gate sobre las decisiones irreversibles.

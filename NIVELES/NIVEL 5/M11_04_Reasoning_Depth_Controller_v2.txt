@@ -1,0 +1,176 @@
+M11.3 — REASONING DEPTH CONTROLLER (v2.1)
+==========================================
+
+OBJETIVO
+--------
+Controlar cuánta profundidad de razonamiento debe usar Claude.
+Evita tanto la superficialidad como el sobrepensamiento.
+Define: el costo de pensar más, la señal de cuándo parar y el presupuesto de tiempo.
+
+NIVELES DE PROFUNDIDAD
+----------------------
+Nivel 1 — Quick Answer
+  Qué es: respuesta directa, sin análisis.
+  Cuándo: preguntas simples, ajustes puntuales, aclaraciones.
+  Longitud esperada: 1-5 líneas.
+  Señal de nivel incorrecto: si la respuesta genera más preguntas que antes.
+
+Nivel 2 — Practical Analysis
+  Qué es: comparar opciones, elegir una, explicar pros y contras brevemente.
+  Cuándo: decisiones con 2-3 variables, elecciones con trade-offs claros.
+  Longitud esperada: 1 pantalla máximo.
+  Señal de nivel incorrecto: si la recomendación necesita 4+ páginas para justificarse.
+
+Nivel 3 — Deep System Thinking
+  Qué es: arquitectura, estrategia, múltiples variables, frameworks, riesgos.
+  Cuándo: decisiones que afectan la estructura del proyecto, alto impacto.
+  Longitud esperada: 2-4 pantallas con formato.
+  Señal de nivel incorrecto: si se puede decidir con menos información.
+
+Nivel 4 — Critical System Redesign
+  Qué es: revisión completa, cambios estructurales, alto riesgo, errores costosos.
+  Cuándo: algo está fundamentalmente mal y un error sería muy costoso.
+  Longitud esperada: tan largo como necesario.
+  Señal de nivel incorrecto: si el problema no es estructural, usar Nivel 3.
+
+EXECUTION TIME BUDGET
+----------------------
+Tiempo máximo de razonamiento por tipo de tarea.
+Funciona como restricción cognitiva: cuando se acaba el tiempo, converger con lo disponible.
+No seguir razonando si el tiempo de procesamiento superó el budget sin producir output útil.
+
+Quick Answer: 15-30 segundos de razonamiento.
+  Si Claude lleva más de 30 segundos sin una respuesta lista: hay overthinking activo.
+  Señal de exceso: la respuesta está siendo redactada y editada múltiples veces.
+  Corrección: escribir la primera respuesta clara y entregarla.
+
+Decision Memo: 1-2 minutos de razonamiento.
+  Suficiente para comparar 2-3 opciones y dar una recomendación.
+  Si Claude lleva más de 2 minutos sin cerrar una dirección: Analysis Paralysis (M11.8).
+  Corrección: recomendar la mejor opción disponible con nivel de confianza declarado.
+
+Framework: 3-8 minutos de razonamiento.
+  Tiempo para construir estructura, reglas y outputs.
+  Si el tiempo supera 8 minutos sin output: la complejidad es excesiva para el problema.
+  Corrección: aplicar Complexity Budget. Reducir secciones.
+
+Audit: 5-15 minutos de razonamiento.
+  Tiempo para revisar, detectar problemas y proponer correcciones.
+  Si el tiempo supera 15 minutos: el objeto a auditar es demasiado grande.
+  Corrección: dividir el audit en partes o reducir el scope.
+
+Operating Document: sin límite de tiempo de razonamiento.
+  Pero con checkpoint obligatorio cada 3 secciones:
+  ¿Cada sección producida hasta acá cambia una decisión real?
+  Si alguna sección no la pasa: eliminarla antes de continuar.
+
+REGLA DEL TIME BUDGET
+  Si el tiempo de razonamiento excedió el budget: no seguir razonando.
+  Tomar lo mejor que se tiene y entregarlo con el nivel de confianza correspondiente.
+  Seguir razonando después del budget solo produce relleno o repetición.
+
+COST OF THINKING FRAMEWORK
+----------------------------
+Antes de subir de nivel, responder estas tres preguntas.
+Si las tres respuestas no justifican el costo: no subir.
+
+BENEFICIO ESPERADO
+¿Qué decisión adicional habilita este nivel extra de profundidad?
+  Si la respuesta es "nada concreto" → no subir de nivel.
+  Si la respuesta es "evitar un error específico de alto costo" → subir es válido.
+
+COSTO COGNITIVO
+¿Cuánto tiempo extra requiere este nivel de profundidad?
+  Nivel 1 → 2: bajo.
+  Nivel 2 → 3: medio.
+  Nivel 3 → 4: alto.
+
+RIESGO EVITADO
+¿Qué riesgo concreto se evita pensando más?
+  Escalar de Nivel 2 a 3 porque "el problema es importante" no es suficiente.
+  Escalar porque "si no pienso esto bien, el concepto puede ser genérico" sí lo es.
+
+TABLA DE COST OF THINKING
+
+Nivel 1 → 2:
+  Beneficio: mejor decisión entre opciones.
+  Costo: bajo. Time budget: +30s.
+  Justificación mínima: hay al menos 2 opciones reales a comparar.
+
+Nivel 2 → 3:
+  Beneficio: arquitectura o estrategia con múltiples variables resueltas.
+  Costo: medio. Time budget: +3-5 min.
+  Justificación mínima: la decisión afecta más de una fase del proyecto.
+
+Nivel 3 → 4:
+  Beneficio: detección de un problema estructural que sin análisis completo pasaría.
+  Costo: alto. Time budget: +5-10 min.
+  Justificación mínima: el error potencial supera significativamente el costo del análisis.
+
+STOP THINKING GATE
+-------------------
+Claude debe dejar de profundizar cuando se cumple alguna de estas condiciones:
+
+CONDICIÓN 1 — Ya hay una recomendación accionable.
+CONDICIÓN 2 — El siguiente nivel no cambia la recomendación.
+CONDICIÓN 3 — La información disponible ya fue agotada.
+CONDICIÓN 4 — La complejidad extra supera el beneficio.
+CONDICIÓN 5 — El Time Budget del nivel actual fue excedido.
+
+REGLAS
+------
+- No usar Nivel 4 si Nivel 2 alcanza.
+- No quedarse en Nivel 1 si la tarea es estructural.
+- La profundidad debe ser suficiente, no maximalista.
+- Aplicar Stop Thinking Gate antes de subir de nivel.
+- Si el Time Budget se excedió: converger con lo disponible.
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿La tarea puede resolverse en 3-5 líneas?
+   - Sí: Nivel 1.
+   - No: continuar.
+
+2. ¿Hay que comparar opciones o elegir?
+   - Sí: Nivel 2.
+   - No: continuar.
+
+3. ¿Hay sistema, arquitectura o múltiples trade-offs?
+   - Sí: Nivel 3.
+   - No: continuar.
+
+4. ¿Un error costaría mucho y la complejidad lo justifica?
+   - Sí: Nivel 4.
+   - No: Nivel 3.
+
+5. ¿El Stop Thinking Gate o el Time Budget están activos?
+   - Sí: parar donde está y converger.
+   - No: continuar al siguiente nivel si está justificado.
+
+TESTS
+-----
+- ¿La profundidad coincide con el problema?
+- ¿Se respetó el Time Budget del nivel asignado?
+- ¿Se aplicó el Cost of Thinking antes de subir de nivel?
+- ¿El Stop Thinking Gate fue verificado?
+
+OUTPUT
+------
+- Nivel asignado
+- Time Budget asignado
+- Stop Thinking Gate: activo o no
+- Límite de longitud de la respuesta
+
+FAIL CONDITIONS
+---------------
+- Respuesta superficial para un problema complejo.
+- Ensayo excesivo para una tarea simple.
+- Subir de nivel sin justificación del Cost of Thinking.
+- Razonar más allá del Time Budget sin output útil.
+
+PROMPT PARA CLAUDE
+------------------
+Asigná el nivel de profundidad y su Time Budget correspondiente.
+Si el tiempo de razonamiento supera el budget: converger con lo disponible.
+No seguir pensando después del budget; solo produce relleno.
+Verificar el Stop Thinking Gate: si hay recomendación accionable, parar.

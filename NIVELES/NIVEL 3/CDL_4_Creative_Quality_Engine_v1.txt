@@ -1,0 +1,176 @@
+CDL-4 — CREATIVE QUALITY ENGINE (v1)
+=====================================
+
+OBJETIVO
+--------
+Puntuar la calidad creativa del proyecto con un criterio consistente.
+Este módulo convierte la intuición en un score defendible y ponderado.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Creative Priority Map de CDL-2
+- Veredicto de CDL-3
+- Project Profile de CDL-1
+- Positioning, Concept, Perception, Visual Direction, Innovation, Process
+
+OPCIONALES:
+- Referencias
+- Comparables
+- Restricciones
+- Feedback del humano
+
+PROCESO CLAUDE
+--------------
+Evaluar las 7 dimensiones del scorecard aplicando los pesos de CDL-2.
+Las dimensiones Críticas tienen peso doble en el score final.
+Las dimensiones Bajas tienen peso normal.
+
+SCORECARD CON CRITERIOS DE SCORE
+----------------------------------
+
+STRATEGIC CLARITY (1-10)
+Criterios:
+  8-10: el brief y el posicionamiento están claros y alineados.
+        el objetivo es medible.
+  6-7:  hay claridad pero alguna dimensión de la estrategia es ambigua.
+  <6:   el objetivo no está claro o hay contradicción entre brief y estrategia.
+
+POSITIONING STRENGTH (1-10)
+Criterios:
+  8-10: pasa el Competitor Test y el 3-Year Test. La posición es propia.
+  6-7:  pasa uno de los dos tests. La posición es diferente pero no exclusiva.
+  <6:   cualquier competidor puede decir lo mismo.
+
+CONCEPT STRENGTH (1-10)
+Criterios:
+  8-10: genera imagen mental, es propio, es traducible y tiene tensión real.
+        Concept Strength Score del M4 ≥ 13/15.
+  6-7:  genera imagen mental pero no es suficientemente propio o no escala.
+        Concept Strength Score del M4 entre 10-12/15.
+  <6:   no genera imagen mental o no puede sostenerse en más de 2 formatos.
+        Concept Strength Score del M4 < 10/15.
+
+PERCEPTION CLARITY (1-10)
+Criterios:
+  8-10: percepción dominante clara, sin colisiones, con traducción visual definida.
+  6-7:  percepción definida pero con alguna colisión no resuelta o traducción vaga.
+  <6:   no hay percepción dominante o hay colisiones activas.
+
+VISUAL DIRECTION (1-10)
+Criterios:
+  8-10: hay firma visual definida, sistema coherente, y el sitio se reconoce sin logo.
+  6-7:  hay dirección pero la firma visual es débil o el sistema es parcial.
+  <6:   no hay firma visual o la dirección es genérica para la categoría.
+
+INNOVATION VALUE (1-10)
+Criterios:
+  8-10: desviación coherente con el concepto, pasó Decay Test y Cost Matrix.
+  6-7:  hay innovación pero no está completamente integrada al concepto.
+  <6:   no hay innovación real o la desviación contradice la percepción objetivo.
+
+EXECUTION COHERENCE (1-10)
+Criterios:
+  8-10: todo el sistema es coherente. Cada decisión responde al concepto.
+  6-7:  coherente en la mayoría, con algunas inconsistencias detectables.
+  <6:   hay inconsistencias significativas entre módulos.
+
+CÁLCULO DEL SCORE FINAL
+------------------------
+Score base = promedio de las 7 dimensiones.
+
+Ponderación por CDL-2:
+- Dimensiones Críticas: multiplicar score por 1.5, luego recalcular promedio.
+  (Para reflejar que una dimensión Crítica baja arrastra más el score total)
+- Dimensiones Bajas: peso normal.
+
+PENALIZACIONES CUANTIFICADAS
+-----------------------------
+Restar del score final:
+- Es genérico (cualquier competidor puede usarlo): -1
+- No tiene firma visual: -1
+- No se reconoce sin logo: -2
+- Contradice la estrategia aprobada en algún módulo: -2
+- Tiene más de 2 ideas compitiendo en el mismo nivel: -1
+- Depende de una tendencia que no pasó el Decay Test: -1
+- No puede sostenerse 3 años: -1
+
+BONUS
+-----
+Sumar al score final:
+- La firma visual es clara y repetible (+1)
+- El concepto tiene imagen mental fuerte y es propio (+1)
+- El proyecto es completamente coherente de M0 a M6 (+1)
+- Hay una decisión valiente y defendible (+1)
+- El proyecto se reconoce inmediatamente sin logo (+1)
+
+THRESHOLDS
+----------
+9-10: excelente — avanzar con confianza.
+8-8.9: muy fuerte — avanzar.
+7-7.9: aceptable / usable — avanzar con ajustes menores.
+6-6.9: débil — revisar antes de continuar.
+<6: no viable — volver al módulo que CDL-4 identifica como débil.
+
+REPORTING
+---------
+Entregar en este formato:
+
+Dimensión             | Score | Peso CDL-2 | Nota
+----------------------|-------|------------|-----
+Strategic Clarity     |       |            |
+Positioning Strength  |       |            |
+Concept Strength      |       |            |
+Perception Clarity    |       |            |
+Visual Direction      |       |            |
+Innovation Value      |       |            |
+Execution Coherence   |       |            |
+
+Score base: /10
+Penalizaciones: -
+Bonus: +
+Score final: /10
+Threshold status: excelente / muy fuerte / aceptable / débil / no viable
+Razón principal del score: [una línea]
+Qué elevaría el score más rápido: [una acción concreta]
+Módulo débil a revisar si score < 7: [módulo específico]
+
+TESTS
+-----
+- ¿El score está ponderado según los pesos de CDL-2?
+- ¿Las penalizaciones y bonus están aplicados?
+- ¿Hay una sola acción de mejora prioritaria?
+- ¿El módulo débil está identificado con nombre específico?
+- ¿El veredicto de CDL-3 está integrado al análisis?
+
+OUTPUT
+------
+1. Scorecard completo con pesos.
+2. Penalizaciones y bonus aplicados.
+3. Score final con threshold status.
+4. Razón principal del score.
+5. Qué elevaría el score más rápido.
+6. Módulo a revisar si score < 7.
+
+DEPENDENCIAS
+------------
+Requiere: CDL-3 Creative Critic
+Bloquea: CDL-5 Executive Creative Director
+
+DELIVERABLES
+------------
+- Creative Scorecard ponderado
+- Threshold Status
+- Improvement Lever (una acción)
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como evaluador creativo.
+Leé el Creative Priority Map de CDL-2 y aplicá los pesos correspondientes.
+Las dimensiones Críticas tienen peso doble en el score final.
+Puntuá cada dimensión usando los criterios del scorecard.
+Aplicá penalizaciones y bonus cuantificados.
+Calculá el score final ponderado.
+Terminá con un veredicto simple, la razón principal del score,
+la única acción que lo elevaría más rápido y el módulo a revisar si está bajo.
+No diseñes. No te pierdas en matices.

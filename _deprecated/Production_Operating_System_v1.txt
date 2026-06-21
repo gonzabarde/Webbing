@@ -1,0 +1,1036 @@
+PRODUCTION OPERATING SYSTEM — v1
+================================
+
+OBJETIVO GENERAL
+----------------
+Convertir el sistema de módulos (Discovery, Positioning, Brand Translation, Visual Language, Concept Generation, Perception, Visual Direction, Innovation, Process) en un flujo de producción real, repetible y validable.
+
+Este documento no reemplaza los módulos.
+Los orquesta.
+
+Su función es:
+1. Decidir qué módulo ejecutar.
+2. Validar la salida de cada fase.
+3. Determinar si se puede avanzar.
+4. Bloquear retrabajo innecesario.
+5. Registrar decisiones.
+6. Mantener coherencia entre estrategia, concepto, percepción, dirección visual, diseño y build.
+
+PRINCIPIOS DEL SISTEMA
+----------------------
+1. Toda decisión debe ser explicable.
+2. Cada fase debe producir un entregable claro.
+3. No se avanza si el gate falla.
+4. Claude propone; el humano valida lo estratégico.
+5. El diseño no empieza antes de validar estrategia, concepto y dirección visual.
+6. Si una decisión no cambia percepción, comportamiento o diseño, no vale.
+7. La originalidad solo importa si sigue siendo defendible.
+8. La marca debe ser reconocible aun sin logo.
+9. La innovación debe reforzar claridad, no competir con ella.
+10. El proceso debe dejar trazabilidad.
+
+ROLES DEL SISTEMA
+-----------------
+CLAUDE:
+- Analista
+- Estratega
+- Generador de opciones
+- Redactor de outputs intermedios
+- Auditor de consistencia
+
+HUMANO:
+- Director creativo
+- Validador de criterio
+- Tomador de decisiones finales
+- Aprobador de gates estratégicos
+
+CLIENTE:
+- Fuente de verdad sobre negocio, restricciones y aprobación de concepto
+
+ARQUITECTURA DEL FLUJO
+----------------------
+M0 — Discovery & Research
+M1 — Positioning
+M2 — Brand Translation
+M3 — Visual Language
+M4 — Concept Generation
+M4.5 — Perception Engine
+M5 — Visual Direction
+M5.5 — Visual Innovation
+M6 — Agency Process
+M7 — Design Review System
+M8 — Build & QA Orchestrator
+M9 — Launch & Learn Loop
+
+MAPA GENERAL
+------------
+Brief
+↓
+M0 Discovery
+↓ Gate 1
+M1 Positioning
+↓ Gate 2
+M2 Brand Translation
+↓ Gate 3
+M4 Concept Generation
+↓ Gate 4
+M4.5 Perception
+↓ Gate 5
+M3 Visual Language
+↓ Gate 6
+M5 Visual Direction
+↓ Gate 7
+M5.5 Visual Innovation
+↓ Gate 8
+M7 Design Review
+↓ Gate 9
+M8 Build & QA
+↓ Gate 10
+M9 Launch & Learn
+↓ Gate 11
+
+ESTÁNDARES DE VALIDACIÓN
+------------------------
+Cada fase debe cerrar con:
+- Objective Check
+- Deliverable Check
+- Gate Check
+- Failure Check
+- Next Step
+
+Cada gate tiene tres posibles estados:
+- PASS
+- REVISE
+- FAIL
+
+PASS:
+Se avanza.
+
+REVISE:
+Se corrige en la misma fase y se vuelve a evaluar.
+
+FAIL:
+Se vuelve a la fase anterior o se detiene el proceso.
+
+REGISTRO DE DECISIONES
+----------------------
+Toda decisión importante debe quedar documentada con:
+- Decisión tomada
+- Motivo
+- Responsable
+- Fecha
+- Impacto esperado
+- Riesgo asociado
+
+ARTIFACT REGISTRY
+-----------------
+El POS produce artefactos oficiales.
+
+- Discovery Report
+- Competitive Snapshot
+- Audience Snapshot
+- Opportunity Notes
+- Positioning Report
+- Competitive Position Map
+- Brand Character Report
+- Voice & Tone Notes
+- Attribute Set
+- Visual Language Report
+- Type & Rhythm Rules
+- Semiotic Rules
+- Composition Notes
+- Concept Presentation
+- Concept Comparison Matrix
+- Visual Implication Report
+- Perception Brief
+- Perception Map
+- Collision Check Notes
+- Art Direction Report
+- Signature System Notes
+- Recognition Audit
+- Innovation Report
+- Cost / Risk Notes
+- Decay Test Notes
+- Design Review Log
+- Build Specification
+- QA Log
+- Launch Checklist
+- Post-Launch Learnings
+
+GLOBAL QUALITY SCORE
+--------------------
+Cada proyecto puede ser puntuado con una escala de 1 a 10 por área:
+- Discovery Score
+- Positioning Score
+- Brand Score
+- Visual Language Score
+- Concept Score
+- Perception Score
+- Direction Score
+- Innovation Score
+- Review Score
+- Build Score
+- Launch Readiness Score
+
+Si alguna categoría cae por debajo de 7, revisar.
+
+EL POS COMO DIRECTOR
+--------------------
+El POS no crea la estrategia.
+El POS la secuencia, valida y protege.
+
+Su trabajo es:
+- elegir el módulo correcto
+- exigir el output correcto
+- pedir claridad antes de seguir
+- bloquear saltos prematuros
+- detectar contradicciones
+- mantener trazabilidad
+
+------------------------------------------------------------
+FASE 0 — BRIEF INTAKE
+------------------------------------------------------------
+
+OBJETIVO
+--------
+Entender el encargo inicial y detectar si faltan datos críticos.
+
+INPUTS
+------
+- Solicitud del cliente
+- Objetivo general
+- Contexto inicial
+- Expectativas
+- Restricciones conocidas
+
+PROCESO
+-------
+1. Leer el brief.
+2. Clasificar el tipo de proyecto.
+3. Detectar si falta información crítica.
+4. Definir si se puede iniciar Discovery.
+5. Pedir aclaraciones si es necesario.
+
+GATE 0
+------
+¿Hay suficiente información para iniciar M0?
+
+PASS:
+- sí
+
+REVISE:
+- pedir datos faltantes
+
+FAIL:
+- no se puede definir ni qué vende ni para quién
+
+ENTREGABLE
+----------
+- Brief clarificado o lista de faltantes
+
+NEXT STEP
+---------
+M0 Discovery
+
+------------------------------------------------------------
+FASE 1 — M0 DISCOVERY & RESEARCH
+------------------------------------------------------------
+
+OBJETIVO
+--------
+Entender el negocio real, la audiencia, la competencia y las oportunidades.
+
+INPUTS
+------
+- Brief inicial
+- Información del cliente
+- Web actual
+- Competidores
+- Reviews
+- Datos de ventas
+- Testimonios
+- Material comercial
+
+PROCESO
+-------
+1. Entender el negocio en una línea.
+2. Separar pedido superficial de necesidad real.
+3. Identificar el tipo de proyecto.
+4. Mapear audiencia.
+5. Analizar competencia.
+6. Detectar patrones de categoría.
+7. Identificar riesgos.
+8. Extraer oportunidades.
+9. Asignar nivel de confianza.
+10. Resumir hallazgos.
+
+ENTREGABLES
+-----------
+- Discovery Report
+- Competitive Snapshot
+- Audience Snapshot
+- Opportunity Notes
+
+GATE 1
+------
+¿El negocio, la audiencia, la categoría y la competencia están suficientemente entendidos?
+
+PASS:
+- sí, el reporte es accionable
+
+REVISE:
+- faltan datos, hay huecos importantes, la confianza es baja
+
+FAIL:
+- no se entiende el negocio real ni la oportunidad
+
+FAIL CONDITIONS
+---------------
+- No se entiende qué vende la marca.
+- No se entiende para quién es.
+- No hay competidores reales.
+- No se detectaron patrones.
+- No hay oportunidad clara.
+- El nivel de confianza no está claro.
+
+NEXT STEP
+---------
+M1 Positioning
+
+------------------------------------------------------------
+FASE 2 — M1 POSITIONING
+------------------------------------------------------------
+
+OBJETIVO
+--------
+Definir la posición mental que la marca quiere ocupar.
+
+INPUTS
+------
+- Discovery Report
+- Categoría
+- Público
+- Problema principal
+- Promesa principal
+- Competidores
+- Objetivo
+- Contexto comercial
+
+PROCESO
+-------
+1. Identificar la categoría.
+2. Listar competidores reales.
+3. Detectar lo que la categoría promete.
+4. Identificar espacio mental ocupado.
+5. Detectar espacio vacío.
+6. Definir categoría mental.
+7. Formular posicionamiento.
+8. Comparar contra competidores.
+9. Traducir el posicionamiento a consecuencias.
+10. Hacer stress test de copia.
+11. Evaluar defensibilidad.
+
+ENTREGABLES
+-----------
+- Positioning Report
+- Competitive Position Map
+- Category Pattern Summary
+- Position Statement
+
+GATE 2
+------
+¿La posición es clara, distinta y defendible?
+
+PASS:
+- sí
+
+REVISE:
+- la posición es algo mejorable pero prometedora
+
+FAIL:
+- es un slogan
+- la podrían usar varios competidores
+- no hay espacio mental real
+- no se puede defender
+
+DECISION CHECK
+--------------
+- ¿Sobrevive si la mostramos a un competidor?
+- ¿Es fácil de copiar?
+- ¿Se entiende en una frase?
+- ¿Resuelve un miedo/deseo real?
+
+NEXT STEP
+---------
+M2 Brand Translation
+
+------------------------------------------------------------
+FASE 3 — M2 BRAND TRANSLATION
+------------------------------------------------------------
+
+OBJETIVO
+--------
+Traducir posicionamiento a personalidad, voz y comportamiento.
+
+INPUTS
+------
+- Positioning Report
+- Categoría
+- Público
+- Objetivo de negocio
+- Contexto cultural/comercial
+- Nivel de formalidad
+
+OPCIONALES:
+- Historia de marca
+- Fundadores
+- Tono actual
+- Referencias emocionales
+- Marcas admiradas
+- Marcas rechazadas
+- Palabras a evitar
+
+PROCESO
+-------
+1. Extraer energía central.
+2. Traducir energía a personalidad.
+3. Definir arquetipo o mezcla.
+4. Determinar voz.
+5. Definir atributos.
+6. Definir reglas de comportamiento.
+7. Traducir a tono visual.
+8. Definir palabras permitidas y prohibidas.
+9. Sintetizar guía de carácter.
+10. Detectar contradicciones útiles.
+11. Puntuar consistencia.
+12. Hacer brand tension score.
+
+ENTREGABLES
+-----------
+- Brand Character Report
+- Voice & Tone Notes
+- Attribute Set
+- Behavior Rules
+
+GATE 3
+------
+¿La marca tiene personalidad clara y consistente?
+
+PASS:
+- sí
+
+REVISE:
+- hay personalidad pero le falta precisión o tensión útil
+
+FAIL:
+- son adjetivos vacíos
+- no hay comportamiento
+- no cambia la experiencia
+- suena genérica
+
+BEHAVIORAL RULES
+----------------
+La marca nunca:
+- presume sin motivo
+- usa urgencia falsa
+- usa jerga innecesaria
+- promete más de lo que puede sostener
+
+La marca siempre:
+- explica antes de vender
+- mantiene coherencia
+- responde con claridad
+- evita ruido
+
+BRAND TENSION SCORE
+-------------------
+Coherencia: 1-10
+Originalidad: 1-10
+Claridad: 1-10
+Total: /30
+
+NEXT STEP
+---------
+M3 Visual Language
+
+------------------------------------------------------------
+FASE 4 — M3 VISUAL LANGUAGE
+------------------------------------------------------------
+
+OBJETIVO
+--------
+Traducir estrategia, personalidad y concepto en lenguaje visual.
+No solo tipografía: sistema de señales visuales, ritmo, jerarquía y composición.
+
+INPUTS
+------
+- Positioning Report
+- Brand Character Report
+- Concepto creativo o borrador
+- Público objetivo
+- Categoría
+- Restricciones técnicas
+
+PROCESO
+-------
+1. Determinar qué debe comunicar el sistema visual.
+2. Definir la lógica del lenguaje visual.
+3. Elegir familias tipográficas si corresponde.
+4. Definir contraste y jerarquía.
+5. Definir escala y ritmo.
+6. Definir reglas semiológicas.
+7. Definir composición.
+8. Auditar legibilidad.
+9. Traducir a sistema de diseño.
+10. Sintetizar dirección de lenguaje visual.
+11. Anti-trend check.
+12. Claridad visual score.
+13. Visual Grammar.
+
+ENTREGABLES
+-----------
+- Visual Language Report
+- Type & Rhythm Rules
+- Semiotic Rules
+- Composition Notes
+
+GATE 4
+------
+¿El lenguaje visual comunica el carácter y no depende de la moda?
+
+PASS:
+- sí
+
+REVISE:
+- funciona, pero necesita más precisión
+
+FAIL:
+- todo parece genérico
+- no hay jerarquía
+- no funciona en mobile
+- contradice personalidad
+
+VISUAL GRAMMAR
+--------------
+Debe quedar definido:
+- jerarquía dominante
+- nivel de contraste
+- uso del vacío
+- nivel de simetría
+- nivel de tensión
+- densidad visual
+- ritmo
+- comportamiento mobile
+
+ANTI-TREND CHECK
+----------------
+¿Esto sigue funcionando si desaparece la moda actual?
+Si no, red flag.
+
+NEXT STEP
+---------
+M4 Concept Generation
+
+------------------------------------------------------------
+FASE 5 — M4 CONCEPT GENERATION
+------------------------------------------------------------
+
+OBJETIVO
+--------
+Convertir brief, posicionamiento y contexto competitivo en un concepto creativo fuerte, memorable y defendible.
+
+INPUTS
+------
+- Brief
+- Categoría
+- Objetivo
+- Público
+- Posicionamiento
+- Competidores
+- Restricciones
+
+PROCESO
+-------
+1. Leer brief sin diseñar.
+2. Resumir negocio en una línea.
+3. Analizar categoría.
+4. Encontrar tensión principal.
+5. Definir transformación.
+6. Generar 20 metáforas.
+7. Agrupar por familias.
+8. Filtrar por criterio.
+9. Reducir a 3 finalistas.
+10. Traducir implicancias visuales.
+11. Recomendar concepto principal y alternativo.
+12. Concept Strength Score.
+13. Concept Kill Test.
+
+ENTREGABLES
+-----------
+- Concept Presentation
+- Concept Comparison Matrix
+- Visual Implication Report
+- Concept Strength Score
+
+GATE 5
+------
+¿El concepto es fuerte, defendible y visualmente útil?
+
+PASS:
+- sí
+
+REVISE:
+- tiene potencial, pero necesita refinamiento
+
+FAIL:
+- es solo un slogan
+- no genera imagen
+- no afecta decisiones
+- se parece a la competencia
+- score bajo
+
+CONCEPT STRENGTH SCORE
+----------------------
+Diferenciación: 1-10
+Memorabilidad: 1-10
+Visualidad: 1-10
+Defendibilidad: 1-10
+Escalabilidad: 1-10
+Total: /50
+
+CONCEPT KILL TEST
+-----------------
+Si elimino este concepto, ¿el proyecto pierde algo?
+Si no, descartarlo.
+
+NEXT STEP
+---------
+M4.5 Perception Engine
+
+------------------------------------------------------------
+FASE 6 — M4.5 PERCEPTION ENGINE
+------------------------------------------------------------
+
+OBJETIVO
+--------
+Definir qué debe sentir la persona y qué no debe sentir.
+
+INPUTS
+------
+- Concepto
+- Posicionamiento
+- Público
+- Tipo de negocio
+- Nivel de confianza
+- Nivel de diferenciación
+
+PROCESO
+-------
+1. Identificar emoción principal.
+2. Separar percepciones primarias y secundarias.
+3. Detectar percepciones prohibidas.
+4. Mapear percepción a decisiones.
+5. Generar 3 rutas.
+6. Evaluar alineación con negocio.
+7. Documentar frase de percepción.
+8. Perception Collision Check.
+9. Perception Priority Stack.
+
+ENTREGABLES
+-----------
+- Perception Brief
+- Perception Map
+- Collision Check Notes
+
+GATE 6
+------
+¿La percepción está clara y no choca con otras percepciones?
+
+PASS:
+- sí
+
+REVISE:
+- hay una ruta clara pero necesita precisión
+
+FAIL:
+- hay demasiadas percepciones
+- no se traduce a diseño
+- contradice posicionamiento
+- hay choque interno
+
+PERCEPTION PRIORITY STACK
+-------------------------
+Primaria
+Secundaria
+Terciaria
+
+NEXT STEP
+---------
+M5 Visual Direction
+
+------------------------------------------------------------
+FASE 7 — M5 VISUAL DIRECTION
+------------------------------------------------------------
+
+OBJETIVO
+--------
+Convertir concepto y percepción en un sistema visual coherente, reconocible y aplicable.
+
+INPUTS
+------
+- Concepto
+- Percepción objetivo
+- Posicionamiento
+- Categoría
+- Público
+- Restricciones
+- Referencias
+
+PROCESO
+-------
+1. Definir firma visual principal.
+2. Traducir concepto a reglas.
+3. Elegir composición dominante.
+4. Definir qué lidera.
+5. Crear sistema de tensión.
+6. Definir sistema tipográfico.
+7. Definir sistema de imágenes.
+8. Definir reglas de exclusión.
+9. Audit de consistencia.
+10. Definir Signature System.
+11. Recognition Test.
+
+ENTREGABLES
+-----------
+- Art Direction Report
+- Signature System Notes
+- Recognition Audit
+
+GATE 7
+------
+¿La dirección visual es clara, coherente y memorable?
+
+PASS:
+- sí
+
+REVISE:
+- funciona, pero falta una firma más fuerte
+
+FAIL:
+- no existe firma visual
+- hay más de un recurso dominante
+- depende del logo
+- se ve genérico
+- no hay elemento memorable
+
+SIGNATURE SYSTEM
+----------------
+Responder:
+- ¿Qué recuerda alguien 24 horas después?
+- ¿Cuál es el recurso dominante?
+- ¿Qué se repite?
+- ¿Qué se evita?
+
+NEXT STEP
+---------
+M5.5 Visual Innovation
+
+------------------------------------------------------------
+FASE 8 — M5.5 VISUAL INNOVATION
+------------------------------------------------------------
+
+OBJETIVO
+--------
+Evitar clichés de categoría y encontrar una desviación visual propia, defendible y memorable.
+
+INPUTS
+------
+- Concepto
+- Dirección visual
+- Categoría
+- Competidores
+- Lenguaje dominante
+- Riesgo aceptable
+- Restricciones
+
+PROCESO
+-------
+1. Detectar clichés.
+2. Separar códigos útiles de genéricos.
+3. Buscar desviación coherente.
+4. Generar 5 innovaciones.
+5. Evaluar costo de implementación.
+6. Elegir innovación principal.
+7. Definir coherencia.
+8. Innovation Cost Matrix.
+9. Innovation Decay Test.
+
+ENTREGABLES
+-----------
+- Innovation Report
+- Cost / Risk Notes
+- Decay Test Notes
+
+GATE 8
+------
+¿La innovación mejora claridad, memoria y percepción?
+
+PASS:
+- sí
+
+REVISE:
+- hay una desviación buena pero falta medirla
+
+FAIL:
+- es solo para llamar atención
+- rompe claridad
+- parece moda
+- no puede sostenerse
+- el costo supera el valor
+
+INNOVATION COST MATRIX
+----------------------
+Impacto: 1-10
+Memorabilidad: 1-10
+Complejidad: 1-10
+Riesgo: 1-10
+Mantenimiento: 1-10
+
+INNOVATION DECAY TEST
+---------------------
+¿Esto sigue funcionando en 3 años?
+Si no, reconsiderar.
+
+NEXT STEP
+---------
+M7 Design Review
+
+------------------------------------------------------------
+FASE 9 — M7 DESIGN REVIEW SYSTEM
+------------------------------------------------------------
+
+OBJETIVO
+--------
+Revisar, criticar y corregir antes de construir.
+Esta fase evita entregar diseño correcto pero débil.
+
+INPUTS
+------
+- Concepto
+- Percepción
+- Dirección visual
+- Mockups / wireframes / diseño en curso
+- Feedback del cliente
+- Riesgos detectados
+
+PROCESO
+-------
+1. Strategy Review.
+2. Concept Review.
+3. Visual Review.
+4. Market Review.
+5. Consistency Review.
+6. Mobile Review.
+7. Conversion Review.
+8. Accessibility Review.
+9. Premium Feeling Review.
+10. Fix or approve.
+
+ENTREGABLES
+-----------
+- Design Review Log
+- Redline Notes
+- Approval / Revision Decisions
+
+GATE 9
+------
+¿El diseño pasa la revisión estratégica, visual y comercial?
+
+PASS:
+- sí
+
+REVISE:
+- hay que ajustar antes de build
+
+FAIL:
+- contradice estrategia
+- se ve débil
+- se parece a un template
+- no convierte
+- falla mobile / accesibilidad
+
+CHECKPOINTS
+-----------
+- ¿Responde al posicionamiento?
+- ¿Refuerza el concepto?
+- ¿La percepción es clara?
+- ¿La dirección visual se sostiene?
+- ¿La innovación aporta?
+- ¿Puede pasar a build sin miedo?
+
+NEXT STEP
+---------
+M8 Build & QA
+
+------------------------------------------------------------
+FASE 10 — M8 BUILD & QA ORCHESTRATOR
+------------------------------------------------------------
+
+OBJETIVO
+--------
+Implementar el diseño sin perder intención visual, accesibilidad ni performance.
+
+INPUTS
+------
+- Diseño aprobado
+- Sistema visual
+- Componentes
+- Requerimientos técnicos
+- Responsivas
+- Contenidos finales
+
+PROCESO
+-------
+1. Setup técnico.
+2. Maquetación.
+3. Implementación responsive.
+4. Motion.
+5. Accesibilidad.
+6. Performance.
+7. SEO básico.
+8. QA visual.
+9. QA funcional.
+10. QA mobile.
+11. QA cross-browser.
+12. Fixes.
+
+ENTREGABLES
+-----------
+- Build Specification
+- QA Log
+- Technical Fix List
+- Launch-Ready Build
+
+GATE 10
+-------
+¿El sitio funciona, se ve bien y mantiene intención?
+
+PASS:
+- sí
+
+REVISE:
+- hay bugs o problemas menores
+
+FAIL:
+- rompe diseño
+- rompe intención
+- falla performance
+- falla mobile
+- falla accesibilidad
+
+QUALITY CHECKS
+--------------
+- responsive
+- no overflow
+- focus visible
+- labels visibles
+- contrastes correctos
+- motion controlado
+- carga razonable
+- semántica correcta
+
+NEXT STEP
+---------
+M9 Launch & Learn Loop
+
+------------------------------------------------------------
+FASE 11 — M9 LAUNCH & LEARN LOOP
+------------------------------------------------------------
+
+OBJETIVO
+--------
+Lanzar, medir y aprender.
+No termina en “publicado”.
+
+INPUTS
+------
+- Build final
+- Métricas iniciales
+- Feedback del cliente
+- Feedback de usuarios
+- Observaciones de uso real
+
+PROCESO
+-------
+1. Launch checklist.
+2. Publicación.
+3. Monitoreo inicial.
+4. Recolección de feedback.
+5. Registro de aprendizajes.
+6. Detectar qué funcionó y qué no.
+7. Guardar insights para la próxima versión.
+
+ENTREGABLES
+-----------
+- Launch Checklist
+- Post-Launch Notes
+- Learnings Log
+
+GATE 11
+-------
+¿El proyecto se lanzó sin romper estrategia, experiencia ni técnica?
+
+PASS:
+- sí
+
+REVISE:
+- hay que corregir pequeños problemas
+
+FAIL:
+- el lanzamiento contradice el sistema
+
+LEARN LOOP
+----------
+Registrar:
+- qué funcionó
+- qué no
+- qué se repite
+- qué debería cambiar en el próximo proyecto
+
+GLOBAL FAIL CONDITIONS
+----------------------
+El POS falla si:
+- salta fases
+- ignora gates
+- no registra artefactos
+- no valida percepción
+- no valida concepto
+- no valida dirección visual
+- deja que la innovación rompa claridad
+- construye antes de aprobar
+- no deja trazabilidad
+- no permite aprendizaje
+
+GLOBAL RULES
+------------
+1. Toda decisión debe ser explicable.
+2. Si una decisión no cambia percepción, comportamiento o diseño, no vale.
+3. Si el usuario no puede defender la decisión ante un cliente, todavía no está lista.
+4. El sistema avanza por gates, no por intuición ciega.
+5. Claude propone; el humano valida lo estratégico.
+6. El artefacto correcto vale más que el texto largo sin output.
+7. El proceso debe proteger el criterio.
+
+MASTER PROMPT FOR CLAUDE
+------------------------
+Actuá como Production OS Director.
+Recibí el brief y ejecutá el flujo completo.
+No saltees fases.
+No avances si un gate falla.
+Entregá el artefacto correcto en cada etapa.
+Registrá decisiones, riesgos, score y próximos pasos.
+Si falta información, detenete y pedila.
+No diseñes por intuición aislada.
+Diseñá siguiendo estrategia, concepto, percepción y dirección visual validados.
+El objetivo no es solo producir una web.
+El objetivo es producir una experiencia de agencia premium sin perder control, trazabilidad ni criterio.

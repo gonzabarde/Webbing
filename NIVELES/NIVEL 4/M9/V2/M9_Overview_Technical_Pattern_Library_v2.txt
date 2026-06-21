@@ -1,0 +1,204 @@
+M9 — TECHNICAL PATTERN LIBRARY (v2)
+=====================================
+
+PROPÓSITO GENERAL
+-----------------
+M9 convierte la ejecución técnica en una biblioteca de patrones premium.
+No decide el stack como M8.
+No define estrategia como M0-M7.
+M9 responde: "¿Qué patrones técnicos de alto nivel convienen para este proyecto?"
+
+M8 resuelve: qué construir, con qué stack, qué arquitectura, qué estándares.
+M9 resuelve: qué forma técnica tomar, qué patrón usar, qué patrón evitar,
+qué combinación genera una experiencia premium y defendible.
+
+EL PRINCIPIO CENTRAL
+--------------------
+No reinventar la rueda en cada proyecto.
+Elegir patrones de excelencia que ya demostraron valor en contextos reales.
+M9 existe para que Claude no improvise.
+
+M9.0 — PATTERN SELECTION ENGINE
+---------------------------------
+Antes de usar cualquier submódulo, ejecutar este selector.
+Determina qué módulos de M9 son prioritarios según el proyecto.
+
+PASO 1 — OBJETIVO DOMINANTE
+¿Qué necesita lograr este proyecto principalmente?
+
+Conversión (leads, ventas, reservas):
+  Prioritario: M9.2 (componentes), M9.5 (Next.js), M9.7 (launch)
+  Secundario: M9.1 (layout), M9.6 (Tailwind)
+  Prescindible: M9.4 (GSAP), M9.3 (motion avanzado)
+
+Percepción / deseo (lujo, premium, marca aspiracional):
+  Prioritario: M9.1 (layout), M9.3 (motion), M9.2 (componentes)
+  Secundario: M9.4 (GSAP si motion es central), M9.6 (Tailwind)
+  Prescindible: M9.7 puede ser simple
+
+Credibilidad / autoridad (institucional, consultora, clínica):
+  Prioritario: M9.2 (componentes), M9.5 (Next.js), M9.1 (layout)
+  Secundario: M9.6 (Tailwind), M9.7 (launch)
+  Prescindible: M9.4 (GSAP casi siempre innecesario), M9.3 (motion mínimo)
+
+Experiencia / memoria (portfolio, agencia, producto experimental):
+  Prioritario: M9.1 (layout), M9.3 (motion), M9.4 (GSAP)
+  Secundario: M9.2 (componentes), M9.6 (Tailwind)
+  Prescindible: M9.7 puede ser simple
+
+PASO 2 — RIESGO ACEPTABLE
+¿Cuánto riesgo técnico y creativo acepta el proyecto?
+
+Bajo (cliente conservador, timeline corto, poco presupuesto):
+  Solo usar patrones marcados como STANDARD o VALIDATED.
+  Evitar: Scroll Story, GSAP complejo, Page Transition, Magnetic Interaction.
+
+Medio (cliente con criterio, budget razonable, tiempo adecuado):
+  Usar patrones VALIDATED. Evaluar EMERGENT caso a caso.
+
+Alto (portfolio propio, cliente sofisticado, budget alto):
+  Explorar EMERGENT. Justificar con el concepto.
+
+PATTERN LIFECYCLE
+------------------
+Cada patrón en los submódulos tiene uno de estos estados:
+
+STANDARD: patrón establecido, usado por agencias top, predecible.
+  Bajo riesgo. Alto valor en contextos correctos.
+
+VALIDATED: patrón probado en proyectos reales recientes.
+  Riesgo medio. Requiere ejecución cuidadosa.
+
+EMERGENT: patrón que está ganando tracción pero no está completamente establecido.
+  Riesgo mayor. Solo usar con justificación de concepto fuerte.
+
+LEGACY: patrón que funcionó pero está sobreusado o envejecido.
+  Evitar salvo necesidad específica.
+
+PATTERN STACKS RECOMENDADOS
+-----------------------------
+Combinaciones de layout + componentes + motion por tipo de proyecto.
+Usar como punto de partida, no como receta rígida.
+
+MARKETING SITE PREMIUM (conversión + percepción)
+  Layout: Full-Bleed Hero + Modular Body o Stacked Narrative
+  Componentes: Editorial Hero + Split Narrative + Proof Block + CTA Block
+  Motion: Text Reveal + Staggered Entry + Hover Confirmation
+  GSAP: no necesario; CSS/Framer Motion alcanza
+  Next.js: SSG + Server Components + next/image + Metadata
+
+SAAS / PRODUCTO DIGITAL (conversión + claridad)
+  Layout: Rule-Driven System o Dense Product Grid
+  Componentes: Hero directo + Feature Cards + Comparison/Pricing + CTA
+  Motion: Staggered Entry + State Transition + Hover Confirmation
+  GSAP: no necesario
+  Next.js: ISR o SSG + Client Components para UI interactiva
+
+PORTFOLIO / ESTUDIO CREATIVO (experiencia + memoria)
+  Layout: Editorial Split o Case-Study Driven
+  Componentes: Editorial Hero + Media Narrative + Process Block
+  Motion: Image Mask Reveal + Page Transition + Text Reveal
+  GSAP: sí, si el motion es parte de la firma
+  Next.js: SSG + App Router simple
+
+LUXURY / HIGH-END (percepción + deseo)
+  Layout: Minimal High-Air o Centered Monument
+  Componentes: Media Narrative Block + Minimal Testimonial + CTA mínimo
+  Motion: Image Mask Reveal + State Transition sutil
+  GSAP: solo si el motion ceremonial es parte del concepto
+  Next.js: SSG + Server Components
+
+CLÍNICA / SALUD / CONFIANZA (credibilidad + claridad)
+  Layout: Stacked Narrative o Rule-Driven System
+  Componentes: Hero directo + Proof Block + Process Block + CTA + FAQ
+  Motion: Hover Confirmation + State Transition + Staggered Entry mínimo
+  GSAP: no
+  Next.js: SSG o ISR + Metadata completo
+
+ESTRUCTURA DE M9
+-----------------
+M9.1 — Premium Layout Patterns
+M9.2 — Premium Component Library
+M9.3 — Motion Pattern Library
+M9.4 — GSAP Playbook
+M9.5 — Next.js Playbook
+M9.6 — Tailwind Playbook
+M9.7 — Launch Patterns
+
+ENTRADA DE M9
+-------------
+- M8 finalizado
+- Concepto aprobado
+- Percepción objetivo
+- Visual Direction + Signature System
+- Stack elegido
+- Tipo de proyecto
+- Restricciones de performance
+- Nivel de riesgo aceptable
+
+SALIDA DE M9
+------------
+- Pattern stack elegido para el proyecto
+- Layout patterns con anatomía
+- Component patterns con anti-patterns
+- Motion patterns con taxonomía y budget
+- Reglas GSAP con costo estimado
+- Recipes Next.js
+- Reglas Tailwind con token mapping
+- Launch patterns con risk matrix
+
+REGLA BASE
+----------
+Cada patrón debe responder al menos una de estas preguntas:
+- ¿mejora percepción?
+- ¿mejora claridad?
+- ¿mejora conversión?
+- ¿mejora memoria?
+- ¿mejora mantenibilidad?
+
+Si no responde ninguna, el patrón no entra.
+
+GATES GLOBALES CON DESTINO DE FALLO
+-------------------------------------
+GATE 1 — ¿El patrón cambia una decisión real?
+  Falla → descartar el patrón. No continuar.
+
+GATE 2 — ¿El patrón es premium y defendible?
+  Falla → buscar alternativa o simplificar.
+
+GATE 3 — ¿El patrón evita clichés de categoría?
+  Falla → comparar contra Mapa de Clichés de M5.5 y ajustar.
+
+GATE 4 — ¿El patrón es compatible con el stack de M8.1?
+  Falla → volver a M8.1 o elegir otro patrón.
+
+GATE 5 — ¿El patrón se sostiene en performance y accesibilidad?
+  Falla → volver a M8.5 y verificar antes de continuar.
+
+GATE 6 — ¿El patrón puede repetirse sin volverse genérico?
+  Falla → reducir frecuencia o cambiar de patrón.
+
+FAIL CONDITIONS GLOBALES
+------------------------
+- Patrón elegido solo por gusto sin justificación de concepto.
+- Patrón que replica un cliché de la categoría.
+- Patrón que no puede mantenerse.
+- Patrón que se ve bien aislado pero falla en sistema.
+- Patrón que no cambia ninguna decisión real de diseño o código.
+
+CÓMO USAR M9
+------------
+1. Ejecutar el Pattern Selection Engine (M9.0) para identificar módulos prioritarios.
+2. Elegir un Pattern Stack del tipo de proyecto correspondiente.
+3. Ajustar el stack al concepto y percepción específicos del proyecto.
+4. Verificar cada patrón elegido contra los 6 gates globales.
+5. Documentar qué patrones se usan y por qué.
+
+PROMPT MAESTRO PARA CLAUDE
+--------------------------
+Actuá como biblioteca de patrones técnicos premium.
+Primero ejecutá el Pattern Selection Engine para saber qué módulos de M9 son prioritarios.
+Elegí un Pattern Stack del tipo de proyecto y ajustalo al concepto y percepción.
+No inventes decisiones desde cero si ya existe un patrón mejor.
+Para cada patrón elegido: justificá por qué entra, por qué evita clichés y qué riesgo tiene.
+Si un patrón no cambia una decisión real, descartalo.

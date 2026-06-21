@@ -1,0 +1,204 @@
+M8.5 — PERFORMANCE & ACCESSIBILITY (v2)
+========================================
+
+OBJETIVO
+--------
+Asegurar que la web sea rápida, usable y accesible.
+La experiencia premium no puede ser lenta ni inaccesible.
+
+UMBRALES OBLIGATORIOS
+----------------------
+Estos son los valores de referencia de Google Core Web Vitals.
+No son opcionales. Son el criterio de pase del módulo.
+
+Core Web Vitals — umbral "bueno" (objetivo mínimo):
+  LCP (Largest Contentful Paint): < 2.5s
+  CLS (Cumulative Layout Shift): < 0.1
+  INP (Interaction to Next Paint): < 200ms
+
+Umbral de "mejorar" (aceptable con correcciones):
+  LCP: 2.5-4s
+  CLS: 0.1-0.25
+  INP: 200-500ms
+
+Por encima de estos rangos: FALLA. No pasa a M8.6.
+
+Accesibilidad: WCAG 2.1 AA como mínimo en todos los proyectos.
+  Contraste texto normal: 4.5:1 mínimo.
+  Contraste texto grande (18px+ bold o 24px+ normal): 3:1 mínimo.
+  Contraste componentes UI e íconos informativos: 3:1 mínimo.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Build o implementación desplegada en staging
+- Arquitectura técnica (M8.1)
+- Component Map con estados (M8.2)
+- Motion rules + fallback prefers-reduced-motion (M8.3)
+- Standards de producción (M8.4)
+- Contenido final
+
+HERRAMIENTAS POR TIPO DE CHECK
+--------------------------------
+Performance:
+  Lighthouse: ejecutar en modo incógnito, simulación mobile, red throttled "Slow 3G".
+  PageSpeed Insights: para verificar en condiciones reales.
+  Chrome DevTools Performance tab: para detectar jank y bloqueos de render.
+
+Accesibilidad:
+  axe DevTools (extensión de Chrome): para detección automatizada de errores.
+  Navegación real por teclado: tab a través de toda la página manualmente.
+  WAVE (extensión): para inspección visual de jerarquía y contraste.
+  Lector de pantalla: VoiceOver (Mac/iOS) o NVDA (Windows) para verificación real.
+
+SEO básico:
+  Lighthouse SEO tab.
+  Inspección de head (title, meta description, canonical).
+
+Layout y overflow:
+  Chrome DevTools → ajustar a viewport mobile real (no solo responsive mode).
+  Probar en dispositivo físico cuando sea posible.
+
+PROCESO CLAUDE
+--------------
+1. Ejecutar Lighthouse en staging (mobile, incógnito, Slow 3G).
+   Registrar: LCP, CLS, INP, Performance score, Accessibility score.
+
+2. Revisar carga de imágenes y media.
+   Verificar: formato (webp/avif), peso (< 300kb por imagen), lazy loading,
+   dimensiones correctas para cada viewport, aspect-ratio definido para evitar CLS.
+
+3. Revisar estrategia de fuentes.
+   Verificar: font-display: swap o optional según el caso.
+   Self-hosted vs CDN: las fuentes self-hosted son más rápidas y controlables.
+   Preload de fuentes críticas (heading font en el <head>).
+
+4. Revisar interactividad.
+   Verificar: time to interactive, delays visibles, transiciones pesadas,
+   JS bloqueante en el critical path.
+
+5. Ejecutar axe DevTools.
+   Registrar todos los errores y advertencias.
+
+6. Navegar por teclado manualmente.
+   Verificar: foco visible en todos los elementos interactivos,
+   orden lógico de tab, skip to content link si el sitio tiene nav extensa.
+
+7. Verificar contraste en todos los pares de color del sistema.
+   Usar el color contrast checker de DevTools o WebAIM Contrast Checker.
+
+8. Revisar SEO básico.
+   Verificar: título único por página, meta description, jerarquía h1-h6,
+   no h1 vacío, canonical configurado.
+
+9. Clasificar todos los problemas encontrados.
+   Ver QA PRIORITY abajo.
+
+10. Producir el QA report.
+
+REGLA DE CONFLICTO: ACCESIBILIDAD VS DIRECCIÓN VISUAL
+-------------------------------------------------------
+Si hay conflicto entre una decisión estética de M5 y los requisitos de WCAG AA:
+La accesibilidad prevalece siempre.
+
+Ejemplo común: texto gris claro sobre fondo blanco aprobado en diseño
+pero que falla el ratio 4.5:1.
+Acción: ajustar el color hasta cumplir WCAG AA, mantener la intención estética.
+Documentar el ajuste y notificar al diseñador con el valor corregido.
+
+No es negociable. WCAG AA es el piso, no una sugerencia.
+
+QA PRIORITY
+-----------
+CRÍTICO — bloquea el launch
+  Problema que impide el acceso, la lectura o la acción principal.
+  Ejemplos:
+  - LCP > 4s en mobile.
+  - CLS > 0.25.
+  - Formulario que no se puede completar por teclado.
+  - Contraste de texto principal por debajo de 3:1.
+  - Overflow horizontal en mobile que rompe el layout.
+  - Error de JavaScript que bloquea el render.
+
+IMPORTANTE — corregir antes del launch si hay tiempo; post-launch si no
+  Problema que degrada la experiencia o la percepción sin bloquear la acción.
+  Ejemplos:
+  - LCP entre 2.5-4s.
+  - Imágenes sin alt text en contenido informativo.
+  - Foco visible débil (existe pero es difícil de ver).
+  - FOUT visible en fuentes.
+  - Jerarquía semántica incorrecta (h2 antes de h1).
+
+MENOR — mejora opcional
+  Detalle visual o de optimización que no afecta uso ni percepción.
+  Ejemplos:
+  - Imagen que podría ser webp pero está en PNG sin impacto notable.
+  - Meta description faltante en página secundaria de baja prioridad.
+  - Advertencia de axe de bajo impacto.
+
+QA REPORT — FORMATO
+--------------------
+Métrica | Valor medido | Umbral | Estado | Prioridad | Fix
+--------|-------------|--------|--------|-----------|----
+LCP     |             | < 2.5s |        |           |
+CLS     |             | < 0.1  |        |           |
+INP     |             | <200ms |        |           |
+Contraste heading |  | 4.5:1  |        |           |
+Contraste body text| | 4.5:1  |        |           |
+Contraste UI elements| | 3:1  |        |           |
+Navegación teclado |  | Sí/No  |        |           |
+Foco visible       |  | Sí/No  |        |           |
+Alt text imágenes  |  | Sí/No  |        |           |
+H1 único por página|  | Sí/No  |        |           |
+[agregar filas según problemas encontrados]
+
+GATE DE PERFORMANCE [antes de M8.6]
+-------------------------------------
+¿LCP < 2.5s en mobile con Slow 3G?
+¿CLS < 0.1?
+¿INP < 200ms?
+¿Sin errores críticos de accesibilidad (axe + teclado)?
+¿Contraste WCAG AA en todos los pares de color del sistema?
+
+Falla en cualquiera → corregir antes de avanzar a M8.6.
+
+TESTS
+-----
+- ¿Lighthouse fue ejecutado en modo correcto (mobile, incógnito, Slow 3G)?
+- ¿Los tres Core Web Vitals están por debajo del umbral "bueno"?
+- ¿axe DevTools fue ejecutado?
+- ¿La navegación por teclado fue verificada manualmente?
+- ¿El contraste fue verificado para todos los pares del sistema?
+- ¿Los conflictos entre accesibilidad y diseño fueron resueltos con WCAG AA como piso?
+- ¿El QA report está completo con severidades?
+- ¿El gate fue ejecutado?
+
+OUTPUT
+------
+Al completar, llenar el handoff de M8 con:
+
+QA report completo (tabla con todos los ítems)
+Problemas críticos resueltos
+Problemas importantes pendientes (si quedan para post-launch, documentados)
+Resultado del gate de performance y accesibilidad
+Ajustes realizados por conflicto accesibilidad/diseño (si aplica)
+
+FAIL CONDITIONS
+---------------
+- LCP > 4s en mobile.
+- CLS > 0.25.
+- Contraste por debajo de WCAG AA sin resolución.
+- Sin navegación por teclado funcional.
+- QA report sin severidades.
+- Se avanzó a M8.6 sin ejecutar el gate.
+- Conflicto accesibilidad/diseño resuelto a favor del diseño.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como auditor de performance y accesibilidad.
+Ejecutá los checks en este orden: Lighthouse (mobile, incógnito, Slow 3G),
+axe DevTools, navegación real por teclado, verificación de contraste.
+Usá los umbrales de Core Web Vitals y WCAG 2.1 AA como criterio de pase.
+Si hay conflicto entre accesibilidad y dirección visual, la accesibilidad prevalece.
+Documentá el QA report con la tabla completa, severidades y fixes.
+Ejecutá el gate antes de cerrar el módulo.

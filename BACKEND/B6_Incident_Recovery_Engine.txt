@@ -1,0 +1,310 @@
+B6 — INCIDENT & RECOVERY ENGINE (v1)
+====================================
+
+UBICACIÓN EN EL SISTEMA
+-----------------------
+Capa: NIVEL 4 — Ejecución (extensión backend).
+Activación: condicional. Aplica a todo proyecto con backend en PRODUCCIÓN real con
+usuarios. Un proyecto en desarrollo todavía no lo necesita; uno que ya cobra o guarda
+datos de usuarios, sí.
+
+B6 es distinto de todos los módulos anteriores. B0-B5 sirven para CONSTRUIR BIEN y
+PREVENIR fallos. B6 sirve para cuando la prevención ya falló y producción está rota.
+Es el único módulo del sistema cuyo objetivo no es evitar el problema, sino sobrevivirlo.
+
+Relación con el resto:
+- Consume la observabilidad de B3-OBS: sin detección no hay respuesta. B3 es el ojo, B6 la mano.
+- Depende del restore probado de B3-LIFE-3: un rollback de datos sin backup restaurable
+  no existe.
+- Depende del aislamiento que permite la arquitectura de B0 (multi-tenancy, integraciones
+  desacopladas se aíslan mejor).
+- Cierra el ciclo: el aprendizaje de cada incidente (postmortem) realimenta B0-B5.
+
+
+OBJETIVO
+--------
+Que un fallo en producción sea un evento gestionado, no un pánico improvisado. B6 define,
+antes de que pase nada, cómo el sistema:
+1. DETECTA que algo está mal.
+2. CLASIFICA la severidad.
+3. CONTIENE el daño (aísla antes de derribar todo).
+4. RECUPERA (rollback o fix hacia adelante).
+5. APRENDE (postmortem) para no repetirlo.
+
+Se escribe ANTES del incidente. Un plan de recuperación improvisado durante el incidente
+es la definición de amateur.
+
+
+PRINCIPIO CENTRAL
+-----------------
+Contener antes que arreglar; aislar antes que derribar.
+El primer objetivo durante un incidente no es entender la causa raíz ni arreglarla:
+es DETENER EL SANGRADO. Aislar la parte rota para que el resto del sistema siga vivo,
+y recién después diagnosticar con calma. Un sistema que ante un fallo de una feature
+se cae entero es frágil; uno que aísla la feature rota y sigue sirviendo el resto es resiliente.
+
+Corolario: la velocidad de recuperación importa más que la elegancia de la solución.
+Un rollback feo que devuelve el servicio en 2 minutos vale más que un fix perfecto que
+tarda 2 horas. El fix bueno viene después, sin presión, con el servicio ya restablecido.
+
+
+INPUTS
+------
+OBLIGATORIOS:
+- Observabilidad activa de B3-OBS (error tracking, logs, alertas). Sin esto, B6 es ciego.
+- Backup con restore probado de B3-LIFE-3.
+- Handoff de B0 (qué es crítico, qué se puede aislar, decisiones irreversibles).
+
+OPCIONALES:
+- SLA acordado con el cliente (define la urgencia de cada severidad).
+- Historial de incidentes previos del proyecto (memoria de incidentes).
+
+Si no hay observabilidad activa, B6 no puede operar: volver a B3 y activarla primero.
+No tiene sentido un plan de recuperación para fallos que no podés detectar.
+
+
+=====================================================================
+SECCIÓN 1 — DETECCIÓN Y CLASIFICACIÓN
+=====================================================================
+
+PATRÓN INC-1 — DETECCIÓN
+  Problema: enterarte del incidente antes (o al menos al mismo tiempo) que el cliente.
+  Cómo se hace bien:
+    - Las alertas de B3-OBS son el disparador: caída de auth, pagos fallando en masa,
+      webhooks rotos, DB inaccesible, cola detenida, error rate disparado.
+    - Definir qué señal corresponde a qué tipo de problema. Una alerta sin un significado
+      claro es ruido que se termina ignorando.
+  Cómo se rompe:
+    - Enterarte de los incidentes por el reclamo del cliente → ya perdiste tiempo y confianza.
+
+PATRÓN INC-2 — CLASIFICACIÓN DE SEVERIDAD
+  Problema: no todos los incidentes merecen la misma respuesta. Tratar todo como crítico
+  agota; tratar lo crítico como menor es negligencia.
+  Cómo se hace bien — clasificar por IMPACTO, en cuatro niveles:
+    SEV-1 CRÍTICO: el sistema central no funciona o hay riesgo de datos/dinero.
+      Ejemplos: nadie puede loguearse, los pagos cobran mal, fuga de datos, DB caída.
+      Respuesta: inmediata, todo lo demás se pausa.
+    SEV-2 ALTO: una función importante está rota pero el núcleo funciona.
+      Ejemplos: no se pueden subir archivos, una integración clave caída, una feature
+      principal con error.
+      Respuesta: urgente, en horas.
+    SEV-3 MEDIO: función secundaria afectada, hay workaround.
+      Ejemplos: los mails de notificación no salen, un reporte falla, lentitud localizada.
+      Respuesta: planificada, en el día o la semana.
+    SEV-4 BAJO: cosmético o de bajo impacto.
+      Respuesta: backlog normal.
+  Regla: clasificar por IMPACTO en el usuario y el negocio, no por dificultad técnica.
+  Un typo en un precio es técnicamente trivial y puede ser SEV-1 por impacto.
+  Conexión: la severidad se alinea con el nivel de sensibilidad de datos de B0. Cualquier
+  cosa que toque datos NIVEL 3-4 escala su severidad.
+
+
+=====================================================================
+SECCIÓN 2 — CONTENCIÓN Y RECUPERACIÓN
+=====================================================================
+
+PATRÓN INC-3 — AISLAMIENTO (contener antes de arreglar)
+  Problema: el instinto es arreglar la causa; el primer paso correcto es contener el daño.
+  Cómo se hace bien — aislar en el nivel más chico posible, en este orden:
+    - ¿Se puede apagar SOLO la feature rota? (feature flag, deshabilitar el endpoint).
+    - ¿Se puede aislar la ruta o el worker afectado sin tocar el resto?
+    - ¿Se puede aislar el tenant afectado (en multi-tenant) sin afectar a los demás?
+    - ¿Se puede cortar la integración con el tercero caído y degradar esa parte?
+    - Solo si nada de lo anterior alcanza: rollback completo (INC-4).
+  Cómo se rompe:
+    - Saltar directo a "tirar todo abajo y rebuildear" ante un fallo localizado → downtime
+      total innecesario por un problema parcial.
+  Nota: la capacidad de aislar se diseña ANTES (feature flags, integraciones desacopladas
+  de B3, multi-tenancy de B0). B6 la usa; B0-B3 la habilitan.
+
+PATRÓN INC-4 — ROLLBACK
+  Problema: cuándo y cómo volver al estado anterior que funcionaba.
+  Cómo se hace bien:
+    - ROLLBACK DE CÓDIGO: volver al deploy anterior estable. Es lo más rápido y casi
+      siempre lo primero a intentar si el incidente empezó tras un deploy. (Vercel y la
+      mayoría de plataformas guardan deploys anteriores y permiten revertir en un click.)
+    - ROLLBACK DE DATOS: mucho más delicado. Restaurar desde backup (B3-LIFE-3) solo si
+      el daño a los datos lo justifica, asumiendo la pérdida de lo ocurrido entre el backup
+      y ahora (el RPO de B3). Requiere autorización explícita: restaurar datos puede
+      destruir datos legítimos posteriores al backup.
+    - Definir QUIÉN autoriza un rollback de datos (vos, el cliente) — no es una decisión
+      a tomar en caliente sin acuerdo previo.
+    - Las migraciones destructivas (B3-LIFE-4) son las más difíciles de revertir: por eso
+      se hacen en dos pasos. Un rollback de código no revierte una columna ya borrada.
+  Cómo se rompe:
+    - Rollback de datos sin autorización → se destruyen datos legítimos posteriores al backup.
+    - Asumir que revertir el código revierte una migración destructiva ya aplicada → no lo hace.
+
+PATRÓN INC-5 — DEGRADACIÓN ELEGANTE (cuando un tercero cae)
+  Problema: una dependencia externa (PSP, email, API de terceros, IA) se cae. No la controlás.
+  Cómo se hace bien (operacionaliza la regla madre de B3):
+    - Definir de antemano, por cada dependencia, qué pasa si cae:
+        ¿Qué se degrada? (la feature que la usa muestra un estado limitado).
+        ¿Qué se pausa? (encolar para reintentar cuando vuelva, en vez de fallar).
+        ¿Qué se informa? (mensaje claro al usuario, no un error críptico).
+        ¿Qué se mantiene vivo? (el resto del sistema sigue funcionando).
+    - Ejemplo: si el proveedor de email cae, el registro de usuarios sigue funcionando;
+      los mails se encolan y se mandan cuando el proveedor vuelve.
+  Cómo se rompe:
+    - La caída de un tercero no-crítico tumba el request principal (lo que B3 prohíbe).
+    - Mostrar el error crudo del tercero al usuario en vez de degradar con un mensaje claro.
+
+PATRÓN INC-6 — PLAYBOOK DE RECUPERACIÓN
+  Problema: durante un incidente, la presión hace que se salteen pasos.
+  Cómo se hace bien — secuencia fija, siempre la misma:
+    1. DETECTAR — la alerta dispara, confirmar que es real (no un falso positivo).
+    2. CLASIFICAR — asignar severidad (INC-2). Define la urgencia.
+    3. CONTENER — aislar el daño (INC-3). Detener el sangrado ANTES de diagnosticar.
+    4. DIAGNOSTICAR — con el daño contenido, entender la causa sin presión.
+    5. CORREGIR — rollback (INC-4) o fix hacia adelante, lo que devuelva el servicio antes.
+    6. VALIDAR — confirmar que el servicio volvió y que el fix no rompió otra cosa.
+    7. REABRIR — restablecer lo que se había aislado.
+    8. POSTMORTEM — documentar y aprender (INC-7).
+  Regla: el orden no se altera. Contener (3) siempre va antes de diagnosticar (4).
+
+PATRÓN INC-9 — RUNBOOK POR SEVERIDAD
+  Problema: el playbook (INC-6) es la secuencia general; cada severidad necesita su versión
+  concreta para no decidir en caliente qué se corta y en qué orden.
+  Nota de dimensionamiento: esto está escrito para un operador solo. "Quién decide" sos
+  vos en todos los casos, así que el foco es QUÉ hacer y EN QUÉ ORDEN, no la cadena de
+  mando. Cuando haya equipo, se agrega quién hace cada paso; el contenido técnico no cambia.
+  Runbook mínimo por nivel:
+
+  SEV-1 (crítico: auth/pagos/datos caídos o en riesgo):
+    - Cortar primero: lo que esté causando daño activo (la feature que cobra mal, el
+      endpoint que filtra). Si empezó tras un deploy: rollback de código inmediato (INC-4).
+    - Aislar: bajar la función afectada antes de diagnosticar. Mejor degradada que rota.
+    - Restaurar primero: el núcleo (poder loguearse, no cobrar mal). Lo demás espera.
+    - Comunicar: si afecta a usuarios, aviso claro de que estás al tanto y trabajando.
+    - Postmortem: obligatorio (INC-7).
+
+  SEV-2 (alto: una función importante rota, núcleo vivo):
+    - Cortar/aislar: la función afectada, sin tocar el resto.
+    - Diagnosticar y corregir con urgencia (horas), sin la presión de un SEV-1.
+    - Comunicar si hay impacto visible.
+    - Postmortem: obligatorio.
+
+  SEV-3 (medio: función secundaria, hay workaround):
+    - No requiere corte de emergencia. Encolar el fix en el día/semana.
+    - Verificar que el workaround no esconda un problema mayor.
+    - Postmortem: opcional, solo si revela un patrón.
+
+  SEV-4 (bajo: cosmético o impacto mínimo):
+    - Backlog normal. Sin tratamiento especial.
+
+  Regla: la severidad se asigna en el paso 2 del playbook y determina qué runbook se sigue.
+  Un incidente puede subir de severidad si el diagnóstico revela más impacto del esperado;
+  reclasificar y cambiar de runbook es correcto, no un error.
+
+
+=====================================================================
+SECCIÓN 3 — APRENDIZAJE
+=====================================================================
+
+PATRÓN INC-7 — POSTMORTEM
+  Problema: un incidente sin aprendizaje es un incidente que vas a repetir.
+  Cómo se hace bien:
+    - Todo incidente SEV-1 y SEV-2 deja un postmortem corto y honesto con:
+        QUÉ pasó (timeline de los hechos).
+        IMPACTO (qué usuarios/datos/dinero se afectaron, por cuánto tiempo).
+        CAUSA RAÍZ (por qué pasó, sin culpar a personas — el foco es el sistema).
+        CORRECCIÓN (qué se hizo para resolverlo).
+        PREVENCIÓN (qué cambio evita que se repita — y esto realimenta B0-B5).
+    - Sin culpa (blameless): el objetivo es mejorar el sistema, no buscar culpables.
+      Un postmortem que busca culpables hace que la gente esconda errores.
+  Cómo se rompe:
+    - Resolver el incidente y seguir sin documentar → el mismo fallo vuelve en meses.
+    - Postmortem que culpa a una persona → se pierde la información real de la próxima.
+
+PATRÓN INC-8 — MEMORIA DE INCIDENTES
+  Problema: repetir un error que ya pasó por no recordarlo.
+  Cómo se hace bien:
+    - Mantener un registro de incidentes pasados (los postmortems) consultable.
+    - Ante un fallo nuevo, revisar si ya pasó algo parecido — la solución puede estar escrita.
+    - Las acciones de prevención de los postmortems se vuelven mejoras concretas en los
+      módulos del proyecto o checklist (cierra el ciclo con B0-B5 y B4).
+  Cómo se rompe:
+    - Cada incidente se trata como si fuera el primero → no hay aprendizaje acumulado.
+  Conexión con el SISTEMA Webbing: esto es el equivalente backend del aprendizaje de
+  M10 (Production OS). El conocimiento de incidentes es un activo del sistema, no solo
+  del proyecto.
+
+
+OUTPUT DEL MÓDULO
+-----------------
+PRECONDICIONES (verificar que existen antes de operar B6):
+  Observabilidad activa (B3-OBS): [confirmada]
+  Backup con restore probado (B3-LIFE-3): [confirmado]
+  Capacidad de aislar (feature flags / desacople / multi-tenancy): [qué hay disponible]
+
+PLAN DE INCIDENTES DEL PROYECTO:
+  Alertas definidas y su significado: [listar señal → tipo de problema]
+  Escala de severidad adaptada al proyecto: [SEV-1..4 con ejemplos del proyecto]
+  Mecanismos de aislamiento disponibles: [feature flags / por ruta / por tenant / por integración]
+  Estrategia de rollback de código: [cómo, en cuánto]
+  Estrategia de rollback de datos: [desde backup, RPO asumido, QUIÉN autoriza]
+  Degradación por dependencia: [por cada tercero: qué se degrada/pausa/informa/mantiene]
+  Playbook de recuperación: [los 8 pasos, adaptados]
+  Runbook por severidad: [SEV-1..4: qué se corta y en qué orden, adaptado al proyecto]
+
+APRENDIZAJE:
+  Dónde viven los postmortems: [definido]
+  Registro de incidentes: [definido]
+
+INCIDENTES CRÍTICOS ANTICIPADOS: [los fallos más probables/graves de ESTE proyecto]
+
+
+GATE DE APROBACIÓN [antes de launch a producción]
+-------------------------------------------------
+Un proyecto NO va a producción con usuarios reales sin esto:
+- ¿Hay observabilidad activa que detecte los fallos críticos? (precondición B3-OBS)
+- ¿El backup tiene un restore PROBADO, no solo configurado? (B3-LIFE-3)
+- ¿Está definido qué se puede aislar sin caer entero? (INC-3)
+- ¿Está definida la estrategia de rollback de código y quién autoriza el de datos? (INC-4)
+- ¿Está definido qué pasa si cada dependencia externa cae? (INC-5)
+- ¿Existe el playbook de recuperación, escrito antes del incidente? (INC-6)
+
+Falla cualquiera → el proyecto no está listo para producción real. Lanzar sin plan de
+recuperación es operar con la esperanza de que nada falle, y producción siempre falla.
+
+
+TESTS
+-----
+- ¿Te enterás de un fallo crítico sin que el cliente avise? (Debes — si no, falta B3-OBS.)
+- ¿El backup se probó restaurando de verdad? (Debe — si no, no es un backup.)
+- ¿Ante un fallo de una feature, el resto del sistema sobrevive? (Debe.)
+- ¿Existe el playbook ANTES del incidente, no improvisado durante? (Debe.)
+- ¿La caída de un tercero degrada con gracia en vez de tumbar todo? (Debe.)
+- ¿Los incidentes SEV-1/2 dejan postmortem que realimenta el sistema? (Debe.)
+
+
+FAIL CONDITIONS
+---------------
+- Producción con usuarios sin observabilidad que detecte fallos.
+- Backup configurado pero nunca probado con un restore.
+- Ningún mecanismo de aislamiento: cualquier fallo tumba todo.
+- Sin estrategia de rollback definida antes del incidente.
+- Rollback de datos sin definir quién autoriza (se destruyen datos en caliente).
+- Dependencia externa sin plan de degradación (su caída tumba el sistema).
+- Diagnosticar antes de contener (se alarga el sangrado).
+- Incidentes resueltos sin postmortem → se repiten.
+- Postmortem que busca culpables en vez de mejorar el sistema.
+
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como ingeniero de confiabilidad (SRE).
+Tu trabajo es preparar el proyecto para cuando producción falle, porque va a fallar.
+Verificá primero las precondiciones: sin observabilidad (B3-OBS) y sin un backup con
+restore probado (B3-LIFE-3), no hay plan de recuperación posible — volvé a activarlas.
+Grabá la regla madre: contener antes que arreglar, aislar antes que derribar. Ante un
+incidente, el primer paso no es entender la causa, es detener el sangrado aislando la
+parte rota para que el resto siga vivo.
+Priorizá la velocidad de recuperación sobre la elegancia del fix: un rollback feo en
+2 minutos vale más que un fix perfecto en 2 horas.
+Definí la escala de severidad por IMPACTO, no por dificultad técnica, y tené un runbook
+mínimo por nivel (qué se corta y en qué orden) para no decidir en caliente.
+Para cada dependencia externa, definí de antemano qué se degrada, pausa, informa y mantiene.
+Escribí el playbook ANTES del incidente. Y exigí postmortem blameless en SEV-1/2 que
+realimente los módulos del sistema.
+Antes de cerrar, completá el output y pasá el gate: sin plan de recuperación, no hay launch.

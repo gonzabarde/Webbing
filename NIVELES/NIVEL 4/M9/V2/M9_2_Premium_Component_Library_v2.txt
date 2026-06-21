@@ -1,0 +1,273 @@
+M9.2 — PREMIUM COMPONENT LIBRARY (v2)
+======================================
+
+OBJETIVO
+--------
+Definir componentes premium reutilizables que no se sientan templated.
+Cada componente tiene anatomía, complejidad, anti-pattern y regla de combinación.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Layout pattern elegido (M9.1)
+- Concepto aprobado
+- Percepción objetivo
+- Signature System
+- Tipo de proyecto
+- Stack M8
+- Component Map de M8.2
+- Pattern Stack de M9 Overview
+
+PROCESO CLAUDE
+--------------
+1. Verificar Component Map de M8.2 — heredar, no redefinir.
+2. Para cada componente necesario, completar el formato extendido.
+3. Verificar que cada componente implementa la firma visual.
+4. Verificar que no hay componentes que replican clichés de M5.5.
+5. Verificar combinaciones: ¿los componentes elegidos coexisten sin fatiga visual?
+6. Elegir el Component Stack correspondiente al tipo de proyecto.
+
+BIBLIOTECA DE COMPONENTES
+--------------------------
+
+1. EDITORIAL HERO [STANDARD] — Complexity: 1
+   Objetivo: capturar atención y transmitir la promesa principal.
+   Estructura: titular (escala máxima del sistema) + subcopy (máximo 2 líneas) + CTA.
+     Espacio entre elementos: generous. Firma tipográfica o espacial como protagonista.
+   Variante principal: tipografía full-width sin imagen.
+   Variante secundaria: split — tipo en 60%, imagen en 40%.
+   Estados:
+     default: cargado completo.
+     loading: skeleton del titular antes de que el font cargue.
+     empty: N/A (contenido siempre estático).
+     error: N/A.
+   Signature check: la firma visual principal debe aparecer aquí.
+   Anti-pattern: "titular de 3 palabras + foto de stock de persona sonriendo →
+     el hero no tiene concepto y replica el cliché principal de la categoría."
+   Mobile: titular a escala ajustada (-1 nivel de escala). CTA al frente. Imagen secundaria.
+   Combinación: no seguir de otro hero. Siguiente bloque debe ser de densidad media.
+
+2. SPLIT NARRATIVE SECTION [STANDARD] — Complexity: 1
+   Objetivo: relacionar contenido visual con narrativo con tensión.
+   Estructura: imagen o media en un lado (50-60%), narrativa o datos en el otro.
+     Alineación vertical: centrado o al top según el tono.
+   Variante principal: imagen izquierda, texto derecha.
+   Variante secundaria: texto izquierda, imagen derecha (alternar para ritmo).
+   Estados:
+     default: cargado.
+     loading: skeleton proporcional.
+     empty: N/A.
+     error: N/A.
+   Signature check: la proporción y la tensión deben coincidir con la gramática de M5.
+   Anti-pattern: "usar la misma proporción 50/50 en 4 secciones seguidas →
+     el ritmo se vuelve mecánico y el usuario predice cada bloque antes de llegar."
+   Mobile: stack vertical. Imagen full-width arriba, texto abajo.
+   Combinación: alternar lado de imagen para evitar monotonía. No repetir más de 3 veces.
+
+3. PROOF BLOCK [STANDARD] — Complexity: 1
+   Objetivo: reducir la objeción principal con evidencia concreta antes del CTA.
+   Estructura: métrica / logo de cliente / testimonio con nombre y cargo real.
+     Máximo 3 elementos por bloque. Densidad media-alta.
+   Variante principal: 3 métricas en columna.
+   Variante secundaria: logos de clientes en grilla de 4-6.
+   Estados:
+     default: cargado.
+     loading: skeleton de métrica.
+     empty: ocultar bloque si no hay datos reales.
+     error: ocultar bloque.
+   Signature check: tipografía de métricas debe seguir el sistema de escala.
+   Anti-pattern: "métrica de '97% de satisfacción' sin fuente ni contexto →
+     destruye la credibilidad que intenta construir. El usuario sabe que es ficticia."
+   Mobile: columna única. Métricas apiladas verticalmente.
+   Combinación: colocar antes del CTA principal. No colocar en el hero.
+
+4. PREMIUM CARD SYSTEM [STANDARD] — Complexity: 2
+   Objetivo: presentar features, servicios o productos con jerarquía real.
+   Estructura: card con header (ícono o imagen), título, descripción (máximo 2 líneas)
+     y link o CTA secundario. Firma en padding, borde o hover state.
+   Variante principal: con ícono o número.
+   Variante secundaria: con imagen o thumbnail.
+   Estados:
+     default: reposo.
+     hover: elevación o color shift sutil (no dramático).
+     active: pressed state si es clickeable.
+     loading: skeleton.
+     empty: ocultar card individual o mostrar placeholder si la card es dinámica.
+     error: ocultar o mostrar estado de error en la card.
+   Signature check: el hover state debe usar el color de acento del sistema.
+   Anti-pattern: "4 cards con exactamente el mismo padding, borde, ícono y peso →
+     el sistema se siente generado por un template builder, no diseñado."
+   Mobile: 1-2 columnas. No reducir padding interno; reducir el ancho.
+   Combinación: max 6 cards en la misma sección. Más → paginar o separar.
+
+5. MINIMAL TESTIMONIAL [STANDARD] — Complexity: 1
+   Objetivo: reducir objeción con voz de tercero relevante.
+   Estructura: cita específica (máximo 40 palabras) + nombre + cargo + empresa.
+     Opcional: foto o avatar.
+   Variante principal: sin foto (tipografía pura).
+   Variante secundaria: con foto circular y nombre prominente.
+   Estados:
+     default: cargado.
+     empty: ocultar sección completa si no hay testimonios reales.
+     error: N/A.
+   Signature check: el peso tipográfico de la cita debe seguir el sistema editorial.
+   Anti-pattern: "cita genérica de 3 palabras ('Excelente servicio — Juan P.') →
+     no reduce ninguna objeción real y ocupa espacio sin valor."
+   Mobile: stack vertical. Cita full-width. Foto y nombre debajo.
+   Combinación: no poner más de 3 testimonios visibles al mismo tiempo sin diferenciación.
+
+6. STRUCTURED FAQ [STANDARD] — Complexity: 1
+   Objetivo: manejar objeciones antes de que el usuario las tenga.
+   Estructura: acordeón o lista expandible. Pregunta en bold, respuesta en body.
+     Las preguntas son las que realmente hace el cliente, no las que la marca quiere responder.
+   Variante principal: acordeón (una a la vez).
+   Variante secundaria: lista expandida (todas visibles desde el inicio).
+   Estados:
+     default: cerrado o abierto según variante.
+     hover: indicador sutil de expansión.
+     active: expandido.
+     empty: N/A (contenido estático).
+     error: N/A.
+   Signature check: la tipografía de preguntas debe seguir el sistema tipográfico.
+   Anti-pattern: "FAQs que nadie hace pero la empresa quiere responder ('¿Cuántos años
+     de experiencia tienen?') → el FAQ pierde su propósito y ocupa espacio sin valor."
+   Mobile: mismo comportamiento. Asegurar touch target de 44px mínimo por ítem.
+   Combinación: colocar después del Proof Block, antes del CTA final.
+
+7. CONVERSION CTA BLOCK [STANDARD] — Complexity: 1
+   Objetivo: provocar la acción principal sin distracciones.
+   Estructura: headline de cierre + subcopy de máximo 1 línea + CTA primario.
+     Sin elementos que compitan. Máximo un CTA visible.
+   Variante principal: centrado, fondo de color acento o neutro oscuro.
+   Variante secundaria: en línea dentro de una sección existente.
+   Estados:
+     default: reposo.
+     hover: shift de color en el botón.
+     loading: spinner en el botón si el CTA dispara una acción async.
+     success: confirmación de que la acción fue registrada.
+     error: mensaje de error con salida clara.
+   Signature check: el botón debe usar el color de acento del sistema, no otro.
+   Anti-pattern: "CTA con texto 'Enviar' o 'Ver más' →
+     no dice qué pasa después del clic y reduce la tasa de conversión."
+   Mobile: botón full-width o near-full-width.
+   Combinación: siempre al final de la sección. No duplicar el mismo CTA visible en pantalla.
+
+8. COMPARISON / PRICING BLOCK [STANDARD] — Complexity: 2
+   Objetivo: facilitar la decisión entre opciones sin confusión.
+   Estructura: 2-3 columnas. Plan destacado con énfasis visual claro.
+     Features comparadas de manera binaria o escalada.
+   Variante principal: 3 planes, plan del medio destacado.
+   Variante secundaria: toggle mensual/anual.
+   Estados:
+     default: mensual o el plan más común activo.
+     hover: highlight sutil en la fila hovered.
+     active: toggle activado.
+     loading: skeleton si el precio carga dinámicamente.
+     empty: N/A (contenido estático).
+     error: si el precio carga dinámicamente y falla, mostrar mensaje claro.
+   Signature check: el plan destacado usa el color de acento del sistema.
+   Anti-pattern: "tabla de features con 15 filas de íconos check/cross →
+     el usuario no puede leer la tabla en mobile y abandona antes de decidir."
+   Mobile: acordeón por plan o tabs. Las columnas paralelas no funcionan en mobile.
+   Combinación: siempre seguido del CTA Block principal.
+
+9. MEDIA NARRATIVE BLOCK [VALIDATED] — Complexity: 1
+   Objetivo: comunicar atmósfera o calidad antes de que el usuario lea.
+   Estructura: imagen o video dominante (full-width o 75%+ del viewport) + copy mínimo.
+     Un foco por bloque. La media es el protagonista, el copy es soporte.
+   Variante principal: imagen full-width con copy superpuesto.
+   Variante secundaria: video muted autoplay con overlay.
+   Estados:
+     default: cargado.
+     loading: placeholder con color de fondo hasta que cargue la media.
+     error: ocultar bloque o mostrar fallback estático.
+   Signature check: el color grading de la imagen debe coincidir con el sistema de M5.
+   Anti-pattern: "imagen de stock aspiracional de cualquier banco de imágenes →
+     el usuario la reconoce en menos de 1 segundo y pierde la confianza en la marca."
+   Mobile: imagen full-width, copy debajo, no superpuesto si reduce legibilidad.
+   Combinación: usar con moderación. No más de 2 por página para no diluir el impacto.
+
+10. PROCESS BLOCK [STANDARD] — Complexity: 1
+    Objetivo: explicar el método o proceso con claridad y ritmo.
+    Estructura: pasos numerados (3-5 máximo). Cada paso: número + título + descripción corta.
+      Progresión visual clara de izquierda a derecha o top a bottom.
+    Variante principal: horizontal (3-4 pasos en fila).
+    Variante secundaria: vertical con línea de progresión lateral.
+    Estados:
+      default: todos los pasos visibles.
+      loading: skeleton de los pasos.
+      empty: N/A.
+      error: N/A.
+    Signature check: el estilo de los números o íconos debe seguir el sistema tipográfico.
+    Anti-pattern: "proceso de 7 pasos con descripciones de 4 líneas cada uno →
+      el bloque se vuelve más complejo que lo que está explicando y genera ansiedad."
+    Mobile: stack vertical. La línea de progresión se vuelve vertical.
+    Combinación: colocar después de la propuesta de valor y antes de los testimonios.
+
+COMPONENT STACKS
+-----------------
+Combinaciones recomendadas por tipo de proyecto.
+Usar como punto de partida.
+
+MARKETING SITE PREMIUM (conversión)
+  1. Editorial Hero
+  2. Proof Block (métricas o logos)
+  3. Split Narrative Section (beneficio principal)
+  4. Premium Card System (3 features)
+  5. Minimal Testimonial
+  6. Conversion CTA Block
+
+SAAS / PRODUCTO DIGITAL (conversión + claridad)
+  1. Hero directo con CTA visible
+  2. Media Narrative Block (captura del producto en uso)
+  3. Premium Card System (features)
+  4. Comparison/Pricing Block
+  5. Proof Block (logos de clientes o métricas)
+  6. Structured FAQ
+  7. Conversion CTA Block
+
+PORTFOLIO / ESTUDIO CREATIVO (credibilidad + experiencia)
+  1. Editorial Hero
+  2. Case-Study Driven (casos con variación)
+  3. Process Block (cómo trabajan)
+  4. Minimal Testimonial
+  5. CTA de bajo compromiso
+
+CLÍNICA / SERVICIO DE CONFIANZA (credibilidad + claridad)
+  1. Hero directo con Proof Block integrado (años / pacientes / certificaciones)
+  2. Process Block (cómo funciona el proceso)
+  3. Split Narrative Section (equipo o espacio)
+  4. Minimal Testimonial con foto y nombre real
+  5. Structured FAQ
+  6. Conversion CTA Block
+
+REGLA DE ABSTRACCIÓN
+--------------------
+Si el mismo bloque aparece 3+ veces con datos distintos: componente reutilizable.
+Si aparece 2 veces: evaluar antes de abstraer.
+Si aparece 1 vez y es muy específico: puede quedar como sección única.
+
+TESTS
+-----
+- ¿Cada componente tiene objective, anatomía, variantes, estados, anti-pattern y mobile?
+- ¿El Signature check está completo en cada componente?
+- ¿El anti-pattern tiene una consecuencia concreta?
+- ¿Los componentes elegidos coexisten sin fatiga visual?
+- ¿El Component Stack elegido corresponde al tipo de proyecto?
+
+OUTPUT
+------
+- Component library con formato extendido
+- Component Stack seleccionado
+- Componentes descartados (y por qué)
+- Combinaciones prohibidas del proyecto
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como arquitecto de componentes premium.
+Verificá el Component Map de M8.2 y heredá desde ahí.
+Para cada componente necesario: completá el formato con anatomía, complexity score,
+anti-pattern con consecuencia concreta y regla de combinación.
+Elegí el Component Stack correspondiente al tipo de proyecto.
+No me des bloques genéricos.
+Quiero componentes que mejoren percepción, que tengan firma visual y que no se puedan confundir con una plantilla.

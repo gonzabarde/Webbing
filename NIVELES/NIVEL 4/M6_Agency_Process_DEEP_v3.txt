@@ -1,0 +1,513 @@
+MÓDULO 6 — AGENCY PROCESS (v3 DEEP)
+=====================================
+
+OBJETIVO
+--------
+Convertir todo el sistema en un proceso de trabajo repetible, validable y profesional.
+Este módulo evita construir demasiado pronto, reduce retrabajo y obliga a validar
+decisiones clave antes de avanzar.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Brief inicial
+- Respuestas del intake
+- Investigación competitiva
+- Posicionamiento
+- Concepto aprobado
+- Dirección visual aprobada
+
+OPCIONALES:
+- Aprobaciones parciales del cliente
+- Comentarios de stakeholders
+- Restricciones técnicas
+- Timeline
+- Presupuesto
+
+PROCESO CLAUDE
+--------------
+1. Discovery.
+   Entender negocio, usuario, objetivos y restricciones.
+   Aplicar Intake Questionnaire y Red Flags.
+
+2. Research.
+   Revisar competencia, referencias y patrones de categoría.
+
+3. Positioning.
+   Definir posición mental, categoría y diferenciación.
+   Aplicar Position Statement, Competitor Test, 3-Year Test y Anti-Positioning.
+
+4. Brand Translation.
+   Definir personalidad, arquetipo, voz y reglas de comportamiento.
+
+5. Concept Generation.
+   Encontrar tensión, transformación y metáfora.
+   Puntuar con Concept Strength Score. Umbral: 10/15.
+
+6. Concept Approval.
+   Mostrar lógica estratégica antes de mostrar visual.
+   Recibir feedback, corregir si es necesario.
+
+7. Perception Definition.
+   Definir qué debe sentir la persona y qué no.
+   Construir las 3 rutas. Aplicar Collision Check.
+
+8. Visual Direction.
+   Traducir concepto y percepción en sistema visual.
+   Definir color, motion, imágenes, layout y firma visual.
+
+9. Visual Approval.
+   Validar dirección antes de diseñar.
+
+10. Visual Innovation.
+    Buscar una desviación coherente y defendible.
+    Aplicar Cost Matrix y Decay Test.
+
+11. Design.
+    Wireframes, UI, responsive y componentes.
+
+12. Build.
+    Implementación técnica, motion, accesibilidad, performance.
+
+13. QA.
+    Aplicar QA Checklist completo. Ver sección abajo.
+
+14. Launch.
+    Publicar y monitorear.
+
+TIEMPO ESTIMADO POR FASE [v3]
+-------------------------------
+Nota: los tiempos varían según complejidad, disponibilidad del cliente
+y número de iteraciones.
+
+M0 — Discovery & Research
+  Humano: 2-4hs (intake + análisis + reporte)
+  Claude: 30-60 min
+  Bloqueo si falta: brief incompleto o red flags sin resolver.
+
+M1 — Positioning
+  Humano: 3-6hs (investigación + formulación + validación interna)
+  Claude: 30-60 min
+  Bloqueo si falta: posicionamiento no aprobado bloquea el concepto.
+
+M2 — Brand Translation
+  Humano: 2-4hs (depende de material previo de marca)
+  Claude: 20-40 min
+  Bloqueo si falta: sin personalidad y voz, el copy y diseño no tienen dirección.
+
+M3 — Typography & Semiotics
+  Humano: 2-4hs (selección + prueba + documentación)
+  Claude: 20-30 min
+  Bloqueo si falta: sin sistema tipográfico, el diseño no puede ejecutarse.
+
+M4 — Concept Generation
+  Humano: 4-8hs (exploración + iteración + presentación)
+  Claude: 30-60 min
+  Este es el módulo más crítico. No comprimir sin justificación.
+  Bloqueo si falta: sin concepto aprobado no se puede pasar a dirección visual.
+
+M4.5 — Perception Engine
+  Humano: 1-2hs (definición + validación)
+  Claude: 15-20 min
+  Bloqueo si falta: sin percepción definida, la dirección visual no tiene criterio.
+
+M5 — Visual Direction
+  Humano: 6-12hs (sistema visual + primeras aplicaciones)
+  Claude: 30-60 min
+  Bloqueo si falta: sin dirección visual aprobada, el diseño no puede comenzar.
+
+M5.5 — Visual Innovation
+  Humano: 2-4hs (análisis + propuesta + validación)
+  Claude: 20-30 min
+  Se puede integrar al M5. No siempre requiere fase separada.
+
+Diseño UI
+  Humano: 15-40hs (wireframes + UI + responsive + componentes)
+  Claude: acompañamiento y revisión, no producción primaria.
+
+Build / Desarrollo
+  Humano: 20-60hs (según tecnología y alcance)
+  Variable según stack y complejidad técnica.
+
+QA
+  Humano: 4-8hs (revisión completa + fixes)
+  Claude: asistencia en checklist y detección de problemas.
+
+Launch
+  Humano: 2-4hs (deploy + monitoreo inicial)
+
+TOTAL ESTIMADO
+  Rápido (scope reducido, landing): 40-60hs humano
+  Estándar (landing o sitio 4-6 páginas): 80-120hs humano
+  Complejo (sitio multipágina + sistema visual completo): 150-250hs+
+
+SCRIPTS DE COMUNICACIÓN CON EL CLIENTE [v3]
+---------------------------------------------
+Estas son guías. Adaptarlas según el proyecto y el cliente.
+
+SCRIPT 1 — PRESENTACIÓN DE CONCEPTO
+Contexto: primera presentación de los conceptos finalistas.
+Objetivo: que el cliente entienda la lógica antes de dar feedback visual.
+
+"Antes de mostrar la dirección visual, quiero compartir la lógica estratégica
+que la sostiene. Si no estamos alineados en la estrategia, cambiar colores
+o fuentes no va a resolver el problema.
+
+[Explicar el concepto, la tensión y la transformación.]
+
+¿Tiene sentido esta dirección para el negocio?
+¿Hay algo de este razonamiento que no corresponde con lo que conocés
+de tus clientes o del mercado?"
+
+Objetivo: recibir feedback estratégico, no estético.
+Evitar: mostrar pantallas antes de validar el concepto.
+
+SCRIPT 2 — FRENANDO UNA DIRECCIÓN EQUIVOCADA
+Contexto: el cliente pide algo que contradice la estrategia aprobada.
+Objetivo: redirigir sin invalidar al cliente.
+
+"Entiendo la referencia. Es una dirección válida para otro tipo de proyecto.
+El desafío es que esa decisión haría que el sitio compita visualmente con
+[competidor X / el sector en general], que es exactamente la posición
+que queremos evitar según lo que acordamos.
+
+¿Te parece que revisamos qué es lo que te atrae de esa referencia
+y vemos cómo captarlo de una manera que siga siendo propio?"
+
+Objetivo: separar la referencia de la solución.
+Evitar: decir "eso no funciona" sin ofrecer alternativa.
+
+SCRIPT 3 — CAMBIO DE SCOPE O TIMELINE
+Contexto: hay un cambio que afecta el acuerdo original.
+Objetivo: informar con transparencia y proponer opciones.
+
+"Quiero ser directo con algo que puede afectar los tiempos del proyecto.
+[Explicar qué cambió y por qué.]
+
+Esto nos pone frente a dos opciones:
+A. Ajustar el timeline para mantener la calidad acordada.
+B. Reducir el scope de esta fase para no cambiar la fecha.
+
+¿Cuál te parece mejor camino? Yo tengo una recomendación pero primero
+quiero saber cómo te afecta cada opción."
+
+Objetivo: decisión informada, sin sorpresas.
+Evitar: presentar el cambio como algo ya decidido sin consultar.
+
+SCRIPT 4 — APROBACIÓN VAGA
+Contexto: el cliente dice "me gusta" pero no da feedback concreto ni aprueba formalmente.
+Objetivo: obtener confirmación real o identificar lo que no funciona.
+
+"Cuando decís que te gusta, ¿estás diciendo que está listo para avanzar
+a la siguiente fase, o que hay cosas que querés explorar más antes de confirmar?
+
+Para mí es importante saber si hay dudas ahora, porque resolver algo en
+esta etapa cuesta mucho menos tiempo que resolverlo después."
+
+Objetivo: convertir aprobación vaga en confirmación o en feedback útil.
+Evitar: asumir que "me gusta" es una aprobación para avanzar.
+
+SCRIPT 5 — SCOPE CREEP DETECTADO
+Contexto: el cliente agrega pedidos fuera del scope original.
+Objetivo: clarificar sin generar tensión innecesaria.
+
+"Entiendo el pedido. Antes de avanzar quiero ser claro:
+esto no estaba en el scope original, lo que significa que va a impactar
+en tiempo o en presupuesto.
+
+Tengo dos propuestas:
+A. Lo sumamos como una etapa adicional con su propio costo y timeline.
+B. Lo intercambiamos por algo del scope original de igual complejidad.
+
+¿Cuál preferís?"
+
+Objetivo: mantener el acuerdo sin frenar el proyecto.
+Evitar: absorber trabajo fuera de scope "para no generar conflicto".
+
+QA CHECKLIST — COMPLETO [v3]
+-------------------------------
+Revisar todas las categorías antes del launch.
+Documentar cada ítem como: OK / FALLA / N/A.
+
+CONTENIDO
+- [ ] Todos los textos revisados (ortografía, gramática, puntuación)
+- [ ] No hay placeholder text visible ("Lorem ipsum", "Tu título acá")
+- [ ] No hay links rotos o que llevan a 404
+- [ ] Todos los CTAs llevan a la página o acción correcta
+- [ ] Los formularios envían a la dirección correcta
+- [ ] El email de confirmación post-formulario funciona
+- [ ] Los meta titles y meta descriptions están escritos y optimizados
+- [ ] Las imágenes tienen alt text descriptivo
+
+VISUAL
+- [ ] El sistema tipográfico es consistente en todas las secciones
+- [ ] Los colores corresponden exactamente a los valores del sistema (hex/rgb)
+- [ ] No hay imágenes pixeladas, estiradas o mal cortadas
+- [ ] La jerarquía visual funciona en todas las páginas
+- [ ] No hay elementos desalineados o con espaciado incorrecto
+- [ ] El logo se ve correctamente en todos los fondos donde aparece
+- [ ] Los íconos tienen tamaño y peso consistente entre sí
+- [ ] Los hover states están aplicados en todos los elementos interactivos
+
+RESPONSIVE / MOBILE
+- [ ] El sitio funciona correctamente en iOS Safari y Chrome Android
+- [ ] No hay texto que se corta, superpone o se hace ilegible en mobile
+- [ ] Los botones tienen al menos 44px de altura en mobile (touch target)
+- [ ] Las imágenes se adaptan correctamente sin distorsión
+- [ ] Los menús de navegación funcionan en mobile
+- [ ] Los formularios se completan sin fricción desde mobile
+- [ ] No hay scroll horizontal no intencional en ninguna pantalla mobile
+- [ ] Las animaciones están reducidas o desactivadas en dispositivos lentos
+
+PERFORMANCE
+- [ ] Las imágenes están optimizadas (webp cuando es posible, < 300kb por imagen)
+- [ ] El sitio carga en menos de 3 segundos en conexión estándar
+- [ ] No hay recursos bloqueantes en el critical path
+- [ ] Las fuentes se cargan sin FOUT visible o con fallback bien definido
+- [ ] El JS no bloquea el render inicial
+
+ACCESIBILIDAD
+- [ ] Todos los textos tienen contraste mínimo WCAG AA
+  (4.5:1 para texto normal / 3:1 para texto grande)
+- [ ] Los inputs de formulario tienen labels correctamente asociados
+- [ ] Los CTAs tienen texto descriptivo (no solo "Ver más" o "Clic acá")
+- [ ] El foco de teclado es visible en todos los elementos interactivos
+- [ ] Las imágenes decorativas tienen alt="" (vacío, no ausente)
+- [ ] La navegación funciona completamente con teclado
+
+ESTADOS VACÍOS Y DE ERROR
+- [ ] El estado de formulario enviado comunica qué va a pasar después
+- [ ] Los mensajes de error explican qué salió mal y cómo resolverlo
+- [ ] La página 404 está diseñada y tiene un camino claro de regreso
+- [ ] Los estados de carga tienen feedback visual
+- [ ] El estado vacío de listas o contenido dinámico está diseñado
+
+TÉCNICO
+- [ ] El SSL está activo (https)
+- [ ] La URL canónica está configurada
+- [ ] El robots.txt está configurado correctamente
+- [ ] El sitemap está generado y accesible
+- [ ] El tracking (Analytics u otro) está activo y verificado
+- [ ] No hay errores en la consola del browser que afecten funcionalidad
+
+PROTOCOLO PARA CUANDO EL CLIENTE QUIERE ALGO QUE NO FUNCIONA [v3]
+-------------------------------------------------------------------
+Este es uno de los momentos más críticos del proceso.
+La mayoría del retrabajo costoso viene de aquí.
+
+PRINCIPIO BASE
+El cliente no siempre sabe qué decisión visual es mejor.
+Pero el cliente siempre sabe mejor qué necesita su negocio.
+La autoridad del diseñador es sobre las decisiones de diseño.
+La autoridad del cliente es sobre las decisiones de negocio.
+Confundir los dos produce conflicto innecesario.
+
+PASO 1 — ESCUCHAR SIN DEFENDER
+Antes de responder, entender exactamente qué pide el cliente y por qué.
+La mayoría de las veces el cliente pide algo específico porque tiene
+una preocupación legítima que no sabe expresar en lenguaje de diseño.
+Pregunta antes de responder: "¿Qué te llevó a pensar en eso?"
+
+PASO 2 — SEPARAR SÍNTOMA DE CAUSA
+El pedido del cliente suele ser un síntoma, no la causa.
+Ejemplo:
+- Síntoma: "El botón tiene que ser rojo."
+- Causa posible: "Necesito que la gente lo vea y haga clic."
+Si se resuelve la causa correctamente, el síntoma desaparece.
+
+PASO 3 — MOSTRAR EL CRITERIO, NO SOLO LA OPINIÓN
+No decir: "Eso no funciona porque no se ve bien."
+Decir: "Esa decisión podría producir [percepción específica] que contradice
+[el posicionamiento o la percepción objetivo que aprobamos en el módulo X]."
+La diferencia: uno es opinión, el otro es criterio con fundamento.
+
+PASO 4 — OFRECER UNA ALTERNATIVA, NUNCA SOLO UN RECHAZO
+Si se rechaza algo, siempre proponer una alternativa que resuelva
+la preocupación real del cliente.
+"Entiendo que necesitás que esa sección sea más visible.
+Una alternativa que logra lo mismo sin cambiar el sistema es [propuesta]."
+
+PASO 5 — DOCUMENTAR Y AVANZAR
+Si el cliente mantiene su posición después de escuchar el criterio,
+documentar la decisión y el argumento en el registro del proyecto.
+Si la decisión afecta el resultado, registrarla explícitamente:
+"Seguimos con tu propuesta. Solo quiero dejar documentado que esto puede
+impactar [resultado específico] para poder evaluarlo después del launch."
+Una vez que el criterio fue dado y registrado: avanzar.
+No insistir indefinidamente.
+
+CUÁNDO CEDER
+- Cuando la decisión del cliente es sobre su negocio, no sobre diseño.
+- Cuando el impacto es menor y la relación vale más que el debate.
+- Cuando ya se dio el criterio y el cliente tomó su decisión informadamente.
+
+CUÁNDO MANTENER LA POSICIÓN
+- Cuando la decisión contradice directamente la estrategia aprobada.
+- Cuando puede causar daño real (accesibilidad, performance, legibilidad).
+- Cuando el proyecto perdería su coherencia estratégica.
+
+SCOPE CREEP — DETECCIÓN Y PROTOCOLO [v3]
+------------------------------------------
+
+SEÑALES TEMPRANAS
+
+En el brief:
+- El cliente amplía el objetivo del proyecto en la segunda reunión.
+- Aparecen páginas o secciones nuevas que no estaban en el scope.
+- El cliente asume que el proyecto incluye algo no acordado.
+- Se menciona que "ya que están" habría que agregar X.
+
+En el proceso:
+- El cliente pide referencias de proyectos fuera del scope.
+- Los feedbacks incluyen pedidos de funcionalidades nuevas.
+- El cliente comparte ejemplos de sitios con características no acordadas.
+- Aparece un nuevo aprobador que pide cambios significativos.
+
+En tiempo y energía:
+- Las reuniones duran más de lo acordado sin output claro.
+- El número de iteraciones supera 2-3 sin resolución.
+- El cliente no aprueba etapas sin agregar pedidos nuevos.
+
+PROTOCOLO DE RESPUESTA
+
+Nivel 1 — Pedido menor (menos de 2hs de trabajo):
+  Registrar el pedido.
+  Evaluar si se puede absorber sin impacto en el timeline.
+  Si se absorbe: hacerlo y notificar que fue un gesto de buena voluntad,
+  no un estándar que va a repetirse.
+  Si no se absorbe: pasar al Nivel 2.
+
+Nivel 2 — Pedido significativo (2-8hs de trabajo):
+  No ejecutar sin confirmación previa.
+  Usar el Script 5 de comunicación.
+  Acordar cómo se maneja: adición al scope o intercambio.
+  Documentar la decisión por escrito.
+
+Nivel 3 — Pedido mayor (más de 8hs de trabajo):
+  Detener el proyecto y reunirse antes de continuar.
+  Replantear el scope completo con nueva propuesta.
+  Nunca absorber trabajo mayor sin acuerdo formal.
+
+REGLA GENERAL
+El scope creep no es un problema del cliente.
+Es un problema de proceso si no se detecta y comunica a tiempo.
+Cuanto antes se comunica, menos costoso es de resolver.
+Cuanto más tarde, más difícil es sin tensión en la relación.
+
+FRAMEWORKS INTERNOS
+-------------------
+A. Framework de Aprobación
+   No pasar de fase sin validar la anterior.
+
+B. Framework de Riesgo
+   Cuanto más tarde se detecta un error, más caro es arreglarlo.
+
+C. Framework de Transparencia
+   Documentar decisiones evita malentendidos.
+
+D. Framework de Iteración
+   Revisar, ajustar y volver a validar.
+
+E. Framework de Kill Switch
+   Si algo falla, volver al módulo correcto.
+   No forzar una solución rota.
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿El cliente tiene claridad?
+   - Sí: avanzar rápido.
+   - No: profundizar discovery antes de seguir.
+
+2. ¿El posicionamiento está claro y aprobado?
+   - Sí: seguir.
+   - No: detenerse en M1.
+
+3. ¿El concepto está aprobado?
+   - Sí: avanzar.
+   - No: corregir antes de pasar al M4.5.
+
+4. ¿La percepción está clara y sin colisiones?
+   - Sí: pasar a dirección visual.
+   - No: volver al M4.5.
+
+5. ¿La dirección visual está aprobada?
+   - Sí: diseñar.
+   - No: iterar antes de avanzar.
+
+6. ¿La innovación mejora la percepción?
+   - Sí: mantener.
+   - No: eliminar o simplificar.
+
+7. ¿El diseño corresponde a la estrategia aprobada?
+   - Sí: build.
+   - No: revisar antes de desarrollar.
+
+8. ¿El QA Checklist está completo y sin ítems en falla?
+   - Sí: launch.
+   - No: resolver los fallos primero.
+
+CASOS REALES
+------------
+Caso 1 — Freelancer premium
+- Problema: diseñar demasiado pronto sin concepto aprobado
+- Solución: validación del concepto antes de cualquier pantalla de UI
+- Resultado: menos cambios tardíos, cliente más involucrado
+
+Caso 2 — Estudio boutique
+- Problema: cliente cambia de dirección a mitad del proceso
+- Solución: checkpoints de aprobación con documentación escrita
+- Resultado: proyecto más ordenado y menos retrabajo
+
+Caso 3 — Proyecto complejo multipágina
+- Problema: scope creep acumulado sin comunicar
+- Solución: detección temprana + Script 5 aplicado en el momento
+- Resultado: relación preservada, acuerdo reencuadrado
+
+TESTS
+-----
+- ¿Cada fase tiene un output claro antes de avanzar?
+- ¿Hay aprobación documentada antes de pasar de fase?
+- ¿El proceso reduce retrabajo?
+- ¿Las decisiones están documentadas?
+- ¿El resultado final responde a la estrategia aprobada?
+- ¿Se puede repetir en otro proyecto?
+- ¿El QA Checklist fue completado antes del launch?
+- ¿Se detectó y comunicó el scope creep a tiempo?
+
+OUTPUT
+------
+1. Discovery documentado con red flags y oportunidades.
+2. Posicionamiento validado.
+3. Concepto aprobado con Concept Strength Score.
+4. Percepción objetivo aprobada sin colisiones.
+5. Dirección visual aprobada.
+6. Innovación validada con Cost Matrix y Decay Test.
+7. Diseño aprobado.
+8. Build final.
+9. QA Checklist completo y sin fallos.
+10. Lanzamiento.
+
+FAIL CONDITIONS
+---------------
+- Se diseñó antes de validar el concepto.
+- El concepto no fue aprobado formalmente.
+- La dirección visual no fue aprobada.
+- La innovación complica sin aportar.
+- No existe documentación de decisiones clave.
+- El QA Checklist tiene ítems en falla al momento del launch.
+- El resultado contradice la estrategia aprobada en algún módulo.
+- Se absorbió scope creep sin comunicar ni documentar.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como productor senior de agencia.
+Tomá el brief y ejecutá el proceso completo por fases.
+No pases a la siguiente fase sin entregar el output de la anterior.
+Aplicá el Intake Questionnaire en el M0 si el brief está incompleto.
+Verificá que el Concept Strength Score supere 10/15 antes de avanzar al M4.5.
+Aplicá el QA Checklist completo antes del launch.
+Si el cliente pide algo que contradice la estrategia, usá los scripts de comunicación.
+Si detectás scope creep, clasificalo por nivel y aplicá el protocolo correspondiente.
+Marcá claramente qué quedó aprobado y qué requiere validación.
+No diseñes de inmediato.
+Primero ordená el proceso, reducí el riesgo y documentá cada decisión clave.

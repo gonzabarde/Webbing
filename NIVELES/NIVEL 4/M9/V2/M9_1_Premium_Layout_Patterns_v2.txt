@@ -1,0 +1,250 @@
+M9.1 — PREMIUM LAYOUT PATTERNS (v2)
+=====================================
+
+OBJETIVO
+--------
+Definir patrones de layout premium reutilizables con anatomía ejecutable.
+Cada patrón debe tener proporciones, failure mode y degradación mobile concreta.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Concepto aprobado
+- Percepción objetivo
+- Visual Direction + Signature System
+- Tipo de proyecto
+- Arquitectura M8
+- Restricciones responsive
+- Pattern Stack elegido en M9.0
+
+PROCESO CLAUDE
+--------------
+1. Identificar la intención del layout: ¿informar, emocionar, vender, autoridad, deseo?
+2. Heredar la gramática de layout de M5 Visual Direction.
+3. Verificar el Pattern Stack de M9 Overview para el tipo de proyecto.
+4. Elegir un patrón principal y uno secundario máximo.
+5. Definir densidad por bloque: qué respira, qué condensa.
+6. Verificar que el patrón sobreviva en mobile con degradación concreta.
+7. Verificar que no replique clichés de la categoría (M5.5).
+
+BIBLIOTECA DE PATRONES
+-----------------------
+
+1. EDITORIAL SPLIT [STANDARD]
+   Un lado fuerte (tipo o imagen) + otro lado soporte.
+   ANATOMÍA: proporción 60/40 o 55/45. Columna fuerte a la izquierda por defecto.
+     Grid de 12 columnas: 7 + 5 o 6 + 6. Espacio vertical entre pares: 120-160px.
+     La columna fuerte define el ritmo; la soporte no compite.
+   ÚTIL PARA: lujo, estudio creativo, marca personal, portfolio de autor.
+   PERCEPCIÓN: tensión refinada, autoridad editorial.
+   LIFECYCLE: STANDARD.
+   FAILURE MODE: si el titular tiene menos de 5 palabras y la imagen es mediocre,
+     la asimetría no tiene razón de ser y el layout parece vacío sin serlo.
+   MOBILE: stack vertical. Imagen primero, texto al 100% del ancho debajo.
+     La columna soporte no necesita aparecer en mobile si el contenido es redundante.
+   RIESGO: pretencioso si el copy es débil o la imagen es genérica.
+   COMBINA CON: Stacked Narrative en el cuerpo. No combinar con Centered Monument.
+
+2. FULL-BLEED HERO + MODULAR BODY [STANDARD]
+   Hero de impacto visual máximo + cuerpo funcional con módulos.
+   ANATOMÍA: hero = 100vw × 100vh o 90vh. Cuerpo = contenedor máximo 1280-1440px,
+     módulos de ancho variable (full, 3/4, 1/2). Espacio entre módulos: 80-120px.
+   ÚTIL PARA: marketing sites premium, portfolios, experiencias de marca.
+   PERCEPCIÓN: entrada fuerte y luego orden.
+   LIFECYCLE: STANDARD.
+   FAILURE MODE: si el hero es genérico (stock foto + sans media), el patrón
+     no tiene razón de existir. El hero necesita la firma visual para justificar el 100vw.
+   MOBILE: hero a 100vw × 70vh. Cuerpo en columna única. Mantener jerarquía de módulos.
+   RIESGO: si el hero no tiene firma visual, es un cliché de marketing site.
+   COMBINA CON: Dense Product Grid o Rule-Driven System en el cuerpo.
+
+3. STACKED NARRATIVE [STANDARD]
+   Secciones apiladas con progresión clara de información o emoción.
+   ANATOMÍA: secciones de altura variable (min 480px, max 100vh para secciones
+     de énfasis). Transición entre secciones con separación de 80-120px o con
+     divisor visual explícito. Alternancia de densidad: densa / ligera / densa.
+   ÚTIL PARA: servicios complejos, storytelling, consultoras, landing de proceso.
+   PERCEPCIÓN: ritmo, facilidad de lectura, guía.
+   LIFECYCLE: STANDARD.
+   FAILURE MODE: si todas las secciones tienen la misma altura y densidad,
+     el patrón pierde el ritmo y se convierte en un scroll tedioso sin contraste.
+   MOBILE: igual que desktop pero con márgenes reducidos. El ritmo de densidad
+     se mantiene incluso en mobile.
+   RIESGO: demasiada altura total si cada sección es redundante o si el copy es largo.
+   COMBINA CON: Editorial Split en algunas secciones para crear variación.
+
+4. ASYMMETRIC BALANCED [VALIDATED]
+   Asimetría controlada con equilibrio visual intencional.
+   ANATOMÍA: no hay proporción fija, pero hay regla: el peso visual total de ambos lados
+     debe ser equivalente aunque las proporciones no lo sean. Un elemento grande + mucho
+     espacio vacío = un elemento mediano + bloque de texto denso.
+   ÚTIL PARA: marcas con tensión y sofisticación, creatividad, estudio de diseño.
+   PERCEPCIÓN: dinamismo sin caos, criterio visual.
+   LIFECYCLE: VALIDATED.
+   FAILURE MODE: si la asimetría no tiene un peso visual equivalente en el otro lado,
+     el layout se rompe y produce sensación de error de diseño, no de intención.
+   MOBILE: simplificar a stack vertical. La asimetría casi siempre no sobrevive mobile;
+     no forzarla.
+   RIESGO: perder legibilidad si la asimetría se exagera o si el contenido es denso.
+   COMBINA CON: Editorial Split en secciones alternadas.
+
+5. MINIMAL HIGH-AIR [STANDARD]
+   Espacio negativo dominante, pocos elementos por pantalla.
+   ANATOMÍA: márgenes laterales de 15-20% del viewport. Máximo 2-3 elementos por bloque.
+     Espacio vertical entre bloques: 160-240px. Tipografía como protagonista si no hay imagen.
+   ÚTIL PARA: lujo, premium silencioso, arquitectura, editorial de alta gama.
+   PERCEPCIÓN: control, exclusividad, pausa, sofisticación.
+   LIFECYCLE: STANDARD.
+   FAILURE MODE: si el contenido es abundante o el copy es largo y detallado,
+     el espacio fuerza el scroll excesivo y el usuario se pierde. El patrón
+     requiere copy muy corto y muy editado.
+   MOBILE: mantener márgenes generosos aunque reducidos (8-10%). No llenar.
+   RIESGO: parecer vacío o pobre si el contenido no está a la altura del espacio.
+   COMBINA CON: Centered Monument en secciones clave.
+
+6. DENSE PRODUCT GRID [STANDARD]
+   Alta densidad controlada, foco en comparación y exploración.
+   ANATOMÍA: grid de 3-4 columnas en desktop, 2 en tablet, 1-2 en mobile.
+     Gap entre items: 24-40px. Padding interno de card: 24-32px.
+     Altura de card consistente o variable según contenido, nunca mixta sin regla.
+   ÚTIL PARA: ecommerce, SaaS con muchas features, catálogos, pricing.
+   PERCEPCIÓN: eficiencia, claridad, completitud.
+   LIFECYCLE: STANDARD.
+   FAILURE MODE: si no hay una firma visual en las cards, el grid se convierte
+     en una tabla y pierde cualquier valor de percepción. El grid necesita un
+     elemento de firma (borde, hover, color, tipografía) para ser premium.
+   MOBILE: 2 columnas máximo. Asegurar touch targets de 44px.
+   RIESGO: sentirse utilitario si no hay ningún elemento de carácter.
+   COMBINA CON: Rule-Driven System para el resto del sitio.
+
+7. CASE-STUDY DRIVEN [VALIDATED]
+   La estructura gira alrededor de casos o piezas de evidencia.
+   ANATOMÍA: cada caso tiene: thumbnail grande (100% de ancho del contenedor),
+     título, cliente, rol y link. El ritmo puede ser grid o alternado.
+     Espacio entre casos: 60-100px. Total de casos visibles: 3-6 (no más).
+   ÚTIL PARA: agencias, studios, freelancers premium.
+   PERCEPCIÓN: credibilidad, criterio, autoría.
+   LIFECYCLE: VALIDATED.
+   FAILURE MODE: si todos los casos se presentan con el mismo formato y densidad,
+     sin variación de escala ni de jerarquía, el portfolio se convierte en catálogo.
+   MOBILE: stack vertical, thumbnail full-width, texto debajo.
+   RIESGO: aburrir si todos los casos tienen el mismo peso visual.
+   COMBINA CON: Editorial Split para la sección "sobre el estudio".
+
+8. SCROLL STORY [VALIDATED]
+   El contenido se revela como narrativa secuencial mediante scroll.
+   ANATOMÍA: requiere pinning de elementos durante el scroll. Duración recomendada:
+     100-300vh por sección de story. No usar para contenido de más de 5 segmentos.
+   ÚTIL PARA: cuando el motion y la experiencia son parte del valor diferencial.
+   PERCEPCIÓN: inmersión, memoria, sofisticación.
+   LIFECYCLE: VALIDATED.
+   FAILURE MODE: si el contenido no tiene una narrativa real con progresión,
+     el scroll story se vuelve un efecto visual sin historia. El usuario llega al final
+     sin haber entendido qué lo diferencia.
+   MOBILE: simplificar a Stacked Narrative estática. El Scroll Story rara vez
+     funciona bien en mobile. Fallback requerido.
+   RIESGO: lento, pesado, inaccesible si se exagera. Performance siempre en riesgo.
+   COMBINA CON: Minimal High-Air en el resto del sitio para equilibrar la densidad.
+
+9. CENTERED MONUMENT [VALIDATED]
+   Un elemento central domina la pantalla.
+   ANATOMÍA: elemento central al 60-80% del viewport de ancho. Centrado horizontal
+     y vertical. Espacio alrededor: mínimo 15% de los cuatro lados.
+     Máximo 2 elementos en pantalla incluyendo el monument.
+   ÚTIL PARA: marcas de deseo, lujo, posicionamiento con una idea muy fuerte.
+   PERCEPCIÓN: autoridad, foco, peso.
+   LIFECYCLE: VALIDATED.
+   FAILURE MODE: si se usa más de 2-3 veces en el mismo sitio, la monotonía destruye
+     el efecto. El Centered Monument funciona en momentos específicos, no como sistema.
+   MOBILE: reducir al 90% del viewport. Mantener el centrado.
+   RIESGO: monotonía si se repite demasiado.
+   COMBINA CON: Full-Bleed Hero para la entrada, Minimal High-Air para el cuerpo.
+
+10. RULE-DRIVEN SYSTEM [STANDARD]
+    Layout basado en reglas visuales explícitas y repetibles.
+    ANATOMÍA: grid de 12 columnas con reglas estrictas de uso.
+      Ejemplo de regla: "los bloques principales siempre en 8 columnas; los secundarios
+      en 4. Los highlights rompen a 12 columnas." Espaciado en múltiplos de 8px.
+    ÚTIL PARA: marcas de precisión, tech, sistemas complejos, SaaS.
+    PERCEPCIÓN: orden, confianza, sistema.
+    LIFECYCLE: STANDARD.
+    FAILURE MODE: si no hay ningún elemento de tensión o punto de quiebre,
+      el sistema se vuelve rígido y sin vida. Una regla bien aplicada necesita
+      al menos una excepción intencional.
+    MOBILE: las reglas se adaptan: grid de 4 columnas, mismos múltiplos de 8px.
+    RIESGO: rigidez excesiva si no hay una excepción intencional en el sistema.
+    COMBINA CON: Dense Product Grid en secciones de features.
+
+PATRONES POR CATEGORÍA
+-----------------------
+Referencia de uso en agencias top por tipo de proyecto.
+P = patrón principal. S = patrón secundario. ✗ = evitar.
+
+Categoría         | Principal          | Secundario           | Evitar
+------------------|--------------------|----------------------|--------
+Luxury / High-end | Minimal High-Air   | Centered Monument    | Dense Grid
+SaaS / Tech       | Rule-Driven System | Dense Product Grid   | Scroll Story
+Portfolio creativo| Editorial Split    | Case-Study Driven    | Dense Grid
+Clínica / Salud   | Stacked Narrative  | Rule-Driven System   | Scroll Story
+Marca personal    | Editorial Split    | Full-Bleed Hero      | Dense Grid
+Ecommerce premium | Dense Product Grid | Full-Bleed Hero      | Scroll Story
+Agencia creativa  | Case-Study Driven  | Asymmetric Balanced  | Centered Monument (en exceso)
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿La percepción necesita lujo/sofisticación o claridad/funcionalidad?
+   - Lujo: Minimal High-Air o Editorial Split.
+   - Claridad: Rule-Driven System o Dense Product Grid.
+
+2. ¿El proyecto vende por historia o por comparación?
+   - Historia: Stacked Narrative o Scroll Story.
+   - Comparación: Dense Product Grid o Case-Study Driven.
+
+3. ¿La marca debe sentirse ligera o con peso?
+   - Ligera: Full-Bleed Hero + Modular Body.
+   - Con peso: Centered Monument o Minimal High-Air.
+
+4. ¿La categoría está saturada de layouts similares?
+   - Sí: buscar un patrón que rompa la secuencia típica de la categoría.
+   - No: usar un patrón familiar bien ejecutado.
+
+5. ¿El mobile sostiene el patrón sin degradación mayor?
+   - Sí: seguir.
+   - No: simplificar o elegir otro patrón.
+
+CUÁNDO EVITAR
+-------------
+- Cuando el contenido es pobre y no sostiene una narrativa fuerte.
+- Cuando el patrón se siente experimental pero no refuerza el concepto.
+- Cuando el patrón depende de desktop y no tiene degradación mobile pensada.
+- Cuando el proyecto necesita máxima simpleza operativa.
+
+TESTS
+-----
+- ¿El layout refuerza la percepción objetivo?
+- ¿La anatomía define proporciones concretas?
+- ¿Se identificó el failure mode específico?
+- ¿Se definió la degradación mobile?
+- ¿El patrón evita clichés de la categoría?
+- ¿Se puede repetir en varias secciones?
+
+OUTPUT
+------
+- Layout pattern principal con lifecycle
+- Anatomía: proporciones, columnas, ritmo
+- Layout pattern secundario (si aplica)
+- Razón de elección
+- Failure mode del patrón elegido
+- Degradación mobile concreta
+- Qué clichés evita
+- Qué componentes necesita
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como arquitecto de layout premium.
+Verificá el Pattern Stack del M9 Overview para este tipo de proyecto.
+Elegí un patrón principal con su anatomía: proporciones, columnas y ritmo vertical.
+Identificá el failure mode específico de ese patrón en este contexto.
+Definí la degradación mobile concreta.
+Indicá qué clichés de la categoría evita y cómo.
+No me des una lista de layouts genéricos. Elegí con criterio y anatomía real.

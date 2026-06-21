@@ -1,0 +1,56 @@
+WEBBING — SYSTEM FILE MAP
+=========================
+(Estructura real del filesystem. Si difiere del disco, reportar antes de operar.
+La fuente de verdad operativa es el FILE MAP dentro de SKILL.md.)
+
+Webbing/
+│
+├── SKILL.md                  ← entry point operativo (bootloader)
+├── webbing.skill             ← SKILL.md empaquetado para Claude Code
+│
+├── Docs/
+│   ├── Webbing_Master_System_Document_v2.txt
+│   └── SYSTEM FILE MAP.txt   ← este archivo
+│
+├── Informes/                 ← research y libros (archivo histórico, no cargar en producción)
+│
+├── _deprecated/              ← versiones reemplazadas (nunca cargar)
+│   └── Production_Operating_System_v1.txt
+│
+└── NIVELES/
+    │
+    ├── NIVEL 1/              ← Strategy Layer
+    │   ├── M0  Agency_OS_M0_Discovery_Research_v3_DEEP.txt
+    │   ├── M1  M1_Positioning_System_DEEP_v3.txt
+    │   ├── M2  M2_Brand_Translation_System_DEEP_v3.txt
+    │   ├── M3  M3_Typography_Semiotics_System_DEEP_v3.txt
+    │   └── (ref) Creative_Knowledge_System_Level1_12_Disciplines_v3.txt
+    │
+    ├── NIVEL 2/              ← Creative Layer
+    │   ├── M4    M4_Concept_Generation_Engine_DEEP_v3.txt
+    │   ├── M4.5  M4_5_Perception_Engine_DEEP_v3.txt
+    │   ├── M5    M5_Visual_Direction_System_DEEP_v3.txt
+    │   └── M5.5  M5_5_Visual_Innovation_Engine_DEEP_v3.txt
+    │
+    ├── NIVEL 3/              ← Creative Director Layer
+    │   └── CDL_0 a CDL_5 (6 archivos v1)
+    │
+    ├── NIVEL 4/              ← Execution Layer
+    │   ├── M6   M6_Agency_Process_DEEP_v3.txt
+    │   ├── M7   Agency_OS_M7_Decision_Compression_Engine_DEEP_v3.txt
+    │   ├── M8/  Overview + M8_1 a M8_6 (7 archivos v2)
+    │   ├── M9/V2/  Overview + M9_1 a M9_8 (9 archivos v2)
+    │   └── M10/ M10_Production_Operating_System_v2.txt
+    │
+    ├── NIVEL 5/              ← AI Operating Layer
+    │   └── M11_00 a M11_10 (11 archivos v2)
+    │
+    ├── NIVEL 6/              ← Visual Intelligence Layer
+    │   └── M12 Overview + M12_0 a M12_9 (11 archivos v3)
+    │
+    └── NEGOCIO/              ← Business Layer (transversal)
+        ├── M13_0_Business_Layer_Overview_v1.txt
+        ├── M13_1_Client_Qualification_Engine_v1.txt
+        ├── M13_2_Scope_Proposal_System_v1.txt
+        ├── M13_3_Pricing_Engine_v1.txt
+        └── M13_4_Closing_Onboarding_v1.txt

@@ -1,0 +1,221 @@
+M8.4 — FRONTEND PRODUCTION STANDARDS (v2)
+==========================================
+
+OBJETIVO
+--------
+Definir estándares de producción frontend para que el código sea mantenible,
+consistente y profesional.
+Estos estándares se aplican desde el primer commit, no al final.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Arquitectura técnica (M8.1 handoff)
+- Component Map (M8.2 handoff)
+- Motion rules (M8.3 handoff)
+- Tipo de proyecto
+- Restricciones del equipo
+
+PROCESO CLAUDE
+--------------
+1. Definir estructura del proyecto.
+2. Definir convención de nombres.
+3. Definir sistema de tokens.
+4. Definir convención de componentes con umbral de abstracción.
+5. Definir standards de entorno (TypeScript, linting, git).
+6. Definir convenciones de responsive.
+7. Definir normas de accesibilidad en el código.
+
+ESTRUCTURA DEL PROYECTO
+------------------------
+/src
+  /components      → componentes reutilizables con sus variantes
+  /sections        → bloques de página específicos (no reutilizables)
+  /ui              → elementos de UI base (Button, Input, Card)
+  /lib             → utilidades, helpers, config
+  /data            → contenido estático, constantes, tipos de datos
+  /styles          → globals, variables CSS, reset
+  /hooks           → hooks custom (solo si el proyecto usa estado complejo)
+
+Regla: si una carpeta tiene menos de 2 archivos, no existe todavía.
+No crear estructura vacía por anticipación.
+
+CONVENCIÓN DE NOMBRES
+----------------------
+Componentes React: PascalCase
+  Correcto: HeroSection.tsx, TestimonialCard.tsx
+  Incorrecto: hero-section.tsx, testimonialcard.tsx
+
+Archivos de utilidad / lib: camelCase
+  Correcto: formatDate.ts, fetchCases.ts
+
+Archivos de estilos: kebab-case
+  Correcto: global-styles.css, token-system.css
+
+Variables y funciones: camelCase
+  Correcto: const baseUrl = ..., function handleSubmit() {}
+
+Tokens CSS: kebab-case con prefijo del sistema
+  Correcto: --color-accent, --space-lg, --font-heading
+
+SISTEMA DE TOKENS
+------------------
+Todos los valores que se repiten van a tokens.
+Nunca hardcodear un valor que ya está en el sistema.
+
+Categorías obligatorias de tokens:
+- Colores: --color-primary, --color-accent, --color-neutral-*, --color-bg
+- Tipografía: --font-heading, --font-body, --text-xs a --text-hero
+- Espaciado: --space-xs, --space-sm, --space-md, --space-lg, --space-xl
+- Motion: --duration-micro, --duration-state, --duration-brand, --ease-out-default
+- Radios (si aplica): --radius-sm, --radius-md
+- Sombras (si aplica): --shadow-sm, --shadow-md
+
+Implementación: CSS custom properties en :root (compatible con todos los stacks).
+Si el proyecto usa Tailwind: extender el theme en tailwind.config con estos valores.
+
+CONVENCIÓN DE COMPONENTES
+---------------------------
+Regla de abstracción:
+Si el mismo bloque aparece 3 o más veces con datos distintos → abstraer como componente.
+Si aparece 2 veces → puede ser coincidencia. Evaluar antes de abstraer.
+Si aparece 1 vez → no abstraer.
+
+Un componente tiene una responsabilidad clara.
+Si un componente hace más de una cosa, dividirlo.
+
+No crear componentes "demasiado inteligentes":
+Un componente inteligente es aquel que gestiona su propio fetching de datos,
+controla su propio estado global y decide su propio layout al mismo tiempo.
+Separar: data fetching en hooks o server components, presentación en componentes.
+
+Documentar con un comentario al inicio de cada componente no obvio:
+// Objetivo: muestra testimonios con nombre + cargo + resultado
+// Variantes: con foto (default) / sin foto
+// Estados: cargado / vacío (ocultar sección) / error (N/A)
+
+STANDARDS DE ENTORNO
+---------------------
+TypeScript
+  Usar TypeScript en todos los proyectos nuevos. Por defecto.
+  Excepción: proyectos muy pequeños (< 5 componentes) o prototipado rápido.
+  Si se hace excepción: documentarla.
+
+Linting y formateo
+  ESLint: instalar con configuración base del framework.
+    Next.js: eslint-config-next (ya incluido)
+    Astro: @astrojs/eslint-config
+  Prettier: siempre, con estas reglas base:
+    semi: true
+    singleQuote: true
+    tabWidth: 2
+    trailingComma: 'es5'
+  Integración: ejecutar en pre-commit con husky + lint-staged.
+
+Convención de commits (commits semánticos)
+  Formato: tipo(scope): descripción corta
+  Tipos: feat / fix / style / refactor / chore / docs / test
+  Ejemplos:
+    feat(hero): add scroll reveal animation
+    fix(form): correct error message on empty email
+    style(tokens): update accent color to approved value
+    chore(deps): update next to 14.2
+
+Ramas
+  main o master: producción solamente.
+  develop o staging: integración.
+  feature/nombre-feature: trabajo nuevo.
+  fix/nombre-bug: corrección.
+
+Variables de entorno
+  Nunca hardcodear API keys, tokens ni URLs de producción en el código.
+  .env.local para desarrollo. .env.production para producción.
+  Documentar todas las variables necesarias en .env.example.
+  Nunca commitear archivos .env.
+
+CONVENCIONES DE RESPONSIVE
+----------------------------
+Mobile-first: el CSS base es para mobile. Las media queries añaden para desktop.
+Breakpoints estándar (ajustar según el proyecto):
+  sm: 640px, md: 768px, lg: 1024px, xl: 1280px, 2xl: 1536px
+
+Si el proyecto usa Tailwind: usar los breakpoints del tema.
+Si usa CSS puro: definir los breakpoints como tokens.
+
+Nunca usar valores de pixel fijos para tipografía en mobile.
+Usar rem o clamp() para escalado fluido.
+
+NORMAS DE ACCESIBILIDAD EN EL CÓDIGO
+--------------------------------------
+Semántica HTML: usar el elemento correcto.
+  Botones que ejecutan acciones: <button>
+  Links que navegan: <a href>
+  No usar <div> para acciones.
+
+Labels en formularios: siempre con <label htmlFor="id-del-input">.
+  Si el label está oculto visualmente, usar .sr-only (screen reader only).
+
+Foco visible: nunca outline: none sin reemplazo.
+  Si se quita el outline por estética, agregar un :focus-visible custom.
+
+Imágenes:
+  Imágenes informativas: alt descriptivo.
+  Imágenes decorativas: alt="" (vacío, no ausente).
+
+ARIA: usar solo cuando el HTML semántico no alcanza.
+  No agregar role="button" a un <button> (ya lo tiene).
+  Usar aria-label cuando el contexto no está claro para un lector de pantalla.
+
+GATE DE REVISIÓN DE CÓDIGO [antes de M8.5]
+-------------------------------------------
+Verificar antes de avanzar:
+¿El código fue revisado contra los standards de este módulo?
+¿Los tokens están implementados?
+¿TypeScript está activo?
+¿ESLint y Prettier pasan sin errores?
+¿Los commits siguen la convención?
+
+Falla → corregir antes de continuar a M8.5.
+
+TESTS
+-----
+- ¿La estructura es entendible para un dev que entra al proyecto por primera vez?
+- ¿Los componentes siguen la convención de nombres?
+- ¿Los tokens cubren todos los valores que se repiten?
+- ¿No hay valores hardcodeados en los componentes?
+- ¿TypeScript está activo?
+- ¿ESLint y Prettier están configurados?
+- ¿Los commits son semánticos?
+- ¿Las variables de entorno están documentadas en .env.example?
+- ¿El gate de revisión fue ejecutado?
+
+OUTPUT
+------
+Al completar, llenar el handoff de M8 con:
+
+Naming convention (resumen de 4 líneas)
+Token system (categorías implementadas)
+Standards de entorno: TypeScript sí/no + ESLint config + Prettier + git convention
+Estructura de proyecto (carpetas activas)
+Accesibilidad baseline (qué checks mínimos están implementados)
+Resultado del gate de revisión
+
+FAIL CONDITIONS
+---------------
+- Estructura caótica o sin criterio.
+- Naming inconsistente entre archivos y componentes.
+- Valores hardcodeados que deberían ser tokens.
+- TypeScript desactivado sin justificación.
+- Sin ESLint ni Prettier configurados.
+- Variables de entorno sin documentar.
+- Accesibilidad no considerada en el código base.
+- Se avanzó a M8.5 sin ejecutar el gate de revisión.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como arquitecto frontend senior.
+Definí estándares de producción para que la web sea mantenible y profesional.
+Establecé naming convention con ejemplos concretos, token system con categorías,
+standards de entorno (TypeScript, ESLint, Prettier, git), responsive y accesibilidad.
+No des teoría general.
+Quiero convenciones concretas, ejemplos reales y el gate de revisión ejecutado.

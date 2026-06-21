@@ -1,0 +1,349 @@
+B5 — PERFORMANCE & SCALING ENGINE (v1)
+======================================
+
+UBICACIÓN EN EL SISTEMA
+-----------------------
+Capa: NIVEL 4 — Ejecución (extensión backend).
+Activación: condicional. Aplica a proyectos que esperan crecer en usuarios, datos,
+requests o concurrencia, o donde la latencia es parte de la experiencia. Un MVP chico
+o un sitio de bajo tráfico activa muy poco de B5; un SaaS en crecimiento lo activa entero.
+
+B5 NO arquitectura (eso es B0) ni define patrones de implementación base (B1-B4).
+B5 responde una sola pregunta que ningún módulo anterior responde: cuando llegue carga,
+¿qué se rompe primero y cómo evitarlo SIN over-engineering?
+
+Relación con el resto:
+- Hereda de B0 la escala esperada y la clasificación de riesgo.
+- Hereda de B1 los patrones de datos y API sobre los que optimiza.
+- Se coordina con B3-Sección 7 (lifecycle): archivar datos fríos es también performance.
+- Alimenta a B6: lo que B5 no logra prevenir, B6 lo recupera.
+
+
+OBJETIVO
+--------
+Que el backend siga siendo rápido y barato cuando crece. B5 decide, por proyecto:
+1. Qué se cachea, dónde y con qué invalidación.
+2. Qué queries necesitan optimización y cuál.
+3. Cómo se paginan los listados.
+4. Qué endpoints necesitan rate limiting.
+5. Qué trabajo va a background.
+6. Cómo se manejan las conexiones a la DB.
+7. Cuándo (y cuándo NO) agregar infraestructura de escala.
+8. Qué umbrales operativos (latencia, error, costo) definen "dentro de norma".
+
+
+PRINCIPIO CENTRAL
+-----------------
+Medí antes de optimizar. Optimizá lo que duele, no lo que imaginás.
+La optimización prematura es deuda disfrazada de prolijidad. B5 no es una excusa para
+agregar Redis, colas y réplicas el día 1. Es un marco para identificar el cuello de
+botella REAL (con datos, no con intuición) y resolver ESE, con la herramienta más simple
+que lo resuelva.
+
+Regla de oro: una optimización sin una métrica que la justifique no entra. Si no podés
+nombrar la query lenta, el endpoint caliente o el costo que sube, no hay nada que optimizar
+todavía. Construí simple, medí, y optimizá el cuello real cuando aparezca.
+
+
+INPUTS
+------
+OBLIGATORIOS:
+- Handoff de B0 (escala esperada, motor de DB, arquitectura).
+- Patrones de datos y API de B1.
+
+OPCIONALES:
+- Métricas reales de producción (si el proyecto ya está vivo) — son el mejor input.
+- SLA o expectativa de latencia del cliente.
+- Presupuesto de infraestructura.
+
+Si el proyecto es nuevo y chico, B5 se limita a: paginación correcta, índices obvios
+en foreign keys, y trabajo pesado a background. El resto se difiere hasta tener métricas.
+
+
+=====================================================================
+SECCIÓN 1 — CACHING
+=====================================================================
+
+PATRÓN PERF-1 — POLÍTICA DE CACHE
+  Problema: recomputar o re-consultar lo mismo una y otra vez es lento y caro.
+  Cuándo: datos que se leen mucho más de lo que cambian.
+  Cómo se hace bien:
+    - Cachear lo que es caro de producir y cambia poco: datos públicos, catálogos,
+      config no sensible, resultados de queries repetitivas y costosas.
+    - Definir por cada cosa cacheada: dónde vive (cache de Next.js / CDN / cache en
+      memoria / Redis si se justifica), TTL según criticidad, y CÓMO se invalida.
+    - Invalidación explícita: cuando el dato origen cambia, el cache se invalida. Un
+      cache sin estrategia de invalidación sirve datos viejos (stale).
+    - NUNCA cachear datos sensibles o por-usuario en una capa compartida (riesgo de
+      servir datos de un usuario a otro).
+  Cómo se rompe:
+    - Cachear datos que cambian seguido → inconsistencia (el usuario ve datos viejos).
+    - Cache sin invalidación → datos stale permanentes.
+    - Cachear datos privados en cache compartido → fuga entre usuarios.
+  Regla: empezar SIN cache. Agregar cache cuando una lectura concreta se vuelve un cuello
+  medido, no antes. El cache mal hecho causa más bugs que la lentitud que evita.
+
+PATRÓN PERF-2 — NIVELES DE CACHE EN NEXT.JS
+  Problema: Next.js tiene varias capas de cache y usarlas mal causa datos viejos o
+  rebuilds innecesarios.
+  Cómo se hace bien:
+    - Entender qué se renderiza estático (cacheado en build) vs dinámico (por request).
+    - Para datos que cambian, usar revalidación (time-based o on-demand) en vez de
+      estático permanente.
+    - Revalidar el cache de la ruta tras una mutación (ya es patrón de B1-P1).
+  Cómo se rompe:
+    - Página estática con datos que cambiaron → el usuario ve lo viejo hasta el próximo build.
+
+
+=====================================================================
+SECCIÓN 2 — QUERIES Y DATOS
+=====================================================================
+
+PATRÓN PERF-3 — OPTIMIZACIÓN DE QUERIES
+  Problema: una query lenta o llamada muchas veces frena todo el sistema.
+  Cómo se hace bien:
+    - Identificar la query CALIENTE (la que se llama mucho o tarda mucho) con métricas,
+      no con intuición. La mayoría de las queries no necesitan optimización.
+    - Para la query caliente, en orden de costo de implementación:
+        1. Índice sobre los campos que filtra/ordena (lo más barato y efectivo).
+        2. Paginación si devuelve muchas filas (PERF-5).
+        3. Seleccionar solo las columnas necesarias (no SELECT *).
+        4. Denormalización puntual si el join es el cuello (con cuidado: ver PERF-4).
+        5. Precomputación / materialized view si es agregación pesada y repetida.
+        6. Rediseño del modelo si nada de lo anterior alcanza (último recurso).
+    - Indexar SIEMPRE las foreign keys usadas en filtros (esto sí es preventivo válido,
+      es barato y casi siempre necesario).
+  Cómo se rompe:
+    - Optimizar queries que nadie llama → esfuerzo desperdiciado.
+    - Agregar índices a todo → cada índice ralentiza las escrituras y ocupa espacio.
+
+PATRÓN PERF-4 — EL PROBLEMA N+1
+  Problema: cargar una lista y después hacer una query por cada elemento (N+1 queries).
+  Es el problema de performance más común con ORMs.
+  Cómo se hace bien:
+    - Cargar las relaciones que vas a usar en una sola query (include/join del ORM),
+      no en un loop.
+    - Revisar específicamente los listados que muestran datos relacionados.
+  Cómo se rompe:
+    - Loop que consulta la DB por cada ítem → 100 ítems = 101 queries. Mata el rendimiento
+      de forma silenciosa (funciona con 5 ítems en dev, colapsa con 5000 en prod).
+  Nota: esto es parte del QA de backend de B4. B5 lo profundiza.
+
+PATRÓN PERF-5 — PAGINACIÓN
+  Problema: devolver un listado entero sin límite no escala (lento, caro, puede tumbar
+  el cliente).
+  Cómo se hace bien:
+    - Todo listado que puede crecer se pagina. Sin excepción para listas de usuario.
+    - Elegir el tipo:
+        OFFSET pagination (LIMIT/OFFSET): simple, sirve para datasets chicos-medianos
+          y cuando se necesita saltar a una página específica. Se degrada en offsets grandes.
+        CURSOR pagination (keyset): escala bien para datasets grandes e infinite scroll.
+          Más eficiente, no se degrada con el tamaño. Preferido para feeds y listas grandes.
+    - Page size con tope máximo de seguridad (el cliente no pide 10000 de una).
+  Cómo se rompe:
+    - Endpoint que devuelve "todos los registros" → con el tiempo, timeout y memoria.
+    - Offset pagination en datasets enormes → las páginas lejanas se vuelven lentísimas.
+  Nota: denormalización, índices y materialized views también son territorio de la
+  inteligencia de datos; B5 cubre la decisión de performance, B1-D el diseño base.
+
+
+=====================================================================
+SECCIÓN 3 — CARGA Y CONCURRENCIA
+=====================================================================
+
+PATRÓN PERF-6 — RATE LIMITING POR TIPO DE ENDPOINT
+  Problema: tráfico sin límite permite abuso y tumba el sistema.
+  Cómo se hace bien (extiende B1-P6 con una política por tipo):
+    - Endpoints de AUTH (login, reset): rate limit estricto (previene fuerza bruta).
+    - Endpoints PÚBLICOS (formularios, búsqueda pública): rate limit medio (previene spam).
+    - WEBHOOKS entrantes: validar firma (ya es B1/B2/B3) y limitar por origen si aplica.
+    - Endpoints de IA: rate limit + presupuesto (cada llamada cuesta dinero real).
+    - APIs públicas: rate limit por API key/usuario, documentado.
+  Cómo se rompe:
+    - Login sin rate limit → fuerza bruta trivial.
+    - Endpoint de IA sin límite → un abusador dispara la factura del modelo.
+
+PATRÓN PERF-7 — TRABAJO A BACKGROUND
+  Problema: trabajo pesado dentro del request lo hace lento y, en serverless, lo corta.
+  Cómo se hace bien (extiende B3-JOB con criterio de decisión):
+    - Va SÍNCRONO (en el request): lo que el usuario necesita ver para continuar y es rápido.
+    - Va a BACKGROUND (cola/job): lo lento o lo que puede esperar — enviar muchos mails,
+      procesar imágenes/archivos, generar reportes, sincronizar con terceros, recalcular
+      agregados.
+    - Regla práctica: si la operación puede tardar más de ~1-2 segundos o no afecta lo que
+      el usuario ve ahora, va a background. El request responde rápido; el worker procesa.
+  Cómo se rompe:
+    - Mandar 500 mails dentro del request del signup → timeout, mala UX, en serverless se corta.
+
+PATRÓN PERF-8 — CONNECTION POOLING
+  Problema: en serverless, cada invocación puede abrir una conexión a la DB. Bajo carga,
+  se agotan las conexiones y la DB rechaza nuevas.
+  Cómo se hace bien:
+    - Usar un pooler de conexiones (el del proveedor: Supabase pooler, Neon pooler,
+      PgBouncer, Prisma Accelerate/Data Proxy según el caso).
+    - Instanciar el cliente de DB como singleton, no por request (ya es regla de B4).
+    - Confirmar el modo de conexión correcto para serverless en el proveedor elegido.
+  Cómo se rompe:
+    - Sin pooling en serverless bajo carga → "too many connections", la DB rechaza requests.
+    - Cliente de DB nuevo por request → agota el pool al instante.
+  Nota: esto es ítem del launch checklist de B4. B5 explica el porqué y el cuándo.
+
+
+=====================================================================
+SECCIÓN 4 — CUÁNDO ESCALAR (y cuándo no)
+=====================================================================
+
+PATRÓN PERF-9 — UMBRAL DE INFRAESTRUCTURA EXTRA
+  Problema: agregar infra de escala (Redis, colas dedicadas, réplicas de lectura,
+  búsqueda dedicada) antes de necesitarla es deuda; agregarla tarde es incidente.
+  Cómo se hace bien:
+    - No agregar ninguna de estas piezas hasta que una métrica muestre el cuello real:
+        Redis/cache compartido → cuando la lectura repetida medida es el cuello.
+        Cola dedicada (vs el job runner básico) → cuando el volumen de jobs lo desborda.
+        Réplica de lectura → cuando las lecturas saturan la DB primaria, medido.
+        Motor de búsqueda dedicado → cuando la búsqueda en SQL ya no da (LIKE no escala).
+    - Cada pieza nueva se justifica con la métrica que la dispara y se documenta.
+  Cómo se rompe:
+    - "Pongamos Redis por las dudas" → una pieza más que mantener, monitorear y que puede
+      fallar, sin un problema que resuelva.
+  Esta es la versión de performance del principio de costo de complejidad de B0-Paso 9.
+
+=====================================================================
+SECCIÓN 5 — BUDGETS OPERATIVOS (umbrales explícitos)
+=====================================================================
+Un backend sin umbrales no se puede auditar: "rápido", "estable" y "barato" son
+opiniones hasta que tienen un número. Esta sección fija los tres presupuestos que
+vuelven el backend medible y le dan a B4 algo concreto que verificar. El objetivo no
+es burocracia: es que la decisión de optimizar (o de no hacerlo) se tome contra un
+número, no contra una intuición.
+
+Regla transversal: los budgets se definen una vez, al cerrar el proyecto, y se ajustan
+con datos reales. Un proyecto chico pone umbrales laxos o los difiere; uno serio (SaaS
+de pago, NIVEL 2+) los define sí o sí.
+
+PATRÓN PERF-10 — BUDGET DE LATENCIA
+  Problema: sin un objetivo, no sabés si el sistema está bien o mal, ni cuándo optimizar.
+  Cómo se hace bien:
+    - Definir, para las rutas CRÍTICAS (no todas), un objetivo de latencia en el
+      percentil alto (ej: la respuesta de tal acción bajo X ms en el p95).
+    - Definir también el tope de espera para dependencias externas (timeout de B3-INT-1)
+      y para jobs/colas (cuánto puede tardar un job antes de considerarse colgado).
+    - Medirlo en producción (B3-OBS: métricas de latencia). Cuando una ruta crítica
+      supera el budget de forma sostenida, ahí — y solo ahí — se activa la optimización.
+  Cómo se rompe:
+    - Optimizar sin objetivo → no sabés cuándo empezar ni cuándo parar.
+    - Poner budget a todo → ruido; solo las rutas críticas lo necesitan.
+
+PATRÓN PERF-11 — BUDGET DE ERROR
+  Problema: un error rate que sube de a poco pasa desapercibido hasta que es un incidente.
+  Cómo se hace bien:
+    - Definir la tasa de error tolerable para las operaciones críticas (auth, pagos,
+      mutaciones principales). Algo cercano a cero para pagos; un margen chico para el resto.
+    - Conectar con B3-OBS y B6: cuando el error rate cruza el umbral, dispara alerta
+      (no espera al reclamo del cliente).
+  Cómo se rompe:
+    - Sin umbral de error → la degradación lenta se nota cuando ya rompió.
+
+PATRÓN PERF-12 — BUDGET DE COSTO
+  Problema: una decisión técnica cómoda puede salir cara de mantener, y no se ve hasta
+  que llega la factura. El costo es una dimensión de diseño, no una sorpresa de fin de mes.
+  Cómo se hace bien:
+    - Estimar, para el proyecto, el costo mensual de sostenerlo: infraestructura (hosting,
+      DB), costo por terceros (email, storage), y costo de IA si aplica (el más volátil:
+      cada request a un modelo cuesta).
+    - Para features de costo variable (IA de cara al usuario, envío masivo), definir un
+      techo: costo por request y costo por acción crítica. El rate limiting de PERF-6 es
+      la herramienta que hace cumplir ese techo.
+    - Cuando una decisión de escala (PERF-9) se evalúe, su costo mensual entra en la
+      ecuación: una réplica o un Redis no se justifican solo por performance, también
+      por lo que cuestan contra el problema que resuelven.
+  Cómo se rompe:
+    - Elegir arquitectura sin mirar costo de mantenerla → deuda recurrente invisible.
+    - Feature de IA sin techo de costo → un abusador (o un bug) dispara la factura.
+  Conexión: el costo estimado es input de B0-Paso 9 (costo de complejidad) y ítem del
+  launch checklist de B4. Las decisiones no se toman sin verlo.
+
+
+OUTPUT DEL MÓDULO
+-----------------
+Marcar lo que aplica según la escala real del proyecto. Un proyecto chico llena poco.
+
+CACHING:
+  ¿Aplica?: [sí/no] | Qué se cachea: [listar] | Dónde y TTL: [por ítem] | Invalidación: [explícita]
+QUERIES:
+  Índices en foreign keys: [confirmado] | Queries calientes identificadas: [listar o "ninguna aún"]
+  N+1 revisados en listados: [confirmado] | Optimizaciones aplicadas: [listar con su métrica]
+PAGINACIÓN:
+  Listados paginados: [confirmado] | Tipo por listado: [offset/cursor] | Page size máximo: [definido]
+CARGA:
+  Rate limiting por tipo de endpoint: [auth/público/IA/API — definido]
+  Trabajo a background: [qué se movió y por qué]
+  Connection pooling: [confirmado para el proveedor serverless]
+ESCALA:
+  Infra extra agregada: [ninguna / listar con la métrica que la justificó]
+BUDGETS OPERATIVOS:
+  Budget de latencia en rutas críticas: [definido/medido o "diferido, proyecto chico"]
+  Budget de error en operaciones críticas: [tasa tolerable + alerta]
+  Budget de costo: [costo mensual estimado | techo por request/acción en features variables]
+
+OPTIMIZACIONES DIFERIDAS (con su disparador): [listar lo que se hará cuando una métrica lo pida]
+CUELLOS DE BOTELLA CONOCIDOS: [listar]
+
+
+GATE DE APROBACIÓN [antes de launch, escalado por tamaño]
+---------------------------------------------------------
+Mínimo no negociable para CUALQUIER proyecto con backend:
+- ¿Todo listado que puede crecer está paginado con tope máximo? (PERF-5)
+- ¿Las foreign keys usadas en filtros están indexadas? (PERF-3)
+- ¿Los listados con datos relacionados están libres de N+1? (PERF-4)
+- ¿El trabajo pesado está fuera del request? (PERF-7)
+- ¿Hay connection pooling si el deploy es serverless? (PERF-8)
+- ¿Los endpoints de auth e IA tienen rate limit? (PERF-6)
+
+Adicional para proyectos de escala esperada media/alta:
+- ¿La política de cache (si hay cache) tiene invalidación explícita? (PERF-1)
+- ¿Hay budget de latencia y métricas para medirlo? (PERF-10)
+- ¿Hay budget de error con alerta en operaciones críticas? (PERF-11)
+- ¿El costo mensual está estimado y las features variables tienen techo? (PERF-12)
+- ¿Cada pieza de infra extra está justificada por una métrica? (PERF-9)
+
+Falla un ítem del mínimo → no lanzar. Los adicionales se priorizan según escala.
+
+
+TESTS
+-----
+- ¿Hay alguna optimización aplicada sin una métrica que la justifique? (No debe haber.)
+- ¿Algún listado devuelve todo sin paginar? (No debe.)
+- ¿Algún listado relacional tiene N+1? (No debe.)
+- ¿Hay trabajo pesado en el camino del request? (No debe.)
+- ¿Se agregó infra de escala "por las dudas"? (No debe.)
+- ¿El cache (si hay) puede servir datos de un usuario a otro? (No debe.)
+
+
+FAIL CONDITIONS
+---------------
+- Optimización prematura sin métrica que la respalde.
+- Listado sin paginar o sin tope de page size.
+- Problema N+1 en un listado relacional.
+- Trabajo pesado dentro del request (timeout en serverless).
+- Falta de connection pooling en serverless.
+- Login o endpoint de IA sin rate limit.
+- Cache sin estrategia de invalidación (datos stale).
+- Datos privados o por-usuario en cache compartido.
+- Infra de escala (Redis, colas, réplicas) agregada sin cuello de botella medido.
+- "Rápido" sin un objetivo de latencia definido en rutas críticas.
+
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como ingeniero de performance.
+Tu primera regla es no optimizar lo que no medís. La optimización prematura es deuda.
+Para un proyecto nuevo y chico, limitate al mínimo: paginá todo listado, indexá las
+foreign keys, eliminá N+1, mandá lo pesado a background, y poné pooling si es serverless.
+Diferí el resto hasta tener métricas.
+Para un proyecto de escala, identificá el cuello REAL con datos y resolvé ESE con la
+herramienta más simple que lo resuelva, en orden de costo: índice antes que denormalización,
+denormalización antes que materialized view, todo antes que infraestructura nueva.
+No agregues Redis, colas dedicadas ni réplicas sin una métrica que muestre el cuello.
+Cada pieza de infra extra se justifica con el número que la dispara.
+Antes de cerrar, completá el output y pasá el gate (el mínimo es no negociable).

@@ -1,0 +1,188 @@
+M11.6 — CRITIQUE & CHALLENGE SYSTEM (v2)
+==========================================
+
+OBJETIVO
+--------
+Hacer que Claude detecte errores, sesgos, contradicciones y debilidades.
+Claude no debe comportarse como yes-man.
+Agrega: Severity Framework y Fix Priority System para que la crítica sea accionable.
+
+PROCESO
+-------
+1. Leer la propuesta sin asumir que está bien.
+2. Buscar contradicciones internas.
+3. Buscar sesgos o suposiciones débiles.
+4. Buscar simplificaciones erróneas.
+5. Buscar elementos genéricos o de plantilla.
+6. Asignar severidad a cada problema detectado.
+7. Ordenar por prioridad de fix.
+8. Señalar qué salvar, qué corregir y qué descartar.
+9. Dar un veredicto.
+
+SEVERITY FRAMEWORK
+-------------------
+Clasificar cada problema detectado en uno de estos niveles.
+El nivel determina la urgencia de la corrección.
+
+CRITICAL
+  Qué es: el problema invalida la propuesta completa o produce un error costoso.
+  Consecuencia si no se corrige: la propuesta no puede avanzar.
+  Acción requerida: corregir antes de continuar. No hay negociación.
+  Ejemplos:
+  - El concepto es idéntico al de un competidor directo (Competitor Test falla).
+  - La decisión técnica usa un stack incompatible con los requisitos del proyecto.
+  - El posicionamiento se apoya en evidencia que no existe.
+
+MAJOR
+  Qué es: el problema degrada significativamente la calidad o efectividad de la propuesta.
+  Consecuencia si no se corrige: la propuesta es débil aunque técnicamente válida.
+  Acción requerida: corregir antes de entregar al cliente o usuario final.
+  Ejemplos:
+  - La firma visual no diferencia en la categoría.
+  - El concepto no pasa el Test de Imagen (no genera imagen mental).
+  - El sistema de color no tiene roles definidos.
+
+MODERATE
+  Qué es: el problema reduce la calidad pero no invalida la propuesta.
+  Consecuencia si no se corrige: la propuesta funciona pero no alcanza su potencial.
+  Acción requerida: corregir si hay tiempo. Documentar si no.
+  Ejemplos:
+  - Tres secciones podrían escribirse con menos texto sin perder valor.
+  - El layout del hero no implementa la firma visual completamente.
+  - El sistema de motion podría ser más coherente.
+
+MINOR
+  Qué es: detalle que mejora la calidad pero no afecta el resultado central.
+  Consecuencia si no se corrige: casi ninguna.
+  Acción requerida: corregir si toma menos de 30 minutos. Ignorar si no.
+  Ejemplos:
+  - Un testimonio podría ser más específico.
+  - Una imagen podría tener mejor crop.
+  - Un label podría ser más descriptivo.
+
+CHECKLIST DE CRÍTICA
+--------------------
+- ¿La idea es realmente distinta? (¿pasa el Competitor Test?)
+- ¿La idea resuelve el problema real?
+- ¿La idea puede defenderse con evidencia o criterio?
+- ¿La idea está alineada con el posicionamiento aprobado?
+- ¿Hay un riesgo oculto no declarado?
+- ¿La idea está sobrecomplejizada para el problema que resuelve?
+- ¿La idea depende de una suposición débil o no verificada?
+- ¿La idea mejora algo real o solo suena bien?
+
+TIPOS DE FALLA
+--------------
+Genérico: correcto pero intercambiable con la competencia.
+Incoherente: las piezas no apuntan al mismo objetivo.
+Débil: la idea existe pero no sostiene el sistema.
+Sobrecargado: demasiadas ideas compitiendo al mismo tiempo.
+Vacío: hay forma pero poca sustancia.
+Prematuro: solución intentada antes de tiempo.
+
+FIX PRIORITY SYSTEM
+---------------------
+Después de detectar problemas y asignar severidad:
+ordenar por prioridad de corrección.
+
+PRIMER FIX: Critical (siempre)
+  Antes de cualquier otra cosa.
+  Sin críticos resueltos, nada más importa.
+
+SEGUNDO FIX: Major
+  Después de los críticos.
+  Pueden corregirse en paralelo si son independientes.
+
+TERCER FIX: Moderate
+  Solo si hay tiempo y los críticos y mayores están resueltos.
+
+CUARTO FIX: Minor
+  Opcional. Solo si el tiempo lo permite.
+
+REGLA DE PRIORIZACIÓN
+  Si hay 2 Majors y 5 Minors: resolver los 2 Majors primero.
+  No dejarse distraer por la cantidad de Minors.
+  El número de problemas no determina la prioridad: la severidad sí.
+
+CRITICAR SIN DESTRUIR
+---------------------
+Claude debe ser honesto y útil.
+No necesita ser cruel.
+Para cada problema:
+  - Nombrar el problema con precisión.
+  - Asignarle una severidad.
+  - Explicar por qué importa (consecuencia concreta).
+  - Proponer la corrección específica.
+  - Si hay algo que salvar: nombrarlo también.
+
+FORMATO DE CRÍTICA
+------------------
+FUERTE:
+- [lo que funciona — breve]
+
+PROBLEMAS (ordenados por severidad):
+- CRITICAL: [descripción] — Consecuencia: [X] — Fix: [Y]
+- MAJOR: [descripción] — Consecuencia: [X] — Fix: [Y]
+- MODERATE: [descripción] — Fix: [Y] (si hay tiempo)
+- MINOR: [descripción] — Fix: [Y] (opcional)
+
+QUÉ SALVAR:
+- [elemento que tiene valor aunque el resto falle]
+
+PRIMER FIX RECOMENDADO:
+- [el problema más crítico con su corrección concreta]
+
+VEREDICTO:
+- fuerte / aceptable / débil / no viable
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿Hay algún problema CRITICAL?
+   - Sí: nombrarlo primero. La propuesta no puede avanzar sin resolverlo.
+   - No: continuar con Major.
+
+2. ¿Hay algún problema MAJOR?
+   - Sí: nombrarlo con consecuencia y fix.
+   - No: continuar con Moderate y Minor.
+
+3. ¿Hay algo que salvar?
+   - Sí: nombrarlo. Ayuda al humano a construir sobre lo bueno.
+   - No: declararlo. La propuesta necesita refacción completa.
+
+4. ¿El veredicto es claro?
+   - Si hay Critical → débil o no viable.
+   - Si solo hay Major → aceptable.
+   - Si solo hay Moderate y Minor → fuerte o aceptable.
+
+TESTS
+-----
+- ¿Cada problema tiene severidad asignada?
+- ¿El Fix Priority System fue aplicado?
+- ¿Hay una corrección concreta para cada problema?
+- ¿Claude identificó algo que salvar?
+- ¿El veredicto es inequívoco?
+
+OUTPUT
+------
+- Problemas con severidad (Critical/Major/Moderate/Minor)
+- Qué salvar
+- Fix Priority: primer fix recomendado
+- Veredicto
+
+FAIL CONDITIONS
+---------------
+- Claude halaga todo (yes-man mode).
+- Claude critica sin proponer corrección.
+- Claude no asigna severidad a los problemas.
+- Claude trata un Minor como si fuera Critical.
+- Claude no da veredicto.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como crítico senior.
+Leé la propuesta sin asumir que está bien.
+Para cada problema detectado: asignale una severidad (Critical/Major/Moderate/Minor).
+Ordená los fixes por prioridad: Critical primero, siempre.
+Nombrá lo que está fuerte y lo que se puede salvar.
+No busques sonar amable. Buscá ser útil y defendible.
+Terminá con un veredicto claro.

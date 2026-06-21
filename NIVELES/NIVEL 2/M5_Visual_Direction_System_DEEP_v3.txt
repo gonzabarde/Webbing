@@ -1,0 +1,395 @@
+MÓDULO 5 — VISUAL DIRECTION SYSTEM (v3 DEEP)
+=============================================
+
+OBJETIVO
+--------
+Convertir concepto y percepción en un sistema visual coherente, reconocible y aplicable.
+Este módulo define cómo debe verse la marca y qué reglas sostienen esa visión.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Concepto aprobado
+- Percepción objetivo
+- Posicionamiento
+- Categoría
+- Público objetivo
+- Restricciones técnicas
+- Referencias aprobadas o rechazadas
+
+OPCIONALES:
+- Brandbook / sistema visual existente
+- Fotografía disponible
+- Tone of voice
+- Ejemplos de sitios admirados
+
+PROCESO CLAUDE
+--------------
+1. Definir una sola firma visual principal.
+   Tipográfica / espacial / geométrica / fotográfica / motion / compositiva.
+
+2. Traducir el concepto a reglas de diseño.
+   El concepto debe afectar: escala, contraste, ritmo, densidad,
+   jerarquía, composición, color, interacción.
+
+3. Elegir el tipo de composición dominante.
+   Editorial / minimal / tecnológica / cinematográfica / experimental /
+   premium silenciosa / estructurada / orgánica controlada.
+
+4. Definir qué lidera la página.
+   Tipografía / imagen / espacio / color / motion.
+   Elegir uno. Los demás son secundarios.
+
+5. Crear un sistema de tensión.
+   Toda experiencia premium necesita al menos un elemento memorable:
+   escala extrema / asimetría / crop intencional / vacío deliberado /
+   superposición / contraste fuerte.
+
+6. Definir el sistema tipográfico.
+   Familia principal / familia secundaria / pesos / tamaños relativos /
+   tracking / line-height.
+
+7. Definir el sistema de color.
+   Ver sección técnica expandida abajo.
+
+8. Definir el sistema de motion.
+   Ver sección de lenguaje de motion abajo.
+
+9. Definir el sistema de imágenes.
+   Ver sección de dirección fotográfica abajo.
+
+10. Definir arquitectura de layout según tipo de proyecto.
+    Ver sección de arquitectura abajo.
+
+11. Definir el Signature System.
+    Ver sección abajo.
+
+12. Definir reglas de exclusión.
+    Qué no se va a usar. Las marcas fuertes diseñan por inclusión y por eliminación.
+
+13. Construir audit de consistencia.
+    Si el logo desaparece, la experiencia debe seguir sintiéndose igual.
+
+SISTEMA DE COLOR — TÉCNICO [v3]
+---------------------------------
+El color no es una decisión estética.
+Es una variable semiótica con propiedades medibles.
+
+TEMPERATURA
+- Cálido (rojo, naranja, amarillo): energía, urgencia, vitalidad, cercanía.
+- Frío (azul, verde, violeta, gris): calma, confianza, distancia, precisión.
+- Neutro (beige, crema, off-white, warm gray): apertura, naturalidad, editorial.
+  #ffffff (blanco puro) ≠ #f5f0eb (off-white). El primero es digital; el segundo es orgánico.
+
+VALOR (LUMINOSIDAD)
+- Alto valor (claros): accesibilidad, apertura, modernidad digital.
+- Bajo valor (oscuros): autoridad, sofisticación, peso visual.
+- Fondo oscuro + tipo claro: exclusividad, drama, nocturno.
+  En lectura extendida cansa más que fondo claro.
+
+SATURACIÓN
+- Alta: energía, atención, urgencia, mass market.
+- Media: balance entre legibilidad y carácter.
+- Baja: sofisticación, premium, control.
+
+FUNCIÓN POR ROL EN LA COMPOSICIÓN
+- Color primario: establece el mundo de la marca.
+- Color de acento: dirige la atención y señala acción (CTAs, highlights, énfasis).
+- Color neutro: sostiene el sistema sin competir.
+- Negro: autoridad, sofisticación, peso. No es ausencia de color.
+- Blanco: espacio, limpieza, apertura. No es ausencia de color.
+
+REGLAS DE PALETA
+- Máximo 2 colores con carácter + 1-2 neutros + negro + blanco.
+- El acento debe tener contraste WCAG AA sobre todos los fondos donde aparezca.
+- La paleta debe funcionar en blanco y negro antes de agregar color.
+- Si quitás el color y la jerarquía desaparece, el sistema tipográfico es débil.
+
+SEMIÓTICA POR CATEGORÍA
+- Tecnología: azul oscuro, grises fríos, negro, verde o violeta como acento.
+- Bienestar: verdes apagados, tierras, blancos cálidos, rosas polvos.
+- Lujo: negro, blanco, crema, dorado apagado, vino.
+- Educación: azules medios, verdes accesibles, neutros cálidos.
+- Creatividad: paleta variable con acento atrevido + neutros como base.
+- Salud y estética: blancos, azules apagados, rosados institucionales.
+- Gastronomía premium: negros, cremas, tierras, vinos.
+
+SISTEMA DE MOTION — LENGUAJE COMPLETO [v3]
+--------------------------------------------
+El motion tiene vocabulario propio.
+Sin definirlo, cada animación es una decisión aislada.
+
+TIMING — DURACIONES POR TIPO
+- Microinteracciones (hover, focus, active): 100-200ms
+- Transiciones de estado (show/hide, expand/collapse): 200-400ms
+- Transiciones de sección o página: 300-600ms
+- Animaciones de entrada al scroll: 400-700ms
+- Momentos de marca (pantallas de carga, brand moments): 600-1200ms
+
+EASING — CURVAS Y SU PERSONALIDAD
+- ease-in: acelera. Sensación de energía que se construye. Usar en salidas.
+- ease-out: desacelera. Aterrizaje natural. Usar en entradas. Más cómodo para el ojo.
+- ease-in-out: curva completa. Movimiento orgánico. Usar en transiciones de estado.
+- linear: velocidad constante. Mecánico, explícitamente digital. Solo si ese efecto es intencional.
+- spring: simula física con rebote. Orgánico, vivo, moderno. Usar en marcas cálidas.
+  No usar en marcas de lujo o precisión extrema.
+
+DENSIDAD DE MOVIMIENTO
+- 1 elemento: máxima atención, máximo significado.
+- 2-3 elementos: sistema coherente, jerarquía de motion.
+- 4+ elementos simultáneos: ruido visual. El ojo no sabe adónde ir.
+Regla: si más de 3 elementos se mueven al mismo tiempo, revisar la estrategia.
+
+PROPÓSITO POR TIPO DE INTERACCIÓN
+- Hover: confirmar que el elemento es interactivo. Cambio sutil, nunca dramático.
+- Focus: accesibilidad + indicar qué elemento está activo.
+- Active/pressed: feedback inmediato de que el gesto fue registrado.
+- Loading: mantener al usuario en el sistema. Siempre animar con propósito.
+- Success: confirmar la acción completada. Positivo, claro, no excesivo.
+- Error: indicar el problema. Nunca agresivo; siempre con una salida visible.
+- Scroll reveal: jerarquizar la entrada del contenido.
+  Lo más importante entra primero y con más peso visual.
+
+DESCRIPTOR DE MOTION (3 PALABRAS)
+Antes de ejecutar, definir el sistema de motion en 3 palabras.
+Ejemplos: "Preciso y medido" / "Fluido y orgánico" / "Rápido y directo" / "Lento y ceremonial".
+Si no puede describirse en 3 palabras, no hay sistema; hay efectos sueltos.
+
+SISTEMA DE IMÁGENES — DIRECCIÓN FOTOGRÁFICA COMPLETA [v3]
+-----------------------------------------------------------
+La imagen dice más que el copy en menos tiempo.
+Un sistema de imágenes sin dirección produce incoherencia.
+
+ESTILOS FOTOGRÁFICOS
+- Documental: momentos reales, sin staging evidente.
+  Efecto: autenticidad, cercanía, humanidad.
+- Constructed / Editorial: staging con intención clara.
+  Efecto: aspiracional, atmosférico, premium.
+- Product-focused: el producto o servicio como protagonista absoluto.
+  Efecto: claridad, funcionalidad, demostración.
+- Abstract: texturas, detalles, elementos no narrativos.
+  Efecto: atmósfera, calidad, sensorialidad. Siempre complemento, nunca sistema principal.
+
+DIRECCIÓN DE LUZ
+- Luz dura (directa, sombras definidas): drama, contraste, energía.
+- Luz suave (difusa, sombras blandas): calidez, intimidad, accesibilidad.
+- Luz natural ambiental: autenticidad, documental, honestidad.
+- Contraluz (backlight): poesía, aspiración, emoción.
+
+COLOR GRADING
+El grading unifica imágenes de distintas fuentes.
+Parámetros a definir antes de producir o seleccionar:
+- Temperatura: ¿cálido o frío? ¿Cuánto?
+- Contraste: ¿alto o bajo?
+- Saturación: ¿vibrante o apagado?
+- Highlights: ¿quemados o preservados?
+- Shadows: ¿profundos o abiertos?
+- Color dominante en sombras (shadow tint): azul, verde, terra, neutro.
+
+CROPS Y DISTANCIA FOCAL
+- Plano abierto: contexto, escala, mundo donde vive el producto.
+- Plano medio: relación, humanidad, uso cotidiano.
+- Primer plano / detalle: calidad, artesanía, materia, prueba.
+Regla: si la imagen va a tener tipografía encima, el crop debe
+dejar espacio para el texto. Definir si tipografía va sobre imagen o separada.
+
+CRITERIOS DE RECHAZO
+- Imágenes de stock obvias (fondo blanco, sonrisas forzadas, diversidad performativa).
+- Imágenes que contradicen el grading del sistema.
+- Imágenes que no pertenecen al mundo semiótico de la marca.
+- Imágenes con problemas de composición que no se corrigen con crop.
+- Imágenes que cualquier competidor podría usar sin sentirse fuera de lugar.
+
+ARQUITECTURA DE LAYOUT — POR TIPO DE PROYECTO [v3]
+----------------------------------------------------
+
+LANDING DE CONVERSIÓN
+Objetivo: máxima claridad hacia un CTA específico.
+Estructura: hero con promesa → prueba de concepto → beneficios →
+  evidencia (testimonios/casos) → manejo de objeciones → CTA final.
+Composición: estructura lógica y predecible.
+Evitar: asimetría excesiva, mucha variedad de módulos, distracciones del CTA.
+
+SITIO INSTITUCIONAL
+Objetivo: construir credibilidad en múltiples audiencias.
+Estructura: identidad fuerte → propuesta de valor → servicios →
+  casos → equipo → contacto.
+Composición: balance entre identidad y funcionalidad.
+Evitar: exceso de información por sección, falta de jerarquía entre servicios.
+
+SAAS / PRODUCTO DIGITAL
+Objetivo: demostrar el valor antes de pedir acción.
+Estructura: promesa de resultado → demostración → features clave →
+  prueba social → pricing → CTA.
+Composición: UI-familiar, capturas del producto visibles.
+  El producto es el protagonista visual.
+Evitar: demasiada narrativa sin mostrar el producto, features sin beneficio.
+
+MARCA PERSONAL
+Objetivo: comunicar personalidad, criterio y autoridad de manera única.
+Estructura: firma visual fuerte → punto de vista → trabajo o casos →
+  forma de trabajo → contacto.
+Composición: puede ser la más personal y experimental del sistema.
+Evitar: exceso de texto autobiográfico, catálogo sin narrativa.
+
+ECOMMERCE
+Objetivo: demostrar el producto y eliminar barreras de compra.
+Estructura: hero → categorías → productos destacados → prueba social →
+  trust signals → fidelización.
+Composición: imágenes dominantes, precio visible, experiencia predecible y fluida.
+Evitar: imágenes de baja calidad, precio o envío oculto, checkout con demasiados pasos.
+
+EDITORIAL / BLOG
+Objetivo: comunicar con autoridad y facilitar la lectura extendida.
+Composición: tipografía y jerarquía como elementos dominantes.
+  Espaciado generoso. Pocos elementos decorativos.
+Evitar: elementos visuales que compiten con el texto, columnas demasiado anchas.
+
+LUXURY / HIGH-END
+Objetivo: producir la percepción correcta antes de cualquier lectura.
+Estructura: imagen dominante → menos texto que el promedio → CTA de bajo compromiso.
+Composición: espacio negativo como protagonista. Uno o dos elementos por pantalla.
+Evitar: demasiado contenido, CTAs agresivos, imágenes de stock, urgencia.
+
+SIGNATURE SYSTEM [v3]
+-----------------------
+Cada proyecto necesita definir qué va a recordar el usuario
+24 horas después de ver el sitio.
+
+No es el logo.
+No es el color.
+Es un elemento, una decisión o una combinación que hace que
+la experiencia sea reconocible y propia.
+
+TIPOS DE FIRMA VISUAL
+
+Firma tipográfica
+Un uso muy específico del tipo que se repite en momentos clave.
+Ejemplo: headline en escala extrema que ocupa el ancho completo.
+Ejemplo: tracking muy abierto en mayúsculas en todos los labels.
+
+Firma espacial
+Una decisión de espacio que se repite con intención.
+Ejemplo: márgenes excesivamente amplios que hacen el contenido flotar.
+Ejemplo: línea horizontal fina como separador consistente de secciones.
+
+Firma de movimiento
+Una animación específica que aparece en momentos de marca.
+Ejemplo: los elementos del hero entran en secuencia con easing muy específico.
+Ejemplo: transición de cursor custom que refuerza el carácter de la marca.
+
+Firma fotográfica
+Un tratamiento de imagen reconocible y consistente.
+Ejemplo: todas las fotos tienen un velo de color sutil que las unifica.
+Ejemplo: todos los close-ups tienen el mismo nivel de detalle y temperatura.
+
+Firma compositiva
+Una decisión de layout que se repite en varias secciones.
+Ejemplo: elemento grande a la izquierda + texto pequeño a la derecha
+  replicado en múltiples bloques.
+
+CÓMO DEFINIR LA FIRMA
+1. Revisar el concepto aprobado y la percepción objetivo.
+2. Preguntar: ¿qué decisión visual es consecuencia natural del concepto?
+3. Elegir una que nadie más en la categoría tenga.
+4. Verificar que pueda repetirse al menos 3-4 veces en la experiencia.
+5. Documentarla como elemento intransable del sistema.
+
+TEST DE FIRMA
+Si quitás la firma, ¿el sitio todavía parece el mismo?
+Si sí, la firma no existía realmente.
+Si no, la firma es real y está haciendo su trabajo.
+
+FRAMEWORKS INTERNOS
+-------------------
+A. Framework de Firma Visual
+   Un recurso dominante + repetición + consistencia.
+
+B. Framework de Traducción
+   Concepto abstracto → decisión concreta.
+
+C. Framework de Tensión
+   Orden + fricción controlada.
+
+D. Framework de Coherencia
+   La marca se reconoce por sistema, no solo por logo.
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿La marca necesita credibilidad o deseo?
+   - Credibilidad: orden, legibilidad, estructura.
+   - Deseo: atmósfera, carácter, tensión.
+
+2. ¿La marca debe sentirse premium o accesible?
+   - Premium: más aire, menos ruido, más refinamiento.
+   - Accesible: más evidencia, más claridad, más cercanía.
+
+3. ¿La firma visual será tipográfica, espacial o fotográfica?
+   - Elegir una principal. Las demás secundarias.
+
+4. ¿El concepto pide orden o ruptura?
+   - Orden: grillas, alineación, simetría.
+   - Ruptura: asimetría, tensión, escalas extremas.
+
+5. ¿La composición debe informar o emocionar?
+   - Informar: claridad y estructura.
+   - Emocionar: ritmo y atmósfera.
+
+6. ¿El Signature System puede repetirse al menos 3-4 veces?
+   - Sí: está bien definido.
+   - No: no es una firma, es un elemento puntual.
+
+TESTS
+-----
+- ¿Existe una firma visual dominante?
+- ¿La marca se reconoce sin el logo?
+- ¿La dirección visual refuerza el concepto?
+- ¿Hay demasiados recursos compitiendo?
+- ¿La composición se siente intencional?
+- ¿El sistema de color tiene roles definidos?
+- ¿El motion tiene descriptor de 3 palabras?
+- ¿El sistema de imágenes tiene grading y criterios de rechazo?
+- ¿La arquitectura de layout corresponde al tipo de proyecto?
+- ¿El Signature System pasó el test de firma?
+
+OUTPUT
+------
+1. Firma visual principal.
+2. Firma visual secundaria.
+3. Sistema tipográfico.
+4. Sistema compositivo.
+5. Sistema de color técnico (temperatura, valor, saturación, roles).
+6. Sistema de motion (timing, easing, descriptor de 3 palabras).
+7. Sistema de imágenes (estilo, luz, grading, crops, criterios de rechazo).
+8. Arquitectura de layout según tipo de proyecto.
+9. Signature System con test de firma.
+10. Reglas de coherencia.
+11. Reglas de exclusión.
+12. Riesgos de cliché.
+
+FAIL CONDITIONS
+---------------
+- No existe firma visual clara.
+- Hay más de un recurso dominante compitiendo.
+- La dirección no conecta con el concepto.
+- La experiencia depende del logo para ser reconocible.
+- El sistema de color no tiene roles definidos.
+- El motion no tiene sistema; tiene efectos sueltos.
+- La fotografía no tiene dirección ni criterios de rechazo.
+- La composición se siente genérica o de plantilla.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como director visual senior.
+A partir del concepto y la percepción objetivo, definí una dirección visual coherente.
+Elegí una sola firma visual principal y verificá que puede repetirse al menos 4 veces.
+Desarrollá el sistema de color técnico con temperatura, valor, saturación y roles.
+Definí el sistema de motion con timing por tipo de interacción, easing con personalidad
+y un descriptor de 3 palabras que defina el vocabulario de movimiento.
+Desarrollá el sistema de imágenes con estilo fotográfico, dirección de luz,
+parámetros de grading, reglas de crop y criterios de rechazo.
+Elegí la arquitectura de layout que corresponde al tipo de proyecto.
+Definí el Signature System y aplicá el test de firma.
+Incluí las reglas de exclusión: qué no se va a usar.
+No diseñes todavía.
+Primero entregá la dirección visual completa, el sistema y los riesgos de cliché.

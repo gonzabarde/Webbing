@@ -1,0 +1,333 @@
+MÓDULO 4.5 — PERCEPTION ENGINE (v3 DEEP)
+==========================================
+
+OBJETIVO
+--------
+Definir la percepción exacta que la marca debe provocar antes de hablar de estilo visual.
+Este módulo traduce estrategia y concepto en sensación.
+
+La pregunta no es: "¿Cómo se ve?"
+La pregunta es: "¿Qué tiene que sentir la persona?"
+
+INPUTS
+------
+OBLIGATORIOS:
+- Concepto aprobado
+- Posicionamiento
+- Público objetivo
+- Tipo de negocio
+- Nivel de confianza requerido
+- Nivel de diferenciación requerido
+
+OPCIONALES:
+- Comentarios del cliente
+- Referencias emocionales
+- Marcas admiradas / rechazadas
+
+PROCESO CLAUDE
+--------------
+1. Tomar el concepto y determinar qué emoción principal debe producir.
+   Calma / control / claridad / deseo / confianza / precisión /
+   cercanía / sofisticación / energía.
+
+2. Separar percepciones primarias de secundarias.
+   Priorizar una sola percepción dominante.
+   Las secundarias no deben competir con la dominante.
+
+3. Detectar percepciones prohibidas.
+   Ver tabla expandida abajo.
+
+4. Construir 3 rutas de percepción usando el método de 4 pasos.
+   Ver método abajo.
+
+5. Aplicar el Perception Collision Check.
+   Ver sección abajo.
+
+6. Evaluar qué ruta está más alineada con el negocio.
+   No elegir por gusto. Elegir por impacto estratégico.
+
+7. Mapear la ruta elegida a la tabla de traducción.
+   Ver tabla percepción → decisión abajo.
+
+8. Documentar la percepción en una frase breve y utilizable.
+
+MÉTODO DE CONSTRUCCIÓN DE RUTAS DE PERCEPCIÓN [v3]
+----------------------------------------------------
+Las 3 rutas no son listas de adjetivos.
+Son caminos de decisión visual con lógica interna.
+
+PASO 1 — PERCEPCIÓN DOMINANTE
+Elegir una sola emoción o sensación que debe dominar la experiencia.
+No elegir más de una por ruta.
+Opciones válidas: calma, control, deseo, confianza, precisión, cercanía, sofisticación.
+
+PASO 2 — EMOCIÓN SECUNDARIA
+Elegir una emoción que amplifica o matiza la dominante sin competir.
+Ejemplo: si la dominante es "control", la secundaria puede ser
+"claridad" (amplifica) o "calma" (matiza).
+No elegir una emoción que contradiga la dominante.
+
+PASO 3 — DECISIONES VISUALES
+Para cada par de percepciones (dominante + secundaria), definir
+las decisiones visuales que activan ese estado emocional.
+Cada decisión debe ser concreta y ejecutable.
+Ver tabla de traducción abajo.
+
+PASO 4 — VERIFICACIÓN
+Pregunta final: si alguien ve esta experiencia sin leer ningún texto,
+¿puede inferir la percepción que buscamos activar?
+Si sí: la ruta está bien construida.
+Si no: volver al paso 3 y revisar las decisiones visuales.
+
+TABLA DE TRADUCCIÓN PERCEPCIÓN → DECISIÓN [v3]
+------------------------------------------------
+
+CALMA
+- Tipografía: serif editorial o humanist sans, interlineado generoso (1.7-2.0)
+- Color: paleta desaturada, fondo claro o neutro cálido
+- Espacio: densidad baja, márgenes amplios
+- Composición: alineada, no caótica, ritmo predecible
+- Motion: transiciones lentas (400-600ms), ease-out suave, sin rebote
+- Imágenes: fondos naturales, luz suave, personas no bajo presión
+- Prohibido: colores saturados, tipografías comprimidas, motion brusco
+
+CONTROL
+- Tipografía: grotesca geométrica o neo-grotesk, pesos medios
+- Color: paleta reducida, acento único bien definido
+- Espacio: densidad media, grilla visible
+- Composición: alineación fuerte, módulos regulares
+- Motion: preciso y corto (200-300ms), easing lineal o ease-out
+- Imágenes: sistemas, datos, procesos con estructura
+- Prohibido: ornamento sin función, paletas amplias, asimetría excesiva
+
+CONFIANZA
+- Tipografía: humanist sans o serif transitional, legibilidad máxima
+- Color: azules o verdes apagados, neutros, blanco
+- Espacio: densidad media, secciones bien separadas
+- Composición: predecible, sin sorpresas visuales
+- Motion: suave y continuo, nunca brusco
+- Imágenes: personas reales, testimonios con cara y nombre, resultados concretos
+- Prohibido: experimentalismo visual, paletas no convencionales, CTAs confusos
+
+DESEO
+- Tipografía: didone o display con carácter, contraste de pesos fuerte
+- Color: paleta con un acento de alto impacto visual
+- Espacio: densidad baja con momentos de alta densidad intencional
+- Composición: asimétrica, tensión visible, escala extrema en algún elemento
+- Motion: energético y expresivo (timing variable, más dramático)
+- Imágenes: atmósfera, textura, personas aspiracionales, close-ups
+- Prohibido: exceso de funcionalidad visible, diseño demasiado ordenado
+
+PRECISIÓN
+- Tipografía: grotesca geométrica o monospace para datos, escala muy clara
+- Color: monocromático o paleta muy reducida (máximo 2 colores)
+- Espacio: densidad media, grilla estricta
+- Composición: modular, todo alineado, sin elemento fuera de grilla
+- Motion: exacto, sin variación, timing controlado (100-200ms)
+- Imágenes: datos, diagramas, proceso técnico
+- Prohibido: ornamento, irregularidad no intencional, tipografía decorativa
+
+CERCANÍA
+- Tipografía: humanist sans o rounded sans, pesos livianos a medios
+- Color: cálidos o neutros con temperatura cálida
+- Espacio: densidad media, no demasiado formal ni demasiado estirado
+- Composición: ligeramente irregular, no rígida, no perfectamente simétrica
+- Motion: suave, rebote mínimo, velocidad media (300-500ms)
+- Imágenes: personas reales en contexto cotidiano, momentos genuinos
+- Prohibido: distancia institucional, tipografías frías, exceso de espacio formal
+
+SOFISTICACIÓN
+- Tipografía: didone o serif editorial, tracking ajustado en headlines
+- Color: paleta mínima, fondo oscuro o neutro elegante
+- Espacio: densidad muy baja, espacio negativo como recurso dominante
+- Composición: asimétrica con control, firma visual tipográfica presente
+- Motion: lento y preciso (600-1000ms), ceremonial, sin rebote
+- Imágenes: editorial, detalle, textura, sin stock genérico
+- Prohibido: colores brillantes, tipografías populares o sobreusadas, motion acelerado
+
+PERCEPCIONES PROHIBIDAS — CON CAUSAS VISUALES [v3]
+----------------------------------------------------
+Para cada percepción prohibida, identificar qué decisiones visuales la producen.
+Esto permite evitarla activamente.
+
+FRIALDAD
+Causas visuales:
+- Paleta monocromática azul-gris sin ningún elemento cálido
+- Tipografía geométrica sin humanist complement
+- Ausencia total de imágenes con personas
+- Motion extremadamente mecánico (lineal, sin variación de velocidad)
+- Texto sin voz propia; correcto pero sin temperatura
+
+CAOS
+Causas visuales:
+- Más de 4 pesos tipográficos distintos en la misma pantalla
+- Paleta de más de 4 colores con roles poco definidos
+- Múltiples elementos de igual jerarquía visual compitiendo
+- Motion de más de 3 elementos simultáneos
+- Secciones sin lógica de secuencia entre sí
+
+AMATEURISMO
+Causas visuales:
+- Fuentes sin criterio (pairings incompatibles, fuentes de baja señal)
+- Imágenes de stock obvias y genéricas
+- Shadows y gradients aplicados sin intención semiótica
+- Colores de alta saturación sin sistema de roles
+- Inconsistencia tipográfica entre secciones del mismo sitio
+
+RIGIDEZ EXCESIVA
+Causas visuales:
+- Todo centrado, sin ninguna asimetría o punto de tensión
+- El mismo módulo repetido 6+ veces sin variación
+- Tipografía sin diferencia visible de peso ni escala
+- Sin ningún punto de quiebre visual en toda la experiencia
+- Motion idéntico en todos los elementos (misma duración, misma curva)
+
+URGENCIA NO DESEADA (en marcas premium)
+Causas visuales:
+- Colores de alta saturación en acento o fondo
+- CTAs con lenguaje de escasez o tiempo limitado
+- Motion rápido y acumulado
+- Tipografías comprimidas en los headlines
+- Múltiples CTAs visibles simultáneamente
+
+PERCEPTION COLLISION CHECK [v3]
+---------------------------------
+Antes de pasar al M5, verificar que las percepciones no colisionen entre sí.
+Una colisión ocurre cuando dos percepciones buscadas se contradicen.
+
+COLISIONES FRECUENTES
+
+LUJO + URGENCIA
+Son percepciones incompatibles.
+El lujo comunica permanencia; la urgencia comunica escasez temporal.
+Si el brief pide ambas, definir cuál domina y cuándo aparece la otra.
+No pueden coexistir en el mismo bloque visual.
+
+CERCANÍA + AUTORIDAD EXTREMA
+Pueden coexistir, pero requieren balance cuidadoso.
+Si la autoridad es excesiva, mata la cercanía.
+Si la cercanía es excesiva, mata la autoridad.
+Asignar espacio a cada una según el momento del funnel.
+
+SOFISTICACIÓN + ACCESIBILIDAD ECONÓMICA
+La sofisticación comunica exclusividad; la accesibilidad comunica apertura masiva.
+Pueden coexistir solo con un separador semiótico claro entre los dos registros.
+
+CONFIANZA + EXPERIMENTALISMO VISUAL EXTREMO
+Un diseño muy experimental puede generar incertidumbre en lugar de confianza.
+Si se necesitan ambas, la experimentación debe ser sutil y la confianza explícita.
+
+PROCESO DEL CHECK
+1. Listar todas las percepciones buscadas.
+2. Verificar cada par posible contra la lista de colisiones.
+3. Si hay colisión: resolver antes de avanzar al M5.
+   Opciones:
+   a. Eliminar una de las percepciones colisionantes.
+   b. Asignar cada percepción a un momento específico del flujo.
+   c. Crear un separador semiótico explícito entre los dos registros.
+4. Si no hay colisión: avanzar.
+
+FRAMEWORKS INTERNOS
+-------------------
+A. Framework de Percepción Dominante
+   Elegir una emoción principal, no cinco.
+
+B. Framework de Traducción
+   Percepción abstracta → decisión visual concreta.
+
+C. Framework de Exclusión
+   Si una decisión visual empuja una percepción prohibida, se elimina.
+
+D. Framework de Coherencia
+   Si cambiás el logo o el nombre, la percepción debería seguir intacta.
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿La marca necesita confianza o deseo?
+   - Confianza: claridad, orden, evidencia.
+   - Deseo: atmósfera, tensión, carácter.
+
+2. ¿La percepción debe ser cálida o fría?
+   - Cálida: cercanía, humanidad, suavidad.
+   - Fría: precisión, control, limpieza.
+
+3. ¿Debe sentirse premium o accesible?
+   - Premium: refinamiento, silencio, espacio.
+   - Accesible: legibilidad, evidencia, cercanía.
+
+4. ¿Debe sentirse rápida o pausada?
+   - Rápida: energía, contraste, ritmo.
+   - Pausada: calma, respiración, control.
+
+5. ¿Las percepciones buscadas pasaron el Collision Check?
+   - Sí: avanzar al M5.
+   - No: resolver la colisión antes de continuar.
+
+CASOS REALES
+------------
+Caso 1 — SaaS B2B
+- Percepción dominante: control
+- Emoción secundaria: claridad
+- Prohibido: caos, exceso, ruido visual
+- Traducción: grillas claras, motion suave, UI ordenada, neo-grotesk
+- Collision check: sin colisiones
+
+Caso 2 — Clínica estética
+- Percepción dominante: confianza
+- Emoción secundaria: calma
+- Prohibido: improvisación, frialdad, exceso de estímulo
+- Traducción: humanist sans, espaciado generoso, colores desaturados
+- Collision check: "confianza + deseo aspiracional" → colisión. Se resolvió
+  asignando deseo solo al hero; confianza dominante en el resto.
+
+Caso 3 — Marca de lujo
+- Percepción dominante: sofisticación
+- Emoción secundaria: deseo
+- Prohibido: urgencia, ostentación, ruido visual
+- Traducción: espacio negativo, motion lento, didone + grotesque
+- Collision check: sin colisiones activas.
+
+TESTS
+-----
+- ¿La percepción se puede decir en una frase?
+- ¿Es una sola percepción dominante o hay demasiadas?
+- ¿Está conectada al negocio y al posicionamiento?
+- ¿Las rutas usan el método de 4 pasos?
+- ¿La ruta elegida tiene traducción en la tabla percepción → decisión?
+- ¿Se aplicó el Perception Collision Check?
+- ¿Evita percepciones prohibidas con causas visuales identificadas?
+- ¿Es distinta de la competencia?
+
+OUTPUT
+------
+1. Percepción dominante.
+2. Percepciones secundarias.
+3. Percepciones prohibidas con causas visuales.
+4. 3 rutas de percepción construidas con el método de 4 pasos.
+5. Ruta elegida con justificación estratégica.
+6. Tabla de traducción aplicada a la ruta elegida.
+7. Resultado del Perception Collision Check.
+8. Frase de percepción (breve, utilizable como criterio de diseño).
+9. Riesgos de desalineación.
+
+FAIL CONDITIONS
+---------------
+- Hay demasiadas percepciones sin prioridad.
+- La percepción no se traduce a decisiones visuales concretas.
+- La percepción parece genérica o intercambiable.
+- La percepción contradice el posicionamiento.
+- No se aplicó el Collision Check.
+- Hay colisiones de percepción sin resolver.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como estratega de percepción.
+A partir del concepto aprobado, definí la percepción dominante y las secundarias.
+Usá el método de 4 pasos para construir 3 rutas de percepción:
+percepción dominante → emoción secundaria → decisiones visuales → verificación.
+Aplicá la tabla de traducción percepción → decisión a la ruta elegida.
+Identificá las percepciones prohibidas con sus causas visuales concretas.
+Ejecutá el Perception Collision Check antes de cerrar el módulo.
+Si hay colisión, resolverla antes de avanzar al M5.
+No diseñes todavía.
+Primero entregá las rutas, la traducción, las prohibidas y el resultado del collision check.

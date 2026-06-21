@@ -1,0 +1,402 @@
+MÓDULO 3 — TYPOGRAPHY & SEMIOTICS SYSTEM (v3 DEEP)
+===================================================
+
+OBJETIVO
+--------
+Traducir posicionamiento y personalidad de marca en un sistema tipográfico
+y semiológico coherente.
+Este módulo responde dos preguntas:
+
+1. ¿Qué debe comunicar la tipografía?
+2. ¿Qué señales visuales sostienen esa percepción?
+
+La tipografía no es solo legibilidad.
+La tipografía es carácter, jerarquía y tono.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Posicionamiento aprobado
+- Personalidad de marca aprobada
+- Concepto creativo aprobado o en borrador
+- Público objetivo
+- Categoría de mercado
+- Restricciones técnicas
+- Preferencias tipográficas o prohibiciones del cliente
+
+OPCIONALES:
+- Brandbook
+- Fuentes que ya usa la marca
+- Marcas de referencia
+- Sitios admirados / rechazados
+- Ejemplos de piezas previas
+
+PROCESO CLAUDE
+--------------
+1. Determinar qué debe comunicar la tipografía.
+   Precisión / cuidado / autoridad / cercanía / lujo / editorialidad /
+   modernidad / confianza.
+
+2. Elegir el rol de cada familia tipográfica.
+   - display / headline
+   - body / lectura
+   - UI / navegación
+   - acento / opcional
+
+3. Definir contraste tipográfico.
+   Decidir si la marca necesita:
+   - alto contraste / contraste moderado / continuidad tipográfica /
+     tensión editorial / sobriedad funcional
+
+4. Elegir lógica de pairing.
+   Ver sección de pairing expandida abajo.
+
+5. Definir sistema de escala con valores numéricos.
+   Ver sección de escalas abajo.
+
+6. Definir ritmo y densidad.
+   - line-height / tracking / line-length / paragraph spacing /
+     heading spacing / hierarchy spacing
+
+7. Definir reglas semiológicas.
+   Traducir atributos a señales tipográficas:
+   formalidad / peso / tensión / silencio / energía / precisión / calidez
+
+8. Auditar legibilidad.
+   - tamaño mínimo / contraste WCAG / line length / jerarquía / mobile
+
+9. Traducir a sistema de diseño.
+   Afectar: cards / hero / FAQ / navegación / formularios / buttons /
+   testimonials.
+
+10. Sintetizar en una dirección tipográfica.
+    Qué familias / por qué / qué comunican / qué no se va a usar.
+
+SEMIÓTICA DE FAMILIAS TIPOGRÁFICAS [v3]
+----------------------------------------
+
+OLD STYLE (Garamond, EB Garamond, Cormorant, Caslon)
+Percepción: tiempo, herencia, narrativa, humanidad editorial.
+Cuándo usar: marcas con historia, lujo con raíces, editorial de largo aliento.
+  Bodegas, casas de moda con herencia, editoriales, marcas de autor.
+Cuándo evitar: tecnología, startups, servicios de alta eficiencia.
+Pairing ideal: con grotescas neutras (contraste temporal: pasado + sistema).
+Señal semiótica: "esto tiene historia y carácter propio".
+
+TRANSITIONAL (Times New Roman, Georgia, Freight, Charter)
+Percepción: equilibrio, autoridad neutral, legibilidad institucional.
+Cuándo usar: editorial de largo aliento, medios, publicaciones, reportes.
+Cuándo evitar: marcas que buscan diferenciación tipográfica fuerte.
+Pairing ideal: funciona sola; si se combina, con una sans sobria.
+Señal semiótica: "esto es serio, legible y no intenta llamar la atención".
+
+DIDONE / MODERN (Didot, Bodoni, Canela, Playfair Display)
+Percepción: drama, moda, refinamiento extremo, fashion, lujo contemporáneo.
+Cuándo usar: moda, lujo, estética, belleza premium, editorial de alta gama.
+Cuándo evitar: tecnología, salud, servicios técnicos, marcas que necesitan cercanía.
+Pairing ideal: con grotescas neutras de peso medio para controlar el drama.
+Señal semiótica: "esto es elegante, selectivo y sabe que se ve bien".
+Riesgo: sobreusado en estética y belleza; si todos en la categoría la usan,
+  no diferencia.
+
+GROTESQUE (Franklin Gothic, Aktiv Grotesk, Helvetica, Neue Haas Grotesk)
+Percepción: modernidad clásica, neutralidad trabajada, sistema, estructura.
+Cuándo usar: sistemas de diseño, identidades corporativas, UI de alto uso.
+Cuándo evitar: marcas que buscan personalidad fuerte o calor humano.
+Pairing ideal: con serif editorial para equilibrar neutralidad con carácter.
+Señal semiótica: "esto funciona y no necesita llamar la atención".
+
+HUMANIST SANS (Gill Sans, Myriad, Frutiger, Raleway)
+Percepción: calidez, accesibilidad, confianza cercana, modernidad sin frialdad.
+Cuándo usar: salud, educación, ONG, servicios que necesitan cercanía y confianza.
+Cuándo evitar: lujo, alta moda, tecnología de alto rendimiento.
+Pairing ideal: autosuficiente; con serif solo si se necesita jerarquía fuerte.
+Señal semiótica: "esto es accesible, humano y no te va a complicar la vida".
+
+GEOMETRIC SANS (Futura, Avenir, Montserrat, Circular, Brandon Grotesque)
+Percepción: precisión, modernidad matemática, eficiencia, diseño contemporáneo.
+Cuándo usar: tecnología, arquitectura, diseño, marcas de producto con ambición premium.
+Cuándo evitar: servicios que necesitan calor o tradición.
+Pairing ideal: con serif clásico para atenuar la frialdad geométrica.
+Señal semiótica: "esto es moderno, ordenado y sabe exactamente lo que hace".
+Riesgo: Montserrat y Circular están sobreusados en todas las categorías.
+  Evitar si hay algo más específico disponible.
+
+NEO-GROTESK (Inter, DM Sans, Söhne, GT Walsheim, ABC Diatype)
+Percepción: digital-nativo, limpieza funcional, UI-friendly, profesional sin excesos.
+Cuándo usar: SaaS, startups, apps, productos digitales, servicios modernos.
+Cuándo evitar: lujo, editorial de largo aliento, marcas con herencia.
+Pairing ideal: pueden funcionar solos; si se combinan, con una serif con carácter.
+Señal semiótica: "esto es digital, claro y eficiente".
+Riesgo: Inter está en todo. Usarlo sin nada que lo diferencie produce marcas genéricas.
+
+DISPLAY / EXPERIMENTAL
+Percepción: depende completamente de la fuente elegida.
+Regla: solo para headlines. Nunca para body.
+Cuándo usar: marcas que necesitan una firma visual tipográfica fuerte.
+Cuándo evitar: proyectos de alto riesgo, categorías conservadoras, timelines cortos.
+Señal semiótica: "esto tiene una identidad visual propia, no genérica".
+Riesgo: una mala elección de display puede producir el efecto contrario al deseado.
+
+LÓGICA DE PAIRING — POR TENSIÓN ÚTIL [v3]
+-------------------------------------------
+Un buen pairing no es que las fuentes "se vean bien juntas".
+Es que la combinación produzca algo que ninguna de las dos puede producir sola.
+
+PAIRING 1 — SERIF EDITORIAL + GROTESQUE NEUTRO
+Tensión: historia + sistema.
+Efecto: autoridad con claridad. El serif tiene carácter; el grotesque tiene función.
+Uso ideal: marcas que necesitan ser sofisticadas y útiles al mismo tiempo.
+  Agencias creativas, consultoras, marcas de servicios premium.
+Regla: el serif lidera en headline; el grotesque lidera en body y UI.
+
+PAIRING 2 — DIDONE + GROTESQUE NEUTRO
+Tensión: drama + control.
+Efecto: lujo sofisticado con legibilidad. El Didone da impacto; el grotesque estabiliza.
+Uso ideal: moda, belleza, lujo, editorial de alta gama.
+Regla: el Didone con criterio; en body cansa.
+
+PAIRING 3 — GEOMETRIC SANS + SERIF CLÁSICO
+Tensión: futuro + pasado.
+Efecto: modernidad con raíces. El geometric da precisión; el serif da humanidad.
+Uso ideal: startups que quieren verse serias, marcas tech con herencia.
+
+PAIRING 4 — HUMANIST SANS + SERIF EDITORIAL
+Tensión: calidez + autoridad.
+Efecto: confianza sin frialdad. El humanist es accesible; el serif da peso.
+Uso ideal: salud, educación, servicios de alto nivel con base humana.
+
+PAIRING 5 — FUENTE ÚNICA (una sola familia, múltiples pesos)
+Tensión: jerarquía interna por peso y tamaño, no por contraste de familia.
+Efecto: coherencia máxima, sistemas más simples.
+Uso ideal: UI-heavy, SaaS, apps donde la consistencia es crítica.
+Riesgo: requiere una fuente con suficiente variedad de pesos.
+
+CUÁNDO NO HACER PAIRING
+- Cuando no hay un arquetipo tipográfico claro.
+- Cuando el cliente no tiene fotos ni contenido que haga visible el pairing.
+- Cuando el presupuesto o el timeline no permiten ejecutar bien dos familias.
+- Cuando la categoría es tan conservadora que dos fuentes parecen exceso.
+
+SISTEMAS DE ESCALA — VALORES NUMÉRICOS [v3]
+--------------------------------------------
+Una escala tipográfica establece una relación matemática que produce
+jerarquía consistente.
+
+MINOR THIRD (ratio 1.2)
+Uso: sistemas de información densa, UI compacta, dashboards.
+Efecto: jerarquía sutil; diferencias pequeñas entre niveles.
+Valores con base 16px:
+  xs:   11px  |  sm:   13px  |  base: 16px  |  md:   19px
+  lg:   23px  |  xl:   28px  |  2xl:  34px  |  3xl:  41px  |  hero: 49px
+
+MAJOR THIRD (ratio 1.25)
+Uso: sistemas balanceados, sitios institucionales, servicios premium.
+Efecto: jerarquía clara sin dramatismo.
+Valores con base 16px:
+  xs:   10px  |  sm:   13px  |  base: 16px  |  md:   20px
+  lg:   25px  |  xl:   31px  |  2xl:  39px  |  3xl:  49px  |  hero: 61px
+
+PERFECT FOURTH (ratio 1.333)
+Uso: editorial, sitios con typographic leadership, marcas con jerarquía fuerte.
+Efecto: contraste visible y dramático entre niveles.
+Valores con base 16px:
+  xs:   9px   |  sm:   12px  |  base: 16px  |  md:   21px
+  lg:   28px  |  xl:   37px  |  2xl:  50px  |  3xl:  67px  |  hero: 89px
+
+REGLAS DE APLICACIÓN DE ESCALA
+- Hero: tamaño máximo en desktop. En mobile, bajar 1-2 niveles.
+- Body: siempre en base o md. Nunca en sm para lectura extendida.
+- Labels (botones, nav, microcopy): siempre en sm o xs.
+- H1 en 2xl o 3xl. H2 en xl. H3 en lg. Nunca al revés.
+- No usar todos los niveles. Elegir 4-5 tamaños y ser consistente.
+
+SEMIÓTICA EXPANDIDA — MÁS ALLÁ DE LA TIPOGRAFÍA [v3]
+------------------------------------------------------
+
+SEMIÓTICA DEL COLOR
+
+Temperatura
+- Cálido (rojos, naranjas, amarillos): energía, urgencia, cercanía, vitalidad.
+- Frío (azules, verdes, grises): calma, confianza, precisión, distancia.
+- Neutro (blancos, cremas, beiges): apertura, ligereza, contenido editorial.
+  Un blanco puro #ffffff es diferente a un off-white #f5f0eb.
+  El primero es digital-nativo. El segundo es editorial y orgánico.
+
+Valor (luminosidad)
+- Alto valor (claros): accesibilidad, apertura, modernidad.
+- Bajo valor (oscuros): autoridad, sofisticación, peso visual.
+  Fondo oscuro + tipo claro comunica exclusividad o drama.
+  En lectura extendida cansa más que fondo claro.
+
+Saturación
+- Alta saturación: energía, atención, urgencia, mass market.
+- Baja saturación: sofisticación, control, premium.
+  Las marcas de lujo suelen tener paletas de baja saturación.
+  Las marcas de mass market usan alta saturación para visibilidad.
+
+Función por rol en la composición
+- Color primario: establece el mundo de la marca.
+- Color de acento: dirige la atención y señala acción (CTAs, highlights).
+- Color neutro: sostiene el sistema sin competir.
+- Negro: autoridad, sofisticación, drama. No es ausencia de color.
+- Blanco: espacio, apertura, limpieza. No es ausencia de color.
+
+SEMIÓTICA DEL ESPACIO
+
+El espacio vacío no es espacio que falta.
+Es un recurso activo.
+
+- Mucho espacio + pocos elementos = premium, exclusivo, confianza.
+- Poco espacio + muchos elementos = popular, abundante, accesible.
+- Espacio asimétrico = tensión, dinamismo, editorial.
+- Espacio simétrico = control, institucional, estabilidad.
+
+Regla: antes de agregar un elemento, preguntar si el espacio actual
+ya está comunicando algo. Si sí, el elemento nuevo puede quitar
+más de lo que agrega.
+
+SEMIÓTICA DE LA DENSIDAD
+
+- Densidad baja: la marca confía en que el usuario se va a quedar.
+  Señal: selectivo, premium, no necesita convencer con volumen.
+- Densidad media: balance entre información y respiro.
+  Señal: completo y accesible.
+- Densidad alta: la marca quiere cubrir todas las dudas.
+  Señal: popular, accesible, transparente, o inseguro de su propia propuesta.
+
+SEMIÓTICA DEL CONTRASTE
+
+- Alto contraste (negro sobre blanco, blanco sobre negro): claridad, fuerza.
+- Bajo contraste (gris sobre blanco): elegancia, sofisticación.
+  Riesgo de legibilidad: siempre verificar WCAG AA.
+- Contraste tipográfico (fuente pequeña + fuente grande): jerarquía editorial.
+- Sin contraste: todo tiene el mismo peso → nada importa.
+
+SEMIÓTICA DEL RITMO Y LA ALINEACIÓN
+
+Ritmo visual:
+- Elementos que se repiten con variación: sistema + vida.
+- Elementos que se repiten sin variación: catálogo, no narrativa.
+- Ruptura de ritmo = énfasis. Si todo se rompe, nada se enfatiza.
+
+Alineación:
+- Izquierda: natural, lectura cómoda, democrática.
+- Centrado: ceremonial, formal, institucional.
+  Texto largo centrado es difícil de leer; usar con criterio.
+- Justificado: formal, denso, editorial clásico.
+  Requiere control tipográfico para evitar ríos de espaciado.
+- Asimétrico intencional: editorial, tensión visual.
+
+FRAMEWORKS INTERNOS
+-------------------
+A. Framework de Significado
+   La tipografía comunica antes de ser leída.
+
+B. Framework de Jerarquía
+   No hay buen diseño sin niveles claros.
+
+C. Framework de Contraste
+   La diferencia entre niveles crea orden y ritmo.
+
+D. Framework de Ritmo
+   El espacio entre elementos también habla.
+
+E. Framework de Coherencia
+   La tipografía debe sostener el mismo carácter que la marca.
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿La marca necesita verse editorial o funcional?
+   - Editorial: más carácter, más tensión, más personalidad.
+   - Funcional: más claridad, más neutralidad.
+
+2. ¿La marca necesita lujo o accesibilidad?
+   - Lujo: más refinamiento, más aire, más control.
+   - Accesible: más legibilidad, más cercanía.
+
+3. ¿La marca necesita autoridad o humanidad?
+   - Autoridad: peso, estructura, precisión.
+   - Humanidad: suavidad, respiración, calidez.
+
+4. ¿La tipografía debe liderar o acompañar?
+   - Liderar: más protagonismo visual.
+   - Acompañar: más neutralidad, más soporte.
+
+5. ¿La tipografía puede sostener el concepto en mobile?
+   - Sí: sigue.
+   - No: simplificar la elección.
+
+6. ¿La familia elegida está sobreusada en la categoría?
+   - No: seguir.
+   - Sí: evaluar si hay una alternativa con carácter similar y menor saturación.
+
+CASOS REALES
+------------
+Caso 1 — Wolf & Whale
+- Comunicación: editorial + credibilidad
+- Recurso: serif protagonista + sans clara
+- Pairing: Old Style + Grotesque (historia + sistema)
+- Escala: Perfect Fourth
+- Efecto: sofisticación con legibilidad
+
+Caso 2 — The First The Last
+- Comunicación: impacto + tensión
+- Recurso: display fuerte + cuerpo limpio
+- Pairing: Didone + Humanist Sans
+- Escala: Major Third con hero oversized
+- Efecto: presencia y memorabilidad
+
+Caso 3 — SaaS premium
+- Comunicación: claridad + confianza
+- Recurso: neo-grotesk con variedad de pesos
+- Pairing: fuente única (Inter o Söhne)
+- Escala: Minor Third (densidad media)
+- Efecto: lectura fácil y percepción seria
+
+TESTS
+-----
+- ¿La tipografía comunica el carácter de marca sin que haya que leerla?
+- ¿La jerarquía es clara en desktop y mobile?
+- ¿La escala tiene valores numéricos definidos?
+- ¿La elección de fuente es defendible estratégicamente?
+- ¿Hay suficiente contraste entre niveles jerárquicos?
+- ¿La tipografía se siente coherente con el concepto?
+- ¿La familia elegida está sobreusada en la categoría?
+- ¿La semiótica cubre tipografía + color + espacio + contraste?
+
+OUTPUT
+------
+1. Intención tipográfica.
+2. Familia principal con clasificación y señal semiótica.
+3. Familia secundaria (si aplica).
+4. Rol de cada familia.
+5. Lógica de pairing y tensión útil.
+6. Sistema de escala con ratio y valores en px.
+7. Reglas de line-height, tracking y spacing.
+8. Reglas semiológicas expandidas (tipografía + color + espacio + contraste).
+9. Riesgos de legibilidad.
+10. Reglas de exclusión tipográfica.
+
+FAIL CONDITIONS
+---------------
+- La tipografía se eligió por gusto, no por criterio estratégico.
+- No hay jerarquía clara o la escala no tiene valores numéricos.
+- La escala no funciona en mobile.
+- La tipografía contradice la personalidad.
+- La semiótica se limitó a tipografía; no cubre color, espacio ni contraste.
+- La familia elegida está sobreusada en la categoría sin diferenciación.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como estratega tipográfico senior.
+Tomá el posicionamiento, la personalidad y el concepto aprobado.
+Identificá la familia tipográfica correcta para cada rol usando la guía de
+semiótica de familias. Justificá la elección con su percepción activada y
+señal semiótica.
+Si hay pairing, explicá la tensión útil que produce la combinación.
+Definí el sistema de escala con ratio y valores numéricos reales.
+Expandí la semiótica más allá de la tipografía: color, espacio, densidad, contraste, ritmo.
+Auditá legibilidad, contraste WCAG y coherencia.
+No diseñes todavía.
+Primero entregá la estrategia tipográfica completa, el sistema de escala y la semiótica expandida.

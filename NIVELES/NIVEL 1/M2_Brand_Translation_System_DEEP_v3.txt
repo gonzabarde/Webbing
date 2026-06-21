@@ -1,0 +1,523 @@
+MÓDULO 2 — BRAND TRANSLATION SYSTEM (v3 DEEP)
+=============================================
+
+OBJETIVO
+--------
+Traducir el posicionamiento en personalidad, tono, valores operativos y comportamiento de marca.
+Este módulo responde la pregunta:
+
+"Si la marca fuera una persona, ¿cómo se comportaría?"
+
+La marca no se queda en una idea abstracta.
+Se vuelve un carácter.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Posicionamiento aprobado
+- Categoría
+- Público objetivo
+- Objetivo de negocio
+- Contexto cultural o comercial
+- Nivel de formalidad deseado
+
+OPCIONALES:
+- Historia de marca
+- Fundadores
+- Tono de comunicación actual
+- Referencias emocionales
+- Marcas admiradas
+- Marcas rechazadas
+- Palabras que el cliente quiere evitar
+
+PROCESO CLAUDE
+--------------
+1. Leer el posicionamiento y extraer su energía principal.
+   Ejemplos:
+   - precisión / calma / confianza / velocidad / cercanía
+   - sofisticación / autoridad / claridad / cuidado
+
+2. Traducir esa energía a personalidad.
+   No convertirlo en adjetivos vacíos.
+   Convertirlo en comportamiento observable.
+
+3. Definir arquetipo o mezcla de arquetipos.
+   Ver guía operativa completa abajo.
+
+4. Determinar la voz.
+   Responder:
+   - ¿cómo habla?
+   - ¿qué evita?
+   - ¿qué intensidad usa?
+   - ¿qué nivel de formalidad tiene?
+   - ¿qué nivel de seguridad transmite?
+
+5. Definir atributos de marca.
+   Convertir la personalidad en 5 a 7 atributos accionables.
+
+6. Definir reglas de comportamiento por touchpoint.
+   Ver sección específica abajo.
+
+7. Traducir a tono visual.
+   Qué implica la personalidad en:
+   - tipografía / color / densidad / motion / composición / imágenes / espaciado
+
+8. Definir palabras permitidas y prohibidas.
+   La marca fuerte sabe cómo habla y cómo no habla.
+
+9. Sintetizar en una guía breve de carácter.
+   Algo que un humano o Claude pueda usar como referencia constante.
+
+ARQUETIPOS DE MARCA — GUÍA OPERATIVA [v3]
+------------------------------------------
+Los arquetipos no son categorías de marketing.
+Son modelos de comportamiento que permiten tomar decisiones de voz,
+diseño y copy sin necesitar al estratega en cada paso.
+
+Cada arquetipo incluye: comportamiento central, tono dominante,
+qué evita siempre, cómo vende, cómo responde objeciones,
+cómo resuelve conflictos, y traducción visual.
+
+GUÍA (The Mentor)
+-----------------
+Comportamiento: acompaña al cliente paso a paso. No empuja; facilita.
+  La relación importa más que la transacción.
+Tono: cálido, claro, orientador. Habla con paciencia.
+  Nunca con urgencia. Nunca con distancia técnica.
+Qué evita: lenguaje de presión, urgencia artificial, superioridad.
+  Nunca "limitado", "última oportunidad", "no te lo pierdas".
+Cómo vende: mostrando el camino antes de pedir acción.
+  "Primero entendemos qué necesitás. Después avanzamos."
+Cómo responde objeciones: con empatía y contexto, no con argumentos.
+  "Es normal tener esa duda. Lo que suele pasar es..."
+Cómo resuelve conflictos: con escucha activa y reformulación.
+  No escala, no defiende. Reformula y redirige.
+Traducción visual:
+  - layouts con jerarquía progresiva y mucho espacio
+  - tipografía legible y cálida, nunca fría ni geométrica extrema
+  - imágenes de personas en proceso, no en resultado final
+  - CTAs que invitan ("Veamos juntos", "Empezamos cuando quieras")
+
+EXPERTO (The Authority)
+-----------------------
+Comportamiento: demuestra competencia en cada detalle.
+  No explica lo obvio. Muestra lo que sabe.
+Tono: directo, preciso, seguro. Sin exceso de calidez.
+  La confianza viene de la evidencia, no de la calidez.
+Qué evita: imprecisión, generalizaciones, lenguaje aspiracional vacío.
+  Nunca "potente", "robusto", "intuitivo" sin demostración.
+Cómo vende: con evidencia, casos y criterio específico.
+  "Este resultado se logró porque..."
+Cómo responde objeciones: con datos, no con opiniones.
+  "Según [caso/dato/evidencia], esto funciona porque..."
+Cómo resuelve conflictos: establece el criterio con fundamento.
+  No cede ante opiniones cuando tiene evidencia contraria.
+  Informa la discrepancia con claridad.
+Traducción visual:
+  - sistemas tipográficos precisos con jerarquía fuerte
+  - datos y cifras visibles y bien diseñados
+  - ausencia de ornamento innecesario
+  - imágenes de proceso, resultado cuantificable
+
+PROTECTOR (The Guardian)
+------------------------
+Comportamiento: el cliente está seguro con esta marca.
+  Prioriza la tranquilidad sobre la emoción.
+Tono: estable, confiable, predecible. Sin sorpresas de tono.
+Qué evita: cambios de registro, promesas no verificables, lenguaje de hype.
+  Nunca sobrevender; nunca prometer sin evidencia.
+Cómo vende: reduciendo el riesgo percibido.
+  "Sin compromiso. Sin cargos ocultos. Sin sorpresas."
+Cómo responde objeciones: reconociendo la preocupación y dando certeza.
+  "Entiendo la preocupación. Acá está exactamente lo que pasa cuando..."
+Cómo resuelve conflictos: con proceso claro y transparente.
+  Explica los pasos, no improvisa. La predictibilidad es su activo principal.
+Traducción visual:
+  - paletas sobrias y estables
+  - UI predecible, sin sorpresas de interacción
+  - secciones de garantías, FAQs y procesos visibles y accesibles
+  - imágenes de resultados seguros, no de promesas exageradas
+
+ESTRATEGA (The Strategist)
+--------------------------
+Comportamiento: piensa antes de actuar.
+  Hace preguntas antes de dar respuestas.
+Tono: analítico, medido, orientado a decisiones.
+Qué evita: respuestas sin fundar, creatividad sin propósito, improvisación visible.
+Cómo vende: mostrando el razonamiento detrás de la solución.
+  "El problema real es X. Por eso la solución correcta es Y."
+Cómo responde objeciones: reformulando la pregunta antes de responderla.
+  "Antes de responder eso, hay algo que importa más..."
+Cómo resuelve conflictos: volviendo al objetivo original acordado.
+  "¿Qué estamos intentando lograr acá?"
+Traducción visual:
+  - layouts con lógica de flujo visible
+  - tipografía con jerarquía fuerte y deliberada
+  - ausencia de elementos decorativos sin función
+  - imágenes de proceso, diagramas, estructura
+
+ARTESANO (The Craftsman)
+------------------------
+Comportamiento: el cuidado está en cada detalle.
+  La calidad no se declara; se nota.
+Tono: contenido, orgulloso del trabajo, sin sobreactuar.
+Qué evita: promesas de escala, lenguaje de volumen, hype de resultados.
+Cómo vende: mostrando el proceso y el detalle.
+  "Acá podés ver cómo lo hacemos."
+Cómo responde objeciones: con transparencia de proceso.
+  "Entendemos que parece caro. Acá está exactamente qué incluye."
+Cómo resuelve conflictos: con calidad demostrable, no con argumentos.
+  Muestra el trabajo; no argumenta su valor.
+Traducción visual:
+  - espaciado generoso que comunica cuidado
+  - tipografía con carácter propio, no genérica
+  - fotografía de detalle, textura, proceso artesanal
+  - paleta que evoca materialidad y precisión
+
+EDITOR (The Curator)
+--------------------
+Comportamiento: elige con criterio, no incluye todo.
+  La exclusión es parte de la identidad.
+Tono: selectivo, refinado, sin exceso. Pocas palabras, cada una elegida.
+Qué evita: abundancia de contenido, listas largas, opciones infinitas.
+Cómo vende: con lo que no muestra tanto como con lo que muestra.
+  "Solo trabajamos con [tipo específico de cliente/proyecto/caso]."
+Cómo responde objeciones: con criterio, no con defensa.
+  "Entendemos que no es para todos. Es exactamente el punto."
+Cómo resuelve conflictos: manteniendo el criterio aunque incomode.
+  No cede la postura para evitar tensión.
+Traducción visual:
+  - espacio negativo como recurso dominante
+  - pocas imágenes, muy bien elegidas
+  - paleta reducida (máximo 2-3 colores con roles claros)
+  - tipografía con peso y presencia propia
+
+PIONERO (The Pioneer)
+---------------------
+Comportamiento: está un paso adelante.
+  Propone antes de que otros lo pidan.
+Tono: seguro de sí, energético, con visión. Nunca defensivo.
+Qué evita: lo que todos hacen, el lenguaje de categoría, el conservadurismo.
+Cómo vende: con la visión de hacia dónde va el mundo.
+  "La mayoría todavía no lo ve. Nosotros sí."
+Cómo responde objeciones: relativizando la perspectiva del cliente.
+  "Eso tiene sentido si mirás el presente. La pregunta es qué pasa en 2 años."
+Cómo resuelve conflictos: con propuesta nueva, no con defensa de lo anterior.
+  Si algo no funciona, propone algo distinto en lugar de argumentar.
+Traducción visual:
+  - ruptura intencional de convenciones de la categoría
+  - tipografía con carácter fuerte y no convencional
+  - composición asimétrica y con tensión deliberada
+  - referencias visuales de un mundo que la categoría todavía no usó
+
+ANFITRIÓN (The Host)
+--------------------
+Comportamiento: el cliente siempre se siente bienvenido.
+  La experiencia importa tanto como el resultado.
+Tono: cálido, atento, sin distancia. Nunca institucional.
+Qué evita: frialdad, lenguaje técnico sin humanidad, procesos sin explicación.
+Cómo vende: con la experiencia antes que con el producto.
+  "Antes de ver qué hacemos, quiero que sepas cómo lo hacemos."
+Cómo responde objeciones: con hospitalidad.
+  "Tiene toda la razón. Déjeme resolver eso ahora mismo."
+Cómo resuelve conflictos: absorbiendo la tensión, no defendiéndose.
+  No argumenta; mejora la experiencia en el momento.
+Traducción visual:
+  - imágenes de personas reales en contexto cálido
+  - lenguaje UI amigable sin jerga
+  - CTAs que invitan ("Hablemos", "Empezamos cuando quieras")
+  - colores cálidos o neutros; nunca fríos ni distantes
+
+REGLAS DE COMPORTAMIENTO POR TOUCHPOINT [v3]
+---------------------------------------------
+La personalidad no puede ser genérica.
+Debe aplicarse de manera específica en cada punto de contacto.
+
+HERO
+- Titular: máximo 8-10 palabras. Debe contener la promesa, no la descripción.
+  Malo: "Diseño web profesional para empresas."
+  Bueno: "El sitio que convierte antes de que leas el primer párrafo."
+- Subtítulo: una sola idea que amplía el titular. No repetirlo con otras palabras.
+- CTA principal: acción específica. Nunca "Ver más" o "Conocenos".
+  Decir siempre qué pasa después del clic.
+
+CALL TO ACTION (CTA)
+- Debe describir el resultado del clic, no el gesto.
+  Malo: "Enviar" / "Más información" / "Contactar"
+  Bueno: "Reservar turno gratuito" / "Ver caso completo" / "Hablar con un estratega"
+- El CTA secundario debe ofrecer una alternativa de menor compromiso.
+- Nunca más de un CTA primario visible en un mismo bloque.
+
+FAQ
+- Cada pregunta debe ser la pregunta real que hace el cliente,
+  no la que la empresa quiere responder.
+- La respuesta empieza respondiendo, no contextualizando.
+  Malo: "Gran pregunta. En primer lugar hay que entender que..."
+  Bueno: "Sí. / No. / Depende de [variable concreta]."
+- El tono de FAQ debe ser el mismo que el del hero.
+
+FORMULARIO
+- El label de cada campo debe decir para qué sirve ese dato, no solo qué es.
+  Malo: "Email"
+  Bueno: "Email para enviarte la propuesta"
+- El botón de envío debe decir qué pasa después.
+  Malo: "Enviar"
+  Bueno: "Recibir propuesta en 24hs"
+
+ERROR STATE
+- El mensaje de error debe explicar qué salió mal y cómo resolverlo.
+  Malo: "Error. Intente nuevamente."
+  Bueno: "El email ingresado no es válido. Revisá que tenga @ y dominio."
+- El tono del error no debe romper con el tono general de la marca.
+  Una marca cálida tiene un error state cálido.
+  Una marca técnica tiene un error state preciso.
+- Nunca culpar al usuario.
+
+TESTIMONIOS
+- Deben tener: nombre real, cargo o contexto, resultado específico.
+  Malo: "Excelente servicio. 100% recomendado. — Juan P."
+  Bueno: "En 3 meses duplicamos las consultas entrantes. No esperaba ese
+  resultado tan rápido. — Laura Gómez, fundadora de Clínica Renova, Buenos Aires."
+- El testimonio debe responder la objeción más común del cliente ideal.
+- No más de 3 en una sección sin diferenciación por categoría de cliente.
+
+FOOTER
+- No es un catálogo de links; es un cierre de experiencia.
+- Debe tener: CTA secundario, contacto directo, y el elemento de confianza
+  final (certificación, años de experiencia, red social activa).
+- El tono del footer debe ser consistente con el tono general.
+
+MENSAJES DE CONFIRMACIÓN
+- Después de que el usuario completa una acción (formulario, compra, suscripción),
+  el mensaje debe:
+  1. Confirmar exactamente qué acción se completó.
+  2. Decir qué va a pasar ahora y cuándo.
+  3. Dar un paso opcional de bajo compromiso para mantener el vínculo.
+  Malo: "¡Gracias por tu mensaje! Te responderemos pronto."
+  Bueno: "Recibimos tu consulta. Te respondemos por email en menos de 24hs
+  con una propuesta inicial. Si necesitás algo urgente, escribinos directo
+  al WhatsApp."
+
+STRESS SCENARIO — LA MARCA BAJO PRESIÓN [v3]
+---------------------------------------------
+La personalidad de marca se prueba cuando algo sale mal.
+Un error, un retraso, una queja pública o una crítica revelan
+si la personalidad es real o decorativa.
+
+Para cada proyecto, Claude debe definir al menos 2 de estos escenarios:
+
+ESCENARIO 1 — Error en el servicio
+¿Qué hace esta marca cuando comete un error?
+Ejemplo para arquetipo PROTECTOR:
+"Reconocer el error inmediatamente. No esperar a que el cliente lo escale.
+Explicar qué pasó, qué se va a corregir y en qué plazo.
+No ofrecer descuento como sustituto de una disculpa genuina."
+
+ESCENARIO 2 — Cliente insatisfecho en redes
+¿Qué hace esta marca cuando un cliente critica públicamente?
+Ejemplo para arquetipo EXPERTO:
+"Responder con datos y criterio, no con defensiva.
+Reconocer la experiencia del cliente sin invalidarla.
+Ofrecer continuación de la conversación en privado.
+No argumentar en público."
+
+ESCENARIO 3 — Cambio de precio o condición
+¿Cómo comunica esta marca un cambio desfavorable para el cliente?
+Ejemplo para arquetipo GUÍA:
+"Comunicarlo con anticipación suficiente.
+Explicar el porqué con honestidad, no con eufemismos.
+Ofrecer un periodo de transición si es posible."
+
+ESCENARIO 4 — Proyecto con problemas internos
+¿Cómo actúa esta marca cuando algo interno está en riesgo?
+Ejemplo para arquetipo ESTRATEGA:
+"Comunicarlo antes de que el cliente lo detecte.
+Presentar el problema con una propuesta de solución al mismo tiempo.
+No ocultar información para proteger la imagen."
+
+REGLA DEL STRESS SCENARIO
+Si la personalidad de marca cambia bajo presión, no era real.
+Una marca que es "cercana y cálida" en los buenos momentos pero
+fría y defensiva cuando hay un problema tiene una personalidad decorativa.
+
+PALABRAS PERMITIDAS Y PROHIBIDAS [EXPANDIDO v3]
+-------------------------------------------------
+Esta sección se completa de manera específica para cada proyecto.
+Las listas abajo son punto de partida, no lista final.
+
+PALABRAS GENERALMENTE PROHIBIDAS EN MARCAS SERIAS
+(vacías o sobreusadas)
+- innovador / innovadora
+- disruptivo / disruptiva
+- de vanguardia
+- soluciones integrales
+- excelencia
+- calidad superior
+- apasionados por
+- hacemos las cosas diferente
+- nos mueve tu éxito
+- el mejor / la mejor
+
+PALABRAS GENERALMENTE PROHIBIDAS EN MARCAS PREMIUM
+(inflan urgencia o percepción de masividad)
+- Rebaja / Descuento / Oferta limitada
+- Últimas unidades
+- Aprovechá / No te lo pierdas
+- Precio especial
+- Líderes del mercado / Número uno
+
+PALABRAS GENERALMENTE PROHIBIDAS EN MARCAS TÉCNICAS
+(no demostradas)
+- Fácil / Simple / Intuitivo (sin demostración)
+- Revolucionario / Potente / Robusto (sin especificación)
+
+PALABRAS GENERALMENTE PERMITIDAS EN MARCAS DIRECTAS
+- Exactamente / En concreto / Sin vueltas
+- Así funciona / Esto es lo que incluye
+- El resultado es
+
+PALABRAS GENERALMENTE PERMITIDAS EN MARCAS CÁLIDAS
+- Entendemos / Acompañamos / Hablemos
+- Cuando pasa X, hacemos Y
+- Estamos disponibles
+
+PALABRAS GENERALMENTE PERMITIDAS EN MARCAS PREMIUM
+- Exclusivamente / Por eso trabajamos con
+- Seleccionado / Criterio / Detalle / Precisión
+
+NOTA
+La lista final debe construirse para cada proyecto según arquetipo,
+categoría y cliente ideal.
+Las listas genéricas son punto de partida.
+Las listas específicas son las que funcionan en producción.
+
+FRAMEWORKS INTERNOS
+-------------------
+A. Framework de Carácter
+   Posicionamiento → energía → personalidad → comportamiento.
+
+B. Framework de Voz
+   Qué dice, cómo lo dice y qué evita.
+
+C. Framework de Atributos
+   Convertir adjetivos en reglas operativas.
+
+D. Framework de Traducción
+   Personalidad → decisiones de copy, UI y visual.
+
+E. Framework de Consistencia
+   La marca debe sonar igual en cualquier punto de contacto.
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿La marca necesita sonar experta o cercana?
+   - Experta: más precisión, menos adorno.
+   - Cercana: más calidez, más humanidad.
+
+2. ¿La marca necesita sonar premium o accesible?
+   - Premium: más control, más silencio, menos ruido.
+   - Accesible: más claridad, más evidencia, más familiaridad.
+
+3. ¿La marca habla rápido o lento?
+   - Rápido: frases más directas y cortas.
+   - Lento: frases más cuidadas y atmosféricas.
+
+4. ¿La marca quiere autoridad o acompañamiento?
+   - Autoridad: tono más firme y criterioso.
+   - Acompañamiento: tono más guiado y humano.
+
+5. ¿La personalidad puede sostenerse en un error state?
+   - Sí: está bien definida.
+   - No: es una personalidad decorativa.
+
+6. ¿Las reglas por touchpoint están definidas?
+   - Sí: avanzar.
+   - No: completar antes de pasar al M3.
+
+7. ¿El stress scenario está definido para al menos 2 situaciones?
+   - Sí: avanzar.
+   - No: completar antes de cerrar el módulo.
+
+CASOS REALES
+------------
+Caso 1 — SaaS de productividad
+- Posicionamiento: simplificar el caos
+- Arquetipo: Estratega + Experto
+- Voz: directa y útil
+- Stress scenario: error en producción → comunicar inmediatamente con causa y ETA de fix
+- Efecto: sensación de control
+
+Caso 2 — Clínica estética
+- Posicionamiento: cuidado y confianza
+- Arquetipo: Protector + Guía
+- Voz: calmada y empática
+- Stress scenario: resultado diferente al esperado → escuchar, agendar revisión, no defenderse
+- Efecto: sensación de seguridad
+
+Caso 3 — Marca de lujo
+- Posicionamiento: lujo silencioso
+- Arquetipo: Editor
+- Voz: corta, medida, sin exceso
+- Stress scenario: crítica pública → no responder en público; contacto privado, sin argumentar
+- Efecto: sensación de exclusividad
+
+Caso 4 — Estudio creativo
+- Posicionamiento: firma visual con criterio
+- Arquetipo: Artesano + Editor
+- Voz: con carácter, sin sobreactuar
+- Stress scenario: cliente pide cambio que arruina el concepto → dar criterio, proponer alternativa
+- Efecto: sensación de autoría
+
+TESTS
+-----
+- ¿La personalidad es consistente con el posicionamiento?
+- ¿Puede sostenerse en todos los puntos de contacto?
+- ¿Las palabras permiten diseñar y escribir mejor?
+- ¿La voz evita lo genérico?
+- ¿El tono se siente humano y no artificial?
+- ¿La marca suena igual en hero, FAQ y CTA?
+- ¿Puede explicarse a otra persona en 30 segundos?
+- ¿La personalidad sobrevive los stress scenarios?
+- ¿Las palabras prohibidas son específicas para este proyecto?
+- ¿Las reglas por touchpoint están todas definidas?
+
+OUTPUT
+------
+1. Energía central de marca.
+2. Personalidad.
+3. Arquetipo principal con guía operativa completa.
+4. Arquetipo secundario.
+5. Voz.
+6. Atributos de marca.
+7. Palabras permitidas (específicas para este proyecto).
+8. Palabras prohibidas (específicas para este proyecto).
+9. Reglas de comportamiento por touchpoint.
+10. Stress scenarios (mínimo 2).
+11. Traducción a tono visual.
+12. Riesgos de inconsistencia.
+
+FAIL CONDITIONS
+---------------
+- La personalidad es un conjunto de adjetivos vacíos.
+- La voz no cambia nada en la experiencia.
+- No hay reglas de comportamiento por touchpoint.
+- La marca suena genérica o intercambiable.
+- La traducción a diseño no existe.
+- No hay stress scenarios definidos.
+- Las palabras prohibidas son genéricas, no específicas del proyecto.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como estratega de brand translation.
+Tomá el posicionamiento aprobado y traducilo a personalidad, voz, atributos y reglas de comportamiento.
+No te quedes en adjetivos.
+Elegí el arquetipo principal y secundario y desarrollalos con comportamiento, tono,
+qué evita, cómo vende, cómo responde objeciones y cómo resuelve conflictos.
+Definí reglas de comportamiento para cada touchpoint:
+hero, CTA, FAQ, formulario, error state, testimonios, footer y confirmación.
+Definí al menos dos stress scenarios y cómo actúa la marca en cada uno.
+Construí la lista de palabras permitidas y prohibidas específica para este proyecto,
+no genérica.
+No diseñes todavía.
+Primero entregá el carácter de marca, las reglas por touchpoint,
+los stress scenarios y los riesgos de inconsistencia.

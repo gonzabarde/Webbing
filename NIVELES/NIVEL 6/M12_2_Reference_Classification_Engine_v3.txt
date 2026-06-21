@@ -1,0 +1,141 @@
+M12.2 — REFERENCE CLASSIFICATION ENGINE (v3)
+============================================
+
+OBJETIVO
+--------
+Clasificar cada referencia para que pueda buscarse, compararse y reutilizarse sin confusión.
+Una referencia sin clasificación útil no sirve para recuperar inteligencia.
+
+INPUTS
+------
+- referencia aceptada (pasó M12.1)
+- tipo de proyecto
+- industria
+- contexto visual
+- intención de diseño
+- nivel de riesgo
+
+CLASIFICACIÓN BASE — 10 DIMENSIONES
+-------------------------------------
+1. Industria (elegir la dominante + máximo 2 secundarias)
+   SaaS, luxury, healthcare, ecommerce, agency, portfolio, consulting,
+   education, personal brand, institucional.
+
+   Regla para proyectos híbridos:
+   Si una referencia encaja en 2+ industrias, marcar la dominante
+   (donde más encaja su propósito principal) y máximo 2 secundarias.
+   Ejemplo: un portfolio de diseñador que también vende servicios →
+   dominante: portfolio / secundaria: consulting.
+   No usar más de 3 etiquetas de industria. La sobreclasificación anula la recuperación.
+
+2. Tipo de UX
+   editorial, inmersiva, informativa, transaccional, storytelling,
+   conversacional, promocional.
+
+3. Tipo de layout
+   split, grid, stacked narrative, full-bleed, modular,
+   centered, asymmetric, content-first.
+
+4. Tipo de motion
+   sutil, narrativa, ceremonial, funcional, experimental, mínimo.
+
+5. Tipo de tipografía
+   serif-clásica, sans-grotesk, humanist, neo-grotesk, display, editorial,
+   high-contrast, neutral.
+
+6. Nivel de innovación
+   bajo (sigue patrones estándar de la categoría),
+   medio (varía algunos patrones),
+   alto (rompe patrones dominantes de la categoría),
+   experimental (territorio no explorado en la categoría).
+
+7. Nivel de riesgo
+   bajo (fácil de abstraer sin clonar),
+   medio (requiere transformación consciente),
+   alto (difícil de usar sin caer en copia).
+
+8. Nivel de firma visual
+   débil (podría ser de cualquier marca),
+   moderada (tiene carácter pero no es inconfundible),
+   fuerte (reconocible sin logo),
+   dominante (define visualmente su categoría).
+
+9. Nivel de reutilización
+   específico (solo para ese contexto exacto),
+   adaptable (funciona con ajustes),
+   reusable (funciona en varios proyectos),
+   base pattern (principio universal aplicable en muchos contextos).
+
+10. Estado del ciclo de vida
+    emergent, validated, standard, legacy, deprecated.
+
+FORMATO ESTÁNDAR DE CLASIFICACIÓN
+-----------------------------------
+Al clasificar una referencia, usar siempre este formato como output:
+
+NOMBRE / URL: [identificador de la referencia]
+INDUSTRIA DOMINANTE: [una sola]
+INDUSTRIAS SECUNDARIAS: [máximo 2 o "ninguna"]
+TIPO DE UX: [uno de la lista]
+TIPO DE LAYOUT: [uno de la lista]
+TIPO DE MOTION: [uno de la lista]
+TIPO DE TIPOGRAFÍA: [uno de la lista]
+INNOVACIÓN: [bajo / medio / alto / experimental]
+RIESGO: [bajo / medio / alto]
+FIRMA VISUAL: [débil / moderada / fuerte / dominante]
+REUTILIZACIÓN: [específico / adaptable / reusable / base pattern]
+ESTADO: [emergent / validated / standard / legacy / deprecated]
+ETIQUETAS DE RECUPERACIÓN: [máximo 5 palabras clave para búsqueda]
+
+PROCESO CLAUDE
+--------------
+1. Leer la referencia con la clasificación ya aceptada de M12.1.
+2. Identificar la industria dominante (la que mejor describe el propósito principal).
+3. Marcar máximo 2 industrias secundarias si aplica.
+4. Clasificar las dimensiones restantes.
+5. Asignar máximo 5 etiquetas de recuperación (palabras que se usarían al buscarla).
+6. Verificar que la clasificación es consistente (ej: firma visual fuerte + reutilización baja no suelen coexistir).
+7. Completar el formato estándar.
+
+CONSISTENCIA DE CLASIFICACIÓN
+-------------------------------
+Verificar que estas combinaciones son coherentes:
+- Alta innovación debería coincidir con nivel de firma moderada/fuerte.
+- Riesgo alto debería marcar nivel de reutilización como "específico" o "adaptable".
+- Estado deprecated no debe estar en industria dominante activa (moverla a legacy primero).
+
+GATES
+-----
+GATE 12.2-A — ¿La industria dominante está definida (solo una)?
+  Falla → elegir una antes de continuar.
+
+GATE 12.2-B — ¿Las etiquetas de recuperación permiten encontrarla por intención?
+  Falla → las etiquetas son demasiado genéricas. Hacerlas más específicas.
+
+GATE 12.2-C — ¿El formato estándar está completo?
+  Falla → completar todos los campos antes de guardar.
+
+GATE 12.2-D — ¿La clasificación es internamente consistente?
+  Falla → revisar las combinaciones inconsistentes.
+
+OUTPUT
+------
+- formato estándar de clasificación completo
+- industria dominante + secundarias (si aplica)
+- etiquetas de recuperación
+- relaciones con referencias similares (si las hay)
+
+FAIL CONDITIONS
+---------------
+- clasificación ambigua con múltiples industrias dominantes
+- más de 3 etiquetas de industria
+- etiquetas de recuperación tan genéricas que no permiten búsqueda útil
+- formato estándar incompleto
+- clasificación inconsistente entre dimensiones
+
+PROMPT PARA CLAUDE
+------------------
+Clasificá cada referencia con el formato estándar completo.
+Una industria dominante, máximo 2 secundarias, máximo 5 etiquetas de recuperación.
+Verificá que la clasificación es internamente consistente.
+Si la clasificación no sirve para buscar la referencia por intención, está mal.

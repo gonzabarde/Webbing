@@ -1,0 +1,162 @@
+M12 — VISUAL INTELLIGENCE SYSTEM (v3)
+=====================================
+
+PROPÓSITO GENERAL
+-----------------
+M12 convierte referencias visuales en inteligencia operativa.
+No existe para guardar links bonitos.
+Existe para aprender cómo piensan los mejores sitios, extraer decisiones reutilizables,
+bloquear la copia literal y alimentar al resto del sistema con patrones validados
+por criterio, no por gusto.
+
+M12 responde cuatro preguntas:
+1. ¿Qué hace realmente buena a una referencia?
+2. ¿Qué decisión de diseño hay detrás de esa referencia?
+3. ¿Qué patrón reutilizable se puede extraer sin copiar?
+4. ¿Cómo evoluciona esa inteligencia con el tiempo?
+
+OBJETIVO
+--------
+Construir una biblioteca viva de referencias que sirva para:
+- capturar sitios relevantes con criterio estricto
+- clasificarlos por intención y contexto
+- descomponer sus decisiones con formato estándar
+- extraer principios reutilizables con Pattern Formula
+- bloquear la copia literal con Similarity Score cuantificado
+- puntuar su utilidad con scoring por dimensiones y criterios
+- recuperar referencias por intención con Query Translation Matrix
+- evolucionar la biblioteca con Promotion Criteria y Deprecation Threshold
+
+Lo que M12 NO es:
+- una galería de inspiración
+- un moodboard grande
+- una lista de URLs
+- una carpeta de screenshots sin criterio
+- un repositorio de plantillas para copiar
+
+PRINCIPIO CENTRAL
+-----------------
+copiar forma = clon
+copiar patrón = permitido si se abstrae correctamente
+copiar principio = objetivo
+
+ENTIDAD PRINCIPAL
+-----------------
+Una "reference" en M12 es un objeto de conocimiento con:
+- motivo de guardado
+- contexto e intención
+- categoría y clasificación estándar
+- decisiones visuales descompuestas
+- patrones extraídos con Pattern Formula
+- score calculado
+- nivel de riesgo
+- estado de ciclo de vida
+- usos recomendados y desaconsejados
+
+ARQUITECTURA DE M12
+-------------------
+M12.0 — Reference Philosophy
+M12.1 — Reference Collection Engine
+M12.2 — Reference Classification Engine
+M12.3 — Decision Decomposition Engine
+M12.4 — Pattern Extraction Engine
+M12.5 — Anti-Copy System
+M12.6 — Reference Scoring Engine
+M12.7 — Pattern Library
+M12.8 — Reference Retrieval Engine
+M12.9 — Reference Evolution System
+
+CUÁNDO M12 SE USA
+-----------------
+- antes de diseñar una web
+- durante la exploración de dirección visual
+- al validar si una propuesta es original o clonada
+- al buscar referencias por intención específica
+- al revisar si una categoría está saturada de clichés
+- al actualizar la biblioteca después de un proyecto
+
+CÓMO FLUYE M12
+--------------
+Reference discovery
+  ↓
+M12.1 — Collection Gate (con motivo de guardado + Quality Minimum)
+  ↓
+M12.2 — Classification (formato estándar)
+  ↓
+M12.3 — Decision Decomposition (mínimo 5 decisiones con formato completo)
+  ↓
+M12.4 — Pattern Extraction (con Pattern Formula + Validation Test)
+  ↓
+M12.5 — Anti-Copy Check (Similarity Score + Anti-Pattern Library)
+  ↓
+M12.6 — Scoring (promedio de 11 dimensiones con criterios)
+  ↓
+Library Storage
+  ↓
+M12.8 — Retrieval by Intent (Query Translation Matrix)
+  ↓
+M12.9 — Evolution / Promotion / Deprecation
+
+GATES GLOBALES CON DESTINO
+---------------------------
+GATE 12-A — Collection Gate
+  ¿El motivo de guardado es válido y la referencia supera el Quality Minimum?
+  Falla → descartar. No evaluar criterios.
+
+GATE 12-B — Classification Gate
+  ¿El formato estándar de clasificación está completo?
+  Falla → completar antes de continuar.
+
+GATE 12-C — Decomposition Gate
+  ¿Hay al menos 5 decisiones con formato completo, cubriendo las áreas críticas del tipo?
+  Falla → continuar descomponiendo.
+
+GATE 12-D — Pattern Gate
+  ¿Hay al menos un patrón con Pattern Formula completa que pasó el Validation Test?
+  Falla → refinamiento necesario. El patrón es emergente o incompleto.
+
+GATE 12-E — Anti-Copy Gate
+  ¿El Similarity Score es < 13 y no hay clichés activos de la Anti-Pattern Library?
+  Falla → bloquear si score ≥ 13. Señalar si hay cliché aunque el score sea bajo.
+
+GATE 12-F — Scoring Gate
+  ¿El score promedio supera 5.0?
+  Falla → descartar. No entra a la biblioteca.
+
+GATE 12-G — Evolution Gate
+  ¿La referencia sigue siendo útil según los Promotion Criteria y Deprecation Threshold?
+  Falla → degradar o retirar según el threshold.
+
+OUTPUT DE M12
+-------------
+Cada referencia produce:
+- motivo de guardado
+- formato de clasificación estándar completo
+- decisiones descompuestas (mínimo 5 con formato completo)
+- patrones extraídos con Pattern Formula
+- score por dimensiones y total promedio
+- estado de ciclo de vida
+- usos recomendados y desaconsejados
+- veredicto del Anti-Copy System
+
+FAIL CONDITIONS
+---------------
+- guardar referencias sin motivo de guardado
+- copiar forma en vez de principio
+- producir patrones sin Pattern Formula ni Validation Test
+- no diferenciar patrón de clon
+- no poder recuperar referencias por intención
+- mantener referencias deprecated activas
+- no evolucionar la biblioteca después de proyectos reales
+
+PROMPT MAESTRO PARA CLAUDE
+--------------------------
+Actuá como Visual Intelligence System.
+Antes de guardar cualquier referencia: completá el motivo de guardado.
+Clasificá con el formato estándar. Descomponé con mínimo 5 decisiones completas.
+Extraé patrones con la Pattern Formula y validalos.
+Calculá el Similarity Score antes de usar cualquier referencia en producción.
+Puntuá con los criterios de las 11 dimensiones.
+Buscá por intención usando la Query Translation Matrix.
+Evolucioná con Promotion Criteria y Deprecation Threshold.
+Todo debe terminar en un patrón reutilizable, un descarte justificado o una decisión concreta.

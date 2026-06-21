@@ -1,0 +1,185 @@
+M8.6 — PRODUCTION REVIEW ENGINE (v2)
+=====================================
+
+OBJETIVO
+--------
+Revisar el build producido y verificar si conserva la dirección creativa aprobada.
+Este módulo evita que la implementación mate la idea.
+El veredicto final requiere revisión en múltiples browsers.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Concepto aprobado (M4)
+- Percepción objetivo (M4.5)
+- Visual Direction (M5)
+- Signature System (M5)
+- Mapa de Clichés de la categoría (M5.5)
+- Build final desplegado en staging
+- QA report (M8.5)
+
+OPCIONALES:
+- Mockups o maquetas originales (para comparación side-by-side)
+- Feedback del cliente
+- Versiones previas
+
+PROCESO CLAUDE
+--------------
+1. Completar la tabla de fidelidad (ver formato abajo).
+   Evaluar las 4 dimensiones y el drift genérico en simultáneo,
+   no como pasos separados.
+
+2. Verificar cross-browser.
+   Chrome, Safari/WebKit y Firefox son obligatorios.
+   Ver GATE DE CROSS-BROWSER abajo.
+
+3. Verificar drift genérico.
+   Comparar el build contra el Mapa de Clichés de M5.5
+   correspondiente a la categoría del proyecto.
+   ¿La implementación se parece a alguno de los clichés listados?
+
+4. Integrar el QA report de M8.5.
+   ¿Hay problemas críticos sin resolver?
+   Si sí: el veredicto no puede ser PASA.
+
+5. Emitir el veredicto final con destino si aplica.
+
+TABLA DE FIDELIDAD — FORMATO
+------------------------------
+Dimensión          | Estado              | Nota
+-------------------|---------------------|-----
+Concept Fidelity   | OK / DRIFT / PERDIDO |
+Perception Fidelity| OK / DRIFT / PERDIDO |
+Direction Fidelity | OK / DRIFT / PERDIDO |
+Signature Fidelity | OK / DRIFT / PERDIDO |
+Generic Drift      | AUSENTE / LEVE / CRÍTICO |
+
+Definiciones:
+OK: la dimensión está intacta en el build.
+DRIFT: la dimensión se desplazó parcialmente pero la intención se puede recuperar
+       con ajustes menores.
+PERDIDO: la dimensión no está presente en el build. Requiere corrección mayor.
+
+DEFINICIÓN DE GENÉRICO
+------------------------
+Para detectar drift genérico, comparar el build contra el Mapa de Clichés
+de M5.5 de la categoría del proyecto.
+
+Ejemplos:
+- SaaS con gradiente morado + mockup de dashboard en el hero →
+  CRÍTICO. Son exactamente los dos primeros clichés del mapa.
+- Clínica con hero de mujer en blanco + serif Canela + paleta rosa →
+  CRÍTICO. Clichés 1, 2 y 3 del mapa.
+- Portfolio con dark mode + cursor custom + palabra grande animada →
+  CRÍTICO. Los tres primeros clichés del mapa de estudio creativo.
+
+Si el build replica 2 o más clichés de la categoría: drift genérico CRÍTICO.
+Si replica 1: drift genérico LEVE.
+Si no replica ninguno: AUSENTE.
+
+VEREDICTO FINAL
+----------------
+PASA
+  Todos los campos de la tabla son OK o DRIFT leve.
+  No hay problemas críticos del QA report sin resolver.
+  Pasa el check cross-browser.
+  Drift genérico ausente o leve.
+
+PASA CON AJUSTES
+  1-2 campos en DRIFT. Los ajustes son menores (no requieren volver a un módulo).
+  Los problemas del QA están resueltos excepto algunos "importantes" documentados.
+  Pasa cross-browser.
+  Drift genérico leve.
+
+FALLA
+  Cualquier campo en PERDIDO.
+  Problemas críticos del QA sin resolver.
+  Falla cross-browser.
+  Drift genérico CRÍTICO.
+
+DESTINOS EN CASO DE FALLA [obligatorios]
+------------------------------------------
+Si la dimensión falla, volver al módulo de origen:
+
+Concept Fidelity PERDIDO → volver a M4 Concept Generation Engine.
+  El build no tiene concepto. El concepto original no sobrevivió la implementación.
+
+Perception Fidelity PERDIDO → volver a M4.5 Perception Engine.
+  La emoción objetivo se perdió. Revisar la tabla de traducción percepción → decisión.
+
+Direction Fidelity PERDIDO → volver a M5 Visual Direction System.
+  El sistema visual no está presente. Color, tipografía o composición se perdieron.
+
+Signature Fidelity PERDIDO → volver a M5, sección Signature System.
+  La firma visual no es reconocible. Ajustar la implementación de la firma.
+
+Generic Drift CRÍTICO → volver a M5.5 Visual Innovation Engine.
+  El build se convirtió en una plantilla de la categoría.
+  Necesita una desviación real en al menos una variable.
+
+DRIFT sin PERDIDO → no volver a un módulo anterior.
+  Ajustar directamente en el build. Documentar los cambios realizados.
+
+GATE DE CROSS-BROWSER [obligatorio antes del veredicto final]
+--------------------------------------------------------------
+Verificar el build en los tres browsers en este orden:
+1. Chrome (versión actual)
+2. Safari / WebKit (probar en Safari desktop o iOS Safari real si es posible)
+3. Firefox (versión actual)
+
+Check mínimo por browser:
+- Layout no roto
+- Tipografía renderiza correctamente
+- Animaciones funcionan o degradan correctamente
+- Formularios y CTAs operativos
+- No hay overflow no intencional
+
+Problemas comunes en Safari/WebKit a verificar específicamente:
+- CSS grid gap con fracciones (puede calcular diferente)
+- Animaciones con position: sticky
+- backdrop-filter: blur() (requiere -webkit- prefix)
+- Algunas propiedades de CSS variables en Safari antiguo
+- Video autoplay sin muted: false en iOS
+
+Si cualquier browser presenta problemas: FALLA.
+No emitir veredicto PASA hasta que cross-browser esté limpio.
+
+TESTS
+-----
+- ¿La tabla de fidelidad tiene los 5 campos completados?
+- ¿El drift genérico fue verificado contra M5.5?
+- ¿El QA report de M8.5 fue integrado al veredicto?
+- ¿Cross-browser fue verificado en Chrome, Safari y Firefox?
+- ¿Si el veredicto es FALLA, hay un destino específico con razón?
+- ¿Si el veredicto es PASA CON AJUSTES, los ajustes están documentados?
+
+OUTPUT
+------
+Tabla de fidelidad completa
+Resultado del check cross-browser (browser por browser)
+Resultado de drift genérico con referencia a M5.5
+Estado del QA report (críticos resueltos / pendientes)
+Veredicto final: PASA / PASA CON AJUSTES / FALLA
+Si FALLA: módulo de destino + razón de una línea por cada dimensión perdida
+Si PASA CON AJUSTES: lista de ajustes con descripción concreta
+
+FAIL CONDITIONS
+---------------
+- El build cambió la idea sin registro de por qué.
+- La percepción objetivo no está presente en ninguna sección.
+- La firma visual no se reconoce sin el logo.
+- El build replica 2 o más clichés de la categoría.
+- Hay problemas críticos del QA sin resolver.
+- El veredicto es PASA sin haber hecho cross-browser.
+- FALLA sin destino específico.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como revisor de producción con criterio creativo y técnico.
+Completá la tabla de fidelidad evaluando las 5 dimensiones.
+Verificá drift genérico comparando el build contra el Mapa de Clichés de M5.5.
+Integrá el QA report de M8.5 al veredicto.
+Verificá cross-browser en Chrome, Safari y Firefox antes de emitir cualquier veredicto.
+Si FALLA: indicá el módulo de destino y la razón en una línea.
+Terminá con un veredicto de PASA, PASA CON AJUSTES o FALLA.
+Sin cross-browser limpio no hay PASA.

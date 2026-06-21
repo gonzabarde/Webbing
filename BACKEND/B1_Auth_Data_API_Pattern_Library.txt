@@ -1,0 +1,549 @@
+B1 — AUTH, DATA & API PATTERN LIBRARY (v1)
+==========================================
+
+UBICACIÓN EN EL SISTEMA
+-----------------------
+Capa: NIVEL 4 — Ejecución (extensión backend).
+Activación: condicional, después de B0. Se activa cuando B0 cerró la arquitectura
+de un proyecto con backend.
+
+B1 es a la lógica de servidor lo que M9 es a la capa visual: una librería de patrones.
+M9 da patrones de layout, componentes y motion. B1 da patrones de auth, datos y API.
+
+B1 NO redecide lo que B0 cerró. B0 eligió Postgres+Prisma+Clerk+RBAC simple;
+B1 dice CÓMO se implementa eso bien. Si B1 descubre que una decisión de B0 era
+incorrecta, no la cambia en silencio: vuelve a B0, lo reporta, se re-aprueba.
+
+Relación con el resto:
+- Hereda el handoff de B0 (motor de DB, ORM, auth provider, modelo de autz, API).
+- Entrega patrones implementables a M8.2+ (construcción) y a B4 (estándares).
+- B2 (pagos) y B3 (integraciones) asumen los patrones de B1 como base.
+
+
+OBJETIVO
+--------
+Dar el catálogo de patrones correctos para las tres capas centrales de cualquier
+backend de proyecto:
+
+1. CAPA DE DATOS — diseño de schema, relaciones, migraciones, integridad.
+2. CAPA DE AUTH — sesiones, protección de rutas, control de acceso, onboarding.
+3. CAPA DE API — Server Actions, Route Handlers, validación, forma de errores,
+   concurrencia, y versionado cuando hay consumidores externos.
+
+Cada patrón responde: qué problema resuelve, cuándo usarlo, cómo se implementa bien,
+y cómo se rompe si se usa mal.
+
+PRINCIPIO CENTRAL
+-----------------
+Un patrón de backend correcto falla de forma segura.
+La capa visual falla feo (se ve mal). La capa de backend falla peligroso (datos
+filtrados, accesos indebidos, plata mal cobrada). Por eso cada patrón de B1 prioriza,
+en este orden: correctitud > seguridad > integridad de datos > ergonomía de desarrollo.
+
+Si un patrón es más cómodo pero menos seguro, no es un patrón válido de B1.
+
+
+INPUTS
+------
+OBLIGATORIOS:
+- Handoff completo de B0 (todas las decisiones cerradas).
+- Modelo de datos preliminar (entidades del proyecto).
+- Nivel de sensibilidad de datos (de B0).
+
+OPCIONALES:
+- Schema preexistente del cliente.
+- Restricciones de performance conocidas.
+
+Si falta el handoff de B0, no avanzar. B1 no arquitectura: implementa lo arquitecturado.
+
+
+=====================================================================
+SECCIÓN 1 — PATRONES DE CAPA DE DATOS
+=====================================================================
+
+PATRÓN D1 — DISEÑO DE SCHEMA RELACIONAL
+  Problema: traducir las entidades del proyecto a tablas correctas.
+  Cuándo: todo proyecto con DB relacional.
+  Cómo se hace bien:
+    - Una entidad = una tabla. Una responsabilidad por tabla.
+    - Toda tabla tiene id (preferir UUID o cuid para IDs no adivinables en datos
+      sensibles; serial/autoincrement solo si el orden o la simplicidad lo justifican
+      y no son IDs expuestos).
+    - Toda tabla tiene created_at y updated_at. Sin excepción.
+    - Nombres consistentes: definir singular o plural y mantenerlo (default del sistema:
+      tablas en plural snake_case, campos en snake_case; el ORM mapea a camelCase en TS).
+    - No columnas "por si acaso". Una columna que nadie lee es deuda.
+  Cómo se rompe:
+    - Tablas que mezclan dos responsabilidades (user con datos de billing adentro).
+    - IDs secuenciales expuestos en URLs de datos sensibles (enumerables → fuga).
+    - Falta de timestamps → imposible auditar o debuggear "cuándo pasó esto".
+  Caso ECOMMERCE — producto con variantes (el modelado que más se traba):
+    Un producto que viene en talles y/o colores NO es una fila: es un producto con N
+    variantes vendibles. Separar:
+      - PRODUCT: lo conceptual (nombre, descripción, marca, imágenes base).
+      - VARIANT (o SKU): la unidad vendible real (product_id, talle, color, precio si
+        varía por variante, y su PROPIO stock). El stock y el precio viven en la variante,
+        no en el producto.
+    El carrito y la orden referencian la VARIANTE (el SKU concreto), nunca el producto a
+    secas — si no, no sabés qué talle se vendió. El descuento de stock (B1-P7, atómico)
+    opera sobre la variante.
+    Combinaciones que no existen (un talle que no viene en cierto color) simplemente no
+    se crean como variante; no se modela "todas las combinaciones posibles".
+
+PATRÓN D2 — RELACIONES Y CLAVES FORÁNEAS
+  Problema: conectar entidades sin perder integridad.
+  Cuándo: siempre que dos entidades se relacionan.
+  Cómo se hace bien:
+    - Foreign keys reales con constraints en la DB, no solo "un campo que apunta".
+    - Definir el comportamiento ON DELETE explícitamente:
+        CASCADE (borrar hijo si se borra padre) — usar con cuidado.
+        RESTRICT / NO ACTION (impedir borrar padre con hijos) — default más seguro.
+        SET NULL (desvincular) — cuando la relación es opcional.
+    - Relaciones N:N → tabla intermedia explícita (join table) con sus propios timestamps.
+    - Indexar las foreign keys que se usan en filtros frecuentes.
+  Cómo se rompe:
+    - Relaciones "lógicas" sin constraint → datos huérfanos, integridad rota.
+    - CASCADE por default sin pensar → borrar un usuario borra silenciosamente su historia.
+
+PATRÓN D3 — MIGRACIONES
+  Problema: evolucionar el schema sin romper datos existentes.
+  Cuándo: todo cambio de schema después del primer deploy.
+  Cómo se hace bien:
+    - Toda migración es versionada y vive en el repo (Prisma Migrate / Drizzle Kit).
+    - Migraciones son forward-only en prod. Nunca editar una migración ya aplicada.
+    - Cambios destructivos (drop column, drop table) → revisión explícita y backup previo.
+    - Probar la migración en staging con datos realistas antes de prod.
+    - Una migración = un cambio conceptual. No mezclar 5 cambios no relacionados.
+  Cómo se rompe:
+    - Editar el schema directo en prod sin migración → drift entre entornos.
+    - Migración destructiva sin backup → pérdida de datos irreversible.
+    - Mezclar cambios → si uno falla, rollback confuso.
+  Conexión: las migraciones corridas en prod son ítem obligatorio del launch checklist
+  (M10.7 extendido / B4).
+
+PATRÓN D4 — SOFT DELETE vs HARD DELETE
+  Problema: ¿borrar de verdad o marcar como borrado?
+  Cuándo: cualquier entidad que un usuario pueda "eliminar".
+  Cómo se hace bien:
+    - Soft delete (campo deleted_at nullable) cuando: hay que poder recuperar, auditar,
+      o el borrado afecta integridad referencial (facturas, transacciones, contenido
+      con historial).
+    - Hard delete cuando: lo exige una normativa de privacidad (derecho al olvido),
+      o el dato es trivial y no aporta auditar.
+    - Si usás soft delete, TODOS los queries normales deben excluir deleted_at IS NOT NULL.
+      Olvidarse de ese filtro = mostrar datos borrados. Centralizar el filtro.
+  Cómo se rompe:
+    - Hard delete de algo referenciado → huérfanos o errores de FK.
+    - Soft delete sin filtrar consistentemente → "datos zombi" que reaparecen.
+
+PATRÓN D5 — DATOS FLEXIBLES (columnas JSON)
+  Problema: datos con forma variable que no justifican tabla propia.
+  Cuándo: metadata, settings, payloads de eventos, config por usuario.
+  Cómo se hace bien:
+    - Usar columna JSON/JSONB para datos genuinamente variables o de solo-lectura.
+    - Validar la forma del JSON en la capa de aplicación (Zod) antes de guardar.
+    - No meter en JSON datos que vas a filtrar o joinear frecuentemente → esos van en columnas.
+  Cómo se rompe:
+    - Usar JSON como excusa para no diseñar el schema → pierde integridad y queryabilidad.
+    - Filtrar por dentro de JSON en queries calientes → performance pobre.
+
+PATRÓN D6 — SEEDS Y DATOS INICIALES
+  Problema: poblar la DB con datos base (roles, planes, categorías) y de prueba.
+  Cómo se hace bien:
+    - Script de seed versionado en el repo.
+    - Separar seed de datos ESENCIALES (roles, planes — van a prod) de seed de
+      datos de PRUEBA (usuarios fake — solo dev).
+    - Seeds idempotentes: correrlos dos veces no duplica.
+  Cómo se rompe:
+    - Datos de prueba que se filtran a producción.
+    - Seed no idempotente → duplicados al re-correr.
+
+
+=====================================================================
+SECCIÓN 2 — PATRONES DE CAPA DE AUTH
+=====================================================================
+
+PATRÓN A1 — INTEGRACIÓN DEL PROVEEDOR DE AUTH
+  Problema: conectar el proveedor elegido en B0 sin construir auth a mano.
+  Cuándo: todo proyecto con auth.
+  Cómo se hace bien:
+    - Usar el SDK oficial del proveedor (Clerk, NextAuth/Auth.js, Supabase Auth).
+    - Configurar los métodos de login que B0 definió, ni más ni menos.
+    - Sincronizar el usuario del proveedor con tu tabla users si los datos viven en tu DB:
+      al primer login, crear/actualizar el registro local (patrón de "user sync").
+    - Guardar el ID del proveedor como referencia estable en tu tabla user.
+  Cómo se rompe:
+    - Construir hashing/tokens/reset a mano → vulnerabilidades. (Prohibido por B0.)
+    - No sincronizar → datos de usuario partidos entre proveedor y DB sin fuente clara.
+
+PATRÓN A2 — GESTIÓN DE SESIÓN
+  Problema: mantener al usuario autenticado entre requests de forma segura.
+  Cómo se hace bien:
+    - Usar el mecanismo de sesión del proveedor (cookie httpOnly + secure + sameSite).
+    - Nunca guardar tokens de sesión en localStorage (accesible por JS → vulnerable a XSS).
+    - Definir expiración razonable y refresh. La sesión eterna es un riesgo.
+  Cómo se rompe:
+    - Token en localStorage → robo de sesión vía XSS.
+    - Sesión sin expiración → una sesión robada vale para siempre.
+
+PATRÓN A3 — PROTECCIÓN DE RUTAS (middleware)
+  Problema: impedir que usuarios no autenticados accedan a rutas privadas.
+  Cómo se hace bien:
+    - Middleware que verifica sesión y redirige a login si falta (patrón estándar Next.js).
+    - Definir matcher explícito: qué rutas son públicas, cuáles privadas.
+    - Default seguro: privado salvo lista explícita de rutas públicas (allowlist),
+      no al revés. Olvidarse de proteger una ruta debe fallar hacia "bloqueado".
+  Cómo se rompe:
+    - Blocklist en vez de allowlist → cada ruta nueva queda pública por olvido.
+    - Confiar solo en ocultar el link en la UI → la ruta sigue accesible por URL directa.
+
+PATRÓN A4 — AUTORIZACIÓN EN CADA ACCIÓN (no solo en la ruta)
+  Problema: un usuario autenticado no debe poder hacer lo que su rol no permite,
+  ni tocar filas que no son suyas.
+  Cómo se hace bien:
+    - Chequear el ROL en cada acción/mutación sensible, no solo en el middleware de ruta.
+      El middleware dice "estás logueado"; la acción dice "podés hacer ESTO".
+    - Chequear PERTENENCIA de fila: que el recurso pertenezca al usuario o a su organización.
+      where { id, organizationId: session.orgId } — nunca solo where { id }.
+    - Si B0 eligió RLS, aplicarlo a nivel DB además del chequeo en código (defensa en capas).
+  Cómo se rompe (esto es el bug de backend más común y más grave):
+    - Chequear auth en la ruta pero no en la acción → usuario A edita el recurso de B
+      mandando el id de B directamente (IDOR / broken object level authorization).
+    - where { id } sin filtro de pertenencia → cualquiera con el id accede a la fila.
+  REGLA: toda query que lee o muta datos de usuario incluye el filtro de pertenencia.
+  No hay excepción. Este es el patrón que más datos filtra en la vida real.
+  DOS NIVELES DE PERTENENCIA (crítico en multi-tenant con roles):
+    En un SaaS multi-tenant, "pertenencia" puede tener DOS capas que se componen:
+      1. Pertenencia al TENANT: la fila es de la organización del usuario
+         (where { clinicId: session.clinicId }). Esto aísla una clínica de otra.
+      2. Pertenencia INTRA-TENANT: dentro de la misma organización, un rol puede ver
+         solo SUS filas, no todas las del tenant. Ejemplo: la dueña ve todos los turnos
+         de la clínica; cada profesional ve SOLO los suyos.
+    El filtro correcto COMPONE las dos capas según el rol:
+      where { clinicId: session.clinicId,
+              ...(rol === 'profesional' ? { professionalId: session.userId } : {}) }
+    Filtrar solo por tenant NO alcanza cuando el rol restringe dentro del tenant: si
+    olvidás la segunda capa, un profesional ve los turnos de TODOS sus colegas. Es un
+    IDOR intra-tenant — más sutil que el clásico, igual de grave.
+    Definir, por cada rol, qué ve a nivel tenant y qué ve a nivel propio. El que ve todo
+    el tenant (admin/dueña) no lleva la segunda capa; el que ve solo lo suyo, sí.
+
+PATRÓN A5 — ONBOARDING POST-SIGNUP
+  Problema: qué pasa entre "se registró" y "puede usar el producto".
+  Cómo se hace bien:
+    - Definir el estado inicial del usuario nuevo (rol default, organización, plan free).
+    - Si es multi-tenant: crear u asociar la organización en el primer login.
+    - Manejar el caso "usuario existe en el proveedor pero no en tu DB" (sync de A1).
+  Cómo se rompe:
+    - Usuario logueado sin organización en un sistema multi-tenant → estado roto, crashes.
+  USUARIO EN MÚLTIPLES TENANTS (decidir en el diseño, no después):
+    ¿Un mismo usuario puede pertenecer a más de una organización? (ej: una profesional
+    que trabaja en dos clínicas distintas, una recepcionista part-time en varias).
+      - Si la respuesta puede ser SÍ: la relación usuario↔tenant es N:N (tabla intermedia
+        membership: user_id, tenant_id, rol). El ROL vive en la membership, no en el user
+        — el mismo usuario puede ser dueña en una clínica y profesional en otra.
+        La sesión necesita un "tenant activo": en qué organización está operando ahora.
+        Todo filtro de pertenencia (A4) usa el tenant activo, no "el tenant del usuario".
+      - Si es siempre 1:1 (un usuario, una organización): más simple, rol en el user/membership
+        único. Pero confirmar que de verdad nunca será N:N: migrar de 1:1 a N:N después
+        obliga a reescribir el modelo de pertenencia y todos los filtros.
+    Esta es una decisión cuasi-irreversible del schema — marcarla en B0 y cerrarla acá.
+  Cómo se rompe (el caso N:N):
+    - Poner el rol en el user (no en la membership) → el usuario tiene el mismo rol en
+      todos los tenants, que es falso.
+    - Filtrar por "tenant del usuario" en vez de "tenant activo" → ve datos del tenant
+      equivocado al pertenecer a varios.
+
+PATRÓN A6 — RESET, VERIFICACIÓN Y RECUPERACIÓN
+  Problema: email no verificado, password olvidada, cuenta bloqueada.
+  Cómo se hace bien:
+    - Delegar al proveedor (Clerk/NextAuth/Supabase lo resuelven). No construir a mano.
+    - Verificación de email antes de dar acceso a features sensibles si el proyecto lo pide.
+  Cómo se rompe:
+    - Flujos de reset caseros → vector de toma de cuenta.
+
+PATRÓN A7 — ACCESO DE USUARIO NO AUTENTICADO (guest)
+  Problema: hay recursos que un usuario SIN cuenta debe poder ver — típicamente su propia
+  orden en un ecommerce con guest checkout. El filtro de pertenencia de A4 NO sirve acá:
+  no hay un user dueño de la fila contra el que filtrar. Resolverlo mal es la causa de
+  fugas tipo "cambio el número de orden en la URL y veo la compra de otro".
+  Cuándo: guest checkout, links de seguimiento, cualquier acceso sin sesión a un recurso propio.
+  Cómo se hace bien:
+    - Token de acceso al recurso: generar un token aleatorio, largo y no adivinable
+      (no un id secuencial) y guardarlo en la fila (ej: order.access_token). El acceso
+      se concede a quien presenta el token, no a una sesión.
+    - El link que recibe el invitado (email de confirmación) lleva ese token. Validar el
+      token en el backend antes de devolver el recurso.
+    - Nunca exponer el recurso por su id secuencial ni permitir enumerarlo. El id interno
+      y el token de acceso son cosas distintas.
+    - Opcional, como segundo factor liviano: pedir también el email asociado a la orden.
+    - Si el invitado luego crea cuenta con el mismo email, vincular sus órdenes previas
+      (patrón de reclamación / claim).
+  Cómo se rompe:
+    - Mostrar la orden por /orders/123 sin token → enumerable, fuga directa.
+    - Usar un token corto o predecible → adivinable por fuerza bruta.
+    - Reusar el mismo token para todo → si se filtra uno, se filtran todos.
+  REGLA: para datos de un usuario CON cuenta, filtro de pertenencia (A4). Para datos de un
+  usuario SIN cuenta, token de acceso no adivinable (A7). Nunca dejar un recurso propio
+  accesible solo por id. Esta decisión viene marcada desde B0 (quién se autentica).
+
+
+=====================================================================
+SECCIÓN 3 — PATRONES DE CAPA DE API
+=====================================================================
+
+PATRÓN P1 — SERVER ACTIONS PARA MUTACIONES
+  Problema: crear/editar/borrar desde la UI sin escribir endpoints HTTP.
+  Cuándo: mutaciones internas disparadas por el frontend del propio proyecto (default B0).
+  Cómo se hace bien:
+    - Una Server Action por operación conceptual.
+    - SIEMPRE empezar la acción con: (1) verificar sesión, (2) validar input (P3),
+      (3) verificar autorización y pertenencia (A4). Recién después tocar la DB.
+    - Devolver un resultado tipado y consistente (P4 forma de errores).
+    - revalidar el cache de la ruta afectada después de mutar.
+  Cómo se rompe:
+    - Server Action sin chequeo de auth adentro → se puede invocar igual sin la UI.
+      Una Server Action es un endpoint, aunque no lo parezca. Tratarla como tal.
+    - Confiar en que "el botón solo aparece para admins" → la acción se llama sin el botón.
+
+PATRÓN P2 — ROUTE HANDLERS PARA HTTP EXPLÍCITO
+  Problema: webhooks entrantes, endpoints para clientes no-React, descargas, APIs.
+  Cuándo: lo que B0 marcó como Route Handler (webhooks de Stripe, etc.).
+  Cómo se hace bien:
+    - Verbo HTTP correcto y status codes correctos (200/201/400/401/403/404/422/500).
+    - Webhooks: verificar la firma del proveedor ANTES de procesar el payload (ver B2/B3).
+    - Validar el body siempre (P3). Nunca confiar en el input externo.
+  Cómo se rompe:
+    - Webhook sin verificar firma → cualquiera POSTea eventos falsos a tu endpoint.
+    - Status codes mentirosos (200 con un error adentro) → el cliente no sabe que falló.
+
+PATRÓN P3 — VALIDACIÓN DE INPUT (Zod)
+  Problema: nunca confiar en lo que manda el cliente.
+  Cuándo: TODA entrada de datos — Server Actions, Route Handlers, params, query.
+  Cómo se hace bien:
+    - Definir un schema de validación (Zod, default del sistema) por cada input.
+    - Validar en el límite: apenas entra el dato, antes de cualquier lógica.
+    - El tipo de TypeScript NO valida en runtime. TS confía; Zod verifica. Necesitás ambos.
+    - Derivar el tipo TS del schema de Zod (z.infer) → una sola fuente de verdad.
+  Cómo se rompe:
+    - Confiar en el tipo de TS como si validara en runtime → llega basura a la DB.
+    - Validar en el frontend pero no en el backend → el frontend se saltea trivialmente.
+  REGLA: validación de frontend es UX. Validación de backend es seguridad. Hacé las dos,
+  pero la del backend no es opcional jamás.
+
+PATRÓN P4 — FORMA CONSISTENTE DE RESPUESTAS Y ERRORES
+  Problema: que el frontend sepa siempre cómo interpretar éxito y error.
+  Cómo se hace bien:
+    - Definir UNA forma de respuesta para el proyecto y mantenerla
+      (ej: { ok: true, data } / { ok: false, error: { code, message } }).
+    - Errores con código estable (machine-readable) y mensaje (human-readable).
+    - No filtrar detalles internos en el error (stack traces, queries) al cliente.
+      Loguear el detalle del lado servidor; devolver un mensaje seguro al cliente.
+  Cómo se rompe:
+    - Cada endpoint con su propia forma → el frontend adivina, los bugs se multiplican.
+    - Devolver el error interno crudo → filtra estructura de DB y rutas de código.
+
+PATRÓN P5 — MANEJO DE ERRORES Y FALLAS
+  Problema: las cosas fallan (DB caída, timeout, dato inesperado). Fallar bien.
+  Cómo se hace bien:
+    - Try/catch en los límites (acciones, handlers). No dejar que una excepción
+      cruda llegue al usuario.
+    - Distinguir error esperado (validación falló, no autorizado) de error inesperado
+      (DB caída). El primero es respuesta normal; el segundo se loguea y alerta.
+    - Loguear con contexto suficiente para debuggear (qué acción, qué usuario, qué input
+      — sin loguear datos sensibles como passwords o tarjetas).
+  Cómo se rompe:
+    - Tragar el error en silencio (catch vacío) → falla invisible, datos inconsistentes.
+    - Loguear datos sensibles → el log se vuelve una fuga.
+
+PATRÓN P6 — RATE LIMITING (cuando aplica)
+  Problema: proteger endpoints de abuso (fuerza bruta en login, spam de formularios).
+  Cuándo: endpoints públicos sensibles (auth, formularios de contacto, APIs públicas).
+  Cómo se hace bien:
+    - Aplicar rate limiting en los endpoints de auth y en cualquier API pública.
+    - Usar una solución probada (el proveedor de auth suele traerlo; o Upstash/edge).
+  Cómo se rompe:
+    - Login sin rate limit → fuerza bruta de passwords trivial.
+  Nota: no es necesario en el día 1 para endpoints internos; sí para públicos sensibles.
+
+PATRÓN P7 — CONCURRENCIA Y TRANSACCIONES CRÍTICAS
+  Problema: dos requests válidos al mismo tiempo pueden romper el estado. El caso clásico:
+  dos compras toman la última unidad de stock; dos transferencias dejan un saldo negativo.
+  Cada request es correcto por separado; juntos corrompen el dato.
+  Cuándo: todo dato donde el resultado depende del valor previo y no puede duplicarse ni
+  intercalarse mal — stock, saldos, cupos, créditos, contadores, cuotas.
+  Cómo se hace bien:
+    - Operación atómica: la lectura-decisión-escritura ocurre como una sola unidad
+      indivisible. En la práctica:
+        * Transacción de DB que envuelve el chequeo y la escritura (el ORM lo soporta:
+          prisma.$transaction).
+        * O un update condicional en un solo statement que falla si la condición cambió
+          (ej: descontar stock WHERE stock >= cantidad; si afectó 0 filas, no había stock).
+        * O un lock de fila cuando el flujo lo requiere (SELECT ... FOR UPDATE).
+    - Idempotencia para operaciones que pueden reintentarse (un request que se reenvía
+      por timeout no debe ejecutar dos veces): clave de idempotencia que deduplica. Es el
+      mismo principio que B2-PAY-4 para webhooks de pago, aplicado a cualquier mutación
+      crítica reintetable.
+    - Identificar EN EL DISEÑO qué operaciones son críticas de concurrencia. No se descubre
+      en producción con un saldo roto.
+  Cómo se rompe:
+    - Leer el stock, decidir en código, y después escribir, sin atomicidad → entre la
+      lectura y la escritura otro request hizo lo mismo. Overselling, saldos negativos.
+    - Asumir que "es rápido, no va a pasar" → bajo carga pasa siempre, y es plata real.
+    - Reintento de un request sin idempotencia → doble cobro, doble descuento.
+  Conexión: B2 lo aplica a stock (ECOM-3) y pagos (PAY-4); B5 a la performance de esas
+  operaciones bajo carga. P7 es el patrón base del que esos derivan.
+
+
+=====================================================================
+SECCIÓN 4 — VERSIONADO Y DEPRECACIÓN DE API
+=====================================================================
+Una API no es una foto: evoluciona. Esta sección define cómo cambia un contrato sin
+romper a quien lo consume, y cómo muere un endpoint sin dejar versiones fantasma.
+Activación: solo aplica si el backend expone una API consumida por algo que NO controlás
+en el mismo deploy — una app mobile, una integración de un tercero, otro frontend, un
+cliente público. Si el único consumidor es el propio frontend Next.js (caso default de
+B0, todo en el mismo deploy), esta sección NO aplica: cambiás las dos puntas a la vez y
+no hay contrato que versionar. No agregar versionado donde no hay consumidor externo:
+es complejidad sin problema.
+
+PATRÓN P8 — CAMBIO DE CONTRATO SIN ROMPER CONSUMIDORES
+  Problema: cambiás un endpoint y rompés una app mobile vieja que sigue llamando al viejo.
+  Cómo se hace bien:
+    - Distinguir cambio COMPATIBLE de cambio ROMPEDOR (breaking):
+        Compatible (no rompe): agregar un campo opcional, agregar un endpoint nuevo.
+          Se puede hacer sin versionar.
+        Rompedor: quitar/renombrar un campo, cambiar un tipo, cambiar el significado de
+          una respuesta, volver obligatorio un campo antes opcional. Requiere versionado.
+    - Para cambios rompedores: versionar la API (ej: /api/v1, /api/v2) y MANTENER la
+      versión vieja viva mientras haya consumidores en ella.
+    - Cambios aditivos antes que rompedores: si podés resolver agregando en vez de
+      cambiando, evitás el versionado entero.
+  Cómo se rompe:
+    - Cambiar el contrato in-place → el consumidor viejo recibe algo que no entiende y rompe.
+    - Versionar por cualquier cambio → proliferación de versiones que nadie limpia.
+
+PATRÓN P9 — DEPRECACIÓN Y RETIRO
+  Problema: una versión vieja no puede vivir para siempre, pero tampoco se apaga de golpe.
+  Cómo se hace bien (ciclo de vida de un endpoint/versión):
+    1. ACTIVO: en uso normal.
+    2. DEPRECADO: sigue funcionando, pero marcado como "va a desaparecer". Avisar a los
+       consumidores conocidos (si son terceros) y documentar la fecha/condición de retiro.
+    3. RETIRADO: se apaga, solo después de confirmar que ningún consumidor activo lo usa.
+    - Para saber si alguien todavía lo usa: medir el tráfico del endpoint viejo (B3-OBS).
+      No se apaga "por las dudas": se apaga cuando los datos muestran cero uso o cuando
+      venció el plazo avisado.
+    - Operador solo / consumidores conocidos: si vos controlás todos los consumidores
+      (ej: tu propia app mobile), el ciclo es simple — actualizás el consumidor, confirmás
+      que no llama al viejo, retirás. El proceso pesado de aviso aplica cuando hay terceros
+      que no controlás.
+  Cómo se rompe:
+    - Apagar una versión sin confirmar que nadie la usa → rompés un consumidor en silencio.
+    - No retirar nunca nada → el backend se llena de endpoints muertos que igual hay que
+      mantener y asegurar (cada uno es superficie de ataque, B0-threat model).
+  Conexión: el inventario de endpoints deprecados/activos es ítem auditable de B4. Un
+  cambio de schema que rompe contrato hereda también la clasificación de riesgo de B3-LIFE-4.
+
+
+OUTPUT DEL MÓDULO
+-----------------
+Al completar, B1 entrega el SET DE PATRONES SELECCIONADOS para este proyecto:
+
+CAPA DE DATOS:
+  Convención de IDs: [UUID/cuid/serial + por qué]
+  Convención de nombres: [definida]
+  Estrategia de borrado por entidad: [soft/hard, listar las que usan soft]
+  Uso de JSON: [dónde, validado con qué]
+  Estrategia de seeds: [esenciales vs prueba]
+  Patrones de relación con cuidado especial: [CASCADE/RESTRICT donde importa]
+
+CAPA DE AUTH:
+  Patrón de sync de usuario: [definido]
+  Mecanismo de sesión: [cookie config]
+  Protección de rutas: [allowlist de rutas públicas]
+  Patrón de autorización por acción: [confirmado A4 en todas las mutaciones]
+  Filtro de pertenencia de fila: [confirmado en todas las queries de datos de usuario]
+  Pertenencia intra-tenant (si aplica): [por rol: quién ve todo el tenant, quién solo lo suyo — A4]
+  Usuario en múltiples tenants: [1:1 / N:N con membership y tenant activo — A5]
+  Acceso de invitado (si aplica): [token de recurso no adivinable — A7]
+  Onboarding post-signup: [estado inicial definido]
+
+CAPA DE API:
+  Mutaciones: [Server Actions con el preámbulo auth+validación+autz]
+  Endpoints HTTP: [Route Handlers, listar cuáles y para qué]
+  Librería de validación: [Zod por default]
+  Forma de respuesta/error estándar: [definida para el proyecto]
+  Estrategia de logging de errores: [definida, sin datos sensibles]
+  Rate limiting: [dónde aplica]
+  Concurrencia: [operaciones críticas identificadas + mecanismo atómico por cada una]
+  Versionado de API: [no aplica (solo frontend propio) / versión + política de deprecación]
+
+PATRONES DESCARTADOS Y POR QUÉ: [listar]
+RIESGOS RESIDUALES: [listar]
+
+
+GATE DE APROBACIÓN [antes de construir / antes de B2-B3]
+--------------------------------------------------------
+Verificar:
+- ¿Toda mutación tiene el preámbulo auth + validación + autorización?
+- ¿Toda query de datos de usuario tiene filtro de pertenencia (A4)?
+- ¿Toda entrada se valida en backend con Zod (P3), no solo en frontend?
+- ¿Los webhooks (si hay) verifican firma (P2)?
+- ¿La forma de errores no filtra detalles internos (P4)?
+- ¿Las migraciones están versionadas y son forward-only (D3)?
+- ¿Las operaciones críticas de concurrencia (stock/saldos/cupos) son atómicas (P7)?
+
+Falla cualquiera → no construir. Estos son los que filtran datos o corrompen estado en producción.
+
+
+TESTS
+-----
+- ¿Un patrón elegido contradice una decisión de B0? (Si sí, volver a B0.)
+- ¿Cada query de datos sensibles filtra por pertenencia?
+- ¿La validación de backend existe independientemente de la de frontend?
+- ¿Los errores fallan de forma segura (sin filtrar internals, sin tragar silencioso)?
+- ¿El borrado (soft/hard) es consistente con el filtrado de queries?
+- ¿Las Server Actions se tratan como endpoints (con auth adentro)?
+
+
+FAIL CONDITIONS
+---------------
+- Query de datos de usuario sin filtro de pertenencia (IDOR).
+- En multi-tenant con roles restringidos: filtrar solo por tenant y no por la segunda
+  capa intra-tenant → un usuario ve filas de sus colegas (IDOR intra-tenant).
+- Rol guardado en el user cuando el usuario puede estar en múltiples tenants (va en membership).
+- Recurso propio de un invitado accesible por id sin token no adivinable (A7).
+- Server Action o Route Handler sin chequeo de auth interno.
+- Validación solo en frontend.
+- Tipo de TypeScript usado como si validara en runtime.
+- Webhook procesado sin verificar firma.
+- Error interno crudo devuelto al cliente.
+- Catch vacío que traga errores.
+- Token de sesión en localStorage.
+- Soft delete sin filtrado consistente.
+- Migración editada después de aplicada en prod.
+- Datos sensibles en logs.
+- Operación crítica (stock/saldo/cupo) sin atomicidad → overselling o estado corrupto.
+- Cambio de contrato de API in-place que rompe un consumidor externo.
+- Versión de API apagada sin confirmar que nadie la usa.
+
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como ingeniero de backend senior.
+Tomá el handoff de B0 y seleccioná los patrones de B1 que correspondan al proyecto.
+No redecidas la arquitectura de B0; implementala bien.
+Para CADA mutación y CADA lectura de datos de usuario, garantizá el preámbulo:
+sesión verificada, input validado con Zod en el backend, autorización y pertenencia
+de fila chequeadas. Este preámbulo no es opcional: es lo que separa un backend seguro
+de una fuga de datos.
+Tratá toda Server Action como un endpoint público: si no tiene auth adentro, está abierta.
+Validá en el backend siempre, aunque el frontend ya valide.
+Verificá firma en todo webhook.
+Para stock, saldos, cupos y cualquier dato donde el resultado dependa del valor previo,
+hacé la operación atómica (transacción o update condicional): dos requests simultáneos
+no pueden romper el estado.
+Si hay una API que consume un tercero o una app que no deployás junto, versioná los
+cambios rompedores y no apagues una versión vieja sin confirmar que nadie la usa. Si el
+único consumidor es tu propio frontend, no versiones nada.
+Antes de cerrar, completá el output y pasá el gate de los chequeos críticos.

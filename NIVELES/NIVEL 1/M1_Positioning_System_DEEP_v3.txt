@@ -1,0 +1,363 @@
+MÓDULO 1 — POSITIONING SYSTEM (v3 DEEP)
+========================================
+
+OBJETIVO
+--------
+Definir la posición mental que la marca quiere ocupar en la cabeza del cliente.
+Este módulo responde la pregunta más importante del negocio y del diseño:
+
+"¿Por qué esta marca y no otra?"
+
+El posicionamiento no es un slogan.
+No es una frase marketinera.
+No es un estilo visual.
+
+Es la decisión estratégica que ordena todo lo demás.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Nombre de la marca o proyecto
+- Categoría de mercado
+- Público objetivo
+- Problema principal del usuario
+- Promesa principal del negocio
+- Competidores directos
+- Competidores aspiracionales o indirectos
+- Objetivo del sitio o pieza digital
+- Contexto comercial
+
+OPCIONALES:
+- Historia de la marca
+- Web actual
+- Respuestas del cliente en intake
+- Datos de ventas
+- Testimonios
+- Reviews
+- Referencias de marcas admiradas
+- Marcas rechazadas por el cliente
+
+PROCESO CLAUDE
+--------------
+1. Identificar la categoría.
+   No asumirla.
+   Claude debe decir en qué categoría compite la marca.
+
+2. Listar competidores reales.
+   No inventar competidores teóricos.
+   Si faltan, pedirlos.
+
+3. Detectar lo que la categoría ya promete.
+   Resumir:
+   - qué repite la categoría
+   - qué colores usa
+   - qué tono usa
+   - qué estructura narrativa usa
+   - qué lenguaje usa
+   - qué experiencia de usuario espera el público
+
+4. Identificar el espacio mental ocupado.
+   Responder:
+   - ¿Qué promesa posee la categoría?
+   - ¿Qué percepción domina?
+   - ¿Qué miedo o deseo intenta resolver?
+
+5. Detectar el espacio vacío.
+   Buscar lo que nadie está diciendo o lo que no está suficientemente defendido.
+   No inventar una diferencia.
+   Buscar una diferencia real y defendible.
+
+6. Definir la categoría mental.
+   No siempre la categoría real y la categoría mental son iguales.
+   Ejemplo:
+   - real: software → mental: control
+   - real: clínica → mental: confianza
+   - real: lujo → mental: silencio
+
+7. Formular el posicionamiento.
+   Debe responder:
+   - quién somos
+   - para quién somos
+   - por qué existimos
+   - por qué elegimos ocupar este lugar
+
+8. Comparar contra competidores.
+   Si el posicionamiento podría decirlo cualquier competidor, no sirve.
+   Hay que refinarlo.
+
+9. Traducir el posicionamiento a consecuencias.
+   Explicar qué implica en:
+   - tono
+   - percepción
+   - copy
+   - dirección visual
+   - tipos de secciones
+   - nivel de formalidad
+   - nivel de tensión
+   - nivel de evidencia
+
+10. Documentar una frase de posición.
+    Tiene que ser corta, clara y útil.
+
+POSITION STATEMENT FORMULA [v3]
+--------------------------------
+Una posición bien definida puede expresarse con esta fórmula:
+
+"Para [quién específico], [marca] es la [categoría mental] que [promesa
+única y defendible] porque [evidencia o razón de creer]."
+
+Esta fórmula obliga a:
+- nombrar al cliente específico (no "todo el mundo")
+- nombrar la categoría mental (no la categoría real del mercado)
+- formular una promesa que nadie más puede decir exactamente igual
+- anclar la promesa en evidencia real o creíble
+
+EJEMPLOS OPERATIVOS
+
+SaaS de productividad:
+"Para equipos de operaciones que perdieron el control del caos,
+ProductivaTool es la plataforma de gestión que simplifica flujos
+sin eliminar la flexibilidad, porque fue construida por ex-operadores,
+no por ingenieros de producto."
+
+Clínica estética:
+"Para personas que buscan resultados sin drama,
+Clínica Nox es el espacio de tratamientos que combina evidencia
+con calma, porque cada protocolo está respaldado por dermatología
+certificada y explicado antes de ejecutarse."
+
+Estudio creativo:
+"Para marcas que necesitan diseño con criterio estratégico,
+Forma Studio es el estudio que traduce posicionamiento en identidad visual,
+porque cada proyecto empieza con investigación, no con referencias de Pinterest."
+
+ADVERTENCIAS
+- Si la promesa puede pertenecer a otro actor de la categoría,
+  no está suficientemente diferenciada.
+- Si la evidencia no existe o no es verificable, la fórmula es aspiracional,
+  no estratégica.
+- Si no se puede completar la fórmula, el posicionamiento no está listo.
+
+COMPETITOR TEST [v3]
+---------------------
+Antes de validar el posicionamiento, someterlo a este test.
+
+INSTRUCCIÓN
+Reemplazá el nombre de la marca con el nombre de un competidor directo.
+Si el posicionamiento sigue funcionando casi igual, no está diferenciado.
+
+APLICACIÓN
+Para cada competidor relevante de la categoría:
+1. Insertar el nombre del competidor en el position statement.
+2. Preguntar: ¿suena creíble para ese competidor?
+3. Si la respuesta es sí: volver al paso 5 del proceso y encontrar
+   una diferencia más específica.
+4. Si la respuesta es no en todos los casos: el posicionamiento es propio.
+
+EJEMPLO
+Statement débil: "La clínica que ofrece tratamientos confiables y seguros."
+Test: "Competidor A es la clínica que ofrece tratamientos confiables y seguros."
+→ Funciona igual. No está diferenciado.
+
+Statement revisado: "La clínica que explica cada protocolo antes de ejecutarlo,
+para pacientes que necesitan entender antes de confiar."
+Test: difícil de apropiarse para un competidor que no tiene ese proceso.
+→ Diferenciación válida.
+
+3-YEAR TEST [v3]
+-----------------
+Antes de cerrar el posicionamiento, proyectarlo 3 años hacia adelante.
+
+INSTRUCCIÓN
+Preguntar si el posicionamiento seguirá siendo relevante o si está
+atado a una tendencia que va a envejecer.
+
+PREGUNTAS DEL TEST
+- ¿Esta posición depende de algo que podría cambiar por moda o tecnología?
+- ¿El espacio mental que ocupa seguirá siendo valorado en 3 años?
+- ¿La diferencia que sostiene la posición puede ser copiada en ese plazo?
+- ¿El cliente ideal seguirá siendo el mismo tipo de cliente?
+
+SEÑALES DE POSICIÓN FRÁGIL
+- Está basado en una tendencia visual o de mercado coyuntural.
+- Usa términos como "innovador", "disruptivo" o "digital-first" sin
+  una diferencia real detrás.
+- Depende de ser el primero en hacer algo que otros pueden copiar rápido.
+- Está atado a un formato o canal que puede saturarse.
+
+SEÑALES DE POSICIÓN SÓLIDA
+- Responde a un deseo o miedo humano que no cambia con tendencias.
+- La diferencia es estructural al negocio, no cosmética.
+- El espacio mental es estable: confianza, control, claridad, pertenencia.
+- Se fortalece con el tiempo en lugar de debilitarse.
+
+ANTI-POSITIONING [v3]
+----------------------
+Definir la posición correcta también requiere definir qué posiciones
+adyacentes no se van a ocupar.
+
+Por qué importa:
+Algunas posiciones adyacentes parecen compatibles pero degradan
+la posición buscada.
+Intentar ocupar dos posiciones adyacentes simultáneamente produce confusión
+en la mente del cliente.
+
+EJEMPLOS DE POSICIONES QUE SE EXCLUYEN MUTUAMENTE
+
+Premium ↔ Accesible económicamente
+Si la posición es premium, la comunicación de precios bajos o descuentos
+permanentes la contradice.
+No se puede posicionar como lujo y poner "oferta especial" en el hero.
+
+Experto técnico ↔ Cercano coloquial en exceso
+Si la posición es autoridad experta, un tono excesivamente informal la debilita.
+No se puede ser "el referente técnico del sector" y comunicar como si fuera
+un amigo de redes sociales.
+
+Minimalista / claro ↔ Completo / abundante
+Si la posición es claridad y simpleza, una web densa con muchas secciones
+la contradice.
+No se puede comunicar "simplicidad" con una experiencia visualmente compleja.
+
+Especialista en nicho ↔ Generalista
+Si la posición es especialización en un segmento, ampliar la oferta
+a múltiples audiencias diluye la posición.
+No se puede ser "el estudio que entiende fintech" y simultáneamente
+hacer sitios de turismo, gastronomía y salud.
+
+PROCESO PARA DEFINIR ANTI-POSITIONING
+1. Listar las posiciones adyacentes más tentadoras.
+2. Para cada una, preguntar: ¿ocuparla refuerza o debilita la posición principal?
+3. Si debilita: documentarla como posición prohibida.
+4. Incluir las posiciones prohibidas en el output del módulo.
+
+FRAMEWORKS INTERNOS
+-------------------
+A. Framework de Categoría
+   Qué se espera ver en este rubro.
+
+B. Framework de Oportunidad
+   Qué espacio mental está libre.
+
+C. Framework de Diferenciación
+   Qué ocupa la marca que los demás no ocupan bien.
+
+D. Framework de Defensa
+   ¿Se puede explicar esta posición frente a un cliente exigente?
+
+E. Framework de Coherencia
+   La posición debe poder sostenerse en diseño, copy y experiencia.
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿La categoría está saturada?
+   - Sí: buscar un ángulo más preciso y menos obvio.
+   - No: se puede usar una posición más amplia.
+
+2. ¿La marca compite por confianza o por deseo?
+   - Confianza: priorizar claridad, evidencia, orden.
+   - Deseo: priorizar identidad, tensión, atmósfera.
+
+3. ¿La audiencia compra rápido o después de comparar?
+   - Rápido: la posición debe ser muy clara y simple.
+   - Después de comparar: la posición debe ser más defendible y específica.
+
+4. ¿La marca quiere parecer familiar o distinta?
+   - Familiar: conservar códigos de categoría.
+   - Distinta: romper algunos códigos de manera intencional.
+
+5. ¿La posición puede mantenerse 3 años?
+   - Sí: sigue.
+   - No: está demasiado basada en tendencia, no en posición estructural.
+
+6. ¿El posicionamiento pasa el Competitor Test?
+   - Sí: sigue.
+   - No: refinar diferencia y volver al paso 5.
+
+7. ¿Está definido el anti-positioning?
+   - Sí: avanzar al M2.
+   - No: completar antes de pasar.
+
+CASOS REALES
+------------
+Caso 1 — SaaS
+- Categoría mental: control
+- Position statement: "Para equipos de operaciones que perdieron el control,
+  es la plataforma que simplifica flujos porque fue construida por operadores."
+- Competitor Test: no aplica a Notion ni a Asana (no tienen esa historia).
+- 3-Year Test: el deseo de control en operaciones no desaparece con tendencias.
+- Anti-positioning: no competir por precio ni por promesa de facilidad extrema.
+- Efecto: claridad, orden, precisión
+
+Caso 2 — Clínica estética
+- Categoría mental: confianza
+- Position statement: "Para personas que buscan resultados sin drama,
+  tratamientos explicados antes de ejecutados."
+- Competitor Test: no aplica a clínicas sin protocolo de comunicación.
+- 3-Year Test: la necesidad de confianza en salud es estable.
+- Anti-positioning: no ocupar el espacio del "lujo aspiracional" ni el de "barato y rápido".
+- Efecto: cercanía, evidencia, cuidado
+
+Caso 3 — Marca de lujo
+- Categoría mental: silencio
+- Position statement: "Para quienes ya no necesitan ser convencidos,
+  un producto que no necesita explicarse."
+- Competitor Test: difícil de decir para marcas que sí argumentan.
+- 3-Year Test: la percepción de silencio como lujo es estructural.
+- Anti-positioning: no usar descuentos, no usar lenguaje de urgencia, no argumentar precio.
+- Efecto: refinamiento, control, pausa
+
+TESTS
+-----
+- ¿La posición es clara?
+- ¿Es distinta de la competencia?
+- ¿Se puede defender?
+- ¿Se puede convertir en diseño?
+- ¿Se sostiene a largo plazo?
+- ¿Describe un lugar mental real?
+- ¿No depende de palabras vacías?
+- ¿Pasó el Competitor Test?
+- ¿Pasó el 3-Year Test?
+- ¿Está definido el anti-positioning?
+- ¿El position statement completa la fórmula sin forzarla?
+
+OUTPUT
+------
+1. Categoría real.
+2. Categoría mental.
+3. Competidores clave.
+4. Patrones dominantes del sector.
+5. Espacio mental ocupado.
+6. Espacio mental libre.
+7. Posicionamiento final.
+8. Position Statement completo con la fórmula.
+9. Resultado del Competitor Test.
+10. Resultado del 3-Year Test.
+11. Anti-positioning: posiciones prohibidas con justificación.
+12. 3 implicancias estratégicas.
+13. 3 riesgos de caer en genérico.
+
+FAIL CONDITIONS
+---------------
+- El posicionamiento es un slogan.
+- La posición podría pertenecer a cualquier competidor.
+- No hay espacio mental claro.
+- No hay diferencia defendible.
+- La posición no puede sostenerse en diseño ni contenido.
+- El position statement no puede completarse con la fórmula.
+- No se definió el anti-positioning.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como estratega senior de posicionamiento.
+Leé el brief, identificá la categoría, listá competidores y analizá qué promete la categoría.
+Encontrá el espacio mental ocupado y el espacio libre.
+Construí un posicionamiento claro, defendible y específico.
+Formulá el Position Statement completo: Para [quién], [marca] es la [categoría mental]
+que [promesa] porque [evidencia].
+Sometelo al Competitor Test: si cualquier competidor puede decir lo mismo, no está listo.
+Sometelo al 3-Year Test: si depende de una tendencia, no está listo.
+Definí el Anti-positioning: qué posiciones adyacentes no se van a ocupar y por qué.
+Después traducilo a implicancias concretas para tono, percepción, copy y dirección visual.
+No diseñes todavía.
+Primero entregá el posicionamiento, el razonamiento, los tests y los riesgos de caer en genérico.

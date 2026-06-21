@@ -1,0 +1,121 @@
+M12.1 — REFERENCE COLLECTION ENGINE (v3)
+========================================
+
+OBJETIVO
+--------
+Decidir qué referencias merecen entrar al sistema y con qué nivel de prioridad.
+No todo link vale.
+La colección debe estar filtrada por relevancia, calidad y utilidad futura.
+
+CAMPO OBLIGATORIO DE ENTRADA
+-----------------------------
+Antes de evaluar cualquier criterio, completar este campo:
+
+MOTIVO DE GUARDADO (obligatorio):
+  "Esta referencia entra porque [razón específica en 1-2 líneas]."
+
+Si no se puede completar este campo, la referencia no califica.
+No evaluar criterios sin motivo de guardado definido.
+Ejemplos válidos:
+  "Enseña cómo construir jerarquía con tipografía sin color de acento."
+  "Ejemplo raro de luxury con motion ceremonial que no usa serif clásica."
+  "Mejor ejemplo de SaaS con percepción de control sin mockup de dashboard."
+Ejemplos inválidos:
+  "Se ve muy bien."
+  "Me gustó el diseño."
+  "Referencia para inspiración."
+
+REFERENCE QUALITY MINIMUM
+--------------------------
+Una referencia debe superar todos estos requisitos mínimos para ser evaluada.
+Si falla en cualquiera: descartar sin revisar los criterios de entrada.
+
+1. Producción: el sitio o pieza tiene un nivel de producción claramente profesional.
+   (No: sitios con errores evidentes, imágenes pixeladas o copy mal escrito.)
+
+2. Intencionalidad: las decisiones visuales parecen deliberadas, no accidentales.
+   (No: sitios donde "funciona" pero es difícil identificar una decisión consciente.)
+
+3. Identificabilidad: se puede nombrar al menos una decisión visual específica que lo distingue.
+   (No: sitios que están "bien" pero son genéricos.)
+
+4. Aprendibilidad: hay algo que no se ve frecuentemente y que cambia cómo podría diseñarse.
+   (No: referencias que confirman lo que ya se sabe pero no agregan nada nuevo.)
+
+CRITERIOS DE ENTRADA
+--------------------
+Una referencia entra si cumple al menos 2 de estos 6:
+
+1. Enseña una decisión que no está ya en la biblioteca.
+2. Mejora claridad o percepción de manera demostrable.
+3. Aporta un patrón reutilizable en más de una categoría.
+4. Representa de manera excepcional una categoría específica.
+5. Resuelve un problema de diseño que aparece frecuentemente.
+6. Tiene una firma visual reconocible y replicable en principio.
+
+Regla: los criterios son aditivos. Cumplir 2 es suficiente pero no garantiza entrada si el Quality Minimum falla.
+
+CRITERIOS DE DESCARTE
+---------------------
+Descartar si cumple cualquiera de estos:
+- es genérica (cualquier estudio podría haberla producido)
+- es similar a una referencia ya guardada (Competitor Test: si encaja igual, sobra)
+- no tiene nada aprendible que no esté ya en la biblioteca
+- el motivo de guardado dice solo "inspiración" o "me gustó"
+- la calidad no supera el Reference Quality Minimum
+- ya fue marcada como deprecated en M12.9
+
+COLLECTION GATE — CUANTIFICADO
+--------------------------------
+Responder las 4 preguntas del gate.
+Si la respuesta es NO en 2 o más: no guardar.
+
+Pregunta 1: ¿Esto enseña algo que no está en la biblioteca?
+Pregunta 2: ¿Esto cambia al menos una decisión futura?
+Pregunta 3: ¿La calidad supera el Reference Quality Minimum?
+Pregunta 4: ¿Se puede clasificar y recuperar por intención?
+
+Resultado:
+  0-1 NO: aceptar (condicionado a que el motivo de guardado sea válido)
+  2-3 NO: descartar
+  4 NO: descartar automáticamente
+
+NIVELES DE PRIORIDAD
+--------------------
+Principal: cumple 4-6 criterios de entrada + todas las preguntas del gate en positivo.
+Secundaria: cumple 2-3 criterios de entrada + pasa el gate.
+Archivada: no pasa el gate pero tiene algún valor específico que conviene documentar.
+Descartada: no pasa el Quality Minimum o falla 2+ preguntas del gate.
+
+PROCESO CLAUDE
+--------------
+1. Completar el campo MOTIVO DE GUARDADO.
+2. Verificar el Reference Quality Minimum (los 4 requisitos).
+3. Evaluar los 6 criterios de entrada.
+4. Ejecutar el Collection Gate.
+5. Asignar nivel de prioridad.
+6. Registrar por qué entró (o por qué no).
+
+OUTPUT
+------
+- motivo de guardado
+- resultado del Quality Minimum: pasa / falla (con cuál criterio específico)
+- criterios de entrada cumplidos (cuáles de los 6)
+- resultado del Collection Gate (cuántos NO)
+- nivel de prioridad: principal / secundaria / archivada / descartada
+- razón del veredicto en una línea
+
+FAIL CONDITIONS
+---------------
+- acumular sin motivo de guardado
+- guardar demasiado por miedo a perder algo
+- aceptar referencias genéricas que no superan el Quality Minimum
+- no cuantificar el gate
+
+PROMPT PARA CLAUDE
+------------------
+Antes de evaluar cualquier criterio: completá el MOTIVO DE GUARDADO.
+Si no podés completarlo: descartá.
+Aplicá el Quality Minimum. Si falla alguno: descartá sin revisar más.
+Evaluá los criterios y el gate con el sistema cuantificado.
+Guardá solo referencias que cambien una decisión futura.

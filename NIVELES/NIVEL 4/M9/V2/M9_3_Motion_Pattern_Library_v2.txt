@@ -1,0 +1,244 @@
+M9.3 — MOTION PATTERN LIBRARY (v2)
+====================================
+
+OBJETIVO
+--------
+Definir patrones de motion reutilizables con taxonomía, presupuesto y límites por categoría.
+El motion no decora. Comunica.
+Este módulo trabaja sobre la base de M8.3 y agrega patrones técnicos listos para aplicar.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Motion descriptor heredado de M8.3 (no redefinir aquí)
+- Percepción objetivo (M4.5)
+- Visual Direction + Signature System (M5)
+- Stack elegido (M8.1)
+- Nivel de riesgo
+- Restricciones de performance
+
+PROCESO CLAUDE
+--------------
+1. Confirmar el descriptor de motion de M8.3. No redefinir.
+2. Clasificar los patrones necesarios por taxonomía (Entrance / Interaction / Narrative).
+3. Aplicar el Motion Budget para este tipo de proyecto.
+4. Verificar la tabla Motion × Percepción.
+5. Verificar los límites de motion por categoría de negocio.
+6. Seleccionar máximo 1 patrón narrativo + los patrones de entrada y de interacción necesarios.
+7. Definir el fallback para prefers-reduced-motion (obligatorio; heredar de M8.3 si ya existe).
+8. Definir exclusiones.
+
+TAXONOMÍA DE PATRONES
+----------------------
+Los patrones se agrupan por intención, no por efecto visual.
+
+GRUPO 1 — ENTRANCE PATTERNS
+El contenido entra al viewport con intención de jerarquía.
+Cuándo: casi siempre. Son el baseline del motion.
+
+  Text Reveal
+    El texto entra con intención de jerarquía.
+    Útil para: hero, titulares, citas destacadas.
+    Percepción activa: foco, precisión, autoridad.
+    Timing: 400-600ms. Easing: ease-out.
+    FAILURE MODE: duración > 800ms en body text → el usuario percibe el sitio
+      como lento e incompetente. Solo usar en titulares, nunca en body.
+    Lifecycle: STANDARD.
+
+  Staggered Entry
+    Elementos entran con retraso secuencial.
+    Útil para: features, listas, cards, grids.
+    Percepción activa: orden, progresión, sistema.
+    Timing: 300-500ms por elemento, stagger de 60-100ms.
+    FAILURE MODE: stagger > 150ms en listas de 5+ ítems → el usuario espera
+      tanto que pierde el hilo de lo que está leyendo.
+    Lifecycle: STANDARD.
+
+  Image Mask Reveal
+    La imagen aparece con una máscara o recorte animado.
+    Útil para: hero premium, editorial, portfolio, secciones de firma.
+    Percepción activa: refinamiento, control, intención.
+    Timing: 600-900ms. Easing: ease-in-out.
+    FAILURE MODE: si se repite en más de 3 imágenes distintas de la misma página,
+      el efecto pierde su impacto y se convierte en ruido.
+    Lifecycle: VALIDATED.
+
+GRUPO 2 — INTERACTION PATTERNS
+Respuestas a acciones del usuario. Son los más funcionales.
+Cuándo: siempre que haya interactividad. Son obligatorios para experiencia coherente.
+
+  Hover Confirmation
+    Respuesta sutil para confirmar interactividad.
+    Útil para: navegación, cards, botones, links.
+    Percepción activa: claridad, feedback, sistema.
+    Timing: 150-200ms. Easing: ease-out.
+    FAILURE MODE: hover demasiado dramático (escala, sombra, color extremo) →
+      el usuario se distrae del contenido cada vez que pasa el mouse.
+    Lifecycle: STANDARD.
+
+  State Transition
+    Animación entre estados de UI.
+    Útil para: forms, tabs, acordeones, toggles, modales.
+    Percepción activa: sistema, coherencia.
+    Timing: 200-300ms. Easing: ease-in-out.
+    FAILURE MODE: state transition de > 400ms en un acordeón de FAQ →
+      el usuario ve la interfaz como lenta y frustrante.
+    Lifecycle: STANDARD.
+
+  Magnetic Interaction
+    El CTA o elemento responde a la proximidad del cursor.
+    Útil para: sitios premium de muy alto detalle con audiencia sofisticada.
+    Percepción activa: sofisticación, detalle, feedback.
+    Timing: continuo, sin duración fija.
+    FAILURE MODE: si el efecto magnético no tiene un radio y fuerza bien calibrados,
+      el CTA se mueve erráticamente y genera sensación de bug, no de detalle premium.
+    Lifecycle: EMERGENT. Solo usar en proyectos de muy alto riesgo aceptado.
+
+GRUPO 3 — NARRATIVE PATTERNS
+El motion cuenta una historia o construye una experiencia secuencial.
+Cuándo: solo si el motion es parte del valor diferencial de la marca.
+Máximo 1 por proyecto.
+
+  Scroll Story
+    Narrativa visual secuencial por scroll.
+    Útil para: cuando el motion y la experiencia son parte del valor de marca.
+    Percepción activa: inmersión, memoria.
+    Timing: variable, basado en la velocidad del scroll.
+    FAILURE MODE: contenido sin narrativa real con progresión → el Scroll Story
+      se vuelve un efecto visual sin historia. El usuario llega al final sin saber
+      qué diferencia a la marca. Costo de performance siempre alto.
+    Lifecycle: VALIDATED. Solo con GSAP + ScrollTrigger. Fallback mobile obligatorio.
+
+  Sticky Narrative
+    Un elemento permanece mientras el contenido cambia.
+    Útil para: explicaciones complejas, comparaciones, demos de producto.
+    Percepción activa: control, foco.
+    Timing: basado en el scroll.
+    FAILURE MODE: sticky en mobile que bloquea demasiado viewport →
+      el usuario no puede ver el contenido que cambia y abandona.
+    Lifecycle: VALIDATED.
+
+  Page Transition
+    Cambio de página con continuidad visual.
+    Útil para: cuando el motion es parte de la identidad de marca.
+    Percepción activa: fluidez, sistema.
+    Timing: 400-700ms.
+    FAILURE MODE: page transition de > 600ms → el usuario percibe la navegación
+      como más lenta que un sitio estático. La transición resta, no suma.
+    Lifecycle: VALIDATED. Solo cuando el motion es firma de marca.
+
+  Parallax Layering
+    Capas con velocidades diferentes.
+    Útil para: profundidad visual con moderación, momentos específicos.
+    Percepción activa: profundidad.
+    Timing: basado en el scroll.
+    FAILURE MODE: parallax con más de 3 capas en el hero →
+      el efecto es nauseabundo en mobile y destruye el LCP.
+    Lifecycle: LEGACY en su versión obvia (hero de 3 capas con parallax rápido).
+      Usar solo versión sutil: 2 capas con velocidad mínima.
+
+MOTION BUDGET
+--------------
+Regla de cuánto motion puede sostener un proyecto antes de volverse ruido.
+
+MÍNIMO (clínica, institucional, servicios de confianza):
+  Grupos permitidos: Interaction (todos) + máximo 1 Entrance Pattern.
+  Grupos prohibidos: Narrative.
+  Regla: si algo se mueve, es para confirmar una acción, nunca para impresionar.
+
+ESTÁNDAR (marketing site, SaaS, ecommerce):
+  Grupos permitidos: todos los Entrance + todos los Interaction.
+  Narrative: solo si está justificado por el concepto. Evaluar.
+  Regla: el motion guía, no llama la atención sobre sí mismo.
+
+RICO (portfolio creativo, lujo con concepto fuerte, estudio de diseño):
+  Grupos permitidos: todos.
+  Narrative: 1 patrón narrativo máximo en todo el proyecto.
+  Regla: el motion es parte de la firma. Cada decisión de motion es defendible
+  con el concepto aprobado.
+
+TABLA MOTION × PERCEPCIÓN
+---------------------------
+Por cada percepción objetivo de M4.5, qué grupos y patrones aplican.
+
+Percepción    | Grupos recomendados          | Patrones específicos         | Evitar
+--------------|------------------------------|------------------------------|-------
+Calma         | Entrance (suave), Interaction| Text Reveal lento, State     | Stagger rápido, Parallax
+Control       | Entrance, Interaction        | Staggered Entry, State Trans.| Magnetic, Scroll Story
+Confianza     | Interaction (baseline)       | Hover, State Transition      | Narrative, efectos dramáticos
+Deseo         | Entrance, Narrative (1)      | Image Mask, Text Reveal      | State transition obvia
+Precisión     | Interaction                  | State Transition exacta      | Entrance dramático
+Cercanía      | Entrance suave, Interaction  | Staggered Entry, Hover       | Magnetic, Page Transition
+Sofisticación | Entrance, 1 Narrative        | Image Mask, Page Transition  | Stagger obvio, Parallax
+
+LÍMITES POR CATEGORÍA
+----------------------
+Clínica / Salud / Servicios de confianza:
+  Solo Interaction + máximo 1 Entrance.
+  Prohibido: Scroll Story, Parallax, Magnetic, Page Transition.
+  Razón: el motion excesivo destruye la percepción de seriedad y confianza.
+
+SaaS / Producto digital:
+  Entrance + Interaction. Stagger sí. Text Reveal sí.
+  Narrative: solo si hay una sección de demo o storytelling del producto.
+  Prohibido: Magnetic, Parallax, Page Transition como firma.
+  Razón: el motion debe aclarar, no entretener.
+
+Ecommerce:
+  Solo Interaction + State Transition para carrito/filtros.
+  Entrance: sutil en hero.
+  Prohibido: Scroll Story, Magnetic, Page Transition.
+  Razón: el motion que entretiene retarda la conversión.
+
+Luxury / High-end:
+  Entrance + 1 Narrative máximo.
+  Image Mask Reveal sí. Text Reveal sí. Page Transition si es firma.
+  Parallax: solo versión sutil (2 capas, velocidad mínima).
+  Razón: el motion ceremonial refuerza la percepción de exclusividad.
+
+Portfolio creativo / Agencia:
+  Todo permitido dentro del Motion Budget RICO.
+  Narrative: 1 máximo.
+  Razón: el motion es parte del producto que se vende.
+
+CUÁNDO EVITAR MOTION
+--------------------
+- Cuando la performance es crítica y el budget no alcanza.
+- Cuando la audiencia tiene poca tolerancia a la complejidad visual.
+- Cuando el patrón de motion no está conectado al concepto aprobado.
+- Cuando el proyecto está en un tipo de categoría donde el motion resta credibilidad.
+
+FALLBACK PREFERS-REDUCED-MOTION
+---------------------------------
+Heredar el fallback definido en M8.3.
+Si M8.3 no lo definió: documentarlo aquí de manera obligatoria.
+(Ver M8.3 para implementación técnica de CSS, GSAP y Framer Motion.)
+
+TESTS
+-----
+- ¿El descriptor de motion viene de M8.3 y no fue redefinido aquí?
+- ¿Los patrones elegidos pertenecen a los grupos correctos según el Motion Budget?
+- ¿Se respeta el límite de 1 patrón narrativo máximo?
+- ¿La tabla Motion × Percepción fue consultada?
+- ¿Los límites por categoría fueron verificados?
+- ¿El fallback prefers-reduced-motion está documentado?
+
+OUTPUT
+------
+- Taxonomía de patrones elegidos por grupo
+- Motion Budget aplicado
+- Tabla Motion × Percepción consultada
+- Límites de categoría verificados
+- Exclusiones con razón
+- Fallback prefers-reduced-motion
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como director de motion con criterio técnico y perceptivo.
+Confirmá el descriptor de motion de M8.3. No lo redefinas.
+Clasificá los patrones que necesita el proyecto en sus grupos: Entrance / Interaction / Narrative.
+Verificá el Motion Budget para el tipo de proyecto.
+Consultá la tabla Motion × Percepción para confirmar que los patrones elegidos
+no contradicen la percepción objetivo.
+Verificá los límites por categoría.
+Máximo 1 patrón narrativo. Si no es necesario, no lo uses.

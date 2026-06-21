@@ -1,0 +1,140 @@
+M12.4 — PATTERN EXTRACTION ENGINE (v3)
+=======================================
+
+OBJETIVO
+--------
+Extraer principios reutilizables de las decisiones identificadas.
+El objetivo no es quedarse en observaciones visuales.
+El objetivo es producir patrones que puedan aplicarse en otros proyectos.
+
+INPUTS
+------
+- decisiones descompuestas de M12.3
+- clasificación de la referencia
+- categoría
+- nivel de innovación
+
+DIFERENCIA ENTRE OBSERVACIÓN Y PATRÓN
+--------------------------------------
+Observación: describe lo que ve.
+Patrón: explica por qué funciona y cuándo se puede replicar.
+
+Observación: "hay mucho blanco"
+Patrón: "baja densidad + copy breve + foco único → percepción de control y premium silencioso.
+  Funciona en: luxury, consulting premium, portfolio de autor.
+  No funciona en: ecommerce, healthcare, proyectos donde la abundancia es el valor."
+
+Observación: "el motion es lento"
+Patrón: "timing > 600ms + easing expo-out + motion selectivo (solo hero) →
+  sensación ceremonial.
+  Funciona en: luxury, alta moda, portfolio con firma visual fuerte.
+  No funciona en: SaaS, ecommerce, cualquier proyecto donde la velocidad comunica eficiencia."
+
+PATTERN FORMULA ESTÁNDAR
+--------------------------
+Todo patrón debe formularse con esta estructura:
+
+"cuando [CONTEXTO]
++ [VARIABLE VISUAL A]
++ [VARIABLE VISUAL B]
+→ [EFECTO PERCEPTIVO]"
+
+Y debe incluir:
+  Funciona en: [categorías donde aplica]
+  No funciona en: [categorías donde falla]
+  Umbral: [condición mínima para que el patrón funcione]
+  Anti-pattern: [error frecuente al aplicar este patrón]
+
+Ejemplo completo:
+  Cuando el proyecto busca percepción de autoridad editorial
+  + tipografía serif con tracking ajustado en headlines
+  + espacio negativo como recurso dominante (márgenes > 20% del viewport)
+  → percepción de criterio, exclusividad y autoría.
+
+  Funciona en: luxury, consulting premium, portfolio de autor, marca personal de alto perfil.
+  No funciona en: SaaS, healthcare, ecommerce, cualquier proyecto que necesite abundancia o accesibilidad.
+  Umbral: el copy debe ser editado y de alta calidad. El patrón amplifica el copy; no lo reemplaza.
+  Anti-pattern: usar este patrón con copy genérico o con imágenes de stock — la combinación amplifica el vacío.
+
+PROCESO DE EXTRACCIÓN
+---------------------
+1. Tomar una decisión descompuesta de M12.3.
+2. Preguntar: ¿esta decisión produce un efecto por sí sola o en combinación?
+   Si sola: extraer el principio de esa variable.
+   Si en combinación: identificar qué variables se necesitan juntas.
+3. Buscar si ese mismo patrón aparece en otras referencias de la biblioteca.
+   Si aparece en 2+ referencias: el patrón es validado.
+   Si aparece en 1: el patrón es emergente.
+4. Formular el patrón con la Pattern Formula.
+5. Definir contexto, límites y anti-pattern.
+6. Ejecutar el Pattern Validation Test.
+
+PATTERN VALIDATION TEST
+------------------------
+Un patrón es válido si supera estas 3 preguntas:
+
+Pregunta 1 — REPLICABILIDAD:
+  ¿Puede aplicarse en un proyecto diferente al de la referencia original
+  y producir el mismo efecto?
+  Si no: es específico de esa referencia, no un patrón.
+
+Pregunta 2 — CAUSALIDAD:
+  ¿El efecto se produce POR la combinación de variables identificada,
+  o podría producirse sin ellas?
+  Si el efecto ocurre sin esas variables: la extracción es incorrecta.
+
+Pregunta 3 — FALSABILIDAD:
+  ¿Se puede identificar un contexto donde el patrón NO funciona?
+  Si no se puede identificar ningún límite: el patrón es demasiado genérico para ser útil.
+
+Resultado: Si falla cualquier pregunta, el patrón requiere refinamiento.
+
+UMBRAL DE VALIDACIÓN
+---------------------
+Emergent: el patrón aparece en 1 referencia. Prometedor, no probado.
+Validated: el patrón aparece en 2+ referencias distintas. Puede usarse con criterio.
+Standard: el patrón apareció en 5+ referencias y proyectos reales. Confiable.
+
+No usar un patrón Emergent como base principal de una decisión de diseño.
+Siempre declarar el estado del patrón cuando se lo aplica.
+
+GATES
+-----
+GATE 12.4-A — ¿El patrón usa la Pattern Formula completa?
+  Falla → reformular antes de guardar.
+
+GATE 12.4-B — ¿El patrón tiene contexto de uso Y límites?
+  Falla → agregar dónde funciona y dónde no.
+
+GATE 12.4-C — ¿Pasó el Pattern Validation Test (3 preguntas)?
+  Falla → refinamiento necesario.
+
+GATE 12.4-D — ¿El estado del patrón está declarado (emergent/validated/standard)?
+  Falla → asignar estado antes de guardar.
+
+OUTPUT
+------
+Para cada patrón extraído:
+- nombre del patrón
+- Pattern Formula completa
+- decisión original que lo generó
+- referencias donde aparece (para determinar estado)
+- estado: emergent / validated / standard
+- anti-pattern asociado
+- límites de uso
+
+FAIL CONDITIONS
+---------------
+- quedarse en observaciones sin Pattern Formula
+- crear patrones sin límites de uso
+- no pasar el Validation Test
+- no declarar el estado del patrón
+
+PROMPT PARA CLAUDE
+------------------
+Para cada decisión descompuesta: formular el patrón con la Pattern Formula estándar.
+"cuando [contexto] + [variable A] + [variable B] → [efecto]"
+Definir dónde funciona, dónde no, el umbral y el anti-pattern.
+Ejecutar el Validation Test.
+Declarar el estado (emergent/validated/standard).
+Si no puede formularse con esa estructura: todavía no es un patrón.

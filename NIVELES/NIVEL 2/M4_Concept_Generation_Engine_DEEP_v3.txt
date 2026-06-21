@@ -1,0 +1,328 @@
+MÓDULO 4 — CONCEPT GENERATION ENGINE (v3 DEEP)
+===============================================
+
+OBJETIVO
+--------
+Convertir un brief, un posicionamiento y un contexto competitivo en un concepto
+creativo fuerte, memorable y defendible.
+El concepto debe servir como núcleo de decisión para todo lo que sigue:
+dirección visual, narrativa, UX, motion y contenido.
+
+Este módulo no busca "una idea bonita".
+Busca una idea con poder de dirección.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Brief del cliente
+- Categoría de mercado
+- Objetivo principal del sitio/proyecto
+- Público objetivo
+- Posicionamiento deseado o situación actual
+- Competidores directos o comparables
+- Restricciones del proyecto
+
+OPCIONALES:
+- Referencias que le gustan al cliente
+- Referencias que odia el cliente
+- Brandbook o identidad previa
+- Datos de ventas, testimonios o métricas
+- Web actual o material existente
+
+PROCESO CLAUDE
+--------------
+1. Leer el brief sin diseñar.
+   No proponer colores, tipografías ni layouts todavía.
+
+2. Resumir el negocio en una línea.
+   Responder: qué vende, a quién y qué transformación promete.
+
+3. Analizar la categoría.
+   Detectar:
+   - patrones visuales repetidos
+   - promesas repetidas
+   - tono dominante
+   - clichés de la categoría
+   - recursos que todos usan
+
+4. Encontrar la tensión principal.
+   Formularla como contraste:
+   caos → claridad / fricción → flujo / ansiedad → confianza /
+   complejidad → simplicidad / frialdad → cercanía / exceso → control
+
+5. Definir la transformación.
+   No describir el producto.
+   Describir el cambio que vive el usuario.
+
+6. Generar 20 metáforas candidatas usando el método de 6 vectores.
+   Ver sección de método abajo.
+
+7. Agrupar metáforas por familias.
+   Ver familias desarrolladas abajo.
+
+8. Filtrar por criterio.
+   Eliminar metáforas que sean demasiado obvias, clichés de categoría,
+   difíciles de visualizar, genéricas o imposibles de defender.
+
+9. Reducir a 3 conceptos finalistas.
+   Cada uno con: nombre, tensión, transformación, metáfora, ventaja, riesgo.
+
+10. Traducir cada finalista a implicancias visuales.
+    Debe afectar: tipografía, composición, motion, imágenes, color, ritmo.
+
+11. Someter los finalistas a los 3 tests de concepto.
+    Ver sección abajo.
+
+12. Puntuar con el Concept Strength Score.
+    Ver sistema abajo.
+
+13. Recomendar 1 concepto principal y 1 alternativa.
+
+MÉTODO DE GENERACIÓN DE METÁFORAS — 6 VECTORES [v3]
+-----------------------------------------------------
+No pedir 20 metáforas sin técnica produce opciones homogéneas.
+Usar estos vectores para generar opciones con diversidad real.
+
+VECTOR 1 — TENSIONES
+Partir de la tensión central del brief.
+Convertir cada polo en una imagen física.
+Ejemplo: si la tensión es "complejidad → simplicidad", una imagen del polo
+"complejidad" puede ser un ovillo; una del polo "simplicidad", un hilo tendido.
+La metáfora puede ser el acto de desenredar.
+
+VECTOR 2 — MUNDOS
+Elegir un mundo conceptual ajeno a la categoría.
+Pregunta: si esta solución existiera en [arquitectura / medicina / náutica /
+cocina / naturaleza / música / astronomía], ¿cómo se llamaría?
+Ejemplo: una herramienta de gestión de equipos descrita desde la arquitectura
+puede ser "andamiaje" o "plano maestro".
+
+VECTOR 3 — TRANSFORMACIONES
+Describir el estado antes y el estado después.
+Encontrar un proceso físico o natural con esa misma lógica de transformación.
+Ejemplo: si la marca convierte el caos en orden, procesos similares son:
+la partitura musical (el ruido se vuelve sinfonía con estructura),
+la fermentación (lo inestable se vuelve estable con tiempo y proceso),
+la edición fotográfica (lo borroso se vuelve nítido).
+
+VECTOR 4 — VERBOS
+Listar todos los verbos que describen lo que hace la solución.
+Seleccionar el más específico.
+Construir la metáfora alrededor de ese verbo.
+Ejemplo: si el verbo más específico es "revelar", las metáforas pueden venir
+del revelado fotográfico, la arqueología, la óptica, la radiografía.
+
+VECTOR 5 — OBJETOS
+Listar objetos físicos que comparten la propiedad clave de la solución.
+La propiedad debe ser la central, no decorativa.
+Ejemplo: si la propiedad clave es "precisión + impacto desproporcionado a su tamaño",
+objetos posibles: bisturí, llave Allen, aguja de acupuntura, código de un dígito.
+
+VECTOR 6 — SISTEMAS
+Encontrar sistemas naturales o artificiales que funcionan con la misma lógica.
+Pregunta: ¿en qué sistema del mundo real existe esta misma lógica de funcionamiento?
+Ejemplo: si la lógica es "muchas partes pequeñas que producen un todo coherente",
+los sistemas son: ecosistema, partitura, código fuente, tejido, red neuronal.
+
+FAMILIAS DE METÁFORAS — DESARROLLADAS [v3]
+--------------------------------------------
+Después de generar candidatos, agruparlos por familia.
+Cada familia tiene un efecto perceptivo diferente.
+
+FAMILIA — MOVIMIENTO Y FLUJO
+Metáforas: corriente, marea, inercia, deslizamiento, trayectoria, cauce.
+Efecto perceptivo: progreso natural, avance sin fricción.
+Cuándo usar: marcas que resuelven fricción o facilitan procesos continuos.
+Riesgo: genérico en SaaS. Necesita una variante muy específica.
+
+FAMILIA — PRECISIÓN Y HERRAMIENTA
+Metáforas: bisturí, brújula, calibre, ecuación, punto focal, meridiano.
+Efecto perceptivo: exactitud, control, competencia técnica.
+Cuándo usar: marcas técnicas, servicios de alta especialización.
+Riesgo: puede sentirse frío si no se humaniza en diseño y copy.
+
+FAMILIA — CALMA Y PAUSA
+Metáforas: ojo del huracán, lago sin viento, antes del amanecer, equilibrio.
+Efecto perceptivo: serenidad, control interno, confianza.
+Cuándo usar: bienestar, salud, servicios de alta confianza.
+Riesgo: sobreusado en wellness. Necesita imagen específica, no genérica.
+
+FAMILIA — PROTECCIÓN Y ESTRUCTURA
+Metáforas: andamiaje, ancla, arquitectura, raíz, cimiento, envolvente.
+Efecto perceptivo: estabilidad, seguridad, solidez.
+Cuándo usar: fintech, legales, servicios donde la confianza es primaria.
+Riesgo: puede comunicar inmovilismo si no se combina con dinamismo.
+
+FAMILIA — RITUAL Y PROCESO
+Metáforas: destilación, fermentación, decantación, curación, maduración.
+Efecto perceptivo: tiempo, cuidado, selección, resultado merecido.
+Cuándo usar: marcas premium que comunican el proceso como valor diferencial.
+Riesgo: puede parecer lenta si el cliente necesita percepción de velocidad.
+
+FAMILIA — EDITORIAL Y LUZ
+Metáforas: encuadre, primer plano, revelado, iluminación, edición, enfoque.
+Efecto perceptivo: perspectiva propia, punto de vista, autoría.
+Cuándo usar: estudios creativos, consultoras de comunicación, marcas con voz.
+Riesgo: abstracto. Necesita traducción visual muy concreta.
+
+FAMILIA — ARQUITECTURA Y ORDEN
+Metáforas: planta, módulo, trama, columna vertebral, axonometría, lógica subyacente.
+Efecto perceptivo: sistema, estructura, orden que no se ve pero que se siente.
+Cuándo usar: servicios B2B, sistemas de gestión, metodologías.
+Riesgo: puede producir frialdad si no hay elementos humanos que lo equilibren.
+
+FAMILIA — NATURALEZA Y TRANSFORMACIÓN
+Metáforas: catálisis, germinación, metamorfosis, sedimento, marea.
+Efecto perceptivo: transformación natural, crecimiento inevitable, proceso.
+Cuándo usar: marcas de cambio, consultoría estratégica, proyectos de largo plazo.
+Riesgo: puede ser abstracto para servicios con resultado inmediato esperado.
+
+TESTS DE CONCEPTO [v3]
+-----------------------
+Someter cada finalista a los 3 tests antes de recomendar.
+
+TEST DE IMAGEN
+Pregunta: ¿puede dibujarse este concepto en una imagen sin usar texto?
+Si no puede dibujarse, no es suficientemente concreto.
+Una metáfora que no genera imagen mental no puede traducirse a diseño.
+Malo: "claridad que transforma" → no es una imagen.
+Bueno: "el filtro que separa el ruido" → imagen posible: luz pasando por un lente.
+Resultado esperado: sí o no. Si no: volver a generación.
+
+TEST DE PROPIEDAD
+Pregunta: ¿podría cualquier otro actor de la categoría usar exactamente este concepto?
+Si sí, el concepto no es propio.
+Instrucción: insertar el nombre de 3 competidores y probar si el concepto
+funciona de manera igual para ellos.
+Si funciona igual para todos, no diferencia a nadie.
+Un concepto propio requiere que algo sea exclusivo para esta marca:
+puede ser la metáfora, la tensión, la transformación o la combinación.
+Resultado esperado: el concepto falla o suena forzado para los competidores.
+
+TEST DE CRECIMIENTO
+Pregunta: ¿puede este concepto generar al menos 10 ejecuciones distintas
+que pertenezcan al mismo mundo?
+Si solo puede sostenerse en el hero, es demasiado estrecho.
+Un concepto verdadero funciona en: headline del hero / sección de valores /
+testimonios / página de servicios / newsletters / posts de redes /
+presentaciones al cliente / naming de secciones.
+Si no puede extenderse a todos estos formatos, el concepto es limitado.
+Resultado esperado: sí o no. Si no: el concepto necesita más profundidad.
+
+CONCEPT STRENGTH SCORE [v3]
+-----------------------------
+Evaluar cada finalista antes de recomendarlo.
+Umbral mínimo para avanzar: 10/15.
+
+DIMENSIÓN 1 — IMAGEN MENTAL (0-3)
+0: no genera ninguna imagen
+1: genera una imagen vaga
+2: genera una imagen específica
+3: genera una imagen específica y memorable
+
+DIMENSIÓN 2 — PROPIEDAD (0-3)
+0: cualquier competidor puede usarlo igual
+1: es diferente pero no exclusivo
+2: requiere la posición específica de esta marca
+3: nadie más puede apropiárselo sin sonar forzado
+
+DIMENSIÓN 3 — TRADUCIBILIDAD (0-3)
+0: solo funciona en texto
+1: funciona en texto e imagen
+2: funciona en texto, imagen y composición
+3: funciona en todos los formatos y medios
+
+DIMENSIÓN 4 — TENSIÓN INTERNA (0-3)
+0: es una descripción, no un concepto
+1: tiene tensión pero no está clara
+2: tiene tensión clara
+3: tiene tensión clara y resonante para el cliente objetivo
+
+DIMENSIÓN 5 — CRECIMIENTO (0-3)
+0: es una idea de hero, no un sistema
+1: puede sostener 3-5 piezas
+2: puede sostener una campaña
+3: puede sostener un sistema de comunicación de largo plazo
+
+SCORE: /15
+UMBRAL: 10/15 para avanzar.
+Si ningún finalista alcanza 10/15 → volver a generación.
+Si el finalista principal está en 13-15/15 → listo para ejecutar.
+
+PREGUNTAS PARA EL HUMANO
+------------------------
+- ¿Cuál concepto recordarías mañana?
+- ¿Cuál se siente más propio de la marca?
+- ¿Cuál te daría más ganas de diseñar?
+- ¿Cuál parece más defendible frente al cliente?
+- ¿Cuál evitaría parecer una plantilla?
+- ¿Cuál aguanta mejor si el logo desaparece?
+
+GATE
+----
+No pasar a M5 si:
+- El concepto es genérico.
+- No genera imagen mental.
+- No cambia decisiones visuales reales.
+- Podría aplicarse a cualquier competidor.
+- La tensión principal no está clara.
+- El Concept Strength Score está por debajo de 10/15.
+
+Si falla el gate:
+- Volver a analizar la categoría.
+- Generar más metáforas con los 6 vectores.
+- Simplificar la transformación.
+- Elegir un concepto más específico.
+
+OUTPUT
+------
+Entregar en este formato:
+
+CONCEPTO PRINCIPAL
+- Nombre:
+- Tensión:
+- Transformación:
+- Metáfora:
+- Por qué funciona:
+- Riesgo:
+- Implicancias visuales:
+- Concept Strength Score: /15
+
+CONCEPTO ALTERNATIVO
+- Nombre:
+- Tensión:
+- Transformación:
+- Metáfora:
+- Por qué funciona:
+- Riesgo:
+- Implicancias visuales:
+- Concept Strength Score: /15
+
+RESULTADO DE LOS 3 TESTS
+- Test de Imagen: (concepto principal)
+- Test de Propiedad: (concepto principal)
+- Test de Crecimiento: (concepto principal)
+
+FAIL CONDITIONS
+---------------
+- El concepto es solo un slogan.
+- La metáfora no genera visualidad.
+- La idea no diferencia de la competencia.
+- La idea no afecta decisiones de diseño.
+- La solución se parece demasiado a la competencia.
+- Ningún finalista pasa el umbral del Concept Strength Score.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como director creativo senior.
+A partir del brief, analizá la categoría, detectá clichés y encontrá la tensión principal.
+Generá 20 metáforas candidatas usando los 6 vectores: tensiones, mundos,
+transformaciones, verbos, objetos y sistemas.
+Agrupalas por familias, filtralas por diferenciación y elegí 3 finalistas.
+Somete cada finalista al Test de Imagen, Test de Propiedad y Test de Crecimiento.
+Puntuá cada finalista con el Concept Strength Score.
+No avances si ningún concepto supera 10/15.
+Traducí cada finalista a implicancias concretas para tipografía, composición,
+motion, imágenes y color.
+No diseñes todavía.
+Primero entregá el concepto, el razonamiento, los tests, los scores y los riesgos de cliché.

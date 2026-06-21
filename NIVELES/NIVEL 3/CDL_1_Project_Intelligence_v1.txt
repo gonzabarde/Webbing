@@ -1,0 +1,138 @@
+CDL-1 — PROJECT INTELLIGENCE (v1)
+==================================
+
+OBJETIVO
+--------
+Identificar qué tipo de proyecto es realmente, qué exige y qué variables
+importan más para ese caso.
+Este módulo evita tratar todos los proyectos como si fueran iguales.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Brief
+- Discovery (M0)
+- Posicionamiento (M1)
+- Tipo de negocio
+- Objetivo del sitio o sistema
+- Restricciones del proyecto
+
+OPCIONALES:
+- Referencias
+- Presupuesto
+- Timeline
+- Stakeholders
+- Riesgo comercial
+- Material existente
+
+PROCESO CLAUDE
+--------------
+1. Clasificar el tipo de proyecto.
+   Determinar si es:
+   landing / sitio institucional / portfolio / ecommerce / SaaS /
+   marca personal / estudio creativo / rebranding / micrositio /
+   sistema multipágina / producto digital / campaña
+
+2. Clasificar la categoría mental del proyecto.
+   Ejemplos: confianza / control / deseo / claridad /
+   sofisticación / autoridad / cercanía / eficiencia
+
+3. Detectar el objetivo dominante.
+   Un proyecto tiene uno principal:
+   conversión / percepción / autoridad / diferenciación /
+   generación de leads / venta / reputación / portfolio / educación
+
+4. Determinar el peso relativo de cada dimensión DEEP.
+   Asignar Bajo / Medio / Alto / Crítico a:
+   Discovery / Positioning / Brand Translation / Concept /
+   Perception / Visual Direction / Innovation / Process
+   (Este output se pasa directamente a CDL-2)
+
+5. Detectar complejidad y sensibilidad de error.
+   Preguntar en simultáneo:
+   - ¿Qué no puede salir mal?
+   - ¿Qué parte es crítica?
+   - ¿Qué arruinaría la percepción?
+   Clasificar complejidad como: baja / media / alta
+
+6. Regla para proyectos híbridos.
+   Si el proyecto combina dos tipos (ej: portfolio + ecommerce, marca personal + SaaS):
+   Aplicar el perfil del tipo de mayor complejidad operativa.
+   Documentar explícitamente qué perfil se eligió y por qué.
+
+7. Producir el Project Profile.
+
+ÁRBOLES DE DECISIÓN
+-------------------
+Estos árboles producen una salida directa, no solo una pregunta.
+
+1. ¿Es un proyecto de conversión o de percepción?
+   - Conversión: peso Crítico en Positioning y Process.
+     Peso Alto en Perception. Peso Medio en Concept e Innovation.
+   - Percepción: peso Crítico en Concept, Perception y Visual Direction.
+     Peso Alto en Positioning. Peso Medio en Process.
+
+2. ¿La categoría es conservadora o abierta?
+   - Conservadora: Innovation en Bajo o Medio.
+     Priorizar legibilidad y confianza sobre diferenciación.
+   - Abierta: Innovation puede subir a Alto o Crítico.
+
+3. ¿El proyecto necesita vender hoy o construir valor?
+   - Vender hoy: foco en Positioning, Perception y Process.
+     Reducir peso en Concept e Innovation.
+   - Construir valor: foco en Concept, Visual Direction e Innovation.
+     Process puede ser Medio.
+
+4. ¿Dónde está el error más caro?
+   - Si en confianza: Positioning y Brand Translation son Críticos.
+   - Si en conversión: Process y Perception son Críticos.
+   - Si en diferenciación: Concept e Innovation son Críticos.
+
+PROJECT PROFILE OUTPUT
+----------------------
+- Tipo de proyecto:
+- Categoría mental:
+- Objetivo dominante:
+- Complejidad: baja / media / alta
+- Sensibilidad de error (qué no puede fallar):
+- Riesgo principal:
+- Oportunidad principal:
+- DIMENSIONES PRIORITARIAS [campo obligatorio para CDL-2]:
+  Crítico: [listar]
+  Alto: [listar]
+  Medio: [listar]
+  Bajo: [listar]
+
+TESTS
+-----
+- ¿El proyecto está clasificado en un tipo específico?
+- ¿El objetivo dominante está definido en una palabra?
+- ¿La complejidad y la sensibilidad de error están en el mismo análisis?
+- ¿El campo DIMENSIONES PRIORITARIAS está completo?
+- ¿Si hay híbrido, está documentado qué perfil se eligió?
+
+OUTPUT
+------
+1. Project Profile completo.
+2. Campo DIMENSIONES PRIORITARIAS listo para pasar a CDL-2.
+
+DEPENDENCIAS
+------------
+Requiere: Brief, Discovery (M0), Positioning (M1)
+Bloquea: CDL-2, CDL-3, CDL-4
+
+DELIVERABLES
+------------
+- Project Profile
+- Dimensiones Prioritarias para CDL-2
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como director creativo que clasifica proyectos antes de evaluarlos.
+Leé el brief, el discovery y el posicionamiento.
+Clasificá el tipo de proyecto y su categoría mental.
+Usá los árboles de decisión para determinar el peso de cada dimensión DEEP.
+Si es un proyecto híbrido, aplicá el perfil del tipo de mayor complejidad.
+Producí el Project Profile con el campo DIMENSIONES PRIORITARIAS completo.
+Ese campo es el output crítico: CDL-2 no puede funcionar sin él.
+No critiques todavía. No propongas diseño. Solo clasificá y pesá.

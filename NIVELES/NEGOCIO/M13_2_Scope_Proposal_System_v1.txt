@@ -1,0 +1,163 @@
+M13.2 — SCOPE & PROPOSAL SYSTEM (v1)
+=====================================
+
+OBJETIVO
+--------
+Definir exactamente qué incluye el proyecto, qué no incluye,
+y presentarlo de manera que el cliente entienda el valor antes de ver el precio.
+
+Un scope mal definido es la causa número uno de retrabajo, scope creep
+y proyectos que terminan sin que nadie esté satisfecho.
+
+CUÁNDO ACTIVAR
+--------------
+Después de M13.1 (cliente calificado).
+Antes de presentar precio.
+Cuando el cliente existente pide algo nuevo fuera del proyecto actual.
+
+PROCESO
+-------
+1. Completar el SCOPE DEFINITION con el cliente.
+2. Clasificar el proyecto según M10.0.
+3. Definir qué está IN SCOPE y qué está OUT OF SCOPE.
+4. Armar la estructura de la propuesta.
+5. Definir las condiciones de trabajo.
+
+SCOPE DEFINITION
+-----------------
+Responder cada punto antes de cerrar el scope.
+
+ENTREGABLE PRINCIPAL:
+  ¿Qué se entrega al final? (sitio web, landing page, sistema de diseño, etc.)
+  ¿Cuántas páginas o secciones?
+  ¿En qué plataforma o stack?
+
+CONTENIDO:
+  ¿Quién produce el copy? (cliente / Webbing / mixto)
+  ¿Quién produce las imágenes? (cliente / Webbing / banco de imágenes)
+  ¿Hay video? ¿Quién lo produce?
+
+FUNCIONALIDAD:
+  ¿Tiene formularios? ¿Se integran con algún CRM o herramienta?
+  ¿Tiene ecommerce, pagos, login, dashboard?
+  ¿Tiene CMS para que el cliente edite?
+  ¿Tiene integraciones con terceros (Mailchimp, WhatsApp, calendarios)?
+
+DISEÑO:
+  ¿Hay identidad visual existente o se crea desde cero?
+  ¿Hay guía de marca o se define durante el proyecto?
+
+ENTREGA:
+  ¿Se entrega en staging y producción?
+  ¿Se incluye un período de soporte post-lanzamiento?
+  ¿Se incluye capacitación para el cliente?
+
+ITERACIONES:
+  ¿Cuántas rondas de revisión están incluidas?
+  ¿Qué pasa si el cliente pide cambios fuera de las rondas acordadas?
+
+WHAT'S IN / WHAT'S OUT
+-----------------------
+Dejar explícito en la propuesta qué no incluye.
+Lo que no se nombra como out of scope, el cliente va a asumir que está incluido.
+
+Ejemplos de what's OUT por defecto (a menos que se acuerde):
+  - producción de contenido (fotos, copy, video)
+  - SEO avanzado (más allá de la configuración técnica base)
+  - campañas de publicidad o redes sociales
+  - mantenimiento post-launch (eso va al retainer)
+  - dominios y hosting (se indica qué necesita pero no se paga por Webbing)
+  - funcionalidades fuera del scope acordado
+  - revisiones más allá del número acordado
+
+CLASIFICACIÓN DEL PROYECTO (M10.0)
+------------------------------------
+Una vez definido el scope, clasificar según M10.0 para calibrar el esfuerzo real.
+
+Marketing Site → gobernanza Ligera, ~40-80hs
+Portfolio / Agency Site → gobernanza Ligera-Media, ~60-120hs
+Luxury / High-End Brand → gobernanza Media, ~80-150hs
+SaaS / Producto Digital → gobernanza Completa, ~120-250hs+
+Ecommerce → gobernanza Completa, ~80-200hs
+Healthcare / Clínica → gobernanza Media-Completa, ~60-120hs
+Startup MVP → gobernanza Ligera-Media, ~40-80hs
+Consulting / Personal Brand → gobernanza Ligera, ~40-100hs
+
+Esta clasificación alimenta directamente al Pricing Engine (M13.3).
+
+ESTRUCTURA DE LA PROPUESTA
+---------------------------
+El orden importa. El cliente debe entender el valor antes de ver el número.
+
+SECCIÓN 1 — EL PROBLEMA QUE RESOLVEMOS
+  Mostrar que entendés el negocio del cliente.
+  No más de 3-4 líneas. Específico, no genérico.
+  Ejemplo: "Tu estudio de pilates tiene una web que no refleja la experiencia
+  premium que ofrecés. Los potenciales alumnos llegan y no se quedan."
+
+SECCIÓN 2 — LO QUE VAMOS A CONSTRUIR
+  Descripción clara del entregable.
+  Listar las secciones o funcionalidades principales.
+  No usar jerga técnica que el cliente no entiende.
+
+SECCIÓN 3 — CÓMO TRABAJAMOS
+  Proceso en 3-5 pasos. Simple.
+  Cuántas rondas de revisión incluye.
+  Qué necesitás del cliente y cuándo.
+
+SECCIÓN 4 — INVERSIÓN
+  El precio (ver M13.3 para cómo calcularlo).
+  Estructura de pagos.
+  Qué está incluido y qué no.
+
+SECCIÓN 5 — PRÓXIMOS PASOS
+  Qué tiene que hacer el cliente para arrancar.
+  Fecha límite de validez de la propuesta.
+  Datos de contacto.
+
+REGLAS DE LA PROPUESTA
+-----------------------
+- Máximo 1-2 páginas si es escrita. Más largo = menos leído.
+- Primero el valor, después el precio. Nunca al revés.
+- No presentar opciones de precio en la misma propuesta salvo que haya real diferencia de scope.
+  Tres opciones confunden. Una propuesta clara cierra más.
+- La propuesta es personalizada. Nunca copiar y pegar una propuesta de otro cliente.
+- Fecha de validez: máximo 15 días. Crea urgencia real.
+
+MANEJO DE SCOPE CREEP
+----------------------
+Si durante el proyecto el cliente pide algo fuera del scope acordado:
+
+Paso 1: identificar si es Minor, Major o Out of Scope (ver M10.3).
+Paso 2: si es Minor → absorber si tarda menos de 1 hora. Registrar.
+Paso 3: si es Major o Out of Scope → comunicar antes de ejecutar:
+  "Esto está fuera del scope acordado. Lo podemos incluir por [precio adicional]
+  o lo dejamos para una segunda fase."
+Paso 4: nunca ejecutar un cambio major sin aprobación explícita del cliente.
+
+GATES
+-----
+GATE 13.2-A — ¿El scope está definido con IN y OUT explícitos?
+  Falla → completar antes de armar la propuesta.
+
+GATE 13.2-B — ¿El proyecto está clasificado según M10.0?
+  Falla → clasificar para calibrar el esfuerzo real antes de cotizar.
+
+GATE 13.2-C — ¿La propuesta sigue el orden valor → precio?
+  Falla → reordenar. Presentar precio sin valor reduce la tasa de cierre.
+
+OUTPUT
+------
+- Scope Definition completo
+- Clasificación del proyecto (M10.0)
+- Lista explícita de what's in / what's out
+- Propuesta estructurada en 5 secciones
+- Condiciones de trabajo
+
+PROMPT PARA CLAUDE
+------------------
+Antes de armar una propuesta, completar el Scope Definition con el cliente.
+Clasificar el proyecto según M10.0.
+Definir explícitamente qué está OUT OF SCOPE.
+Armar la propuesta en orden: problema → entregable → proceso → inversión → próximos pasos.
+No presentar precio antes de que el cliente entienda qué está comprando.

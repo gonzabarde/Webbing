@@ -1,0 +1,457 @@
+WEBBING — MASTER SYSTEM DOCUMENT
+================================
+
+VERSION
+-------
+v2.0
+
+PURPOSE
+-------
+This document is the master reference for the entire Webbing system.
+
+It explains:
+- what Webbing is
+- what each level does
+- how the system flows from end to end
+- which gates block progress
+- how the different levels interact
+- how the system should be read, used, and maintained
+
+For session activation and module routing, use SKILL.md.
+This document is reference. SKILL.md is operation.
+
+WEBBING IN ONE SENTENCE
+-----------------------
+Webbing is an AI-assisted agency operating system that takes a project from discovery
+to positioning, concept, visual direction, technical execution, production control,
+AI collaboration, and visual reference intelligence.
+
+WHAT WEBBING IS NOT
+-------------------
+Webbing is not:
+- a random folder of prompts
+- a library of inspiration
+- a generic design handbook
+- a frontend tutorial
+- a branding moodboard
+- a project management template
+- a collection of unrelated docs
+
+Webbing is a layered operating system for:
+- thinking
+- designing
+- building
+- producing
+- controlling AI behavior
+- learning from references
+- improving execution over time
+
+CORE DESIGN PHILOSOPHY
+----------------------
+Webbing is built on one principle:
+
+Every module must change a decision, reduce uncertainty, reduce risk, or reduce rework.
+
+If a module does not do at least one of those things, it does not belong in the system.
+
+SYSTEM GOALS
+------------
+Webbing exists to help produce work that is:
+- strategically coherent
+- creatively strong
+- visually differentiated
+- technically sound
+- operationally controlled
+- AI-assisted without losing human authority
+- reusable across projects
+- measurable and improvable over time
+
+THE SEVEN CORE QUESTIONS WEBBING ANSWERS
+---------------------------------------
+1. Is this client and project worth taking?
+2. What should we make?
+3. Why should we make it that way?
+4. How should it look and feel?
+5. Is the creative direction strong enough to build on?
+6. How should it be built and launched?
+7. How should Claude behave while helping us?
+
+SYSTEM ARCHITECTURE
+-------------------
+Webbing is organized into 6 levels plus a transversal business layer.
+
+NIVEL 1 — STRATEGY LAYER
+  M0   Discovery & Research
+  M1   Positioning
+  M2   Brand Translation
+  M3   Typography & Semiotics
+
+NIVEL 2 — CREATIVE LAYER
+  M4   Concept Generation
+  M4.5 Perception Engine
+  M5   Visual Direction
+  M5.5 Visual Innovation
+
+NIVEL 3 — CREATIVE DIRECTOR LAYER
+  CDL-0  Overview & Rules
+  CDL-1  Project Intelligence
+  CDL-2  Creative Prioritization
+  CDL-3  Creative Critic
+  CDL-4  Creative Quality Engine
+  CDL-5  Executive Creative Director
+
+NIVEL 4 — EXECUTION LAYER
+  M6   Agency Process
+  M7   Decision Compression Engine
+  M8   Technical Execution System
+  M9   Technical Pattern Library
+  M9.8 Signature Operating System
+  M10  Production Operating System
+
+NIVEL 5 — AI OPERATING LAYER
+  M11  AI Operating System
+
+NIVEL 6 — VISUAL INTELLIGENCE LAYER
+  M12  Visual Intelligence System
+
+BUSINESS LAYER — transversal (pre-project and post-project)
+  M13.0 Business Layer Overview
+  M13.1 Client Qualification Engine
+  M13.2 Scope & Proposal System
+  M13.3 Pricing Engine
+  M13.4 Closing & Onboarding
+  Location: NIVELES/NEGOCIO/
+
+These levels are not separate islands.
+Each level depends on the one above it.
+
+HOW THE CDL WORKS
+-----------------
+The Creative Director Layer (NIVEL 3) is transversal, not sequential.
+It does not produce. It judges.
+
+The CDL evaluates output from NIVEL 1, NIVEL 2, and NIVEL 4.
+It decides what is strong enough to proceed and what needs to go back.
+
+The CDL is activated:
+- after M5.5, before NIVEL 4 begins (mandatory gate)
+- when Claude needs to evaluate the quality of a creative decision
+- when the human requests a quality evaluation
+
+If the CDL vetoes a direction, the system returns to M4-M5.5.
+Maximum 2 iterations before escalating to the human.
+
+HOW M11 AND M12 WORK
+---------------------
+M11 (NIVEL 5) governs Claude's behavior at every stage.
+It is always active in the background. It is not a step in the sequence.
+
+M12 (NIVEL 6) feeds reference intelligence into NIVEL 1, NIVEL 2, and NIVEL 4.
+It is consulted during research, concept, and visual direction.
+It is never consulted during execution to avoid copy behavior.
+
+HOW M13 WORKS
+-------------
+M13 (Business Layer) operates outside the creative flow.
+It runs BEFORE M0: qualification (M13.1), scope and proposal (M13.2),
+pricing (M13.3), and closing (M13.4) happen before the project enters the system.
+It runs AFTER M10: the retainer conversion (M13.4 section C) happens at delivery.
+M13 never interferes with creative or technical decisions.
+
+HIGH-LEVEL FLOW
+---------------
+M0 Discovery & Research
+  ↓
+M1 Positioning
+  ↓
+M2 Brand Translation
+  ↓
+M3 Typography & Semiotics
+  ↓
+[GATE 1 — Strategy closed]
+  ↓
+M4 Concept Generation
+  ↓
+M4.5 Perception Calibration
+  ↓
+M5 Visual Direction
+  ↓
+M5.5 Visual Innovation
+  ↓
+[CDL evaluation / GATE 2 — Creative Director veto]
+  ↓
+M6 Agency Process
+  ↓
+M7 Decision Compression
+  ↓
+M8 Technical Execution
+  ↓
+M9 Pattern Library
+  ↓
+M9.8 Signature System
+  ↓
+[GATE 3 — Pre-production]
+  ↓
+M10 Production Operating System
+  ↓
+[GATE 4 — Deploy approval]
+
+M11 runs in the background throughout the entire flow.
+M12 is consulted during M0, M4, and M5.5. Not during execution.
+
+ORDER OF USE
+------------
+Claude should not use every module on every task.
+The flow above is the canonical order for full projects.
+For partial tasks, use the routing table in SKILL.md.
+
+If the task is about strategy or research:
+  → NIVEL 1 (M0–M3)
+
+If the task is about concept or creative direction:
+  → NIVEL 2 (M4–M5.5)
+
+If the task needs a creative quality evaluation:
+  → NIVEL 3 (CDL)
+
+If the task is about building, producing, or launching:
+  → NIVEL 4 (M6–M10)
+
+If the task is about how Claude should behave:
+  → NIVEL 5 (M11)
+
+If the task is about visual references and pattern learning:
+  → NIVEL 6 (M12)
+
+If the task is about business (lead, proposal, pricing, closing, retainer):
+  → BUSINESS LAYER (M13)
+
+GLOBAL RULES
+------------
+1. Do not jump to execution before the problem is understood.
+2. Do not jump to visual direction before concept is approved.
+3. Do not jump to technical implementation before the CDL has cleared the direction.
+4. Do not let Claude choose modules randomly.
+5. Do not exceed the authority of the module being used.
+6. Do not add complexity unless it changes a decision.
+7. Do not ask unnecessary questions.
+8. Do not overexplore when convergence is possible.
+9. Do not let references become copies.
+10. Do not let the system stagnate: every project should feed learning back into the system.
+
+LEVEL SUMMARY
+-------------
+
+NIVEL 1 — STRATEGY LAYER
+Purpose:
+Understand the project, the market, the brand, the audience, and the strategic context.
+
+Modules: M0, M1, M2, M3
+
+What this level answers:
+- What is the project?
+- Who is it for?
+- What makes it different?
+- How should the brand speak visually?
+- What semiotic language should guide the work?
+
+Key outputs:
+- insights, positioning, brand language, semiotic direction, strategic constraints
+
+Gate: if the foundation is weak, NIVEL 2 should not begin.
+
+---
+
+NIVEL 2 — CREATIVE LAYER
+Purpose:
+Turn strategy into creative territory and visual direction.
+
+Modules: M4, M4.5, M5, M5.5
+
+What this level answers:
+- What is the concept?
+- What should the user feel?
+- What visual direction supports that feeling?
+- Where does the work stay safe, and where does it innovate?
+
+Key outputs:
+- concept territories, final concept, perception map, color direction,
+  typography direction, motion direction, visual innovation opportunities
+
+Gate: if concept and perception are not clear, NIVEL 3 evaluation cannot proceed.
+
+---
+
+NIVEL 3 — CREATIVE DIRECTOR LAYER
+Purpose:
+Evaluate the quality of creative output. Approve, redirect, or veto.
+This level does not produce. It judges.
+
+Modules: CDL-0 through CDL-5
+
+What this level answers:
+- Is this concept strong enough?
+- Is this direction differentiated or generic?
+- Does the work reflect the positioning?
+- Should this proceed to execution?
+
+Key outputs:
+- quality verdict, creative score, specific feedback, go / no-go decision
+
+Gate: if the CDL vetoes, return to NIVEL 2. If it approves, NIVEL 4 begins.
+      Maximum 2 iteration cycles before escalating to the human.
+
+---
+
+NIVEL 4 — EXECUTION LAYER
+Purpose:
+Convert creative direction into a buildable and launchable system.
+
+Modules: M6, M7, M8, M9, M9.8, M10
+
+What this level answers:
+- How does the project move operationally?
+- What decisions must be compressed?
+- What stack and technical structure should be used?
+- What patterns should be reused?
+- What makes the project visually recognizable?
+- How is it produced, reviewed, launched, and maintained?
+
+Key outputs:
+- process plan, decision compression, architecture, component logic,
+  pattern stack, signature system, production flow, risk control, launch plan
+
+Gate: if the build is not operationally clear, launch should not happen.
+
+---
+
+NIVEL 5 — AI OPERATING LAYER
+Purpose:
+Control how Claude behaves inside the system at every stage.
+
+Module: M11
+
+What this level answers:
+- What role should Claude play?
+- How much should Claude think?
+- When should Claude ask vs. assume?
+- When should Claude decide vs. defer?
+- When should Claude stop?
+
+Key outputs:
+- role assignment, authority calibration, reasoning depth, exploration budget,
+  question policy, critique system, output budget, failure mode detection,
+  human override handling, self review
+
+Gate: if Claude is misbehaving, every other module becomes less useful.
+      M11 must be corrected before continuing work.
+
+---
+
+NIVEL 6 — VISUAL INTELLIGENCE LAYER
+Purpose:
+Learn from visual references and convert them into reusable patterns.
+Block copy behavior before it enters the work.
+
+Module: M12
+
+What this level answers:
+- What makes a reference valuable?
+- What decision does the reference reveal?
+- What pattern can be reused?
+- What should never be copied?
+- How does the library evolve over time?
+
+Key outputs:
+- reference classification, decision decomposition, pattern extraction,
+  anti-copy validation, scoring, retrieval by intention, library evolution
+
+Gate: if references are not filtered and abstracted, the system drifts into imitation.
+
+MODULE PURPOSE MAP
+------------------
+M0   — Understand the project, client, market, audience, and problem.
+M1   — Define where the brand lives in the market and why it matters.
+M2   — Translate brand strategy into visual behaviors, tone, and rules.
+M3   — Define the semiotic language of type, meaning, and perception.
+M4   — Generate and select strong concepts.
+M4.5 — Define the desired perception and what visual choices create it.
+M5   — Choose the visual system that best expresses the concept.
+M5.5 — Find where the project can differentiate without losing coherence.
+CDL  — Evaluate creative quality. Approve, redirect, or veto.
+M6   — Define the agency workflow, checkpoints, and approvals.
+M7   — Reduce decision load and force focus on what matters.
+M8   — Define how the project is built technically.
+M9   — Provide reusable technical and interface patterns.
+M9.8 — Define the visual signatures that make a project feel owned.
+M10  — Control production, scope, handoffs, launch, and learning.
+M11  — Control Claude's behavior, authority, depth, and output discipline.
+M12  — Store, classify, and reuse reference intelligence. Block copies.
+M13  — Qualify clients, define scope, price projects, close deals, convert retainers.
+
+INTERACTION BETWEEN MODULES
+---------------------------
+M0 informs M1.
+M1 informs M2.
+M2 informs M3.
+M3 informs M4 and M5.
+M4 and M4.5 inform M5.
+M5 and M5.5 feed into the CDL evaluation.
+CDL output (approval or feedback) gates the entry into NIVEL 4.
+M5 and M5.5 inform M8, M9, and M9.8.
+M6, M7, and M10 structure execution.
+M8 and M9 translate visual direction into buildable systems.
+M9.8 makes the project visually recognizable.
+M11 governs Claude at every stage.
+M12 feeds back into M4, M5, M8, M9, and M9.8 with pattern intelligence.
+
+BLOCKING GATES
+--------------
+GATE 1 — Strategy closed (after M3)
+  Condition: positioning, brand translation, and typographic direction defined and approved.
+  If fails: do not begin concept generation. Return to NIVEL 1.
+
+GATE 2 — CDL veto (after M5.5)
+  Condition: creative direction passes CDL evaluation.
+  If fails: return to M4–M5.5 with CDL feedback. Max 2 iterations.
+
+GATE 3 — Pre-production (after M9.8)
+  Condition: build complete, no critical TODOs, patterns applied, signature present.
+  If fails: list what is missing. Do not enter M10 with open debt.
+
+GATE 4 — Deploy (inside M10)
+  Condition: explicit human approval to publish.
+  If fails: stop. Deploy is never Claude's decision.
+
+WHAT CLAUDE SHOULD DO WITH THIS DOCUMENT
+-----------------------------------------
+This document is reference, not operation.
+For session activation and task routing, use SKILL.md.
+
+Use this document to understand:
+- what each level does
+- how the levels interact
+- where the CDL fits
+- where M11 and M12 fit
+- what each gate requires
+
+When Claude is unsure about the system:
+- read this document
+- do not improvise module selection
+- ask for the minimum missing information
+
+SYSTEM MAINTENANCE
+------------------
+When the system changes:
+- update this document to reflect the new architecture
+- update the affected module
+- update the FILE MAP in SKILL.md
+- mark deprecated files clearly
+- avoid duplicate versions without labels
+
+FINAL RULE
+----------
+If a piece of information does not change a decision, it is not part of the operating system.
+If a module does not improve the system, it should not stay.
+If a reference cannot be abstracted, it should not become guidance.
+If Claude cannot operate within its authority, it must defer to the human.

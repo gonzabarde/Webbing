@@ -1,0 +1,98 @@
+M13 — BUSINESS LAYER (v1)
+==========================
+
+PROPÓSITO
+---------
+El Business Layer cubre lo que el sistema no cubre: cómo Webbing consigue trabajo,
+lo evalúa, lo cobra, lo cierra y lo mantiene.
+
+No es parte del flujo creativo ni técnico.
+Es la capa que alimenta ese flujo con proyectos reales y bien calificados.
+
+CUÁNDO SE USA
+-------------
+Antes de M0:
+  Cuando llega un lead o una consulta.
+  Determina si el proyecto vale la pena y en qué condiciones entra al sistema.
+
+Entre M3 y M4 (o al cerrar M5.5):
+  Cuando se necesita presentar una propuesta con scope y precio formal.
+
+Después de M10:
+  Cuando el proyecto entregado puede convertirse en retainer.
+  Cuando hay una oportunidad de expansión con el mismo cliente.
+
+En cualquier momento:
+  Cuando un cliente existente pide algo nuevo.
+
+EL CICLO COMPLETO DE UN CLIENTE EN WEBBING
+-------------------------------------------
+Lead / consulta entrante
+  ↓
+M13.1 — Calificación (¿vale la pena?)
+  ↓
+M13.2 — Scope & Propuesta (¿qué incluye y cuánto vale?)
+  ↓
+M13.3 — Pricing (¿cómo se estructura el precio?)
+  ↓
+M13.4 — Cierre & Onboarding (¿cómo se formaliza y arranca?)
+  ↓
+M0 → ... → M10 (el sistema opera)
+  ↓
+M13.4 — Retainer (¿el cliente sigue?)
+
+ARQUITECTURA DEL BUSINESS LAYER
+--------------------------------
+M13.1 — Client Qualification Engine
+M13.2 — Scope & Proposal System
+M13.3 — Pricing Engine
+M13.4 — Closing & Onboarding
+
+TIPOS DE CLIENTE QUE PUEDE ATENDER WEBBING
+--------------------------------------------
+PyMEs argentinas:
+  Precio: en USD o ARS según capacidad del cliente.
+  Oportunidad: muchas empresas locales necesitan sitios serios y pagan bien.
+  Riesgo: plazos de pago más lentos, más fricción en el proceso.
+
+Empresas medianas AR:
+  Precio: en USD preferentemente.
+  Oportunidad: proyectos más grandes, posibilidad de retainer.
+  Riesgo: más stakeholders, aprobaciones más lentas.
+
+Clientes internacionales (USD):
+  Precio: siempre en USD.
+  Oportunidad: máximo arbitraje geográfico, mayor margen.
+  Riesgo: diferencia horaria, comunicación 100% remota.
+
+Startups:
+  Precio: en USD, negociar timing de pagos.
+  Oportunidad: proyectos con criterio, posibilidad de equity en casos especiales.
+  Riesgo: pivots, cambios de scope, presupuesto ajustado.
+
+Profesionales / marca personal:
+  Precio: en USD o ARS según el perfil.
+  Oportunidad: proyectos más simples y rápidos, buen ratio esfuerzo/valor.
+  Riesgo: muchas opiniones personales, dificultad para aprobar sin criterio.
+
+REGLA CENTRAL
+-------------
+No todo cliente merece un proyecto de Webbing.
+Entrar a un proyecto sin calificar bien al cliente
+es la causa más frecuente de proyectos que no cierran,
+clientes que no pagan y trabajo que no se puede mostrar en el portfolio.
+
+RELACIÓN CON EL RESTO DEL SISTEMA
+-----------------------------------
+M13 alimenta M0 con un brief pre-calificado.
+M10 alimenta M13.4 con el proyecto entregado para convertirlo en retainer.
+M11 (AI Operating System) gobierna el comportamiento de Claude también en M13.
+El CDL no opera en M13 — aquí no hay evaluación creativa.
+
+PROMPT PARA CLAUDE
+------------------
+Cuando llega una consulta o un lead, activar M13.1 primero.
+No arrancar con M0 antes de pasar por la calificación.
+No presentar precio sin pasar por M13.2 y M13.3.
+No asumir que un lead calificado ya tiene scope cerrado.
+El Business Layer no es burocracia: es lo que separa proyectos rentables de proyectos que drenan.

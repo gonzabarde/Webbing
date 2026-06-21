@@ -1,0 +1,468 @@
+B2 — PAYMENTS & COMMERCE PATTERN LIBRARY (v1)
+=============================================
+
+UBICACIÓN EN EL SISTEMA
+-----------------------
+Capa: NIVEL 4 — Ejecución (extensión backend).
+Activación: condicional. Solo se activa si B0 marcó "necesita pagos = sí".
+Un SaaS sin cobro propio o un marketing site NO tocan B2.
+
+B2 asume los patrones de B1 como base (validación, auth, webhooks con firma, forma
+de errores). No los repite: los usa. B2 agrega lo específico de mover plata.
+
+Relación con el resto:
+- Hereda de B0: nivel de sensibilidad (pagos = NIVEL 3 mínimo) y modelo de datos.
+- Hereda de B1: patrón de webhooks (P2), validación (P3), autorización (A4).
+- Entrega a B4 ítems específicos de launch de pagos (webhooks registrados en prod,
+  claves live vs test, modo de prueba verificado).
+
+
+OBJETIVO
+--------
+Dar los patrones correctos para cobrar de forma segura, en los dos modelos que un
+proyecto de agencia toca:
+
+1. PAGOS SAAS — suscripciones, planes, billing recurrente, usage-based.
+2. PAGOS ECOMMERCE — carrito, checkout único, órdenes, inventario.
+
+Cada patrón prioriza, en este orden inquebrantable:
+correctitud financiera > seguridad > idempotencia > reconciliación > ergonomía.
+
+PRINCIPIO CENTRAL
+-----------------
+Nunca el backend es la fuente de verdad de un pago. El procesador de pagos (PSP) lo es.
+Tu backend NO decide si un pago se concretó: lo decide Stripe (u otro PSP) y te lo
+comunica por webhook. Tu backend REACCIONA a esa verdad, no la inventa.
+
+Tres reglas que no se negocian:
+- El backend nunca toca ni almacena datos de tarjeta. Eso es del PSP (PCI compliance).
+- El estado de un pago se confirma por webhook verificado, no por el redirect del navegador.
+- Toda operación de pago es idempotente: el mismo evento procesado dos veces no cobra
+  ni acredita dos veces.
+
+Si un patrón viola una de estas tres, no es un patrón válido de B2.
+
+
+INPUTS
+------
+OBLIGATORIOS:
+- Handoff de B0 con "pagos = sí" y nivel de sensibilidad (NIVEL 3 mínimo).
+- Modelo de negocio del cobro: ¿una vez? ¿suscripción? ¿por uso? ¿productos físicos?
+- Moneda(s) y jurisdicción del cobro.
+- Patrones de B1 disponibles (webhooks, validación, autz).
+
+OPCIONALES:
+- PSP preexistente del cliente.
+- Necesidad de facturación formal / impuestos (depende de jurisdicción).
+- Modelo de precios definido por M13 (cuando exista) o por el brief.
+
+CONTEXTO ARGENTINA / LATAM (relevante para proyectos locales):
+- Stripe no opera para cobros locales en Argentina al momento de escribir esto.
+  Para cobros en pesos a clientes argentinos, los PSP habituales son Mercado Pago
+  y, según el caso, dLocal u otros. Para cobros en USD a clientes internacionales,
+  Stripe/LemonSqueezy/Paddle siguen siendo válidos.
+  REGLA: confirmar disponibilidad del PSP en la jurisdicción del cobro ANTES de
+  diseñar el flujo. La elección de PSP es decisión de B0; B2 la asume cerrada.
+  Los patrones de B2 son agnósticos del PSP — los ejemplos usan Stripe por ser el
+  más documentado, pero el patrón (webhook verificado, idempotencia, PSP como fuente
+  de verdad) aplica igual a Mercado Pago u otro.
+
+
+ELECCIÓN DEL MODELO DE COBRO
+----------------------------
+Antes de los patrones, clasificar el cobro. Determina qué patrones aplican.
+
+PAGO ÚNICO (one-time)
+  El cliente paga una vez por un producto o servicio.
+  Ecommerce de productos, compra de un curso, un servicio puntual.
+  → Patrones de la SECCIÓN ECOMMERCE + webhooks.
+
+SUSCRIPCIÓN (recurrente)
+  El cliente paga periódicamente por acceso continuo.
+  SaaS con planes mensuales/anuales.
+  → Patrones de la SECCIÓN SAAS + webhooks.
+
+USAGE-BASED (por uso / metered)
+  El cliente paga según consumo (requests, almacenamiento, asientos).
+  SaaS con precio variable.
+  → Patrones SaaS + metering. Más complejo. Solo si el modelo lo exige.
+
+HÍBRIDO
+  Suscripción base + extras por uso, o suscripción + compras únicas.
+  Combinar patrones. No inventar un cuarto modelo: componer los existentes.
+
+
+=====================================================================
+SECCIÓN 1 — PATRONES TRANSVERSALES (aplican a todo cobro)
+=====================================================================
+
+PATRÓN PAY-1 — INTEGRACIÓN DEL PSP (checkout hospedado por default)
+  Problema: cobrar sin que datos de tarjeta toquen tu backend.
+  Cómo se hace bien:
+    - Usar el checkout HOSPEDADO del PSP (Stripe Checkout, Mercado Pago Checkout Pro)
+      siempre que se pueda. El cliente ingresa la tarjeta en la página del PSP, no en
+      la tuya. Vos nunca ves ni transmitís el número.
+    - Si el diseño exige checkout embebido (en tu página), usar los elementos seguros
+      del PSP (Stripe Elements) que aíslan los datos de tarjeta en un iframe del PSP.
+      Aun así, la tarjeta no pasa por tu servidor.
+    - Tu backend crea la "intención de pago" / "sesión de checkout" del lado servidor
+      con el monto calculado en el SERVIDOR (nunca confiar en el monto que manda el cliente).
+  Cómo se rompe:
+    - Construir tu propio formulario de tarjeta que postea a tu backend → violación de
+      PCI, responsabilidad legal enorme, prohibido.
+    - Calcular el monto en el frontend y confiarlo → el cliente edita el precio y paga $1.
+
+PATRÓN PAY-2 — EL MONTO SE CALCULA EN EL SERVIDOR
+  Problema: el cliente no debe poder decidir cuánto paga.
+  Cómo se hace bien:
+    - El backend recalcula el precio total desde la fuente de verdad (precios en tu DB
+      o en el PSP), tomando del cliente solo QUÉ quiere comprar (IDs), nunca el precio.
+    - Validar que los productos/planes existan y estén activos antes de cobrar.
+  Cómo se rompe:
+    - Tomar price o total del payload del cliente → manipulación trivial del precio.
+
+PATRÓN PAY-3 — WEBHOOK COMO CONFIRMACIÓN DE VERDAD
+  Problema: ¿cuándo doy por concretado el pago?
+  Cómo se hace bien:
+    - El redirect de "pago exitoso" en el navegador NO es confirmación. El usuario puede
+      cerrar la pestaña, perder conexión, o falsear la URL. Es solo UX.
+    - La confirmación real llega por WEBHOOK del PSP (ej: checkout.session.completed,
+      payment_intent.succeeded). Verificar la firma del webhook (patrón B1-P2).
+    - Recién con el webhook verificado: marcar la orden pagada / activar la suscripción /
+      dar el acceso.
+  Cómo se rompe:
+    - Activar el acceso en el redirect del navegador → el usuario llega a la URL de éxito
+      sin haber pagado y obtiene el producto gratis.
+    - Webhook sin verificar firma → cualquiera POSTea "pagó" y obtiene acceso gratis.
+
+PATRÓN PAY-4 — IDEMPOTENCIA
+  Problema: los webhooks se reenvían. Un evento puede llegar dos o más veces.
+  Cómo se hace bien:
+    - Guardar el ID del evento del PSP. Antes de procesar, chequear si ya se procesó.
+      Si ya está → ignorar (idempotente).
+    - Las operaciones de cobro al PSP usan idempotency key para no cobrar doble por
+      reintentos de red.
+  Cómo se rompe:
+    - Procesar cada webhook sin deduplicar → doble acreditación, doble envío, doble
+      activación. En pagos, esto es plata real perdida o clientes cobrados de más.
+
+PATRÓN PAY-5 — REGISTRO Y RECONCILIACIÓN
+  Problema: poder auditar qué se cobró, a quién, cuándo y por qué.
+  Cómo se hace bien:
+    - Guardar en tu DB una referencia de cada transacción: id del PSP, monto, moneda,
+      estado, usuario/orden asociada, timestamp. NO datos de tarjeta.
+    - Tu DB y el PSP deben poder reconciliarse: para cada cobro en el PSP hay un registro
+      tuyo y viceversa.
+    - Registrar también los fallos y reembolsos, no solo los éxitos.
+  Cómo se rompe:
+    - No guardar referencia local → imposible auditar o dar soporte ("no sé por qué te
+      cobraron").
+    - Guardar datos de tarjeta "para tener registro" → violación de PCI.
+
+PATRÓN PAY-6 — MANEJO DE FALLOS Y REEMBOLSOS
+  Problema: pagos que fallan, se rechazan, o hay que devolver.
+  Cómo se hace bien:
+    - Manejar el evento de pago fallido (tarjeta rechazada, fondos insuficientes):
+      no activar acceso, notificar al usuario.
+    - Reembolsos: ejecutarlos vía PSP, registrar el reembolso localmente, revertir el
+      acceso/orden de forma consistente.
+    - En suscripciones: manejar el pago recurrente fallido (dunning) — reintentos,
+      aviso al usuario, y suspensión de acceso si no se regulariza.
+  Cómo se rompe:
+    - Ignorar pagos fallidos → usuario con acceso que no pagó, o suscripción zombi.
+    - Reembolsar en el PSP pero no revertir el acceso localmente → producto gratis.
+
+PATRÓN PAY-7 — MÚLTIPLES PSP (por moneda o jurisdicción)
+  Problema: un proyecto puede necesitar más de un PSP. Caso típico argentino: cobrar en
+  pesos a clientes locales (Mercado Pago) Y en USD a clientes del exterior (Stripe). No es
+  un capricho: ningún PSP único cubre bien ambos.
+  Cuándo: hay dos o más monedas/jurisdicciones que ningún PSP único atiende bien.
+  Cómo se hace bien:
+    - Tratar "PSP" como una abstracción, no como Stripe hardcodeado. Definir una interfaz
+      común (crear checkout, verificar webhook, reembolsar) e implementarla por cada PSP.
+      El resto del código de cobro habla con la interfaz, no con un PSP concreto.
+    - RUTEAR por una regla explícita y del lado servidor: la moneda/país del comprador
+      determina el PSP. La regla de ruteo es única y central, no dispersa.
+    - CADA PSP mantiene su propia configuración completa: su verificación de firma de
+      webhook (con SU secret), su store de idempotencia, sus claves test/live por entorno.
+      Un webhook de Mercado Pago se verifica distinto que uno de Stripe.
+    - El registro local de transacciones (PAY-5) guarda CUÁL PSP procesó cada una, para
+      poder reconciliar contra el PSP correcto.
+  Cómo se rompe:
+    - Asumir un solo PSP y meter el segundo a los parches → ruteo disperso, webhooks
+      cruzados, idempotencia que no distingue origen.
+    - Una sola verificación de firma para ambos → uno de los dos queda mal verificado.
+    - No registrar qué PSP procesó cada cobro → imposible reconciliar.
+  Nota: no agregar un segundo PSP "por las dudas". Solo si hay una moneda/jurisdicción
+  real que el primero no cubre. Un PSP es más simple; dos es el doble de superficie a
+  mantener y verificar. La decisión de cuántos PSP viene de B0.
+  PARIDAD DE FEATURES ENTRE PSP (no asumir que son intercambiables):
+    Dos PSP NO ofrecen lo mismo, sobre todo en SUSCRIPCIONES. Stripe tiene un modelo de
+    suscripciones muy completo (prorrateo, trials, dunning, usage-based); Mercado Pago y
+    otros locales tienen suscripciones más limitadas y con otra mecánica. Implicancias:
+      - No asumir que la lógica de suscripción de un PSP se traduce 1:1 al otro. Lo que
+        Stripe maneja solo (prorrateo de un upgrade) puede haber que manejarlo a mano en
+        el otro PSP, o no estar disponible.
+      - La interfaz común de PSP cubre bien lo simple (cobro único). Para suscripciones,
+        verificar feature por feature qué soporta cada PSP ANTES de prometerlo al cliente.
+      - Si un PSP no soporta una mecánica de billing que el proyecto necesita, eso es
+        input para B0: puede cambiar qué monedas/planes se ofrecen en qué PSP.
+    Cómo se rompe:
+      - Diseñar el billing asumiendo features de Stripe y descubrir tarde que el PSP local
+        no las tiene → redeño del modelo de cobro a mitad del build.
+
+
+=====================================================================
+SECCIÓN 2 — PATRONES SAAS (suscripciones)
+=====================================================================
+
+PATRÓN SAAS-1 — MODELO DE PLANES Y PRECIOS
+  Problema: representar planes, precios e intervalos en tu sistema.
+  Cómo se hace bien:
+    - Definir los planes en el PSP (productos y precios de Stripe) como fuente de verdad
+      de precios. En tu DB, referenciar el plan por su ID del PSP.
+    - Tu DB guarda QUÉ plan tiene cada usuario/organización y el estado de la suscripción.
+    - Mapear claramente: plan → features/límites que habilita (entitlements).
+  Cómo se rompe:
+    - Hardcodear precios en el código → cambiar un precio obliga a redeploy y desincroniza.
+    - No mapear plan a entitlements → no sabés qué puede hacer cada plan.
+
+PATRÓN SAAS-2 — CICLO DE VIDA DE LA SUSCRIPCIÓN
+  Problema: una suscripción pasa por estados (activa, en prueba, vencida, cancelada).
+  Cómo se hace bien:
+    - Reflejar el estado de la suscripción del PSP en tu DB vía webhooks
+      (created, updated, deleted, payment_succeeded, payment_failed).
+    - Estados mínimos a manejar: trialing, active, past_due, canceled.
+    - El acceso del usuario deriva del estado: active/trialing → acceso; past_due →
+      período de gracia o bloqueo según política; canceled → sin acceso al terminar el período.
+  Cómo se rompe:
+    - Dar acceso según "tiene una suscripción" sin mirar el estado → usuario cancelado
+      o impago sigue entrando.
+
+PATRÓN SAAS-3 — GATING POR ENTITLEMENTS
+  Problema: habilitar features según el plan pagado.
+  Cómo se hace bien:
+    - Chequear el entitlement en el backend antes de permitir la feature, igual que se
+      chequea autorización (B1-A4). El plan vive en la sesión/DB, no en el frontend.
+    - Frontend oculta lo no disponible (UX); backend lo bloquea (seguridad). Las dos capas.
+  Cómo se rompe:
+    - Gating solo en frontend → el usuario del plan free llama la acción premium directo.
+  DOS TIPOS DE ENTITLEMENT — booleano vs cuantitativo:
+    No todo límite de plan es "tenés o no tenés la feature". Hay dos clases:
+      BOOLEANO: la feature existe o no (free no tiene reportes; pro sí). Chequeo simple.
+      CUANTITATIVO (límite de uso): cuántos X podés tener (free = 1 profesional, pro = 5,
+        premium = ilimitado). Esto NO es un booleano: es un tope que se chequea CONTRA EL
+        USO ACTUAL en el momento de crear el recurso.
+    Para el límite cuantitativo:
+      - Al crear el recurso (agregar un profesional), contar cuántos hay en el tenant y
+        comparar con el tope del plan. Si está en el límite, bloquear con mensaje claro
+        ("tu plan permite 5; actualizá para agregar más").
+      - El chequeo es del lado servidor (igual que A4) y debe ser ATÓMICO si dos requests
+        pueden crear a la vez (B1-P7): contar-y-crear en transacción, o dos usuarios
+        simultáneos meten 6 en un plan de 5.
+      - El tope por plan vive en tu mapa de entitlements (no hardcodeado por todos lados).
+      - Definir qué pasa con el downgrade: si bajan de pro (5) a free (1) con 4 profesionales
+        cargados, ¿se bloquean los excedentes? ¿se impide el downgrade? Decidir la política,
+        no dejarla al azar.
+  Cómo se rompe (el cuantitativo):
+    - Tratar un límite de cantidad como booleano → no se chequea contra el uso, se pasan del tope.
+    - Chequeo de límite no atómico → dos creaciones simultáneas exceden el plan.
+    - No definir el downgrade → estado inconsistente (más recursos que los que el plan permite).
+
+PATRÓN SAAS-4 — TRIALS Y CAMBIOS DE PLAN
+  Problema: pruebas gratis, upgrades, downgrades, prorrateo.
+  Cómo se hace bien:
+    - Delegar el prorrateo y el cálculo de upgrade/downgrade al PSP (Stripe lo maneja).
+    - Manejar el fin del trial (convierte a pago o se bloquea) vía webhook.
+  Cómo se rompe:
+    - Calcular prorrateos a mano → errores de cobro casi garantizados.
+
+PATRÓN SAAS-5 — USAGE-BASED / METERING (solo si el modelo lo exige)
+  Problema: cobrar por consumo medido.
+  Cómo se hace bien:
+    - Registrar el uso de forma confiable y reportarlo al PSP (usage records de Stripe).
+    - Idempotencia en el reporte de uso: no contar dos veces el mismo evento.
+  Cómo se rompe:
+    - Metering sin idempotencia → cobros inflados, disputas de clientes.
+  Nota: es el modelo más complejo. No elegirlo si suscripción fija alcanza.
+
+
+=====================================================================
+SECCIÓN 3 — PATRONES ECOMMERCE (pago único, productos)
+=====================================================================
+
+NOTA DE ARQUITECTURA PREVIA:
+  Para ecommerce, B0 ya debió decidir entre solución a medida (Next.js + PSP) vs
+  plataforma (Shopify, Medusa, etc.). B2 cubre el caso a medida. Si B0 eligió Shopify,
+  gran parte de estos patrones los resuelve la plataforma y B2 se reduce a la integración.
+
+PATRÓN ECOM-1 — CARRITO
+  Problema: representar lo que el usuario quiere comprar antes de pagar.
+  Cómo se hace bien:
+    - Carrito del lado servidor (en DB) para usuarios logueados; carrito en cookie/sesión
+      para invitados, consolidado al loguear.
+    - El carrito guarda referencias a productos (IDs) y cantidades, NO precios congelados
+      del lado cliente. El precio se calcula al checkout desde la fuente de verdad (PAY-2).
+  Cómo se rompe:
+    - Guardar el precio en el carrito del lado cliente → precio manipulable.
+
+PATRÓN ECOM-2 — ÓRDENES Y SU CICLO DE VIDA
+  Problema: una compra se convierte en una orden con estados.
+  Cómo se hace bien:
+    - Crear la orden en estado "pendiente" al iniciar el checkout.
+    - Confirmarla "pagada" SOLO con el webhook verificado (PAY-3), no con el redirect.
+    - Estados típicos: pending → paid → fulfilled → (refunded / canceled).
+    - La orden es inmutable en sus líneas una vez creada (qué se compró y a qué precio
+      queda registrado para auditoría — acá sí se congela el precio, del lado servidor).
+  Cómo se rompe:
+    - Marcar pagada en el redirect → órdenes "pagadas" sin pago real.
+    - Mutar las líneas de una orden vieja → se pierde el registro histórico del precio.
+
+PATRÓN ECOM-3 — INVENTARIO Y STOCK
+  Problema: no vender lo que no hay.
+  Cómo se hace bien:
+    - Verificar stock al momento de crear la orden, no solo al agregar al carrito.
+    - Decidir la política: reservar stock al iniciar checkout (con expiración) o
+      descontar al confirmar el pago. Reservar evita overselling pero requiere liberar
+      reservas que expiran.
+    - El descuento de stock debe ser atómico (transacción) para evitar carreras donde
+      dos compras toman la última unidad.
+  Cómo se rompe:
+    - Chequear stock solo en el carrito → entre el carrito y el pago se agota y vendés de más.
+    - Descuento no atómico → overselling en concurrencia.
+
+PATRÓN ECOM-4 — IMPUESTOS, FACTURACIÓN Y ENVÍOS (según jurisdicción)
+  Problema: el total no es solo el precio del producto, y en muchos países emitir
+  comprobante fiscal es OBLIGATORIO por ley, no opcional.
+  Cómo se hace bien:
+    - Calcular impuestos y envío del lado servidor según reglas/jurisdicción.
+    - Envíos: si hay correo/logística (Andreani, Correo Argentino, etc.), tratarlo como
+      integración de tercero (B3-INT-1) con su timeout y manejo de fallo. El cálculo de
+      costo de envío puede ser por tabla propia (zonas) o por API del correo.
+  Cómo se rompe:
+    - Cobrar sin impuestos donde son obligatorios → problema legal/contable del cliente.
+
+FACTURACIÓN ELECTRÓNICA — ARGENTINA (AFIP/ARCA), requisito legal:
+  En Argentina, toda venta requiere factura electrónica emitida vía AFIP/ARCA. Esto NO es
+  lo mismo que el comprobante del PSP ni que Stripe Tax (que es para impuestos de EEUU/UE).
+  Es un requisito legal del país y un proyecto de integración en sí mismo. Tratarlo así:
+    - La factura se emite DESPUÉS de confirmar el pago (webhook, PAY-3), no antes.
+    - La emisión es una integración con AFIP/ARCA. Opciones: SDK/servicios intermediarios
+      (Afip SDK, facturación de terceros) en vez de hablar con el web service crudo de AFIP,
+      que es notoriamente áspero. Tratar como B3-INT-1 (timeout, reintento, manejo de fallo).
+    - DESACOPLAR del camino crítico: si la emisión de factura falla, la orden ya está
+      pagada y válida — la factura se reintenta (job, B3/B5-PERF-7), no se cae la compra.
+    - Guardar el comprobante emitido (CAE, número) asociado a la orden, para el cliente
+      y para auditoría fiscal.
+  Cómo se rompe:
+    - Confundir el recibo del PSP con la factura legal → venta sin comprobante válido.
+    - Emitir factura antes de confirmar el pago → facturas de ventas que no se concretaron.
+    - Emisión síncrona en el checkout → si AFIP tarda o falla, se cae la compra.
+  REGLA: para cobros en Argentina, la facturación electrónica es parte del alcance desde
+  el día 1, no un agregado posterior. Si el cobro es solo en USD al exterior, aplica la
+  normativa de exportación de servicios/bienes correspondiente — confirmar con el contador
+  del cliente. Esta es una decisión que se marca en B0 (jurisdicción del cobro).
+
+
+OUTPUT DEL MÓDULO
+-----------------
+MODELO DE COBRO: [único / suscripción / usage-based / híbrido]
+PSP: [Stripe / Mercado Pago / otro — confirmado disponible en la jurisdicción]
+¿MÚLTIPLES PSP?: [no / sí — cuáles y regla de ruteo por moneda/país (PAY-7)]
+MONEDA(S) Y JURISDICCIÓN: [definidas]
+FACTURACIÓN LEGAL: [no aplica / AFIP-ARCA (Argentina) / otra — cómo se emite, desacoplada]
+
+TRANSVERSAL:
+  Tipo de checkout: [hospedado / embebido con elementos seguros]
+  Cálculo de monto: [confirmado del lado servidor]
+  Confirmación de pago: [webhook verificado, evento(s) escuchado(s)]
+  Idempotencia: [mecanismo de deduplicación de eventos definido]
+  Registro local de transacciones: [qué se guarda, sin datos de tarjeta]
+  Manejo de fallos y reembolsos: [definido]
+
+SI SAAS:
+  Planes: [definidos en el PSP, referenciados en DB]
+  Estados de suscripción manejados: [trialing/active/past_due/canceled]
+  Entitlements por plan: [mapeados]
+  Tipo de límite por plan: [booleano / cuantitativo — si cuantitativo: tope + chequeo atómico + política de downgrade]
+  Gating: [confirmado en backend, no solo frontend]
+  Trials / cambios de plan: [delegados al PSP]
+  Metering: [aplica/no aplica + idempotencia si aplica]
+
+SI ECOMMERCE:
+  Solución: [a medida / plataforma — de B0]
+  Carrito: [server-side / cookie + consolidación]
+  Ciclo de orden: [estados definidos, confirmación por webhook]
+  Inventario: [política de stock, descuento atómico]
+  Impuestos/envíos: [cómo se calculan]
+  Facturación electrónica: [si Argentina: AFIP/ARCA, desacoplada del checkout]
+
+DEPENDENCIAS DE TERCEROS: [PSP y servicios asociados]
+RIESGOS FINANCIEROS RESIDUALES: [listar]
+
+
+GATE DE APROBACIÓN [antes de construir cobro / antes de launch]
+---------------------------------------------------------------
+Verificar:
+- ¿Los datos de tarjeta NUNCA tocan el backend (checkout hospedado o elementos seguros)?
+- ¿El monto se calcula y valida del lado servidor (PAY-2)?
+- ¿El acceso/orden se confirma SOLO por webhook verificado, nunca por redirect (PAY-3)?
+- ¿Cada webhook es idempotente (dedup por event id) (PAY-4)?
+- ¿Hay registro local reconciliable de cada transacción, sin datos de tarjeta (PAY-5)?
+- ¿Los pagos fallidos y reembolsos se manejan consistentemente (PAY-6)?
+- SI SaaS: ¿el acceso deriva del ESTADO de la suscripción, no de su mera existencia?
+- SI SaaS con límites cuantitativos: ¿el tope se chequea contra el uso actual, de forma atómica?
+- SI ecommerce: ¿el stock se descuenta de forma atómica?
+- SI múltiples PSP: ¿cada uno verifica su firma con su secret y el ruteo es central (PAY-7)?
+- SI cobro en Argentina: ¿la facturación electrónica AFIP está contemplada y desacoplada?
+
+Falla cualquiera → no construir el cobro. Cada uno de estos es plata real o fraude.
+
+
+TESTS
+-----
+- ¿Puede un usuario obtener el producto sin pagar manipulando el redirect? (No debe.)
+- ¿Puede manipular el precio desde el cliente? (No debe.)
+- ¿Un webhook duplicado cobra o acredita dos veces? (No debe.)
+- ¿Un pago fallido deja acceso activo? (No debe.)
+- ¿Tu DB y el PSP se pueden reconciliar transacción por transacción? (Debe.)
+- ¿Hay algún dato de tarjeta en tu DB o tus logs? (No debe haber.)
+- SI ecommerce: ¿dos compras concurrentes pueden vender la misma última unidad? (No debe.)
+
+
+FAIL CONDITIONS
+---------------
+- Datos de tarjeta almacenados o transmitidos por el backend (violación PCI).
+- Monto tomado del payload del cliente.
+- Acceso o orden confirmados por el redirect del navegador en vez del webhook.
+- Webhook de pago sin verificar firma.
+- Webhooks no idempotentes (sin deduplicación de eventos).
+- Sin registro local reconciliable de transacciones.
+- Pagos fallidos o reembolsos ignorados.
+- Acceso SaaS otorgado sin mirar el estado de la suscripción.
+- Gating de features premium solo en el frontend.
+- Stock descontado de forma no atómica (overselling).
+- PSP elegido sin confirmar disponibilidad en la jurisdicción del cobro.
+- Segundo PSP integrado a los parches: ruteo disperso o firma de webhook mal verificada.
+- Cobro en Argentina sin facturación electrónica AFIP, o factura emitida antes del pago
+  o de forma síncrona que tira abajo el checkout.
+
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como ingeniero de pagos.
+Partí de "pagos = sí" en B0 y del modelo de cobro del proyecto.
+Grabá la regla madre: el PSP es la fuente de verdad del pago, tu backend reacciona a él.
+Nunca dejes que datos de tarjeta toquen el backend. Nunca confíes en el monto del cliente.
+Nunca confirmes un pago por el redirect del navegador: solo por webhook verificado.
+Hacé toda operación de pago idempotente: un evento repetido no cobra ni acredita dos veces.
+Para SaaS, derivá el acceso del estado de la suscripción. Para ecommerce, descontá stock
+de forma atómica.
+Confirmá que el PSP elegido opera en la jurisdicción del cobro (en Argentina, Stripe no
+cobra local: Mercado Pago u otro para pesos; Stripe sí para USD internacional).
+Si hay dos monedas/jurisdicciones que ningún PSP único cubre, usá múltiples PSP (PAY-7):
+interfaz común, ruteo central por moneda, y cada PSP con su propia firma e idempotencia.
+Si el cobro es en Argentina, la facturación electrónica AFIP es parte del alcance desde
+el día 1: emitila después del pago confirmado y desacoplada del checkout (un fallo de AFIP
+no tira abajo la compra).
+Antes de cerrar, completá el output y pasá el gate: cada ítem es plata real o fraude.

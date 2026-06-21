@@ -1,0 +1,335 @@
+B4 — BACKEND PRODUCTION STANDARDS (v1)
+======================================
+
+UBICACIÓN EN EL SISTEMA
+-----------------------
+Capa: NIVEL 4 — Ejecución (extensión backend).
+Es el par de M8.4 (Frontend Production Standards) para la capa de servidor.
+Mientras M8.4 fija los estándares de producción del frontend, B4 fija los del backend:
+estructura, convenciones, calidad y el checklist de launch.
+
+Activación: condicional, junto con B0-B3. Aplica a todo proyecto con backend.
+B4 NO introduce decisiones de arquitectura (eso es B0) ni patrones nuevos (eso es B1-B3).
+B4 fija CÓMO se organiza, se nombra, se revisa y se lanza el backend ya decidido.
+
+Relación con el resto:
+- Consolida los ítems de launch que B1 (migraciones), B2 (pagos) y B3 (secrets, monitoring,
+  jobs, webhooks) fueron dejando marcados como "ítem del launch checklist".
+- Extiende M10.7 (Launch checklist, hoy 100% frontend) con la dimensión backend.
+- Extiende M8.5/M8.6 (QA y Production Review) con la dimensión backend.
+
+
+OBJETIVO
+--------
+Garantizar que el backend de cualquier proyecto sea consistente, mantenible y seguro
+de lanzar. Cuatro cosas:
+
+1. ESTRUCTURA — dónde vive cada cosa en el código.
+2. CONVENCIONES — cómo se nombra y se escribe.
+3. QA DE BACKEND — qué se revisa antes de dar por terminado.
+4. LAUNCH CHECKLIST DE BACKEND — qué se verifica antes de poner en producción.
+
+PRINCIPIO CENTRAL
+-----------------
+La consistencia vale más que la perfección individual.
+Un backend donde cada archivo sigue la misma convención, aunque no sea la "óptima
+teórica", es mantenible. Un backend donde cada parte es brillante pero distinta es
+imposible de mantener — sobre todo cuando el que mantiene sos vos solo, meses después,
+o un cliente con equipo propio.
+
+B4 elige UNA forma de hacer cada cosa y la fija. La discusión de cuál es la mejor se
+da una vez, acá, no en cada proyecto.
+
+
+INPUTS
+------
+OBLIGATORIOS:
+- Handoff de B0 (stack y arquitectura cerrados).
+- Patrones seleccionados de B1, y de B2/B3 según apliquen.
+
+OPCIONALES:
+- Convenciones preexistentes del cliente (si tiene equipo, respetar las suyas).
+- Estándares de M8.4 (frontend) para mantener coherencia en el mismo repo.
+
+
+=====================================================================
+SECCIÓN 1 — ESTRUCTURA DE CARPETAS
+=====================================================================
+
+Estructura de referencia para un proyecto Next.js con backend (App Router).
+Adaptar al proyecto, pero mantener la separación de responsabilidades.
+
+  /app
+    /api
+      /[recurso]/route.ts        → Route Handlers (webhooks, endpoints HTTP) (B1-P2)
+    /(rutas de la app)           → páginas y layouts (frontend, M8.4)
+  /actions
+    /[dominio].ts                → Server Actions agrupadas por dominio (B1-P1)
+  /lib
+    /db
+      index.ts                   → cliente de DB / instancia del ORM (singleton)
+      schema.ts | prisma/        → schema (según ORM)
+    /auth
+      index.ts                   → config y helpers de auth (B1-A1..A6)
+    /validations
+      /[dominio].ts              → schemas de Zod por dominio (B1-P3)
+    /email                       → cliente y plantillas de email (B3-EMAIL) (si aplica)
+    /storage                     → cliente de object storage (B3-FILE) (si aplica)
+    /payments                    → cliente del PSP y helpers (B2) (si aplica)
+    /integrations
+      /[servicio].ts             → un cliente por tercero (B3-INT-1) (si aplica)
+    /jobs                        → definiciones de jobs y crons (B3-JOB) (si aplica)
+    errors.ts                    → forma de errores del proyecto (B1-P4)
+    env.ts                       → validación de env vars al arranque (B3-SEC-1)
+  /types                         → tipos compartidos (derivados de Zod donde aplique)
+
+REGLAS DE ESTRUCTURA:
+- Una responsabilidad por carpeta. La lógica de auth no vive en /actions, vive en /lib/auth.
+- Cliente de DB y de servicios externos como singleton en /lib. No instanciar el cliente
+  en cada archivo (en serverless agota conexiones).
+- Las validaciones (Zod) centralizadas en /lib/validations, no inline en cada acción.
+  El mismo schema se reusa entre Server Action y Route Handler.
+- Si una carpeta no aplica al proyecto (no hay pagos), no existe. No carpetas vacías.
+
+QUÉ NO HACER:
+- Lógica de negocio dentro de los componentes de React (frontend). El backend es backend.
+- Queries a la DB sueltas por toda la app. El acceso a datos pasa por una capa.
+- Mezclar Server Actions y Route Handlers sin criterio (B1 ya definió cuándo cada uno).
+
+
+=====================================================================
+SECCIÓN 2 — CONVENCIONES DE NOMBRES Y CÓDIGO
+=====================================================================
+
+NOMBRES:
+- Server Actions: verbo + sustantivo, describe la operación (createInvoice, updateProfile,
+  deleteProject). Una acción = una operación conceptual.
+- Route Handlers: la ruta describe el recurso (/api/webhooks/stripe, /api/files/upload).
+- Funciones de acceso a datos: describir la intención (getUserById, listProjectsByOrg).
+- Tablas/campos en DB: snake_case plural para tablas, snake_case para campos (B1-D1).
+  El ORM mapea a camelCase en TypeScript.
+- Schemas de Zod: nombre del recurso + Schema (createInvoiceSchema).
+- Env vars: SCREAMING_SNAKE_CASE; públicas con prefijo del framework, secrets sin él (B3-SEC-2).
+
+CÓDIGO:
+- TypeScript estricto. Nada de `any` sin justificación. Los tipos de datos derivan del
+  schema de Zod o del ORM, no se escriben dos veces.
+- El preámbulo de toda mutación es fijo y en este orden (B1): verificar sesión → validar
+  input (Zod) → verificar autorización y pertenencia → tocar la DB → revalidar cache.
+  Este orden no se altera. Es la columna vertebral de la seguridad.
+- Forma de respuesta/error única en todo el proyecto (B1-P4). No improvisar por endpoint.
+- Sin secrets hardcodeados jamás (B3-SEC-1). Todo secret pasa por /lib/env validado.
+- Errores manejados en los límites, nunca tragados en silencio (B1-P5).
+
+COMENTARIOS Y DOCUMENTACIÓN:
+- Comentar el PORQUÉ, no el qué. El código dice qué hace; el comentario dice por qué así.
+- Documentar las decisiones irreversibles de B0 en un README del proyecto (motor de DB,
+  multi-tenancy, auth provider) para quien mantenga después.
+
+
+=====================================================================
+SECCIÓN 3 — QA DE BACKEND (extiende M8.5/M8.6)
+=====================================================================
+
+M8.5/M8.6 miden Core Web Vitals, accesibilidad y calidad visual. Eso es frontend.
+B4 agrega la dimensión backend al QA. Antes de dar un backend por terminado, revisar:
+
+SEGURIDAD (lo no negociable):
+- ¿Toda query de datos de usuario filtra por pertenencia? (B1-A4 / IDOR)
+- ¿Toda Server Action y Route Handler verifica auth adentro? (B1-P1/P2)
+- ¿Toda entrada se valida con Zod en el backend? (B1-P3)
+- ¿Ningún secret en el código, repo o bundle del cliente? (B3-SEC)
+- ¿Webhooks con firma verificada? (B1-P2 / B2 / B3-INT-2)
+- ¿Errores sin filtrar internals al cliente? (B1-P4)
+- ¿Dependencias escaneadas (npm audit) sin vulnerabilidades críticas/altas? (B3-SEC-3)
+- ¿Headers de seguridad HTTP configurados y HTTPS forzado? (B3-SEC-5)
+- ¿Cuentas críticas con MFA y accesos viejos revocados? (B3-SEC-4 — responsabilidad del operador)
+
+CORRECTITUD:
+- ¿Las migraciones corren limpio desde cero en una DB vacía?
+- ¿El borrado (soft/hard) es consistente con el filtrado de queries? (B1-D4)
+- SI pagos: ¿el flujo completo de pago es idempotente y confirma por webhook? (B2)
+- ¿Las operaciones concurrentes críticas (stock, saldos) son atómicas?
+
+INTEGRIDAD Y PERFORMANCE:
+- ¿Las foreign keys tienen constraints reales y ON DELETE definido? (B1-D2)
+- ¿Las queries en listados frecuentes están indexadas? ¿Hay N+1 evidentes?
+- ¿Las llamadas a terceros tienen timeout y manejo de fallo? (B3-INT-1)
+
+RESILIENCIA:
+- ¿La caída de un tercero no-crítico tumba el request principal? (No debe — B3)
+- ¿Hay error tracking activo para enterarse de fallos? (B3-OBS-2)
+
+REGLA: una falla de la sección SEGURIDAD es bloqueante. No se "lanza igual y se arregla
+después". Las otras secciones se priorizan, pero seguridad frena el launch.
+
+
+=====================================================================
+SECCIÓN 4 — LAUNCH CHECKLIST DE BACKEND (extiende M10.7)
+=====================================================================
+
+M10.7 cubre el launch de frontend. Este checklist agrega la dimensión backend.
+Consolida los ítems que B1, B2 y B3 fueron dejando marcados. Verificar TODO lo que
+aplique antes de poner en producción.
+
+BASE DE DATOS:
+□ Migraciones aplicadas en producción (no solo en dev). (B1-D3)
+□ La DB de producción es distinta de la de dev/staging.
+□ Backups de la DB de producción configurados y verificados.
+□ Seeds de datos esenciales (roles, planes) corridos en prod; seeds de prueba NO. (B1-D6)
+□ Connection pooling configurado si el proveedor lo requiere (serverless).
+
+SECRETS Y ENTORNOS:
+□ Todos los secrets de producción cargados en el entorno de prod. (B3-SEC-1)
+□ Ningún secret de prod vive en dev; ningún .env commiteado.
+□ Ningún secret con prefijo público (NEXT_PUBLIC_). (B3-SEC-2)
+□ Validación de env al arranque pasa en prod (no falta ninguna var requerida).
+
+AUTH:
+□ Flujos de auth probados en prod (signup, login, reset, verificación).
+□ Protección de rutas activa (allowlist de públicas correcta). (B1-A3)
+□ Onboarding post-signup funciona (estado inicial, organización si multi-tenant). (B1-A5)
+
+PAGOS (si aplica):
+□ Claves del PSP en modo LIVE en prod (TEST en dev/staging). (B3-SEC-1)
+□ Webhooks de pago registrados en el PSP apuntando a la URL de PRODUCCIÓN. (B2-PAY-3)
+□ Firma de webhook verificada con el secret de prod.
+□ Flujo de pago completo probado en prod (con monto real chico o modo de prueba del PSP).
+□ Idempotencia de webhooks verificada. (B2-PAY-4)
+□ PSP confirmado operativo en la jurisdicción del cobro. (B2)
+
+INTEGRACIONES Y JOBS (si aplica):
+□ Email transaccional: SPF/DKIM/DMARC configurados en el dominio de prod. (B3-EMAIL-1)
+□ Envío de mail probado en prod (que llegue, que no caiga en spam).
+□ Webhooks de terceros registrados apuntando a prod, con firma verificada. (B3-INT-2)
+□ Jobs programados (cron) activos en prod y con endpoint protegido. (B3-JOB-2)
+□ Storage de archivos configurado en prod; archivos privados con URL firmada. (B3-FILE)
+
+OBSERVABILIDAD:
+□ Error tracking (Sentry u otro) activo en prod y recibiendo eventos. (B3-OBS-2)
+□ Logging estructurado funcionando, sin datos sensibles. (B3-OBS-1)
+□ Health check / uptime monitoring si el proyecto es crítico. (B3-OBS-3)
+
+DATOS Y PERFORMANCE (B5 + B3-Lifecycle):
+□ Backups de prod activos Y con un restore probado al menos una vez. (B3-LIFE-3)
+□ Todo listado que crece está paginado con tope máximo. (B5-PERF-5)
+□ Foreign keys usadas en filtros indexadas; sin N+1 en listados. (B5-PERF-3/4)
+□ Trabajo pesado fuera del request. (B5-PERF-7)
+□ Connection pooling configurado si el deploy es serverless. (B5-PERF-8)
+□ Rate limit en endpoints de auth e IA. (B5-PERF-6)
+□ Operaciones críticas (stock/saldos/cupos) atómicas. (B1-P7)
+□ TTL definido para logs/eventos; política de retención de datos personales. (B3-LIFE-1)
+□ Costo mensual estimado; features de costo variable (IA) con techo. (B5-PERF-12)
+□ Budgets de latencia/error definidos en rutas críticas (proyectos de escala). (B5-PERF-10/11)
+□ Si hay API pública: versión vigente y endpoints deprecados inventariados. (B1-P8/P9)
+
+RECUPERACIÓN (B6, si va a producción con usuarios reales):
+□ Plan de incidentes escrito ANTES del launch (severidad, aislamiento, playbook). (B6)
+□ Runbook mínimo por severidad (qué se corta y en qué orden). (B6-INC-9)
+□ Estrategia de rollback de código definida; autorización de rollback de datos acordada. (B6-INC-4)
+□ Degradación definida por cada dependencia externa (qué se degrada/pausa/informa). (B6-INC-5)
+□ Capacidad de aislar la parte rota sin caer entero, verificada. (B6-INC-3)
+
+VERIFICACIÓN FINAL DE SEGURIDAD:
+□ QA de backend sección SEGURIDAD (Sección 3) pasado completo, sin excepciones.
+□ Probado que un usuario no accede a datos de otro (IDOR). (B1-A4)
+□ Probado que no se puede obtener el producto sin pagar (si hay pagos). (B2)
+□ Dependencias escaneadas, sin vulnerabilidades críticas/altas abiertas. (B3-SEC-3)
+□ MFA activo en TODAS las cuentas críticas: GitHub, host, DB, PSP, auth, DNS, email. (B3-SEC-4)
+□ Accesos viejos revocados; menor privilegio aplicado. (B3-SEC-4)
+□ Headers de seguridad HTTP configurados; HTTPS forzado. (B3-SEC-5)
+□ SI hay datos sensibles (NIVEL 3-4: pagos, salud, financiero): considerar una revisión
+   de seguridad EXTERNA antes del primer launch con datos reales. El sistema reduce el
+   riesgo de diseño; no reemplaza un par de ojos profesionales sobre código que maneja
+   plata o datos de terceros. No es opcional cuando el riesgo es alto y hay terceros afectados.
+
+REGLA: este checklist no es opcional ni "para después". Un ítem de seguridad sin tachar
+frena el launch. Conecta con el gate de launch de M10.7 — ambos checklists (frontend y
+backend) deben pasar antes de ir a producción.
+
+
+OUTPUT DEL MÓDULO
+-----------------
+ESTRUCTURA:
+  Árbol de carpetas del proyecto: [definido según referencia, adaptado]
+  Carpetas activas: [listar solo las que aplican]
+
+CONVENCIONES:
+  Naming de actions/handlers/data/schemas: [confirmado consistente]
+  Preámbulo de mutaciones: [confirmado fijo en todas]
+  Forma de error única: [confirmada]
+  TypeScript estricto: [confirmado, any justificados]
+
+QA DE BACKEND:
+  Seguridad: [todos los ítems pasados — bloqueante, incl. dependencias/MFA/headers]
+  Correctitud: [estado]
+  Integridad/Performance: [estado — paginación, índices, N+1, pooling: B5]
+  Resiliencia: [estado — degradación y plan de recuperación: B6]
+
+LAUNCH CHECKLIST:
+  Estado por bloque: [DB / Secrets / Auth / Pagos / Integraciones / Observabilidad / Datos-Performance / Recuperación / Seguridad]
+  Ítems pendientes: [listar — ninguno de seguridad puede quedar pendiente]
+
+README del proyecto con decisiones irreversibles: [creado/actualizado]
+
+
+GATE DE APROBACIÓN [el gate final antes de producción]
+------------------------------------------------------
+Este es el último gate de la capa backend. Verificar:
+- ¿El QA de backend sección SEGURIDAD pasó completo? (bloqueante)
+- ¿El launch checklist de backend está completo en todo lo que aplica?
+- ¿Ningún ítem de seguridad quedó pendiente "para después"?
+- ¿Dependencias escaneadas, MFA en cuentas críticas, headers de seguridad puestos? (B3-SEC-3/4/5)
+- ¿El backup de prod tiene un restore PROBADO, no solo configurado? (B3-LIFE-3)
+- SI va a producción con usuarios: ¿existe el plan de recuperación de B6 escrito? (B6)
+- SI hay datos NIVEL 3-4: ¿se evaluó una revisión de seguridad externa? (B4)
+- ¿El launch checklist de frontend (M10.7) también está completo?
+- ¿Las decisiones irreversibles de B0 están documentadas para quien mantenga?
+
+Falla cualquiera → no va a producción. Este gate y el de M10.7 son la doble llave del launch.
+
+
+TESTS
+-----
+- ¿Un desarrollador nuevo (o vos en 6 meses) entiende dónde vive cada cosa? (estructura)
+- ¿El naming es predecible en todo el proyecto? (convenciones)
+- ¿El QA de seguridad está 100%? (no negociable)
+- ¿El checklist de launch no tiene ningún ítem de seguridad pendiente?
+- ¿Las migraciones corren en prod, no solo en dev?
+- ¿Los secrets de prod están separados y completos?
+
+
+FAIL CONDITIONS
+---------------
+- Estructura inconsistente (cada parte organizada distinta).
+- Lógica de negocio o queries sueltas en componentes de frontend.
+- Cliente de DB instanciado por request (agota conexiones en serverless).
+- Naming arbitrario o inconsistente entre módulos.
+- Preámbulo de seguridad alterado u omitido en alguna mutación.
+- Launch con un ítem de seguridad pendiente.
+- Migraciones no aplicadas en prod.
+- Secrets de prod incompletos o mezclados con dev.
+- Claves de pago en modo TEST en producción (o LIVE en dev).
+- Webhooks apuntando a la URL equivocada de entorno.
+- Producción sin error tracking.
+- Dependencias con vulnerabilidades críticas/altas abiertas al lanzar (B3-SEC-3).
+- Cuenta crítica sin MFA al lanzar (B3-SEC-4).
+- App servida sin headers de seguridad o sin HTTPS (B3-SEC-5).
+- Launch con datos NIVEL 3-4 sin haber considerado revisión de seguridad externa.
+- Decisiones irreversibles sin documentar.
+
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como tech lead cerrando el proyecto para producción.
+Tu trabajo no es decidir arquitectura (eso fue B0) ni elegir patrones (B1-B3): es
+garantizar que todo esté organizado, nombrado y verificado de forma consistente y segura.
+Fijá UNA estructura y UNA convención, y aplicalas parejo. La consistencia vale más que
+la brillantez individual, sobre todo para quien mantenga después.
+Corré el QA de backend: la sección de SEGURIDAD es bloqueante, no se lanza con un ítem
+de seguridad abierto.
+Corré el launch checklist de backend completo, consolidando lo que dejaron B1, B2 y B3.
+Verificá que migraciones, secrets, webhooks y monitoring estén bien en PRODUCCIÓN, no
+solo en dev.
+Documentá las decisiones irreversibles de B0 para el que venga después.
+Este es el gate final: junto con M10.7, son la doble llave que abre producción.

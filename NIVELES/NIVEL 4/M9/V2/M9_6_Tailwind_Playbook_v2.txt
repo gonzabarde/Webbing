@@ -1,0 +1,238 @@
+M9.6 — TAILWIND PLAYBOOK (v2)
+==============================
+
+OBJETIVO
+--------
+Definir patrones de implementación visual con Tailwind que sean consistentes y escalables.
+Este módulo asume que M8.4 ya definió tokens, naming convention y standards de entorno.
+M9.6 no los redefine: los lleva a patrones concretos de Tailwind.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Token system de M8.4 (categorías y valores ya definidos)
+- Layout pattern de M9.1
+- Component map de M9.2
+- Motion rules de M8.3/M9.3
+- Stack M8.1
+
+PROCESO CLAUDE
+--------------
+1. Confirmar el token system de M8.4. No redefinir.
+2. Documentar el TOKEN MAPPING: cómo los tokens se mapean a Tailwind.
+3. Definir los patrones de layout en Tailwind.
+4. Definir los patrones de tipografía.
+5. Definir los patrones de espaciado.
+6. Definir las reglas de responsive.
+7. Definir cuándo usar utilities vs. cuándo extraer con CVA o @apply.
+8. Definir cuándo usar CSS custom en lugar de utilities.
+9. Documentar anti-patterns concretos.
+
+TOKEN MAPPING
+--------------
+Los CSS custom properties de M8.4 se mapean a Tailwind en tailwind.config.ts.
+Esta es la fuente de verdad. Todo el sistema visual pasa por aquí.
+
+Ejemplo de configuración:
+  theme: {
+    extend: {
+      colors: {
+        primary:   'var(--color-primary)',
+        accent:    'var(--color-accent)',
+        neutral:   {
+          100: 'var(--color-neutral-100)',
+          200: 'var(--color-neutral-200)',
+          900: 'var(--color-neutral-900)',
+        },
+        bg:        'var(--color-bg)',
+        fg:        'var(--color-fg)',
+      },
+      spacing: {
+        xs:   'var(--space-xs)',
+        sm:   'var(--space-sm)',
+        md:   'var(--space-md)',
+        lg:   'var(--space-lg)',
+        xl:   'var(--space-xl)',
+      },
+      fontFamily: {
+        heading: 'var(--font-heading)',
+        body:    'var(--font-body)',
+      },
+      transitionDuration: {
+        micro:  'var(--duration-micro)',
+        state:  'var(--duration-state)',
+        brand:  'var(--duration-brand)',
+      },
+    }
+  }
+
+Uso correcto después del mapping:
+  text-accent, bg-primary, p-lg, font-heading, duration-state
+
+Uso incorrecto (arbitrary values sin mapping):
+  text-[var(--color-accent)] — verboso y difícil de mantener
+  text-[#ff6b35] — hardcoded sin token
+  p-[32px] — valor sin token
+
+ANTI-PATTERNS DE TAILWIND
+--------------------------
+Con código malo vs. bueno.
+
+ANTI-PATTERN 1 — Clase infinita sin extracción
+  Malo:
+    className="flex items-center justify-between px-lg py-md bg-bg
+    border border-neutral-200 rounded-md shadow-sm hover:shadow-md
+    transition-shadow duration-state cursor-pointer select-none
+    sm:flex-col sm:items-start sm:gap-sm md:flex-row"
+
+  Bueno: extraer con CVA o como componente reutilizable si aparece 3+ veces.
+    Si aparece solo una vez, puede quedarse inline pero documentar por qué.
+
+ANTI-PATTERN 2 — Arbitrary values en lugar de tokens
+  Malo:
+    className="text-[#1a1a2e] bg-[#f0ede8] p-[24px] text-[18px]"
+  Bueno:
+    className="text-fg bg-bg p-md text-body"
+
+ANTI-PATTERN 3 — @apply para todo
+  Malo:
+    .card { @apply flex flex-col gap-sm p-md bg-bg rounded-md border border-neutral-200; }
+    /* Tailwind pierde su ventaja y se vuelve CSS regular */
+  Bueno: @apply solo para elementos base de HTML global (body, h1, p, a) en globals.css.
+    Para componentes: usar className directamente o CVA para variantes.
+
+PATRONES DE IMPLEMENTACIÓN
+----------------------------
+
+CONTAINER PATTERN
+  El ancho máximo del contenido es una decisión de sistema, no caso por caso.
+  Clase base: mx-auto px-sm sm:px-md lg:px-lg max-w-screen-xl
+  Variantes:
+    - Contenedor estándar: max-w-screen-xl (1280px)
+    - Contenedor ancho: max-w-screen-2xl (1536px)
+    - Contenedor editorial: max-w-3xl (texto de lectura, máximo 65ch)
+  Nunca usar max-w arbitrario sin una razón de sistema.
+
+SECTION SPACING PATTERN
+  El espacio entre secciones es consistente y basado en tokens.
+  Vertical spacing por sección: py-xl sm:py-2xl (ajustar según el sistema de escala)
+  Usar la misma clase en todas las secciones del proyecto.
+  No decidir el padding de sección caso por caso.
+
+GRID PATTERN
+  2 columnas: grid grid-cols-1 md:grid-cols-2 gap-md
+  3 columnas: grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md
+  4 columnas: grid grid-cols-2 md:grid-cols-4 gap-sm
+  Asimetría (60/40): grid grid-cols-5 (col 1: col-span-3, col 2: col-span-2)
+  No usar grid con columnas fijas sin pensar el responsive.
+
+TYPOGRAPHY SCALE PATTERN
+  Los tamaños de texto vienen del sistema de escala de M3.
+  Mapear en tailwind.config:
+    fontSize: {
+      xs: 'var(--text-xs)',
+      sm: 'var(--text-sm)',
+      base: 'var(--text-base)',
+      ...
+      hero: 'var(--text-hero)',
+    }
+  Uso: text-hero font-heading (titular), text-base font-body (body)
+  Nunca text-[89px] ni text-9xl sin token.
+
+COLOR ROLE PATTERN
+  Los colores tienen roles, no valores arbitrarios.
+  bg-bg: fondo principal
+  text-fg: texto principal
+  text-accent: énfasis, CTAs
+  bg-primary: fondos de sección alternativa
+  border-neutral-200: divisores, bordes de card
+  Nunca agregar un color nuevo sin definirlo en el token system.
+
+STATE PATTERN
+  Hover, focus, active y disabled son consistentes en todo el proyecto.
+  Botón primario base:
+    className="bg-accent text-bg px-md py-sm font-heading text-sm
+    hover:bg-accent/90 focus:outline-none focus-visible:ring-2
+    focus-visible:ring-accent focus-visible:ring-offset-2
+    active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed
+    transition-all duration-micro"
+  Definir este patrón una vez. No repetir en cada botón del proyecto.
+
+CVA PATTERN PARA VARIANTES
+-----------------------------
+Class Variance Authority (CVA) es el estándar para variantes de componentes en Tailwind.
+Usar cuando un componente tiene múltiples variantes de estilo.
+
+Instalación: npm install class-variance-authority
+
+Ejemplo básico — Button con variantes:
+  import { cva } from 'class-variance-authority'
+
+  const buttonVariants = cva(
+    // base: clases que aplican siempre
+    'inline-flex items-center justify-center font-heading text-sm transition-all duration-micro',
+    {
+      variants: {
+        intent: {
+          primary: 'bg-accent text-bg hover:bg-accent/90',
+          secondary: 'bg-transparent border border-fg text-fg hover:bg-neutral-100',
+          ghost: 'text-fg hover:bg-neutral-100',
+        },
+        size: {
+          sm: 'px-sm py-xs',
+          md: 'px-md py-sm',
+          lg: 'px-lg py-md',
+        },
+      },
+      defaultVariants: {
+        intent: 'primary',
+        size: 'md',
+      },
+    }
+  )
+
+  // Uso:
+  <button className={buttonVariants({ intent: 'secondary', size: 'lg' })}>
+    Texto
+  </button>
+
+Cuándo usar CVA: cuando un componente tiene 2+ variantes de estilo que cambian por contexto.
+Cuándo no usar CVA: para componentes sin variantes. No agregar complejidad innecesaria.
+
+CUÁNDO USAR CSS CUSTOM EN LUGAR DE UTILITIES
+---------------------------------------------
+Usar CSS custom (en globals.css o módulo .css) cuando:
+- El selector es complejo (::before, :not, :has, nth-child).
+- Las clases de Tailwind serían más difíciles de leer que el CSS equivalente.
+- Se necesita una animación compleja que Tailwind no puede expresar limpiamente.
+- El componente necesita propiedades CSS que Tailwind no cubre.
+
+No usar CSS custom por default. Usar Tailwind y migrar a CSS solo si hay razón.
+
+TESTS
+-----
+- ¿El token mapping está completo en tailwind.config.ts?
+- ¿No hay arbitrary values donde hay tokens disponibles?
+- ¿Los tres anti-patterns están verificados?
+- ¿Los patrones de container, grid y spacing son consistentes?
+- ¿Se usa CVA para componentes con variantes?
+- ¿El CSS custom se usa solo cuando Tailwind no alcanza?
+
+OUTPUT
+------
+- Token mapping (fragmento de tailwind.config.ts)
+- Patrones de implementación activos en el proyecto
+- CVA components si aplica
+- Anti-patterns verificados
+- Reglas de extracción del proyecto
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como arquitecto de implementación con Tailwind.
+Confirmá el token system de M8.4. No lo redefinas.
+Documentá el TOKEN MAPPING: cómo los CSS custom properties se mapean al tailwind.config.
+Definí los patrones concretos: container, section spacing, grid, typography, colors, states.
+Si hay componentes con variantes, usa CVA.
+Verificá los 3 anti-patterns y asegurate de que no estén en el proyecto.
+No me des clases sueltas sin sistema.
+Quiero un Tailwind organizado que escale con el proyecto.

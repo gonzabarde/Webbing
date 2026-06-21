@@ -1,0 +1,169 @@
+M12.3 — DECISION DECOMPOSITION ENGINE (v3)
+==========================================
+
+OBJETIVO
+--------
+Desarmar una referencia en decisiones concretas.
+No analizar "la web" como un todo.
+Analizar las decisiones específicas que la hacen funcionar.
+
+INPUTS
+------
+- referencia clasificada
+- tipo de proyecto
+- categoría
+- intención de diseño
+
+DECOMPOSITION PRIORITY POR TIPO DE PROYECTO
+---------------------------------------------
+No todas las áreas importan igual en todos los proyectos.
+Comenzar siempre por las áreas críticas para ese tipo.
+
+MARKETING SITE / LANDING (conversión):
+  Críticas: hero, CTA, storytelling, ritmo visual
+  Importantes: tipografía, color, imágenes, spacing
+  Secundarias: footer, cards, navegación
+
+LUXURY / HIGH-END (percepción):
+  Críticas: hero, tipografía, spacing, imágenes, motion
+  Importantes: color, jerarquía, ritmo visual
+  Secundarias: CTA, footer, navegación
+
+SAAS / PRODUCTO DIGITAL (claridad + conversión):
+  Críticas: hero, grid, jerarquía, CTA, cards
+  Importantes: tipografía, color, interacción
+  Secundarias: footer, motion, storytelling
+
+PORTFOLIO / AGENCIA (experiencia + memoria):
+  Críticas: hero, motion, imágenes, ritmo visual, firma visual
+  Importantes: tipografía, storytelling, grid
+  Secundarias: CTA, footer
+
+CLÍNICA / SALUD (confianza):
+  Críticas: hero, jerarquía, tipografía, color
+  Importantes: storytelling, CTA, imágenes
+  Secundarias: motion, cards, footer
+
+Regla: analizar siempre las 4 áreas críticas del tipo de proyecto antes de pasar a las demás.
+
+DECISIONES A DESCOMPONER
+------------------------
+- hero
+- navegación
+- grid
+- spacing
+- tipografía
+- color
+- motion
+- imágenes
+- cards
+- CTA
+- storytelling
+- jerarquía
+- footer
+- ritmo visual
+- densidad
+- interacción
+
+MINIMUM DECOMPOSITION REQUIREMENT
+----------------------------------
+Toda referencia debe tener al menos 5 decisiones descompuestas con el formato completo.
+Menos de 5 decisiones completas = descomposición insuficiente.
+Las 5 deben incluir: mínimo 2 de las áreas críticas del tipo de proyecto.
+
+PROCESO CLAUDE
+--------------
+1. Identificar el tipo de proyecto de la referencia.
+2. Ordenar las áreas por prioridad según el tipo.
+3. Analizar primero las 4 áreas críticas del tipo.
+4. Completar las áreas importantes si hay tiempo.
+5. Para cada decisión: completar el formato estándar.
+6. Verificar que hay mínimo 5 decisiones con formato completo.
+
+FORMATO ESTÁNDAR POR DECISIÓN
+------------------------------
+Decisión: [nombre del área / elemento]
+
+Qué hace:
+  [descripción de la decisión en términos visuales concretos]
+
+Función:
+  [qué hace en la experiencia del usuario]
+
+Efecto:
+  [qué percepción genera — en términos de M4.5: calma, control, deseo, etc.]
+
+Razón:
+  [por qué está ahí — qué problema de diseño o comunicación resuelve]
+
+Riesgo de copia:
+  [qué pasaría si se replica sin entender el principio]
+
+Reusabilidad:
+  reusable / adaptable / específico
+
+---
+
+EJEMPLO COMPLETO
+
+Decisión: Hero tipográfico de una agencia de diseño
+
+Qué hace:
+  Titular a 120px en sans geométrica bold ocupa el 70% del viewport.
+  Sin imagen. Sin subtítulo visible. Solo el titular y un CTA mínimo.
+
+Función:
+  Establece la firma tipográfica como protagonista absoluta.
+  Elimina competencia visual entre tipo e imagen.
+
+Efecto:
+  Percepción de control, autoría y criterio. Señal de que la marca confía en su propio punto de vista.
+
+Razón:
+  Un estudio creativo que vende criterio no necesita imagen de hero.
+  El tipo a esta escala demuestra la competencia sin declararla.
+
+Riesgo de copia:
+  Si el copy es genérico ("somos un estudio creativo"), la escala extrema amplifica el vacío
+  en lugar del carácter. Solo funciona con copy que tenga punto de vista fuerte.
+
+Reusabilidad: adaptable
+
+---
+
+GATES
+-----
+GATE 12.3-A — ¿Hay al menos 5 decisiones con formato completo?
+  Falla → continuar descomponiendo.
+
+GATE 12.3-B — ¿Las áreas críticas del tipo de proyecto están cubiertas?
+  Falla → analizar primero las críticas antes de avanzar.
+
+GATE 12.3-C — ¿Cada decisión tiene función, efecto Y razón?
+  Falla → la descomposición es superficial. No es válida.
+
+GATE 12.3-D — ¿El riesgo de copia está identificado?
+  Falla → completar antes de pasar al Pattern Extraction.
+
+OUTPUT
+------
+- tipo de proyecto identificado
+- áreas prioritarias según el tipo
+- lista de decisiones descompuestas (mínimo 5 con formato completo)
+- áreas analizadas marcadas por prioridad
+- decisiones críticas vs. secundarias
+
+FAIL CONDITIONS
+---------------
+- describir sin explicar función ni razón
+- no llegar a las 5 decisiones mínimas con formato completo
+- omitir las áreas críticas del tipo de proyecto
+- copiar la estructura de la referencia en vez de descomponerla
+
+PROMPT PARA CLAUDE
+------------------
+Identificá el tipo de proyecto de la referencia.
+Comenzá por las áreas críticas de ese tipo.
+Para cada decisión: completá el formato completo (qué hace, función, efecto, razón, riesgo, reusabilidad).
+No avancés sin tener al menos 5 decisiones con el formato completo.
+Si no podés explicar función, efecto y razón, todavía no entendiste la pieza.

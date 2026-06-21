@@ -1,0 +1,129 @@
+M12.0 — REFERENCE PHILOSOPHY (v3)
+=================================
+
+OBJETIVO
+--------
+Definir el criterio operativo del sistema.
+Las referencias existen para aprender decisiones visuales y convertirlas en principios
+reutilizables. Este módulo evita que la biblioteca se convierta en una colección de
+copias bonitas sin inteligencia.
+
+PRINCIPIO CENTRAL
+-----------------
+copiar forma = clon
+copiar patrón = permitido si se abstrae correctamente
+copiar principio = objetivo
+
+Una referencia debe enseñar algo que pueda reaplicarse.
+Si una referencia no cambia una decisión, no sirve.
+
+QUÉ SIGNIFICA APRENDER DE UNA REFERENCIA
+-----------------------------------------
+Aprender de una referencia NO es:
+- guardar el layout y usarlo en otro proyecto
+- replicar la paleta de colores
+- copiar la estructura de secciones
+- imitar el tono visual
+
+Aprender de una referencia SÍ es:
+- entender POR QUÉ ese layout funciona para ese posicionamiento
+- extraer la lógica de la paleta (qué percepción produce y cómo)
+- identificar el principio detrás de la estructura de secciones
+- abstraer el sistema visual en una regla reutilizable
+
+QUÉ PUEDE COPIARSE Y QUÉ NO
+-----------------------------
+NUNCA copiar:
+- la composición exacta del hero
+- la distribución específica de elementos
+- la firma visual reconocible de otra marca
+- el ritmo visual construido para ese concepto específico
+
+PUEDE ABSTRAERSE:
+- la lógica que produce una percepción específica
+- la combinación de variables que genera un efecto
+- el principio de jerarquía visual (no la jerarquía específica)
+- el sistema de decisiones (no las decisiones individuales)
+
+TIPOS DE APRENDIZAJE — CON EJEMPLOS OPERATIVOS
+------------------------------------------------
+1. APRENDIZAJE DE COMPOSICIÓN
+   Qué es: cómo se ordenan los elementos y por qué ese orden funciona.
+   Pregunta: ¿qué principio compositivo hace que esto se lea bien?
+   Ejemplo malo: "el texto está a la izquierda y la imagen a la derecha"
+   Ejemplo bueno: "el split 60/40 con el peso textual a la izquierda crea
+     un punto de entrada dominante que guía la lectura de izquierda a derecha
+     mientras la imagen actúa como remate emocional"
+   Output esperado: "split pesado a izquierda + soporte visual a derecha =
+     lectura guiada + tensión equilibrada"
+
+2. APRENDIZAJE DE PERCEPCIÓN
+   Qué es: qué emoción o lectura genera la experiencia.
+   Pregunta: ¿qué variable visual produce esa emoción específica?
+   Ejemplo malo: "se siente premium"
+   Ejemplo bueno: "la combinación de densidad baja (pocas palabras por pantalla) +
+     espacio negativo dominante + tipografía con tracking ajustado produce
+     percepción de exclusividad y control"
+   Output esperado: "baja densidad + espacio negativo + tracking ajustado = premium silencioso"
+
+3. APRENDIZAJE DE JERARQUÍA
+   Qué es: qué se ve primero y por qué.
+   Pregunta: ¿qué decisión visual controla la secuencia de lectura?
+   Ejemplo malo: "el titular es grande"
+   Ejemplo bueno: "el titular a 90px genera un punto de entrada ineludible,
+     el subtítulo a 18px en color desaturado crea separación jerárquica visible,
+     el CTA en color de acento actúa como tercer punto de atención sin competir"
+   Output esperado: "escala extrema en titular + subtítulo desaturado + acento en CTA =
+     jerarquía de 3 niveles clara sin necesidad de otros recursos"
+
+4. APRENDIZAJE DE MOVIMIENTO
+   Qué es: cómo la animación cambia la experiencia.
+   Pregunta: ¿qué efecto perceptivo produce este sistema de motion?
+   Ejemplo malo: "el motion es lento y elegante"
+   Ejemplo bueno: "las entradas a 700ms con easing expo-out + stagger de 80ms
+     entre elementos + ausencia de motion en interacciones secundarias produce
+     sensación de control ceremonial"
+   Output esperado: "timing largo + easing expo + motion selectivo = ceremonial"
+
+5. APRENDIZAJE DE SISTEMA
+   Qué es: qué regla se repite en varias partes de la página.
+   Pregunta: ¿cuál es la regla que gobierna las decisiones visuales de toda la página?
+   Ejemplo malo: "el diseño es muy consistente"
+   Ejemplo bueno: "la regla del sistema es: siempre un elemento dominante por bloque,
+     siempre espacio negativo doble del estándar, siempre un solo color de acento"
+   Output esperado: "1 elemento dominante por bloque + espacio doble + acento único =
+     sistema visual de baja densidad con firma fuerte"
+
+GATES
+-----
+GATE 12.0-A — ¿La referencia enseña una decisión específica?
+  Si no: no entra.
+
+GATE 12.0-B — ¿Se está aprendiendo principio o copiando forma?
+  Si se está copiando forma: bloquear y documentar qué no copiar.
+
+GATE 12.0-C — ¿El principio puede reusarse en otro proyecto distinto?
+  Si no: la referencia es específica, no estructural. Guardar solo si tiene otro valor.
+
+OUTPUT
+------
+- tipo de aprendizaje identificado (1 de los 5)
+- principio visual extraído en formato operativo
+- forma descartada (qué no reutilizar)
+- criterio reusable
+- veredicto: entra / entra como referencia menor / no entra
+
+FAIL CONDITIONS
+---------------
+- confundir inspiración con aprendizaje
+- guardar una referencia solo porque "se ve bien"
+- no poder explicar qué enseña en una línea
+- producir output que describe en lugar de abstraer
+
+PROMPT PARA CLAUDE
+------------------
+Exprimí la referencia hasta convertirla en decisión visual.
+Identificá el tipo de aprendizaje (composición, percepción, jerarquía, movimiento, sistema).
+Formulá el principio en formato: "[variable A] + [variable B] = [efecto]".
+No guardes la superficie; guardá el principio.
+Si no hay principio reusable en ese formato, descartala.

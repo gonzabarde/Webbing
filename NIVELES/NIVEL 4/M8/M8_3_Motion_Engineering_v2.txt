@@ -1,0 +1,217 @@
+M8.3 — MOTION ENGINEERING (v2)
+==============================
+
+OBJETIVO
+--------
+Convertir la percepción y la dirección visual en un lenguaje de movimiento concreto.
+El motion no decora. Comunica.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Percepción objetivo (M4.5)
+- Visual Direction (M5) — incluyendo descriptor de motion si ya está definido
+- Signature System (M5)
+- Nivel de riesgo
+- Tipo de proyecto
+- Stack elegido (M8.1) — para elegir la herramienta correcta
+
+OPCIONALES:
+- Restricciones de performance
+- Preferencia del cliente
+- Referencias de motion
+
+PROCESO CLAUDE
+--------------
+1. Heredar o definir el descriptor de motion en 3 palabras.
+   PRIMERO: verificar si M5 Visual Direction ya definió el descriptor.
+   Si sí: heredarlo. No redefinirlo.
+   Si no: definirlo acá basándose en la percepción objetivo.
+   Ejemplos: "preciso y medido" / "fluido y orgánico" /
+   "ceremonial y lento" / "rápido y directo"
+
+2. Elegir la herramienta de implementación.
+   Basarse en el stack de M8.1:
+   - Astro / HTML estático: CSS transitions + CSS animations.
+     Para motion más complejo: GSAP vía CDN.
+   - Next.js sin motion intensivo: Framer Motion (integración nativa con React).
+   - Next.js con motion intensivo o scroll-based: GSAP + ScrollTrigger.
+   - Regla: no mezclar GSAP y Framer Motion en el mismo proyecto.
+     Elegir uno y ser consistente.
+
+3. Definir el propósito del motion para este proyecto.
+   Elegir máximo 2:
+   - guiar atención
+   - confirmar interacción
+   - reforzar percepción de lujo
+   - transmitir energía / velocidad
+   - explicar estado de UI
+   - crear memoria de marca
+
+4. Definir timing por tipo de interacción.
+   Ver TIMING GUIDE abajo.
+
+5. Definir easing por percepción.
+   Ver EASING GUIDE abajo.
+
+6. Definir stagger para elementos en lista o grilla.
+   Valor en ms entre cada elemento.
+   Ejemplo: lista de features con stagger de 80ms entre items.
+
+7. Definir densidad de movimiento.
+   Máximo de elementos animados simultáneamente.
+
+8. Definir sistema de aparición al scroll.
+   Qué entra primero, qué entra después, qué queda quieto.
+
+9. Definir sistema de transición entre páginas o secciones.
+
+10. Definir el fallback para prefers-reduced-motion.
+    Obligatorio. Ver sección abajo.
+
+11. Definir los límites del motion.
+    Qué no se va a animar y por qué.
+
+TIMING GUIDE
+------------
+Microinteracciones (hover, focus, active): 100-200ms
+Transiciones de estado (show/hide, expand): 200-400ms
+Transiciones de sección o página: 300-600ms
+Scroll reveal: 400-700ms
+Brand moments (carga, transiciones ceremoniales): 600-1200ms
+
+EASING GUIDE — POR PERCEPCIÓN
+-------------------------------
+ease-out: aterrizaje natural. Usar en entradas.
+  Para: confianza, calma, claridad. Velocidad media.
+ease-in-out: movimiento orgánico completo.
+  Para: transiciones de estado donde el elemento no entra ni sale.
+ease-in: aceleración. Usar en salidas.
+  Para: elementos que se van.
+linear: velocidad constante, mecánico.
+  Usar solo cuando el efecto explícitamente digital es intencional.
+spring: rebote físico. Orgánico, vivo.
+  Para: marcas cálidas, cercanía, cercanía humana.
+  No usar en lujo ni en precisión extrema.
+
+DENSIDAD DE MOVIMIENTO
+-----------------------
+1 elemento: foco total.
+2-3 elementos: sistema coherente.
+4+ simultáneos: ruido visual. El ojo no sabe adónde ir.
+Regla: si más de 3 elementos se mueven al mismo tiempo, revisar.
+
+STAGGER
+-------
+Definir el delay entre elementos consecutivos en listas o grillas.
+Valor recomendado: 60-120ms entre items.
+Regla: cuanto más grande el grupo, menor el stagger (para no hacer esperar mucho).
+Ejemplo: lista de 3 features → 100ms de stagger. Lista de 8 logos → 50ms.
+
+PREFERS-REDUCED-MOTION — FALLBACK OBLIGATORIO
+----------------------------------------------
+prefers-reduced-motion es una preferencia de sistema en iOS, Android,
+macOS y Windows que indica que el usuario prefiere menos movimiento.
+Es un criterio WCAG 2.1 nivel AAA y una necesidad real para usuarios
+con sensibilidad al movimiento o epilepsia fotosensible.
+
+Regla: todo sistema de motion debe tener un fallback explícito.
+
+Implementación CSS (siempre presente):
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+Para GSAP:
+Verificar window.matchMedia('(prefers-reduced-motion: reduce)').matches
+antes de inicializar animaciones complejas.
+Si es true: desactivar ScrollTrigger, reducir duraciones a 0 o near-0.
+
+Para Framer Motion:
+Usar useReducedMotion() hook.
+Si retorna true: pasar variants sin transform o con duración 0.
+
+En el output del módulo, documentar explícitamente:
+¿Qué animaciones se desactivan?
+¿Qué elementos quedan en su estado final sin transición?
+¿La experiencia sigue siendo coherente sin motion?
+
+EXCLUSIONES DE MOTION
+-----------------------
+Definir qué no se anima y justificar.
+Ejemplo de exclusiones comunes:
+- El logo: si la firma es tipográfica, el logo no debería moverse.
+- Elementos de texto largo: animar párrafos cansa y distrae la lectura.
+- Tablas de datos: el motion en tablas dificulta la lectura.
+- Elementos que el usuario necesita encontrar rápido (navegación, formularios).
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿El motion es central o secundario para este proyecto?
+   - Central (portfolio premium, marca con motion como firma):
+     Invertir en sistema de motion completo. GSAP + ScrollTrigger.
+   - Secundario (SaaS, clínica, institucional):
+     Motion sutil y funcional. Framer Motion o CSS puro.
+
+2. ¿La percepción pide calma o energía?
+   - Calma: tiempos 400-600ms, ease-out suave, stagger largo, densidad 1-2.
+   - Energía: tiempos 150-300ms, entradas directas, densidad hasta 3.
+
+3. ¿La marca busca lujo o precisión?
+   - Lujo: motion ceremonial (600-1000ms), sin rebote, ease-in-out.
+   - Precisión: motion exacto y corto (100-200ms), linear o ease-out.
+
+4. ¿Hay restricción de performance?
+   - Sí: solo CSS transitions. Sin GSAP. Sin scroll-based animation.
+   - No: evaluar si el valor perceptivo justifica la complejidad técnica.
+
+TESTS
+-----
+- ¿El descriptor de motion fue heredado de M5 o definido acá con justificación?
+- ¿La herramienta de implementación corresponde al stack de M8.1?
+- ¿El propósito del motion está definido (máximo 2)?
+- ¿El stagger está definido para listas y grillas?
+- ¿El fallback para prefers-reduced-motion está documentado?
+- ¿Las exclusiones de motion están definidas con razón?
+- ¿Hay elementos que se animan solo por gusto?
+- ¿El motion puede sostenerse técnicamente en el stack elegido?
+
+OUTPUT
+------
+Al completar, llenar el handoff de M8 con:
+
+Descriptor de motion (3 palabras):
+Herramienta elegida + justificación:
+Propósito del motion (máximo 2):
+Timing rules (por tipo de interacción):
+Easing rules (por percepción):
+Stagger value:
+Densidad máxima:
+Scroll reveal order:
+Transición de página:
+Exclusiones de motion:
+Fallback prefers-reduced-motion: [qué se desactiva + fragmento de implementación]
+
+FAIL CONDITIONS
+---------------
+- Motion decorativo sin propósito definido.
+- Descriptor de motion no heredado ni definido.
+- Sin fallback para prefers-reduced-motion.
+- Herramienta de motion incompatible con el stack de M8.1.
+- Más de 3 elementos animados simultáneamente sin justificación.
+- Tiempos incongruentes con la percepción objetivo.
+- Easing arbitrario sin relación con el carácter de la marca.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como ingeniero de motion con criterio creativo.
+Primero verificá si M5 ya definió el descriptor de motion.
+Si sí, heredalo. Si no, definilo acá basándote en la percepción objetivo.
+Elegí la herramienta correcta según el stack de M8.1.
+Definí timing, easing, stagger, densidad y exclusiones.
+Documentá el fallback para prefers-reduced-motion: es obligatorio.
+Cada movimiento debe comunicar algo. Sin propósito, no se anima.

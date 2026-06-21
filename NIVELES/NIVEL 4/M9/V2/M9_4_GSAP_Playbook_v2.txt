@@ -1,0 +1,167 @@
+M9.4 — GSAP PLAYBOOK (v2)
+==========================
+
+OBJETIVO
+--------
+Definir cuándo GSAP vale la pena, qué patrones usar y cuál es el costo real.
+Este módulo evita GSAP ornamental y GSAP ignorante de performance.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Stack M8.1 (confirmar que no hay conflicto con el framework)
+- Motion descriptor de M8.3
+- Motion patterns elegidos de M9.3
+- Nivel de riesgo
+- Restricciones de performance
+
+PROCESO CLAUDE
+--------------
+1. Decidir si GSAP entra o no. Ver árbol de decisión.
+2. Si entra: identificar el uso principal y los patrones a aplicar.
+3. Evaluar cada patrón en la tabla costo × impacto.
+4. Verificar compatibilidad con el stack (especialmente Next.js App Router).
+5. Definir estrategia de carga de GSAP (CDN vs. bundle).
+6. Definir exclusiones y lo que se hace con CSS/Framer Motion en su lugar.
+7. Confirmar fallback prefers-reduced-motion.
+
+CUÁNDO GSAP SÍ
+---------------
+- Scroll storytelling donde la sincronización con el scroll es precisa.
+- Animación de marca central donde el motion es parte de la firma visual.
+- Secuencias complejas con sincronización entre múltiples capas.
+- Experiencias donde CSS transitions no tienen suficiente control de easing.
+- Portfolio o proyectos donde el motion es parte del producto entregado.
+
+CUÁNDO GSAP NO
+---------------
+- Microinteracciones simples (hover, focus, active state) → usar CSS.
+- Motion de UI estándar (tabs, acordeones, toggles) → usar CSS o Framer Motion.
+- Proyectos con presupuesto de performance muy ajustado.
+- Categorías donde el motion excesivo resta credibilidad (clínica, institucional).
+- Proyectos con timeline corto donde el costo de implementación de GSAP no se justifica.
+
+PATRONES GSAP — COSTO × IMPACTO
+----------------------------------
+Evaluar cada patrón antes de elegirlo.
+Costo 1-5: esfuerzo de implementación, debugging y mantenimiento.
+Impacto 1-5: valor perceptivo real en el proyecto.
+
+Patrón                | Costo | Impacto | Cuándo vale
+----------------------|-------|---------|-------------------------------------------
+Timeline secuencial   |  2    |   4     | hero reveals, brand moments
+ScrollTrigger básico  |  3    |   4     | parallax suave, fade-in por scroll
+ScrollTrigger + pin   |  4    |   5     | scroll storytelling, sticky narrative
+Stagger controlado    |  2    |   3     | grids, listas, features
+Morphing de formas    |  5    |   4     | transiciones de logo, iconos
+Reveal masks          |  3    |   5     | imágenes premium, hero editorial
+Parallax controlado   |  3    |   3     | solo versión sutil (2 capas máx)
+Page transition       |  4    |   4     | cuando el motion es firma de marca
+
+Cuadrante de decisión:
+- Costo 1-2 / Impacto 4-5 → PRIORIDAD MÁXIMA. Siempre usar si aplica.
+- Costo 4-5 / Impacto 4-5 → EVALUAR. Solo si el proyecto lo justifica.
+- Costo 1-2 / Impacto 1-3 → OPCIONAL. Solo si el tiempo lo permite.
+- Costo 4-5 / Impacto 1-3 → DESCARTAR. No vale la inversión.
+
+ANTI-PATTERNS DE GSAP
+-----------------------
+Cada uno tiene una consecuencia específica y medible.
+
+"Parallax con 3+ capas en el hero"
+  → El efecto es nauseabundo en dispositivos lentos y destruye el LCP.
+  → El scroll jank es medible en Chrome DevTools Performance.
+  → Solución: máximo 2 capas, velocidad muy sutil (0.05-0.1 de la velocidad del scroll).
+
+"Timeline secuencial con más de 8 elementos en secuencia"
+  → El usuario espera tanto que percibe el sitio como lento aunque la carga sea rápida.
+  → Solución: no más de 5 elementos en la misma secuencia. Stagger para el resto.
+
+"ScrollTrigger en un elemento que está dentro de un contenedor con overflow: hidden"
+  → El trigger se calcula mal y la animación aparece en el momento equivocado.
+  → Solución: asegurarse de que el elemento trigger y su contenedor no tengan overflow oculto.
+
+"GSAP animando propiedades que disparan layout (width, height, top, left)"
+  → CLS sube y la performance cae. El browser recalcula todo el layout en cada frame.
+  → Solución: solo animar transform y opacity. Nunca propiedades que disparan layout.
+
+"GSAP sin cleanup en useEffect de React"
+  → Memory leak en Next.js. La animación se registra múltiples veces al navegar.
+  → Solución: siempre retornar ctx.revert() o tl.kill() en el return del useEffect.
+
+COMPATIBILIDAD CON NEXT.JS APP ROUTER
+---------------------------------------
+GSAP tiene quirks específicos con el App Router de Next.js 13+.
+
+Reglas obligatorias:
+1. GSAP solo puede usarse en Client Components ('use client').
+   No puede usarse en Server Components.
+
+2. Siempre inicializar GSAP dentro de useEffect:
+   useEffect(() => {
+     const ctx = gsap.context(() => {
+       // animaciones aquí
+     }, containerRef)
+     return () => ctx.revert() // cleanup obligatorio
+   }, [])
+
+3. Para ScrollTrigger en Next.js App Router:
+   useEffect(() => {
+     gsap.registerPlugin(ScrollTrigger)
+     // configurar triggers
+     return () => ScrollTrigger.getAll().forEach(t => t.kill())
+   }, [])
+
+4. No inicializar GSAP en el cuerpo del componente ni en módulos importados sin useEffect.
+   Causa hydration mismatch y SSR errors.
+
+5. Con Framer Motion: no mezclar en el mismo componente.
+   Elegir uno por proyecto. Si GSAP ya está, no agregar Framer Motion.
+
+ESTRATEGIA DE CARGA DE GSAP
+-----------------------------
+CDN (via <script> en layout.tsx): para proyectos donde GSAP se usa en pocas páginas.
+  Ventaja: no aumenta el bundle. Desventaja: request adicional.
+
+Bundle (npm install gsap): para proyectos donde GSAP se usa extensamente.
+  Ventaja: tree-shaking posible. Desventaja: aumenta el bundle.
+
+Plugins (ScrollTrigger, MorphSVGPlugin, etc.): registrar una sola vez en el layout raíz.
+  gsap.registerPlugin(ScrollTrigger) en el useEffect del layout.
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿El motion es central para la percepción o firma del proyecto?
+   - Sí → GSAP es candidato.
+   - No → CSS transitions o Framer Motion. No GSAP.
+
+2. ¿La experiencia depende de scroll storytelling preciso?
+   - Sí → ScrollTrigger es la herramienta correcta.
+   - No → evaluar si CSS scroll-driven animations alcanza.
+
+3. ¿El costo de implementación está justificado por el impacto?
+   - Ver tabla costo × impacto. Solo usar si el patrón está en cuadrante Prioridad o Evaluar.
+   - Si está en Descartar → no usar GSAP para ese patrón.
+
+4. ¿El stack es Next.js App Router?
+   - Sí → seguir las reglas de compatibilidad obligatorias.
+   - No → usar normalmente.
+
+OUTPUT
+------
+- GSAP: sí / no (con justificación)
+- Patrones elegidos con costo × impacto
+- Patrones descartados (y alternativa)
+- Estrategia de carga
+- Reglas de compatibilidad aplicadas
+- Fallback prefers-reduced-motion confirmado
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como director de motion técnico.
+Primero decidí si GSAP vale la pena para este proyecto usando el árbol de decisiones.
+Si sí: elegí los patrones con la tabla costo × impacto. Solo cuadrantes Prioridad o Evaluar.
+Verificá los anti-patterns y asegurate de que ninguno aplique al proyecto.
+Si el stack es Next.js App Router: confirmá que se van a seguir las reglas de compatibilidad.
+Dame criterio de decisión, no código todavía.
+Si CSS o Framer Motion alcanzan, decilo sin rodeos.

@@ -1,0 +1,155 @@
+M12.9 — REFERENCE EVOLUTION SYSTEM (v3)
+=======================================
+
+OBJETIVO
+--------
+Hacer que la biblioteca aprenda con el uso real.
+M12 no debe congelarse.
+Registra qué referencias envejecen bien, cuáles se vuelven cliché y cuáles dejan de servir.
+Agrega: Promotion Criteria, Deprecation Threshold y Evolution Review.
+
+ESTADOS DEL CICLO DE VIDA
+-------------------------
+emergent:
+  Nueva, prometedora, todavía no validada en proyectos reales.
+  Puede usarse con criterio pero no como guía primaria.
+
+validated:
+  Funciona en al menos 2 proyectos reales distintos.
+  Puede usarse como referencia principal.
+
+standard:
+  Referencia confiable y repetidamente útil.
+  Funciona bien como guía primaria y los patrones están estabilizados.
+
+legacy:
+  Útil históricamente pero ya no sorprende.
+  Se volvió demasiado común o fue adoptada masivamente por la categoría.
+  Puede consultarse para entender la categoría, no para diferenciarse.
+
+deprecated:
+  Ya no conviene usarla como referencia principal.
+  Los patrones que generó se volvieron clichés o están obsoletos.
+  Se mantiene en la biblioteca solo como referencia histórica.
+
+PROMOTION CRITERIA — CUANTIFICADOS
+------------------------------------
+Cuándo escalar de un estado al siguiente.
+
+emergent → validated:
+  - Usada como referencia en 2 proyectos distintos con resultados positivos.
+  - Los patrones extraídos fueron aplicables en ambos proyectos.
+  - No fue bloqueada por el Anti-Copy System en ningún uso.
+  Tiempo mínimo en emergent: sin mínimo (puede promoverse rápido si hay evidencia).
+
+validated → standard:
+  - Usada en 5+ proyectos distintos sin degradar la calidad.
+  - Los patrones son estables (no requieren ajuste por proyecto).
+  - El nivel de riesgo de copia sigue siendo manejable.
+  Tiempo mínimo en validated: ninguno si la evidencia es suficiente.
+
+standard → legacy:
+  Ver Deprecation Threshold abajo.
+
+DEPRECATION THRESHOLD — CUANTIFICADO
+--------------------------------------
+Cuándo degradar de standard/validated a legacy o deprecated.
+
+SEÑALES DE DEGRADACIÓN A LEGACY (basta con 2 de estas):
+  1. La referencia fue usada como "inspiración" en 3+ proyectos del mismo sector
+     en los últimos 6 meses por estudios distintos.
+  2. El Anti-Pattern Library de M12.5 ya incluye elementos de esta referencia como clichés.
+  3. El nivel de Innovación en el score bajó por debajo de 5.0 en la última revisión.
+  4. El humano o el sistema de búsqueda la devuelve como "estándar de la categoría"
+     en lugar de como diferenciador.
+
+SEÑALES DE DEGRADACIÓN A DEPRECATED (basta con 1 de estas):
+  1. La referencia fue explícitamente identificada como cliché en la Anti-Pattern Library.
+  2. Produce Similarity Score ≥ 13 con propuestas nuevas (es decir, los proyectos nuevos
+     se parecen a ella sin querer).
+  3. El score de Innovación bajó a ≤ 3 en la última revisión.
+  4. Está en el Anti-Pattern Library de su propia categoría.
+
+REGLAS DE EVOLUCIÓN
+-------------------
+- si funciona repetidamente en proyectos distintos → promover (según Promotion Criteria)
+- si se vuelve cliché de categoría → degradar a legacy (según Deprecation Threshold)
+- si ya está en el Anti-Pattern Library → degradar a deprecated
+- si el score de innovación baja pero los patrones siguen siendo útiles → mantener en legacy
+- si aparece una referencia mejor en la misma categoría → comparar y decidir si desplazar
+
+PROCESO CLAUDE
+--------------
+1. Revisar qué referencias fueron usadas en proyectos recientes.
+2. Para cada una, actualizar el estado según Promotion Criteria y Deprecation Threshold.
+3. Revisar si alguna entró en la Anti-Pattern Library de M12.5.
+4. Promover, mantener, degradar o retirar.
+5. Actualizar la biblioteca con los cambios.
+6. Registrar los gaps detectados en búsquedas fallidas (input de M12.1).
+
+EVOLUTION REVIEW — CADENCIA
+-----------------------------
+Cuándo hacer la revisión de evolución:
+
+Después de cada 3 proyectos finalizados:
+  Revisión rápida: ¿alguna referencia merece promover o degradar?
+  Tiempo: 15-20 minutos de revisión.
+
+Cada 6 meses:
+  Revisión completa: revisar el estado de todas las referencias active.
+  Verificar si el Anti-Pattern Library creció (nuevos clichés detectados).
+  Actualizar el score de innovación de las referencias standard y validated.
+
+Después de detectar un cliché nuevo:
+  Inmediato: verificar si alguna referencia de la biblioteca generó ese cliché.
+  Si sí: moverla a legacy o deprecated según el threshold.
+
+GAPS DE LA BIBLIOTECA
+---------------------
+Cuando una búsqueda de M12.8 no encuentra resultados, registrar el gap aquí.
+Los gaps alimentan la colección (M12.1): qué tipos de referencias hacen falta.
+
+Formato de registro de gap:
+  Intención de búsqueda: [qué buscó el sistema]
+  Criterios usados: [etiquetas]
+  Gap detectado: [qué tipo de referencia falta]
+  Prioridad de adquisición: alta / media / baja
+
+GATES
+-----
+GATE 12.9-A — ¿La referencia cumple el Promotion Criteria para subir de estado?
+  Falla → mantener en el estado actual.
+
+GATE 12.9-B — ¿La referencia alcanzó el Deprecation Threshold?
+  Sí → degradar. Documentar qué produjo la degradación.
+
+GATE 12.9-C — ¿La referencia está en la Anti-Pattern Library de M12.5?
+  Sí → deprecate inmediato.
+
+GATE 12.9-D — ¿Se realizó la Evolution Review según la cadencia?
+  Falla → biblioteca potencialmente congelada con referencias obsoletas.
+
+OUTPUT
+------
+- acción por referencia: promover / mantener / degradar (legacy) / retirar (deprecated)
+- razón de la acción
+- patrones afectados por el cambio
+- gaps de la biblioteca registrados
+- recomendaciones de adquisición basadas en los gaps
+
+FAIL CONDITIONS
+---------------
+- biblioteca congelada (sin evolucionar por más de 6 meses)
+- no aprender de proyectos reales
+- acumular referencias deprecated que siguen siendo usadas
+- no registrar gaps de búsqueda
+- no promover patrones que sí funcionan en proyectos reales
+
+PROMPT PARA CLAUDE
+------------------
+Revisá el estado de cada referencia usada recientemente.
+Aplicá el Promotion Criteria para las que merezcan subir.
+Aplicá el Deprecation Threshold para las que hayan entrado en cliché o bajado en innovación.
+Si una referencia aparece en la Anti-Pattern Library de su categoría: deprecated inmediato.
+Registrá los gaps de búsqueda.
+La biblioteca no puede congelarse.

@@ -1,0 +1,195 @@
+M8.2 — LAYOUT & COMPONENT ENGINEERING (v2)
+==========================================
+
+OBJETIVO
+--------
+Traducir la dirección visual a estructuras de layout y componentes reales.
+Este módulo convierte M5 en piezas construibles.
+Cada componente debe implementar el Signature System.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Visual Direction (M5)
+- Signature System (M5)
+- Mapa de Clichés de la categoría (M5.5)
+- Architecture recomendada (M8.1 handoff)
+- Concepto aprobado
+- Percepción objetivo
+- Tipo de proyecto
+
+OPCIONALES:
+- Contenido disponible
+- Restricciones responsive
+- Número de secciones
+
+PROCESO CLAUDE
+--------------
+1. Leer M5 Visual Direction y extraer la gramática visual.
+   La gramática no se inventa acá. Se hereda de M5.
+   Si M5 no la define explícitamente, inferirla de:
+   - percepción objetivo
+   - Signature System
+   - tipo de composición aprobada
+
+2. Traducir esa gramática a layout real.
+   Usar el árbol de decisión de gramática abajo.
+
+3. Detectar los bloques necesarios del proyecto.
+   Solo incluir lo que el proyecto necesita.
+   Un bloque que no cambia percepción, claridad o conversión, sobra.
+
+4. Para cada componente, completar el Component Map completo.
+   Incluir obligatoriamente: objetivo, variantes, comportamiento mobile,
+   estado vacío, estado de error, y riesgo si se usa mal.
+
+5. Definir variantes.
+   Un componente tiene variante cuando cambian los datos o el contexto,
+   no cuando cambia el estilo.
+   Umbral de abstracción: si el mismo bloque aparece 3+ veces con datos
+   distintos, se abstrae como componente parametrizable.
+
+6. Verificar que cada componente respeta el Signature System.
+   La firma visual debe aparecer al menos en 3-4 componentes distintos.
+   Ver gate abajo.
+
+7. Verificar que ningún componente replica un cliché de la categoría.
+   Comparar contra el Mapa de Clichés de M5.5.
+
+8. Definir comportamiento responsive.
+   Cada componente debe tener una regla de degradación mobile explícita.
+
+ÁRBOL DE DECISIÓN DE GRAMÁTICA DE LAYOUT
+------------------------------------------
+¿Qué percepción objetivo se definió en M4.5?
+
+Sofisticación / lujo → espacio negativo dominante, densidad baja,
+  asimetría controlada. Máximo 1-2 elementos por bloque.
+
+Confianza / claridad → composición predecible, simetría o asimetría
+  leve, densidad media, flujo de lectura limpio.
+
+Control / precisión → grilla visible, alineación fuerte,
+  módulos regulares, densidad media.
+
+Deseo / aspiración → tensión visual deliberada, escala extrema en algún
+  elemento, asimetría, densidad variable (baja en algunos bloques,
+  alta en otros).
+
+Cercanía / calidez → composición no rígida, irregularidad controlada,
+  densidad media, fotografía dominante en bloques clave.
+
+COMPONENT MAP — FORMATO COMPLETO
+----------------------------------
+Para cada componente:
+
+NOMBRE:
+OBJETIVO: qué hace este bloque para la percepción o la conversión
+CONTENIDO: qué datos necesita
+VARIANTE PRINCIPAL: descripción breve
+VARIANTE SECUNDARIA: descripción breve (si aplica)
+COMPORTAMIENTO MOBILE: cómo se adapta sin perder intención
+ESTADO VACÍO: cómo se ve si no hay contenido cargado aún
+ESTADO DE ERROR: cómo se ve si algo falla (formularios, contenido dinámico)
+SIGNATURE CHECK: ¿cómo implementa o es compatible con la firma visual?
+RIESGO SI SE USA MAL: qué produce si se implementa sin criterio
+
+EJEMPLOS DE COMPONENT MAP
+
+HERO
+  Objetivo: capturar atención y transmitir la promesa principal
+  Variante principal: tipográfica oversized + CTA
+  Variante secundaria: split con imagen editorial
+  Mobile: titular a escala ajustada, CTA al frente, imagen secundaria
+  Estado vacío: N/A (siempre tiene contenido estático)
+  Estado de error: N/A
+  Signature check: la firma tipográfica o espacial principal debe aparecer acá
+  Riesgo: ser demasiado genérico si no implementa la firma
+
+TESTIMONIOS
+  Objetivo: reducir objeción antes del CTA con evidencia real
+  Variante principal: nombre + cargo + resultado específico
+  Variante secundaria: con foto + empresa
+  Mobile: cards en scroll horizontal o stack vertical
+  Estado vacío: ocultar la sección completamente (no mostrar sección vacía)
+  Estado de error: N/A
+  Signature check: tipografía y densidad deben coincidir con el sistema
+  Riesgo: testimonios anónimos o vagos que no reducen ninguna objeción
+
+FORMULARIO DE CONTACTO
+  Objetivo: capturar lead o solicitud
+  Variante principal: nombre + email + mensaje + botón
+  Variante secundaria: solo email (newsletter o lead magnet)
+  Mobile: campos en columna única, botón full-width
+  Estado vacío: campos con placeholder con instrucción real (no "Nombre")
+  Estado de error: mensaje por campo con causa y solución concreta
+  Signature check: botón y labels deben seguir el sistema tipográfico
+  Riesgo: campos sin label visible, mensaje de error genérico
+
+PRICING (SaaS)
+  Objetivo: convertir y gestionar la comparación
+  Variante principal: 3 columnas con plan destacado
+  Variante secundaria: 2 columnas sin jerarquía (si hay solo 2 planes)
+  Mobile: acordeón o tabs por plan, no columnas
+  Estado vacío: N/A
+  Estado de error: si el precio carga dinámicamente, mostrar skeleton
+  Signature check: el plan destacado debe usar el color de acento del sistema
+  Riesgo: demasiadas features listadas → el usuario no sabe qué plan elegir
+
+GATE DE SIGNATURE SYSTEM [obligatorio]
+----------------------------------------
+Antes de cerrar el Component Map, verificar:
+¿La firma visual aparece en al menos 3-4 componentes distintos?
+¿El sitio se reconocería sin el logo solo por los componentes?
+
+Falla → ajustar los componentes afectados antes de entregar el mapa.
+No avanzar a M8.3 con un mapa que no implementa la firma.
+
+GATE DE CONTENIDO REAL
+------------------------
+¿El contenido disponible (textos, fotos, datos) funciona en estos componentes?
+Si el testimonial requiere foto + nombre + cargo y el cliente solo tiene texto,
+el componente necesita una variante que funcione sin foto.
+
+Falla → ajustar variantes antes de construir.
+
+TESTS
+-----
+- ¿El layout fue derivado de M5, no inventado acá?
+- ¿Cada componente tiene objetivo, variantes, mobile, estado vacío y error?
+- ¿La firma visual está en al menos 3-4 componentes?
+- ¿Ningún componente replica un cliché de M5.5?
+- ¿Hay componentes que sobran?
+- ¿El responsive no destruye la intención?
+- ¿Los dos gates fueron ejecutados?
+
+OUTPUT
+------
+Al completar, llenar el handoff de M8 con:
+
+Component Map completo (todos los campos por componente)
+Gramática de layout elegida
+Reglas responsive globales
+Componentes descartados (y por qué)
+Resultado del gate de Signature System
+Resultado del gate de contenido real
+
+FAIL CONDITIONS
+---------------
+- Layout derivado de una plantilla, no de M5.
+- Componentes sin estado vacío o de error definido.
+- Firma visual ausente en el mapa de componentes.
+- Componentes que replican clichés de la categoría.
+- Mobile rompe la intención de la experiencia.
+- Se avanzó sin ejecutar los gates.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como arquitecto de layout y componentes.
+Heredá la gramática visual de M5, no la inventes acá.
+Completá el Component Map con todos los campos por cada componente:
+objetivo, variantes, mobile, estado vacío, estado de error, signature check y riesgo.
+Verificá el Mapa de Clichés de M5.5 para confirmar que ningún componente es genérico.
+Ejecutá el gate de Signature System antes de cerrar el módulo.
+No me des una lista de secciones genéricas.
+Quiero componentes que respondan al concepto, la percepción y la firma visual.

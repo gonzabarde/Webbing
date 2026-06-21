@@ -1,0 +1,131 @@
+M8 — TECHNICAL EXECUTION SYSTEM (v2)
+=====================================
+
+OBJETIVO GENERAL
+----------------
+Transformar una dirección creativa aprobada en una web o producto digital
+bien construido, rápido, accesible y coherente con la estrategia.
+
+M8 no es un curso de frontend.
+M8 es un sistema de decisión técnica.
+
+Mientras M5 responde "cómo debe verse",
+M8 responde "cómo lo construimos sin romper esa visión".
+
+CUÁNDO ACTIVAR M8
+------------------
+Activar cuando ya exista:
+- Concepto aprobado
+- Percepción definida
+- Dirección visual aprobada
+- Innovación validada o descartada
+- Proyecto listo para producción
+
+NO activar M8 para:
+- discovery
+- posicionamiento
+- ideación abierta
+- exploración creativa sin aprobación
+
+REGLA CENTRAL
+-------------
+La tecnología se elige por necesidad del proyecto, no por moda.
+La ejecución técnica debe servir: percepción, claridad, performance,
+mantenibilidad, autonomía del cliente y coherencia visual.
+
+ARQUITECTURA DE M8
+------------------
+M8.1 — Technical Architecture Engine
+M8.2 — Layout & Component Engineering
+M8.3 — Motion Engineering
+M8.4 — Frontend Production Standards
+M8.5 — Performance & Accessibility
+M8.6 — Production Review Engine
+
+PRINCIPIOS
+----------
+1. La técnica no debe pelear con la dirección creativa.
+2. No se elige un stack por popularidad ni por costumbre.
+3. El motion solo existe si refuerza percepción o claridad.
+4. La accesibilidad no es un extra; es parte del producto.
+
+FORMATO DE HANDOFF ENTRE MÓDULOS
+---------------------------------
+Cada módulo completa su sección de esta tabla antes de pasar al siguiente.
+El módulo siguiente hereda los campos relevantes sin volver a definirlos.
+
+Módulo  | Campo clave que entrega
+--------|------------------------
+M8.1    | Stack elegido + deploy strategy
+M8.2    | Component Map + Signature check
+M8.3    | Motion descriptor + Timing rules + prefers-reduced-motion fallback
+M8.4    | Naming convention + Token system + Standards de entorno
+M8.5    | QA report con severidades + Core Web Vitals medidos
+M8.6    | Veredicto final + tabla de fidelidad
+
+Si un campo clave no está completo al inicio del módulo siguiente,
+detener y completar antes de continuar.
+
+ENTRADA DE M8
+-------------
+- Project Profile (CDL-1)
+- Creative Priority Map (CDL-2)
+- Concepto aprobado
+- Percepción objetivo
+- Dirección visual
+- Signature System
+- Restricciones técnicas
+- Presupuesto / timeline
+- Nivel de riesgo aceptable
+- Stack preferido o restricciones del cliente
+
+SALIDA DE M8
+------------
+- Arquitectura técnica recomendada + deploy strategy
+- Component Map con estados vacíos y de error
+- Lenguaje de motion + fallback accesible
+- Estándares de producción frontend
+- QA report con Core Web Vitals y WCAG AA
+- Veredicto de producción final
+
+GATES GLOBALES CON PROTOCOLO DE FALLO
+---------------------------------------
+GATE M8-A — ¿La arquitectura técnica elegida es la correcta?
+  Falla → volver a M8.1 antes de diseñar componentes.
+
+GATE M8-B — ¿Los componentes traducen el sistema visual y la firma?
+  Falla → volver a M8.2 antes de construir.
+
+GATE M8-C — ¿El motion tiene intención, no ruido, y cumple prefers-reduced-motion?
+  Falla → volver a M8.3 antes de implementar animaciones.
+
+GATE M8-D — ¿El frontend está producido con standards profesionales?
+  Falla → volver a M8.4 antes de QA.
+
+GATE M8-E — ¿Performance y accesibilidad pasan los umbrales definidos?
+  Falla → volver a M8.5 y corregir antes de la revisión final.
+
+GATE M8-F — ¿La web final conserva la dirección creativa en todos los browsers?
+  Falla → volver al módulo que CDL-3 o M8.6 identifica como punto de pérdida.
+
+FAIL CONDITIONS
+---------------
+- Stack elegido por costumbre o popularidad.
+- Layout genérico sin firma visual.
+- Motion decorativo sin propósito o sin fallback accesible.
+- Código sin standards ni convenciones.
+- Performance por debajo de Core Web Vitals umbral "bueno".
+- Accesibilidad por debajo de WCAG 2.1 AA.
+- La web final pierde el concepto o la firma.
+- Un módulo avanzó sin completar el handoff.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como director técnico creativo.
+Tomá la dirección creativa aprobada y convertila en un producto digital bien construido.
+Seguí el orden de los módulos. No avancés al siguiente sin completar el handoff.
+Elegí la arquitectura correcta, definí componentes con todos sus estados,
+establecé el sistema de motion con fallback accesible, aplicá standards de producción,
+medí performance y accesibilidad con los umbrales del sistema, y revisá fidelidad final.
+No des listas de herramientas sin criterio.
+No agregues complejidad que no cambie el resultado.

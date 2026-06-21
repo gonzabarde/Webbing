@@ -1,0 +1,409 @@
+MÓDULO 5.5 — VISUAL INNOVATION ENGINE (v3 DEEP)
+=================================================
+
+OBJETIVO
+--------
+Evitar clichés de categoría y encontrar una desviación visual propia, defendible y memorable.
+Este módulo no busca rareza.
+Busca diferenciación útil.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Concepto aprobado
+- Dirección visual aprobada
+- Categoría
+- Competidores
+- Lenguaje dominante del sector
+- Riesgo aceptable
+- Restricciones de marca
+
+OPCIONALES:
+- Referencias experimentales
+- Referencias del cliente
+- Rechazos explícitos
+- Nivel de ambición visual
+
+PROCESO CLAUDE
+--------------
+1. Detectar clichés de la categoría.
+   ¿Qué hace todo el mundo?
+   ¿Qué se repite visualmente?
+   ¿Qué prometen todos?
+   ¿Qué motion usan todos?
+   ¿Qué imágenes usan todos?
+
+2. Separar códigos útiles de códigos genéricos.
+   No romper todo.
+   Mantener lo que ayuda a la lectura o al reconocimiento de la categoría.
+
+3. Usar el método de innovación por variable.
+   Ver sección abajo.
+
+4. Evaluar cada propuesta con el Innovation Cost Matrix.
+   Ver sección abajo.
+
+5. Elegir una innovación principal.
+   Una sola decisión bien ejecutada vale más que diez pequeñas rarezas.
+
+6. Aplicar el Decay Test.
+   Ver sección abajo.
+
+7. Definir cómo sostener la coherencia.
+   La innovación debe aparecer en más de un lugar, pero sin volverse ruido.
+
+INNOVACIÓN POR VARIABLE [v3]
+------------------------------
+La mejor forma de encontrar una desviación coherente es cambiar solo una variable.
+No intentar ser distinto en todo.
+Encontrar la variable donde la diferencia importa más.
+
+VARIABLE 1 — LAYOUT
+Pregunta: ¿qué pasa si cambio la estructura de composición que usa toda la categoría?
+Ejemplos:
+- La categoría usa 3 columnas → usar 2 o 1 columna con elementos oversized.
+- La categoría usa hero centrado → usar hero asimétrico con peso a la izquierda.
+- La categoría usa muchas secciones pequeñas → usar pocas secciones con mucho espacio.
+Costo de implementación: 2/5 (requiere repensar la jerarquía de información).
+Riesgo: el usuario puede tardarse en entender el flujo si el cambio es radical.
+
+VARIABLE 2 — MOTION
+Pregunta: ¿qué pasa si cambio el vocabulario de movimiento de la categoría?
+Ejemplos:
+- La categoría usa fade-in en scroll → usar slide desde margen izquierdo.
+- La categoría no anima el hero → agregar un reveal tipográfico medido.
+- La categoría usa transitions de página → usar morphing de elementos compartidos.
+Costo de implementación: 4/5 (requiere desarrollo y tiempo).
+Riesgo: puede afectar performance si no se ejecuta con criterio técnico.
+
+VARIABLE 3 — TIPO DE IMAGEN
+Pregunta: ¿qué pasa si cambio el estilo fotográfico que usa toda la categoría?
+Ejemplos:
+- La categoría usa fotos lifestyle staging → usar fotografía documental honesta.
+- La categoría usa ilustraciones → usar solo tipografía sin imágenes.
+- La categoría usa close-ups de producto → usar planos abiertos de contexto.
+Costo de implementación: 3/5 (puede requerir producción específica).
+Riesgo: si la calidad de imagen no es alta, la diferencia se convierte en debilidad.
+
+VARIABLE 4 — CONTRASTE TIPOGRÁFICO
+Pregunta: ¿qué pasa si cambio el nivel de contraste tipográfico de la categoría?
+Ejemplos:
+- La categoría usa pesos similares → usar contraste extremo light/bold.
+- La categoría usa una sola familia → introducir una segunda con carácter fuerte.
+- La categoría usa sans → usar una serif con personalidad editorial.
+Costo de implementación: 1/5 (la tipografía es la variable de menor costo).
+Riesgo: si la fuente elegida está sobreusada, la diferencia no es real.
+
+VARIABLE 5 — RITMO DE CONTENIDO
+Pregunta: ¿qué pasa si cambio la densidad y el ritmo del layout de la categoría?
+Ejemplos:
+- La categoría es densa → diseñar con mucho más espacio y menos texto.
+- La categoría tiene muchas secciones cortas → usar pocas secciones largas y profundas.
+- La categoría usa muchos CTAs → usar solo uno con máximo peso visual.
+Costo de implementación: 1/5 (es una decisión editorial, no técnica).
+Riesgo: si se reduce demasiado el contenido, el usuario puede irse sin suficiente información.
+
+MAPA DE CLICHÉS POR CATEGORÍA [v3]
+-------------------------------------
+
+SAAS / PRODUCTO DIGITAL
+Clichés visuales:
+- Hero con screenshot del dashboard en mockup de dispositivo.
+- Gradiente de color (morado-azul o rosa-naranja) sobre fondo oscuro.
+- Grid de 3 features con ícono + título + descripción corta.
+- Sección "How it works" con 3 pasos numerados.
+- Pricing con 3 columnas y plan del medio destacado.
+- Testimonials con avatar circular + nombre + cargo.
+Clichés de copy:
+- "Simplificá tu flujo de trabajo."
+- "Todo lo que necesitás en un solo lugar."
+- "Empezá gratis. Sin tarjeta de crédito."
+Desviaciones válidas:
+- Sin mockup: mostrar el producto en uso real, en contexto.
+- Sin gradiente: paleta desaturada o monocromática.
+- Features con narrativa y tensión en lugar de lista de bullets.
+
+CLÍNICA ESTÉTICA / SALUD Y BELLEZA
+Clichés visuales:
+- Fondo blanco limpio + foto de mujer de perfil bien iluminada.
+- Serif didone ligera en headlines (Canela, Cormorant).
+- Paleta rosa pálido + blanco + dorado o negro.
+- Servicios en grid de cards iguales con ícono.
+- Sección "Antes / Después" en dos columnas.
+Clichés de copy:
+- "Tu belleza natural."
+- "Confiá en manos expertas."
+- "Sentite bien con vos misma."
+Desviaciones válidas:
+- Fotografía más documental y menos staging.
+- Sistema tipográfico sin serif clásica.
+- Paleta más desaturada o con temperatura diferente.
+
+MARCA PERSONAL / FREELANCE CREATIVO
+Clichés visuales:
+- Portfolio en grid masonry de proyectos.
+- Foto del creativo con brazos cruzados mirando a cámara.
+- Dark mode con acento en color llamativo (verde neón, naranja).
+- Frase de propósito personal en hero de texto muy grande.
+- Footer con íconos de redes sociales alineados al centro.
+Clichés de copy:
+- "Diseño que hace diferencia."
+- "Especialista en branding y estrategia."
+- "Trabajemos juntos."
+Desviaciones válidas:
+- No mostrar al creativo en el hero; mostrar el trabajo.
+- Narrar un proceso en lugar de listar capacidades.
+- Un solo proyecto en profundidad en lugar de grilla de muchos.
+
+ECOMMERCE PREMIUM
+Clichés visuales:
+- Hero en video full-screen o foto de producto en lifestyle.
+- Grid de productos en 3-4 columnas con hover que muestra segunda imagen.
+- Sección "Best Sellers" o "Más vendidos".
+- Trust badges en footer (pago seguro, envío, devolución).
+Clichés de copy:
+- "Envío gratis en compras mayores a X."
+- "Calidad garantizada."
+- "Descubrí la colección."
+Desviaciones válidas:
+- Storytelling del producto antes de la tienda.
+- Grid con mayor espacio y menos productos visibles simultáneamente.
+- Precio visible solo cuando el usuario interactúa con el producto.
+
+ESTUDIO CREATIVO / AGENCIA
+Clichés visuales:
+- Dark mode + tipografía sans ligera + cursor custom.
+- Hero con una palabra grande animada (rotate, slide o fade).
+- Portfolio en grid de casos con hover que revela el nombre del proyecto.
+- Logos de clientes en gris que se activan en hover.
+Clichés de copy:
+- "Diseñamos experiencias que importan."
+- "Convertimos estrategia en diseño."
+- "Estudio boutique con alma independiente."
+Desviaciones válidas:
+- Mostrar el proceso y el criterio, no solo el resultado.
+- Escribir sobre clientes como casos estratégicos con tensión.
+- Un punto de vista declarado sobre el diseño en lugar de misión genérica.
+
+FITNESS / COACHING PERSONAL
+Clichés visuales:
+- Fotos de atletas en acción, sudando.
+- Paleta negra + naranja brillante o verde neón.
+- Sección "Resultados" con fotos antes/después.
+- Countdown timer o urgencia de inscripción.
+Clichés de copy:
+- "Sin excusas."
+- "Tu transformación empieza acá."
+- "El método que te va a cambiar la vida."
+Desviaciones válidas:
+- Comunicar desde el proceso y el bienestar, no solo el resultado físico.
+- Paleta desaturada, más sofisticada.
+- Testimonios enfocados en bienestar y hábito, no solo cambio físico.
+
+FRAMEWORK DE RIESGO — NIVELES [v3]
+------------------------------------
+
+INNOVACIÓN SUTIL (Riesgo 1/4)
+Qué es: una variación dentro de los códigos esperados de la categoría.
+Ejemplos:
+- Cambiar la tipografía de body por una con más carácter.
+- Usar más espacio del promedio en los layouts.
+- Un color de acento ligeramente menos convencional.
+Cuándo usar: cuando el cliente o la categoría son conservadores.
+Cuándo no usar: cuando el objetivo es diferenciarse significativamente.
+Resultado esperado: un sitio más refinado que el promedio, pero no memorable por diferente.
+
+INNOVACIÓN MEDIA (Riesgo 2/4)
+Qué es: una desviación visible de los patrones de la categoría en una variable.
+Ejemplos:
+- Un sistema tipográfico con una fuente display de carácter fuerte.
+- Una arquitectura de layout que rompe el estándar de la categoría.
+- Un estilo fotográfico diferente al promedio del sector.
+Cuándo usar: cuando el brief pide diferenciación real sin tomar riesgos grandes.
+Resultado esperado: un sitio memorable por una decisión clara.
+  Puede generar fricción con el cliente conservador.
+
+INNOVACIÓN ALTA (Riesgo 3/4)
+Qué es: una ruptura de varios códigos simultáneamente con intención clara.
+Ejemplos:
+- Layout experimental que requiere que el usuario aprenda a navegar.
+- Sistema de motion prominente que es parte de la experiencia de marca.
+- Fotografía que no sigue ninguno de los clichés de la categoría.
+Cuándo usar: cuando el brief exige y permite diferenciación máxima.
+Cuándo no usar: cuando la audiencia necesita claridad inmediata o la marca necesita
+  confianza como primera señal perceptiva.
+Resultado esperado: memorable, polarizante. Puede impactar la conversión si no se ejecuta bien.
+
+INNOVACIÓN EXPERIMENTAL (Riesgo 4/4)
+Qué es: exploración que puede redefinir la categoría o resultar en un fracaso.
+Ejemplos:
+- Interacción no convencional que no sigue patrones de UX conocidos.
+- Sistema visual sin precedentes en la categoría.
+- Concepto que requiere tiempo del usuario para entenderse.
+Cuándo usar: proyectos de portfolio, marcas con audiencia muy sofisticada,
+  contextos donde la diferencia extrema es el valor.
+Cuándo no usar: proyectos con objetivos de conversión directa, audiencias amplias,
+  timelines cortos o clientes sin tolerancia al riesgo.
+
+INNOVATION COST MATRIX [v3]
+------------------------------
+Evaluar cada innovación propuesta contra estas dos dimensiones.
+
+Eje X — COSTO DE IMPLEMENTACIÓN (1-5)
+1: Solo requiere decisión de diseño (tipografía, espacio, color).
+2: Requiere producción adicional (fotos específicas, copywriting nuevo).
+3: Requiere desarrollo moderado (animaciones CSS, transiciones custom).
+4: Requiere desarrollo significativo (motion complejo, interacciones custom).
+5: Requiere tecnología nueva o producción mayor (video, interacción experimental).
+
+Eje Y — IMPACTO PERCEPTIVO (1-5)
+1: Mejora sutil que solo nota un diseñador.
+2: Mejora visible para un ojo entrenado.
+3: Mejora notable para el usuario promedio.
+4: Decisión memorable que identifica la marca.
+5: Diferenciador de categoría que nadie más tiene.
+
+CUADRANTES DE DECISIÓN
+- Costo 1-2 / Impacto 4-5: PRIORIDAD MÁXIMA. Ejecutar siempre.
+- Costo 4-5 / Impacto 4-5: EVALUAR. Solo si el proyecto lo justifica.
+- Costo 1-2 / Impacto 1-2: OPCIONAL. Hacer si el tiempo lo permite.
+- Costo 4-5 / Impacto 1-2: DESCARTAR. No vale la inversión.
+
+DECAY TEST [v3]
+----------------
+Antes de aprobar una innovación, proyectarla 3 años hacia adelante.
+
+Pregunta: ¿esta decisión visual seguirá funcionando en 3 años
+o está atada a una tendencia que va a envejecer?
+
+SEÑALES DE QUE VA A ENVEJECER
+- Está basada en una tendencia de diseño muy específica del año actual.
+- Muchas marcas la están adoptando al mismo tiempo en la categoría.
+- Requiere una fuente que se puso de moda recientemente.
+- El efecto depende de la novedad para impactar; sin novedad, no impacta.
+
+SEÑALES DE QUE VA A RESISTIR
+- Está basada en principios semióticos que no cambian con tendencias.
+- Refuerza el concepto de marca, no solo un efecto visual.
+- La referencia conceptual es más antigua que la tendencia actual.
+- Se puede aplicar a distintos momentos y formatos sin perder fuerza.
+
+REGLA
+Si el Decay Test falla, la innovación puede ejecutarse igualmente
+si el cliente acepta el riesgo y el ciclo de vida del proyecto es corto.
+No toda marca necesita durabilidad; algunas necesitan relevancia inmediata.
+Pero esto debe declararse explícitamente, no asumirse.
+
+FRAMEWORKS INTERNOS
+-------------------
+A. Framework de Cliché
+   Detectar lo que hace la categoría de forma automática.
+
+B. Framework de Desviación
+   Cambiar solo una o dos variables para salir del patrón.
+
+C. Framework de Riesgo
+   Si la innovación compite con el mensaje, se elimina.
+
+D. Framework de Memoria
+   El usuario recuerda lo claro + distinto.
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿La categoría tolera innovación visual?
+   - Sí: más libertad, puede ir a nivel Media o Alta.
+   - No: innovación Sutil.
+
+2. ¿La marca vende confianza o identidad?
+   - Confianza: innovación controlada (Sutil o Media).
+   - Identidad: más espacio para ruptura (Media o Alta).
+
+3. ¿El usuario necesita entender rápido?
+   - Sí: la novedad debe ser sutil y no interferir con la claridad.
+   - No: se puede explorar más agresivamente.
+
+4. ¿La innovación pasa el Decay Test?
+   - Sí: mantener.
+   - No: evaluar si el ciclo de vida del proyecto lo justifica.
+
+5. ¿La innovación es defendible frente al cliente?
+   - Sí: sigue.
+   - No: simplificar o preparar el argumento estratégico antes de presentar.
+
+6. ¿La innovación elegida está en el cuadrante correcto del Cost Matrix?
+   - Sí: ejecutar.
+   - No: ajustar o elegir una alternativa del cuadrante Prioridad Máxima.
+
+CASOS REALES
+------------
+Caso 1 — Agencia premium
+- Cliché: hero genérico + 3 cards de servicios
+- Variable elegida: contraste tipográfico (nivel Sutil-Media)
+- Innovación: firma tipográfica en hero con escala extrema
+- Cost Matrix: costo 1 / impacto 4 → Prioridad Máxima
+- Decay Test: pasa. La escala como firma tipográfica es atemporal.
+- Efecto: más memoria sin perder claridad.
+
+Caso 2 — Marca de lujo
+- Cliché: blanco + serif + mucho vacío
+- Variable elegida: ritmo de contenido (nivel Media)
+- Innovación: densidad extremadamente baja con pocas imágenes de altísima calidad
+- Cost Matrix: costo 2 / impacto 4 → Prioridad Máxima
+- Decay Test: pasa. El lujo silencioso es estructural, no de tendencia.
+- Efecto: lujo menos obvio, más propio.
+
+Caso 3 — Startup SaaS
+- Cliché: dark mode + gradiente + mockup de dashboard
+- Variable elegida: tipo de imagen (nivel Media)
+- Innovación: sin mockup; el producto en uso real con personas reales
+- Cost Matrix: costo 3 / impacto 4 → EVALUAR.
+- Decay Test: pasa. La autenticidad fotográfica es duradera.
+- Efecto: tecnología más sofisticada y humana.
+
+TESTS
+-----
+- ¿La innovación aporta memoria?
+- ¿La innovación se entiende?
+- ¿La marca sigue siendo creíble?
+- ¿La desviación está al servicio del concepto?
+- ¿El diseño sería menos fuerte sin esa decisión?
+- ¿El recurso innovador puede sostenerse en toda la experiencia?
+- ¿Pasó el Innovation Cost Matrix?
+- ¿Pasó el Decay Test?
+- ¿El nivel de riesgo elegido es adecuado para el contexto del proyecto?
+
+OUTPUT
+------
+1. Clichés detectados por categoría.
+2. Códigos útiles a conservar.
+3. Códigos a romper.
+4. Variable elegida para la innovación (1 de las 5).
+5. Innovación principal con descripción ejecutable.
+6. Nivel de riesgo (1-4).
+7. Posición en el Innovation Cost Matrix.
+8. Resultado del Decay Test.
+9. Riesgos de sobreinnovación.
+10. Reglas de coherencia para mantener la innovación en el sistema.
+
+FAIL CONDITIONS
+---------------
+- La innovación existe solo para llamar la atención.
+- La innovación rompe la claridad o la confianza del usuario.
+- La innovación parece tendencia sin concepto detrás.
+- No ayuda a la percepción objetivo.
+- No puede sostenerse en todo el sistema.
+- No pasó el Cost Matrix ni el Decay Test.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como director creativo con criterio de innovación.
+Identificá los clichés de la categoría usando el mapa de clichés correspondiente.
+Separá los códigos útiles de los genéricos.
+Usá el método de innovación por variable: elegí una sola variable (layout, motion,
+tipo de imagen, contraste tipográfico o ritmo de contenido) y formulá la desviación.
+Evaluá la innovación en el Innovation Cost Matrix.
+Aplicá el Decay Test.
+Elegí el nivel de riesgo adecuado (Sutil, Media, Alta, Experimental) según el contexto.
+No busques ser raro por ser raro.
+Buscá ser memorable sin perder claridad.
+Primero entregá la innovación, la variable elegida, el costo, el impacto y el resultado del Decay Test.

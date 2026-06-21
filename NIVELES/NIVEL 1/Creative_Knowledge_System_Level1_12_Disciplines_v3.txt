@@ -1,0 +1,2497 @@
+CREATIVE KNOWLEDGE SYSTEM — LEVEL 1 EXPANDED
+=============================================
+v2 — Expansión operativa completa
+Basado en: Creative_Knowledge_System_Level1_12_Disciplines_v1.txt
+
+PROPÓSITO DEL NIVEL 1
+---------------------
+Este nivel reúne el conocimiento base que alimenta todo el sistema.
+No es un flujo de trabajo.
+No es un prompt.
+No es un proyecto.
+
+Es la biblioteca mental que explica por qué ciertas decisiones de marca, diseño
+y experiencia funcionan mejor que otras.
+
+La función de este nivel es convertir teoría, referencias, casos y principios
+en reglas operativas que Claude y un humano puedan usar para tomar mejores decisiones.
+
+CÓMO USAR ESTE DOCUMENTO
+------------------------
+Cada disciplina tiene:
+- Objetivo
+- Qué enseña
+- Preguntas clave
+- Principios operativos
+- Errores comunes
+- Heurísticas de decisión      [NUEVO en v2]
+- Señales de calidad           [NUEVO en v2]
+- Output útil para Claude
+
+La idea no es memorizar todo.
+La idea es convertir criterio creativo en decisión.
+
+NOTA v2
+-------
+Este documento expande cada sección del v1 con:
+— Más qué enseña: conocimiento concreto que cambia decisiones
+— Más preguntas clave: diagnóstico preciso, no exploración general
+— Más principios operativos: reglas de acción inmediata
+— Más errores comunes: específicos y reconocibles
+— Heurísticas de decisión: tests rápidos para evaluar calidad
+— Señales de calidad: cómo saber cuándo algo está bien hecho
+— Output útil: más granular y accionable
+
+============================================================
+1. BRANDING
+============================================================
+
+OBJETIVO
+--------
+Entender qué hace que una marca exista en la mente del público.
+Branding no es logo.
+Branding es percepción sostenida.
+
+QUÉ ENSEÑA
+----------
+— Una marca es una promesa percibida.
+— La repetición construye memoria.
+— La diferencia importa más que la "calidad abstracta".
+— La identidad no vive solo en lo visual; vive en tono, comportamiento,
+  consistencia y contexto.
+— La marca fuerte ocupa un espacio mental claro.
+
+[EXPANDIDO v2]
+— La marca opera en capas: visual, verbal, experiencial, reputacional.
+  Todas deben decir lo mismo.
+— Brand equity no es reconocimiento: es lo que alguien paga de más
+  por elegirla sobre una alternativa idéntica.
+— Una marca sin postura declarada carece de atracción.
+  La neutralidad no es seguridad; es invisibilidad.
+— La marca se revela bajo presión: cómo actúa en crisis, escasez o
+  ataque de competencia es más definitorio que cualquier campaña.
+— El tono verbal es tan constitutivo de la marca como el logo.
+  Dos marcas con el mismo logo pero distinto tono son marcas distintas.
+— La marca fuerte puede subir precio sin perder a su cliente ideal.
+  Si no puede, es una marca débil con buena estética.
+— Una marca fuerte genera rechazo en alguien: si gusta a todos,
+  no posee ningún espacio.
+— La identidad de marca no se define solo desde adentro.
+  La percepción la construye el público; la tarea es alinear intención
+  con esa percepción.
+
+PREGUNTAS CLAVE
+---------------
+— ¿Qué promete realmente esta marca?
+— ¿Qué ocupa hoy en la mente del usuario?
+— ¿Qué debería ocupar?
+— ¿Qué hace que la gente la recuerde?
+— ¿Qué hace que la gente la elija?
+— ¿Qué la diferencia de manera defendible?
+
+[EXPANDIDO v2]
+— Si esta marca desapareciera mañana, ¿quién la extrañaría y por qué?
+  La respuesta define su valor real.
+— ¿Qué hace que alguien hable de ella sin que nadie se lo pida?
+— ¿Existe una sola palabra que esta marca "posee" en la mente del cliente?
+— ¿Cómo se comporta la marca cuando algo sale mal?
+  ¿Pide disculpas como cualquier empresa o actúa consistente con su
+  identidad?
+— ¿El cliente siente que pertenece a algo al elegirla, o solo está
+  comprando un producto?
+— ¿Qué tipo de persona elige esta marca y qué dice eso de ella?
+— ¿Qué cliente no quiere esta marca? (define el límite de la posición)
+
+PRINCIPIOS OPERATIVOS
+---------------------
+— La marca debe poder explicarse en una frase.
+— Si la promesa no se puede repetir, no existe.
+— Si el público no la distingue de competidores, la marca es débil.
+— El branding no se define solo en el logo; se define en cada
+  punto de contacto.
+— La coherencia vale más que la ocurrencia.
+
+[EXPANDIDO v2]
+— Una marca fuerte resiste simplificación extrema: funciona en blanco
+  y negro, en formato 16x16px, sin paleta de colores. Si no funciona,
+  depende demasiado del tratamiento.
+— Las marcas que dicen muchas cosas no dicen ninguna.
+  Uno de los trabajos del branding es decidir qué no decir.
+— Identidad ≠ campaña. La identidad dura años; la campaña, semanas.
+  Confundirlos produce inconsistencia sistémica.
+— El comportamiento de la marca importa más que el logo en el largo plazo.
+  Lo que la marca hace en cada interacción es la marca.
+— Una marca que teme posicionarse claramente teme perder clientes que
+  nunca fueron suyos de todos modos.
+— La coherencia semiótica entre todos los touchpoints multiplica
+  percepción de autoridad sin necesitar más presupuesto.
+
+ERRORES COMUNES
+---------------
+— Confundir branding con diseño visual.
+— Confundir branding con marketing de performance.
+— Querer "verse premium" sin tener una posición premium.
+— Usar palabras vacías como innovación, calidad, excelencia o modernidad
+  sin evidencia.
+— Diseñar primero y pensar la marca después.
+
+[EXPANDIDO v2]
+— Asumir que el rebrand soluciona un problema de posicionamiento:
+  un logo nuevo no cambia percepción si el comportamiento es el mismo.
+— Construir la marca para el cliente que se desea tener en vez del
+  cliente que se tiene hoy. El resultado es disonancia.
+— Crear "valores de marca" que son aspiracionales y no descriptivos:
+  si los valores no guían ninguna decisión concreta, no existen.
+— Mezclar el tono de marca entre canales: formal en la web, casual en
+  Instagram, técnico en el email. El resultado es una marca fragmentada.
+— Evaluar la marca solo con stakeholders internos: la percepción es
+  externa, la evaluación también debe serlo.
+
+HEURÍSTICAS DE DECISIÓN
+-----------------------
+— Test de sustitución: ¿Puedo poner el nombre de la competencia en este
+  mensaje y seguiría funcionando? Si sí, el mensaje no sirve.
+— Test de frase: ¿Puedo describir esta marca en menos de 10 palabras?
+  Si no, la marca no es clara.
+— Test de promesa: ¿La promesa cambia el comportamiento del cliente o
+  solo lo entretiene?
+— Test de coherencia: ¿Instagram, web, packaging y atención al cliente
+  dicen exactamente lo mismo?
+— Test de renuncia: ¿Qué rechaza esta marca? Si no rechaza nada, es
+  genérica.
+
+SEÑALES DE CALIDAD
+------------------
+— La marca genera conversación sin necesidad de promotarla.
+— Los clientes la describen con las mismas palabras que el equipo
+  interno usa.
+— Es reconocible incluso sin logo visible.
+— Tiene una postura clara, no solo un estilo.
+— Puede decir que no a ciertos clientes, formatos o colaboraciones
+  sin perder identidad.
+— El equipo puede tomar decisiones cotidianas preguntando
+  "¿esto es de nuestra marca?" sin necesitar una guía.
+
+OUTPUT ÚTIL PARA CLAUDE
+-----------------------
+— Brand essence (frase que captura el núcleo de la marca)
+— Brand promise (qué promete específicamente)
+— Brand position (dónde vive en la mente del cliente)
+— Brand attributes (3-5 adjetivos defendibles con evidencia)
+— Brand perception gap (diferencia entre lo que es y lo que debería ser)
+— Brand consistency rules (qué nunca puede cambiar)
+— Brand rejection list (qué NO hace esta marca)
+— Brand voice guidelines (tono en distintos contextos)
+— Touchpoint audit (qué puntos de contacto están bien / mal alineados)
+
+============================================================
+2. POSITIONING
+============================================================
+
+OBJETIVO
+--------
+Definir la posición mental que la marca quiere ocupar frente a la
+competencia.
+
+QUÉ ENSEÑA
+----------
+— No se trata de ser mejor en todo.
+— Se trata de ser distinto en algo que importe.
+— El posicionamiento existe dentro de una categoría.
+— La competencia define el contexto; la diferencia define la oportunidad.
+— Una posición fuerte es específica, defendible y fácil de recordar.
+
+[EXPANDIDO v2]
+— El posicionamiento no es sobre la empresa; es sobre la mente del cliente.
+  La posición vive en la percepción, no en el brief.
+— Una posición fuerte reduce el precio a un factor secundario: cuando
+  la diferencia es real, la discusión de precio cambia.
+— Posicionarse bien significa renunciar: no puedes ser todo para todos.
+  El intento de ser todo produce el resultado de no ser nada.
+— La categoría puede reinventarse: quien define los términos de la
+  categoría, define también las reglas del juego.
+  Red Bull no vendió una bebida energizante; vendió un permiso para
+  una transformación personal.
+— El reposicionamiento es entre 3 y 5 veces más costoso que el
+  posicionamiento original. Hacerlo bien desde el inicio es más barato.
+— La posición puede construirse en relación al líder (retador),
+  en un espacio libre (first mover) o redefiniendo la categoría (disruptor).
+  Cada una exige estrategias distintas.
+— Una posición fuerte permite a la marca cobrar más, rechazar ciertos
+  clientes y tomar decisiones creativas sin necesitar justificarse.
+
+PREGUNTAS CLAVE
+---------------
+— ¿Qué categoría ocupa esta marca?
+— ¿Qué promete la categoría?
+— ¿Qué promete la competencia?
+— ¿Qué espacio mental está saturado?
+— ¿Qué espacio mental está libre?
+— ¿Qué miedo o deseo resuelve esta marca?
+— ¿Por qué deberían elegirla a ella y no a otra?
+
+[EXPANDIDO v2]
+— Si esta marca subiera el precio 30%, ¿quién se quedaría?
+  ¿Es ese cliente el que queremos?
+— ¿Qué frase resume la promesa de esta categoría que nadie está
+  diciendo todavía?
+— ¿Qué le dice la competencia al cliente que es verdad pero que
+  esta marca puede decir con más credibilidad?
+— ¿Qué cliente ideal queremos atraer y cuál queremos evitar?
+  (Saber a quién no sirves es tan importante como saber a quién sí.)
+— ¿Qué creencia del cliente hay que cambiar para que nos elija?
+— ¿El espacio libre en el mercado está libre porque nadie lo quiere
+  o porque nadie lo vio todavía?
+
+PRINCIPIOS OPERATIVOS
+---------------------
+— El posicionamiento debe poder sostenerse durante años.
+— Si el mismo mensaje lo podría decir cualquier competidor, no sirve.
+— La posición debe ser comprensible para el usuario y defendible
+  para el cliente.
+— La diferencia no debe ser solo estética; debe ser estratégica.
+— Una buena posición cambia copy, diseño, percepción y experiencia.
+
+[EXPANDIDO v2]
+— Una buena posición le dice al cliente quién NO es esta marca,
+  no solo quién es. La exclusión define la identidad.
+— La posición debe poder vivir en el tiempo sin necesitar redefinición
+  constante: si la posición cambia con cada tendencia, no es posición.
+— Posicionarse como "premium" no es una decisión de diseño;
+  es una decisión sistémica que debe sostenerse en precio, experiencia,
+  comunicación, selección de clientes y rechazo de otros.
+— La diferencia percibida vale más que la diferencia real: lo que el
+  cliente cree que es distinto importa más que lo que efectivamente
+  es distinto.
+— Mejor una posición estrecha y fuerte que una posición amplia y débil.
+
+ERRORES COMUNES
+---------------
+— Definir el posicionamiento como un slogan.
+— Elegir una promesa genérica.
+— Copiar la promesa de la competencia y cambiarle las palabras.
+— Querer abarcar demasiadas cosas al mismo tiempo.
+— Confundir notoriedad con posicionamiento.
+
+[EXPANDIDO v2]
+— Posicionarse por precio (barato o caro) sin una razón estratégica
+  que lo sostenga: el precio es consecuencia de la posición, no la posición.
+— Definir la posición en una reunión interna sin validación externa:
+  lo que el equipo cree que es su diferencial rara vez coincide con
+  lo que el cliente percibe.
+— Construir la posición sobre un atributo funcional que la competencia
+  puede replicar en 6 meses.
+— Creer que basta con declarar la posición: la posición se sostiene con
+  comportamiento consistente, no con palabras.
+
+HEURÍSTICAS DE DECISIÓN
+-----------------------
+— Test "¿por qué nosotros?": si la respuesta tarda más de 5 segundos,
+  la posición no es clara.
+— Test "¿quién más dice eso?": si tres competidores usan el mismo mensaje,
+  la posición no existe.
+— Test de renuncia: ¿hay algo que esta marca NO hace que refuerza lo que sí
+  hace? Si no hay nada que rechace, es genérica.
+— Test de traducción: ¿la posición cambia el diseño, el copy y el precio?
+  Si no cambia nada concreto, solo es una declaración.
+
+SEÑALES DE CALIDAD
+------------------
+— El cliente usa las mismas palabras que la marca para describirse
+  a sí mismo cuando la recomienda a otros.
+— La marca aparece como punto de referencia en comparaciones,
+  no como el que se compara con el referente.
+— Las decisiones de diseño, precio, distribución y comunicación
+  refuerzan todas la misma posición sin necesitar coordinación explícita.
+— La posición genera tensión: atrae a algunos y repele a otros.
+
+OUTPUT ÚTIL PARA CLAUDE
+-----------------------
+— Category map (categoría y competidores con sus posiciones)
+— Position statement (para quién / qué promete / por qué esta marca)
+— Competitive difference (diferencia específica y defendible)
+— Mental category (lugar exacto en la mente del cliente)
+— White space analysis (qué está libre y por qué)
+— Defensibility notes (por qué la posición es difícil de copiar)
+— Anti-positioning notes (qué posiciones adyacentes deben evitarse)
+— Repositioning gap (si existe: qué tiene que cambiar para llegar)
+
+============================================================
+3. PSYCHOLOGY
+============================================================
+
+OBJETIVO
+--------
+Entender cómo las personas perciben, deciden, comparan y confían.
+
+QUÉ ENSEÑA
+----------
+— La gente no procesa todo; filtra.
+— La emoción guía la percepción.
+— La confianza reduce fricción.
+— La familiaridad puede ser más fuerte que la originalidad.
+— El cerebro prefiere atajos claros.
+— La carga cognitiva excesiva mata la decisión.
+
+[EXPANDIDO v2]
+— El Sistema 1 (automático, rápido, emocional) toma la mayoría de las
+  decisiones de compra. El Sistema 2 (racional, lento) las justifica después.
+  Diseñar para el Sistema 2 solo es diseñar para la justificación, no la
+  decisión.
+— La aversión a la pérdida es 2-2.5x más poderosa que la motivación de
+  ganar. "No pierdas X" mueve más que "Gana X".
+— El efecto ancla: el primer número que el usuario ve define el marco de
+  referencia para todos los números siguientes. Controlarlo es diseñar
+  la percepción de precio.
+— La prueba social no es decorativa: cuando alguien no sabe si confiar,
+  ver que otros ya confiaron reduce activamente la ansiedad.
+— La escasez percibida aumenta el deseo: menos disponibilidad =
+  más valor percibido. Funciona incluso cuando el cliente sabe que
+  es un recurso de marketing, si es creíble.
+— La autoridad simbólica transfiere confianza: años de experiencia,
+  certificaciones, nombres reconocidos, números de clientes.
+— La reciprocidad genera obligación blanda: dar algo primero aumenta
+  la probabilidad de que el otro corresponda.
+— El efecto de fluencia cognitiva: lo que es fácil de procesar se percibe
+  como más verdadero y de mayor calidad. La claridad produce confianza.
+— La coherencia interna: las personas actúan consistente con sus decisiones
+  pasadas. Un micro-sí facilita un macro-sí.
+
+PREGUNTAS CLAVE
+---------------
+— ¿Qué teme perder el usuario?
+— ¿Qué necesita ver para confiar?
+— ¿Qué lo haría seguir leyendo?
+— ¿Qué lo haría abandonar?
+— ¿Qué sesgo está operando?
+— ¿Qué objeción mental está activa?
+— ¿Qué percepción cambia su decisión?
+
+[EXPANDIDO v2]
+— ¿Qué ancla de precio estamos estableciendo con el primer número visible?
+— ¿Qué prueba social tenemos y en qué posición de la página aparece?
+  (antes del CTA, no después)
+— ¿Qué señal de escasez legítima existe y cómo se comunica sin parecer
+  manipulador?
+— ¿Qué autoridad creíble puede invocarse para reducir el riesgo percibido?
+— ¿Qué micro-compromiso puede hacer el usuario antes del compromiso
+  principal? (suscripción, prueba, primera compra pequeña)
+— ¿La emoción que genera el primer screen corresponde con la emoción
+  con la que queremos que el usuario tome la decisión?
+— ¿La promesa principal se enuncia en términos de ganancia o de pérdida
+  evitada? ¿Cuál es más relevante para este usuario?
+
+PRINCIPIOS OPERATIVOS
+---------------------
+— Menos complejidad percibida = más probabilidad de avance.
+— Prueba social, claridad y consistencia reducen ansiedad.
+— La señal más clara gana frente a señales débiles.
+— La gente compara con estándares previos, no con ideales.
+— El lenguaje visual y el copy deben reducir incertidumbre.
+
+[EXPANDIDO v2]
+— El título debe reducir el esfuerzo de interpretación, no amplificarlo.
+  Un título que requiere ser leído dos veces ya perdió.
+— La primera emoción que genera una página define el marco perceptivo
+  de todo lo que sigue. Si el primer screen genera ansiedad o confusión,
+  el resto de la página opera en desventaja.
+— Un usuario ansioso no convierte. La ansiedad debe reducirse antes de
+  pedir acción: testimonios, garantías, claridad de proceso.
+— La ambigüedad es el mayor obstáculo para la confianza. Cada punto de
+  ambigüedad es una fricción que reduce probabilidad de acción.
+— El contraste perceptivo importa: lo caro se ve más razonable al lado
+  de algo más caro. El diseño de menús de precios es diseño psicológico.
+— Las objeciones no resueltas antes del CTA son objeciones activas que
+  bloquean la decisión. Mapearlas y responderlas es diseño de conversión.
+
+SESGOS OPERATIVOS CLAVE [NUEVO v2]
+-----------------------------------
+— Anchoring: el primer número define la percepción de precio.
+  Usar para mostrar precio más alto primero o "precio original".
+— Loss aversion: enmarcar como "no pierdas X" en vez de "gana X".
+  Más efectivo en decisiones con riesgo percibido.
+— Social proof: mostrar quién ya eligió esto. Números, testimonios,
+  logos de clientes. Más específico = más creíble.
+— Authority: señales de competencia y credencial. No solo logos;
+  también números concretos y resultados verificables.
+— Scarcity: limitar sin mentir. "Últimos 3 disponibles" solo si es real.
+  La escasez falsa detectada destruye confianza.
+— Fluency effect: diseño claro y simple = percepción de mayor calidad
+  y mayor confianza. La legibilidad no es solo funcional; es persuasiva.
+— Reciprocity: dar algo de valor antes de pedir. Un recurso, un insight,
+  una prueba gratuita.
+— Commitment & consistency: un sí pequeño facilita un sí grande después.
+  El flujo de onboarding bien diseñado usa este principio.
+— Mere exposure effect: la familiaridad produce preferencia. La repetición
+  de una marca construye preferencia incluso sin convicción.
+
+ERRORES COMUNES
+---------------
+— Diseñar para impresionar en vez de facilitar decisión.
+— Sobrecargar con información.
+— Subestimar objeciones invisibles.
+— Pensar que más elementos = más persuasión.
+— Ignorar el costo mental de leer y decidir.
+
+[EXPANDIDO v2]
+— Resolver objeciones después del CTA: el usuario ya abandonó.
+— Usar prueba social genérica ("miles de clientes satisfechos") en vez de
+  específica: nombres, números exactos, contextos reconocibles.
+— Poner la información técnica antes de la promesa emocional:
+  la emoción abre la puerta; la lógica la sostiene.
+— Asumir que el usuario lee en orden: escanea. La jerarquía visual
+  debe funcionar para el escáner, no para el lector lineal.
+
+HEURÍSTICAS DE DECISIÓN
+-----------------------
+— Test de 5 segundos: ¿puede alguien entender qué es esto y por qué
+  le importa en 5 segundos? Si no, la jerarquía de comunicación falla.
+— Test de objeción: lista las 3 objeciones más comunes del cliente.
+  ¿Están todas respondidas antes del CTA principal?
+— Test de ancla: ¿cuál es el primer número que ve el usuario?
+  ¿Es intencional o accidental?
+— Test de emoción: ¿qué emoción genera el primer scroll?
+  ¿Es la emoción que facilita la decisión que queremos?
+
+SEÑALES DE CALIDAD
+------------------
+— El usuario entiende qué hace el producto en los primeros 5 segundos.
+— No hay preguntas básicas sin respuesta en el flujo.
+— Las objeciones más comunes están respondidas antes de que el usuario
+  las formule conscientemente.
+— El CTA es único, claro y tiene lógica en ese momento del flujo.
+— La prueba social es específica y creíble, no genérica.
+
+OUTPUT ÚTIL PARA CLAUDE
+-----------------------
+— Objection map (objeciones por etapa del funnel)
+— Trust triggers (qué elementos generan confianza en este contexto)
+— Attention triggers (qué capta atención en este segmento)
+— Friction points (dónde se rompe la experiencia de decisión)
+— Cognitive load notes (qué está generando carga excesiva)
+— Decision shortcuts (qué atajos cognitivos podemos activar)
+— Bias activation map (qué sesgos pueden activarse legítimamente)
+— Emotional frame analysis (qué emoción domina cada sección)
+— Conversion sequence (orden óptimo de información para este usuario)
+
+============================================================
+4. SEMIOTICS
+============================================================
+
+OBJETIVO
+--------
+Entender qué comunican los signos visuales antes de ser leídos
+conscientemente.
+
+QUÉ ENSEÑA
+----------
+— Todo elemento visual comunica algo.
+— Una serif, una grotesk, un círculo, un grid o una textura tienen
+  asociaciones.
+— El significado depende del contexto, pero hay patrones culturales
+  fuertes.
+— La semiología ayuda a alinear forma y mensaje.
+
+[EXPANDIDO v2]
+— Los signos visuales operan en tres niveles:
+  Icónico: se parece a lo que representa (foto de producto).
+  Indexical: indica o señala algo (flecha, humo que indica fuego).
+  Simbólico: asociación convencional sin relación directa (color verde
+  = naturaleza en occidente).
+  Los tres coexisten en cualquier sistema visual; entender cuál opera
+  permite controlarlo.
+— El color es el elemento semiótico de mayor velocidad: comunica antes
+  que cualquier texto o forma.
+— Las formas curvas comunican: suavidad, accesibilidad, organicidad,
+  calidez, feminidad (en contextos culturales occidentales).
+  Las formas rectas y angulares: solidez, control, precisión, autoridad.
+— La tipografía tiene semiología propia:
+  Serif = tradición, autoridad, tiempo, narrativa, herencia.
+  Sans-serif = modernidad, claridad, eficiencia, apertura.
+  Monospace = código, exactitud, técnica, honestidad sin ornamento.
+  Display/Experimental = actitud, categoría, diferenciación.
+— La densidad visual comunica clase de oferta:
+  Mucho contenido, poca jerarquía = mass market, accesible, popular.
+  Poco contenido, mucho espacio = premium, selectivo, exclusivo.
+— La escala relativa entre elementos comunica jerarquía de valores.
+  Lo que se ve más grande importa más: ley universal de lectura visual.
+— El fondo blanco comunica: limpieza, transparencia, espacio,
+  accesibilidad.
+— El fondo negro comunica: exclusividad, sofisticación, intimidad,
+  noche, peso, seriedad.
+— La textura comunica: artesanía (grano de papel), lujo (materiales
+  nobles), naturaleza (superficies orgánicas), tecnología (ausencia
+  de textura).
+
+PREGUNTAS CLAVE
+---------------
+— ¿Qué comunica este color?
+— ¿Qué comunica esta forma?
+— ¿Qué comunica este peso tipográfico?
+— ¿Qué comunica este vacío?
+— ¿Qué comunica esta simetría o asimetría?
+— ¿Qué comunica esta textura?
+— ¿Qué comunica esta imagen?
+
+[EXPANDIDO v2]
+— ¿Qué categoría cultural de referencia evoca el sistema visual completo?
+  (farmacia, moda, tecnología, alimentos naturales, banca, etc.)
+— ¿Qué "mundo" construye el conjunto: artesanía, clínica, naturaleza,
+  editorial, lujo, popular, técnico?
+— ¿Las formas del logo comunican lo mismo que las formas del layout?
+  La incoherencia semiótica entre componentes produce ruido.
+— ¿La paleta tiene coherencia interna o mezcla mundos distintos?
+  (ej: colores de bienestar + tipografía de tecnología = confusión)
+— ¿Los íconos del sistema son coherentes en su nivel de abstracción?
+  Mezclar íconos lineales con íconos llenos, o planos con volumétricos,
+  rompe la coherencia semiótica.
+— ¿Hay algún elemento visual que contradice el mensaje que queremos
+  comunicar?
+
+PRINCIPIOS OPERATIVOS
+---------------------
+— Los signos deben reforzar la percepción buscada.
+— La forma nunca es neutral en un contexto de marca.
+— Los símbolos deben ser legibles culturalmente.
+— El significado visual cambia según categoría, cultura y competencia.
+— La coherencia semiótica multiplica claridad.
+
+[EXPANDIDO v2]
+— El sistema semiótico debe pertenecer a un solo mundo conceptual,
+  no a varios: la mezcla produce confusión percibida aunque cada
+  elemento individual sea correcto.
+— Una marca que mezcla semiótica de lujo con semiótica de mass market
+  comunica aspiración fallida, no versatilidad.
+— Los signos correctos pueden hacer que un producto de precio medio
+  se perciba como premium antes de leer el precio.
+— La coherencia semiótica multiplicada en todos los touchpoints crea
+  percepción de autoridad y madurez de marca sin necesitar presupuesto
+  adicional.
+— El significado semiótico no es universal: lo que comunica confianza
+  en una cultura puede comunicar frialdad en otra. Verificar contexto
+  cultural del cliente objetivo.
+
+ERRORES COMUNES
+---------------
+— Elegir recursos visuales por moda.
+— Usar formas que contradicen la personalidad de marca.
+— Asumir que todo el mundo interpreta igual.
+— Mezclar signos de distintos mundos sin intención.
+— Pensar que una forma "solo se ve bonita".
+
+[EXPANDIDO v2]
+— Adoptar el lenguaje semiótico del líder de categoría: el resultado
+  es parecer una extensión del competidor.
+— Usar colores que pertenecen a otra categoría (ej: el verde de
+  farmacia en un producto de moda) sin intención de resignificación
+  explícita.
+— Ignorar el peso semiótico de las imágenes: una foto de stock comunica
+  exactamente lo mismo que lo que el cliente percibe que es stock.
+— Subestimar el cambio de significado que produce el contexto:
+  el mismo color negro puede ser lujo (con espacio vacío y tipografía
+  serif fina) o agresividad (con iconografía geométrica y tipografía
+  gruesa).
+
+HEURÍSTICAS DE DECISIÓN
+-----------------------
+— Test de extracción: quita el logo y el nombre. ¿A qué categoría
+  pertenece el sistema visual? ¿Es la categoría correcta?
+— Test de coherencia de mundo: ¿cada elemento del sistema visual
+  podría aparecer en la misma publicación o espacio?
+  Si no, hay mezcla de mundos.
+— Test de primer instinto: ¿qué dice alguien que ve esto por primera vez
+  sin leer nada? ¿Coincide con lo que queremos que sienta?
+
+SEÑALES DE CALIDAD
+------------------
+— El sistema visual puede reconocerse sin nombre ni logo visible.
+— El mundo semiótico que evoca corresponde exactamente con la promesa
+  de marca.
+— No hay elementos que "no pertenezcan" al universo construido.
+— Distintas personas describen el sistema visual con palabras similares,
+  sin necesidad de que se les explique el concepto.
+
+OUTPUT ÚTIL PARA CLAUDE
+-----------------------
+— Sign meaning map (qué comunica cada elemento del sistema)
+— Visual world descriptor (2-3 palabras que definen el universo visual)
+— Visual associations (qué referencias culturales activa el sistema)
+— Semiotic alignment check (coherencia entre elementos)
+— Forbidden signs (qué signos contradicen la posición)
+— Desired sign system (qué signos refuerzan la posición)
+— Cultural read notes (cómo se lee en el contexto cultural específico)
+
+============================================================
+5. TYPOGRAPHY
+============================================================
+
+OBJETIVO
+--------
+Entender la tipografía como voz visual, jerarquía y ritmo.
+
+QUÉ ENSEÑA
+----------
+— La tipografía organiza la información.
+— La tipografía también expresa carácter.
+— La jerarquía es tan importante como la fuente.
+— El espaciado comunica tanto como la forma de letra.
+— La tipografía genera atmósfera.
+
+[EXPANDIDO v2]
+— Clasificación semiótica operativa:
+  Serif (Old Style/Transitional/Modern): memoria, tradición, editorial,
+  autoridad, permanencia. Old Style es más humano y cálido;
+  Didone/Modern es más dramático y fashion.
+  Sans-serif (Grotesque/Neo-grotesque/Geometric/Humanist): claridad,
+  sistema, modernidad, apertura. Grotesque es más orgánico y carácter;
+  Geometric es más preciso y frío; Humanist es más accesible.
+  Monospace: código, honestidad, exactitud, lo técnico sin ornamento.
+  Display/Slab/Experimental: actitud fuerte, diferenciación, categoría.
+  Para titulares y firma visual, nunca para body.
+— El tamaño tipográfico es poder relativo: el elemento más grande manda
+  primero. La escala no es solo diferencia de tamaño; es diferencia de
+  intención y valor.
+— El interlineado (line-height) comunica densidad y clase:
+  Textos apretados (1.2-1.3) = información técnica densa, manual,
+  eficiencia.
+  Textos normales (1.5-1.6) = lectura cómoda, neutral.
+  Textos abiertos (1.7-2.0+) = narrativa, respiro, editorial, calidad.
+— El tracking (letter-spacing):
+  Abierto en mayúsculas = institucional, clásico, elegante.
+  Cerrado = contemporáneo, denso, directo.
+  Nunca tracking negativo en body; solo en display con criterio.
+— El color del texto no es solo legibilidad: es tono.
+  Negro puro (#000) = dureza, contraste máximo, agresividad en algunos
+  contextos.
+  Gris oscuro (#1a1a1a o #111) = sofisticación, lectura cómoda.
+  Gris medio (#666-#999) = distancia, soporte, segunda jerarquía.
+— La jerarquía tipográfica puede funcionar completamente sin color:
+  solo con tamaño, peso y espaciado. Si necesita color para funcionar,
+  la jerarquía es débil.
+
+PREGUNTAS CLAVE
+---------------
+— ¿Qué debe comunicar esta tipografía?
+— ¿Debe ser seria, cálida, editorial, precisa, elegante?
+— ¿Qué rol tiene cada familia?
+— ¿Qué nivel de contraste necesita?
+— ¿Cómo respira el texto?
+— ¿Cómo cambia en mobile?
+— ¿Cómo se ve en titulares largos y cortos?
+
+[EXPANDIDO v2]
+— ¿La tipografía display sobrevive en titulares de 3 palabras y también
+  en titulares de 12-15 palabras? Si solo funciona en un caso, es un
+  problema de sistema.
+— ¿El body funciona a 14px en mobile y 16-18px en desktop sin fatiga
+  visual?
+— ¿El pairing tipográfico crea tensión útil o solo diferencia de estilo?
+  (tensión útil = la relación entre las dos fuentes produce algo que
+  ninguna de las dos sola podría producir)
+— ¿El sistema tipográfico tiene 2-3 tamaños estructurales usados con
+  consistencia, o tiene 6-8 tamaños sin lógica?
+— ¿El tipo habla el mismo idioma semiótico que el resto del sistema
+  visual? ¿Una fuente de moda con paleta de bienestar son el mismo mundo?
+— ¿El tipo de marca es único o está sobreusado en la categoría?
+  (ejemplo: la mayoría de las marcas de wellness usan la misma sans
+  ligera con tracking abierto)
+
+PRINCIPIOS OPERATIVOS
+---------------------
+— No elegir una fuente por gusto.
+— El body debe ser legible, estable y cómodo.
+— El display puede tener carácter, pero sin matar lectura.
+— La escala tipográfica debe sostener jerarquía clara.
+— El line-height y el tracking cambian la percepción.
+— Un buen pairing tipográfico crea tensión útil.
+
+[EXPANDIDO v2]
+— Dos familias tipográficas máximo en la mayoría de sistemas.
+  Tres si hay una razón editorial explícita y un rol claro para la tercera.
+  Más de tres es falta de decisión, no flexibilidad.
+— La jerarquía funciona cuando puedes escanear el layout y entender el
+  orden de lectura sin leer ninguna palabra.
+— El tipo display debe "pertenecer" a la marca: si cualquier competidor
+  de la misma categoría lo usa igual, no diferencia.
+— El espaciado entre bloques tipográficos es parte del diseño tipográfico,
+  no del layout solamente. El espacio antes de un titular importa tanto
+  como el titular.
+— Las reglas de escala para mobile no son las mismas que para desktop:
+  no escalar directamente. El mobile tiene jerarquía más vertical,
+  contraste de peso más importante, y tolerancia menor a la densidad.
+— Un buen sistema tipográfico puede ser implementado por alguien que no
+  lo diseñó y seguir funcionando: si requiere al diseñador original para
+  funcionar, es un sistema malo.
+
+ERRORES COMUNES
+---------------
+— Elegir fuentes populares sin criterio.
+— Usar demasiadas familias.
+— No definir roles.
+— No probar en mobile.
+— Compensar mala jerarquía con color.
+— Confundir personalidad con ornamentación.
+
+[EXPANDIDO v2]
+— Elegir tipografía "de moda" sin verificar si pertenece al mundo semiótico
+  de la marca: la tendencia es un préstamo que vence.
+— No probar el sistema en uso real: la fuente que se ve bien en un
+  showcase no siempre funciona en un párrafo de 80 palabras o en un
+  título de 20 caracteres.
+— Asumir que el peso Bold resuelve la jerarquía sin necesidad de escala
+  ni espaciado: el peso solo no hace jerarquía.
+— Usar tracking negativo en body: siempre reduce legibilidad y produce
+  percepción de aglomeración.
+— Confundir "legible" con "aburrido": hay fuentes de body que son
+  legibles y tienen carácter. La búsqueda debe incluir ambos.
+
+HEURÍSTICAS DE DECISIÓN
+-----------------------
+— Test de escaneo: cubre el texto y observa solo el ritmo visual de los
+  tamaños. ¿Se entiende la jerarquía sin leer?
+— Test de personalidad: ¿podría esta tipografía pertenecer a una marca
+  de mass market de la misma categoría? Si sí, no diferencia lo
+  suficiente.
+— Test de mobile: ¿la experiencia tipográfica en mobile es igual de
+  buena que en desktop, o solo acceptable?
+— Test de fatiga: ¿puedes leer 300 palabras en el body sin que produzca
+  incomodidad? Si no, el body no sirve.
+
+SEÑALES DE CALIDAD
+------------------
+— Puedo leer la jerarquía del layout sin leer el contenido.
+— El body no produce fatiga visual después de 300 palabras.
+— El sistema tiene consistencia incluso usado por alguien que no lo
+  diseñó.
+— El tipo display tiene carácter propio que identifica a la marca,
+  no solo una fuente distinta de la competencia.
+— El pairing genera una relación que produce más que la suma de sus
+  partes.
+
+OUTPUT ÚTIL PARA CLAUDE
+-----------------------
+— Typography strategy (qué rol tiene cada familia)
+— Font pairing logic (por qué estas dos fuentes juntas)
+— Scale system (valores de tamaño con ratio y lógica)
+— Rhythm rules (espaciado entre bloques, entre líneas, entre párrafos)
+— Tracking rules (valores por contexto: body, display, labels, caps)
+— Hierarchy rules (cómo leer la jerarquía sin color)
+— Mobile type rules (ajustes específicos para mobile)
+— Semiótic classification (qué comunica el sistema tipográfico elegido)
+
+============================================================
+6. EDITORIAL DESIGN
+============================================================
+
+OBJETIVO
+--------
+Aprender a componer información con ritmo, intención y sofisticación.
+
+QUÉ ENSEÑA
+----------
+— El espacio vacío tiene función.
+— La secuencia importa.
+— El orden editorial guía el ojo.
+— La composición puede producir calma, tensión o autoridad.
+— Los layouts buenos no solo muestran; narran.
+
+[EXPANDIDO v2]
+— Editorial no es solo revista: es cualquier layout donde la secuencia
+  de lectura importa. Una landing page es editorial.
+  Un email de marca es editorial. Una pantalla de onboarding es editorial.
+— Un buen layout editorial tiene estructura narrativa: introducción
+  (establece tono y promesa), desarrollo (argumenta), cierre (propone
+  acción). La secuencia no es casual.
+— El ritmo editorial funciona alternando densidad y respiro:
+  bloque pesado → pausa → bloque pesado → pausa.
+  Si todo tiene la misma densidad, no hay ritmo: hay catálogo.
+— La ruptura de grilla es un recurso, no un error, cuando es intencional.
+  Un elemento que "rompe" la alineación produce jerarquía y atención
+  si está bien ejecutado.
+— El contraste de escala (un elemento muy grande frente a muchos
+  pequeños) produce la jerarquía más efectiva en diseño editorial.
+— El diseño editorial moderno no teme el vacío: el vacío es donde el
+  ojo descansa y el significado se asienta.
+  El exceso de información no produce más transmisión; produce ruido.
+— La densidad debe variar a lo largo del scroll: abrir con impacto,
+  desarrollar con profundidad, cerrar con claridad.
+
+PREGUNTAS CLAVE
+---------------
+— ¿Qué debe leer primero el usuario?
+— ¿Qué debe sentir al avanzar?
+— ¿Qué se repite?
+— ¿Qué cambia?
+— ¿Qué se deja respirar?
+— ¿Qué se enfatiza?
+— ¿Qué se suprime?
+
+[EXPANDIDO v2]
+— ¿Cuántos bloques de densidad visual diferente tiene este layout?
+  (Si todos tienen la misma densidad, hay un problema de ritmo.)
+— ¿Hay un momento de pausa intencional antes del CTA principal?
+  (El usuario necesita llegar al CTA con la mente clara, no saturada.)
+— ¿La secuencia construye un argumento o simplemente apila información?
+— ¿La composición tiene un elemento dominante que ancla la lectura,
+  o todo compite en igualdad?
+— ¿El ritmo visual cambia a lo largo del scroll, o es constante de
+  principio a fin?
+— ¿Hay un hero que establece el tono emocional antes de que el usuario
+  lea una sola palabra?
+
+PRINCIPIOS OPERATIVOS
+---------------------
+— La composición debe tener ritmo.
+— No todo debe estar alineado de la misma forma.
+— El vacío puede ser un recurso dominante.
+— La estructura editorial crea percepción premium cuando está bien
+  ejecutada.
+— La secuencia visual debe sostener narrativa.
+
+[EXPANDIDO v2]
+— La densidad informacional debe variar. Si todo tiene el mismo peso,
+  nada importa.
+— Un módulo de texto puro entre dos módulos visuales es una pausa
+  editorial deliberada, no un problema de diseño.
+— La composición asimétrica bien ejecutada produce más tensión y atención
+  que la simétrica. La simetría perfecta puede comunicar estatismo.
+— La grilla no es una prisión: es un referente que puede tensarse para
+  producir dinamismo. Rompería conscientemente, no por accidente.
+— El bloque hero decide el tono emocional de toda la página.
+  Si el hero falla, todo lo que sigue opera en desventaja.
+— Cada sección debe tener una razón de existir en ese punto de la
+  secuencia, no solo un contenido correcto.
+
+ERRORES COMUNES
+---------------
+— Llenar demasiado la pantalla.
+— Repetir fórmulas de cards iguales.
+— Usar el mismo peso visual en todas partes.
+— No dejar puntos de pausa.
+— Diseñar como catálogo y no como relato.
+
+[EXPANDIDO v2]
+— Diseñar el scroll como una lista de módulos intercambiables:
+  el resultado es que cada sección puede estar en cualquier orden
+  sin que cambie nada, lo que significa que no hay narrativa.
+— Repetir el mismo tipo de módulo (ej: grid de 3 cards) demasiadas
+  veces: la repetición sin variación es ausencia de ritmo.
+— No tener una sección de "pausa" antes de la conversión:
+  el usuario que llega al CTA saturado convierte menos.
+— Subestimar el impacto del espacio vacío y llenarlo con "algo":
+  el espacio vacío intencional comunica premium y control.
+
+HEURÍSTICAS DE DECISIÓN
+-----------------------
+— Test de ritmo: al hacer scroll rápido, ¿se perciben cambios de ritmo
+  y densidad, o es todo igual?
+— Test de narrativa: numera cada sección. ¿Puedes explicar por qué está
+  en ese orden y no en otro?
+— Test de pausa: identifica los 3 momentos de menor densidad visual
+  en el layout. ¿Son intencionales?
+— Test de hero: ¿el primer screen establece tono, promesa y razón
+  para seguir leyendo sin necesitar texto adicional?
+
+SEÑALES DE CALIDAD
+------------------
+— Al hacer scroll, la experiencia tiene ritmo evidente: no es una cascada
+  de módulos iguales.
+— Hay al menos un momento de pausa intencional que el usuario experimenta
+  antes del CTA principal.
+— El layout tiene al menos un elemento que "rompe" la monotonía con
+  intención clara.
+— La secuencia construye una narrativa: hay introducción, desarrollo y
+  cierre reconocibles.
+— El vacío no parece un olvido; parece una decisión.
+
+OUTPUT ÚTIL PARA CLAUDE
+-----------------------
+— Layout principles (lógica de composición para este proyecto)
+— Sequencing rules (por qué cada sección está en ese orden)
+— Rhythm rules (alternancia de densidad a lo largo del scroll)
+— Empty space rules (cuándo y cómo usar el vacío)
+— Narrative composition notes (cómo la secuencia construye argumento)
+— Section weight map (qué peso visual tiene cada sección del layout)
+— Hero brief (qué debe establecer el primer screen)
+
+============================================================
+7. COMPOSITION
+============================================================
+
+OBJETIVO
+--------
+Entender cómo organizar elementos en un espacio para dirigir la
+atención y el significado.
+
+QUÉ ENSEÑA
+----------
+— La composición es jerarquía espacial.
+— El peso visual no se distribuye al azar.
+— La alineación, la escala y la proximidad alteran lectura y percepción.
+— Una composición buena no solo es ordenada; es intencional.
+
+[EXPANDIDO v2]
+— Principios Gestalt operativos:
+  Proximidad: elementos cercanos se perciben como grupo.
+  Similitud: elementos iguales se agrupan perceptivamente.
+  Continuidad: el ojo sigue líneas implícitas y direcciones sugeridas.
+  Cierre: el cerebro completa figuras incompletas.
+  Figura/fondo: siempre hay un elemento que se percibe como figura
+  y otro como fondo. La relación puede invertirse.
+  Usar estos principios activamente, no dejar que operen por accidente.
+— El punto focal es el elemento que el ojo lee primero. Puede serlo por:
+  tamaño (el más grande), contraste (el más distinto del fondo),
+  posición (esquina superior izquierda, centro, o punto de tensión),
+  aislamiento (rodeado de espacio vacío).
+— El flujo visual puede diseñarse: el ojo sigue líneas implícitas,
+  diagonales, y la dirección de la mirada de las personas en las imágenes.
+— La asimetría dinámica: tensión sin caos. Un elemento pesado a la
+  izquierda compensado por espacio + tipografía pequeña a la derecha.
+  Produce energía sin inestabilidad.
+— La regla de los tercios es un punto de partida para ubicar el peso
+  visual principal, no una ley que no puede romperse.
+— El fondo no es pasivo: la forma del fondo genera figuras negativas
+  que también comunican. El logo de FedEx tiene una flecha en el
+  espacio negativo.
+
+PREGUNTAS CLAVE
+---------------
+— ¿Dónde cae el foco?
+— ¿Qué elemento pesa más?
+— ¿Qué espacio equilibra el conjunto?
+— ¿Hay tensión suficiente?
+— ¿La composición se siente estática o viva?
+— ¿Qué parte necesita descanso visual?
+
+[EXPANDIDO v2]
+— ¿Dónde entra el ojo y adónde va después? ¿Hay un flujo claro?
+— ¿Hay un elemento que ancla el layout o todo flota con igual importancia?
+— ¿El elemento más importante tiene el peso visual que merece,
+  o está compitiendo con otros elementos de igual peso?
+— ¿La composición tiene tensión suficiente o está resuelta en equilibrio
+  perfecto y por eso muerta?
+— ¿Qué pasa con la composición si se quita el color?
+  ¿Sigue funcionando como composición o dependía del color para tener
+  jerarquía?
+— ¿Hay elementos que podrían eliminarse sin que la composición perdiera
+  fuerza? (Si sí, eliminarlos.)
+
+PRINCIPIOS OPERATIVOS
+---------------------
+— Todo elemento necesita una razón de ubicación.
+— La proximidad agrupa.
+— La escala jerarquiza.
+— La asimetría puede dar energía.
+— La simetría puede dar control.
+— El balance visual es más importante que la simetría mecánica.
+
+[EXPANDIDO v2]
+— Toda composición necesita un elemento dominante claro.
+  Si todo compite, nadie gana y la composición no tiene jerarquía.
+— El vacío no es ausencia: es un peso visual activo que equilibra
+  y da respiración. Más vacío = más peso relativo del elemento presente.
+— La diagonal genera movimiento en la composición.
+  El eje horizontal genera estabilidad.
+  El eje vertical genera autoridad y elevación.
+  Usar ejes para reforzar el tono que se busca.
+— La composición debe funcionar en múltiples escalas: igual de buena
+  en thumbnail que en pantalla completa.
+  Si solo funciona en grande, es dependiente del detalle, no de la
+  estructura.
+— Si un elemento no tiene razón de estar donde está, o se mueve
+  con intención o se elimina. No existen elementos neutros.
+
+ERRORES COMUNES
+---------------
+— Alinear todo por costumbre.
+— No entender pesos visuales.
+— Confundir composición con grilla rígida.
+— Repetir patrones sin variar ritmo.
+— No usar tensión visual con intención.
+
+[EXPANDIDO v2]
+— Centrar todo por default: el centrado total produce composiciones
+  estables pero sin energía. Conveniente, no intencional.
+— Distribuir los elementos uniformemente en el espacio: la distribución
+  uniforme elimina jerarquía.
+— Depender del color para producir jerarquía que la composición no tiene:
+  si al quitar el color la jerarquía desaparece, la composición es débil.
+— Agregar elementos decorativos para "llenar" el espacio: el espacio
+  que "molesta" es generalmente el espacio que necesita quedarse.
+
+HEURÍSTICAS DE DECISIÓN
+-----------------------
+— Test en blanco y negro: ¿la jerarquía visual es clara sin color?
+— Test de squint (ojos entrecerrados): ¿se puede ver el punto focal
+  dominante con los ojos entrecerrados? Si no, no hay focal point claro.
+— Test de eliminación: quita un elemento a la vez.
+  ¿La composición pierde algo o se fortalece?
+— Test de miniatura: ¿la composición funciona a 100x100px?
+  Si no, la jerarquía depende del detalle, no de la estructura.
+
+SEÑALES DE CALIDAD
+------------------
+— Puedo cubrir el copy con un dedo y la composición visual sigue diciendo
+  algo sobre la jerarquía de la página.
+— El ojo sabe exactamente dónde ir primero, segundo y tercero sin
+  instrucción explícita.
+— Hay tensión sin caos: el balance es dinámico, no mecánico.
+— La composición tiene al menos un elemento memorable o inusual,
+  no solo elementos correctos.
+— Funciona tanto en thumbnail como en full screen.
+
+OUTPUT ÚTIL PARA CLAUDE
+-----------------------
+— Composition map (jerarquía visual de la pieza)
+— Weight distribution (cómo se distribuye el peso en el espacio)
+— Balance rules (balance dinámico vs. simétrico para este proyecto)
+— Tension zones (dónde vive la tensión intencional)
+— Focus priority (elemento 1, 2, 3 en orden de atención)
+— Axis analysis (ejes dominantes y qué comunican)
+— Negative space strategy (cómo usar el vacío en este sistema)
+
+============================================================
+8. PHOTOGRAPHY
+============================================================
+
+OBJETIVO
+--------
+Entender cómo las imágenes construyen percepción, evidencia y atmósfera.
+
+QUÉ ENSEÑA
+----------
+— La imagen puede vender más que el copy.
+— La fotografía correcta puede elevar o destruir el nivel percibido.
+— Un buen crop puede decir más que una explicación.
+— La dirección de arte visualiza el concepto.
+
+[EXPANDIDO v2]
+— El estilo fotográfico es parte del sistema de identidad, no una
+  decisión estética separada. No puede ser genérico.
+— La luz es el primer elemento determinante de una fotografía:
+  Luz dura (directa, sombras definidas) = drama, contraste, energía.
+  Luz suave (difusa, sombras blandas) = calidez, intimidad, accesibilidad.
+  Luz de ambiente (luz natural, no dirigida) = autenticidad, documental.
+  Contraluz (backlight) = poesía, aspiración, misterio.
+— El crop define nivel de intimidad y significado:
+  Plano abierto = contexto, escala, mundo en que vive el producto.
+  Plano medio = relación, humanidad, uso.
+  Plano cerrado/detalle = materia, calidad, artesanía, prueba.
+— La profundidad de campo comunica:
+  Mucho bokeh (f/1.4-f/2) = calidez, personal, artesanal, emocional.
+  Profundidad media (f/4-f/5.6) = natural, uso cotidiano.
+  Profundidad total (f/11+) = documental, honesto, técnico, clínico.
+— El color grading no es solo estética: los tonos de las fotos deben
+  pertenecer a la paleta de marca. Una foto sin grading dentro de un
+  sistema con grading fuerte rompe la coherencia.
+— La composición dentro de la foto importa igual que en el layout:
+  vacío, balance, dirección de mirada, punto de tensión.
+— La presencia de personas en una foto define aspiración o identificación:
+  ¿el usuario quiere ser esa persona o quiere verse en esa persona?
+  La elección es estratégica.
+
+PREGUNTAS CLAVE
+---------------
+— ¿Qué debe mostrar la imagen?
+— ¿Qué no debe mostrar?
+— ¿La imagen debe ser real o construida?
+— ¿Debe haber personas?
+— ¿Debe haber textura, producto, ambiente, detalle?
+— ¿Qué emoción transmite la foto?
+
+[EXPANDIDO v2]
+— ¿Esta foto podría pertenecer a la competencia? Si sí, no es
+  suficientemente propia.
+— ¿La dirección de luz de esta foto comunica el mismo tono que el copy?
+  (Una promesa de calidez con iluminación dura y fría no funciona.)
+— ¿El crop deja espacio tipográfico sin que el texto pelee con la imagen?
+— ¿Las personas en la foto son aspiracionales para el cliente objetivo
+  o generan distancia?
+— ¿Existe un tratamiento de color (grading) consistente entre todas las
+  imágenes del sistema, incluso entre fotos de distintas fuentes?
+— ¿Qué nivel de detalle o textura necesita aparecer para probar la
+  calidad del producto?
+
+PRINCIPIOS OPERATIVOS
+---------------------
+— La imagen debe pertenecer al mundo de la marca.
+— Si no hay fotos reales, la sustitución debe ser intencional.
+— El estilo de fotografía debe sostener el tono.
+— Los crops, la iluminación y el color grading importan.
+— Una mala foto baja percepción más que una mala línea de copy.
+
+[EXPANDIDO v2]
+— Una buena foto de producto bien dirigida puede vender más que la
+  mejor página de texto.
+— El color grading unifica imágenes de distintos fotógrafos y fuentes
+  en un sistema visualmente coherente. Hacerlo bien vale más que
+  hacer mejores fotos.
+— Una foto mal seleccionada destruye más percepción de marca que una
+  foto de menor técnica pero bien elegida.
+— La fotografía de ambiente debe construir el mundo en que vive la marca,
+  no solo mostrar el producto.
+— Si no hay fotos reales, el placeholder debe tener intención explícita:
+  moodboard, tono, estilo, tratamiento de color definido.
+  Un placeholder indefinido produce un diseño sin sistema fotográfico.
+— La foto de portada o hero establece el mundo percibido de la marca
+  antes de que cualquier texto sea leído.
+
+ERRORES COMUNES
+---------------
+— Usar stock genérico.
+— Poner imágenes solo para llenar espacio.
+— No definir dirección fotográfica.
+— No mantener consistencia entre fotos.
+— Confiar en imágenes que no prueban nada.
+
+[EXPANDIDO v2]
+— Usar fotos de banco sin adaptar al color grading del sistema:
+  el resultado es incoherencia visual que se percibe como
+  falta de cuidado aunque las fotos individualmente sean buenas.
+— No definir la dirección fotográfica antes de buscar o encargar fotos:
+  sin criterio explícito, el resultado es variedad sin sistema.
+— Elegir fotos que "se ven bien" sin verificar si corresponden con
+  la promesa de marca: una foto hermosa que no pertenece al mundo
+  de la marca confunde más que ayuda.
+— No tener un criterio de rechazo: "¿qué foto nunca usaría esta marca?"
+  define el sistema tanto como "¿qué foto sí usaría?".
+
+HEURÍSTICAS DE DECISIÓN
+-----------------------
+— Test de pertenencia: ¿podría esta foto aparecer en el Instagram de la
+  competencia sin verse rara?
+  Si sí, no es suficientemente propia.
+— Test de tono: ¿la emoción que transmite la foto corresponde con la
+  emoción que queremos que el usuario sienta?
+— Test de coherencia: ¿todas las fotos del sistema tienen el mismo
+  tratamiento de color? Si no, ¿hay razón intencional para la variación?
+— Test de prueba: ¿la foto prueba algo sobre el producto o solo lo decora?
+
+SEÑALES DE CALIDAD
+------------------
+— Las fotos tienen un mundo reconocible que pertenece a la marca.
+— El tratamiento de color es consistente entre fotos de distinto origen.
+— Ninguna foto puede ser reemplazada por stock genérico sin que se note.
+— Las imágenes y el copy se refuerzan mutuamente, no se duplican ni
+  se contradicen.
+— La dirección de arte puede describirse en 5-6 palabras.
+
+OUTPUT ÚTIL PARA CLAUDE
+-----------------------
+— Photography direction (estilo, tono, mundo visual)
+— Image rules (qué debe y no debe aparecer)
+— Crop strategy (planos por tipo de uso)
+— Lighting notes (tipo de luz por contexto)
+— Color grading direction (tonos, temperatura, contraste)
+— Subject selection (personas, productos, ambiente, detalle)
+— Placeholder strategy (qué hacer si no hay fotos reales todavía)
+— Rejection criteria (qué fotos nunca pertenecen a este sistema)
+
+============================================================
+9. MOTION
+============================================================
+
+OBJETIVO
+--------
+Entender cómo el movimiento refuerza narrativas, percepciones y
+jerarquías.
+
+QUÉ ENSEÑA
+----------
+— El motion no es decoración.
+— El tiempo también diseña.
+— El movimiento da personalidad.
+— La velocidad, el easing y el ritmo tienen significado.
+— El motion puede ser suave, exacto, premium, energético o experimental.
+
+[EXPANDIDO v2]
+— El timing es la variable más sensible en motion: 0.1 segundos de
+  diferencia cambia radicalmente la percepción de velocidad y fluidez.
+  200ms se siente rápido; 400ms se siente tranquilo; 800ms+ se siente
+  ceremonial.
+— Tipos de easing y sus personalidades:
+  ease-in: acelera al inicio → sensación de energía que se construye.
+  ease-out: desacelera al final → aterrizaje natural, orgánico, confortante.
+  ease-in-out: curva completa → movimiento orgánico, más humano.
+  linear: velocidad constante → mecánico, robótico, digital-explícito.
+  spring: simulación física con rebote → orgánico, vivo, humano, moderno.
+— La continuidad de movimiento (un objeto que sigue siendo el mismo
+  mientras se transforma) reduce confusión cognitiva y crea fluidez.
+  Transiciones que preservan identidad del elemento > transiciones que
+  lo hacen desaparecer y reaparecer.
+— Las micro-interacciones son el lenguaje de feedback del sistema:
+  hover, focus, active, loading, success, error.
+  Cada uno tiene sus propias reglas de timing y easing.
+— El motion diferencia jerarquía: elementos importantes se animan;
+  elementos de soporte permanecen o tienen motion más sutil.
+— La dirección del movimiento tiene significado semiótico:
+  Arriba = ascenso, mejora, positivo.
+  Abajo = continuación natural del scroll, expansión.
+  Derecha = avance, progreso, tiempo hacia adelante.
+  Izquierda = retroceso, regreso.
+  Hacia el usuario (scale up) = énfasis, importancia.
+
+PREGUNTAS CLAVE
+---------------
+— ¿Qué debe moverse?
+— ¿Con qué velocidad?
+— ¿Con qué suavidad?
+— ¿Qué se repite?
+— ¿Qué revela?
+— ¿Qué sugiere?
+— ¿Qué evita distracción?
+
+[EXPANDIDO v2]
+— ¿Cuántos elementos se mueven simultáneamente? ¿Es demasiado?
+  (La regla: si 3+ elementos se mueven al mismo tiempo, ninguno importa.)
+— ¿El sistema de motion tiene coherencia interna: mismo easing,
+  misma familia de timing, mismo vocabulario?
+— ¿El usuario con `prefers-reduced-motion` activado tiene una
+  experiencia degradada o simplemente diferente y igualmente válida?
+— ¿El movimiento está aportando claridad al estado de la interfaz
+  o está siendo una distracción decorativa?
+— ¿El tiempo total de las transiciones de página es menor a 400ms?
+  Si no, el usuario percibe lentitud aunque el performance sea bueno.
+
+PRINCIPIOS OPERATIVOS
+---------------------
+— El motion debe tener intención semántica.
+— Menos motion bien usado puede valer más que mucho motion irrelevante.
+— La interacción debe tener feedback claro.
+— El motion premium suele ser medido y preciso.
+— El motion inmaduro suele llamar la atención sin sentido.
+
+[EXPANDIDO v2]
+— El motion debería poder describirse en 2-3 palabras:
+  "suave y preciso", "rápido y directo", "orgánico y cálido".
+  Si no tiene descriptor, no tiene dirección.
+— Las transiciones entre páginas o secciones deben ser coherentes
+  con el tono de marca: una marca premium tiene transiciones medidas;
+  una marca de energía tiene transiciones rápidas.
+— Un sistema de motion maduro tiene pocas reglas muy bien definidas,
+  no muchos efectos distintos. La variedad sin sistema es ruido.
+— El feedback de interacción debe ser inmediato (< 100ms) para que
+  el usuario lo perciba como respuesta al gesto, no como lag.
+— El motion de entrada de contenido (reveal, fade-in al scroll)
+  debe sumar jerarquía: lo que aparece primero importa más.
+  No animar todo por igual.
+
+ERRORES COMUNES
+---------------
+— Animar todo.
+— Usar parallax solo porque parece "fino".
+— No respetar accesibilidad ni reduced motion.
+— Convertir la animación en show.
+— No alinear movimiento con concepto.
+
+[EXPANDIDO v2]
+— Usar el mismo easing para todos los elementos: sin variación en el
+  sistema de easing, todo se percibe igual y no hay jerarquía de motion.
+— Crear animaciones de entrada que tardan tanto que el usuario las
+  ve como lentitud, no como fluidez.
+— Animar elementos en fondos o detalles decorativos: el ojo sigue el
+  movimiento; si el movimiento está en lo secundario, la atención está
+  en lo secundario.
+— Tener transiciones de página complejas en una aplicación de alta
+  frecuencia de uso: la animación que se ve bien la primera vez
+  produce frustración en la décima.
+
+HEURÍSTICAS DE DECISIÓN
+-----------------------
+— Test de descriptor: ¿puedo describir el sistema de motion en 3 palabras?
+  Si no puedo, no hay sistema.
+— Test de ausencia: ¿si elimino todas las animaciones, la experiencia
+  sigue siendo buena? Si no, el motion está tapando problemas de UX.
+— Test de simultaneidad: en el momento de mayor actividad visual,
+  ¿cuántos elementos se mueven al mismo tiempo? Si son más de 2-3,
+  hay demasiado ruido de motion.
+— Test de marca: ¿el sistema de motion corresponde con el tono de marca?
+  Una marca de bienestar con transiciones rápidas y bruscas tiene
+  incoherencia de motion.
+
+SEÑALES DE CALIDAD
+------------------
+— El motion pasa desapercibido como artificio pero se nota su ausencia.
+— Hay un descriptor de 2-3 palabras que define todo el vocabulario de
+  movimiento del sistema.
+— Los elementos más importantes en la jerarquía tienen el motion
+  más cuidado.
+— El sistema funciona igual de bien en dispositivos de menor rendimiento.
+— El usuario con reduced motion tiene una experiencia diseñada,
+  no degradada.
+
+OUTPUT ÚTIL PARA CLAUDE
+-----------------------
+— Motion principles (filosofía de movimiento para esta marca)
+— Timing rules (valores en ms para cada tipo de transición)
+— Easing rules (qué curva para qué tipo de movimiento)
+— Motion vocabulary (palabras que describen el sistema de movimiento)
+— Interaction feedback notes (hover, focus, active, loading, error)
+— Reveal strategy (cómo entran los elementos al scroll)
+— Reduced motion strategy (versión sin animación igualmente diseñada)
+— Prohibited motion (qué tipos de animación nunca corresponden)
+
+============================================================
+10. UX
+============================================================
+
+OBJETIVO
+--------
+Entender cómo las personas navegan, escanean, comparan y deciden.
+
+QUÉ ENSEÑA
+----------
+— El usuario busca claridad.
+— La jerarquía reduce fricción.
+— La lectura en web es escaneo, no lectura lineal.
+— Menos fricción = más probabilidad de acción.
+— La experiencia debe anticipar dudas.
+
+[EXPANDIDO v2]
+— El usuario no lee; escanea. Los patrones de escaneo más comunes:
+  F-pattern: páginas de texto denso. El ojo lee primero la línea
+  superior, luego baja por el margen izquierdo.
+  Z-pattern: páginas con poco texto y CTAs. El ojo traza una Z
+  de esquina superior izquierda a superior derecha, diagonal al
+  inferior izquierdo, luego a inferior derecho.
+  Implicación: la información crítica debe estar en las zonas de
+  mayor densidad de escaneo.
+— "Above the fold" importa pero no es absoluto. Lo que importa es
+  que el primer screen establezca propuesta de valor clara y genere
+  una razón para seguir scrolleando.
+— Los formularios son el mayor punto de abandono de cualquier flujo.
+  Cada campo extra reduce la tasa de completado. La regla: pedir solo
+  lo indispensable para el objetivo de esa etapa.
+— La jerarquía de CTA: primario (una acción que queremos), secundario
+  (alternativa aceptable), terciario (información que retrasa la acción).
+  Si todo parece primario, ninguno lo es.
+— El scroll no es un obstáculo si hay señales de que hay más contenido.
+  La ausencia de señales produce abandono, no el scroll en sí.
+— La consistencia de patrones reduce carga cognitiva: el usuario aprende
+  una vez y aplica el aprendizaje en toda la interfaz.
+  Innovar sin necesidad en patrones conocidos crea fricción.
+— Los estados de error son diseño: cómo se comunica que algo salió mal
+  determina la confianza del usuario en el sistema.
+
+PREGUNTAS CLAVE
+---------------
+— ¿Qué quiere hacer el usuario primero?
+— ¿Qué objeción necesita resolver?
+— ¿Qué necesita ver para seguir?
+— ¿Dónde se puede perder?
+— ¿Qué necesita ser obvio?
+— ¿Qué información debe aparecer antes?
+
+[EXPANDIDO v2]
+— ¿Cuántos CTAs primarios hay en esta pantalla? (debe ser uno)
+— ¿En cuántos segundos puede el usuario entender qué hace esto y qué
+  se supone que haga? (objetivo: menos de 5 segundos)
+— ¿Qué información está faltando que el usuario necesitaría para confiar
+  y avanzar?
+— ¿Qué tan largo es el formulario? ¿Qué campo puede eliminarse sin
+  perder información crítica?
+— ¿La navegación es predecible? ¿El usuario puede volver al punto de
+  partida sin perderse?
+— ¿Qué pasa cuando algo sale mal? ¿El mensaje de error explica qué
+  hacer o solo qué ocurrió?
+— ¿La información de confianza (testimonios, garantías) aparece antes
+  del CTA o después?
+
+PRINCIPIOS OPERATIVOS
+---------------------
+— La UX debe eliminar esfuerzo innecesario.
+— El contenido debe estar secuenciado según intención.
+— La navegación debe ser clara y predecible.
+— Las decisiones importantes deben estar visibles.
+— La fricción debe ser intencional, no accidental.
+
+[EXPANDIDO v2]
+— Un CTA efectivo describe exactamente qué va a pasar al hacer clic:
+  "Reservar turno gratis" no "Enviar". La especificidad reduce ansiedad
+  y aumenta conversión.
+— La información de confianza (testimonios, garantías, número de clientes)
+  debe aparecer antes del CTA principal, no después.
+  El usuario que llega al CTA sin resolver sus objeciones no convierte.
+— La primera acción visible debe ser la más fácil de hacer, no
+  necesariamente la más importante para la conversión.
+  La escalera de micro-compromisos funciona mejor que el gran pedido
+  inmediato.
+— Mobile no es desktop reducido: los patrones de interacción son
+  distintos (thumb zone, tap vs hover), las prioridades de contenido
+  también. Diseñar mobile-first no es solo cambiar el ancho.
+— Un buen diseño UX puede describirse como "obvio":
+  si alguien dice "no sé qué hacer", es un diagnóstico de UX fallida,
+  no de usuario malo.
+
+ERRORES COMUNES
+---------------
+— Diseñar para demostrar creatividad y no claridad.
+— Hacer menús confusos.
+— Ocultar información crítica.
+— Sobrecargar formularios.
+— Diseñar sin entender el patrón de lectura.
+
+[EXPANDIDO v2]
+— Poner el precio tarde en el flujo: el usuario que descubre el precio
+  al final sin haberlo anticipado percibe ocultamiento, no sorpresa.
+— No tener versión mobile del estado de error: los formularios en mobile
+  con errores pobremente comunicados tienen mayor abandono.
+— Crear menús de navegación con nombres internos o creativos que el
+  usuario no reconoce: la claridad de navegación vale más que la
+  originalidad de los labels.
+— No tener un estado de loading visible: el usuario que no recibe
+  feedback de que algo está ocurriendo asume que algo está roto.
+
+HEURÍSTICAS DE DECISIÓN
+-----------------------
+— Test de claridad: ¿puede alguien que no conoce el producto entender
+  qué hace y qué debe hacer en menos de 5 segundos?
+— Test de CTA: cuenta los CTAs primarios. Si hay más de uno, ¿cuál es
+  el real?
+— Test de objeción: lista las 3 objeciones más comunes.
+  ¿Están respondidas antes del CTA?
+— Test mobile: completa el flujo completo en mobile. ¿Hay algún paso
+  que requiere más de 2 intentos para completarse?
+
+SEÑALES DE CALIDAD
+------------------
+— El usuario puede completar el objetivo principal sin instrucciones
+  externas.
+— El flujo no tiene ningún paso que produzca duda o pausa.
+— Las objeciones frecuentes están respondidas antes del CTA final.
+— El formulario no tiene campos que el usuario perciba como innecesarios.
+— El error state explica claramente qué hacer, no solo qué salió mal.
+
+OUTPUT ÚTIL PARA CLAUDE
+-----------------------
+— User journey (pasos desde entrada hasta conversión)
+— Friction map (dónde se rompe o se debilita la experiencia)
+— Attention map (qué ve primero, segundo y tercero)
+— CTA hierarchy (primario, secundario, terciario con texto propuesto)
+— Scanning pattern notes (F o Z y qué información va en cada zona)
+— Objection placement (dónde responder cada objeción en el flujo)
+— Error state design notes (cómo comunicar estados de error)
+— Mobile-specific notes (qué cambia en mobile vs desktop)
+
+============================================================
+11. LUXURY PERCEPTION
+============================================================
+
+OBJETIVO
+--------
+Entender qué hace que algo se sienta caro, refinado y con autoridad.
+
+QUÉ ENSEÑA
+----------
+— El lujo no es exceso.
+— El lujo suele comunicar restricción, control y silencio.
+— La percepción de lujo surge de la coherencia y el detalle.
+— El vacío bien usado puede ser más premium que el ornamento.
+— La precisión vale más que la ornamentación.
+
+[EXPANDIDO v2]
+— El lujo real se comunica con restricción: dice menos, muestra menos,
+  explica menos. La explicación excesiva destruye la percepción de lujo.
+— El white space (espacio vacío) es el recurso premium por excelencia
+  en diseño digital: significa que la marca no necesita llenar todo
+  el espacio disponible para justificar su existencia.
+— Las marcas de lujo usan la tipografía como principal vehículo de tono,
+  más que la imagen o el color. La elección tipográfica es la decisión
+  más determinante en una identidad de lujo.
+— La paleta de lujo tiende a ser monocromática o bicromática.
+  Cada color adicional es un costo en percepción premium.
+— El silencio en copy es poder: menos palabras = más peso por palabra.
+  Las marcas de lujo no explican; presentan.
+— La velocidad de transición premium es más lenta que la promedio:
+  el lujo no apura. Las transiciones lentas y precisas comunican
+  ceremonia, no lentitud.
+— Las marcas premium evitan activamente las tendencias de masas:
+  adoptar la moda de diseño que todos usan es la forma más rápida de
+  degradar la percepción de lujo.
+— El lujo comunica permanencia: actúa como si fuera a existir siempre.
+  Los cambios frecuentes de identidad son un anti-signo de lujo.
+
+PREGUNTAS CLAVE
+---------------
+— ¿Qué parte del diseño transmite calma?
+— ¿Qué comunica control?
+— ¿Qué comunica restricción?
+— ¿Qué se siente refinado?
+— ¿Dónde aparece la calidad?
+— ¿Qué hace que esto parezca caro?
+
+[EXPANDIDO v2]
+— ¿Qué elemento de este diseño podría aparecer en una marca de mass
+  market sin verse raro? (si existe, es un anti-signo de lujo)
+— ¿Cuántas palabras tiene el headline principal? ¿Puede reducirse a la
+  mitad sin perder el mensaje?
+— ¿El espacio vacío existe porque hubo una decisión de que no hay nada
+  más que poner, o porque sobró espacio?
+— ¿La tipografía body tiene el interlineado y tracking necesarios para
+  comunicar calidad de lectura?
+— ¿Qué pasaría si se eliminara un elemento visual más de los que hay?
+  (Si el diseño mejora al eliminar algo, hay algo de más.)
+— ¿La navegación comunica control y claridad, o genera microansiedad?
+
+PRINCIPIOS OPERATIVOS
+---------------------
+— Menos ruido, más intención.
+— Menos promesas, más control.
+— Menos elementos, más peso por elemento.
+— La tipografía, el espaciado y la consistencia son determinantes.
+— Lo premium debe sentirse fácil de mirar y difícil de copiar.
+
+[EXPANDIDO v2]
+— El lujo no justifica. No explica por qué es caro. No argumenta.
+  Existe. Las marcas de lujo que argumentan su precio parecen inseguras.
+— Cada elemento extra que se agrega a un diseño premium cuesta
+  percepción de lujo. La adición es un riesgo; la sustracción suele
+  ser una mejora.
+— El color adicional en un sistema premium tiene un costo mayor que
+  en un sistema de mass market. Cada color extra debe justificar
+  su existencia con un argumento estratégico.
+— Las imágenes de lujo no venden el producto; lo presentan.
+  La diferencia: "vender" requiere argumentar; "presentar" solo requiere
+  mostrar con la calidad suficiente para que hable por sí solo.
+— La consistencia perfecta communica más lujo que la creatividad
+  frecuente. La estabilidad es un signo de seguridad y autoridad.
+— Los detalles invisibles (kerning perfecto, espaciado preciso, alineación
+  exacta) son detectados inconscientemente y contribuyen a la percepción
+  de calidad más que cualquier elemento decorativo.
+
+ERRORES COMUNES
+---------------
+— Confundir lujo con oro, mármol o excesos visuales.
+— Sobreactuar exclusividad.
+— Llenar la interfaz de adornos.
+— Usar clichés de lujo genérico.
+— Hacer algo "fino" sin base estratégica.
+
+[EXPANDIDO v2]
+— Usar el mismo sistema visual que todos los competidores de lujo en
+  la categoría: la homogeneización de la estética premium produce
+  paradoxalmente una percepción menos premium.
+— Agregar ornamentación para "verse premium" sin tener una posición
+  premium: el resultado es percepción de aspiración fallida,
+  no de lujo real.
+— Usar tipografías de moda de lujo (como las Didone que todos usan)
+  sin aportar nada propio: la familiaridad con la moda premium es
+  la peor señal de lujo verdadero.
+— No tener una jerarquía de información adecuada: el lujo tiene
+  espaciado generoso y ritmo lento, pero también tiene claridad.
+  El lujo opaco no es lujo; es confusión bien fotografiada.
+
+HEURÍSTICAS DE DECISIÓN
+-----------------------
+— Test de sustracción: elimina el elemento menos necesario del diseño.
+  ¿Mejora? Si sí, había algo de más.
+— Test de explicación: ¿la marca necesita explicar por qué es cara
+  o simplemente actúa como si lo fuera?
+— Test de masa: ¿algún elemento de este sistema podría pertenecer a
+  una marca de mass market?
+— Test de tipografía sola: ¿la tipografía, sin imágenes ni color,
+  comunica el tono premium deseado?
+
+SEÑALES DE CALIDAD
+------------------
+— El primer screen genera una reacción de "esto se ve serio/premium"
+  antes de que el usuario lea una palabra.
+— La tipografía sola, sin imágenes, comunica el tono de la marca.
+— Eliminar cualquier elemento más haría el diseño más fuerte, no
+  más vacío.
+— El sistema visual sostiene en blanco y negro sin perder distinción.
+— El vacío se percibe como una decisión, no como falta de contenido.
+
+OUTPUT ÚTIL PARA CLAUDE
+-----------------------
+— Luxury cues (qué señales comunican premium en este contexto)
+— Restriction rules (qué se elimina deliberadamente)
+— Silence rules (dónde el silencio visual es el mensaje)
+— Refinement notes (qué detalles de precisión son determinantes)
+— Detail quality checklist (qué elementos deben ser perfectos)
+— Anti-luxury list (qué nunca puede aparecer en este sistema)
+— Typographic luxury notes (cómo la tipografía comunica el tono)
+— Space strategy (cómo usar el vacío como recurso activo)
+
+============================================================
+12. CREATIVE STRATEGY
+============================================================
+
+OBJETIVO
+--------
+Aprender a transformar estrategia en concepto, narrativa y sistema
+creativo.
+
+QUÉ ENSEÑA
+----------
+— Un concepto fuerte ordena todo.
+— Una buena metáfora traduce lo abstracto.
+— La creatividad útil resuelve problemas estratégicos.
+— La dirección creativa conecta negocio, percepción y forma.
+— La narrativa no es adorno; es estructura de sentido.
+
+[EXPANDIDO v2]
+— Un concepto fuerte es una idea que conecta la promesa de marca con
+  una emoción o imagen que la hace memorable y traducible.
+— La diferencia entre slogan y concepto:
+  Slogan = una frase.
+  Concepto = un mundo que puede traducirse a diseño, copy, motion,
+  fotografía, arquitectura de información y campaña.
+  Un concepto mal definido produce ejecuciones fragmentadas.
+— Una buena metáfora no solo describe; transforma: hace que el cliente
+  vea su problema o deseo de una manera diferente a como lo veía antes.
+  Si la metáfora no cambia la percepción, es solo una analogía.
+— La estrategia creativa no es ejecutar más cosas; es encontrar la
+  dirección que hace que todas las decisiones sean consecuencias obvias.
+  Cuando el concepto es correcto, el equipo puede tomar decisiones
+  autónomamente porque el concepto actúa como filtro.
+— El brief no es un resumen del cliente; es una toma de posición del
+  estratega. Un brief que no tiene ninguna idea dentro no es un brief;
+  es un archivo de información.
+— La tensión es la fuente de toda creatividad genuina:
+  Existe un conflicto (el usuario quiere X pero tiene el problema Y).
+  Existe una resolución (la marca ofrece Z de manera particular).
+  Existe una idea (la expresión de esa relación).
+  Sin tensión, no hay concepto; hay descripción.
+
+PREGUNTAS CLAVE
+---------------
+— ¿Qué tensión está resolviendo esta marca?
+— ¿Qué transformación promete?
+— ¿Qué metáfora puede sostener eso?
+— ¿Qué historia quiere contar?
+— ¿Qué debe sentir el usuario?
+— ¿Qué firma visual podría nacer de ahí?
+
+[EXPANDIDO v2]
+— ¿Cuál es la tensión central que esta marca resuelve para su cliente?
+  (No el problema funcional; la tensión emocional o de identidad.)
+— ¿Qué transformación promete al usuario: qué es antes de la marca
+  y qué puede ser después?
+— ¿Qué debería sentir el usuario después de consumir esta comunicación
+  que no sentía antes?
+— ¿El concepto puede traducirse a imagen, texto, movimiento y espacio?
+  Si solo funciona en uno de esos formatos, es limitado.
+— ¿Hay una metáfora que capture la posición de manera visual e inmediata?
+— ¿El concepto tiene una única dirección o se puede interpretar de
+  múltiples maneras? (Si son múltiples, no es un concepto; es una
+  constelación de ideas sin centro.)
+— ¿La idea puede sobrevivir 2-3 años sin agotarse?
+
+PRINCIPIOS OPERATIVOS
+---------------------
+— La creatividad debe estar al servicio de una intención.
+— El concepto debe poder traducirse a diseño, copy, motion e imagen.
+— La metáfora correcta simplifica la decisión.
+— La diferenciación sin estrategia se vuelve ruido.
+— La estrategia sin creatividad se vuelve fría.
+
+[EXPANDIDO v2]
+— Un concepto que no puede dibujarse no es suficientemente concreto.
+  Si el equipo de diseño no puede hacer una imagen del concepto,
+  el concepto no existe todavía.
+— La diferenciación sin tensión es solo estilo: puede verse distinto
+  pero no mueve ninguna percepción.
+— El creative brief debe poder leerse en 2 minutos y producir una imagen
+  en la mente del lector. Si necesita más tiempo o no produce imagen,
+  está incompleto.
+— La metáfora correcta hace que la ejecución sea una consecuencia
+  natural, no un esfuerzo de traducción. Cuando el equipo dice
+  "obvio, claro" al ver la metáfora, está bien.
+— La estrategia creativa es responsable de que diseño, copy y motion
+  estén hablando del mismo mundo, incluso si trabajan en paralelo.
+  Sin concepto compartido, las piezas no suman sistema.
+
+ERRORES COMUNES
+---------------
+— Hacer ideas "cool" que no mueven nada.
+— Confundir inspiración con estrategia.
+— No conectar narrativa y negocio.
+— Generar conceptos que no pueden sostenerse en diseño.
+— Hacer brainstorming sin filtros.
+
+[EXPANDIDO v2]
+— Presentar referencias visuales antes de tener el concepto:
+  las referencias condicionan la dirección antes de que haya una
+  dirección estratégica. El resultado es una estética sin fundamento.
+— Confundir el tono con el concepto: "sofisticado y moderno" es un tono,
+  no un concepto. Un concepto tiene tensión, transformación y metáfora.
+— Generar demasiadas opciones sin filtro estratégico previo:
+  el brainstorming sin criterio produce cantidad, no calidad.
+  El filtro debe anteceder la generación, no reemplazarla.
+— No probar el concepto contra el brief: si el concepto no responde
+  la pregunta estratégica central, es una idea interesante, no
+  la solución.
+
+TESTS DE CONCEPTO [NUEVO v2]
+-----------------------------
+— Test de imagen: ¿puedo dibujar o imaginar una imagen que represente
+  este concepto? Si no puedo, no es suficientemente concreto.
+— Test de propiedad: ¿podría cualquier otra marca de la categoría usar
+  este concepto? Si sí, no es propio.
+— Test de crecimiento: ¿el concepto puede generar 10 ejecuciones distintas
+  que pertenezcan al mismo mundo? Si solo genera 2-3, es limitado.
+— Test de traducción: ¿el concepto puede vivir en diseño, copy, fotografía
+  y motion al mismo tiempo? Si no puede traducirse a todos, es parcial.
+— Test de supervivencia: ¿el concepto sobrevive 2-3 años sin agotarse?
+  ¿O es tan específico a un momento que envejecería en meses?
+
+HEURÍSTICAS DE DECISIÓN
+-----------------------
+— Un concepto que requiere más de 2 frases para explicarse no está
+  suficientemente destilado.
+— Si el cliente dice "me gusta" pero no puede describir lo que significa,
+  el concepto no está claro.
+— Si el equipo no puede tomar decisiones autónomas usando el concepto
+  como filtro, el concepto no está funcionando.
+— La metáfora correcta produce una reacción de "por supuesto"
+  en el cliente, no de "interesante, explícame".
+
+SEÑALES DE CALIDAD
+------------------
+— Las primeras ejecuciones son "obviamente correctas" para quien
+  conoce el concepto.
+— El concepto tiene una frase de 5-8 palabras que lo resume.
+— Distintos profesionales (diseñador, copywriter, fotógrafo) producen
+  piezas diferentes que pertenecen al mismo mundo sin necesidad de
+  coordinación constante.
+— El concepto puede crecer durante 2-3 años sin agotarse ni
+  contradecirse.
+— La metáfora puede dibujarse.
+
+OUTPUT ÚTIL PARA CLAUDE
+-----------------------
+— Creative brief (problema, público, promesa, tono, restricciones)
+— Concept seeds (ideas con tensión, metáfora y dirección visual)
+— Metaphor library (metáforas evaluadas con criterio estratégico)
+— Narrative angle (el argumento que construye la comunicación)
+— Strategy-to-design rules (cómo el concepto se traduce a cada formato)
+— Concept evaluation criteria (filtros para elegir entre opciones)
+— Execution examples (2-3 ejemplos que demuestran que el concepto
+  se puede traducir a diseño real)
+— Brief quality check (el brief responde a todas las preguntas críticas)
+
+============================================================
+CÓMO CONECTAR ESTAS 12 DISCIPLINAS CON EL RESTO DEL SISTEMA
+============================================================
+
+El Nivel 1 alimenta al Nivel 2.
+El Nivel 2 alimenta al Nivel 3.
+El Nivel 3 alimenta a Claude.
+
+La cadena ideal es:
+
+Branding + Positioning + Psychology + Semiotics
+→ Brand Translation + Visual Language + Creative Strategy
+→ Concept + Perception + Direction + Innovation
+→ Production Operating System
+→ Claude execution
+→ Design real
+→ QA
+→ Launch
+→ Learnings
+
+La regla más importante:
+si una decisión no cambia percepción, comportamiento o diseño, no vale.
+
+MAPA DE DEPENDENCIAS ENTRE DISCIPLINAS [NUEVO v2]
+-------------------------------------------------
+
+Branding define la promesa →
+  Positioning la ubica en el mercado →
+    Psychology explica cómo se percibe →
+      Semiotics traduce al lenguaje visual →
+        Typography da voz a ese lenguaje →
+          Editorial Design organiza la narrativa →
+            Composition dirige la atención →
+              Photography provee la evidencia visual →
+                Motion da vida al sistema →
+                  UX elimina la fricción →
+                    Luxury Perception calibra el nivel →
+                      Creative Strategy ordena todo en concepto.
+
+Ninguna disciplina funciona de manera completamente aislada.
+El error más común es trabajar solo desde una disciplina
+sin conectarla con las demás.
+
+============================================================
+FORMATO DE USO PARA CLAUDE
+============================================================
+
+Cuando Claude use este nivel, no debe resumir libros.
+Debe devolver:
+— principios
+— criterios
+— preguntas
+— heurísticas
+— outputs operativos
+— riesgos
+— señales de calidad
+— decisiones justificadas
+
+No teoría suelta.
+No cultura general.
+No relleno.
+
+Solo conocimiento que mejore el criterio creativo.
+
+NOTA FINAL v2
+-------------
+Este documento existe para que cada decisión creativa tenga un fundamento.
+No para que sea perfecta.
+Para que sea defendible, coherente y eficaz.
+
+La diferencia entre un trabajo bueno y un trabajo excelente no es
+cuántas herramientas usaste.
+Es cuántas de estas preguntas respondiste antes de ejecutar.
+
+======================================================================
+v3 ADDENDUM — OPERATIVE LAYER FOR CLAUDE + HUMAN
+======================================================================
+
+QUÉ FALTABA EN v2
+-----------------
+v2 explica muy bien qué es cada disciplina.
+Lo que agrega esta capa es lo que más ayuda a Claude a decidir mejor:
+
+1. First principles
+   La verdad base que gobierna la disciplina.
+2. Trade-offs
+   Qué gana y qué pierde cada decisión.
+3. Decision trees
+   Cómo elegir entre opciones válidas.
+4. Conflict resolution
+   Qué hacer cuando dos objetivos chocan.
+5. Anti-patterns
+   Qué no hacer aunque "parezca correcto".
+6. Creative recipes
+   Cómo traducir la teoría en una dirección concreta.
+7. Cross-discipline links
+   Cómo una disciplina afecta a las demás.
+
+USO OPERATIVO PARA CLAUDE
+-------------------------
+Cuando Claude use este nivel 1, debería:
+- empezar por el first principle,
+- identificar trade-offs,
+- elegir una ruta,
+- verificar anti-patterns,
+- traducir a una receta,
+- y cerrar con un output accionable.
+
+Si una decisión no puede justificarse con una receta o un trade-off,
+todavía no está lista.
+
+======================================================================
+CAPA GLOBAL — DECISION OPERATING RULES
+======================================================================
+
+A. FIRST PRINCIPLES
+-------------------
+Cada disciplina debe arrancar con 1 verdad base.
+
+Ejemplos:
+- Branding: la repetición sostenida crea percepción.
+- Positioning: diferenciarse importa más que agradar a todos.
+- Psychology: la gente evita incertidumbre.
+- Semiotics: toda forma comunica.
+- Typography: la jerarquía organiza la lectura.
+- Editorial Design: la secuencia construye significado.
+- Composition: el peso visual dirige el ojo.
+- Photography: la imagen instala mundo y prueba.
+- Motion: el tiempo también comunica.
+- UX: la claridad reduce fricción.
+- Luxury: la restricción comunica valor.
+- Creative Strategy: la idea correcta ordena decisiones.
+
+B. TRADE-OFFS
+-------------
+Toda decisión buena pierde algo.
+
+Ejemplos:
+- Más espacio = más premium, menos densidad informativa.
+- Más contraste = más jerarquía, más riesgo de ruido.
+- Más originalidad = más memoria, más riesgo de rechazo.
+- Más claridad = menos ambigüedad, menos misterio.
+- Más minimalismo = más refinamiento, menos evidencia visible.
+- Más motion = más energía, más riesgo de distracción.
+
+C. DECISION TREE RULE
+---------------------
+Claude no debe elegir "la mejor opción" en abstracto.
+Debe elegir "la mejor opción para este caso".
+
+Formato:
+1. ¿Qué quiere lograr la marca?
+2. ¿Qué percepción necesita?
+3. ¿Qué quiere evitar?
+4. ¿Qué puede soportar la audiencia?
+5. ¿Qué recurso cumple mejor sin romper lo demás?
+
+D. CONFLICT RESOLUTION
+----------------------
+Cuando dos objetivos chocan, resolver por prioridad.
+
+Prioridad sugerida:
+1. Verdad del negocio
+2. Necesidad de la audiencia
+3. Posicionamiento
+4. Percepción
+5. Dirección visual
+6. Innovación
+7. Gusto personal
+
+Si algo queda lindo pero rompe 1-4, se descarta.
+
+E. ANTI-PATTERN RULE
+--------------------
+No basta con decir qué hacer.
+Hay que nombrar el cliché que se evita.
+
+Ejemplo:
+- "Luxury = serif + negro + vacío" es un anti-pattern si no hay una
+  razón estratégica.
+- "Tech = blue glow + dark mode + glass" es un anti-pattern si la marca
+  no pertenece realmente a ese mundo.
+
+F. CREATIVE RECIPE RULE
+-----------------------
+Cada disciplina debe poder traducirse en una receta.
+
+Ejemplo:
+"Quiero calma sofisticada"
+→ espacio negativo
+→ tipografía contenida
+→ contraste moderado
+→ motion lento
+→ fotografía con luz suave
+→ copy breve
+→ jerarquía clara
+
+G. CROSS-DISCIPLINE LINK
+------------------------
+Ninguna disciplina vive sola.
+Lo que decide una afecta a todas.
+
+Ejemplo:
+Positioning afecta:
+- semiotics
+- typography
+- photography
+- motion
+- UX
+
+Branding afecta:
+- voice
+- messaging
+- pricing perception
+- customer experience
+
+Typography afecta:
+- tone
+- hierarchy
+- composition
+- luxury perception
+
+======================================================================
+DISCIPLINE UPGRADE BLOCKS
+======================================================================
+
+1. BRANDING — v3 UPGRADE
+------------------------
+FIRST PRINCIPLE
+- Una marca vive en la memoria, no en el logo.
+
+TRADE-OFFS
+- Más consistencia = menos improvisación.
+- Más diferenciación = más riesgo de rechazo.
+- Más claridad = menos ambigüedad.
+
+DECISION TREE
+- ¿La marca necesita ser recordada o explicada?
+- ¿Necesita pertenencia o autoridad?
+- ¿Debe atraer a muchos o a pocos?
+
+ANTI-PATTERNS
+- Branding sin comportamiento.
+- Branding reducido a un sistema visual.
+- Promesas que no se sostienen en la experiencia.
+
+CREATIVE RECIPE
+- Brand essence
+- Brand promise
+- Brand behavior rules
+- Rejection list
+- Touchpoint consistency
+
+CLAUDE OUTPUT
+- Qué promete
+- Qué rechaza
+- Cómo habla
+- Cómo actúa
+- Qué debe repetir
+
+2. POSITIONING — v3 UPGRADE
+---------------------------
+FIRST PRINCIPLE
+- Diferenciarse significa ocupar un espacio mental específico.
+
+TRADE-OFFS
+- Más específico = más fuerte.
+- Más amplio = más débil.
+- Más premium = menos volumen.
+- Más accesible = menos exclusividad.
+
+DECISION TREE
+- ¿La marca gana si se la compara o si se la siente distinta?
+- ¿La posición se basa en función, percepción o categoría?
+- ¿Qué competidor queda más cerca y por qué?
+
+ANTI-PATTERNS
+- Posicionamiento genérico.
+- Posicionamiento que cualquiera podría copiar.
+- Posicionamiento basado solo en precio.
+
+CREATIVE RECIPE
+- Category map
+- White space analysis
+- Position statement
+- Defensibility notes
+- Anti-positioning list
+
+CLAUDE OUTPUT
+- Qué lugar ocupa
+- Qué lugar evita
+- Qué competencia la presiona
+- Qué espacio libre aprovecha
+
+3. PSYCHOLOGY — v3 UPGRADE
+-------------------------
+FIRST PRINCIPLE
+- La gente busca reducir incertidumbre.
+
+TRADE-OFFS
+- Más información = más posibilidad de decisión, pero más carga.
+- Más emoción = más atención, pero más riesgo de sesgo.
+- Más prueba social = más confianza, pero menos singularidad.
+
+DECISION TREE
+- ¿El usuario necesita aliviar riesgo o aumentar deseo?
+- ¿Necesita prueba o inspiración?
+- ¿Necesita claridad o empuje?
+
+ANTI-PATTERNS
+- Interfaz que obliga a pensar demasiado.
+- Copy que no reduce ansiedad.
+- CTA que aparece antes de resolver objeciones.
+
+CREATIVE RECIPE
+- Objection map
+- Trust triggers
+- Bias activation map
+- Decision sequence
+
+CLAUDE OUTPUT
+- Qué teme
+- Qué compara
+- Qué evidencia necesita
+- Qué sesgo se puede activar legítimamente
+
+4. SEMIOTICS — v3 UPGRADE
+------------------------
+FIRST PRINCIPLE
+- Todo signo visual tiene significado.
+
+TRADE-OFFS
+- Más simbolismo = más reconocimiento cultural.
+- Más abstracción = más sofisticación, menos literalidad.
+- Más coherencia semiótica = más control.
+
+DECISION TREE
+- ¿Qué mundo debe evocar?
+- ¿Qué categoría debe leer?
+- ¿Qué signos pertenecen y cuáles no?
+
+ANTI-PATTERNS
+- Mezclar mundos semióticos incompatibles.
+- Elegir recursos visuales solo porque "se ven bien".
+- Copiar signos del líder de categoría.
+
+CREATIVE RECIPE
+- Visual world descriptor
+- Sign meaning map
+- Forbidden signs
+- Desired sign system
+
+CLAUDE OUTPUT
+- Qué comunica cada forma, color e imagen
+- Qué mundo construye
+- Qué signos rompen la intención
+
+5. TYPOGRAPHY — v3 UPGRADE
+-------------------------
+FIRST PRINCIPLE
+- La tipografía organiza y también expresa carácter.
+
+TRADE-OFFS
+- Más contraste tipográfico = más jerarquía, más tensión.
+- Más continuidad = más calma, menos dramatismo.
+- Más display = más personalidad, menos neutralidad.
+
+DECISION TREE
+- ¿La marca necesita voz editorial o voz funcional?
+- ¿El body debe sentirse técnico, amable o premium?
+- ¿La escala tipográfica debe ser sobria o expresiva?
+
+ANTI-PATTERNS
+- Elegir fuentes populares sin razón.
+- Tener demasiadas familias.
+- No probar en mobile.
+- Resolver jerarquía con color en vez de tamaño y ritmo.
+
+CREATIVE RECIPE
+- Type strategy
+- Font pairing logic
+- Scale system
+- Rhythm rules
+- Mobile type rules
+
+CLAUDE OUTPUT
+- Qué fuente lidera
+- Qué fuente acompaña
+- Qué comunica el sistema
+- Qué se evita
+
+6. EDITORIAL DESIGN — v3 UPGRADE
+--------------------------------
+FIRST PRINCIPLE
+- La secuencia construye significado.
+
+TRADE-OFFS
+- Más densidad = más información, menos respiro.
+- Más vacío = más sofisticación, menos volumen visible.
+- Más ruptura = más atención, más riesgo de ruido.
+
+DECISION TREE
+- ¿La pieza informa, persuade o seduce?
+- ¿Qué debe pasar primero, segundo y tercero?
+- ¿Dónde hace falta pausa?
+
+ANTI-PATTERNS
+- Todo con el mismo peso.
+- Cards idénticas sin ritmo.
+- Scroll sin narrativa.
+
+CREATIVE RECIPE
+- Sequencing rules
+- Rhythm rules
+- Section weight map
+- Hero brief
+- Pause zones
+
+CLAUDE OUTPUT
+- Orden de lectura
+- Ritmo de secciones
+- Dónde abrir y cerrar
+- Qué merece espacio
+
+7. COMPOSITION — v3 UPGRADE
+---------------------------
+FIRST PRINCIPLE
+- La composición dirige el ojo.
+
+TRADE-OFFS
+- Más simetría = más orden, menos energía.
+- Más asimetría = más tensión, menos estabilidad.
+- Más jerarquía = más claridad, menos neutralidad.
+
+DECISION TREE
+- ¿La composición debe sentirse estable o viva?
+- ¿Qué elemento es el dominante?
+- ¿Dónde se ubica la tensión?
+
+ANTI-PATTERNS
+- Centrar todo por default.
+- Distribución uniforme sin intención.
+- Depender del color para que exista jerarquía.
+
+CREATIVE RECIPE
+- Composition map
+- Focus priority
+- Weight distribution
+- Axis analysis
+- Negative space strategy
+
+CLAUDE OUTPUT
+- Qué pesa más
+- Dónde va el foco
+- Qué espacio equilibra
+- Qué se puede eliminar
+
+8. PHOTOGRAPHY — v3 UPGRADE
+---------------------------
+FIRST PRINCIPLE
+- La foto instala mundo y prueba.
+
+TRADE-OFFS
+- Más realismo = más credibilidad, menos control absoluto.
+- Más construcción = más coherencia, menos espontaneidad.
+- Más detalle = más prueba, menos atmósfera.
+
+DECISION TREE
+- ¿La foto debe probar, emocionar o ambientar?
+- ¿Debe haber personas?
+- ¿Debe ser real o construida?
+- ¿Qué nivel de intimidad necesita?
+
+ANTI-PATTERNS
+- Stock genérico.
+- Fotos de banco sin grading.
+- Imágenes que podrían pertenecer a otra marca.
+- Poner fotos solo para llenar.
+
+CREATIVE RECIPE
+- Photography direction
+- Crop strategy
+- Lighting notes
+- Color grading direction
+- Placeholder strategy
+
+CLAUDE OUTPUT
+- Qué debe verse
+- Qué no debe verse
+- Cómo se siente la imagen
+- Qué mundo construye
+
+9. MOTION — v3 UPGRADE
+----------------------
+FIRST PRINCIPLE
+- El tiempo también comunica.
+
+TRADE-OFFS
+- Más motion = más energía, más riesgo de distracción.
+- Más suavidad = más premium, menos urgencia.
+- Más rapidez = más eficiencia, menos ceremonia.
+
+DECISION TREE
+- ¿El motion debe calmar, impresionar o guiar?
+- ¿Qué transición necesita cada estado?
+- ¿Qué gesto es marca y cuál es feedback?
+
+ANTI-PATTERNS
+- Animar todo.
+- Parallax sin intención.
+- Motion decorativo sin semántica.
+- Ignorar reduced motion.
+
+CREATIVE RECIPE
+- Motion principles
+- Timing rules
+- Easing rules
+- Reveal strategy
+- Reduced motion strategy
+
+CLAUDE OUTPUT
+- Cómo se mueve
+- Cuándo se mueve
+- Qué comunica al moverse
+- Qué no hacer
+
+10. UX — v3 UPGRADE
+-------------------
+FIRST PRINCIPLE
+- La claridad reduce fricción.
+
+TRADE-OFFS
+- Más pasos = más control, menos conversión.
+- Más claridad = más confianza, menos misterio.
+- Más creatividad en navegación = más carácter, más riesgo de confusión.
+
+DECISION TREE
+- ¿El usuario necesita entender, comparar o actuar?
+- ¿Qué información falta antes del CTA?
+- ¿Qué fricción es necesaria y cuál no?
+
+ANTI-PATTERNS
+- Navegación confusa.
+- Formularios largos sin necesidad.
+- CTA ambiguo.
+- Error states pobres.
+
+CREATIVE RECIPE
+- User journey
+- Friction map
+- CTA hierarchy
+- Scanning pattern notes
+- Objection placement
+
+CLAUDE OUTPUT
+- Qué ve primero
+- Qué necesita para seguir
+- Qué objeción responde cada sección
+- Dónde se rompe el flujo
+
+11. LUXURY PERCEPTION — v3 UPGRADE
+----------------------------------
+FIRST PRINCIPLE
+- El lujo nace de la restricción, el control y el detalle.
+
+TRADE-OFFS
+- Más ornamento = menos lujo, más ruido.
+- Más vacío = más lujo, menos información.
+- Más silencio = más autoridad, menos explicación.
+
+DECISION TREE
+- ¿La marca debe sentirse ceremonial, silenciosa o aspiracional?
+- ¿Qué se puede quitar sin perder valor?
+- ¿Qué debe quedarse para que se vea caro?
+
+ANTI-PATTERNS
+- Oro y mármol como atajo.
+- Demasiados colores.
+- Exceso de palabras.
+- Tendencias masivas en marcas premium.
+
+CREATIVE RECIPE
+- Luxury perception notes
+- Restriction rules
+- Color reduction
+- Typographic restraint
+- Silence strategy
+
+CLAUDE OUTPUT
+- Qué comunica lujo
+- Qué hace ruido
+- Qué se elimina
+- Qué se deja respirar
+
+12. CREATIVE STRATEGY — v3 UPGRADE
+----------------------------------
+FIRST PRINCIPLE
+- La idea correcta ordena decisiones.
+
+TRADE-OFFS
+- Más concepto = más coherencia, más inversión en pensamiento.
+- Más metáfora = más memoria, más riesgo de ambigüedad.
+- Más estrategia = menos improvisación.
+
+DECISION TREE
+- ¿Cuál es la tensión principal?
+- ¿Cuál es la transformación?
+- ¿Cuál es la metáfora?
+- ¿Qué decisión visual nace de ahí?
+
+ANTI-PATTERNS
+- Ideas lindas sin consecuencia.
+- Conceptos genéricos.
+- Estrategias que no cambian el diseño.
+
+CREATIVE RECIPE
+- Tension map
+- Metaphor library
+- Concept stress test
+- Creative direction brief
+- Decision implications
+
+CLAUDE OUTPUT
+- Idea central
+- Razón de la idea
+- Qué decisiones activa
+- Qué errores evita
+
+======================================================================
+CROSS-DISCIPLINE MATRIX — v3
+======================================================================
+
+A. BRANDING → afecta:
+- positioning
+- tone
+- UX
+- luxury perception
+- consistency
+
+B. POSITIONING → afecta:
+- semiotics
+- typography
+- photography
+- motion
+- creative strategy
+
+C. PSYCHOLOGY → afecta:
+- copy
+- CTA
+- order of content
+- friction reduction
+
+D. SEMIOTICS → afecta:
+- color
+- shapes
+- images
+- world-building
+
+E. TYPOGRAPHY → afecta:
+- hierarchy
+- tone
+- rhythm
+- composition
+
+F. EDITORIAL DESIGN → afecta:
+- sequencing
+- section structure
+- pacing
+
+G. COMPOSITION → afecta:
+- focus
+- weight
+- balance
+- tension
+
+H. PHOTOGRAPHY → afecta:
+- trust
+- atmosphere
+- brand world
+
+I. MOTION → afecta:
+- energy
+- premium feeling
+- feedback
+- clarity
+
+J. UX → afecta:
+- conversion
+- clarity
+- task completion
+
+K. LUXURY PERCEPTION → afecta:
+- restraint
+- silence
+- precision
+- value perception
+
+L. CREATIVE STRATEGY → afecta:
+- concept
+- narrative
+- innovation
+- direction
+
+======================================================================
+HOW CLAUDE SHOULD USE LEVEL 1
+======================================================================
+
+1. Start with the first principle.
+2. Identify the trade-off.
+3. Choose the path.
+4. Check the anti-pattern.
+5. Build the creative recipe.
+6. Apply the cross-discipline matrix.
+7. Produce an output that can guide design.
+
+If the output cannot change an actual design decision,
+it is not useful enough yet.
+
+If the output cannot be explained to a client in plain language,
+it is not ready.
+
+If the output does not help Claude choose between two valid options,
+it is incomplete.
+

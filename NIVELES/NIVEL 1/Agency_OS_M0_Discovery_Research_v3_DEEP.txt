@@ -1,0 +1,584 @@
+MÓDULO 0 — DISCOVERY & RESEARCH ENGINE (v3 DEEP)
+=================================================
+
+OBJETIVO
+--------
+Entender el proyecto antes de definir estrategia.
+
+Este módulo existe para evitar el error más caro del proceso:
+diseñar sobre supuestos débiles.
+
+Acá se reúne:
+- contexto real del negocio
+- problema que el cliente cree tener
+- problema que realmente tiene
+- audiencia
+- competencia
+- evidencia disponible
+- restricciones
+- oportunidades
+- nivel de confianza sobre cada hallazgo
+
+No se diseña aquí.
+No se define posicionamiento todavía.
+No se elige paleta.
+No se elige tipografía.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Nombre del proyecto o marca
+- Qué vende
+- A quién vende
+- Objetivo principal
+- Tipo de negocio
+- País / mercado / contexto
+- Referencias iniciales si existen
+
+OPCIONALES:
+- Web actual
+- Logo actual
+- Redes sociales
+- Reviews
+- Testimonios
+- Datos de ventas
+- Quejas frecuentes de clientes
+- Material comercial existente
+- Competidores sugeridos por el cliente
+- Casos de éxito
+- Fotos disponibles
+- Restricciones de presupuesto
+- Restricciones de tiempo
+- Nivel de aprobación del cliente
+- Equipo disponible para copy / fotos / motion
+
+INTAKE QUESTIONNAIRE [v3]
+--------------------------
+Si el brief está incompleto, Claude aplica este cuestionario antes de avanzar.
+No avanzar con información parcial.
+Enviar los bloques de a uno, no todos juntos.
+
+BLOQUE A — NEGOCIO
+- ¿Qué hace exactamente la empresa o profesional?
+- ¿Cuánto tiempo lleva operando?
+- ¿Cuál es el ticket promedio del servicio o producto?
+- ¿Qué porcentaje de clientes es recurrente?
+- ¿Cuál es el canal de venta principal hoy?
+- ¿Qué está funcionando bien en el negocio?
+- ¿Qué no está funcionando?
+- ¿Hubo un rediseño anterior? ¿Por qué?
+
+BLOQUE B — AUDIENCIA
+- ¿Quién es el cliente ideal? (edad, perfil, ocupación, contexto)
+- ¿Qué problema tiene ese cliente antes de encontrar esta marca?
+- ¿Qué resultado busca al contratar o comprar?
+- ¿Qué le genera dudas o le impide decidir?
+- ¿Cómo encuentra hoy a esta marca?
+- ¿Hay un cliente que el negocio no quiere? ¿Por qué?
+
+BLOQUE C — OFERTA
+- ¿Cuál es el servicio o producto principal?
+- ¿Hay oferta secundaria?
+- ¿Qué diferencia al producto/servicio de la competencia?
+- ¿Existe evidencia concreta de ese diferencial?
+- ¿Cuánto cuesta? ¿Es precio competitivo, medio o premium?
+
+BLOQUE D — OBJETIVO DEL PROYECTO
+- ¿Para qué se hace este sitio / pieza / sistema?
+- ¿Qué debe lograr que hoy no está logrando?
+- ¿Cuál es la métrica de éxito?
+- ¿Hay una acción principal que debe hacer el usuario?
+- ¿Se puede medir esa acción?
+
+BLOQUE E — RESTRICCIONES
+- ¿Hay presupuesto definido?
+- ¿Hay timeline definido?
+- ¿Hay tecnología obligatoria o prohibida?
+- ¿Cuántas personas tienen poder de veto en la aprobación?
+- ¿Hay decisiones ya tomadas que no se pueden cambiar?
+
+BLOQUE F — ASSETS Y PRODUCCIÓN
+- ¿Hay fotos propias disponibles?
+- ¿Hay videos?
+- ¿Hay copywriting hecho?
+- ¿Hay logo e identidad visual?
+- ¿Se puede producir material nuevo o se trabaja con lo que hay?
+- ¿Quién produce el contenido si hace falta?
+
+BLOQUE G — COMPETIDORES Y REFERENCIAS
+- ¿Quiénes son los competidores directos?
+- ¿Qué marca del sector admira el cliente?
+- ¿Qué marca del sector rechaza el cliente?
+- ¿Hay una referencia de otro sector que le guste?
+- ¿Qué ve en esas referencias que quiere tener?
+- ¿Qué ve en esas referencias que NO quiere replicar?
+
+BLOQUE H — APROBACIÓN Y PROCESO
+- ¿Quién aprueba el concepto?
+- ¿Quién aprueba el diseño?
+- ¿Quién aprueba el copy?
+- ¿Hay consenso entre los aprobadores o puede haber conflicto?
+- ¿Cuál es la disponibilidad del cliente durante el proceso?
+
+PROCESO CLAUDE
+--------------
+1. Entender el negocio en una línea.
+   Responder:
+   - qué hace
+   - para quién
+   - qué problema resuelve
+   - qué resultado promete
+
+2. Separar pedido superficial de necesidad real.
+   Ejemplo:
+   - pedido superficial: "quiero una web linda"
+   - necesidad real: "quiero más leads / más confianza / más percepción / más ventas"
+
+3. Identificar el tipo de proyecto.
+   Clasificarlo como:
+   - landing
+   - sitio institucional
+   - portfolio
+   - SaaS
+   - ecommerce
+   - marca personal
+   - rebranding
+   - micrositio
+   - sistema multipágina
+
+4. Mapear audiencia.
+   Responder:
+   - quién es
+   - qué teme
+   - qué desea
+   - qué compara
+   - qué objeción tiene
+   - qué necesita ver para confiar
+   - qué lo haría actuar ahora
+
+5. Analizar competencia.
+   Registrar:
+   - competidores directos
+   - aspiracionales
+   - indirectos
+   - patrones comunes de la categoría
+
+6. Detectar patrones del sector.
+   Claude debe listar:
+   - color dominante
+   - tono dominante
+   - estructura de secciones
+   - tipo de prueba social
+   - tipo de imágenes
+   - recursos visuales repetidos
+   - claims típicos
+   - calls to action típicos
+
+7. Levantar evidencia real.
+   Identificar qué pruebas existen de verdad:
+   - testimonios
+   - métricas
+   - casos
+   - reseñas
+   - logos de clientes
+   - fotografías propias
+   - certificaciones
+   - premios
+   - experiencias demostrables
+
+8. Detectar restricciones.
+   Responder:
+   - qué no se puede hacer
+   - qué falta producir
+   - qué depende del cliente
+   - qué depende de terceros
+   - qué limita tiempo o presupuesto
+   - qué riesgo tiene el proyecto
+
+9. Extraer oportunidades.
+   Buscar:
+   - espacio de diferenciación
+   - ángulo narrativo
+   - percepción libre
+   - firma visual potencial
+   - oportunidad de conversión
+   - oportunidad de credibilidad
+   - oportunidad de contenido
+
+10. Priorizar oportunidades.
+    No todas valen igual.
+    Ordenar por:
+    - impacto comercial
+    - diferenciación
+    - facilidad de ejecución
+    - valor percibido
+
+11. Asignar nivel de confianza a cada hallazgo.
+    Claude debe decir si cada hallazgo es:
+    - alto
+    - medio
+    - bajo
+    y explicar por qué.
+
+12. Resumir hallazgos.
+    Dejar un reporte breve, útil y accionable.
+
+FRAMEWORKS INTERNOS
+-------------------
+A. Framework de Negocio Real
+   Lo que el cliente pide vs lo que realmente necesita.
+
+B. Framework de Audiencia
+   Miedo, deseo, objeción, expectativa y gatillo de confianza.
+
+C. Framework de Categoría
+   Patrones dominantes del sector.
+
+D. Framework de Evidencia
+   Qué pruebas reales existen y cuáles faltan.
+
+E. Framework de Restricciones
+   Qué limita la solución y qué la hace viable.
+
+F. Framework de Oportunidad
+   Qué espacio libre existe para diferenciarse.
+
+G. Framework de Riesgo
+   Qué puede romper el proyecto si no se detecta ahora.
+
+H. Research Confidence
+   Qué tan confiable es cada hallazgo.
+
+I. Customer Reality Layer [EXPANDIDO v3]
+   Cinco dimensiones de la realidad del cliente.
+   No es lo que el cliente dice que quiere.
+   Es lo que realmente determina su decisión.
+
+   DIMENSIÓN 1 — QUÉ TEME PERDER
+   La aversión a la pérdida mueve más que el deseo de ganar.
+   El cliente no solo quiere el resultado positivo.
+   Tiene miedo de perder algo: tiempo, dinero, reputación, oportunidad.
+   Preguntas:
+   - ¿Qué perdería si elige esta marca y no funciona?
+   - ¿Qué costo personal, económico o reputacional enfrenta si falla?
+   - ¿Qué esfuerzo previo quedaría desperdiciado?
+   Implicancias de diseño:
+   - Garantías explícitas o implícitas antes del CTA
+   - Prueba social que reduce riesgo percibido
+   - Lenguaje que elimina la sensación de apuesta
+
+   DIMENSIÓN 2 — QUÉ YA INTENTÓ
+   El cliente llega con historia.
+   Si ya probó una solución similar y no funcionó, carga una objeción activa.
+   Esa objeción nunca se declara; solo se activa en silencio cuando ve algo familiar.
+   Preguntas:
+   - ¿Ya probó alguna solución similar?
+   - ¿Qué salió mal en esa experiencia?
+   - ¿Qué promesa no se cumplió antes?
+   Implicancias de diseño:
+   - Narrativa que reconoce el intento previo sin negarlo
+   - Diferencia explícita frente a lo que ya falló
+   - Señales de que esto es distinto, no más de lo mismo
+
+   DIMENSIÓN 3 — QUÉ ESTÁ COMPARANDO AHORA
+   El usuario no llega al sitio en el vacío.
+   Llega con alternativas activas en la mente.
+   Preguntas:
+   - ¿Con qué o con quién está comparando hoy?
+   - ¿Qué pone en la balanza?
+   - ¿Qué atributos usa para comparar?
+   Implicancias de diseño:
+   - Diferenciación visible antes de que el usuario vaya a comparar
+   - Posición explícita respecto a las alternativas más comunes
+   - No asumir que el usuario ya decidió; asumir que todavía compara
+
+   DIMENSIÓN 4 — QUÉ LO HARÍA DUDAR EN EL ÚLTIMO MOMENTO
+   Las objeciones no siempre se expresan.
+   Muchas veces el usuario abandona sin decir por qué.
+   Preguntas:
+   - ¿Qué señal de alarma lo detendría justo antes del CTA?
+   - ¿Qué percepción negativa podría activar el diseño o el copy?
+   - ¿Qué pregunta sin respuesta lo haría salir?
+   Implicancias de diseño:
+   - Mapear y responder objeciones antes del CTA, no después
+   - Evitar señales de riesgo percibido (diseño desactualizado,
+     copy ambiguo, falta de precios, ausencia de fotos reales)
+
+   DIMENSIÓN 5 — QUÉ LO HARÍA COMPRAR HOY
+   No basta con reducir objeciones.
+   Hay que activar el gatillo correcto.
+   Preguntas:
+   - ¿Qué haría que actúe ahora y no la semana próxima?
+   - ¿Qué promesa específica lo convence?
+   - ¿Qué señal de confianza final necesita?
+   Implicancias de diseño:
+   - CTA con razón de valor clara del próximo paso
+   - Prueba social específica y contextualizada
+   - Claridad absoluta del paso siguiente: qué pasa cuando hace clic
+
+RED FLAGS DEL PROYECTO [v3]
+----------------------------
+Detectar estas señales antes de avanzar al M1.
+Si aparecen múltiples flags, detener y resolver antes de continuar.
+
+FLAGS DE BRIEF DÉBIL
+- El cliente no puede explicar qué lo diferencia de la competencia.
+- La promesa del negocio es "calidad", "excelencia" o "atención personalizada"
+  sin evidencia concreta.
+- El cliente dice que su negocio es "para todo el mundo".
+- El objetivo del proyecto es "verse más profesional" sin una métrica detrás.
+- No hay competidores identificados.
+- El cliente no sabe cuál es su ticket promedio.
+
+FLAGS DE CLIENTE CONFUSO
+- Las respuestas del intake se contradicen entre sí.
+- Quiere parecer premium pero vende a precio de mercado sin justificación.
+- No sabe qué hace que la gente lo elige hoy.
+- Tiene referencias que se contradicen (quiere ser Hermès y Airbnb al mismo tiempo).
+- Cambia el objetivo principal en mitad del intake.
+- Usa referencias de sectores distintos sin un hilo conductor.
+
+FLAGS DE EVIDENCIA DÉBIL
+- No hay fotos propias disponibles.
+- No hay testimonios reales con nombre y contexto.
+- No hay métricas de ningún tipo.
+- Todo el contenido depende de producción futura no confirmada.
+- Los casos de éxito son vagos o genéricos.
+
+FLAGS DE RESTRICCIONES INCOMPATIBLES
+- El presupuesto no alcanza para los assets que el proyecto requiere.
+- El timeline no permite un proceso de conceptos bien ejecutado.
+- Hay más de 3 personas con poder de veto.
+- Hay decisiones ya tomadas (logo, paleta, tipografía) que contradicen
+  la dirección estratégica necesaria.
+- Se pide innovación visual alta con un presupuesto de producción bajo.
+
+FLAGS DE RIESGO DE RETRABAJO
+- El cliente dice "hacé lo que creas mejor" sin involucrarse en el proceso.
+- No hay aprobación intermedia establecida.
+- El cliente aprueba todo sin hacer preguntas.
+- Hay un socio, cónyuge o superior que va a opinar al final del proceso.
+- El scope no está escrito: solo fue hablado.
+- No está claro quién aprueba qué.
+
+PROTOCOLO POR CANTIDAD DE FLAGS
+- 1 flag: registrar y monitorear.
+- 2-3 flags: resolver antes de avanzar al M1.
+- 4+ flags: reunión de realineación antes de cualquier entrega.
+- Flags de evidencia + restricciones juntos: replantear el scope completo.
+
+ARQUITECTURA DE AUDITORÍA
+-------------------------
+Claude debe dejar claro:
+- qué sabemos
+- qué no sabemos
+- qué inferimos
+- qué está verificado
+- qué necesita confirmación
+
+OPPORTUNITY SCORING [EXPANDIDO v3]
+------------------------------------
+Impacto Comercial: 1-10
+Diferenciación: 1-10
+Facilidad de Ejecución: 1-10
+Valor Percibido: 1-10
+Score Total: /40
+
+CRITERIOS EXPLÍCITOS POR DIMENSIÓN
+
+IMPACTO COMERCIAL
+1-3: La oportunidad no afecta ingresos ni conversión directa.
+     Ej: reordenar dos secciones sin impacto en el CTA.
+4-6: Puede mejorar percepción pero el impacto en venta es indirecto.
+     Ej: mejorar la sección "Sobre nosotros" para generar más confianza.
+7-9: Puede mejorar conversión o aumentar precio percibido directamente.
+     Ej: agregar prueba social específica antes del CTA principal.
+10:  Transforma la percepción de valor o abre acceso a un nuevo segmento.
+     Ej: reposicionamiento que permite subir precio y mejorar el perfil del cliente.
+
+DIFERENCIACIÓN
+1-3: Cualquier competidor ya lo hace o puede copiarlo inmediatamente.
+     Ej: usar colores claros en una categoría de bienestar.
+4-6: Diferenciado pero relativamente fácil de replicar a mediano plazo.
+     Ej: un tono más cercano en un sector formal.
+7-9: Difícil de copiar en el corto plazo o requiere una posición específica.
+     Ej: sistema visual basado en evidencia que los competidores no tienen.
+10:  Exclusivo para esta marca y sostenible en el tiempo.
+     Ej: posición de categoría que nadie más puede reclamar de manera creíble.
+
+FACILIDAD DE EJECUCIÓN
+1-3: Requiere producción, tecnología o recursos no disponibles en el scope.
+     Ej: sesión fotográfica completa no presupuestada.
+4-6: Requiere esfuerzo significativo pero es viable dentro del proyecto.
+     Ej: producir tres testimonios en video con el cliente.
+7-9: Se puede ejecutar dentro del scope y tiempo con lo disponible.
+     Ej: reorganizar secciones con el copy ya aprobado.
+10:  Se puede ejecutar de inmediato sin recursos adicionales.
+     Ej: ajustar el headline con lo que ya está escrito.
+
+VALOR PERCIBIDO
+1-3: El usuario no lo valoraría aunque existiera.
+     Ej: animaciones complejas en una landing B2B de alto ticket.
+4-6: Lo valoraría pero no sería un factor de decisión.
+     Ej: iconografía más cuidada en un sitio institucional.
+7-9: Puede ser un diferencial perceptivo que acelera la decisión.
+     Ej: testimonios con foto y nombre real en lugar de anónimos.
+10:  Es exactamente lo que el usuario necesita ver para decidir.
+     Ej: garantía explícita en el punto de mayor duda del funnel.
+
+INTERPRETACIÓN DEL SCORE TOTAL
+0-15:  Oportunidad débil. Registrar pero no priorizar.
+16-25: Oportunidad válida. Incluir si no compite con las de mayor score.
+26-32: Oportunidad fuerte. Incluir siempre en la estrategia.
+33-40: Oportunidad crítica. Construir el proyecto alrededor de esta.
+
+RESEARCH CONFIDENCE
+-------------------
+Alto:
+- hay evidencia directa
+- el dato está confirmado
+- no depende de demasiadas suposiciones
+
+Medio:
+- hay buena inferencia
+- falta una parte de validación
+- el dato parece sólido pero no definitivo
+
+Bajo:
+- depende de supuestos
+- falta información crítica
+- el dato podría cambiar la decisión si se verifica
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿La información del brief es suficiente?
+   - Sí: seguir.
+   - No: aplicar Intake Questionnaire bloque a bloque.
+
+2. ¿Hay red flags activos?
+   - 0-1: seguir con monitoreo.
+   - 2-3: resolver antes de avanzar.
+   - 4+: reunión de realineación primero.
+
+3. ¿La categoría está clara?
+   - Sí: seguir.
+   - No: clasificar antes de avanzar.
+
+4. ¿La audiencia está definida con sus 5 dimensiones?
+   - Sí: seguir.
+   - No: detenerse y completar el Customer Reality Layer.
+
+5. ¿Hay competidores reales?
+   - Sí: analizar.
+   - No: pedir referencias reales antes de avanzar.
+
+6. ¿Se entiende la necesidad real detrás del pedido superficial?
+   - Sí: pasar a posicionamiento.
+   - No: volver a discovery.
+
+7. ¿Hay evidencia suficiente para sostener el proyecto?
+   - Sí: seguir.
+   - No: marcar el vacío y pedirla o ajustar el scope.
+
+8. ¿Las oportunidades están puntuadas con criterios explícitos?
+   - Sí: avanzar.
+   - No: puntuar antes de seguir.
+
+CASOS REALES
+------------
+Caso 1 — SaaS
+- Pedido: "una home moderna"
+- Necesidad real: diferenciarse de competidores saturados
+- Hallazgo: demasiados dashboards genéricos en la categoría
+- Red flag detectado: sin fotos propias ni testimonios reales
+- Oportunidad critica (score 34/40): claridad + percepción de control
+
+Caso 2 — Clínica estética
+- Pedido: "una web elegante"
+- Necesidad real: transmitir confianza y seguridad antes de agendar
+- Hallazgo: falta evidencia y cercanía en el sector
+- Red flag detectado: 4 aprobadores con criterios distintos
+- Oportunidad fuerte (score 28/40): prueba social + calma + profesionalismo
+
+Caso 3 — Marca personal
+- Pedido: "algo premium"
+- Necesidad real: percepción de criterio y autoridad
+- Hallazgo: falta personalidad, no solo lujo visual
+- Red flag detectado: referencias contradictorias (Apple + Nike + Airbnb)
+- Oportunidad fuerte (score 30/40): voz propia, firma visual, prueba de expertise
+
+TESTS
+-----
+- ¿El Intake Questionnaire fue completado o quedan bloques sin respuesta?
+- ¿El negocio quedó entendido en una línea?
+- ¿La audiencia está clara con sus 5 dimensiones de Customer Reality Layer?
+- ¿Se identificaron competidores reales?
+- ¿Se detectaron patrones del sector?
+- ¿Se levantó evidencia real o se documentó su ausencia?
+- ¿Se detectaron restricciones?
+- ¿Se registraron y evaluaron los red flags?
+- ¿Se encontraron oportunidades y se puntuaron con criterios explícitos?
+- ¿Está el nivel de confianza explícito por hallazgo?
+- ¿Se puede pasar a M1 sin supuestos críticos sin resolver?
+
+OUTPUT
+------
+1. Resumen del negocio en una línea.
+2. Tipo de proyecto.
+3. Audiencia con Customer Reality Layer completo (5 dimensiones).
+4. Competidores.
+5. Patrones de categoría.
+6. Evidencia disponible.
+7. Restricciones críticas.
+8. Red flags activos con su nivel de severidad.
+9. Oportunidades con Opportunity Score completo.
+10. Nivel de confianza por hallazgo.
+11. Recomendación de siguiente paso.
+
+DEPENDENCIAS
+------------
+Requiere: brief mínimo
+Bloquea: M1 Positioning
+
+DELIVERABLES
+------------
+- Discovery Report
+- Competitive Snapshot
+- Audience Snapshot con Customer Reality Layer
+- Evidence Inventory
+- Constraint Audit
+- Red Flags Register
+- Opportunity Notes con scores y criterios
+
+TIEMPO ESTIMADO
+---------------
+Humano: 30-90 min
+Claude: 5-15 min
+
+FAIL CONDITIONS
+---------------
+- No se entiende qué vende la marca.
+- No se entiende para quién es.
+- No hay competidores reales identificados.
+- No se detectaron patrones del sector.
+- No hay oportunidad clara con score asignado.
+- El nivel de confianza no está explícito en los hallazgos.
+- No se levantó o documentó evidencia.
+- No se registraron restricciones.
+- El Intake Questionnaire tiene bloques sin completar.
+- Hay red flags activos sin resolver que bloquean el avance.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como estratega de discovery.
+Si el brief está incompleto, aplicá el Intake Questionnaire bloque a bloque antes de avanzar.
+No diseñes. No propongas colores ni tipografías.
+Primero revisá los Red Flags del proyecto y registrá cuántos están activos.
+Si hay 4 o más, detenete y avisá antes de continuar.
+Después entendé el negocio real, la audiencia con las 5 dimensiones del Customer Reality Layer,
+la categoría y la competencia.
+Levantá evidencia, detectá restricciones, identificá oportunidades y puntualas con el
+Opportunity Scoring expandido usando los criterios explícitos por dimensión.
+Asigná nivel de confianza a cada hallazgo.
+No avancés al M1 si quedan red flags sin resolver o si el nivel de confianza
+es bajo en hallazgos críticos para la estrategia.

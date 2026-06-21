@@ -1,0 +1,183 @@
+M13.3 — PRICING ENGINE (v1)
+============================
+
+OBJETIVO
+--------
+Calcular el precio correcto para cada proyecto y estructurarlo
+de manera que sea sostenible para Webbing y justo para el cliente.
+
+Modelo: fijo por proyecto + retainer mensual opcional.
+Moneda base: USD para clientes internacionales.
+          USD o ARS (equivalente) para clientes locales.
+
+PRICING BASE POR TIPO DE PROYECTO
+-----------------------------------
+Basado en la clasificación de M10.0 y el esfuerzo estimado.
+Estos son rangos de referencia. El precio final depende del scope real.
+
+MARKETING SITE / LANDING
+  Esfuerzo estimado: 40-80hs
+  Precio base: USD 800 – 2.500
+  Cuándo ir al límite superior: copy original + estrategia de contenido incluidos,
+  integración con CRM o herramienta, animaciones o motion.
+
+PORTFOLIO / AGENCY SITE
+  Esfuerzo estimado: 60-120hs
+  Precio base: USD 1.500 – 4.000
+  Cuándo ir al límite superior: sistema de casos de estudio complejo,
+  animaciones de firma, CMS para actualizaciones del cliente.
+
+LUXURY / HIGH-END BRAND + WEB
+  Esfuerzo estimado: 80-150hs
+  Precio base: USD 3.000 – 7.000
+  Cuándo ir al límite superior: identidad visual incluida, sistema de firma completo,
+  fotografía dirigida o producción de assets.
+
+SAAS / PRODUCTO DIGITAL
+  Esfuerzo estimado: 120-250hs+
+  Precio base: USD 5.000 – 15.000+
+  Cuándo ir al límite superior: auth, dashboard, integraciones con APIs,
+  sistema de onboarding, múltiples roles de usuario.
+
+ECOMMERCE
+  Esfuerzo estimado: 80-200hs
+  Precio base: USD 2.500 – 8.000
+  Cuándo ir al límite superior: catálogo grande, lógica de descuentos compleja,
+  integración con sistema de gestión de stock.
+
+HEALTHCARE / CLÍNICA
+  Esfuerzo estimado: 60-120hs
+  Precio base: USD 1.500 – 4.000
+  Mismos drivers que Marketing Site pero con mayor rigor de contenido y accesibilidad.
+
+STARTUP MVP
+  Esfuerzo estimado: 40-80hs
+  Precio base: USD 800 – 2.500
+  Nota: si hay auth o funcionalidad de app, recalcular como SaaS.
+
+CONSULTING / PERSONAL BRAND
+  Esfuerzo estimado: 40-100hs
+  Precio base: USD 1.000 – 3.500
+  Cuándo ir al límite superior: sistema de contenido complejo,
+  integración con newsletter, calendario de reservas.
+
+CÓMO CALCULAR EL PRECIO FINAL
+-------------------------------
+No usar el rango como único criterio. Calcular a partir del scope real.
+
+Paso 1: estimar las horas reales del proyecto según el scope de M13.2.
+Paso 2: multiplicar por la tarifa hora base.
+
+  Tarifa hora base: USD 35-60/h (ajustar según complejidad y cliente)
+  Para clientes internacionales: usar el límite superior del rango.
+  Para clientes locales: usar el límite inferior o cotizar en ARS equivalente.
+
+Paso 3: verificar que el resultado está dentro del rango de referencia del tipo.
+  Si está por debajo del rango mínimo: revisar el scope (probablemente se subestimó).
+  Si está por encima del rango máximo: revisar si el scope es demasiado amplio
+  o si el proyecto es genuinamente complejo (en ese caso el precio es correcto).
+
+Paso 4: agregar el margen de imprevistos (10-15% sobre el total).
+  Proyectos con clientes nuevos: 15%.
+  Proyectos con clientes conocidos o scope muy claro: 10%.
+
+ESTRUCTURA DE PAGOS
+--------------------
+Fijo por proyecto:
+
+  3 cuotas (proyectos medianos y grandes):
+    50% al inicio (antes de arrancar)
+    25% al aprobar la dirección visual (GATE 2)
+    25% al entregar el sitio en staging (antes del deploy)
+
+  2 cuotas (proyectos simples):
+    60% al inicio
+    40% al entregar
+
+  Regla: nunca arrancar sin el primer pago recibido.
+  El deploy a producción no ocurre sin el pago final confirmado.
+
+Regla de moneda:
+  Si el precio está en USD: se cobra en USD (Wise, Payoneer, transferencia).
+  Si el precio está en ARS: se cobra en ARS pero el monto se recalcula
+  a la cotización del día del pago para proyectos de más de 4 semanas.
+
+RETAINER MENSUAL
+-----------------
+El retainer se propone siempre al cerrar el proyecto.
+Es más fácil cerrar un retainer con un cliente satisfecho que conseguir uno nuevo.
+
+TIER 1 — Mantenimiento básico
+  Incluye: actualizaciones técnicas (dependencias, seguridad), monitoring, backups.
+  No incluye: cambios de contenido ni nuevas funcionalidades.
+  Precio: USD 100-200/mes
+  Para quién: cualquier cliente que tenga el sitio en producción.
+
+TIER 2 — Mantenimiento + actualizaciones
+  Incluye: todo el Tier 1 + hasta 3 horas de cambios de contenido o pequeños ajustes por mes.
+  Precio: USD 250-500/mes
+  Para quién: clientes que actualizan contenido regularmente (blog, eventos, precios, equipo).
+
+TIER 3 — Partner ongoing
+  Incluye: todo el Tier 2 + hasta 8 horas de trabajo mensual (nuevas secciones,
+  mejoras, SEO, analytics, pequeñas features).
+  Precio: USD 500-1200/mes
+  Para quién: clientes que quieren crecer el sitio con el tiempo.
+
+Regla: proponer el retainer en el email de entrega del proyecto.
+No esperar a que el cliente lo pida. La mayoría no lo va a pedir aunque lo necesite.
+
+CÓMO MANEJAR LA OBJECIÓN DE PRECIO
+-------------------------------------
+"Es caro"
+  No bajar el precio. Ajustar el scope.
+  "Puedo hacer una versión más acotada que incluya X, Y y Z por [precio menor].
+  El resto lo dejamos para una segunda fase."
+
+"Encontré alguien más barato"
+  No competir en precio. Diferenciar en valor.
+  "Es probable que encuentres opciones más económicas. La diferencia está en
+  el proceso: Webbing trabaja con sistema, no de forma improvisada.
+  Eso reduce retrabajo y produce resultados que podés usar en el tiempo."
+
+"¿Me hacés un descuento?"
+  Podés hacer un descuento por:
+  - pago 100% por adelantado (5-10% de descuento)
+  - referido que cierra (descuento en el próximo proyecto)
+  - cliente que vuelve (precio preferencial claro desde el inicio)
+  No hacer descuentos solo porque el cliente presiona.
+
+PRECIOS EN ARS
+--------------
+Para clientes locales que no pueden pagar en USD:
+  Calcular el precio en USD y convertir al tipo de cambio blue/MEP del día.
+  Indexar proyectos de más de 4 semanas a la cotización del día del pago.
+  Dejar esto explícito en la propuesta para evitar disputas.
+
+GATES
+-----
+GATE 13.3-A — ¿El precio cubre el esfuerzo estimado con margen de imprevistos?
+  Falla → recalcular antes de enviar la propuesta.
+
+GATE 13.3-B — ¿La estructura de pagos tiene el 50% (o 60%) al inicio?
+  Falla → ajustar. No arrancar proyectos con menos del 50% adelantado.
+
+GATE 13.3-C — ¿Se propuso el retainer al cierre del proyecto?
+  Falla → proponer antes de dar por cerrado el proyecto.
+
+OUTPUT
+------
+- Precio final calculado con desglose
+- Estructura de pagos
+- Moneda y condiciones de pago
+- Propuesta de retainer (tier recomendado)
+- Respuesta a objeciones si aplica
+
+PROMPT PARA CLAUDE
+------------------
+Para calcular el precio: estimar horas reales del scope de M13.2,
+multiplicar por la tarifa hora, verificar contra el rango del tipo de proyecto,
+agregar margen de imprevistos.
+No bajar el precio por presión. Ajustar el scope si el presupuesto no alcanza.
+Proponer retainer siempre al cierre del proyecto.
+El primer pago siempre antes de arrancar.

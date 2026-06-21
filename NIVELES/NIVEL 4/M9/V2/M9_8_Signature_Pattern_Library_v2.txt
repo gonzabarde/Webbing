@@ -1,0 +1,974 @@
+M9.8 — SIGNATURE OPERATING SYSTEM (v2)
+========================================
+
+PROPÓSITO
+---------
+Una firma visual es el elemento que hace que una experiencia sea reconocible
+como una marca específica aunque se quite el logo.
+No es un detalle decorativo. Es el sistema de identidad más profundo
+que puede tener un proyecto digital.
+
+Este módulo es un sistema operativo completo para:
+- crear la firma correcta
+- evaluarla antes de producir
+- distribuirla con criterio en el proyecto
+- protegerla de decisiones que la diluyen
+- medirla después del build
+- mantenerla en el tiempo
+- evolucionarla cuando el negocio lo requiere
+
+RELACIÓN CON EL RESTO DEL SISTEMA
+-----------------------------------
+M5 Visual Direction ya tiene una sección de Signature System.
+M9.8 no la reemplaza ni la duplica.
+
+REGLA DE ENTRADA OBLIGATORIA:
+Antes de ejecutar cualquier sección de este módulo, verificar:
+¿M5 Visual Direction ya definió la firma?
+
+SÍ → heredar la firma de M5. M9.8 toma esa firma y la convierte en
+  implementación técnica (distribución, protección, medición, mantenimiento).
+  No redefinir la firma. Solo operativizarla.
+
+NO → M9.8 crea la firma desde cero usando la Sección 1.
+  Luego opera como sistema completo.
+
+Sin esta verificación, el riesgo es que la firma se defina dos veces
+con resultados distintos, lo que destruye exactamente lo que este módulo intenta construir.
+
+ORDEN DE EJECUCIÓN
+------------------
+1. Verificar si M5 ya definió la firma.
+2. Si no: Sección 1 — Creation Engine.
+3. Siempre: Sección 2 — Evaluation Engine.
+4. Siempre: Sección 3 — Distribution System.
+5. Siempre: Sección 4 — Protection Rules.
+6. Post-build: Sección 5 — Measurement.
+7. Post-launch: Sección 6 — Maintenance.
+8. Cuando el negocio cambia: Sección 7 — Evolution.
+
+==============================================================
+SECCIÓN 1 — SIGNATURE CREATION ENGINE
+==============================================================
+
+OBJETIVO
+--------
+Crear la firma visual correcta para el proyecto a partir del concepto
+y la percepción aprobados.
+Produce: firma dominante + máximo 2 firmas secundarias.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Concepto aprobado (M4)
+- Percepción objetivo (M4.5)
+- Visual Direction (M5)
+- Tipo de proyecto
+- Clichés de la categoría (M5.5)
+- Pattern Stack elegido (M9 Overview)
+
+PROCESO
+-------
+1. Leer el concepto y la percepción. La firma debe ser consecuencia directa
+   del concepto. No es una decisión de estilo.
+
+2. Preguntar: ¿qué es lo que esta marca hace de manera diferente?
+   No en estrategia — en percepción visual. La respuesta a esa pregunta
+   es el territorio de la firma.
+
+3. Identificar la variable visual que mejor comunica ese diferencial.
+   Una variable visual es: tipografía / espacio / composición / motion /
+   imagen / interacción / color.
+
+4. Consultar el SIGNATURE TAXONOMY para elegir el tipo correcto.
+
+5. Verificar contra el SIGNATURE SELECTION TREE.
+
+6. Elegir la firma dominante. Una sola.
+
+7. Evaluar si hay una firma secundaria que amplifica (no compite con) la dominante.
+   Máximo 1. Opcional.
+
+8. Documentar con el formato SIGNATURE BRIEF.
+
+SIGNATURE TAXONOMY — TIPOS CON IMPLEMENTACIÓN
+-----------------------------------------------
+
+TYPOGRAPHIC SIGNATURE
+La marca se reconoce por cómo usa la tipografía.
+Variables: escala, contraste de pesos, serif/sans tension, tracking, alineación, ritmo.
+Útil para: lujo, editorial, marca personal, consultoría, estudio de autor.
+Implementación técnica:
+  - Escala extrema en hero: clase text-hero o font-size: clamp(60px, 8vw, 120px)
+  - Tracking ajustado en headings: letter-spacing: -0.03em o tracking-tight
+  - Line-height controlado: line-height: 1.0 o 1.05 en headings grandes
+  - Contraste de pesos: font-weight 300 + font-weight 700 en el mismo bloque
+  - Mixtura serif + sans: heading en serif (Canela, Cormorant), body en neo-grotesk
+Anti-pattern operativo: titular de 2-3 palabras + cuerpo vacío + tipografía premium →
+  el espacio percibe como error de diseño, no como criterio. La firma tipográfica
+  requiere copy editado de alta calidad o colapsa.
+Lifecycle: STANDARD.
+
+LAYOUT / SPATIAL SIGNATURE
+La marca se reconoce por su composición y uso del espacio.
+Variables: split constante, espacio negativo, asimetría controlada, ritmo de módulos.
+Útil para: estudios, portfolios, marcas con fuerte dirección de arte.
+Implementación técnica:
+  - Split consistente: grid-cols-[3fr_2fr] o grid-cols-[7_5] en todo el sitio
+  - Espacio negativo activo: padding-top: 20vh, max-w de 45ch para editorial
+  - Asimetría controlada: margin-left: 15% en elementos de énfasis
+  - Módulo de firma: un tipo de bloque que se repite con la misma proporción siempre
+Anti-pattern operativo: alternar izquierda/derecha en todos los bloques sin lógica →
+  el ritmo se vuelve mecánico y predecible. La alternancia debe responder a jerarquía,
+  no a "dar movimiento".
+Lifecycle: STANDARD.
+
+MOTION SIGNATURE
+La marca se reconoce por cómo se mueve.
+Variables: timing, easing, stagger, reveal pattern, transition style, scroll behavior.
+Útil para: portfolios, marcas aspiracionales, productos con experiencia.
+Implementación técnica (CSS):
+  --signature-duration: 700ms;
+  --signature-easing: cubic-bezier(0.16, 1, 0.3, 1); /* expo out */
+  transition: transform var(--signature-duration) var(--signature-easing);
+Implementación técnica (GSAP):
+  gsap.from(element, {
+    duration: 0.7,
+    y: 40,
+    opacity: 0,
+    ease: 'expo.out',
+    stagger: 0.08
+  })
+Regla: el easing de firma es único para este proyecto. No usar ease-out genérico.
+Anti-pattern operativo: ralentizar todas las animaciones a 1000ms+ para parecer premium →
+  el sitio se siente broken y lento, no sofisticado.
+Lifecycle: VALIDATED.
+
+IMAGE SIGNATURE
+La marca se reconoce por su tratamiento visual de imágenes.
+Variables: crop, framing, color grading, distancia focal, textura, contraste.
+Útil para: luxury, arquitectura, cultura, marcas con fotografía propia.
+Implementación técnica:
+  - CSS filter para grading coherente: filter: contrast(1.05) saturate(0.85) brightness(0.98)
+  - object-position consistente: object-position: center 30% en todos los retratos
+  - Aspect ratio de firma: todos los thumbnails en 3/4 (vertical) o 16/9 (panorámico)
+  - Overlay de color: background: rgba(var(--color-signature-tint), 0.08) sobre imágenes
+Anti-pattern operativo: stock genérico con filtro "cinematic" → el usuario reconoce la imagen
+  antes de leer cualquier copy. La firma de imagen se cae si las imágenes son reconocibles
+  como stock.
+Lifecycle: VALIDATED.
+
+INTERACTION SIGNATURE
+La marca se reconoce por cómo responde al usuario.
+Variables: hover behavior, focus style, microfeedback, magnetic response, state transitions.
+Útil para: SaaS, productos digitales, estudios con detalle técnico.
+Implementación técnica:
+  /* Hover con firma: elevación + color shift */
+  .signature-hover {
+    transition: transform 150ms ease-out, box-shadow 150ms ease-out;
+  }
+  .signature-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  /* Focus con firma: ring de color de acento */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+Anti-pattern operativo: hover diferente en cada tipo de elemento del mismo sitio →
+  el sistema de interacción se siente inconsistente y da sensación de varios diseñadores.
+Lifecycle: STANDARD.
+
+COLOR SIGNATURE
+La marca se reconoce por su uso específico del color.
+Variables: paleta reducida, rol del color de acento, temperatura dominante, combinaciones.
+Útil para: marcas con identidad fuerte, sistemas de marca, productos digitales.
+Implementación técnica:
+  :root {
+    --color-signature: #1C1C1C; /* el negro de esta marca, nunca #000000 */
+    --color-signature-accent: #C8F04D; /* acento específico, no generic green */
+    --color-signature-bg: #F5F0EB; /* off-white cálido, no #ffffff */
+  }
+  Regla: los valores exactos son parte de la firma. #F5F0EB y #FFFFFF no son lo mismo.
+Anti-pattern operativo: paleta de 6+ colores sin jerarquía clara →
+  el usuario no puede identificar el color de la marca porque todos tienen el mismo peso.
+Lifecycle: STANDARD.
+
+NEGATIVE SPACE SIGNATURE
+La marca se reconoce por cómo usa el vacío como elemento activo.
+Variables: márgenes estructurales, densidad por sección, respiración entre elementos.
+Útil para: lujo, premium silencioso, arquitectura, marcas que confían en su contenido.
+Implementación técnica:
+  .signature-section {
+    padding: clamp(80px, 12vw, 200px) clamp(24px, 8vw, 160px);
+  }
+  .signature-container {
+    max-width: 680px; /* contenedor estrecho intencional */
+    margin: 0 auto;
+  }
+Regla: el espacio no es lo que queda después de los elementos. Es el primer elemento.
+Anti-pattern operativo: aplicar espacio generoso a todas las secciones por igual →
+  el vacío pierde su poder cuando es uniforme. La firma de espacio requiere contraste:
+  secciones con mucho aire + momentos de mayor densidad.
+Lifecycle: VALIDATED.
+
+SIGNATURE SELECTION TREE
+--------------------------
+Árbol de decisión para elegir el tipo de firma correcto.
+Seguir en orden. Parar en la primera condición que aplique.
+
+¿El concepto aprobado (M4) es esencialmente tipográfico o editorial?
+  SÍ → Typographic Signature como dominante.
+
+¿La percepción objetivo es sofisticación o lujo silencioso?
+  SÍ → Negative Space Signature o Layout Signature como dominante.
+
+¿El motion es parte del valor diferencial de la marca (portfolio, experiencia)?
+  SÍ → Motion Signature como dominante.
+
+¿La marca tiene fotografía propia de alta calidad?
+  SÍ → Image Signature como dominante.
+
+¿Es un producto digital donde la interacción es la experiencia?
+  SÍ → Interaction Signature como dominante.
+
+¿La paleta es absolutamente específica y diferente de todos los competidores?
+  SÍ → Color Signature como dominante.
+
+Por defecto (cuando ninguno domina):
+  → Layout Signature + Interaction Signature.
+
+SIGNATURE BRIEF — FORMATO DE OUTPUT
+--------------------------------------
+Firma dominante: [tipo]
+Variable central: [la variable específica]
+Cómo se implementa: [2-3 líneas concretas con valores o clases]
+Dónde aparece primero: [sección]
+Dónde se repite: [3-4 secciones]
+Qué cliché de categoría evita: [específico de M5.5]
+Firma secundaria (si aplica): [tipo + variable]
+Qué amplifica: [relación con la dominante]
+
+FRAMEWORKS INTERNOS
+-------------------
+F1 — Concept-to-Signature Bridge: la firma es consecuencia del concepto, no decisión estética.
+F2 — Variable Isolation: elegir UNA variable por tipo de firma. No combinar variables.
+F3 — Category Inversion: si la categoría usa firma X, evaluar si la firma opuesta
+  diferencia más.
+
+GATES DE VALIDACIÓN — SECCIÓN 1
+---------------------------------
+GATE 1A: ¿La firma dominante es consecuencia directa del concepto aprobado?
+  Falla → la firma es una decisión estética, no estratégica. Volver al paso 1.
+
+GATE 1B: ¿La firma tiene una implementación técnica concreta?
+  Falla → no es una firma ejecutable. Solo es una intención.
+
+GATE 1C: ¿La firma evita el cliché principal de la categoría (según M5.5)?
+  Falla → ajustar antes de continuar.
+
+FAILURE MODES — SECCIÓN 1
+---------------------------
+Firma decorativa: "la firma es un efecto que no responde al concepto"
+  → el primer test de coherencia con el concepto la expone.
+  → Volver al paso 1.
+
+Firma de moda: "la firma usa un recurso visual popular en el año actual"
+  → no tiene durabilidad y va a envejece en 12-18 meses.
+  → Aplicar Decay Test de M5.5 antes de cerrar.
+
+Firma genérica: "cualquier competidor de la categoría podría tener esta firma"
+  → pasa el Competitor Test de M1: insertar el nombre de 3 competidores.
+  → Si funciona para todos: no es una firma. Es un estilo de categoría.
+
+==============================================================
+SECCIÓN 2 — SIGNATURE EVALUATION ENGINE
+==============================================================
+
+OBJETIVO
+--------
+Puntuar la firma antes de producir para asegurarse de que es suficientemente
+fuerte para sostener el proyecto.
+
+INPUTS
+------
+- Signature Brief de la Sección 1 (o de M5 si ya existía)
+- Concepto aprobado
+- Mapa de Clichés de la categoría (M5.5)
+
+PROCESO
+-------
+1. Puntuar la firma con el SIGNATURE STRENGTH SCORE.
+2. Verificar si supera el umbral mínimo.
+3. Si no supera: identificar la dimensión débil y reforzarla.
+4. Si supera: avanzar a la Sección 3.
+
+SIGNATURE STRENGTH SCORE
+--------------------------
+Puntuar cada dimensión de 1 a 10.
+
+DISTINCTIVENESS (1-10)
+¿Es visualmente diferente de todos los competidores directos?
+  8-10: nadie en la categoría tiene algo similar.
+  5-7: es diferente pero la diferencia no es dramática.
+  1-4: varios competidores usan algo muy similar.
+
+OWNERSHIP (1-10)
+¿Solo esta marca puede reclamar esta firma de manera creíble?
+  8-10: la firma requiere el posicionamiento específico de esta marca.
+  5-7: otros podrían adoptarla pero sería un esfuerzo.
+  1-4: cualquier competidor podría usarla sin parecer forzado.
+
+MEMORY (1-10)
+¿Alguien la recordaría 24 horas después de ver el sitio?
+  8-10: genera imagen mental fuerte y específica.
+  5-7: es agradable pero no especialmente memorable.
+  1-4: no deja ninguna imagen mental.
+
+REPEATABILITY (1-10)
+¿Puede aparecer en 4+ momentos del sitio sin convertirse en ruido?
+  8-10: funciona en hero, secciones, componentes y detalles.
+  5-7: funciona bien en 2-3 lugares pero en más se satura.
+  1-4: solo funciona en el hero.
+
+TECHNICAL FEASIBILITY (1-10)
+¿Se puede implementar dentro del stack con el timeline y budget disponibles?
+  8-10: implementación directa con CSS/Tailwind o GSAP básico.
+  5-7: requiere desarrollo adicional pero es viable.
+  1-4: requiere tecnología o tiempo fuera del scope.
+
+CONCEPT COHERENCE (1-10)
+¿Refuerza el concepto aprobado de M4?
+  8-10: es consecuencia directa e inevitable del concepto.
+  5-7: es compatible con el concepto pero no emerge de él naturalmente.
+  1-4: es una decisión estética que coexiste con el concepto pero no lo expresa.
+
+SCORE TOTAL: /60
+UMBRAL MÍNIMO: 42/60 para avanzar.
+
+Interpretación:
+  50-60: firma fuerte. Avanzar con confianza.
+  42-49: firma aceptable. Identificar la dimensión más débil y reforzarla.
+  35-41: firma débil. Revisar antes de continuar. No producir sobre esta firma.
+  <35: firma inviable. Volver a la Sección 1.
+
+PENALIZACIONES
+--------------
+-4 puntos: la firma es el cliché principal de la categoría.
+-3 puntos: la firma depende de assets que no están disponibles (fotos propias, tipografía custom).
+-2 puntos: la firma no tiene implementación técnica definida.
+-2 puntos: la firma no pasa el Decay Test (depende de una tendencia visual del año).
+
+BONUS
+-----
++3 puntos: la firma es consecuencia directa e inevitable del concepto.
++2 puntos: nadie en la categoría tiene nada similar en este año.
++2 puntos: la firma ya está parcialmente presente en assets existentes del cliente.
+
+FRAMEWORKS INTERNOS
+-------------------
+F4 — Threshold System: 42/60 es el mínimo operativo. Por debajo: no producir.
+F5 — Weakness Isolation: si el score es bajo, identificar la dimensión más débil
+  y reforzarla antes de avanzar. No promediar debilidades.
+
+ÁRBOLES DE DECISIÓN
+-------------------
+¿El score supera 42/60?
+  SÍ → avanzar a Sección 3.
+  NO → ¿cuál es la dimensión más débil?
+    Distinctiveness o Ownership bajos → volver a Sección 1, cambiar tipo de firma.
+    Memory bajo → la firma necesita ser más específica o más dramática.
+    Repeatability bajo → simplificar la firma o cambiar variables.
+    Technical Feasibility bajo → evaluar si simplificar la implementación resuelve.
+    Concept Coherence bajo → la firma no emerge del concepto. Volver a la Sección 1.
+
+TESTS
+-----
+- ¿Cada dimensión fue puntuada con honestidad?
+- ¿Las penalizaciones y bonus fueron aplicados?
+- ¿El score supera el umbral?
+- ¿Si no supera: está identificada la dimensión débil?
+
+GATES DE VALIDACIÓN — SECCIÓN 2
+---------------------------------
+GATE 2A: ¿El score supera 42/60 antes de las penalizaciones?
+  Falla → la firma es estructuralmente débil. Volver a Sección 1.
+
+GATE 2B: ¿El score supera 42/60 después de las penalizaciones?
+  Falla → la firma tiene un problema específico. Identificar cuál y corregir.
+
+FAILURE MODES — SECCIÓN 2
+---------------------------
+Score inflado: "todas las dimensiones puntúan 7-8 sin discriminación"
+  → ocurre cuando el score se usa para validar, no para evaluar.
+  → Corrección: el score total no puede superar 50/60 en un proyecto de complejidad estándar.
+
+Penalización ignorada: "la firma replica un cliché pero el score sigue siendo alto"
+  → las penalizaciones son obligatorias. Si se omiten, el score pierde validez.
+
+==============================================================
+SECCIÓN 3 — SIGNATURE DISTRIBUTION SYSTEM
+==============================================================
+
+OBJETIVO
+--------
+Definir dónde aparece la firma, con qué intensidad y en qué orden.
+Una firma que solo aparece en el hero es un efecto, no un sistema.
+
+INPUTS
+------
+- Signature Brief (Sección 1 o M5)
+- Component Stack elegido (M9.2)
+- Layout Pattern elegido (M9.1)
+
+PROCESO
+-------
+1. Definir el PLACEMENT MAP: dónde aparece la firma en el proyecto.
+2. Definir la intensidad por aparición (primaria / secundaria / terciaria).
+3. Verificar que no hay secciones donde la firma desaparece completamente.
+4. Verificar que no hay secciones donde la firma compite con el contenido.
+
+PLACEMENT MAP
+--------------
+Toda firma tiene 3 niveles de aparición:
+
+PRIMARIA (1 aparición): la expresión más completa y explícita de la firma.
+  Casi siempre: el hero o la primera sección que el usuario ve.
+  Regla: aquí la firma es protagonista.
+
+SECUNDARIA (2-3 apariciones): la firma está presente pero no domina.
+  Puede ser: secciones de features, proof blocks, secciones de casos.
+  Regla: aquí la firma es coherente, no destacada.
+
+TERCIARIA (en todos los detalles): la firma está en los elementos pequeños.
+  Puede ser: botones, labels, divisores, navegación, footer.
+  Regla: aquí la firma es silenciosa pero consistente.
+
+EJEMPLOS POR TIPO DE FIRMA
+
+Typographic Signature:
+  Primaria: hero con escala extrema y tracking específico.
+  Secundaria: subtítulos de sección con el mismo peso y tracking.
+  Terciaria: labels y navegación con la misma familia tipográfica y peso.
+
+Motion Signature:
+  Primaria: reveal del hero con el easing de firma.
+  Secundaria: entrada de imágenes y secciones con el mismo easing.
+  Terciaria: hover states y state transitions con el mismo timing.
+
+Layout Signature:
+  Primaria: primera sección del cuerpo con el split completo.
+  Secundaria: secciones alternadas con el mismo split reducido.
+  Terciaria: cards con la misma proporción interna.
+
+Color Signature:
+  Primaria: acento en el CTA principal y un elemento del hero.
+  Secundaria: borders, highlights y elementos de énfasis.
+  Terciaria: focus state, hover state, divisores.
+
+REGLA DE MÍNIMOS
+-----------------
+Primaria: mínimo 1 aparición (obligatoria).
+Secundaria: mínimo 2 apariciones.
+Terciaria: presente en todos los elementos interactivos.
+
+Total: la firma debe aparecer en al menos 4 puntos distintos del sitio.
+Si aparece en menos de 4: no es un sistema de firma. Es un efecto aislado.
+
+FRAMEWORKS INTERNOS
+-------------------
+F6 — Intensity Gradient: la firma va de más a menos intensa a medida que el usuario
+  avanza. El hero es el máximo. Los detalles son el mínimo.
+F7 — Saturation Rule: si la firma aparece en más del 60% de los elementos de la página,
+  pierde su efecto. El contraste con lo no-firmado es lo que hace que la firma funcione.
+
+ÁRBOLES DE DECISIÓN
+-------------------
+¿La firma tiene al menos 4 apariciones distribuidas?
+  NO → ampliar el placement map antes de continuar.
+
+¿Alguna sección importante carece completamente de la firma?
+  SÍ → evaluar si es intencional (contraste) o un olvido. Si es olvido, corregir.
+
+¿La firma compite con el contenido principal en alguna aparición?
+  SÍ → reducir la intensidad en esa aparición a nivel secundario o terciario.
+
+GATES DE VALIDACIÓN — SECCIÓN 3
+---------------------------------
+GATE 3A: ¿La firma tiene al menos 1 aparición primaria + 2 secundarias + terciarias?
+  Falla → el sistema de firma está incompleto.
+
+GATE 3B: ¿El Placement Map no tiene secciones críticas completamente sin firma?
+  Falla → la experiencia es inconsistente. Rellenar los gaps.
+
+FAILURE MODES — SECCIÓN 3
+---------------------------
+Firma de hero: "la firma solo aparece en el hero y desaparece en el resto"
+  → el usuario pierde el sentido de marca a los 2 scrolls.
+  → Distribuir la firma en al menos 3 puntos adicionales.
+
+Firma saturada: "la firma está en todos y cada uno de los elementos"
+  → pierde efecto porque no hay contraste. Todo tiene el mismo peso.
+  → Reducir la intensidad en elementos secundarios.
+
+==============================================================
+SECCIÓN 4 — SIGNATURE PROTECTION RULES
+==============================================================
+
+OBJETIVO
+--------
+Definir qué no puede hacerse con la firma y qué diluciones son inaceptables.
+Una firma sin protección es una firma que desaparece en producción.
+
+INPUTS
+------
+- Signature Brief
+- Placement Map (Sección 3)
+- Clichés de la categoría (M5.5)
+
+PROCESO
+-------
+1. Definir las reglas de no-negociables de la firma.
+2. Definir las diluciones que la matan.
+3. Definir el protocolo cuando alguien (cliente o equipo) pide algo que la diluye.
+
+NON-NEGOTIABLES POR TIPO DE FIRMA
+
+Typographic Signature:
+  - Los valores exactos de escala y tracking son fijos. No se aproximan.
+  - La familia tipográfica de firma no se cambia por otra de "la misma categoría".
+  - El copy en la aparición primaria no se escribe genéricamente. La firma
+    tipográfica requiere copy editado o no funciona.
+
+Layout Signature:
+  - La proporción del split es fija. No se negocia por conveniencia de contenido.
+  - El espacio negativo de firma no se reduce para "meter más contenido".
+  - Si el contenido no cabe en la proporción de firma: el contenido se edita,
+    no la firma.
+
+Motion Signature:
+  - El easing de firma es único. No se reemplaza por ease-out genérico.
+  - La duración de firma no se reduce para parecer más ágil.
+  - El fallback de prefers-reduced-motion existe pero no cambia la firma —
+    la simplifica sin eliminarla.
+
+Image Signature:
+  - El color grading se aplica a todas las imágenes del sistema, no solo al hero.
+  - No se mezclan imágenes con grading de firma con imágenes sin grading.
+  - Si el cliente aporta imágenes que no pueden recibir el grading: se producen
+    imágenes nuevas o se busca alternativa.
+
+Interaction Signature:
+  - El hover state de firma es consistente en todos los elementos interactivos.
+  - No se agregan hover states nuevos que no sigan el patrón.
+  - El focus state de firma es accesible Y visualmente coherente con la firma.
+
+Color Signature:
+  - Los valores exactos de color son los del sistema (ver token mapping en M9.6).
+  - No se usan aproximaciones: #1C1C1C y #000000 no son lo mismo.
+  - El color de acento tiene un único rol. No se duplica en fondo.
+
+DILUCIONES QUE MATAN UNA FIRMA
+--------------------------------
+1. Agregar una decisión de "tendencia actual" que contradice la firma.
+   Ejemplo: la firma es tipografía seria + espacio negativo.
+   Dilución: agregar un gradiente de moda porque "se ve más moderno".
+
+2. Reducir el espacio, escala o timing de firma para "no parecer extremo".
+   El "extremo" es exactamente lo que produce la firma. Al reducirlo, desaparece.
+
+3. Cambiar la firma en mobile porque "no cabe".
+   La firma debe tener una versión mobile. Si no cabe en mobile, no es una firma
+   bien diseñada. Rediseñar el mobile, no eliminar la firma.
+
+4. Agregar variantes de la firma sin criterio.
+   "Una firma con muchas variantes no tiene firma." Un solo sistema con
+   intensidades distintas (primario/secundario/terciario), no variantes arbitrarias.
+
+PROTOCOLO CUANDO ALGUIEN PIDE DILUCIÓN
+-----------------------------------------
+Paso 1: identificar exactamente qué dimensión de la firma está en riesgo.
+Paso 2: explicar la consecuencia específica de la dilución.
+  No: "eso no funciona bien".
+  Sí: "si reducimos el tracking del headline a este valor, la firma tipográfica
+  pierde su diferencial respecto al estándar de la categoría.
+  El sitio pasa de ser reconocible a ser competente."
+Paso 3: proponer una alternativa que resuelve la necesidad sin diluir la firma.
+Paso 4: si la dilución se acepta igualmente, documentarla como decisión consciente
+  con la consecuencia registrada.
+
+FRAMEWORKS INTERNOS
+-------------------
+F8 — Dilution Cost: cada dilución tiene un costo medible en el Signature Strength Score.
+  Calcular el impacto antes de aceptar. Si el score cae por debajo de 42/60: rechazar.
+F9 — Alternative First: nunca rechazar una dilución sin proponer una alternativa.
+
+GATES DE VALIDACIÓN — SECCIÓN 4
+---------------------------------
+GATE 4A: ¿Los non-negotiables están documentados por tipo de firma?
+  Falla → no hay protección. La firma se diluirá en producción.
+
+GATE 4B: ¿El protocolo de dilución está disponible antes del build?
+  Falla → cuando llegue la primera petición de cambio, no habrá criterio para responder.
+
+FAILURE MODES — SECCIÓN 4
+---------------------------
+Firma de papel: "se definió la firma pero no se documentaron sus non-negotiables"
+  → en producción, cada decisión de implementación la erosiona sin que nadie lo note.
+
+Dilución progresiva: "cada pedido de cambio es pequeño pero el acumulado destruye la firma"
+  → llevar la cuenta. Calcular el impacto acumulado en el Signature Strength Score.
+
+==============================================================
+SECCIÓN 5 — SIGNATURE MEASUREMENT
+==============================================================
+
+OBJETIVO
+--------
+Verificar después del build si la firma sobrevivió la implementación.
+Esta sección conecta con M8.6 Production Review Engine.
+
+INPUTS
+------
+- Build final (o staging)
+- Signature Brief original
+- Placement Map (Sección 3)
+- Production Review de M8.6
+
+PROCESO
+-------
+1. Ejecutar el SIGNATURE FIDELITY CHECK.
+2. Ejecutar el RECOGNITION TEST.
+3. Integrar con el veredicto de M8.6.
+4. Si algo falló: identificar qué y el destino de corrección.
+
+SIGNATURE FIDELITY CHECK
+--------------------------
+Verificar punto por punto que el build implementó la firma.
+Para cada aparición del Placement Map:
+
+APARICIÓN PRIMARIA:
+  [ ] La firma dominante está presente con la intensidad correcta.
+  [ ] Los valores técnicos (escala, easing, grading, proporción) son los definidos.
+  [ ] No hay elementos que compitan con la firma en el mismo bloque.
+
+APARICIONES SECUNDARIAS (repetir por cada una):
+  [ ] La firma está presente con intensidad secundaria.
+  [ ] Es coherente con la aparición primaria pero sin duplicarla.
+
+TERCIARIA:
+  [ ] Los elementos interactivos siguen el patrón de firma.
+  [ ] El hover, focus y active state son consistentes con el tipo de firma.
+
+RECOGNITION TEST
+-----------------
+Aplicar este test al build antes de cualquier otro feedback.
+
+Test 1 — Sin Logo:
+  Quitar el logo del sitio (cubrir con un bloque de color).
+  Pregunta: ¿la experiencia sigue sintiéndose como una marca específica
+  o parece un template premium genérico?
+  Respuesta honesta: SÍ o NO.
+
+Test 2 — Primera Impresión:
+  Mostrar el sitio a alguien que no lo conoce durante 5 segundos.
+  Pregunta: ¿qué percepción/sensación describe?
+  Verificar si coincide con la percepción objetivo de M4.5.
+
+Test 3 — Competitor Swap:
+  Aplicar el logo de un competidor directo al sitio.
+  Pregunta: ¿el sitio todavía parecería coherente con ese competidor?
+  Si SÍ: la firma no diferencia suficientemente.
+  Si NO: la firma es lo suficientemente propia.
+
+INTEGRACIÓN CON M8.6
+---------------------
+El Signature Fidelity Check alimenta la tabla de fidelidad de M8.6:
+  Signature Fidelity: OK / DRIFT / PERDIDO
+
+Si DRIFT: ajustes menores en el build. No requiere volver a módulos anteriores.
+Si PERDIDO: volver al Placement Map (Sección 3) y reimplementar.
+
+FRAMEWORKS INTERNOS
+-------------------
+F10 — Post-Build Gate: el Recognition Test no es opcional. Si no se ejecuta,
+  el build puede estar técnicamente correcto pero perceptivamente fallido.
+
+GATES DE VALIDACIÓN — SECCIÓN 5
+---------------------------------
+GATE 5A: ¿El Signature Fidelity Check pasó todos los ítems?
+  Falla → la firma no fue implementada correctamente. Corregir antes de M8.6.
+
+GATE 5B: ¿El Recognition Test 1 (sin logo) pasó?
+  Falla → la firma es demasiado débil. Reforzar en el build.
+
+GATE 5C: ¿El Recognition Test 3 (competitor swap) pasó?
+  Falla → la firma no diferencia. Evaluar si hay una dilución que la causó (Sección 4).
+
+FAILURE MODES — SECCIÓN 5
+---------------------------
+Build correcto, firma perdida: "el código es impecable pero la firma desapareció"
+  → ocurre cuando la implementación priorizó lo técnico sobre lo perceptivo.
+  → El Fidelity Check hubiera capturado esto si se hubiera ejecutado durante el build.
+
+Recognition failure: "el Recognition Test falla pero el equipo lo acepta"
+  → el Recognition Test no es subjetivo: si no pasa, la firma no existe.
+  → Volver a la Sección 3 y ajustar la distribución.
+
+==============================================================
+SECCIÓN 6 — SIGNATURE MAINTENANCE
+==============================================================
+
+OBJETIVO
+--------
+Asegurar que la firma se mantiene coherente en el tiempo: cuando el cliente edita contenido,
+cuando se agregan páginas nuevas, cuando cambia el equipo.
+
+INPUTS
+------
+- Signature Brief
+- Non-negotiables (Sección 4)
+- Client Handoff (M9.7)
+
+PROCESO
+-------
+1. Documentar la firma en el Handoff del cliente (M9.7).
+2. Crear el SIGNATURE GUARDIAN DOC: qué puede y no puede tocarse.
+3. Definir el proceso de auditoría periódica.
+
+SIGNATURE GUARDIAN DOC
+-----------------------
+Documento de 1 página máximo para el cliente y/o equipo de mantenimiento.
+
+QUÉ ES LA FIRMA DE ESTA MARCA:
+  [Descripción de la firma dominante en 2 líneas]
+
+QUÉ PUEDE EDITARSE SIN RIESGO:
+  - [Elemento editable 1]
+  - [Elemento editable 2]
+  Regla: el contenido puede cambiar; los valores de firma no.
+
+QUÉ NO PUEDE TOCARSE:
+  - [Non-negotiable 1]
+  - [Non-negotiable 2]
+  Regla: cualquier cambio en estos elementos requiere aprobación del equipo.
+
+SI APARECE ALGO RARO:
+  - La firma se siente genérica → verificar los non-negotiables.
+  - Una nueva sección parece "diferente" → aplicar el Placement Map a esa sección.
+  - Alguien sugirió un cambio → aplicar el protocolo de dilución de la Sección 4.
+
+AUDITORÍA PERIÓDICA
+--------------------
+Post-launch a los 30 días: revisar si el cliente editó contenido que afectó la firma.
+Post-launch a los 90 días: revisar si hay páginas nuevas sin firma aplicada.
+En cualquier actualización mayor: ejecutar el Recognition Test 1 (sin logo) de la Sección 5.
+
+FRAMEWORKS INTERNOS
+-------------------
+F11 — Living Document: el Signature Brief se actualiza cuando hay cambios aprobados.
+  No es un documento estático. Es la fuente de verdad de la firma.
+
+GATES DE VALIDACIÓN — SECCIÓN 6
+---------------------------------
+GATE 6A: ¿El Signature Guardian Doc fue entregado al cliente en el handoff?
+  Falla → el cliente no sabe qué proteger. La firma va a degradarse.
+
+FAILURE MODES — SECCIÓN 6
+---------------------------
+Drift silencioso: "cada edición del cliente erosiona la firma sin que nadie lo note"
+  → sin el Guardian Doc y sin auditoría periódica, el drift es inevitable.
+
+Firma olvidada: "el equipo que toma el proyecto 6 meses después no sabe que existe"
+  → el Signature Brief debe estar en el repositorio, no solo en un chat.
+
+==============================================================
+SECCIÓN 7 — SIGNATURE EVOLUTION
+==============================================================
+
+OBJETIVO
+--------
+Definir cuándo y cómo evolucionar la firma sin destruir el reconocimiento acumulado.
+Evolucionar no es resetear. Es cambiar variables sin cambiar el tipo.
+
+INPUTS
+------
+- Signature Brief original
+- Signature Strength Score actual
+- Trigger de evolución
+
+CUÁNDO EVOLUCIONAR
+-------------------
+Triggers válidos para evolución:
+  - Reposicionamiento de marca (M1 cambió significativamente).
+  - La categoría adoptó la firma y ya no diferencia.
+  - El Distinctiveness o Ownership cayeron por debajo de 6/10 en revisión.
+  - La firma fue diseñada para un producto que ya no existe.
+
+No son triggers válidos:
+  - "Ya no se ve tan moderna."
+  - "Vi algo que me gustó más."
+  - Un cambio de equipo o de gusto.
+
+TIPOS DE EVOLUCIÓN
+-------------------
+AJUSTE (bajo riesgo):
+  Cambiar las variables dentro del mismo tipo de firma.
+  Ejemplo: la Motion Signature cambia el easing de expo.out a power3.out.
+  La firma sigue siendo Motion Signature. Solo cambia la expresión.
+  Proceso: actualizar el Signature Brief. Verificar con el Recognition Test.
+
+MIGRACIÓN (riesgo medio):
+  Cambiar de tipo de firma manteniendo el espíritu.
+  Ejemplo: la firma era Typographic Signature y migra a Layout Signature
+  porque la categoría adoptó el uso tipográfico fuerte.
+  Proceso: ejecutar la Sección 1 con el nuevo tipo. Luego Sección 2 y 3.
+  Verificar que el nuevo score supera el umbral.
+
+RESET (alto riesgo):
+  El concepto cambió radicalmente y la firma existente ya no es coherente.
+  Proceso: ejecutar M9.8 completo desde el inicio.
+  Implica: el reconocimiento acumulado puede perderse parcialmente.
+  Solo aplicar cuando el negocio o el posicionamiento cambió de manera fundamental.
+
+CÓMO EVOLUCIONAR SIN ROMPER EL RECONOCIMIENTO
+-----------------------------------------------
+1. Mantener al menos 1 elemento de la firma anterior en la nueva.
+   El ojo del usuario necesita un puente entre la versión anterior y la nueva.
+2. No cambiar todas las variables simultáneamente.
+3. El Recognition Test 1 debe pasar con la nueva firma antes de implementar.
+
+FRAMEWORKS INTERNOS
+-------------------
+F12 — Bridge Rule: en toda evolución, al menos un elemento de la firma anterior
+  persiste en la nueva. El reconocimiento acumulado es un activo.
+F13 — Trigger Validation: antes de evolucionar, verificar que el trigger es real
+  y no una reacción estética.
+
+GATES DE VALIDACIÓN — SECCIÓN 7
+---------------------------------
+GATE 7A: ¿Hay un trigger válido para la evolución?
+  Falla → la evolución no está justificada. Proteger la firma existente.
+
+GATE 7B: ¿La nueva firma supera 42/60 en el Signature Strength Score?
+  Falla → la evolución produce una firma más débil. Revisar.
+
+GATE 7C: ¿El Recognition Test 1 pasa con la nueva firma?
+  Falla → la nueva firma no es suficientemente clara. Ajustar antes de implementar.
+
+FAILURE MODES — SECCIÓN 7
+---------------------------
+Evolución cosmética: "la firma cambió de variables pero no de propósito"
+  → no es evolución, es rediseño sin criterio.
+  → Verificar si el trigger era real antes de aplicar el cambio.
+
+Ruptura de reconocimiento: "la nueva firma es tan diferente que no hay continuidad"
+  → el usuario pierde el sentido de identidad de la marca.
+  → Aplicar la Bridge Rule antes de implementar.
+
+==============================================================
+SIGNATURE STACKS RECOMENDADOS
+==============================================================
+No usar más de 2 firmas al mismo tiempo.
+
+LUXURY / HIGH-END
+  Dominante: Typographic o Negative Space Signature
+  Secundaria: Layout Signature
+  Evitar: Motion Signature protagonista, Interaction exuberante
+
+AGENCY / STUDIO CREATIVO
+  Dominante: Layout o Motion Signature
+  Secundaria: Image Signature (si hay fotografía propia) o Typographic
+  Evitar: Interaction Signature como protagonista
+
+SAAS / PRODUCTO DIGITAL
+  Dominante: Interaction Signature
+  Secundaria: Color Signature o Layout Signature
+  Evitar: Motion decorativa, Image Signature sin fotos propias
+
+PORTFOLIO PREMIUM
+  Dominante: Motion o Image Signature
+  Secundaria: Layout Signature
+  Evitar: cards genéricas, hover states inconsistentes
+
+CLÍNICA / INSTITUCIONAL
+  Dominante: Layout o Color Signature (sobria)
+  Secundaria: Interaction Signature (funcional)
+  Evitar: Image Signature aspiracional falsa, Motion protagonista
+
+MARCA PERSONAL
+  Dominante: Typographic Signature
+  Secundaria: Layout o Motion Signature (según el tono)
+  Evitar: Negative Space si el contenido es abundante
+
+==============================================================
+SIGNATURE BRIEF COMPLETO — FORMATO FINAL
+==============================================================
+
+Firma dominante: [tipo]
+Variable central: [la variable específica]
+Implementación técnica: [valores exactos o clases]
+
+Placement Map:
+  Primaria: [sección]
+  Secundaria: [sección 1], [sección 2], [sección 3]
+  Terciaria: [elementos]
+
+Signature Strength Score: [N]/60
+Penalizaciones aplicadas: [lista]
+Bonus aplicados: [lista]
+
+Non-negotiables:
+  1. [no-negociable con consecuencia de violación]
+  2. [no-negociable con consecuencia de violación]
+
+Qué cliché de categoría evita: [específico]
+Diluciones a evitar: [lista de las más probables para este proyecto]
+Trigger de evolución futuro: [cuándo sería válido cambiarla]
+
+==============================================================
+GATES GLOBALES DEL SISTEMA
+==============================================================
+
+GATE GLOBAL 1: ¿Se verificó M5 antes de ejecutar la Sección 1?
+  Falla → existe riesgo de doble definición de firma.
+
+GATE GLOBAL 2: ¿El Signature Strength Score supera 42/60?
+  Falla → no producir. La firma es débil.
+
+GATE GLOBAL 3: ¿El Placement Map tiene al menos 4 apariciones distribuidas?
+  Falla → la firma no es un sistema. Es un efecto.
+
+GATE GLOBAL 4: ¿Los non-negotiables están documentados?
+  Falla → la firma se diluirá en producción.
+
+GATE GLOBAL 5: ¿El Recognition Test 1 (sin logo) pasó post-build?
+  Falla → la firma no sobrevivió la implementación.
+
+GATE GLOBAL 6: ¿El Signature Guardian Doc fue entregado al cliente?
+  Falla → la firma se degradará después del handoff.
+
+==============================================================
+FAIL CONDITIONS GLOBALES
+==============================================================
+- La firma fue definida dos veces: en M5 y en M9.8, con resultados distintos.
+- El score no supera 42/60 y se avanzó igual.
+- La firma solo aparece en el hero.
+- La firma no pasó el Recognition Test post-build.
+- Los non-negotiables no fueron documentados.
+- No hay Signature Guardian Doc.
+- La firma fue evolucionada sin un trigger válido.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como director de sistemas de identidad.
+Primero: verificar si M5 ya definió la firma. Si sí, heredar. Si no, ejecutar la Sección 1.
+Crear la firma con implementación técnica concreta: valores, clases, configuración.
+Puntuar con el Signature Strength Score. Si no supera 42/60, no avanzar.
+Definir el Placement Map con apariciones primaria, secundaria y terciaria.
+Documentar los non-negotiables con las consecuencias concretas de violarlos.
+Post-build: ejecutar el Signature Fidelity Check y los 3 Recognition Tests.
+Entregar el Signature Brief completo y el Signature Guardian Doc para el cliente.
+No me des teoría de firma visual. Dame un sistema operativo que produzca firmas
+concretas, medibles, distribuidas y protegidas.

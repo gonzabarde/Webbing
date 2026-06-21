@@ -1,0 +1,564 @@
+B3 — INTEGRATIONS & OPS PATTERN LIBRARY (v1)
+============================================
+
+UBICACIÓN EN EL SISTEMA
+-----------------------
+Capa: NIVEL 4 — Ejecución (extensión backend).
+Activación: condicional y parcial. Casi todo proyecto con backend usa AL MENOS una
+pieza de B3 (típicamente email transaccional). El resto se activa por necesidad real
+del proyecto, no por default.
+
+B3 asume B0 (arquitectura) y B1 (patrones de auth/data/API) como base. No los repite.
+B2 (pagos) y B3 conviven: los webhooks de pago son de B2; los webhooks de OTROS terceros
+son de B3.
+
+Relación con el resto:
+- Hereda de B1: patrón de webhooks entrantes (P2), validación (P3), manejo de errores (P5),
+  forma de respuesta (P4).
+- Entrega a B4: ítems de launch específicos (servicios de terceros configurados en prod,
+  secrets de cada servicio, monitoring activo, jobs programados corriendo).
+
+
+OBJETIVO
+--------
+Dar los patrones correctos para todo lo que rodea al core del backend y lo vuelve un
+sistema real en producción:
+
+1. EMAIL TRANSACCIONAL — el backend necesita mandar mails (verificación, reset, recibos).
+2. STORAGE DE ARCHIVOS — subir, guardar y servir archivos (avatares, documentos, imágenes).
+3. JOBS Y TAREAS PROGRAMADAS — trabajo asíncrono y recurrente (cron, colas).
+4. INTEGRACIONES DE TERCEROS — consumir y recibir de APIs externas (webhooks entrantes/salientes).
+5. OBSERVABILIDAD — saber qué pasa en producción (logs, errores, monitoring).
+6. SECRETS Y CONFIGURACIÓN — manejar claves y config por entorno.
+7. CICLO DE VIDA DEL DATO — qué se retiene, archiva, borra y cómo se respalda/restaura.
+8. HIGIENE DE SEGURIDAD — dependencias, cuentas, headers HTTP: el riesgo que no está
+   en el diseño de un patrón sino en la operación cotidiana del sistema.
+
+Cada pieza se agrega SOLO si el proyecto la necesita. El principio de no agregar infra
+preventiva (de B0) sigue vigente acá.
+
+PRINCIPIO CENTRAL
+-----------------
+Toda integración con un tercero es un punto de falla que no controlás.
+El servicio externo se cae, cambia su API, te corta por rate limit, o tarda.
+Un backend maduro asume que el tercero va a fallar y se diseña para sobrevivir a eso:
+con timeouts, reintentos, degradación elegante y observabilidad.
+
+Regla madre: nunca dejes que la falla de un tercero no-crítico tumbe tu request principal.
+Si el envío del mail de bienvenida falla, el usuario igual se registró. Desacoplá lo
+crítico de lo accesorio.
+
+
+INPUTS
+------
+OBLIGATORIOS:
+- Handoff de B0 y patrones seleccionados de B1.
+- Lista de necesidades reales del proyecto: ¿manda mails? ¿sube archivos? ¿trabajo
+  asíncrono? ¿integra con qué terceros? ¿qué nivel de observabilidad pide el riesgo?
+
+OPCIONALES:
+- Servicios preexistentes del cliente (su proveedor de email, su storage).
+- Requisitos de jurisdicción de datos (dónde pueden vivir los archivos).
+
+Si el proyecto no necesita una sección, se saltea y se documenta "no aplica". No se
+construye infra que nadie pidió.
+
+
+=====================================================================
+SECCIÓN 1 — EMAIL TRANSACCIONAL
+=====================================================================
+
+PATRÓN EMAIL-1 — PROVEEDOR DE EMAIL TRANSACCIONAL
+  Problema: mandar mails confiables (que lleguen, no caigan en spam) desde el backend.
+  Cuándo: casi todo proyecto con auth (verificación, reset) o con pagos (recibos).
+  Cómo se hace bien:
+    - Usar un proveedor de email transaccional (Resend, Postmark, SendGrid, SES).
+      No mandar mails desde el servidor con SMTP casero → terminan en spam.
+    - Default del sistema: Resend (ergonomía moderna, buena entregabilidad) salvo que
+      el cliente ya tenga proveedor.
+    - Configurar SPF, DKIM y DMARC en el dominio para entregabilidad. Sin esto, los
+      mails caen en spam por más buen proveedor que uses.
+    - Separar email TRANSACCIONAL (disparado por una acción: reset, recibo) de email
+      de MARKETING (campañas). Son productos y reputaciones distintas.
+  Cómo se rompe:
+    - SMTP propio sin reputación → spam garantizado.
+    - Sin SPF/DKIM/DMARC → spam aunque el proveedor sea bueno.
+    - Mezclar marketing y transaccional en el mismo canal → un reporte de spam de
+      marketing arruina la entregabilidad de los mails críticos.
+
+PATRÓN EMAIL-2 — PLANTILLAS Y ENVÍO DESACOPLADO
+  Problema: mandar el mail sin bloquear ni romper la acción principal.
+  Cómo se hace bien:
+    - El envío de mail NO debe bloquear la respuesta al usuario. Si el mail tarda o
+      falla, la acción (registro, compra) ya se completó. Disparar el mail de forma
+      desacoplada (después de confirmar la operación, idealmente vía job/cola si el
+      volumen lo justifica).
+    - Plantillas versionadas en el repo, no hardcodeadas inline.
+    - Manejar el fallo de envío: loguear, reintentar si es crítico (reset de password),
+      pero no tumbar la operación principal por un mail.
+  Cómo se rompe:
+    - await del envío de mail en el camino crítico → si el proveedor tarda, el usuario
+      espera; si falla, el registro falla por un mail.
+
+
+=====================================================================
+SECCIÓN 2 — STORAGE DE ARCHIVOS
+=====================================================================
+
+PATRÓN FILE-1 — ALMACENAMIENTO DE ARCHIVOS (object storage)
+  Problema: guardar archivos que suben los usuarios (imágenes, documentos).
+  Cuándo: el proyecto permite subir archivos.
+  Cómo se hace bien:
+    - Usar object storage (S3, Cloudflare R2, Supabase Storage, UploadThing), NUNCA
+      el filesystem del servidor (en serverless ni existe; en server tradicional no escala
+      ni sobrevive a un redeploy).
+    - Default: si elegiste Supabase en B0, su Storage; si no, Cloudflare R2 (sin egress fees)
+      o S3.
+    - Guardar en tu DB solo la REFERENCIA al archivo (URL/key), no el archivo.
+  Cómo se rompe:
+    - Guardar archivos en el filesystem del servidor → se pierden en cada deploy, no escalan.
+    - Guardar el binario en la DB → la infla, la hace lenta, mala práctica salvo casos muy chicos.
+
+PATRÓN FILE-2 — SUBIDA SEGURA Y DIRECTA
+  Problema: subir archivos sin que pasen por tu servidor (que es lento y caro) y sin
+  permitir abusos.
+  Cómo se hace bien:
+    - Usar subida directa al storage con URL firmada (presigned URL): tu backend autoriza
+      y firma, el cliente sube directo al storage. El archivo no pasa por tu servidor.
+    - Validar ANTES de firmar: tipo de archivo (allowlist de MIME types), tamaño máximo,
+      y que el usuario tenga permiso de subir.
+    - Generar nombres de archivo no adivinables. No confiar en el nombre que manda el cliente.
+  Cómo se rompe:
+    - Aceptar cualquier tipo/tamaño → subida de ejecutables, archivos gigantes, abuso de storage.
+    - Servir archivos con el nombre original del cliente → path traversal, colisiones, XSS
+      si es un HTML servido inline.
+
+PATRÓN FILE-3 — SERVIR ARCHIVOS CON CONTROL DE ACCESO
+  Problema: que solo quien corresponde acceda a un archivo privado.
+  Cómo se hace bien:
+    - Archivos públicos (avatares públicos) → URL pública directa, idealmente vía CDN.
+    - Archivos privados (documentos de un usuario) → URL firmada con expiración, generada
+      tras verificar autorización (B1-A4). Nunca una URL pública permanente para algo privado.
+  Cómo se rompe:
+    - Archivo privado en URL pública adivinable → fuga de documentos.
+
+
+=====================================================================
+SECCIÓN 3 — JOBS Y TAREAS PROGRAMADAS
+=====================================================================
+
+PATRÓN JOB-1 — TRABAJO ASÍNCRONO (fuera del request)
+  Problema: tareas que tardan o no deben bloquear la respuesta (enviar 100 mails,
+  procesar una imagen, generar un reporte).
+  Cuándo: cuando una operación es lenta o puede hacerse después de responder al usuario.
+  Cómo se hace bien:
+    - Mover el trabajo pesado fuera del request: cola de jobs (Inngest, Trigger.dev,
+      BullMQ con Redis, o la solución de background del proveedor).
+    - El request encola y responde rápido; el worker procesa después.
+    - Jobs idempotentes y con reintentos: si un job falla, se reintenta sin duplicar efecto.
+  Cómo se rompe:
+    - Trabajo pesado dentro del request → timeouts, mala UX, en serverless directamente
+      se corta por límite de tiempo.
+    - Jobs no idempotentes → reintento duplica el efecto (manda el mail dos veces).
+
+PATRÓN JOB-2 — TAREAS PROGRAMADAS (cron)
+  Problema: trabajo recurrente (limpiar datos viejos, enviar resúmenes, reconciliar pagos).
+  Cómo se hace bien:
+    - Usar el scheduler del proveedor (Vercel Cron, o el del servicio de jobs).
+    - El endpoint de cron debe estar protegido (secret/firma) para que no lo dispare
+      cualquiera desde afuera — es un endpoint público.
+    - Cada corrida debe ser idempotente y loguear su resultado.
+  Cómo se rompe:
+    - Endpoint de cron sin proteger → cualquiera lo ejecuta a voluntad (abuso, costos).
+    - Cron no idempotente → corridas solapadas o reintentos corrompen datos.
+  Conexión: los jobs programados activos son ítem del launch checklist (B4).
+
+
+=====================================================================
+SECCIÓN 4 — INTEGRACIONES DE TERCEROS
+=====================================================================
+
+PATRÓN INT-1 — CONSUMIR APIS EXTERNAS (salientes)
+  Problema: tu backend llama a una API de un tercero (un CRM, una API de datos, IA).
+  Cómo se hace bien:
+    - Timeout explícito en toda llamada externa. Nunca una llamada sin límite de tiempo.
+    - Reintentos con backoff para fallos transitorios, pero con tope (no reintentar infinito).
+    - Manejar el fallo: si el tercero no responde, degradar elegante (valor por defecto,
+      mensaje claro), no propagar un crash.
+    - Centralizar la integración en un módulo (un cliente del servicio), no llamadas
+      sueltas por todo el código.
+    - Respetar el rate limit del tercero.
+  Cómo se rompe:
+    - Llamada sin timeout → tu request cuelga esperando a un tercero caído.
+    - Sin manejo de fallo → la caída del tercero tumba tu feature.
+    - Llamadas dispersas → cambiar la integración obliga a tocar todo el código.
+
+PATRÓN INT-2 — RECIBIR WEBHOOKS DE TERCEROS (entrantes)
+  Problema: un tercero te notifica eventos (no de pago; eso es B2).
+  Cómo se hace bien:
+    - Mismo patrón que B1-P2 y B2-PAY: verificar la firma del webhook ANTES de procesar.
+    - Idempotencia: deduplicar por ID de evento (un webhook puede reenviarse).
+    - Responder rápido (2xx) y procesar pesado de forma asíncrona si hace falta (JOB-1).
+      Muchos proveedores reintentan si no respondés rápido.
+  Cómo se rompe:
+    - Webhook sin verificar firma → eventos falsos.
+    - Procesar pesado de forma síncrona → timeout, el proveedor reintenta, se duplica.
+
+PATRÓN INT-3 — IA EN EL BACKEND (si el proyecto la usa)
+  Problema: integrar un modelo (Claude, OpenAI) en la lógica del producto.
+  Cómo se hace bien:
+    - Tratarla como cualquier API externa (INT-1): timeout, manejo de fallo, costo.
+    - La API key del modelo es un secret de servidor. NUNCA exponerla en el cliente.
+      La llamada al modelo va del backend, no del navegador.
+    - Validar y acotar el input que va al modelo y el output que vuelve (no confiar ciego).
+    - Considerar costo por request y rate limiting si es feature de cara al usuario.
+  Cómo se rompe:
+    - API key del modelo en el frontend → cualquiera la roba y la usa a tu costo.
+    - Sin control de costo → un usuario abusivo dispara la factura.
+  Nota: esto conecta con tu stack de IA, pero acá es IA DENTRO del producto del cliente,
+  no IA en tu flujo de trabajo de agencia.
+
+PATRÓN INT-4 — MENSAJERÍA CONVERSACIONAL (WhatsApp Business API y similares)
+  Problema: mandar mensajes por WhatsApp/SMS no es como mandar un email. WhatsApp Business
+  API (vía Meta o un proveedor tipo Twilio, 360dialog, Wati) tiene reglas propias que el
+  patrón genérico de API externa (INT-1) no captura, y en muchos proyectos del rubro
+  servicios (recordatorios de turno) es EL canal principal, no un accesorio.
+  Cuándo: el proyecto manda notificaciones por WhatsApp o SMS.
+  Cómo se hace bien:
+    - PLANTILLAS PRE-APROBADAS: WhatsApp exige que los mensajes iniciados por el negocio
+      (recordatorios, notificaciones) usen plantillas aprobadas por Meta de antemano. No
+      podés mandar texto libre arbitrario para iniciar conversación. Diseñar las plantillas
+      y contar con su aprobación es parte del alcance, con lead time — no es instantáneo.
+    - VENTANA DE 24 HORAS: solo podés mandar mensajes libres (no-plantilla) dentro de las
+      24h de que el usuario te escribió. Fuera de esa ventana, solo plantillas. La lógica
+      de qué se puede mandar depende de cuándo fue el último mensaje del usuario.
+    - COSTO POR MENSAJE / CONVERSACIÓN: a diferencia del email, cada mensaje (o ventana de
+      conversación) cuesta. Entra en el budget de costo (B5-PERF-12) y puede necesitar
+      rate limiting / tope.
+    - Por lo demás, es una integración de tercero como INT-1 (timeout, reintento, manejo
+      de fallo) y se desacopla del camino crítico como el email (EMAIL-2): si el recordatorio
+      no sale, el turno igual quedó agendado. Los estados de entrega llegan por webhook
+      entrante (INT-2, con firma).
+    - Default: salvo volumen muy alto, usar un proveedor intermediario (Twilio, 360dialog,
+      Wati) en vez de integrar la API de Meta cruda — abstrae buena parte de la aspereza.
+  Cómo se rompe:
+    - Asumir que es como email y mandar texto libre para iniciar → Meta lo bloquea; no llega.
+    - Ignorar la ventana de 24h → mensajes rechazados.
+    - No contar el costo por mensaje → sorpresa en la factura, sobre todo a escala.
+    - Plantillas sin aprobar al momento del launch → el canal principal no funciona el día 1.
+  Nota: si el canal es el feature central del producto (ej: recordatorios de turno), su
+  lead time de aprobación y su costo se planifican desde B0, no se descubren en el build.
+
+
+=====================================================================
+SECCIÓN 5 — OBSERVABILIDAD
+=====================================================================
+
+PATRÓN OBS-1 — LOGGING ESTRUCTURADO
+  Problema: saber qué pasó cuando algo falla en producción.
+  Cómo se hace bien:
+    - Logs estructurados (con contexto: qué acción, qué usuario, qué request id), no
+      console.log sueltos.
+    - Nunca loguear datos sensibles (passwords, tarjetas, tokens) — regla de B1-P5.
+    - Niveles de log (info/warn/error) usados con criterio.
+  Cómo se rompe:
+    - Logs sin contexto → imposible rastrear un problema.
+    - Datos sensibles en logs → el log es una fuga.
+
+PATRÓN OBS-2 — MONITORING DE ERRORES
+  Problema: enterarte de los errores de producción sin que te los reporte el cliente.
+  Cuándo: todo proyecto con backend en producción real.
+  Cómo se hace bien:
+    - Integrar un servicio de error tracking (Sentry, default del sistema) que capture
+      excepciones con stack trace y contexto.
+    - Alertas para errores críticos.
+  Cómo se rompe:
+    - Sin monitoring → te enterás de los bugs cuando el cliente se queja, no antes.
+  Conexión: monitoring activo es ítem obligatorio del launch checklist (B4).
+
+PATRÓN OBS-3 — HEALTH Y UPTIME (según criticidad)
+  Problema: saber si el sistema está vivo.
+  Cómo se hace bien:
+    - Endpoint de health check para sistemas críticos.
+    - Monitoring de uptime externo si la disponibilidad importa (SaaS de pago).
+  Cómo se rompe:
+    - Sistema crítico caído sin que nadie se entere hasta que un usuario avisa.
+
+
+=====================================================================
+SECCIÓN 6 — SECRETS Y CONFIGURACIÓN
+=====================================================================
+
+PATRÓN SEC-1 — MANEJO DE SECRETS POR ENTORNO
+  Problema: claves de API, strings de conexión, secrets de webhook, sin filtrarlos.
+  Cómo se hace bien:
+    - Secrets en variables de entorno, nunca en el código ni en el repo.
+    - .env en .gitignore SIEMPRE. Un .env.example sin valores reales documenta qué se necesita.
+    - Secrets distintos por entorno (dev/staging/prod). La clave de prod no vive en dev.
+    - Claves de PSP/servicios en modo TEST en dev/staging, modo LIVE solo en prod.
+    - Validar al arranque que los secrets requeridos existen (fallar rápido si falta uno).
+  Cómo se rompe:
+    - Secret commiteado al repo → expuesto para siempre (rotarlo, el historial lo guarda).
+    - Misma clave en todos los entornos → un leak en dev compromete prod.
+    - Clave LIVE de pagos en dev → cobros reales en pruebas.
+
+PATRÓN SEC-2 — SEPARACIÓN CLIENTE/SERVIDOR DE VARIABLES
+  Problema: en Next.js, algunas env vars llegan al navegador (NEXT_PUBLIC_) y otras no.
+  Cómo se hace bien:
+    - Solo lo verdaderamente público lleva el prefijo público. TODO secret va sin prefijo
+      (solo servidor).
+    - Verificar que ninguna API key o secret tenga el prefijo público por error.
+  Cómo se rompe:
+    - Un secret con prefijo NEXT_PUBLIC_ → se empaqueta en el bundle del cliente, expuesto
+      a cualquiera que abra el navegador. Error catastrófico y silencioso.
+
+
+=====================================================================
+SECCIÓN 7 — CICLO DE VIDA DEL DATO (data lifecycle)
+=====================================================================
+B1 define cómo se diseña y accede el dato (schema, relaciones, migraciones, soft delete).
+B3-Sección 7 define qué le pasa al dato A LO LARGO DEL TIEMPO: cuánto se guarda, cuándo
+se archiva, cuándo se borra, y cómo se respalda y restaura. Sin esto, una DB sana al
+lanzar se vuelve lenta, cara y un riesgo de compliance con los meses.
+Activación: aplica a todo proyecto que persista datos de usuario. El rigor escala con
+el nivel de sensibilidad de B0 (NIVEL 2+ vuelve obligatorias retención y restore test).
+
+PATRÓN LIFE-1 — RETENCIÓN Y BORRADO
+  Problema: no todo dato se guarda para siempre. Guardar de más es costo y riesgo legal.
+  Cómo se hace bien:
+    - Definir, por entidad, cuánto tiempo se retiene y qué pasa después: se mantiene,
+      se archiva, se anonimiza o se borra.
+    - Datos personales (NIVEL 2+): definir política de borrado real para soportar el
+      derecho al olvido si la jurisdicción lo exige (conecta con soft/hard delete de B1-D4).
+    - Logs y eventos: TTL definido. No acumular logs para siempre (crecen sin techo).
+  Cómo se rompe:
+    - Retener datos personales sin límite ni justificación → riesgo legal y de fuga.
+    - Logs sin TTL → la tabla más pesada del sistema es basura vieja.
+
+PATRÓN LIFE-2 — ARCHIVADO DE DATOS FRÍOS
+  Problema: datos viejos que no se consultan degradan el rendimiento de los calientes.
+  Cómo se hace bien:
+    - Separar datos calientes (consultados seguido) de fríos (históricos, rara consulta).
+    - Archivar los fríos a almacenamiento más barato o tablas separadas cuando el volumen
+      empieza a pesar en queries calientes.
+  Cómo se rompe:
+    - Años de datos históricos conviviendo con los activos en la misma tabla caliente →
+      cada query paga el peso de todo el historial.
+  Nota: no archivar preventivamente. Es una optimización que se aplica cuando el volumen
+  lo justifica (conecta con B5: medir antes de optimizar).
+
+PATRÓN LIFE-3 — BACKUP Y, SOBRE TODO, RESTORE TESTING
+  Problema: un backup que nunca se probó restaurar no es un backup, es una esperanza.
+  Cómo se hace bien:
+    - Backups automáticos de la DB de producción (la mayoría de proveedores gestionados
+      los traen; confirmar que estén activos, no asumirlo).
+    - PROBAR el restore al menos una vez: restaurar el backup en un entorno aparte y
+      verificar que los datos vuelven íntegros. Sin esta prueba, no sabés si el backup sirve.
+    - Definir CADENCIA de re-prueba: el restore no se prueba una vez y se olvida. Re-probarlo
+      cuando cambia algo estructural (motor de DB, proveedor, cambio grande de schema) y,
+      en proyectos críticos (NIVEL 2+), de forma periódica. La regla práctica para operador
+      solo: si en los últimos meses cambió la infra de datos y no reprobaste el restore,
+      no sabés si seguís teniendo backups que sirvan.
+    - Definir el objetivo de recuperación: cuánto dato podés permitirte perder (RPO) y
+      cuánto tiempo de caída es tolerable al restaurar (RTO). Escala con la criticidad.
+  Cómo se rompe:
+    - "Tenemos backups" sin haber probado nunca restaurarlos → el día del desastre se
+      descubre que estaban corruptos o incompletos. Es el fallo clásico.
+  Conexión: el backup configurado es ítem de B4 (launch); el restore probado es la
+  precondición de la estrategia de recuperación de B6.
+
+PATRÓN LIFE-4 — CLASIFICACIÓN DE RIESGO DE MIGRACIÓN
+  Problema: no todas las migraciones son igual de peligrosas.
+  Cómo se hace bien:
+    - Clasificar cada migración: SEGURA (agregar tabla/columna nullable, agregar índice
+      concurrente) vs PELIGROSA (borrar/renombrar columna, cambiar tipo, backfill masivo).
+    - Las peligrosas requieren: backup previo verificado, prueba en staging con datos
+      realistas, y ventana de bajo tráfico. Las seguras corren normal.
+    - Cambios destructivos en dos pasos: primero dejar de usar la columna, deployar,
+      confirmar, y recién en una migración posterior eliminarla. Nunca romper y borrar
+      en el mismo paso.
+  Cómo se rompe:
+    - Tratar una migración destructiva como una trivial → pérdida de datos o downtime.
+  Conexión: continúa el patrón de migraciones de B1-D3 con la dimensión de riesgo.
+
+
+=====================================================================
+SECCIÓN 8 — HIGIENE DE SEGURIDAD (dependencias, cuentas, headers)
+=====================================================================
+B0-B2 cubren la seguridad de DISEÑO (IDOR/pertenencia, validación, webhooks firmados,
+secrets). Esta sección cubre la seguridad OPERATIVA: los vectores que no dependen de un
+patrón de código sino de la disciplina con que se opera el sistema. Son, en la práctica,
+los que MÁS comprometen a una agencia chica — no un IDOR sofisticado, sino una clave
+robada o una dependencia desactualizada.
+Principio: ningún patrón de diseño te protege de un secret robado por phishing ni de una
+vulnerabilidad en un paquete de terceros. Esto se gestiona con higiene, no con arquitectura.
+Activación: SEC-3 y SEC-4 aplican a todo proyecto en producción. SEC-5 (headers) aplica
+a toda app web.
+
+PATRÓN SEC-3 — SEGURIDAD DE DEPENDENCIAS
+  Problema: tu app usa decenas de paquetes de terceros (npm). Una vulnerabilidad en
+  cualquiera de ellos es una vulnerabilidad TUYA. La mayoría de los compromisos reales
+  entran por una dependencia desactualizada, no por código propio.
+  Cómo se hace bien:
+    - Escanear dependencias de forma automática: `npm audit` en el flujo, y un servicio
+      que avise de vulnerabilidades nuevas (Dependabot/GitHub Security, Renovate).
+    - Actualizar dependencias con regularidad, sobre todo las que tienen CVE conocido.
+      No dejar el proyecto congelado en versiones viejas "porque anda".
+    - Minimizar la superficie: cada paquete que agregás es superficie de ataque y de
+      mantenimiento. No instalar una dependencia para algo que resolvés con poco código.
+    - Fijar versiones (lockfile commiteado) para builds reproducibles.
+  Cómo se rompe:
+    - Nunca correr audit → arrastrás vulnerabilidades conocidas sin saberlo.
+    - Proyecto congelado años → cada dependencia vieja es un agujero documentado y público.
+    - Instalar paquetes sin criterio → superficie inflada, riesgo de paquete malicioso.
+  Conexión: el escaneo limpio (sin vulnerabilidades críticas/altas abiertas) es ítem del
+  launch checklist de B4.
+
+PATRÓN SEC-4 — HIGIENE DE CUENTAS Y ACCESOS
+  Problema: el breach más probable de una agencia chica no es técnico, es una credencial
+  robada o un acceso mal gestionado. Quien tiene tu clave de Vercel, del PSP o de la DB,
+  ES tu sistema. Ningún patrón de B0-B2 te protege de esto.
+  Cómo se hace bien:
+    - MFA (segundo factor) OBLIGATORIO en TODA cuenta crítica: GitHub, Vercel/host, el
+      proveedor de DB, el PSP, el proveedor de auth, el dominio/DNS, el email. Es la única
+      medida que tapa el vector más común (robo de contraseña por phishing o reuso).
+    - No reusar contraseñas entre servicios. Gestor de contraseñas.
+    - Principio de menor privilegio: cada persona/servicio tiene SOLO los accesos que
+      necesita. No dar admin "por comodidad".
+    - Revocar accesos cuando dejan de hacer falta: un colaborador que terminó, una API key
+      de una integración que ya no usás, un token viejo. El acceso que no revocás es deuda
+      de seguridad.
+    - Rotar secrets si hay sospecha de filtración, y siempre que alguien con acceso se va.
+  Cómo se rompe:
+    - Cuenta crítica sin MFA → una contraseña robada = control total del sistema.
+    - Accesos que nunca se revocan → la superficie de quién-puede-entrar crece sin control.
+    - Todos con admin → cualquier cuenta comprometida compromete todo.
+  Conexión: la verificación de MFA en cuentas críticas y la revisión de accesos son ítems
+  del launch checklist de B4. Esto es responsabilidad del OPERADOR (vos), no del código.
+
+PATRÓN SEC-5 — HEADERS DE SEGURIDAD HTTP
+  Problema: el navegador puede aplicar protecciones extra si el servidor se las pide con
+  ciertos headers. Sin ellos, quedás expuesto a ataques que el navegador podría haber frenado.
+  Cómo se hace bien:
+    - Configurar los headers de seguridad estándar (en Next.js, en la config o middleware):
+        Content-Security-Policy (CSP): limita de dónde se cargan scripts → mitiga XSS.
+        Strict-Transport-Security (HSTS): fuerza HTTPS siempre.
+        X-Content-Type-Options, X-Frame-Options / frame-ancestors: evitan sniffing y
+          clickjacking (que tu sitio se embeba en un iframe malicioso).
+        Referrer-Policy: controla qué info de tu URL se filtra al navegar afuera.
+    - HTTPS siempre (los hosts modernos como Vercel lo dan por default — confirmarlo).
+    - CSP es la más poderosa y la más delicada de configurar: empezar en modo report y
+      ajustar antes de hacerla estricta, para no romper recursos legítimos.
+  Cómo se rompe:
+    - Sin headers de seguridad → XSS y clickjacking que eran evitables quedan abiertos.
+    - Servir por HTTP → tráfico interceptable.
+  Conexión: headers configurados es ítem del launch checklist de B4. Complementa, no
+  reemplaza, la validación de input de B1-P3 (defensa en capas contra XSS).
+
+
+OUTPUT DEL MÓDULO
+-----------------
+Marcar cada sección como APLICA / NO APLICA. Solo detallar las que aplican.
+
+EMAIL: [aplica/no]
+  Proveedor: [Resend/otro] | SPF-DKIM-DMARC: [configurar] | Desacople: [confirmado]
+STORAGE: [aplica/no]
+  Proveedor: [R2/S3/Supabase] | Subida: [presigned URL + validación] | Acceso privado: [firmado]
+JOBS: [aplica/no]
+  Async: [solución de cola] | Cron: [scheduler + endpoint protegido] | Idempotencia: [confirmada]
+INTEGRACIONES: [aplica/no]
+  Salientes: [terceros + timeout/retry] | Entrantes: [webhooks verificados] | IA: [aplica/no, key server-side]
+  Mensajería (WhatsApp/SMS): [aplica/no — proveedor, plantillas aprobadas, costo por mensaje en budget]
+OBSERVABILIDAD:
+  Logging: [estructurado, sin datos sensibles] | Error tracking: [Sentry/otro] | Health: [aplica/no]
+SECRETS:
+  Por entorno: [confirmado] | .env en gitignore: [confirmado] | Sin secrets con prefijo público: [verificado]
+  Test vs Live keys: [separadas por entorno]
+CICLO DE VIDA DEL DATO:
+  Retención por entidad: [definida, con TTL de logs] | Borrado de datos personales: [política]
+  Archivado de fríos: [aplica/no, criterio] | Backups: [activos] | Restore probado: [sí/no]
+  RPO/RTO: [definidos según criticidad] | Clasificación de riesgo de migración: [en uso]
+HIGIENE DE SEGURIDAD:
+  Dependencias: [audit en el flujo + alertas activas] | Lockfile commiteado: [sí]
+  Cuentas críticas con MFA: [GitHub/host/DB/PSP/auth/DNS/email — todas]
+  Menor privilegio y revocación de accesos: [revisado] | Headers de seguridad HTTP: [configurados]
+
+PIEZAS DESCARTADAS POR NO NECESARIAS: [listar]
+DEPENDENCIAS DE TERCEROS TOTALES DEL PROYECTO: [listar consolidado]
+PUNTOS DE FALLA EXTERNOS Y SU MITIGACIÓN: [listar]
+
+
+GATE DE APROBACIÓN [antes de launch]
+------------------------------------
+Verificar (solo lo que aplica al proyecto):
+- ¿Ningún secret está en el repo? ¿.env en .gitignore?
+- ¿Ningún secret tiene prefijo público (NEXT_PUBLIC_)?
+- ¿Las claves de servicios están en modo TEST en dev/staging y LIVE solo en prod?
+- ¿Los webhooks entrantes de terceros verifican firma y son idempotentes?
+- ¿Toda llamada a API externa tiene timeout y manejo de fallo?
+- ¿El envío de mail está desacoplado del camino crítico?
+- ¿Los archivos privados se sirven con URL firmada, no pública?
+- ¿Los endpoints de cron están protegidos?
+- ¿Hay error tracking activo?
+- SI usa IA: ¿la API key está solo en el servidor?
+- ¿El escaneo de dependencias (npm audit) está limpio de vulnerabilidades críticas/altas?
+- ¿Todas las cuentas críticas tienen MFA activo? (GitHub, host, DB, PSP, auth, DNS, email)
+- ¿Los headers de seguridad HTTP están configurados y el sitio se sirve por HTTPS?
+
+Falla cualquiera que aplique → no lanzar.
+
+
+TESTS
+-----
+- ¿La caída de un tercero no-crítico tumba el request principal? (No debe.)
+- ¿Hay algún secret en el bundle del cliente? (No debe.)
+- ¿Un archivo privado es accesible por URL adivinable? (No debe.)
+- ¿Un webhook de tercero duplicado duplica el efecto? (No debe.)
+- ¿El endpoint de cron lo puede disparar cualquiera? (No debe.)
+- ¿Te enterás de un error de prod sin que el cliente avise? (Debes.)
+
+
+FAIL CONDITIONS
+---------------
+- Secret en el repo o en el bundle del cliente (prefijo público en un secret).
+- Misma clave de servicio en todos los entornos; clave LIVE en dev.
+- Mail enviado por SMTP casero o sin SPF/DKIM/DMARC.
+- Envío de mail bloqueando el camino crítico.
+- Archivos en el filesystem del servidor; binarios en la DB.
+- Archivo privado servido por URL pública.
+- Subida de archivos sin validar tipo/tamaño.
+- Llamada a API externa sin timeout ni manejo de fallo.
+- Webhook de tercero sin verificar firma o no idempotente.
+- Endpoint de cron sin proteger.
+- API key de IA expuesta en el cliente.
+- WhatsApp/SMS tratado como email: texto libre para iniciar, sin plantillas aprobadas,
+  sin contemplar la ventana de 24h ni el costo por mensaje.
+- Producción sin error tracking.
+- Backups asumidos pero nunca probados con un restore real.
+- Datos personales retenidos sin límite ni política de borrado (NIVEL 2+).
+- Migración destructiva tratada como trivial (sin backup ni staging).
+- Dependencias nunca escaneadas o proyecto congelado con vulnerabilidades conocidas.
+- Cuenta crítica (GitHub/host/DB/PSP/DNS) sin MFA.
+- Accesos viejos nunca revocados; todos con privilegio de admin.
+- App web sin headers de seguridad o servida por HTTP.
+- Infra de B3 agregada sin que el proyecto la necesite.
+
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como ingeniero de plataforma/infra.
+Tomá el proyecto y activá SOLO las secciones de B3 que necesita de verdad. No agregues
+email, jobs, storage ni colas si el proyecto no los pide: la infra preventiva es deuda.
+Grabá la regla madre: todo tercero va a fallar. Diseñá para sobrevivir a su caída con
+timeouts, reintentos acotados y degradación elegante. Nunca dejes que un tercero
+no-crítico tumbe el request principal.
+Tratá los secrets con paranoia: nunca en el repo, nunca con prefijo público, distintos
+por entorno, claves test en dev y live solo en prod.
+Verificá firma en todo webhook entrante y protegé todo endpoint de cron.
+Si el producto usa IA, la key vive solo en el servidor.
+Gestioná la higiene de seguridad operativa, no solo la de diseño: escaneá dependencias
+(npm audit + alertas), exigí MFA en todas las cuentas críticas, aplicá menor privilegio
+y revocá accesos viejos, y configurá los headers de seguridad HTTP. El breach más probable
+de una agencia chica es una credencial robada o una dependencia vieja, no un IDOR — esa
+higiene tapa más riesgo real que cualquier patrón sofisticado.
+Antes de cerrar, completá el output marcando aplica/no-aplica por sección y pasá el gate.

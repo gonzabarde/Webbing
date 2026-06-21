@@ -1,0 +1,201 @@
+M8.1 — TECHNICAL ARCHITECTURE ENGINE (v2)
+==========================================
+
+OBJETIVO
+--------
+Elegir la arquitectura técnica correcta antes de escribir código.
+Este módulo decide stack, patrón de despliegue, CMS, auth y nivel de complejidad.
+La elección debe ser aprobada antes de avanzar a M8.2.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Project Profile (CDL-1)
+- Objetivo del proyecto
+- Tipo de proyecto
+- Restricciones del cliente
+- Nivel de interacción requerido
+- Necesidad de CMS o auth
+- Presupuesto y timeline
+
+OPCIONALES:
+- Preferencia del equipo o stack preexistente
+- Restricciones de hosting
+- Necesidad de escalabilidad futura
+
+PROCESO CLAUDE
+--------------
+1. Clasificar el proyecto usando el árbol de decisiones unificado.
+   Ver sección ÁRBOL DE DECISIÓN UNIFICADO abajo.
+
+2. Determinar el objetivo técnico dominante.
+   Uno principal:
+   velocidad / SEO / edición fácil / animación / escalabilidad /
+   simplicidad / autenticación / comercio / flexibilidad
+
+3. Elegir stack base desde STACK RECOMENDADO POR CONTEXTO.
+   La clasificación del paso 1 conecta directamente con la tabla.
+
+4. Evaluar costo de complejidad.
+   No elegir una arquitectura más compleja de la necesaria.
+   Justificar si la complejidad elegida es mayor a "baja".
+
+5. Evaluar capacidad de mantenimiento.
+   Responder: ¿quién mantiene esto después del launch?
+   ¿El cliente puede editarlo solo? ¿Requiere un dev para cambios básicos?
+
+6. Evaluar dependencia técnica.
+   ¿Qué partes dependen de terceros (Vercel, Sanity, Shopify)?
+   ¿Qué partes quedan bajo control total del equipo?
+
+7. Definir estrategia de deploy.
+   Plataforma recomendada + entornos (dev / staging / prod).
+
+8. Producir recomendación final.
+   Una arquitectura concreta, no un listado de opciones.
+
+ÁRBOL DE DECISIÓN UNIFICADO
+-----------------------------
+Seguir en orden. Cada bifurcación lleva a un contexto del stack table.
+
+¿Es un marketing site o una app?
+
+MARKETING SITE (objetivos: percepción, conversión, SEO, velocidad)
+  ↓
+  ¿Necesita CMS (el cliente edita contenido sin dev)?
+    SÍ → usar perfil "Marketing site con CMS"
+    NO → usar perfil "Marketing site estático / semi-estático"
+  ↓
+  ¿La animación es central para la percepción?
+    SÍ → agregar GSAP al stack del perfil elegido
+    NO → motion ligero con CSS o Framer Motion básico
+
+APP / PRODUCTO DIGITAL (objetivos: interacción, estado, auth, datos)
+  ↓
+  ¿Necesita autenticación de usuarios?
+    SÍ → usar perfil "SaaS / producto web con auth"
+    NO → usar perfil "Producto web sin auth"
+  ↓
+  ¿Tiene catálogo de productos y checkout?
+    SÍ → usar perfil "Ecommerce"
+    NO → continuar con el perfil elegido arriba
+
+CASO ESPECIAL — PORTFOLIO / EXPERIENCIA PREMIUM
+  Usar perfil "Portfolio premium / experiencia interactiva"
+
+STACK RECOMENDADO POR CONTEXTO
+--------------------------------
+Cada perfil incluye: stack base / CMS / deploy / complejidad estimada.
+
+MARKETING SITE ESTÁTICO / SEMI-ESTÁTICO
+  Stack: Astro o Next.js (static export)
+  Motion: CSS transitions o GSAP liviano
+  CMS: no necesario
+  Deploy: Vercel, Netlify o Cloudflare Pages
+  Entornos: main (prod) + preview branches
+  Complejidad: Baja. Build time estimado: 40-80hs según alcance.
+
+MARKETING SITE CON CMS
+  Stack: Next.js (App Router, ISR)
+  CMS: Sanity (si el cliente necesita control editorial rico)
+        Contentful (si ya lo usa el cliente)
+        Tina CMS (si el cliente prefiere editar en el sitio)
+  Deploy: Vercel
+  Entornos: dev / staging / prod
+  Complejidad: Media. Build time estimado: 60-120hs según alcance.
+
+SAAS / PRODUCTO WEB CON AUTH
+  Stack: Next.js (App Router, SSR)
+  Auth: NextAuth o Clerk
+  DB: según necesidad (Supabase, PlanetScale, Neon)
+  UI: Tailwind + shadcn/ui o sistema propio
+  Deploy: Vercel o Railway según uso de backend
+  Entornos: dev / staging / prod
+  Complejidad: Alta. Build time estimado: 120-250hs+
+
+PORTFOLIO PREMIUM / EXPERIENCIA INTERACTIVA
+  Stack: Next.js
+  Motion: GSAP (ScrollTrigger para scroll-based)
+  CMS: opcional según volumen de casos
+  Deploy: Vercel
+  Entornos: dev / prod
+  Complejidad: Media-alta según profundidad de motion. Build time estimado: 80-150hs.
+
+ECOMMERCE — CATÁLOGO PEQUEÑO (< 50 productos, checkout simple)
+  Stack: Next.js + Stripe
+  Productos: datos en CMS headless (Sanity) o JSON/MDX
+  Deploy: Vercel
+  Entornos: dev / prod
+  Complejidad: Media. Build time estimado: 80-120hs.
+  Cuándo usar: negocio chico, sin inventario complejo, sin variantes múltiples.
+
+ECOMMERCE — CATÁLOGO MEDIANO/GRANDE (inventario, variantes, gestión)
+  Stack: Shopify (Hydrogen si se necesita UI custom) o Shopify básico con tema
+  Deploy: Shopify hosting
+  Entornos: Shopify development store / production store
+  Complejidad: Media (tema) a Alta (Hydrogen). Build time estimado: 60-200hs.
+  Cuándo usar: cliente gestiona inventario propio, necesita panel de administración,
+  tiene variantes de producto, necesita reportes de ventas.
+  No sobrecomplicar con Next.js custom si Shopify resuelve el problema.
+
+QUÉ NO USAR Y POR QUÉ
+-----------------------
+- WordPress: evitar en proyectos nuevos de performance alta o diseño premium.
+  Excepción: cliente tiene equipo de contenido ya entrenado en WP y no puede cambiar.
+- Create React App: deprecated. Usar Next.js o Vite.
+- Stack personalizado sin framework: solo si hay una razón técnica muy específica.
+  Aumenta mantenibilidad y curva de entrada para nuevos devs.
+- Dos CMS al mismo tiempo: produce confusión de fuente de verdad.
+
+OUTPUT DEL MÓDULO
+------------------
+Al completar, llenar el handoff de M8 con:
+
+Tipo de proyecto:
+Perfil de stack:
+Stack base:
+CMS (si aplica):
+Auth (si aplica):
+Deploy / plataforma:
+Entornos:
+Estrategia de deploy: [cómo se actualiza en producción]
+Complejidad estimada:
+Capacidad de mantenimiento: [quién mantiene, con qué nivel técnico]
+Dependencias críticas de terceros:
+Qué no usar:
+Riesgos de la elección:
+
+GATE DE APROBACIÓN [obligatorio antes de M8.2]
+------------------------------------------------
+Antes de avanzar a M8.2, verificar:
+"¿La arquitectura fue revisada y aprobada por el cliente y/o el equipo técnico?"
+
+Falla → no avanzar. Un cambio de stack post-M8.2 invalida el mapa de componentes.
+
+TESTS
+-----
+- ¿La arquitectura corresponde al objetivo del proyecto?
+- ¿Es la opción más simple que resuelve el problema?
+- ¿Puede sostenerse en el tiempo por quien la va a mantener?
+- ¿Tiene sentido económico (hosting, licencias)?
+- ¿La elección técnica cambia el resultado del proyecto?
+- ¿El gate de aprobación fue ejecutado?
+
+FAIL CONDITIONS
+---------------
+- Stack elegido por moda o costumbre.
+- Arquitectura más compleja de lo necesario sin justificación.
+- Arquitectura demasiado débil para el objetivo.
+- El cliente no puede mantenerla sin contratar un dev para cada cambio básico.
+- La elección técnica no cambia el resultado.
+- Se avanzó a M8.2 sin aprobación de arquitectura.
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como director técnico creativo.
+Usá el árbol de decisión para clasificar el proyecto y elegí el perfil de stack correspondiente.
+Completá todos los campos del output del módulo.
+Definí la estrategia de deploy con entornos.
+Documentá qué no usar y por qué.
+No me des una lista de opciones: entregá una recomendación concreta y defendible.
+Antes de cerrar el módulo, verificá el gate de aprobación.

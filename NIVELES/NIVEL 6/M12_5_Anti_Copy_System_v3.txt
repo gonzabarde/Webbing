@@ -1,0 +1,189 @@
+M12.5 — ANTI-COPY SYSTEM (v3)
+==============================
+
+OBJETIVO
+--------
+Bloquear la copia literal y distinguirla de la inspiración válida.
+Este módulo protege al sistema de producir clones disfrazados de referencias.
+
+DEFINICIONES
+------------
+COPIA LITERAL:
+  Reproduce la forma, composición o estructura reconocible de manera demasiado cercana.
+  No hay transformación real. Si se cambia el logo, es la misma pieza.
+
+INSPIRACIÓN VÁLIDA:
+  Toma un principio o lógica y la transforma suficientemente en otro contexto.
+  La referencia de origen no es reconocible en el resultado final.
+
+PATRÓN REUTILIZABLE:
+  Abstrae una decisión visual en un principio que funciona en otro contexto distinto.
+  El patrón se aplica; la forma original no se replica.
+
+CLICHÉ:
+  Solución tan repetida en una categoría que deja de diferenciar.
+  Puede ser un buen diseño pero ya no produce ningún diferencial.
+
+CLON:
+  Imitación sin transformación real. Puede tener colores diferentes pero la estructura
+  es reconociblemente la misma que la fuente.
+
+SIMILARITY SCORE — CUANTIFICADO
+---------------------------------
+Evaluar la similitud entre la propuesta y la referencia en 5 dimensiones.
+Cada dimensión se puntúa de 0 a 4 (0 = ninguna similitud, 4 = copia directa).
+
+COMPOSICIÓN (0-4):
+  0: composición completamente distinta
+  1: similar en concepto pero diferente en estructura
+  2: estructura parecida con variaciones notables
+  3: estructura casi igual con diferencias cosméticas
+  4: composición idéntica o casi idéntica
+
+COLOR / PALETA (0-4):
+  0: paleta completamente distinta en temperatura, valor y saturación
+  1: similar en concepto (ej: ambas oscuras) pero valores distintos
+  2: paleta parecida con algún diferencial
+  3: paleta casi igual con cambios mínimos
+  4: misma paleta o variación directa
+
+TIPOGRAFÍA (0-4):
+  0: familias y pesos completamente distintos
+  1: misma clasificación (ej: ambas sans-serif) pero familias distintas
+  2: familias similares o misma familia con variantes distintas
+  3: misma familia con pesos casi iguales
+  4: tipografía idéntica en familia, peso y escala
+
+MOTION (0-4):
+  0: vocabulario de motion completamente distinto
+  1: similar en intención pero diferente en ejecución
+  2: timing y easing similares
+  3: patrones de motion casi iguales
+  4: sistema de motion idéntico
+
+NARRATIVA / ESTRUCTURA DE CONTENIDO (0-4):
+  0: estructura narrativa completamente distinta
+  1: misma lógica (ej: ambas van de problema a solución) pero diferente desarrollo
+  2: secciones similares con diferente tratamiento
+  3: misma secuencia de secciones con variaciones cosméticas
+  4: misma estructura de contenido casi exacta
+
+TOTAL: /20
+
+UMBRALES DE ACCIÓN
+
+0-4: sin riesgo. La propuesta tiene origen en la referencia pero está transformada.
+5-8: riesgo bajo. Revisar las dimensiones que puntúan más alto.
+9-12: riesgo medio. La propuesta es demasiado cercana. Requiere transformación.
+13-16: riesgo alto. Bloquear y rediseñar.
+17-20: clon. Bloquear.
+
+TRANSFORMATION TEST
+--------------------
+Antes de declarar que una propuesta es "inspiración válida" y no copia:
+responder estas 3 preguntas.
+
+Pregunta 1 — DESCONEXIÓN:
+  ¿Si se oculta la referencia fuente, la propuesta puede sostenerse sola?
+  Si la propuesta necesita la referencia para "funcionar" visualmente: es dependiente.
+  Si puede pararse sola: la transformación es real.
+
+Pregunta 2 — RECONOCIMIENTO:
+  ¿Un diseñador que conoce la referencia fuente reconocería la propuesta como derivada?
+  Si la respuesta es "claramente sí": el Similarity Score es probablemente ≥ 10.
+  Si la respuesta es "posiblemente" o "no": la transformación es suficiente.
+
+Pregunta 3 — VALOR AÑADIDO:
+  ¿La propuesta agrega algo que la referencia fuente no tiene?
+  Un cambio de colores no es valor añadido.
+  Una nueva decisión de sistema, concepto o percepción sí es valor añadido.
+
+Si falla 2 de las 3 preguntas: la propuesta es una copia, no una transformación.
+
+ANTI-PATTERN LIBRARY POR CATEGORÍA
+-------------------------------------
+Clichés que el Anti-Copy System debe detectar automáticamente.
+Si una propuesta replica alguno de estos, señalarlo aunque el Similarity Score sea bajo.
+
+SAAS / PRODUCTO DIGITAL:
+  - Hero con mockup de dashboard en dispositivo flotante
+  - Gradiente morado-azul o rosa-naranja sobre fondo oscuro
+  - Grid de 3 features con ícono + título + descripción
+  - Sección "How it works" de 3 pasos numerados
+  - Pricing con 3 columnas y plan del medio destacado
+  - Testimonials con avatar circular + nombre + cargo
+
+LUXURY / HIGH-END:
+  - Serif Didone (Canela, Cormorant) + fondo blanco + mucho aire
+  - Paleta crema + negro + dorado sobre fotografía de producto
+  - Hero full-bleed de producto en lifestyle aspiracional
+  - Contador de "fundado en [año]" como señal de herencia
+
+AGENCY / PORTFOLIO:
+  - Dark mode + cursor custom + palabra grande animada en el hero
+  - Grid masonry de proyectos con hover que revela el nombre
+  - Logos de clientes en gris que se activan en hover
+  - "Trabajemos juntos" como único CTA de cierre
+
+HEALTHCARE / CLÍNICA:
+  - Fondo blanco + foto de profesional con bata + paleta azul institucional
+  - Serif clásica ligera + paleta rosada o azul pastel
+  - Hero con "Tu salud es nuestra prioridad"
+  - Grid de servicios con íconos de medicina
+
+ECOMMERCE PREMIUM:
+  - Hero en video full-screen de producto en lifestyle
+  - "Envío gratis en compras mayores a X" como único diferenciador
+  - Grid de productos en 3-4 columnas con hover de segunda imagen
+  - Trust badges en footer como cierre
+
+PERSONAL BRAND:
+  - Foto del creativo con brazos cruzados mirando a cámara
+  - Frase de propósito en hero con tipografía grande
+  - Dark mode + acento en neón o naranja
+  - "Trabajemos juntos" como sección final
+
+PROCESO CLAUDE
+--------------
+1. Calcular el Similarity Score en las 5 dimensiones.
+2. Verificar si hay algún cliché de la Anti-Pattern Library activo.
+3. Si Similarity Score ≥ 9 o hay cliché activo: ejecutar el Transformation Test.
+4. Determinar veredicto.
+5. Registrar qué se está copiando si el veredicto es riesgoso o bloquear.
+
+GATES
+-----
+GATE 12.5-A — ¿El Similarity Score supera 12?
+  Sí: bloquear. Rediseñar.
+
+GATE 12.5-B — ¿Hay un cliché activo de la Anti-Pattern Library?
+  Sí: señalar aunque el score sea bajo. El cliché bloquea la diferenciación.
+
+GATE 12.5-C — ¿El Transformation Test pasó?
+  No (falla 2/3): la propuesta es copia. Bloquear.
+
+GATE 12.5-D — ¿La propuesta tiene valor añadido claro?
+  No: evaluar si la transformación es real o cosmética.
+
+OUTPUT
+------
+- Similarity Score total y por dimensión
+- Clichés activos de la Anti-Pattern Library (si los hay)
+- Resultado del Transformation Test (si se ejecutó)
+- Veredicto: válido / riesgoso / bloquear / clon
+- Qué transformar si el veredicto es riesgoso
+
+FAIL CONDITIONS
+---------------
+- copiar layouts enteros y justificarlo como "inspiración"
+- aceptar imitaciones "casi iguales"
+- replicar un cliché aunque el Similarity Score sea bajo
+- no ejecutar el Transformation Test cuando el score supera 9
+
+PROMPT PARA CLAUDE
+------------------
+Calculá el Similarity Score en las 5 dimensiones.
+Verificá contra la Anti-Pattern Library de la categoría correspondiente.
+Si el score supera 9 o hay un cliché activo: ejecutar el Transformation Test.
+Si falla 2/3 preguntas del Transformation Test: bloquear.
+Copiar forma no es aprender. Un cliché bien ejecutado sigue siendo un cliché.

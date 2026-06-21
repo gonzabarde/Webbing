@@ -1,0 +1,1148 @@
+M10 — PRODUCTION OPERATING SYSTEM (v2)
+========================================
+
+PROPÓSITO GENERAL
+-----------------
+M10 convierte el trabajo creativo y técnico en producción controlada.
+Hasta acá el sistema sabe pensar, posicionar, diseñar y construir.
+M10 responde: ¿cómo se ejecuta un proyecto real sin que el sistema se rompa?
+
+M10 no es branding. No es diseño. No es frontend.
+M10 es operación.
+
+REGLA CENTRAL
+-------------
+Nada avanza sin estado, dueño y criterio de salida.
+
+Si una fase no puede responder:
+- qué busca
+- qué entrega
+- quién aprueba
+- qué bloquea
+- cuál es la siguiente fase
+
+entonces esa fase no está lista.
+
+REGLA DE ENTRADA
+-----------------
+Antes de cualquier otro módulo de M10: ejecutar M10.0 Project Classification Engine.
+El nivel de gobernanza del proyecto depende de su clasificación.
+Un proyecto Simple no necesita los mismos controles que un proyecto Complejo.
+Sin clasificación, el sistema sobre-gobierna lo simple y bajo-gobierna lo complejo.
+
+ARQUITECTURA DE M10
+-------------------
+M10.0 — Project Classification Engine [NUEVO]
+M10.1 — Project Lifecycle Engine
+M10.2 — Intake & Approval System
+M10.3 — Scope & Change Control
+M10.4 — Production Flow Engine
+M10.5 — Handoff & Ownership
+M10.6 — Risk & Escalation System
+M10.7 — Launch & Post-Launch Learning
+
+GATES GLOBALES CON DESTINO DE FALLO
+--------------------------------------
+GATE M10-A — ¿El proyecto está clasificado?
+  Falla → ejecutar M10.0 antes de continuar.
+
+GATE M10-B — ¿El intake tiene campos críticos completos?
+  Falla → volver a M10.2. No avanzar.
+
+GATE M10-C — ¿Cada fase tiene aprobación documentada?
+  Falla → volver a M10.2. Obtener aprobación explícita.
+
+GATE M10-D — ¿El scope está controlado y actualizado?
+  Falla → volver a M10.3. Reclasificar y documentar el cambio.
+
+GATE M10-E — ¿El Production Health Score es ≥ 60?
+  Falla → identificar dimensión débil en M10.4 y corregir.
+
+GATE M10-F — ¿Los riesgos altos y críticos tienen owner y mitigación?
+  Falla → volver a M10.6. No avanzar a launch.
+
+GATE M10-G — ¿El launch checklist está completo?
+  Falla → no publicar. Resolver items pendientes.
+
+FAIL CONDITIONS
+---------------
+- Proyecto avanza sin clasificación.
+- Aprobación verbal no documentada.
+- Scope cambia sin registro.
+- Riesgo alto sin owner.
+- Handoff sin contexto verificado.
+- Launch sin checklist completo.
+- Post-launch sin formato de aprendizaje.
+
+
+==============================================================
+M10.0 — PROJECT CLASSIFICATION ENGINE [NUEVO]
+==============================================================
+
+OBJETIVO
+--------
+Clasificar el proyecto antes de entrar en producción.
+Calibrar el nivel de gobernanza, QA, aprobaciones e innovación
+según el tipo y la complejidad real del proyecto.
+
+Por qué existe:
+Un marketing site de 3 páginas y un SaaS con auth no necesitan
+el mismo nivel de control operativo. Sin clasificación, el sistema
+produce burocracia donde no hace falta y descuido donde sí hace falta.
+
+PROCESO
+-------
+1. Identificar el tipo de proyecto.
+2. Identificar la complejidad operativa.
+3. Asignar el nivel de gobernanza.
+4. Definir qué módulos de M10 aplican con qué intensidad.
+
+TIPOS DE PROYECTO
+
+MARKETING SITE (landing, institucional sin auth)
+  Riesgo típico: bajo.
+  Complejidad: baja-media.
+  Nivel de QA: standard (M8.5 completo).
+  Aprobaciones necesarias: brief, concepto, visual direction, launch.
+  Innovación aceptable: media.
+  Producción típica: 40-80hs.
+  Gobernanza: Ligera (4 estados activos, 4 approval points).
+
+PORTFOLIO / AGENCY SITE
+  Riesgo típico: bajo-medio.
+  Complejidad: media.
+  Nivel de QA: standard + signature fidelity.
+  Aprobaciones necesarias: brief, concepto, dirección visual, firma, launch.
+  Innovación aceptable: alta.
+  Producción típica: 60-120hs.
+  Gobernanza: Ligera-Media (6 estados activos).
+
+LUXURY / HIGH-END BRAND
+  Riesgo típico: medio (percepción crítica).
+  Complejidad: media-alta.
+  Nivel de QA: estricto (signature fidelity + production review).
+  Aprobaciones necesarias: todas. Sin excepción.
+  Innovación aceptable: media-alta (con criterio).
+  Producción típica: 80-150hs.
+  Gobernanza: Media (todos los estados activos, control de scope estricto).
+
+SAAS / PRODUCTO DIGITAL
+  Riesgo típico: alto (auth, datos, escalabilidad).
+  Complejidad: alta.
+  Nivel de QA: estricto + cross-browser + accesibilidad + performance real.
+  Aprobaciones necesarias: todas + aprobación de arquitectura técnica separada.
+  Innovación aceptable: media (claridad > originalidad).
+  Producción típica: 120-250hs+.
+  Gobernanza: Completa (todos los estados, todos los módulos de M10 activos).
+
+ECOMMERCE
+  Riesgo típico: alto (conversión, pagos, confianza).
+  Complejidad: media-alta según catálogo.
+  Nivel de QA: estricto + checkout + pagos + mobile.
+  Aprobaciones necesarias: todas + aprobación de flujo de checkout separada.
+  Innovación aceptable: baja-media.
+  Producción típica: 80-200hs.
+  Gobernanza: Completa.
+
+HEALTHCARE / CLÍNICA
+  Riesgo típico: alto (confianza crítica, accesibilidad obligatoria).
+  Complejidad: media.
+  Nivel de QA: estricto + accesibilidad WCAG AA verificada.
+  Aprobaciones necesarias: todas.
+  Innovación aceptable: baja.
+  Producción típica: 60-120hs.
+  Gobernanza: Media-Completa.
+
+STARTUP MVP
+  Riesgo típico: medio (velocidad > perfección).
+  Complejidad: media.
+  Nivel de QA: reducido pero no ausente (funcionalidad core + performance básica).
+  Aprobaciones necesarias: brief, concepto, launch. Resto ágil.
+  Innovación aceptable: media.
+  Producción típica: 40-80hs.
+  Gobernanza: Ligera-Media.
+
+CONSULTING / PERSONAL BRAND
+  Riesgo típico: bajo-medio (autoridad y percepción como vectores principales).
+  Complejidad: baja-media.
+  Nivel de QA: standard.
+  Aprobaciones necesarias: brief, concepto, visual direction, launch.
+  Innovación aceptable: media-alta.
+  Producción típica: 40-100hs.
+  Gobernanza: Ligera.
+
+NIVELES DE GOBERNANZA
+----------------------
+LIGERA: usar M10.1 (estados simplificados), M10.2, M10.3, M10.7.
+  M10.4, M10.5, M10.6 en versión reducida.
+
+MEDIA: usar todos los módulos de M10. Producción Health Score activo.
+  Risk register para riesgos altos y críticos únicamente.
+
+COMPLETA: todos los módulos activos. Production Health Score obligatorio.
+  Risk register completo. Escalation Matrix activa. Agency Memory actualizada.
+
+ÁRBOL DE DECISIÓN DE CLASIFICACIÓN
+------------------------------------
+¿Hay auth, pagos o datos de usuario?
+  SÍ → Gobernanza COMPLETA (mínimo).
+
+¿La percepción de la marca es el activo principal (luxury, consulting, portfolio)?
+  SÍ → Gobernanza MEDIA con QA estricto de signature.
+
+¿Es un proyecto de velocidad con scope reducido (MVP, landing, personal brand)?
+  SÍ → Gobernanza LIGERA.
+
+¿La accesibilidad es crítica (healthcare, educación, gobierno)?
+  SÍ → Gobernanza MEDIA-COMPLETA con QA accesibilidad obligatorio.
+
+Por defecto si no aplica ninguno → Gobernanza MEDIA.
+
+OUTPUT
+------
+- Tipo de proyecto: [tipo]
+- Nivel de gobernanza: Ligera / Media / Completa
+- Módulos de M10 activos: [lista]
+- QA level: standard / estricto / reducido
+- Approval points requeridos: [número y cuáles]
+- Riesgo típico: bajo / medio / alto
+- Producción estimada: [rango de horas]
+
+
+==============================================================
+M10.1 — PROJECT LIFECYCLE ENGINE
+==============================================================
+
+OBJETIVO
+--------
+Definir el ciclo de vida del proyecto según su clasificación.
+Los estados activos dependen del nivel de gobernanza de M10.0.
+
+ESTADOS COMPLETOS (gobernanza Media y Completa)
+
+1. INTAKE
+   Objetivo: obtener información suficiente para decidir si el proyecto comienza.
+   Criterio de salida: M10.2 completado, campos críticos verificados.
+   Bloqueador: información insuficiente.
+   Owner de aprobación: agencia.
+
+2. DISCOVERY
+   Objetivo: reducir incertidumbre estratégica.
+   Criterio de salida: M0 completado, red flags resueltos.
+   Bloqueador: red flags activos.
+   Owner de aprobación: agencia + cliente en brief final.
+
+3. STRATEGY APPROVED
+   Objetivo: cerrar dirección estratégica antes de conceptualizar.
+   Criterio de salida: posicionamiento + brand translation aprobados.
+   Bloqueador: posicionamiento no aprobado.
+   Owner de aprobación: cliente.
+
+4. CONCEPT APPROVED
+   Objetivo: evitar iterar sin dirección creativa clara.
+   Criterio de salida: concepto aprobado con Concept Strength Score ≥ 10/15.
+   Bloqueador: score insuficiente o falta de aprobación.
+   Owner de aprobación: cliente.
+
+5. VISUAL DIRECTION APPROVED
+   Objetivo: congelar la intención visual antes de producir.
+   Criterio de salida: visual direction + signature system aprobados.
+   Bloqueador: firma no verificada, dirección no aprobada.
+   Owner de aprobación: cliente.
+
+6. TECHNICAL ARCHITECTURE APPROVED
+   Objetivo: evitar cambios estructurales tardíos.
+   Criterio de salida: stack + deploy strategy aprobados.
+   Bloqueador: arquitectura no confirmada por el cliente/equipo.
+   Owner de aprobación: equipo técnico + cliente si afecta budget.
+
+7. IN PRODUCTION
+   Objetivo: construir sin perder criterio.
+   Criterio de salida: build completo según component map y spec.
+   Bloqueador: dependencias no resueltas, cambios fuera de scope.
+   Owner de aprobación: producción.
+
+8. QA / REVIEW
+   Objetivo: detectar y corregir fallos antes del launch.
+   Criterio de salida: QA checklist completo sin ítems críticos.
+   Bloqueador: ítems críticos sin resolver.
+   Owner de aprobación: producción + cliente si hay cambios de contenido.
+
+9. READY FOR LAUNCH
+   Objetivo: publicar con riesgo controlado.
+   Criterio de salida: launch checklist completo, rollback documentado.
+   Bloqueador: cualquier ítem crítico sin resolver.
+   Owner de aprobación: producción + cliente.
+
+10. LIVE
+    Objetivo: monitorear comportamiento real.
+    Criterio de salida: monitoring window completo sin incidentes críticos.
+    Bloqueador: incidente crítico activo.
+    Owner de aprobación: producción.
+
+11. POST-LAUNCH REVIEW
+    Objetivo: aprender y decidir siguientes pasos.
+    Criterio de salida: Agency Memory actualizada.
+    Owner de aprobación: agencia.
+
+ESTADOS SIMPLIFICADOS (gobernanza Ligera)
+  1. Intake + Discovery (combinados)
+  2. Concept Approved
+  3. In Production
+  4. QA / Review
+  5. Live + Post-Launch Review (combinados)
+
+ÁRBOL DE DECISIÓN
+-----------------
+¿El proyecto tiene gobernanza Ligera?
+  SÍ → usar Estados Simplificados. Saltear estados técnicos si el stack es simple.
+  NO → usar Estados Completos.
+
+¿El estado actual tiene owner y criterio de salida?
+  NO → el estado no está listo. Definirlos antes de continuar.
+
+¿El bloqueador del estado actual está identificado?
+  NO → no avanzar. Identificar el bloqueador primero.
+
+GATES CON DESTINO
+-----------------
+GATE 1.A — ¿El estado actual tiene criterio de salida cumplido?
+  Falla → no avanzar al siguiente estado.
+
+GATE 1.B — ¿La aprobación para avanzar es explícita y documentada?
+  Falla → volver a M10.2 para obtener aprobación válida.
+
+GATE 1.C — ¿El bloqueador está resuelto?
+  Falla → no avanzar. Escalar según M10.6 si persiste.
+
+OUTPUT
+------
+- Estado actual con criterio de salida
+- Próximo estado
+- Bloqueador principal
+- Owner de aprobación
+- Tiempo en estado actual (para detectar estancamiento)
+
+
+==============================================================
+M10.2 — INTAKE & APPROVAL SYSTEM
+==============================================================
+
+OBJETIVO
+--------
+Evitar que el proyecto empiece con ambigüedad y que las aprobaciones queden
+implícitas o verbales.
+
+CAMPOS CRÍTICOS DE INTAKE
+-------------------------
+Obligatorios. Si alguno falta, el intake está incompleto.
+- Proyecto: nombre y descripción en una línea
+- Objetivo: qué debe lograr (con métrica si existe)
+- Público: quién es el usuario final
+- Alcance: qué incluye y qué no incluye
+- Presupuesto: rango o valor
+- Timeline: fecha de entrega acordada
+- Nivel de riesgo aceptado: bajo / medio / alto
+- Stakeholders: quién participa, quién aprueba, quién tiene veto
+- Restricciones: técnicas, legales, de contenido, de producción
+- Criterio de éxito: cómo se mide que el proyecto funcionó
+
+CAMPOS SECUNDARIOS
+------------------
+- Referencias visuales
+- Competidores
+- Material existente
+- Stack preferido
+- Nivel de autonomía del cliente para edición post-launch
+
+REWORK PREVENTION — CLASIFICACIÓN DE DECISIONES
+--------------------------------------------------
+No todas las decisiones cuestan lo mismo revertirlas.
+Clasificar cada decisión antes de tomarla para saber cuándo aprobarla.
+
+REVERSIBLE
+  Se puede cambiar sin costo significativo en cualquier momento.
+  Ejemplos: copy de secciones secundarias, colores de fondos, íconos.
+  Cuándo aprobar: en la fase que corresponde. Sin urgencia.
+
+SEMI-REVERSIBLE
+  Se puede cambiar pero tiene un costo de tiempo o re-trabajo.
+  Ejemplos: estructura de secciones, sistema tipográfico, componentes implementados.
+  Cuándo aprobar: antes de construir, no durante.
+  Costo de cambio tardío: 3-8 horas por cambio estructural.
+
+IRREVERSIBLE (o de costo muy alto)
+  Cambiar esto después de cierto punto puede invalidar fases enteras.
+  Ejemplos: stack tecnológico, concepto creativo, arquitectura de información, paleta principal.
+  Cuándo aprobar: lo antes posible. Priorizar estas decisiones.
+  Costo de cambio tardío: puede invalidar días o semanas de trabajo.
+
+Regla operativa:
+Antes de presentar algo para aprobación, clasificarlo.
+Si es Irreversible: obtener aprobación explícita antes de producir sobre esa decisión.
+Si es Reversible: puede avanzarse con aprobación provisional.
+
+APPROVAL POINTS
+---------------
+1. Aprobación del brief (activa Discovery)
+2. Aprobación de la estrategia (activa Concept)
+3. Aprobación del concepto — IRREVERSIBLE (activa Visual Direction)
+4. Aprobación de la dirección visual — IRREVERSIBLE (activa Build)
+5. Aprobación de la arquitectura técnica — IRREVERSIBLE si afecta budget
+6. Aprobación del build previo al launch (activa Launch Prep)
+7. Aprobación final de launch
+
+TEMPLATE DE APROBACIÓN VÁLIDA
+-------------------------------
+Una aprobación válida cumple estas condiciones:
+
+QUÉ SE APRUEBA: [nombre del entregable]
+QUIÉN APRUEBA: [nombre + rol]
+CUÁNDO: [fecha]
+FORMATO DE CONFIRMACIÓN: email / mensaje escrito / firma en documento
+CONDICIONES: sin condiciones / con condiciones [listar]
+SIGUIENTE PASO AUTORIZADO: [acción concreta]
+
+Formato mínimo aceptable:
+"Apruebo [entregable] con fecha [fecha]. Próximo paso: [acción]."
+Con eso alcanza. No necesita ser formal, pero debe ser escrito.
+
+QUÉ NO ES UNA APROBACIÓN VÁLIDA:
+- "Todo bien, seguimos."
+- "Me gustó la presentación."
+- Silencio después de 3 días.
+- "Está bien pero habría que ver."
+
+APPROVAL EXPIRATION
+--------------------
+Si el cliente no responde en el plazo acordado, aplicar este protocolo:
+  Día 1-3: enviar recordatorio.
+  Día 4-7: escalar a siguiente stakeholder según la Escalation Matrix de M10.6.
+  Día 7+: el proyecto entra en estado SUSPENDIDO hasta obtener respuesta.
+  Estado SUSPENDIDO: no se trabaja. Se documenta la suspensión.
+  Reactivación: requiere aprobación explícita del cliente con nueva fecha acordada.
+
+GATES CON DESTINO
+-----------------
+GATE 2.A — ¿El intake tiene todos los campos críticos completos?
+  Falla → no iniciar Discovery. Completar campos faltantes.
+
+GATE 2.B — ¿Cada aprobación es explícita y documentada?
+  Falla → el trabajo posterior a esa aprobación no está autorizado. Obtenerla.
+
+GATE 2.C — ¿Está claro quién tiene el veto final?
+  Falla → identificar antes de cualquier presentación. Presentar al decisor equivocado
+  es un riesgo mayor que el retraso de clarificarlo.
+
+GATE 2.D — ¿Las decisiones Irreversibles están aprobadas antes de construirlas?
+  Falla → no construir sobre decisiones no aprobadas.
+
+OUTPUT
+------
+- Intake completeness (campos completos / faltantes)
+- Clasificación de decisiones pendientes (reversible / semi / irreversible)
+- Approval status por punto
+- Owner de cada aprobación
+- Próximo paso autorizado o bloqueado
+- Fecha de expiración de respuesta si aplica
+
+
+==============================================================
+M10.3 — SCOPE & CHANGE CONTROL
+==============================================================
+
+OBJETIVO
+--------
+Controlar cambios y medir su costo real para que el proyecto no se desborde.
+
+TIPOS DE CAMBIO
+---------------
+IN SCOPE
+  Contemplado o variación esperable.
+  Costo de cambio: cero adicional.
+  Acción: aprobar y ejecutar.
+
+MINOR CHANGE
+  Ajuste que no altera la estructura.
+  Costo de cambio: 1-4 horas.
+  Acción: aprobar si no rompe timeline. Registrar.
+
+MAJOR CHANGE
+  Afecta alcance, estructura o tiempo de forma relevante.
+  Costo de cambio: 4-20+ horas.
+  Acción: reestimar, obtener aprobación formal, documentar cambio de scope.
+
+OUT OF SCOPE
+  No estaba contemplado y cambia la naturaleza del proyecto.
+  Costo de cambio: variable según el pedido.
+  Acción: rechazar del scope actual. Cotizar como trabajo adicional o mover a fase 2.
+
+IMPACT QUANTIFICATION TEMPLATE
+--------------------------------
+Para cada cambio Major o Out of Scope, completar antes de decidir:
+
+Descripción del cambio: [qué se pide]
+Tipo: Minor / Major / Out of Scope
+Horas adicionales estimadas: [N horas]
+Afecta al timeline: sí / no. Si sí: nueva fecha estimada: [fecha]
+Afecta al budget: sí / no. Si sí: costo adicional estimado: [N]
+Afecta al concepto o dirección visual aprobada: sí / no
+Afecta al stack o arquitectura aprobada: sí / no
+Clasificación de reversibilidad: reversible / semi-reversible / irreversible
+Decisión recomendada: aprobar / posponer / rechazar / cotizar aparte
+Owner de la decisión: [persona]
+
+PRODUCTION ECONOMICS
+----------------------
+Antes de aceptar un cambio, responder:
+
+¿Este cambio mejora percepción, claridad, conversión, memoria o mantenibilidad?
+  NO → no tiene justificación productiva. Rechazar.
+  SÍ → continuar.
+
+¿El costo en horas es proporcional al beneficio esperado?
+  Usar el mismo criterio que el Innovation Cost Matrix de M9.5.5:
+  Costo 1-2 / Impacto 4-5 → Prioridad máxima.
+  Costo 4-5 / Impacto 1-2 → Descartar.
+
+¿El momento del cambio es correcto?
+  Cambiar algo Irreversible en QA cuesta 5-10x más que cambiarlo antes de producir.
+  Calcular el Decision Cost: costo ahora vs. costo en la fase siguiente.
+  Si el Decision Cost en la siguiente fase es > 2x el costo actual: decidir ahora.
+
+COMPLEXITY BUDGET
+------------------
+Cada proyecto tiene un budget implícito de complejidad.
+Si se agrega complejidad en un lugar, debe reducirse en otro.
+Agregar una feature nueva sin quitar una existente es scope creep disfrazado.
+
+Regla: todo cambio que agrega complejidad debe especificar qué simplificación lo compensa.
+
+SCOPE CREEP DETECTION
+---------------------
+Señales tempranas:
+- el cliente agrega pedidos en cada revisión
+- el equipo resuelve "cositas" no registradas
+- el timeline se corre sin re-aprobación
+- la lista de entregables crece sin ajuste de budget
+- el proyecto cambia de objetivo sin formalizarlo
+- el número de páginas o secciones crece > 20% del scope original
+
+Protocolo cuando se detecta:
+  1 señal → registrar y monitorear.
+  2-3 señales → conversación con el cliente. Usar script de M6 Script 5.
+  4+ señales → reunión de realineación de scope antes de continuar.
+
+GATES CON DESTINO
+-----------------
+GATE 3.A — ¿El cambio fue clasificado con el Impact Quantification Template?
+  Falla → no aprobar el cambio sin cuantificarlo.
+
+GATE 3.B — ¿El Production Economics check pasó?
+  Falla → el cambio no tiene justificación productiva. Rechazar.
+
+GATE 3.C — ¿El scope actualizado está documentado y fue re-aprobado?
+  Falla → el cambio se ejecuta fuera de scope. Riesgo de retrabajo.
+
+OUTPUT
+------
+- Tipo de cambio clasificado
+- Impact Quantification completado
+- Resultado del Production Economics check
+- Decisión y owner
+- Scope actualizado
+- Señales de scope creep detectadas
+
+
+==============================================================
+M10.4 — PRODUCTION FLOW ENGINE
+==============================================================
+
+OBJETIVO
+--------
+Mover el proyecto por producción con orden, criterio y visibilidad del estado real.
+
+ETAPAS
+------
+1. SETUP
+   Repositorio, estructura, tokens, entorno dev/staging, documentación base.
+   Criterio de salida: el equipo puede empezar a trabajar sin preguntar dónde.
+
+2. PRODUCTION
+   Construcción del sistema visual y técnico según el component map y el spec.
+   Criterio de salida: todas las secciones implementadas según spec aprobado.
+
+3. INTERNAL REVIEW
+   Revisión interna con los criterios del sistema (M8.6 Production Review).
+   Criterio de salida: tabla de fidelidad sin ítems en PERDIDO.
+
+4. CLIENT REVIEW
+   Presentación al cliente del build en staging.
+   Criterio de salida: aprobación explícita del build.
+
+5. QA
+   Revisión técnica, visual y de contenido (M8.5 QA Checklist).
+   Criterio de salida: QA Checklist sin ítems críticos.
+
+6. FREEZE
+   Congelar cambios críticos. Solo fixes de bugs.
+   Criterio de salida: freeze activo, ningún cambio estructural en curso.
+
+7. LAUNCH PREP
+   Checklist final, deploy a producción, verificación.
+   Criterio de salida: launch checklist completo, rollback documentado.
+
+8. LIVE
+   Publicación y monitoring window activo.
+   Criterio de salida: monitoring window completo sin incidentes críticos.
+
+9. POST-LAUNCH REVIEW
+   Análisis 7/30/90 días, Agency Memory actualizada.
+   Criterio de salida: aprendizaje documentado.
+
+CRITICAL PATH
+--------------
+El Critical Path es la secuencia de etapas donde un retraso en cualquiera
+retrasa el proyecto completo.
+
+Para cada proyecto, identificar:
+  Etapas seriales (no pueden paralelizarse): [listar]
+  Etapas que pueden paralelizarse: [listar]
+  Etapa con mayor probabilidad de retraso en este proyecto específico: [identificar]
+  Buffer recomendado: agregar 20% al tiempo estimado de cada etapa crítica.
+
+Ejemplo de critical path típico:
+  SERIAL: Discovery → Strategy → Concept → Visual Direction → Setup → Production
+  PARALELO: QA técnico y QA de contenido pueden correr simultáneamente.
+  RIESGO PRINCIPAL: Client Review es la etapa con mayor variabilidad. Si el cliente
+  tarda en dar feedback, bloquea todo lo que sigue.
+
+DEPENDENCY MAPPING
+-------------------
+Antes de empezar una etapa, verificar sus dependencias.
+Una dependencia no resuelta bloquea la etapa.
+
+Formato:
+  Etapa: [nombre]
+  Depende de: [etapa anterior que debe estar completa]
+  Depende de (externo): [asset, aprobación, material del cliente]
+  Bloqueada si: [condición de bloqueo]
+  Unblocking action: [qué hacer para resolver el bloqueo]
+
+BOTTLENECK DETECTION
+---------------------
+Un cuello de botella es una etapa o dependencia que está
+ralentizando el proyecto más que cualquier otra.
+
+Señales de cuello de botella:
+  - Una etapa lleva más de 2x el tiempo estimado
+  - Un aprobador no responde en el plazo acordado
+  - Un asset externo no llega (fotos, copy, datos)
+  - Una decisión técnica no se puede tomar sin input externo
+  - El mismo problema aparece más de una vez en diferentes revisiones
+
+Detección activa:
+  Cada 72 horas en proyectos activos: verificar si hay alguna etapa
+  que no avanzó en ese periodo y por qué.
+  Si no avanzó: clasificar como bottleneck y aplicar el Mitigation Framework.
+
+MITIGATION FRAMEWORK
+---------------------
+Cuando se detecta un bottleneck:
+
+Paso 1: Identificar si el bottleneck es interno (equipo) o externo (cliente, tercero).
+Paso 2: Estimar el impacto en el timeline si persiste 24-48-72hs más.
+Paso 3: Acción por tipo:
+  - Bottleneck interno: reasignar o simplificar la tarea.
+  - Bottleneck de aprobación: aplicar el Approval Expiration de M10.2.
+  - Bottleneck de asset externo: identificar si el proyecto puede avanzar
+    con placeholder o si debe suspenderse.
+  - Bottleneck de decisión técnica: escalar según M10.6.
+
+PRODUCTION HEALTH SCORE
+-------------------------
+Score rápido del estado real del proyecto.
+Aplicar en cualquier momento para saber si el proyecto está sano o en riesgo.
+Puntuar cada dimensión de 1 a 10.
+
+SCOPE STABILITY (1-10)
+¿El scope está controlado?
+  8-10: sin cambios relevantes desde la última aprobación.
+  5-7: 1-2 cambios menores registrados y controlados.
+  1-4: cambios frecuentes, scope creep activo.
+
+APPROVAL VELOCITY (1-10)
+¿Las aprobaciones se obtienen a tiempo?
+  8-10: todas las aprobaciones se obtuvieron en el plazo acordado.
+  5-7: 1-2 aprobaciones tardaron más de lo esperado.
+  1-4: hay aprobaciones pendientes que bloquean el avance.
+
+RISK LEVEL (1-10)
+¿El nivel de riesgo está bajo control?
+  8-10: sin riesgos altos o críticos activos.
+  5-7: 1-2 riesgos medios bajo monitoreo.
+  1-4: hay riesgos altos o críticos sin mitigación.
+
+TIMELINE HEALTH (1-10)
+¿El proyecto va en el tiempo esperado?
+  8-10: dentro del 10% del timeline original.
+  5-7: entre 10-25% de desvío.
+  1-4: más de 25% de desvío o sin timeline claro.
+
+QA STATUS (1-10)
+¿El estado de calidad es aceptable?
+  8-10: QA en progreso o completado sin ítems críticos.
+  5-7: hay ítems importantes sin resolver.
+  1-4: hay ítems críticos activos.
+
+LAUNCH READINESS (1-10)
+¿El proyecto puede lanzarse si fuera necesario?
+  8-10: launch checklist completo o casi completo.
+  5-7: checklist incompleto pero sin ítems críticos.
+  1-4: no está listo para launch.
+
+SCORE TOTAL: /60
+
+INTERPRETACIÓN
+  50-60: SANO. El proyecto está en buen estado.
+  40-49: ATENCIÓN. Hay dimensiones débiles. Identificar y corregir.
+  30-39: EN RIESGO. Intervención necesaria.
+  <30: CRÍTICO. Detener y revisar antes de continuar.
+
+ACCIONES CORRECTIVAS POR DIMENSIÓN
+  Scope Stability baja → volver a M10.3. Reclasificar cambios.
+  Approval Velocity baja → aplicar Approval Expiration de M10.2.
+  Risk Level bajo → volver a M10.6. Escalar riesgos activos.
+  Timeline Health bajo → revisar Critical Path. Identificar bottleneck.
+  QA Status bajo → resolver ítems críticos antes de cualquier otra cosa.
+  Launch Readiness bajo → completar launch checklist antes de avanzar.
+
+REGLAS DE PRODUCCIÓN
+---------------------
+- No saltar etapas.
+- No mezclar producción con launch prep.
+- No permitir cambios estructurales en QA sin re-aprobación formal.
+- No considerar terminado algo que no pasó internal review y QA.
+- Cada etapa produce un entregable concreto.
+- Ninguna etapa "está casi lista". Está lista o no.
+
+GATES CON DESTINO
+-----------------
+GATE 4.A — ¿El Production Health Score es ≥ 40?
+  Falla → identificar dimensión débil y aplicar acción correctiva antes de avanzar.
+
+GATE 4.B — ¿El Critical Path está mapeado?
+  Falla → no estimar timelines sin él.
+
+GATE 4.C — ¿Hay un bottleneck activo que lleva más de 72hs sin resolverse?
+  Falla → escalar según M10.6 antes de continuar.
+
+OUTPUT
+------
+- Etapa actual con criterio de salida
+- Critical Path del proyecto
+- Dependency Map
+- Bottleneck activo (si existe)
+- Production Health Score con dimensiones
+- Acción correctiva si score < 40
+
+
+==============================================================
+M10.5 — HANDOFF & OWNERSHIP
+==============================================================
+
+OBJETIVO
+--------
+Evitar pérdida de contexto entre personas, módulos o fases.
+Un handoff sin contexto es la causa más frecuente de retrabajo innecesario.
+
+HANDOFF TEMPLATE
+-----------------
+Todo handoff se documenta con este formato.
+El receptor debe confirmar recepción antes de continuar.
+
+HANDOFF: [nombre de la fase o entregable]
+FECHA: [fecha]
+DE: [quién entrega]
+A: [quién recibe]
+
+ESTADO ACTUAL:
+  [qué se hizo, qué nivel de completitud tiene]
+
+QUÉ ESTÁ COMPLETO:
+  - [ítem 1]
+  - [ítem 2]
+
+QUÉ FALTA:
+  - [ítem 1 con razón de por qué falta]
+
+DECISIONES TOMADAS:
+  - [decisión 1] — aprobada por [quién] el [fecha]
+  - [decisión 2]
+
+DECISIONES PENDIENTES:
+  - [decisión 1] — owner: [quién] — deadline: [fecha]
+
+QUÉ NO DEBE CAMBIARSE SIN RE-APROBACIÓN:
+  - [elemento 1 — irreversible]
+  - [elemento 2]
+
+RIESGOS ACTIVOS:
+  - [riesgo] — owner: [quién] — mitigación: [qué se está haciendo]
+
+PRÓXIMOS PASOS:
+  1. [acción] — owner: [quién] — deadline: [fecha]
+  2. [acción]
+
+CONFIRMACIÓN DE RECEPCIÓN: [receptor completa este campo]
+
+CRITERIO DE ACEPTACIÓN DE HANDOFF
+-----------------------------------
+El handoff está completo cuando el receptor confirma que puede continuar
+sin necesidad de preguntar más de 1-2 cosas.
+
+Si el receptor tiene más de 2 preguntas después del handoff:
+  → el handoff está incompleto. Completarlo antes de continuar.
+
+OWNERSHIP
+---------
+Cada riesgo, decisión y bloqueo tiene un owner.
+Sin owner, no hay responsable y no hay acción.
+
+Tipos de owner:
+  Creativo: decisiones de concepto, percepción, firma visual.
+  Técnico: stack, performance, accesibilidad, bugs.
+  Estratégico: posicionamiento, objetivos, scope.
+  Cliente: aprobaciones, contenido, feedback.
+  Producción: timelines, etapas, entregables.
+  QA: calidad técnica y visual.
+
+Regla: si una decisión no tiene owner, asignar uno antes de registrar el handoff.
+
+GATES CON DESTINO
+-----------------
+GATE 5.A — ¿El Handoff Template está completo?
+  Falla → no continuar. El receptor no tiene la información para trabajar.
+
+GATE 5.B — ¿El receptor confirmó recepción?
+  Falla → el handoff no fue aceptado. Completar o aclarar.
+
+GATE 5.C — ¿Cada riesgo y decisión pendiente tiene owner?
+  Falla → asignar owners antes de continuar.
+
+OUTPUT
+------
+- Handoff documentado con template
+- Confirmación de recepción del receptor
+- Owner list actualizada
+- Decisiones pendientes con deadline
+- Qué no tocar sin re-aprobación
+
+
+==============================================================
+M10.6 — RISK & ESCALATION SYSTEM
+==============================================================
+
+OBJETIVO
+--------
+Detectar, clasificar, escalar y mitigar riesgos antes de que rompan el proyecto.
+
+TIPOS DE RIESGO
+
+Creativo:
+  - El concepto pierde fuerza en la implementación
+  - La dirección visual se diluye
+  - La firma visual no se reconoce sin logo
+  - El sistema se vuelve genérico
+
+Técnico:
+  - Performance por debajo de Core Web Vitals
+  - Incompatibilidad cross-browser
+  - Bugs no resueltos en fases avanzadas
+  - Deuda técnica que bloquea features
+
+Operativo:
+  - Scope creep activo
+  - Aprobaciones pendientes sin respuesta
+  - Retrasos de assets externos
+  - Handoffs incompletos
+
+Comercial:
+  - Cliente indeciso o con expectativas irreales
+  - Presupuesto insuficiente para el scope
+  - Cambios constantes sin control
+  - Stakeholder adicional aparece tarde en el proceso
+
+RISK MATRIX
+-----------
+Cada riesgo se evalúa en 3 dimensiones:
+
+PROBABILIDAD: ¿qué tan probable es que ocurra?
+  Alta / Media / Baja
+
+SEVERIDAD: ¿qué tan grave es si ocurre?
+  Crítica / Alta / Media / Baja
+
+TIEMPO AL IMPACTO: ¿cuándo afecta?
+  Inmediato (ya está ocurriendo)
+  Corto plazo (en las próximas 72hs)
+  Mediano plazo (en las próximas 2 semanas)
+  Largo plazo (afecta post-launch)
+
+PRIORIDAD DE ACCIÓN
+  Probabilidad Alta + Severidad Crítica o Alta → actuar ahora.
+  Probabilidad Media + Severidad Alta → monitorear y preparar mitigación.
+  Probabilidad Baja + Severidad Media → registrar y observar.
+  Probabilidad Baja + Severidad Baja → no invertir energía.
+
+ESCALATION MATRIX
+------------------
+Para cada tipo de problema: quién decide, quién corrige, quién aprueba la solución.
+
+PROBLEMA CREATIVO (concepto diluido, firma perdida, percepción incorrecta)
+  Quién decide: director creativo / agencia
+  Quién corrige: diseñador / equipo creativo
+  Quién aprueba la solución: director creativo + cliente si la solución afecta concepto aprobado
+  Si no se resuelve en 48hs: revisar concepto aprobado y evaluar RETROCEDER en CDL-5
+
+PROBLEMA TÉCNICO (performance, bugs críticos, incompatibilidad)
+  Quién decide: arquitecto técnico / lead developer
+  Quién corrige: developer
+  Quién aprueba la solución: QA + director técnico
+  Si no se resuelve en 48hs: evaluar si el launch puede ocurrir con ese problema
+    Si sí: documentar y lanzar con deuda conocida
+    Si no: posponer launch. No lanzar con problemas críticos activos.
+
+PROBLEMA OPERATIVO (scope creep, aprobaciones tardías, assets faltantes)
+  Quién decide: producción / account
+  Quién corrige: según el tipo (ver M10.3 para scope, M10.2 para aprobaciones)
+  Quién aprueba la solución: producción + cliente si hay cambio de scope o timeline
+  Si no se resuelve en 72hs: proyecto entra en estado SUSPENDIDO hasta resolver.
+
+PROBLEMA COMERCIAL (cliente indeciso, expectativas irreales, budget insuficiente)
+  Quién decide: director / senior account
+  Quién corrige: reunión con el cliente
+  Quién aprueba: cliente
+  Si no se resuelve en 1 semana: evaluar si el proyecto puede continuar con el
+    scope y budget actuales. Si no puede: replantear el scope formalmente.
+
+PROBLEMA DE LAUNCH (algo crítico falla en el último momento)
+  Quién decide: director de producción
+  Quién corrige: equipo técnico + QA
+  Quién aprueba: producción + cliente
+  Si no se resuelve en 24hs: posponer launch. No publicar con riesgos críticos activos.
+  Rollback: aplicar plan documentado. Ver M9.7 Rollback Plan.
+
+MITIGATION FRAMEWORK
+---------------------
+Para cada riesgo Alta o Crítica:
+  1. Asignar owner (sin owner no hay mitigación).
+  2. Definir acción de mitigación concreta.
+  3. Definir fecha límite para resolución.
+  4. Si no se resuelve en la fecha: escalar según la Escalation Matrix.
+
+RISK REGISTER — FORMATO
+------------------------
+Riesgo: [descripción]
+Tipo: creativo / técnico / operativo / comercial
+Probabilidad: alta / media / baja
+Severidad: crítica / alta / media / baja
+Tiempo al impacto: inmediato / corto / mediano / largo
+Prioridad de acción: actuar ahora / monitorear / observar
+Owner: [persona]
+Mitigación: [acción concreta]
+Fecha límite: [fecha]
+Estado: activo / mitigado / resuelto / escalado
+
+GATES CON DESTINO
+-----------------
+GATE 6.A — ¿Cada riesgo Alta o Crítica tiene owner y mitigación?
+  Falla → no avanzar a las etapas siguientes.
+
+GATE 6.B — ¿Hay riesgos sin fecha límite de resolución?
+  Falla → asignar fecha antes de continuar.
+
+GATE 6.C — ¿La Escalation Matrix fue consultada para problemas sin resolver?
+  Falla → escalar según la matriz antes de seguir.
+
+OUTPUT
+------
+- Risk Register actualizado
+- Escalation Matrix consultada si aplica
+- Riesgos críticos con owner, mitigación y fecha
+- Riesgos resueltos documentados
+
+
+==============================================================
+M10.7 — LAUNCH & POST-LAUNCH LEARNING
+==============================================================
+
+OBJETIVO
+--------
+Lanzar con control y aprender de la salida para mejorar el sistema.
+
+CHECKLIST DE LANZAMIENTO
+------------------------
+Completar antes de hacer cualquier deployment a producción.
+Cada ítem: OK / FALLA / N/A.
+
+Técnico:
+  [ ] Build pasa sin errores (npm run build o equivalente)
+  [ ] Variables de entorno de producción configuradas
+  [ ] SSL activo
+  [ ] DNS configurado y propagado
+  [ ] Rollback plan documentado y probado
+
+Calidad:
+  [ ] QA Checklist de M8.5 completado sin ítems críticos
+  [ ] Production Review de M8.6: veredicto PASA o PASA CON AJUSTES
+  [ ] Cross-browser verificado (Chrome, Safari, Firefox)
+  [ ] Mobile verificado en dispositivo real
+  [ ] Performance: LCP < 2.5s, CLS < 0.1, INP < 200ms
+
+Contenido:
+  [ ] Todos los textos finales (sin placeholder)
+  [ ] Formularios probados con datos reales
+  [ ] Links verificados (sin 404s)
+  [ ] Metadata y OG images verificadas
+  [ ] Analytics configurado y evento de prueba registrado
+
+Operativo:
+  [ ] Backups configurados o deployment anterior disponible
+  [ ] Client Handoff entregado (M9.7 Signature Guardian Doc)
+  [ ] Stakeholders notificados del launch
+
+MONITORING WINDOW
+-----------------
+Riesgo bajo: 24hs. Revisar: errores, analytics básico, formularios.
+Riesgo medio: 48hs. Revisar: errores, performance real, conversión, logs.
+Riesgo alto: 7 días diarios. Revisar: errores, conversión, logs, alertas.
+
+POST-LAUNCH REVIEW
+------------------
+A los 7 días — foco técnico:
+  ¿Hay errores de JavaScript en producción?
+  ¿Los formularios convierten?
+  ¿Performance en Core Web Vitals: dentro de umbrales?
+  ¿El cliente encontró problemas de uso?
+
+A los 30 días — foco de conversión:
+  ¿La tasa de conversión del CTA principal es razonable?
+  ¿Hay páginas con bounce rate alto?
+  ¿El flujo de usuario sigue el camino esperado?
+
+A los 90 días — foco de crecimiento:
+  ¿Las páginas principales rankean para keywords relevantes?
+  ¿El tráfico orgánico creció?
+  ¿Hay nuevas necesidades que requieren iteración?
+  ¿El sistema técnico sigue siendo mantenible?
+
+AGENCY MEMORY — FORMATO ESTRUCTURADO
+---------------------------------------
+El aprendizaje de cada proyecto se documenta en este formato.
+Sin formato, el aprendizaje es anecdótico. Con formato, alimenta el sistema.
+
+PROYECTO: [nombre]
+TIPO: [clasificación de M10.0]
+FECHA: [fecha de launch]
+
+QUÉ FUNCIONÓ (máximo 5 puntos):
+  - [patrón, decisión o proceso que funcionó mejor de lo esperado]
+
+QUÉ NO FUNCIONÓ (máximo 5 puntos):
+  - [problema, error o proceso que falló o costó más de lo esperado]
+
+PATRONES QUE RINDIERON:
+  - Layout: [patrón usado — evaluación]
+  - Motion: [patrón usado — evaluación]
+  - Componentes: [patrones usados — evaluación]
+  - Stack: [decisiones técnicas — evaluación]
+
+ERRORES REPETIDOS (si aplica):
+  - [error que ya ocurrió en proyectos anteriores]
+  Corrección propuesta para el sistema: [qué cambiar en qué módulo]
+
+CAMBIO RECOMENDADO AL SISTEMA:
+  Módulo a actualizar: [M0-M10]
+  Qué cambiar: [propuesta concreta]
+  Prioridad: alta / media / baja
+
+CLIENTE SATISFACTION (si aplica):
+  - Lo que más valoró: [punto]
+  - Lo que generó más fricción: [punto]
+
+FORMATO DE ALMACENAMIENTO
+--------------------------
+El Agency Memory se guarda en una ubicación fija del sistema.
+Cada proyecto agrega un registro nuevo. No reemplaza los anteriores.
+El objetivo es que cualquier miembro del equipo pueda leer los últimos
+3-5 registros y entender qué funciona y qué no en este sistema.
+
+GATES FINALES CON DESTINO
+--------------------------
+GATE FINAL 1 — ¿El launch checklist está completo sin ítems en FALLA?
+  Falla → no publicar. Resolver antes.
+
+GATE FINAL 2 — ¿Existe un monitoring window activo?
+  Falla → sin monitoring, los incidentes post-launch se detectan tarde.
+
+GATE FINAL 3 — ¿El Agency Memory fue actualizado después del post-launch review?
+  Falla → el proyecto no generó aprendizaje para el sistema.
+
+OUTPUT
+------
+- Launch checklist completado
+- Monitoring window activo
+- Post-launch review 7/30/90 días
+- Incident log si aplica
+- Agency Memory actualizado con formato estructurado
+
+
+==============================================================
+GATES FINALES GLOBALES CON DESTINO
+==============================================================
+GATE FINAL A — ¿El proyecto fue clasificado con M10.0?
+  Falla → volver a M10.0.
+
+GATE FINAL B — ¿Cada fase tuvo estado, owner y criterio de salida?
+  Falla → volver a M10.1.
+
+GATE FINAL C — ¿Hay aprobaciones documentadas para las decisiones Irreversibles?
+  Falla → volver a M10.2.
+
+GATE FINAL D — ¿Hubo control de scope con Impact Quantification?
+  Falla → volver a M10.3.
+
+GATE FINAL E — ¿El Production Health Score estuvo ≥ 40 en todo el proyecto?
+  Falla → identificar qué dimensión causó el riesgo y documentar en Agency Memory.
+
+GATE FINAL F — ¿El handoff dejó contexto suficiente verificado por el receptor?
+  Falla → volver a M10.5.
+
+GATE FINAL G — ¿Los riesgos críticos tuvieron owner, mitigación y resolución?
+  Falla → volver a M10.6.
+
+GATE FINAL H — ¿El launch tuvo checklist completo y monitoring activo?
+  Falla → volver a M10.7.
+
+GATE FINAL I — ¿El Agency Memory fue actualizado con formato estructurado?
+  Falla → completar antes de considerar el proyecto cerrado.
+
+==============================================================
+PROMPT PARA CLAUDE
+==============================================================
+Actuá como director de producción.
+Primero: clasificar el proyecto con M10.0 para calibrar el nivel de gobernanza.
+Definir los estados activos según la clasificación.
+Para cada fase: estado, criterio de salida, bloqueador y owner.
+Cuantificar el impacto de cada cambio antes de aprobarlo.
+Aplicar Production Economics antes de aceptar cualquier complejidad adicional.
+Monitorear el Production Health Score y actuar cuando alguna dimensión cae.
+Detectar bottlenecks activamente cada 72hs.
+Documentar cada handoff con template completo.
+Registrar riesgos con owner, mitigación y fecha.
+Escalar según la Escalation Matrix cuando un problema supera 48hs sin resolverse.
+No lanzar sin checklist completo.
+Actualizar Agency Memory con formato estructurado después del post-launch review.
+No me des teoría de project management.
+Dame un sistema operativo de producción que mantenga el criterio sin romperse.

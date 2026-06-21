@@ -1,0 +1,219 @@
+M9.7 — LAUNCH PATTERNS (v2)
+============================
+
+OBJETIVO
+--------
+Definir patrones técnicos y operativos para el lanzamiento y la etapa post-launch.
+El objetivo no es solo publicar.
+Es publicar con riesgo controlado y aprender de la salida.
+
+INPUTS
+------
+OBLIGATORIOS:
+- Build final
+- QA de M8.5
+- Production Review de M8.6
+- Tipo de proyecto
+- Nivel de riesgo aceptable
+- Stakeholders involucrados
+
+OPCIONALES:
+- Analytics configurados
+- Feedback del cliente
+- Roadmap de post-launch
+- Plan de mantenimiento
+
+LAUNCH RISK MATRIX
+-------------------
+Clasificar el proyecto antes de elegir la estrategia de release.
+La clasificación determina el nivel de precaución requerido.
+
+CRITERIOS DE CLASIFICACIÓN
+  Auth y datos de usuario: ¿hay login, sesiones, datos sensibles?
+  Pagos o transacciones: ¿hay ecommerce, suscripciones, cobros?
+  Audiencia y tráfico esperado: ¿es un lanzamiento público masivo o acotado?
+
+RIESGO BAJO
+  Perfil: landing, portfolio, sitio institucional sin formularios críticos.
+  Características: sin auth, sin pagos, contenido estático, audiencia pequeña-media.
+  Estrategia de release: release total.
+  Monitoring: 24hs con revisión manual de analytics y console.
+  Rollback: siempre documentado pero raro que se necesite.
+
+RIESGO MEDIO
+  Perfil: marketing site con formularios, CMS editable, integraciones simples (email, CRM).
+  Características: sin auth, sin pagos, alguna integración de terceros.
+  Estrategia de release: release total con staging previo de 24-48hs.
+  Monitoring: 48hs con revisión activa. Alertas en Vercel/hosting.
+  Rollback: documentado y probado antes del launch.
+
+RIESGO ALTO
+  Perfil: SaaS con auth, ecommerce con pagos, datos de usuario, migraciones de DB.
+  Características: auth, pagos, datos sensibles, alta audiencia o tráfico esperado alto.
+  Estrategia de release: staged release. Primero a usuarios internos o lista beta.
+    Luego release público gradual.
+  Monitoring: primer semana con revisión diaria de errores, logs y performance.
+  Rollback: documentado, probado, y con responsable asignado.
+
+PATRONES DE LANZAMIENTO
+------------------------
+
+1. CONTENT FREEZE
+   Bloquear cambios de contenido y código 24-48hs antes del lanzamiento.
+   Sin freeze, el último cambio de contenido puede romper algo en producción.
+   Regla: si no está en el scope aprobado, no entra en el release.
+
+2. PRELAUNCH CHECKLIST
+   Basarse en el QA report de M8.5.
+   Verificar antes del deploy:
+   - [ ] Build pasa sin errores (npm run build)
+   - [ ] Variables de entorno de producción configuradas
+   - [ ] Domain configurado y DNS propagado
+   - [ ] SSL activo
+   - [ ] Formularios probados con datos reales
+   - [ ] Analytics verificado (evento de prueba registrado)
+   - [ ] Metadata y OG images verificados
+   - [ ] 404 personalizada activa
+   - [ ] Robots.txt y sitemap configurados
+   - [ ] Cross-browser final (Chrome, Safari, Firefox)
+   - [ ] Revisión mobile en dispositivo real
+
+3. STAGED RELEASE (para proyectos de riesgo alto)
+   Release por etapas para detectar problemas antes de la exposición total.
+   Etapa 1: deploy a producción + acceso solo para el equipo (links directos, no indexado).
+   Etapa 2: acceso para el cliente + feedback loop de 24-48hs.
+   Etapa 3: release público.
+   Entre cada etapa: verificar que no hay errores críticos en logs y console.
+
+4. ROLLBACK PLAN
+   Documentar antes del launch cómo volver atrás si algo se rompe.
+   
+   En Vercel:
+     Dashboard → proyecto → Deployments → deployment anterior → "Promote to Production".
+     1 clic. Sin tiempo de inactividad.
+   
+   En Netlify:
+     Dashboard → proyecto → Deploys → deployment anterior → "Publish deploy".
+     1 clic.
+   
+   En hosting manual (VPS, servidor propio):
+     Mantener el directorio del deployment anterior antes de sobrescribir.
+     Paso 1: hacer backup del directorio actual antes del deploy nuevo.
+     Paso 2: si hay rollback: restaurar el backup y reiniciar el servidor.
+     Documentar el proceso antes del launch. No improvisar en producción.
+   
+   Con base de datos: el rollback de código sin rollback de DB puede ser peligroso.
+     Si hay migraciones de DB en el release, documentar cómo revertirlas.
+
+5. MONITORING WINDOW
+   Primera ventana de monitoreo activo después del launch.
+   
+   Riesgo bajo: 24hs. Revisar: errores en console, analytics básico, formularios funcionando.
+   Riesgo medio: 48hs. Revisar: errores, performance real, conversión inicial, logs de servidor.
+   Riesgo alto: primera semana diaria. Revisar: errores, conversión, logs, alertas de Sentry.
+   
+   Herramientas mínimas:
+     Vercel/Netlify: logs de deployment y errores de build.
+     Google Analytics 4 o Plausible: eventos y comportamiento.
+     Sentry (proyectos de riesgo alto): error tracking en tiempo real.
+
+6. CLIENT HANDOFF
+   Entregar al cliente documentación clara de qué puede y no puede hacer.
+   Qué puede editar: contenido en CMS si existe, imágenes específicas, textos aprobados.
+   Qué no debe tocar: código, configuración de servidor, variables de entorno, DNS.
+   Qué contactar al equipo: errores técnicos, cambios de layout, nuevas funcionalidades.
+   Formato: documento de 1-2 páginas máximo. No manual técnico.
+
+7. POST-LAUNCH REVIEW
+   Tres momentos de revisión con foco diferente por periodo.
+   
+   A LOS 7 DÍAS — Foco técnico
+     ¿Hay errores de JavaScript en producción?
+     ¿Los formularios están convirtiendo?
+     ¿El LCP y CLS están dentro de los umbrales de M8.5?
+     ¿El cliente encontró algún problema de uso?
+     Acción: corregir bugs, ajustar performance si está fuera de umbral.
+   
+   A LOS 30 DÍAS — Foco de conversión
+     ¿La tasa de conversión del CTA principal es razonable?
+     ¿Hay páginas con bounce rate muy alto?
+     ¿El flujo de usuario sigue el camino esperado?
+     ¿Hay objeciones no resueltas que emergen del comportamiento?
+     Acción: proponer ajustes de copy, CTA o estructura si los datos lo indican.
+   
+   A LOS 90 DÍAS — Foco de crecimiento
+     ¿Las páginas principales están rankeando para las keywords relevantes?
+     ¿El tráfico orgánico creció?
+     ¿Hay nuevas necesidades del negocio que requieren iteración?
+     ¿El sistema técnico sigue siendo mantenible o acumuló deuda?
+     Acción: proponer la primera iteración de mejora con evidencia.
+
+8. ANALYTICS BASELINE
+   Qué medir primero en cualquier proyecto.
+   Sin estos 5 datos, el post-launch review no tiene base.
+   
+   1. Page views del home y las páginas principales.
+   2. Conversión del CTA principal (click o formulario).
+   3. Bounce rate del home.
+   4. Dispositivos: % mobile vs. desktop.
+   5. Fuentes de tráfico: directo, orgánico, referral, social.
+   
+   Si el proyecto tiene ecommerce: agregar conversión de carrito y revenue.
+   Si tiene SaaS: agregar sign-ups y activación.
+   
+   Configurar estos eventos antes del launch. No post-hoc.
+
+ÁRBOLES DE DECISIÓN
+-------------------
+1. ¿El proyecto es de riesgo bajo, medio o alto?
+   - Bajo: release total. Monitoring 24hs.
+   - Medio: staging previo + release total. Monitoring 48hs.
+   - Alto: staged release. Monitoring primera semana.
+
+2. ¿Hay analytics configurados?
+   - Sí: revisar baseline en los primeros 7 días.
+   - No: documentar la limitación. El post-launch review no puede hacerse sin datos.
+
+3. ¿El cliente puede editar contenido?
+   - Sí: handoff con instrucciones claras de qué puede y no puede tocar.
+   - No: handoff técnico mínimo + contacto de soporte.
+
+4. ¿Existe un plan de rollback probado?
+   - Sí: lanzar.
+   - No: documentarlo antes de hacer el deploy. No lanzar sin plan de rollback.
+
+5. ¿Es el primer lanzamiento o una iteración?
+   - Primer lanzamiento: seguir todos los patrones.
+   - Iteración: verificar el prelaunch checklist + monitoring reducido.
+
+TESTS
+-----
+- ¿El nivel de riesgo fue clasificado con la risk matrix?
+- ¿El prelaunch checklist fue ejecutado completo?
+- ¿El rollback plan está documentado y probado?
+- ¿El monitoring window corresponde al nivel de riesgo?
+- ¿El analytics baseline está configurado y verificado?
+- ¿El handoff al cliente está documentado?
+
+OUTPUT
+------
+- Clasificación de riesgo del proyecto
+- Estrategia de release elegida
+- Prelaunch checklist ejecutado
+- Rollback plan documentado
+- Monitoring window y herramientas
+- Client handoff
+- Post-launch review schedule (7/30/90 días)
+- Analytics baseline configurado
+
+PROMPT PARA CLAUDE
+------------------
+Actuá como responsable de lanzamiento.
+Primero clasificá el proyecto en la Launch Risk Matrix: bajo, medio o alto.
+Elegí la estrategia de release correspondiente.
+Ejecutá el prelaunch checklist y documentá el resultado.
+Documentá el rollback plan específico para la plataforma del proyecto.
+Definí el monitoring window y las herramientas según el nivel de riesgo.
+Configurá el analytics baseline antes del launch.
+Planificá las tres revisiones post-launch: 7, 30 y 90 días.
+Quiero un launch seguro, un handoff claro y un sistema de aprendizaje real.
