@@ -35,7 +35,7 @@ Webbing existe para resolver tres fallas estructurales del trabajo con IA en dis
 
 ## 3. ARCHITECTURE
 
-El sistema se organiza en siete capas (seis de proyecto + una de negocio). Cada capa contiene módulos. Todos los módulos están en `NIVELES/` relativo a la raíz del sistema (`Webbing/`). Ver el FILE MAP al final de esta sección para los paths exactos.
+El sistema se organiza en siete capas (seis de proyecto + una de negocio). Cada capa contiene módulos. Todos los módulos están en `NIVELES/` relativo a la raíz del sistema, que es la carpeta raíz del skill (`~/.claude/skills/webbing/`). No existe ninguna subcarpeta `Webbing/` intermedia. Ver el FILE MAP al final de esta sección para los paths exactos.
 
 ```
 CAPA 1 — ESTRATEGIA
@@ -96,7 +96,7 @@ CAPA DE NEGOCIO — transversal (pre-proyecto y post-proyecto)
 
 **FILE MAP — PATHS REALES**
 
-Base: `Webbing/NIVELES/`
+Base: `NIVELES/` (relativo a la raíz del skill). Nota: `NEGOCIO/` es subcarpeta de `NIVELES/`, hermana de las carpetas `NIVEL 1-6/` — por eso los paths de M13 se escriben `NEGOCIO/...` sobre esa misma base.
 
 | Módulo | Path |
 |--------|------|
@@ -131,7 +131,7 @@ Base: `Webbing/NIVELES/`
 | M13.3 | `NEGOCIO/M13_3_Pricing_Engine_v1.txt` |
 | M13.4 | `NEGOCIO/M13_4_Closing_Onboarding_v1.txt` |
 
-**BACKEND (B0-B6) — excepción de path:** estos módulos NO viven en `NIVELES/`. Viven en `Webbing/BACKEND/` (al lado de `NIVELES/`, no dentro). Son extensión condicional de la Capa 4.
+**BACKEND (B0-B6) — excepción de path:** estos módulos NO viven en `NIVELES/`. Viven en `BACKEND/` (en la raíz del skill, al lado de `NIVELES/`, no dentro). Son extensión condicional de la Capa 4.
 
 | Módulo | Path |
 |--------|------|
