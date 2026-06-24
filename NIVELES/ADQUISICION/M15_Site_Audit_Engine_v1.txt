@@ -107,6 +107,13 @@ entrenado ve solo la primera; el audit que vale las cubre las cuatro.
    Claridad de audiencia: ¿a quién le habla? ¿B2C y B2B mezclados sin foco?
    Posicionamiento y mensaje: ¿se entiende qué lo hace distinto?
    Coherencia entre lo que dice y lo que muestra.
+   Benchmark competitivo (OBLIGATORIO): traer 1-2 competidores reales del
+   prospecto vía research vivo (mismo rubro y zona) y comparar. ¿Qué hacen
+   mejor? ¿Dónde está el hueco? El insight más vendible suele salir de acá:
+   si el prospecto tiene buena sustancia pero peor "vidriera" que un
+   competidor que marca el estándar local, ESE es el argumento de venta
+   ("tu competidor se ve así; vos, con mejor producto, te ves peor"). Sin
+   benchmark, el diagnóstico flota sin referencia y pierde su mejor gancho.
 
 Cada hallazgo se registra con:
   QUÉ        — el problema, concreto.
@@ -198,6 +205,7 @@ PROMPT PARA CLAUDE
 ------------------
 Inspección viva siempre: auditar el sitio real, nunca de memoria.
 Recorrer las cuatro capas (superficie, función, técnica, estrategia) antes de concluir.
+En la capa de estrategia, el benchmark competitivo es OBLIGATORIO: traer 1-2 competidores reales del prospecto con research vivo y comparar. El mejor argumento de venta suele ser el hueco frente a un competidor que marca el estándar local.
 Traducir cada hallazgo técnico a pérdida de negocio. Sin excepción.
 El mensaje al prospecto abre conversación, no ataca: reconoce lo bueno, marca
 2-3 puntos críticos en lenguaje de negocio, ofrece una charla — no el rediseño.
