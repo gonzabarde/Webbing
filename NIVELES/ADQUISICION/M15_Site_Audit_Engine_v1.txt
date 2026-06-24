@@ -1,0 +1,206 @@
+M15 — SITE AUDIT & DIAGNOSIS ENGINE (v1)
+========================================
+
+PROPÓSITO
+---------
+M15 audita el sitio de un PROSPECTO —alguien que todavía no es cliente— y
+produce dos cosas:
+  1. Un diagnóstico que funciona como anzuelo de venta consultiva.
+  2. Un Audit Handoff: paquete estructurado que alimenta a M13 (scope, score,
+     argumento de valor).
+
+Es la puerta de entrada del servicio de mejora de sitios existentes.
+No construye nada. Diagnostica, traduce el problema a pérdida de negocio,
+y prepara el terreno para que el prospecto entre al flujo de negocio.
+
+M15 ≠ M0 (LEER PRIMERO)
+-----------------------
+La distinción que justifica que M15 exista y no duplique a M0:
+
+M0 (Discovery) audita el sitio de un proyecto QUE YA ES TUYO — cliente
+calificado y pagado. Es discovery interno, para construir. Corre DESPUÉS
+de que M13 cerró.
+
+M15 audita el sitio de alguien que TODAVÍA NO ES CLIENTE — un prospecto.
+Su output no es interno: es un artefacto de venta + un handoff a M13.
+Corre ANTES de M13, antes de cualquier engagement o pago.
+
+Regla dura: si el sitio es de un cliente ya cerrado → M0. Si es de un
+prospecto que querés enganchar → M15. Nunca al revés.
+
+LÍMITE DE AUTORIDAD (LEER SEGUNDO)
+----------------------------------
+M15 GENERA el diagnóstico y el mensaje al prospecto. NO los envía.
+Mandarle el mensaje al dueño lo decide el humano, siempre.
+
+Y la regla de modelo de negocio, no negociable: el audit puede ser gratis
+como gancho, pero el TRABAJO DE MEJORA se cobra vía M13. M15 no habilita
+rediseñar gratis para después ofrecerlo (eso es spec work: trabajo caro
+sobre una apuesta). El diagnóstico es el anzuelo; la mejora es trabajo pago.
+
+CUÁNDO SE USA
+-------------
+Cuando el humano quiere evaluar o abordar el sitio de un prospecto para
+ofrecerle una mejora. Disparador explícito.
+
+No se usa dentro de un proyecto activo (eso es M0).
+No se usa sobre el sitio de un cliente ya cerrado (eso es M0).
+
+LOS TRES GUARDRAILS (de lecciones reales)
+------------------------------------------
+1. INSPECCIÓN VIVA OBLIGATORIA.
+   El audit corre sobre el sitio REAL: fetch, navegador, o las observaciones
+   visuales del humano. NUNCA de memoria. Un LLM lee el HTML pero no VE la
+   página renderizada — el juicio de UX, jerarquía visual y estética requiere
+   ver la página. Sin inspección viva, el diagnóstico es genérico y no sirve.
+
+2. ESTÁNDARES FRESCOS.
+   Los umbrales (Core Web Vitals, prácticas de SEO, patrones de conversión)
+   cambian. Donde el diagnóstico depende de un estándar actual, se verifica
+   con research vivo, no con conocimiento congelado.
+
+3. NO AUTO-ENVÍO + NO SPEC WORK.
+   M15 genera el mensaje; enviarlo lo decide el humano. Y el audit es anzuelo
+   de trabajo pago, nunca rediseño gratis disfrazado.
+
+EL CICLO DE UNA AUDITORÍA
+--------------------------
+Prospecto con sitio mejorable
+  ↓
+M15 — Inspección viva (fetch / navegador / observación del humano)
+  ↓
+M15 — Diagnóstico (4 capas + severidad + traducción a pérdida de negocio)
+  ↓
+M15 — Audit Handoff (paquete para M13) + Mensaje de contacto (para el humano)
+  ↓
+[EL HUMANO decide si envía el contacto]
+  ↓
+Si el prospecto pica → M13.1 (califica, con el Handoff como insumo)
+  ↓
+Si cierra → M0 (discovery real para construir)
+
+LAS CUATRO CAPAS DE AUDITORÍA
+------------------------------
+El diagnóstico recorre cuatro capas, de lo visible a lo invisible. El ojo no
+entrenado ve solo la primera; el audit que vale las cubre las cuatro.
+
+1. SUPERFICIE (lo que se ve)
+   Primera impresión / claridad en 5 segundos.
+   Legibilidad de marca (¿se lee el logo, el nombre?).
+   Calidad de assets visuales (fotos, imágenes — en ecommerce la foto ES el producto).
+   Jerarquía visual y carga de texto (¿se escanea o exige leer un ensayo?).
+   Percepción de obsolescencia (¿se ve viejo → erosiona confianza?).
+
+2. FUNCIÓN (lo que se rompe)
+   Paths de conversión: botones de compra, CTAs, ¿adónde llevan?
+   Botones muertos (apuntan a "#", a la nada, o a destinos inconsistentes).
+   Checkout, formularios, carrito: ¿funcionan, fricción?
+   Navegación: ¿ayuda o entierra el producto en menús de 4 niveles?
+
+3. TÉCNICA (lo que falla por debajo)
+   HTTPS / candado de seguridad (un sitio http espanta donde se pone plata).
+   Performance / velocidad de carga / peso (banners GIF, imágenes sin optimizar).
+   Mobile: ¿responsive, usable en teléfono?
+   SEO técnico base (metadata, estructura) — sin entrar en SEO avanzado.
+
+4. ESTRATEGIA (lo que no se entiende)
+   Claridad de audiencia: ¿a quién le habla? ¿B2C y B2B mezclados sin foco?
+   Posicionamiento y mensaje: ¿se entiende qué lo hace distinto?
+   Coherencia entre lo que dice y lo que muestra.
+
+Cada hallazgo se registra con:
+  QUÉ        — el problema, concreto.
+  DÓNDE      — en qué parte del sitio.
+  SEVERIDAD  — Crítica / Alta / Media / Baja.
+  PÉRDIDA    — la traducción a consecuencia de negocio (ver abajo).
+
+TRADUCCIÓN A PÉRDIDA DE NEGOCIO (el corazón del valor)
+-------------------------------------------------------
+Cada hallazgo técnico se traduce a consecuencia de negocio. Esto es lo que
+hace al audit VENDIBLE y lo que alimenta la Sección 1 de la propuesta (M13.2).
+
+  "CTA sin contraste"        → "el visitante no encuentra dónde comprar".
+  "Botón de compra muerto"   → "perdés la venta de quien YA quería comprar".
+  "Sitio sin HTTPS"          → "el navegador le dice 'no seguro' antes de pagar".
+  "Foto de mala calidad"     → "tu café premium se ve barato; contradice el precio".
+  "Demasiado texto"          → "el visitante no lee, se va".
+
+Regla: nunca dejar un hallazgo en lenguaje técnico. El dueño no compra
+"contraste"; compra "dejar de perder clientes".
+
+SEVERIDAD
+---------
+Crítica — pierde ventas HOY o espanta al visitante (checkout roto, sin HTTPS).
+Alta    — degrada conversión o confianza de forma seria.
+Media   — fricción que resta pero no bloquea.
+Baja    — mejora cosmética o nice-to-have.
+Regla: una Crítica vale más que diez Bajas. El contacto al dueño se ancla
+en las Críticas, no en la lista entera.
+
+CLIENT COMMUNICATION LAYER
+---------------------------
+Traduce el diagnóstico a un mensaje de venta consultiva. Es la pieza más
+delicada del módulo: un mensaje mal calibrado mata la venta antes de empezar.
+
+Reglas del mensaje al prospecto:
+  - NUNCA una lista de quejas ("tu sitio tiene 8 errores"). Suena a ataque;
+    el dueño se pone a la defensiva y se cierra.
+  - Abrir reconociendo lo que SÍ funciona. Respeto antes que crítica.
+  - Hablar en pérdida de negocio, no en jerga técnica.
+  - Máximo 2-3 puntos en el primer contacto — los Críticos. NO el informe
+    completo (ese es lo que se entrega/cobra después).
+  - Cerrar ABRIENDO conversación (una charla, un diagnóstico completo),
+    no cerrando venta ni ofreciendo el rediseño de una.
+  - Tono: consultor que detecta una oportunidad de negocio, no vendedor que
+    señala defectos.
+
+EL AUDIT HANDOFF (la bisagra con M13)
+--------------------------------------
+M15 corre standalone, pero termina produciendo el Audit Handoff: el insumo
+que M13 necesita, en su propio vocabulario.
+
+  → Hallazgos priorizados por severidad
+       = candidatos a IN SCOPE de M13.2 (qué se arreglaría = qué se cotiza).
+  → Lo que está sano / no se toca
+       = candidatos a OUT OF SCOPE de M13.2.
+  → Magnitud del problema (cuántos Críticos, qué tan roto, qué tan grande el
+    rebuild) = insumo del Qualification Score (M13.1) + clasificación M10.0
+    (tipo de proyecto → banda de horas).
+  → Traducción a pérdida de negocio
+       = argumento de valor / Sección 1 de la propuesta (M13.2),
+         que abre con "el problema que resolvemos".
+
+Con el Handoff, M13 no arranca de cero: recibe scope, score y valor masticados.
+
+GATE
+----
+Sin gate bloqueante nuevo. La disciplina es de modelo:
+el diagnóstico NO se convierte en trabajo de mejora sin pasar por M13
+(calificación + propuesta + cobro). El audit gratis es gancho; la mejora
+se cobra. Ningún rediseño arranca sin GATE 13.4-A (pago 1).
+
+RELACIÓN CON EL RESTO DEL SISTEMA
+-----------------------------------
+M15 → M13: le entrega el Audit Handoff (scope, score, argumento de valor).
+M15 ≠ M0: prospecto vs cliente; pre-venta vs discovery interno. Nunca se pisan.
+M15 ← M14: la retrospectiva puede proponer mejoras a M15 como a cualquier módulo.
+M11 gobierna el comportamiento de Claude también en M15.
+Donde el audit toca lo técnico (performance, accesibilidad), puede apoyarse en
+los criterios de M8.5 — pero M15 DIAGNOSTICA, no construye.
+
+REGLA CENTRAL
+-------------
+El audit no es para lucirte señalando defectos. Es para que el dueño vea una
+oportunidad de negocio y quiera pagarte por capturarla. Un diagnóstico que
+suena a crítica cierra la puerta; uno que suena a plata sobre la mesa la abre.
+
+PROMPT PARA CLAUDE
+------------------
+Inspección viva siempre: auditar el sitio real, nunca de memoria.
+Recorrer las cuatro capas (superficie, función, técnica, estrategia) antes de concluir.
+Traducir cada hallazgo técnico a pérdida de negocio. Sin excepción.
+El mensaje al prospecto abre conversación, no ataca: reconoce lo bueno, marca
+2-3 puntos críticos en lenguaje de negocio, ofrece una charla — no el rediseño.
+No enviar nada: el envío lo decide el humano.
+Producir el Audit Handoff para que M13 reciba scope, score y valor.
+M15 alimenta a M13; no reemplaza a M0. El trabajo de mejora se cobra.
