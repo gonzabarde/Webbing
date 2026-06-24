@@ -1,0 +1,159 @@
+M16 — PHASE HANDOFF PROTOCOL (v1)
+=================================
+
+PROPÓSITO
+---------
+M16 cubre algo que ningún otro módulo cubre: cómo el sistema se transfiere a
+sí mismo entre sesiones sin perder lo que importa.
+
+Cuando un proyecto no entra en una sola sesión —porque el contexto se satura,
+porque se corta una fase, o porque se retoma días después— hay que pasar el
+estado del proyecto a una sesión nueva. M16 produce ese traspaso: un artefacto
+comprimido y estandarizado que la sesión nueva consume para continuar sin
+recrear nada.
+
+No produce trabajo nuevo (no diseña, no codea, no analiza). Es infraestructura:
+comprime y transporta trabajo ya hecho.
+
+EL PROBLEMA QUE RESUELVE
+------------------------
+Una sesión tiene ventana de contexto finita. Un proyecto largo (creatividad +
+build + debugging) puede saturarla. Cuando se satura, el sistema NO avisa con
+un cartel: se degrada en silencio — olvida decisiones tempranas, pierde la
+trazabilidad de las deudas (los 🔴), se repite, se contradice.
+
+La trampa: arrastrar el chat entero a una sesión nueva no resuelve nada —
+recrea la misma saturación. La solución no es transferir la conversación;
+es transferir el ESTADO comprimido.
+
+REGLA CENTRAL (LEER PRIMERO)
+----------------------------
+El handoff transfiere DECISIONES y DEUDAS, no RAZONAMIENTO.
+
+  Transfiere: QUÉ se decidió + QUÉ falta.
+  Descarta:   CÓMO se llegó a cada decisión.
+
+El razonamiento ya cumplió su función cuando produjo la decisión. Transportarlo
+de nuevo es lo que recrea la saturación. La compresión —quedarse con el output
+y tirar el proceso— es todo el valor de M16. Un handoff que copia todo no es
+un handoff: es el problema otra vez.
+
+CUÁNDO SE USA
+-------------
+Disparador — el humano decide cortar. Tres gatillos típicos:
+  1. Semáforo de contexto: la ventana cruza ~70-75% con trabajo aún por delante.
+  2. Fin de fase: corte natural (ej. cerrar creatividad en GATE 2 antes del build).
+  3. Pausa larga: se retoma el proyecto días/semanas después.
+
+Es un protocolo GENERAL: funciona en cualquier punto de corte (creatividad→build,
+build→build, o continuación tras pausa), no solo en una frontera fija.
+
+No se usa: a mitad de un módulo sin razón. El corte se hace en un punto estable
+(un módulo cerrado, un gate cruzado), no en el medio de un razonamiento.
+
+EL CICLO
+--------
+Sesión 1 — trabajo hasta el punto de corte
+  ↓
+[Humano decide cortar: semáforo ~70-75% / fin de fase / pausa]
+  ↓
+M16 — genera el Handoff Artifact (estado comprimido)
+  ↓
+[Humano abre sesión NUEVA, limpia]
+  ↓
+Sesión 2 — primer movimiento: pegar el Handoff Artifact
+  ↓
+El sistema reconstruye el estado desde el artefacto y continúa
+  (sin recrear el razonamiento de la Sesión 1)
+
+EL HANDOFF ARTIFACT — ESTRUCTURA FIJA
+--------------------------------------
+El artefacto tiene una estructura fija. Se llena con lo que aplica al punto de
+corte; lo que no aplica se omite, no se inventa.
+
+1. IDENTIDAD DEL PROYECTO
+   Cliente, tipo de proyecto, una línea de qué es. El mínimo para ubicarse.
+
+2. DECISIONES CERRADAS (irreversibles)
+   Lo aprobado en gates: posición, concepto, dirección visual, stack técnico,
+   scope, precio. Va COMPLETO — es lo que NO se puede perder ni recomprimir.
+   Cada decisión en una línea: qué se decidió, no por qué.
+
+3. ESTADO DE GATES
+   Cuáles se cruzaron, cuáles quedaron condicionales, con qué condición exacta.
+
+4. DEUDAS ACTIVAS (lo más importante de transferir)
+   Las verificaciones pendientes, los 🔴 make-or-break, los 🟡 sin confirmar.
+   Esto es JUSTO lo que un chat saturado olvida primero, así que es lo que
+   M16 protege con más cuidado. Cada deuda: qué falta, qué bloquea, severidad.
+
+5. PUNTO DE CORTE
+   En qué módulo/fase se frenó y por qué se cortó acá.
+
+6. PRÓXIMO PASO
+   Qué tiene que hacer la sesión nueva como primer movimiento. Concreto.
+
+7. DESCARTADO EXPLÍCITAMENTE
+   Nota de qué NO se transfiere y por qué: el razonamiento de cómo se llegó a
+   las decisiones, los outputs intermedios, las exploraciones descartadas.
+   (Esto se declara para que quede claro que la omisión es deliberada, no un
+   olvido — y para que nadie intente "recuperarlo" en la sesión nueva.)
+
+QUÉ INCLUIR Y QUÉ TIRAR (la línea fina)
+----------------------------------------
+INCLUIR (sin esto la sesión nueva está ciega):
+  - Toda decisión cerrada en un gate.
+  - Toda deuda activa (🔴 y 🟡).
+  - El estado de cada gate.
+  - El punto de corte y el próximo paso.
+
+TIRAR (incluirlo recrea la saturación):
+  - El razonamiento que produjo cada decisión.
+  - Los outputs completos de módulos ya cerrados (basta la decisión que dejaron).
+  - Las opciones exploradas y descartadas (salvo que una sea una deuda activa).
+  - La conversación, los falsos arranques, las iteraciones intermedias.
+
+Criterio de duda: si algo es necesario para CONTINUAR, va. Si solo explica
+cómo se LLEGÓ hasta acá, se tira. La sesión nueva continúa, no audita el pasado.
+
+VERIFICACIÓN DEL HANDOFF
+------------------------
+Antes de cerrar la sesión vieja, un test rápido: ¿con solo este artefacto,
+una sesión limpia podría continuar el proyecto sin preguntar nada esencial?
+Si falta algo para responder que sí, el handoff está incompleto. Si sobra
+razonamiento, está inflado. El artefacto correcto es el mínimo que permite
+continuar.
+
+RELACIÓN CON EL RESTO DEL SISTEMA
+-----------------------------------
+M16 formaliza, a nivel PROYECTO, el bloque de cierre que cada módulo ya
+produce ("Decisión tomada / Pendiente / Próximo paso") — pero comprimido para
+transporte entre sesiones, no entre módulos.
+M16 protege especialmente las deudas que M1–M5.5 y los gates van arrastrando:
+es lo que evita que una verificación 🔴 se pierda al cambiar de sesión.
+M16 ← M14: la retrospectiva puede proponer mejoras a M16 como a cualquier módulo.
+M11 gobierna el comportamiento de Claude también acá.
+M16 no produce trabajo de proyecto: es infraestructura operativa, transversal.
+
+GATE
+----
+Sin gate bloqueante. M16 es una herramienta de continuidad, no un paso del
+flujo de producción. Se invoca cuando se necesita, no en un orden fijo.
+
+REGLA CENTRAL (recordatorio)
+----------------------------
+Transferir un chat entero entre sesiones no preserva el contexto: lo destruye,
+porque recrea la saturación que obligó a cortar. Lo que preserva el contexto es
+transferir el ESTADO comprimido — decisiones y deudas, no razonamiento. El
+handoff bien hecho es el mínimo que permite continuar, no el máximo que se
+puede copiar.
+
+PROMPT PARA CLAUDE
+------------------
+Cuando el humano decide cortar (semáforo de contexto, fin de fase o pausa),
+activar M16 y generar el Handoff Artifact con la estructura fija.
+Incluir TODA decisión cerrada y TODA deuda activa (🔴/🟡) — esas no se pierden nunca.
+Descartar el razonamiento, los outputs intermedios y las exploraciones muertas.
+Antes de cerrar: verificar que una sesión limpia podría continuar solo con el artefacto.
+El handoff es el mínimo que permite continuar, no una copia del trabajo.
+M16 no genera trabajo nuevo: comprime y transporta el que ya existe.

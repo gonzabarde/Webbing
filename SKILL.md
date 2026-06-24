@@ -35,7 +35,7 @@ Webbing existe para resolver tres fallas estructurales del trabajo con IA en dis
 
 ## 3. ARCHITECTURE
 
-El sistema se organiza en nueve capas (seis de proyecto + una de adquisición + una de negocio + una de evolución). Cada capa contiene módulos. Todos los módulos están en `NIVELES/` relativo a la raíz del sistema, que es la carpeta raíz del skill (`~/.claude/skills/webbing/`). No existe ninguna subcarpeta `Webbing/` intermedia. Ver el FILE MAP al final de esta sección para los paths exactos.
+El sistema se organiza en diez capas (seis de proyecto + una de adquisición + una de negocio + una de evolución + una de infraestructura). Cada capa contiene módulos. Todos los módulos están en `NIVELES/` relativo a la raíz del sistema, que es la carpeta raíz del skill (`~/.claude/skills/webbing/`). No existe ninguna subcarpeta `Webbing/` intermedia. Ver el FILE MAP al final de esta sección para los paths exactos.
 
 ```
 CAPA 1 — ESTRATEGIA
@@ -88,6 +88,9 @@ CAPA DE NEGOCIO — transversal (pre-proyecto y post-proyecto)
 
 CAPA DE EVOLUCIÓN — transversal (post-proyecto)
   M14  Retrospective & System Evolution Engine
+
+CAPA DE INFRAESTRUCTURA — transversal (entre sesiones)
+  M16  Phase Handoff Protocol
 ```
 
 **Relaciones:**
@@ -98,6 +101,7 @@ CAPA DE EVOLUCIÓN — transversal (post-proyecto)
 - M13 (capa de negocio) opera antes de M0 (calificación, propuesta, precio, cierre) y después de M10 (retainer). No interfiere con el flujo creativo ni técnico.
 - M15 (capa de adquisición) opera antes de M13, sobre el sitio de un prospecto que todavía no es cliente. Produce un diagnóstico de venta y un Audit Handoff que alimenta a M13 (scope, Qualification Score, argumento de valor). No se confunde con M0: M0 audita el sitio de un cliente ya cerrado (discovery interno); M15 audita el de un prospecto (pre-venta).
 - M14 (capa de evolución) opera solo después de la entrega (post-GATE 4). Audita el proyecto cerrado y propone mejoras al sistema. No se auto-aplica: el humano aprueba cada cambio (ver secciones 7 y 13). Es el único módulo con alcance transversal sobre toda la arquitectura.
+- M16 (capa de infraestructura) no produce trabajo de proyecto: comprime el estado del proyecto en un punto de corte y lo transfiere a una sesión nueva (handoff). Se usa cuando el contexto se satura, al cerrar una fase, o al retomar tras una pausa. Transfiere decisiones y deudas, no razonamiento.
 - El BACKEND (B0-B6) es una extensión condicional de la Capa 4, no una capa nueva. Solo se activa cuando M8 detecta que el proyecto necesita auth, base de datos, lógica de servidor o pagos (SaaS, ecommerce, apps con login). Un marketing site no lo activa. B0 decide la arquitectura de backend; B1-B6 la implementan. No redeciden lo que las capas 1-3 ni M8 cerraron: lo construyen.
 
 **Regla:** ningún módulo de una capa superior compensa la ausencia de una capa inferior. Si falta estrategia, la ejecución hereda el vacío.
@@ -140,6 +144,7 @@ Base: `NIVELES/` (relativo a la raíz del skill). Nota: `NEGOCIO/` es subcarpeta
 | M13.4 | `NEGOCIO/M13_4_Closing_Onboarding_v1.txt` |
 | M14 | `EVOLUCION/M14_Retrospective_Engine_v1.txt` |
 | M15 | `ADQUISICION/M15_Site_Audit_Engine_v1.txt` |
+| M16 | `INFRAESTRUCTURA/M16_Phase_Handoff_Protocol_v1.txt` |
 
 **BACKEND (B0-B6) — excepción de path:** estos módulos NO viven en `NIVELES/`. Viven en `BACKEND/` (en la raíz del skill, al lado de `NIVELES/`, no dentro). Son extensión condicional de la Capa 4.
 
@@ -179,6 +184,7 @@ Identificá el tipo de tarea ANTES de cargar nada. Cargá solo los módulos de l
 | Negocio (lead, propuesta, precio, cierre, retainer) | M13 (Business Layer) | Todo lo demás |
 | Retrospectiva post-proyecto (auditar el proyecto cerrado, proponer mejoras al sistema) | M14 (Retrospective Engine) | Todo lo demás |
 | Auditar el sitio de un PROSPECTO (todavía no cliente) para vender una mejora | M15 (Site Audit Engine) | Todo lo demás (M0 es para clientes ya cerrados, no prospectos) |
+| Cortar la sesión / retomar el proyecto en otra sesión (handoff entre fases) | M16 (Phase Handoff Protocol) | Todo lo demás |
 
 **Reglas de routing:**
 - Una tarea = un tipo. Si parece dos tipos, es dos tareas: resolvelas en secuencia, no en paralelo.
@@ -199,6 +205,7 @@ M0 → M1 → M2 → M3 → [GATE 1] → M4 → M4.5 → M5 → M5.5 → [CDL / 
 - M12 se consulta en M0 (research visual), M4–M5.5 (dirección) y nunca en ejecución.
 - M14 (retrospectiva) corre DESPUÉS de GATE 4 y de la entrega real, al cierre del proyecto. No es parte del flujo de producción: es post-proyecto. Nunca se dispara a mitad de camino.
 - M15 (auditoría de prospecto) corre ANTES del flujo y fuera de un proyecto: sobre el sitio de alguien que todavía no es cliente. Su salida (Audit Handoff) entra a M13.1. No se confunde con M0, que audita dentro de un proyecto ya cerrado.
+- M16 (handoff) no corre en un punto fijo del flujo: se invoca cuando hay que cortar la sesión (contexto saturado, fin de fase, o pausa) y transferir el estado a una sesión nueva.
 - BACKEND (si el proyecto lo activa): B0 corre DENTRO de M8 (resuelve la arquitectura de
   backend junto con la técnica, antes de GATE 3). B1-B4 corren en paralelo a M9 (patrones
   de implementación). B5 (performance) y B6 (recuperación) se cierran antes de GATE 4.
