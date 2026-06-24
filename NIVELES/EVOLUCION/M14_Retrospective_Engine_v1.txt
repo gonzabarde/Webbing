@@ -1,0 +1,158 @@
+M14 — RETROSPECTIVE & SYSTEM EVOLUTION ENGINE (v1)
+==================================================
+
+PROPÓSITO
+---------
+M14 cubre lo que ningún otro módulo cubre: cómo Webbing aprende de sí mismo.
+
+Después de cada proyecto, el sistema se audita: qué funcionó, qué falló,
+qué tuvo que arreglar el humano a mano, y qué debería cambiar para que el
+próximo proyecto salga mejor.
+
+No es parte del flujo creativo ni técnico ni de negocio.
+Es la capa que convierte la experiencia de un proyecto en mejora del sistema.
+
+Sin M14, cada proyecto repite los mismos errores.
+Con M14, cada proyecto deja al sistema más afilado que antes.
+
+LÍMITE DE AUTORIDAD (LEER PRIMERO)
+----------------------------------
+M14 PROPONE. El humano APLICA.
+
+El sistema NO se auto-modifica. M14 no edita módulos, no toca el SKILL.md,
+no cambia gates por su cuenta. Genera propuestas de mejora priorizadas y se
+detiene. Aplicar cada cambio es decisión exclusiva del humano (SKILL.md
+secciones 7 y 13).
+
+"El sistema se mejora a sí mismo" significa que el sistema GENERA sus propias
+mejoras — no que las ejecuta solo. La diferencia es la columna vertebral de
+toda la disciplina de autoridad de Webbing. M14 no es la excepción: es su
+operacionalización.
+
+CUÁNDO SE USA
+-------------
+Disparador principal — al cierre del proyecto:
+  Después de GATE 4 (deploy) y de la entrega real.
+  Explícito: el humano pide "retrospectiva" o "cerramos el proyecto".
+  Nunca automático a mitad de flujo. La retrospectiva mira un proyecto
+  terminado, no uno en curso.
+
+Disparador secundario — captura en caliente:
+  Cuando durante un proyecto el humano tiene que arreglar algo a mano que el
+  sistema debió capturar, se registra el incidente en una línea para que la
+  retrospectiva de cierre no dependa de la memoria. No se analiza en el momento:
+  se anota y se sigue.
+
+No se usa:
+  En proyectos que no llegaron a entregarse (un lead que no cerró no genera
+  retrospectiva de sistema; eso es feedback de M13, no de M14).
+
+EL CICLO DE UNA RETROSPECTIVA
+------------------------------
+Proyecto entregado (post-GATE 4)
+  ↓
+M14 — Recolección (¿qué pasó en cada eje?)
+  ↓
+M14 — Análisis de causa raíz (¿por qué pasó?)
+  ↓
+M14 — Propuestas priorizadas (¿qué cambiar y dónde?)
+  ↓
+[APROBACIÓN DEL HUMANO] — acepta / rechaza / posterga cada propuesta
+  ↓
+Cambios aprobados → SKILL.md sección 13 (versionado, bump, _deprecated)
+  ↓
+Sistema actualizado para el próximo proyecto
+
+LOS CINCO EJES DE ANÁLISIS
+---------------------------
+La retrospectiva audita el proyecto cerrado en cinco ejes. Cada hallazgo se
+clasifica y se convierte en propuesta.
+
+1. GATES
+   ¿Qué gates pasaron limpios? ¿Cuáles fallaron? ¿Cuáles se "fudgearon"
+   (se cruzaron sin cumplir la condición real)?
+   Un gate que se saltó en silencio es la señal más grave: el sistema dejó
+   pasar lo que debía frenar.
+
+2. CALIDAD DE OUTPUT POR MÓDULO
+   ¿Qué módulo produjo output fuerte y cuál genérico, flojo o incompleto?
+   Un módulo que repetidamente entrega output que el humano reescribe es un
+   módulo a revisar, no un humano exigente.
+
+3. INTERVENCIONES MANUALES
+   ¿Qué tuvo que arreglar el humano a mano que el sistema debió capturar solo?
+   Cada intervención manual es un agujero del sistema con nombre y apellido.
+   (Ejemplo histórico: el bug del FILE MAP que el humano detectó y corrigió
+   tras mover la skill — el sistema no lo capturó solo.)
+
+4. DIVERGENCIAS
+   a) Filesystem vs FILE MAP: rutas que no resolvieron, módulos en paths
+      distintos a los declarados.
+   b) Conocimiento congelado: hallazgos del sistema que estaban desactualizados
+      y solo se corrigieron con research vivo.
+      (Ejemplo histórico: lista de competidores vieja; "suscripción flexible"
+      marcada como eje cuando ya era piso de categoría — gaps que solo la
+      búsqueda en vivo detectó.)
+   Las divergencias de tipo (b) son estructurales: el sistema corre sobre
+   conocimiento congelado y necesita research vivo en los módulos de mercado.
+
+5. PRECISIÓN DE ESTIMACIÓN
+   Scope estimado vs scope real. Horas estimadas vs horas reales. Precio
+   cotizado vs esfuerzo entregado.
+   Este eje alimenta de vuelta a M13.2 (scope) y M13.3 (pricing): si el
+   sistema subestima sistemáticamente, las próximas cotizaciones se ajustan.
+
+FORMATO DE OUTPUT — LA PROPUESTA
+---------------------------------
+Cada hallazgo se entrega como una propuesta con esta estructura fija:
+
+  QUÉ PASÓ        — el hecho, sin interpretación.
+  CAUSA RAÍZ      — por qué pasó, no el síntoma.
+  CAMBIO PROPUESTO — qué se modifica para que no vuelva a pasar.
+  ARCHIVO/MÓDULO  — qué módulo o sección del SKILL.md toca.
+  SEVERIDAD       — Crítica / Alta / Media / Baja.
+
+La retrospectiva cierra con un resumen: cantidad de propuestas por severidad
+y la recomendación de cuáles aplicar primero. No se aplica nada: se entrega
+para aprobación.
+
+SEVERIDAD Y PRIORIZACIÓN
+-------------------------
+Crítica — rompió o casi rompió el proyecto, o entregó un dato falso al cliente.
+          Se resuelve antes del próximo proyecto, sin excepción.
+Alta    — degradó output o costó tiempo/plata significativo. Se resuelve pronto.
+Media   — fricción recurrente que no bloquea pero molesta. Se agenda.
+Baja    — mejora cosmética o nice-to-have. Se aplica si hay tiempo.
+
+Regla de priorización: una propuesta Crítica vale más que diez Bajas.
+No diluir el foco en mejoras menores mientras hay un agujero crítico abierto.
+
+RELACIÓN CON EL RESTO DEL SISTEMA
+-----------------------------------
+M14 puede proponer cambios a CUALQUIER módulo del sistema — es el único módulo
+con alcance transversal sobre toda la arquitectura.
+M14 alimenta a M13.2 y M13.3 con precisión de estimación real.
+M14 operacionaliza la sección 13 del SKILL.md (mantenimiento del sistema):
+es la maquinaria concreta detrás de "Claude propone cambios; el humano los aplica".
+M11 (AI Operating System) gobierna el comportamiento de Claude también en M14.
+El CDL no opera en M14 — aquí no hay evaluación creativa, hay auditoría de sistema.
+
+REGLA CENTRAL
+-------------
+Un proyecto del que el sistema no aprende es un proyecto a medias.
+La entrega al cliente cierra el trabajo; la retrospectiva cierra el aprendizaje.
+Saltear M14 no ahorra tiempo: garantiza repetir el mismo error en el próximo
+proyecto, esta vez con un cliente que paga.
+
+PROMPT PARA CLAUDE
+------------------
+Cuando el humano cierra un proyecto entregado y pide retrospectiva, activar M14.
+Recolectar los cinco ejes antes de proponer nada.
+Buscar causa raíz, no síntoma: el FILE MAP roto no era "un path mal", era
+"el mapa no se actualizó al mover la carpeta".
+Entregar propuestas en el formato fijo, priorizadas por severidad.
+No aplicar ningún cambio. Proponer y detenerse.
+Si una propuesta toca la arquitectura (SKILL.md), marcarlo explícito: requiere
+aprobación humana antes de tocar nada.
+M14 no es burocracia post-mortem: es lo que separa un sistema que mejora de
+uno que se estanca.
