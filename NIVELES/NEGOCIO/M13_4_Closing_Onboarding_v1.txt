@@ -165,10 +165,44 @@ SEÑALES DE QUE NO VALE LA PENA PROPONER RETAINER
 - El cliente quiere manejar todo solo
 - El sitio es completamente estático y no va a cambiar
 
+CLÁUSULA DE FASE ARRANQUE — EXCEPCIÓN TEMPORAL (v1, con sunset)
+---------------------------------------------------------------
+ESTADO: ACTIVA. Vigencia: solo durante la fase de arranque de Webbing, hasta
+cerrar los primeros 3 casos de portfolio. Cumplido eso → VENCE, y GATE 13.4-A
+vuelve al estándar de pago previo sin excepción.
+
+CONTEXTO: en arranque, Webbing necesita cerrar los primeros 2-3 proyectos para
+construir portfolio, casos y prueba social. Exigir el pago previo total bloquea
+el modelo de intercambio (web a cambio de portfolio + testimonio) que esos
+primeros casos requieren.
+
+QUÉ CAMBIA: durante el arranque, GATE 13.4-A se satisface con pago previo O con
+"PRUEBA DE COMPROMISO", definida como TODO esto junto (los tres, no alguno):
+  1. Acuerdo firmado de intercambio: alcance fijo + entregables + derechos
+     explícitos de uso en portfolio, testimonio y caso.
+  2. Deadline del cliente para entregar sus materiales (contenido, accesos,
+     fotos). Si no cumple, el proyecto se pausa.
+  3. Seña simbólica, aunque sea mínima, para asegurar skin in the game.
+Si los tres NO se cumplen, GATE 13.4-A NO se da por satisfecho y no se arranca
+trabajo.
+
+POR QUÉ NO SE APAGA LA REGLA BASE: el pago previo filtra clientes sin compromiso
+y protege del que ghostea, no manda material o mete scope creep. La prueba de
+compromiso preserva ese filtro sin exigir el pago completo. El gate sigue
+existiendo; en arranque solo se amplía QUÉ lo satisface.
+
+SUNSET: tras el 3er caso de portfolio cerrado, esta cláusula vence
+automáticamente. GATE 13.4-A vuelve a "pago previo, sin excepción".
+Registrada en Docs/CHANGELOG.txt.
+
 GATES
 -----
 GATE 13.4-A — ¿El primer pago fue recibido antes de arrancar?
-  Falla → no arrancar. Sin excepción.
+  Falla → no arrancar.
+  EXCEPCIÓN TEMPORAL (fase arranque, con sunset): durante el arranque se
+  satisface con pago previo O con la PRUEBA DE COMPROMISO de tres partes
+  (ver CLÁUSULA DE FASE ARRANQUE arriba). Vence tras los primeros 3 casos
+  de portfolio → vuelve a "sin excepción".
 
 GATE 13.4-B — ¿El kickoff meeting tuvo lugar y el Brief Interno está completo?
   Falla → no activar M0.
@@ -190,7 +224,7 @@ OUTPUT
 
 PROMPT PARA CLAUDE
 ------------------
-No arrancar ningún trabajo sin pago confirmado.
+No arrancar ningún trabajo sin pago confirmado. (Excepción temporal de fase arranque, con sunset tras los primeros 3 casos de portfolio: se satisface también con la PRUEBA DE COMPROMISO de tres partes — ver CLÁUSULA DE FASE ARRANQUE.)
 No activar M0 sin el Brief Interno completo post-kickoff.
 No hacer deploy sin el pago final confirmado.
 Al entregar el proyecto: proponer el retainer en el mismo mensaje.

@@ -82,6 +82,17 @@ Entrar a un proyecto sin calificar bien al cliente
 es la causa más frecuente de proyectos que no cierran,
 clientes que no pagan y trabajo que no se puede mostrar en el portfolio.
 
+NOTA — EXCEPCIÓN TEMPORAL DE FASE ARRANQUE (con sunset)
+-------------------------------------------------------
+Durante la fase de arranque de Webbing (hasta cerrar los primeros 3 casos de
+portfolio), GATE 13.4-A admite una excepción temporal: se satisface con pago
+previo O con una PRUEBA DE COMPROMISO de tres partes (acuerdo firmado de
+intercambio con derechos de portfolio + deadline de materiales del cliente +
+seña simbólica). No apaga la regla de cobro: amplía qué la satisface, solo en
+arranque. Vence automáticamente tras el 3er caso de portfolio → GATE 13.4-A
+vuelve a "pago previo, sin excepción". Detalle completo en M13.4 (Closing &
+Onboarding). Registrada en Docs/CHANGELOG.txt.
+
 RELACIÓN CON EL RESTO DEL SISTEMA
 -----------------------------------
 M13 alimenta M0 con un brief pre-calificado.

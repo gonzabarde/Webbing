@@ -1,0 +1,67 @@
+WEBBING — SYSTEM CHANGELOG
+==========================
+
+Propósito: bitácora de cambios de arquitectura del sistema Webbing.
+Registra qué cambió, cuándo y —si aplica— su condición de vencimiento (sunset).
+Entradas de más reciente a más antigua.
+Autoridad: los cambios los aprueba y aplica el humano (SKILL.md secciones 7 y 13).
+
+--------------------------------------------------------------------------------
+
+2026-06-26 — GATE 13.4-A: EXCEPCIÓN TEMPORAL DE FASE ARRANQUE (CON SUNSET)
+-------------------------------------------------------------------------
+Módulos afectados: M13.4 (Closing & Onboarding) + nota en M13.0 (Overview).
+Estado: ACTIVA.
+
+Cambio: durante la fase de arranque de Webbing (hasta cerrar los primeros 3
+casos de portfolio), GATE 13.4-A se satisface con pago previo O con una PRUEBA
+DE COMPROMISO de tres partes (los tres juntos, no alguno):
+  1. Acuerdo firmado de intercambio: alcance fijo + entregables + derechos
+     explícitos de uso en portfolio, testimonio y caso.
+  2. Deadline del cliente para entregar sus materiales (si no cumple, se pausa).
+  3. Seña simbólica (skin in the game).
+
+Razón: en arranque, exigir el pago previo total bloquea el modelo de intercambio
+(web a cambio de portfolio + testimonio) necesario para cerrar los primeros casos
+y construir prueba social.
+
+Qué NO cambia: la regla base de cobro no se apaga. El pago previo sigue siendo el
+estándar; la excepción solo AMPLÍA qué satisface el gate, y solo durante arranque.
+El filtro anti-ghosteo / anti-scope-creep se preserva vía la prueba de compromiso.
+
+SUNSET (condición de vencimiento): tras el 3er caso de portfolio cerrado, la
+excepción VENCE automáticamente. GATE 13.4-A vuelve a "pago previo, sin excepción".
+Acción al vencer: quitar la CLÁUSULA DE FASE ARRANQUE de M13.4, quitar la nota de
+M13.0, y registrar el cierre de esta entrada acá.
+
+--------------------------------------------------------------------------------
+
+2026-06-26 — ALTA DE MÓDULO: M16 — PHASE HANDOFF PROTOCOL
+--------------------------------------------------------
+Capa nueva: INFRAESTRUCTURA (transversal, entre sesiones). Sin sunset (permanente).
+Comprime el estado de un proyecto en un punto de corte y lo transfiere a una
+sesión nueva. Transfiere decisiones y deudas, no razonamiento. Se usa cuando el
+contexto se satura (~70-75%), al cerrar una fase o al retomar tras una pausa.
+
+--------------------------------------------------------------------------------
+
+2026-06-26 — ALTA DE MÓDULO: M15 — SITE AUDIT & DIAGNOSIS ENGINE
+---------------------------------------------------------------
+Capa nueva: ADQUISICIÓN (transversal, pre-venta). Sin sunset (permanente).
+Audita el sitio de un prospecto (no cliente aún) y produce un Audit Handoff que
+alimenta a M13 (scope, Qualification Score, argumento de valor). Distinto de M0
+(M0 = cliente cerrado, discovery interno; M15 = prospecto, pre-venta).
+Mejora posterior aplicada: benchmark competitivo obligatorio en la capa de
+estrategia (hallazgo surgido al correr M15 sobre un caso real).
+
+--------------------------------------------------------------------------------
+
+2026-06-26 — ALTA DE MÓDULO: M14 — RETROSPECTIVE & SYSTEM EVOLUTION ENGINE
+-------------------------------------------------------------------------
+Capa nueva: EVOLUCIÓN (transversal, post-proyecto). Sin sunset (permanente).
+Tras cada proyecto entregado, audita el proyecto cerrado (gates, calidad de
+output, intervenciones manuales, divergencias, precisión de estimación) y PROPONE
+mejoras al sistema. Propone, no aplica: el humano aprueba cada cambio (secciones
+7 y 13). Operacionaliza la sección 13 del SKILL.md.
+
+--------------------------------------------------------------------------------
