@@ -8,6 +8,25 @@ Autoridad: los cambios los aprueba y aplica el humano (SKILL.md secciones 7 y 13
 
 --------------------------------------------------------------------------------
 
+2026-06-26 — DISCIPLINA DE CONOCIMIENTO CONGELADO: PRINCIPIO 9 (M11.01) + REFUERZO M0
+----------------------------------------------------------------------------------
+Módulos afectados: M11.01 (AI Operating Principles) + M0 (Discovery & Research).
+Estado: ACTIVA. Permanente (sin sunset).
+
+Cambio: se agregó el Principio 9 a la constitución (M11.01): el conocimiento factual
+de mercado/competencia/tecnología embebido en cualquier módulo (o en el entrenamiento)
+es una HIPÓTESIS a verificar en vivo, no un dato cerrado. Con violation matrix, test y
+fail condition. Refuerzo en M0 (paso 5 y prompt): competidores y estado de categoría se
+relevan con research vivo, no de memoria.
+
+Razón: la disciplina ya existía en bolsones (M12.9 ciclo de vida de referencias; B2
+"confirmar PSP antes de diseñar") pero no estaba nombrada como principio, así que se
+aplicaba inconsistente. M0 se rompió en un run de práctica por servir una lista de
+competidores de memoria. El Principio 9 generaliza la disciplina a todo el sistema y a
+módulos futuros, sin marcas dispersas.
+
+--------------------------------------------------------------------------------
+
 2026-06-26 — GATE 13.4-A: EXCEPCIÓN TEMPORAL DE FASE ARRANQUE (CON SUNSET)
 -------------------------------------------------------------------------
 Módulos afectados: M13.4 (Closing & Onboarding) + nota en M13.0 (Overview).

@@ -162,6 +162,11 @@ PROCESO CLAUDE
    - aspiracionales
    - indirectos
    - patrones comunes de la categoría
+   REGLA DE FRESCURA (M11.01, Principio 9): los competidores y el estado de la
+   categoría se relevan con research VIVO, no desde conocimiento embebido o de
+   entrenamiento. Una lista de competidores de memoria es una hipótesis vencida hasta
+   verificarla. Si no se puede verificar en vivo, marcar el hallazgo como confianza
+   BAJA, nunca como dato cerrado.
 
 6. Detectar patrones del sector.
    Claude debe listar:
@@ -577,6 +582,8 @@ Primero revisá los Red Flags del proyecto y registrá cuántos están activos.
 Si hay 4 o más, detenete y avisá antes de continuar.
 Después entendé el negocio real, la audiencia con las 5 dimensiones del Customer Reality Layer,
 la categoría y la competencia.
+Relevá competencia y estado de categoría con research vivo, no de memoria: el conocimiento
+embebido sobre el mercado es hipótesis a verificar (M11.01, Principio 9), no dato cerrado.
 Levantá evidencia, detectá restricciones, identificá oportunidades y puntualas con el
 Opportunity Scoring expandido usando los criterios explícitos por dimensión.
 Asigná nivel de confianza a cada hallazgo.
