@@ -1,4 +1,4 @@
-CDL-1 — PROJECT INTELLIGENCE (v1)
+CDL-1 — PROJECT INTELLIGENCE (v1.1)
 ==================================
 
 OBJETIVO
@@ -6,6 +6,8 @@ OBJETIVO
 Identificar qué tipo de proyecto es realmente, qué exige y qué variables
 importan más para ese caso.
 Este módulo evita tratar todos los proyectos como si fueran iguales.
+Su clasificación no termina en qué dimensiones pesar: deriva el ESQUELETO de
+arquitectura de información del proyecto (IA Archetype + IA Spec), que alimenta GATE 2 y GATE 3.
 
 INPUTS
 ------
@@ -62,6 +64,13 @@ PROCESO CLAUDE
 
 7. Producir el Project Profile.
 
+8. Derivar el IA Archetype (arquitectura de información).
+   La clasificación de los pasos 1-3 (tipo + objetivo dominante) determina el ESQUELETO
+   del sitio, no solo qué dimensiones pesar. Mapear a un arquetipo de la IA ARCHETYPE
+   LIBRARY y producir la IA Spec. El esqueleto es una DERIVACIÓN del arquetipo, no una
+   plantilla reusable: si coincide con el de un proyecto de otro arquetipo, está mal
+   derivado (M11 Principio 10).
+
 ÁRBOLES DE DECISIÓN
 -------------------
 Estos árboles producen una salida directa, no solo una pregunta.
@@ -103,6 +112,81 @@ PROJECT PROFILE OUTPUT
   Medio: [listar]
   Bajo: [listar]
 
+IA ARCHETYPE LIBRARY
+--------------------
+La clasificación (tipo + objetivo dominante) mapea a UN arquetipo de arquitectura.
+El arquetipo define el esqueleto. Mismo arquetipo puede repetir esqueleto; arquetipos
+distintos NO. Los subtipos finos (clínica vs. odontología) colapsan en el mismo
+arquetipo: lo que cambia el esqueleto es el journey de compra, no el rubro.
+
+1. TRANSACCIÓN-FIRST
+   Proyectos: ecommerce, catálogo, marketplace, suscripciones, venta digital, commerce B2C/B2B.
+   Objetivo: vender ya / reducir fricción de compra.
+   Esqueleto: hero con entrada rápida al catálogo o quiz -> grilla/producto -> prueba
+     social PEGADA al producto (reviews/rating) -> recompra/loyalty -> checkout corto.
+   Job dominante: meter al usuario al catálogo o al producto lo antes posible.
+   NO va: "quiénes somos" largo arriba; bio del fundador antes del producto.
+
+2. LEAD ALTA-CONSIDERACIÓN
+   Proyectos: SaaS B2B (landing), consultora, jurídico, contable, ingeniería, coaching,
+     servicios profesionales de ticket alto.
+   Objetivo: generar lead calificado / construir confianza antes del pedido.
+   Esqueleto: hero centrado en el problema -> método o "cómo funciona" -> prueba (casos,
+     resultados, testimonios) -> oferta/planes -> objeciones (FAQ) -> contacto/demo.
+   Job dominante: construir confianza suficiente para que el usuario pida contacto.
+   NO va: catálogo tipo ecommerce; CTA de compra directa.
+
+3. TURNO / SERVICIO LOCAL
+   Proyectos: clínica, estética, odontología, nutrición, psicología, salud, peluquería,
+     cualquier servicio presencial con reserva.
+   Objetivo: que el usuario reserve un turno.
+   Esqueleto: hero -> credibilidad (quién atiende + credenciales) -> servicios/tratamientos
+     -> prueba -> HORARIOS + UBICACIÓN + RESERVAR como sección de primera clase (no al pie)
+     -> contacto rápido (WhatsApp).
+   Job dominante: reservar fácil + dar la info práctica (cuándo, dónde) sin fricción.
+   NO va: horarios/ubicación escondidos en el footer; checkout de ecommerce.
+
+4. BRAND EXPERIENCE / PERCEPCIÓN
+   Proyectos: luxury, fashion, arquitectura, interiorismo, estudio creativo, agencia,
+     marca personal, portfolio, showcase.
+   Objetivo: percepción / deseo / sofisticación. La conversión es secundaria.
+   Esqueleto: inmersión visual -> narrativa de marca -> trabajo/showcase -> filosofía/valores
+     -> contacto. Menos CTA-driven, más experiencia.
+   Job dominante: transmitir nivel y diferenciación; que el usuario SIENTA la marca.
+   NO va: tira de stats genérica, pricing tiers, FAQ de objeciones tipo SaaS.
+
+5. AUTORIDAD / CONTENIDO
+   Proyectos: educación, academia, plataforma educativa, media, blog, biblioteca digital.
+   Objetivo: autoridad / educación / recirculación.
+   Esqueleto: hero de valor -> temas/categorías -> contenido o cursos -> prueba (alumnos,
+     resultados) -> suscripción/recirculación.
+   Job dominante: dar profundidad y mantener al usuario navegando contenido.
+   NO va: estructura de one-pager con CTA único.
+
+6. PLATAFORMA / PRODUCTO FUNCIONAL
+   Proyectos: dashboard, admin, CRM, ERP, portal de clientes/empleados, app con login,
+     marketplace funcional, booking.
+   Objetivo: USO del producto, no marketing.
+   Esqueleto: NO es un esqueleto de landing. Es app shell: auth -> onboarding -> core loop.
+     La IA la gobiernan M8 y B0-B6, no esta librería.
+   Job dominante: que el usuario use el producto. La landing de marketing (si existe) es
+     un proyecto aparte (arquetipo 1, 2 o 4).
+   NO va: tratar la app como un sitio de marketing.
+
+REGLA DE HÍBRIDOS (IA): si un proyecto combina arquetipos (ej: marca de lujo que también
+vende = 4 + 1), el esqueleto se construye sobre el arquetipo del OBJETIVO DOMINANTE, no
+se promedian. Documentar cuál mandó y por qué.
+
+IA SPEC OUTPUT
+--------------
+- Arquetipo elegido (1-6):
+- Justificación (1 línea: por qué este arquetipo dado tipo + objetivo):
+- Orden de secciones (el esqueleto concreto de ESTE proyecto):
+- Job-to-be-done por sección (qué etapa del journey / qué objeción resuelve cada una):
+- Camino de conversión (de dónde entra el usuario a dónde sale):
+- DIFF contra el esqueleto default (hero -> nosotros -> servicios -> testimonios -> CTA):
+  qué secciones coinciden y por qué están justificadas en ESTE caso.
+
 TESTS
 -----
 - ¿El proyecto está clasificado en un tipo específico?
@@ -110,6 +194,8 @@ TESTS
 - ¿La complejidad y la sensibilidad de error están en el mismo análisis?
 - ¿El campo DIMENSIONES PRIORITARIAS está completo?
 - ¿Si hay híbrido, está documentado qué perfil se eligió?
+- ¿Se derivó un IA Archetype y se completó la IA Spec?
+- ¿El esqueleto difiere del de proyectos de otro arquetipo (no es el esqueleto default genérico)?
 
 OUTPUT
 ------
@@ -125,6 +211,7 @@ DELIVERABLES
 ------------
 - Project Profile
 - Dimensiones Prioritarias para CDL-2
+- IA Spec (arquetipo + orden de secciones + job-to-be-done por sección + camino de conversión + diff contra el default)
 
 PROMPT PARA CLAUDE
 ------------------
@@ -135,4 +222,6 @@ Usá los árboles de decisión para determinar el peso de cada dimensión DEEP.
 Si es un proyecto híbrido, aplicá el perfil del tipo de mayor complejidad.
 Producí el Project Profile con el campo DIMENSIONES PRIORITARIAS completo.
 Ese campo es el output crítico: CDL-2 no puede funcionar sin él.
-No critiques todavía. No propongas diseño. Solo clasificá y pesá.
+Derivá además el IA Archetype y completá la IA Spec: el esqueleto del sitio sale de acá,
+no de una plantilla por defecto (ver M11 Principio 10).
+No critiques todavía. No propongas diseño visual. Clasificá, pesá y derivá el esqueleto.

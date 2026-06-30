@@ -8,6 +8,39 @@ Autoridad: los cambios los aprueba y aplica el humano (SKILL.md secciones 7 y 13
 
 --------------------------------------------------------------------------------
 
+2026-06-29 — IA ARCHETYPE: DERIVACIÓN DE ARQUITECTURA DE INFORMACIÓN (CDL-1) + PRINCIPIO 10 (M11.01) + GATES
+-----------------------------------------------------------------------------------------------------------
+Módulos afectados: CDL-1 (Project Intelligence, v1->v1.1), M11.01 (AI Operating
+Principles, v3->v3.1), SKILL.md (GATE 2 y GATE 3). Estado: ACTIVA. Permanente (sin sunset).
+
+Cambio: CDL-1 ahora deriva un IA ARCHETYPE y produce una IA SPEC (orden de secciones +
+job-to-be-done por sección + camino de conversión + diff contra el esqueleto default),
+reusando su clasificación existente (tipo + objetivo dominante). Seis arquetipos:
+transacción-first, lead alta-consideración, turno/servicio local, brand experience,
+autoridad/contenido, plataforma funcional. Se agregó el Principio 10 a la constitución
+(M11.01): la arquitectura de información se DERIVA del arquetipo, no se reusa como
+plantilla; dos proyectos de distinto arquetipo no pueden compartir esqueleto (con
+violation matrix, test y fail condition). GATE 2 ahora exige la IA Spec derivada y
+justificada; GATE 3 exige que el build la respete.
+
+Razón: se compararon tres sitios reales (Move On, Espacio Tita, Glow Factor) — dos
+hechos sin Webbing, uno con — y los tres compartían el mismo esqueleto. El denominador
+común era el operador, no la herramienta: el sistema producía output templated a nivel
+de arquitectura, justo lo que la sección 2 del SKILL.md dice que existe para evitar.
+CDL-1 ya clasificaba el proyecto pero su salida terminaba en "qué dimensiones pesar";
+nunca se convertía en una decisión de arquitectura de información.
+
+Qué NO cambia: no se creó módulo nuevo (se evaluó y descartó un "M17" propuesto por ser
+duplicado de la clasificación de CDL-1, §13). No se tocó el orden de ejecución ni se
+agregaron gates: la IA Spec cuelga de GATE 2 y GATE 3 existentes.
+
+Descartado en el camino: taxonomía de ~80 subtipos de industria — no cambia el esqueleto
+(colapsa en los 6 arquetipos) y meterla rompería el Principio 9 (conocimiento de industria
+embebido sin reps). Se guarda como mapa de mercado para decisión de nicho (capa M13), no
+en el pipeline de proyecto.
+
+--------------------------------------------------------------------------------
+
 2026-06-26 — DISCIPLINA DE CONOCIMIENTO CONGELADO: PRINCIPIO 9 (M11.01) + REFUERZO M0
 ----------------------------------------------------------------------------------
 Módulos afectados: M11.01 (AI Operating Principles) + M0 (Discovery & Research).

@@ -1,4 +1,4 @@
-M11.0 — AI OPERATING PRINCIPLES (v3)
+M11.0 — AI OPERATING PRINCIPLES (v3.1)
 ======================================
 
 OBJETIVO
@@ -109,6 +109,28 @@ orienta la búsqueda, nunca la reemplaza.
   Modelo existente: M12.9 (ciclo de vida de referencias) y B2 (PSP por jurisdicción,
     "confirmar antes de diseñar") ya aplican esta disciplina; este principio la generaliza.
 
+PRINCIPIO 10 — LA ARQUITECTURA DE INFORMACIÓN SE DERIVA, NO SE REPITE
+El esqueleto de un sitio (qué secciones, en qué orden, con qué camino de conversión)
+es una DECISIÓN derivada del tipo de proyecto y su objetivo (CDL-1 -> IA Archetype),
+no una plantilla por defecto que se reusa entre clientes. Dos proyectos de distinto
+arquetipo no pueden tener el mismo esqueleto.
+
+  VIOLATION MATRIX:
+  Síntoma: el output usa el esqueleto genérico (hero -> nosotros -> servicios ->
+    testimonios -> CTA) sin haberlo derivado del arquetipo del proyecto.
+  Síntoma 2: dos proyectos de distinto tipo/objetivo (ej: ecommerce y negocio de
+    turnos) salen con el mismo orden de secciones.
+  Impacto: output templated. El sistema converge a la estructura promedio, que es
+    exactamente lo que la sección 2 del SKILL.md dice que Webbing existe para evitar.
+  Detección: ¿la IA Spec de este proyecto difiere de la de un proyecto de otro
+    arquetipo? ¿Cada sección tiene un job-to-be-done atado a una etapa del journey,
+    o está porque "siempre va"?
+  Corrección: derivar el esqueleto desde el IA Archetype de CDL-1; diffear contra el
+    esqueleto default y justificar cada sección que coincida. Si el esqueleto es el
+    genérico sin justificación por sección, bloquear en GATE 2 y rehacer la IA Spec.
+  Modelo existente: CDL-1 (IA ARCHETYPE LIBRARY + IA SPEC OUTPUT) produce la derivación;
+    este principio la vuelve obligatoria y detectable.
+
 MEMORY USAGE POLICY
 --------------------
 Política de uso del contexto de la conversación.
@@ -205,6 +227,7 @@ TESTS
 - ¿La Memory Usage Policy está siendo aplicada?
 - ¿Claude está usando contexto descartado o viejo?
 - ¿Claude verificó en vivo el conocimiento factual/de mercado, en vez de servir el embebido como dato?
+- ¿La arquitectura de información se derivó del arquetipo (CDL-1), en vez de reusar el esqueleto default?
 
 OUTPUT
 ------
@@ -225,13 +248,15 @@ FAIL CONDITIONS
 - Claude usa contexto descartado para justificar nuevas recomendaciones.
 - Claude no señala inconsistencias entre el contexto previo y la tarea actual.
 - Claude sirve conocimiento factual/de mercado embebido como dato cerrado sin verificarlo en vivo.
+- Claude reusa el esqueleto genérico (hero -> nosotros -> servicios -> testimonios -> CTA) sin derivarlo del arquetipo del proyecto.
 
 PROMPT PARA CLAUDE
 ------------------
-Antes de responder, verificar los 9 principios.
+Antes de responder, verificar los 10 principios.
 Para cada uno: ¿estoy violando este principio en esta respuesta?
 Si hay una violación activa: corregirla antes de entregar.
 Tratar el conocimiento factual/de mercado/tecnología embebido como hipótesis a verificar en vivo, no como dato cerrado.
+Tratar el esqueleto del sitio como derivación del arquetipo (CDL-1), no como plantilla reusable.
 Aplicar la Memory Usage Policy: usar solo el contexto relevante y activo.
 Si hay inconsistencia entre contexto previo y tarea actual: señalarla primero.
 Reducir incertidumbre, evitar complejidad innecesaria, mostrar duda cuando exista,
