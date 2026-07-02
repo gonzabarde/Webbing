@@ -1,4 +1,4 @@
-M10 — PRODUCTION OPERATING SYSTEM (v2)
+M10 — PRODUCTION OPERATING SYSTEM (v2.1)
 ========================================
 
 PROPÓSITO GENERAL
@@ -1006,6 +1006,11 @@ Contenido:
   [ ] Links verificados (sin 404s)
   [ ] Metadata y OG images verificadas
   [ ] Analytics configurado y evento de prueba registrado
+  [ ] Sitio deployado recorrido en vivo como usuario real (no solo el build/código):
+      cada filtro/facet visible devuelve ≥1 resultado, las imágenes cargan (no
+      placeholders por error de datos), sin estados muertos no señalizados. El código
+      puede pasar QA y el sitio en producción igual mostrar datos rotos (slugs,
+      duplicados, campos vacíos del seed) — esto solo lo atrapa navegar el sitio real.
 
 Operativo:
   [ ] Backups configurados o deployment anterior disponible

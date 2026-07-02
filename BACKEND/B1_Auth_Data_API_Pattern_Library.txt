@@ -1,4 +1,4 @@
-B1 — AUTH, DATA & API PATTERN LIBRARY (v1)
+B1 — AUTH, DATA & API PATTERN LIBRARY (v1.1)
 ==========================================
 
 UBICACIÓN EN EL SISTEMA
@@ -154,9 +154,30 @@ PATRÓN D6 — SEEDS Y DATOS INICIALES
     - Separar seed de datos ESENCIALES (roles, planes — van a prod) de seed de
       datos de PRUEBA (usuarios fake — solo dev).
     - Seeds idempotentes: correrlos dos veces no duplica.
+    - Todo valor DERIVADO (slug, código, hash) se genera con una función validada
+      contra su forma esperada (ej: slugify que remueve diacríticos correctamente),
+      no se asume que "anda" sin probarlo contra casos con acentos/ñ/caracteres especiales.
+    - El upsert de cada entidad setea TODOS los campos del def tanto en create como en
+      update. Un campo que el modelo espera (ej: images) y el upsert no persiste queda
+      silenciosamente vacío aunque el resto del pipeline (UI, componente) ya lo soporte.
+    - Provenance real (Principio 9, M11.01): toda entidad de catálogo/contenido seedeada
+      traza a una fuente real verificada. Si falta cobertura para un filtro/facet, se
+      busca una entidad real que la dé — no se fabrica una entidad inventada para
+      "tapar" el hueco. Dato fabricado servido como real es lo que el Principio 9 pide evitar.
+    - Chequeo post-seed: una query que confirme 0 registros con valores derivados mal
+      formados y 0 campos esenciales vacíos antes de dar el seed por terminado.
   Cómo se rompe:
     - Datos de prueba que se filtran a producción.
     - Seed no idempotente → duplicados al re-correr.
+    - Valor derivado mal generado (slug sin remover diacríticos) → entidades duplicadas
+      o inaccesibles en producción; visible recién navegando el sitio, no en el código.
+    - Arreglar el bug de generación SIN limpiar los registros ya persistidos con el valor
+      viejo — el fix de código no revierte los datos que ya se escribieron mal. Un bug de
+      seed son DOS pasos: corregir el código y limpiar/backfillear lo ya persistido
+      (con query de verificación antes de borrar).
+    - Ofrecer un filtro/facet de navegación sin garantizar que devuelva algún resultado —
+      el usuario hace clic y llega a un hueco. Toda opción de navegación visible necesita
+      ≥1 entidad real que la cubra, o no se muestra.
 
 
 =====================================================================
@@ -492,6 +513,7 @@ Verificar:
 - ¿La forma de errores no filtra detalles internos (P4)?
 - ¿Las migraciones están versionadas y son forward-only (D3)?
 - ¿Las operaciones críticas de concurrencia (stock/saldos/cupos) son atómicas (P7)?
+- ¿El seed pasó el chequeo post-corrida: valores derivados válidos, campos esenciales completos, cada opción de navegación con ≥1 resultado, sin datos fabricados sin fuente real (D6)?
 
 Falla cualquiera → no construir. Estos son los que filtran datos o corrompen estado en producción.
 
@@ -524,6 +546,11 @@ FAIL CONDITIONS
 - Migración editada después de aplicada en prod.
 - Datos sensibles en logs.
 - Operación crítica (stock/saldo/cupo) sin atomicidad → overselling o estado corrupto.
+- Seed con valor derivado mal formado (slug sin normalizar) sin chequeo post-corrida.
+- Bug de generación de seed corregido en el código pero sin limpiar los datos ya
+  persistidos con el valor viejo.
+- Filtro/facet de navegación visible sin al menos una entidad real que lo cubra.
+- Entidad de catálogo/contenido fabricada sin trazar a una fuente real verificada (Principio 9).
 - Cambio de contrato de API in-place que rompe un consumidor externo.
 - Versión de API apagada sin confirmar que nadie la usa.
 

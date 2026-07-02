@@ -8,6 +8,40 @@ Autoridad: los cambios los aprueba y aplica el humano (SKILL.md secciones 7 y 13
 
 --------------------------------------------------------------------------------
 
+2026-06-29 (2) — RETROSPECTIVA GLOW FACTOR (M14): DISCIPLINA DE SEEDS + AUDITORÍA EN VIVO POST-DEPLOY
+----------------------------------------------------------------------------------------------------
+Módulos afectados: B1 (Auth/Data/API Pattern Library, v1->v1.1, Patrón D6 + gate +
+fail conditions), M10 (Production Operating System, v2->v2.1, M10.7 Checklist de
+Lanzamiento / Contenido). Origen: M14 corrido sobre el proyecto Glow Factor entregado
+(build de aprendizaje/portfolio). Estado: ACTIVA. Permanente.
+
+Cambio en B1-D6 (Seeds): (a) todo valor derivado (slug) se genera con función validada
+contra diacríticos/casos especiales; (b) el upsert setea TODOS los campos del def en
+create Y update; (c) provenance real — toda entidad de catálogo seedeada traza a una
+fuente real, nunca se fabrica una para cubrir un facet (extiende Principio 9 a la capa
+de ejecución de datos, sin re-proponerlo); (d) un bug de generación de seed es DOS
+arreglos — el código Y los datos ya persistidos con el valor viejo, no uno solo; (e)
+toda opción de navegación (filtro/facet) visible necesita ≥1 entidad real que la cubra.
+Sumado a GATE DE APROBACIÓN y FAIL CONDITIONS de B1.
+
+Cambio en M10.7: nuevo ítem en el Checklist de Lanzamiento, sección Contenido —
+recorrer el sitio deployado en vivo como usuario real (filtros devuelven resultados,
+imágenes cargan, sin estados muertos) antes de dar el proyecto por entregado. No
+requirió tocar SKILL.md: M10.7 ya tiene su propio gate final (GATE FINAL H).
+
+Razón: en Glow Factor, 4 bugs de producción (slug roto/duplicado, facets sin
+cobertura, upsert que no seteaba imágenes, 3 productos fabricados en el seed inicial)
+se detectaron únicamente navegando el sitio deployado en vivo — ningún gate ni QA de
+código los atrapó. Patrón de fondo (M14): el sistema es fuerte en QA de código y ciego
+en integridad de datos y en lo que se ve en producción.
+
+Descartado: propuesta de tests automatizados de checkout/webhook/stock como ítem de
+gate (P6 de la retrospectiva) — diferida hasta activar pagos reales (Mercado Pago
+seguía apagado en este proyecto); gatear tests de cobro sobre un checkout que no cobra
+es complejidad sin problema todavía.
+
+--------------------------------------------------------------------------------
+
 2026-06-29 — IA ARCHETYPE: DERIVACIÓN DE ARQUITECTURA DE INFORMACIÓN (CDL-1) + PRINCIPIO 10 (M11.01) + GATES
 -----------------------------------------------------------------------------------------------------------
 Módulos afectados: CDL-1 (Project Intelligence, v1->v1.1), M11.01 (AI Operating
