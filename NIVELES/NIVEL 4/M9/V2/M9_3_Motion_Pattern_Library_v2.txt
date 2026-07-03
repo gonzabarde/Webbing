@@ -1,4 +1,4 @@
-M9.3 — MOTION PATTERN LIBRARY (v2)
+M9.3 — MOTION PATTERN LIBRARY (v2.1)
 ====================================
 
 OBJETIVO
@@ -208,6 +208,37 @@ CUÁNDO EVITAR MOTION
 - Cuando el patrón de motion no está conectado al concepto aprobado.
 - Cuando el proyecto está en un tipo de categoría donde el motion resta credibilidad.
 
+LIBRERÍAS DE COMPONENTES DE ANIMACIÓN (ej. React Bits, Aceternity, Magic UI)
+-----------------------------------------------------------------------------
+Este módulo decide QUÉ patrón usar (taxonomía, budget, percepción, límites por
+categoría). Las librerías de componentes animados son acelerador de CÓMO
+implementarlo una vez decidido — nunca al revés. El orden es siempre:
+concepto (M4) -> percepción (M4.5) -> dirección visual (M5) -> patrón de motion
+(este archivo) -> recién ahí, opcionalmente, acelerador de implementación.
+Si una librería sugiere el efecto ANTES de que el patrón esté decidido, el orden
+se invirtió y es el mismo riesgo de sameness que el Principio 10 corrige a nivel
+de arquitectura, ahora a nivel de componente.
+
+CÓMO TRAERLO (evita conocimiento congelado — Principio 9):
+  No copiar código de memoria ni mantener un catálogo estático embebido en Webbing
+  (se desactualiza). Instalar en el momento de build, vía CLI, que trae la versión
+  vigente del componente:
+    npx shadcn@latest add @react-bits/<ComponentName>-TS-TW
+    npx jsrepo add github/DavidHDev/react-bits/src/ts-tailwind/<Categoria>/<Componente>
+  Licencia MIT + Commons Clause: uso comercial permitido, el código queda propio
+  del proyecto tras instalarlo — no es bloqueante legal.
+
+TEST ANTI-CLONACIÓN (M12) OBLIGATORIO ANTES DE SHIPPEAR:
+  ¿Alguien que conoce esta librería (o librerías similares del mismo estilo)
+  reconocería el efecto tal cual y nombraría la fuente? Si sí, no pasa. Extraer el
+  MECANISMO (cómo resuelve el timing/la interacción) y adaptarlo a los valores ya
+  decididos en este archivo (timing, easing) y en M5 (signature, color) hasta que
+  deje de ser literalmente reconocible. Nunca copiar el efecto default sin ajustar.
+
+PROHIBIDO: dejar que el catálogo disponible de una librería sea la fuente de
+selección del patrón Narrativo o de la Innovación de M5.5. La librería acelera
+código de un patrón ya elegido por criterio; no elige el patrón ni sustituye a M5.5.
+
 FALLBACK PREFERS-REDUCED-MOTION
 ---------------------------------
 Heredar el fallback definido en M8.3.
@@ -222,6 +253,8 @@ TESTS
 - ¿La tabla Motion × Percepción fue consultada?
 - ¿Los límites por categoría fueron verificados?
 - ¿El fallback prefers-reduced-motion está documentado?
+- Si se usó una librería de componentes de animación: ¿el patrón se eligió ANTES
+  de mirar la librería, y pasó el test anti-clonación?
 
 OUTPUT
 ------
@@ -231,6 +264,8 @@ OUTPUT
 - Límites de categoría verificados
 - Exclusiones con razón
 - Fallback prefers-reduced-motion
+- Si aplica: librería usada como acelerador de implementación + resultado del test
+  anti-clonación
 
 PROMPT PARA CLAUDE
 ------------------
@@ -242,3 +277,6 @@ Consultá la tabla Motion × Percepción para confirmar que los patrones elegido
 no contradicen la percepción objetivo.
 Verificá los límites por categoría.
 Máximo 1 patrón narrativo. Si no es necesario, no lo uses.
+Recién después de elegir el patrón, si querés acelerar la implementación con una
+librería de componentes animados, instalá el componente vigente vía CLI (no lo
+copies de memoria) y corré el test anti-clonación antes de darlo por listo.

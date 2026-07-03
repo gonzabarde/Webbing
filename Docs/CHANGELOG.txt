@@ -8,6 +8,68 @@ Autoridad: los cambios los aprueba y aplica el humano (SKILL.md secciones 7 y 13
 
 --------------------------------------------------------------------------------
 
+2026-06-29 (4) — M9.3: LIBRERÍAS DE COMPONENTES DE ANIMACIÓN COMO ACELERADOR DE IMPLEMENTACIÓN (React Bits y similares)
+---------------------------------------------------------------------------------------------------------------------
+Módulo afectado: M9.3 (Motion Pattern Library, v2->v2.1). Estado: ACTIVA. Permanente.
+
+Cambio: nueva sección que regula el uso de librerías de componentes animados
+(React Bits y equivalentes) dentro de la Fase de Implementación. Reglas: (1) orden
+fijo — concepto/percepción/dirección visual/patrón de motion se deciden PRIMERO; la
+librería acelera código de un patrón ya elegido, nunca elige el patrón ni sustituye a
+M5.5; (2) instalación vía CLI en el momento del build (shadcn/jsrepo), nunca código
+embebido/copiado de memoria en Webbing — evita conocimiento congelado por diseño
+(Principio 9), sin necesitar catálogo estático que se desactualice; (3) test
+anti-clonación de M12 obligatorio antes de shippear cualquier componente usado así.
+
+Razón: el operador consultó sobre integrar reactbits.dev (librería de 130+
+componentes React animados) y pidió pasar un .zip completo de los componentes para
+embeberlos en el sistema. Se rechazó esa vía: (a) violaría el Principio 2 (bulto de
+código sin necesidad probada en un sistema de patrones/criterio, no de componentes);
+(b) violaría el Principio 9 (un zip es una foto fija de una librería que se actualiza
+semanalmente). Research vivo confirmó que la librería ya resuelve esto sola vía CLI
+(trae la versión vigente en cada instalación) — la solución correcta era documentar
+la REGLA de uso, no el contenido de la librería.
+
+--------------------------------------------------------------------------------
+
+2026-06-29 (3) — RETROSPECTIVA CUORE (M14): CONSISTENCIA DE INTERFAZ EN LA CAPA CDL
+-----------------------------------------------------------------------------------
+Módulos afectados: CDL-1 (v1.1->v1.2, POSICIÓN NUMÉRICA DE LA SECCIÓN CRÍTICA en IA
+SPEC OUTPUT + TESTS), CDL-4 (v1->v1.1, mapeo de dimensiones 8->7 + techo de escala /10),
+CDL-5 (v1->v1.1, Regla de Conflicto extendida a dimensión Alta). Origen: M14 corrido
+sobre la corrida completa de CUORE (prospecto, práctica de sistema, no cliente cerrado;
+GATE 1→GATE 2→GATE 3 con 6 incidentes + 1 acierto capturados en caliente en
+cuore-web/INCIDENTES_M14.md). Estado: ACTIVA. Permanente.
+
+Hallazgo de fondo (no son 3 bugs sueltos, es un solo defecto de interfaz): la capa CDL
+tiene inconsistencias entre sus propios sub-módulos. CDL-1/CDL-2 pesan 8 dimensiones
+con 4 niveles (Crítico/Alto/Medio/Bajo); CDL-4 tiene un scorecard fijo de 7 filas sin
+Process ni Brand Translation, y su Regla de Conflicto en CDL-5 solo cubría 2 de esos 4
+niveles (Crítica y Media/Baja, sin caso para Alta). Ambos vacíos obligaban a improvisar
+un proxy o un criterio conservador cada corrida, sin quedar codificado.
+
+Cambios: (1) CDL-1: la IA Spec ahora exige reportar la POSICIÓN NUMÉRICA de la sección
+crítica ("N de M secciones") y falla si cae en el tercio inferior sin excepción
+documentada — cierra el agujero de detección que dejó pasar el error real de INC-1 (la
+IA Spec original de CUORE violó su propia instrucción "no al pie" y el TESTS cualitativo
+no lo atrapó; lo detectó el humano comparando contra Espacio Tita). (2) CDL-4: mapeo fijo
+documentado (Process->Execution Coherence; Brand Translation->Positioning+Perception) en
+vez de proxy improvisado; techo de escala explícito (score capado en 10, cálculo crudo
+siempre documentado). (3) CDL-5: la Regla de Conflicto ahora cubre dimensión Alta
+(default conservador: CDL-3 prevalece, igual que Crítica; CDL-4 solo prevalece con
+excepción documentada).
+
+Qué NO cambia: no se creó gate nuevo ni se tocó SKILL.md en esta pasada (P5 y P6 de la
+retrospectiva tocan arquitectura y quedan a decisión separada del humano). Los
+Principios 9 y 10, el IA Archetype de CDL-1 y la retro de Glow Factor (B1-D6 seeds +
+M10.7) NO se re-proponen — ya estaban aplicados y se confirmaron vigentes.
+
+Acierto preservado sin tocar (ACIERTO-1): GATE 3 se negó a pasar en CUORE por un
+advisory de seguridad real de B4 (Next 14.2.x desactualizado), con código compilado y
+todo lo demás en orden — comportamiento correcto, no se modifica.
+
+--------------------------------------------------------------------------------
+
 2026-06-29 (2) — RETROSPECTIVA GLOW FACTOR (M14): DISCIPLINA DE SEEDS + AUDITORÍA EN VIVO POST-DEPLOY
 ----------------------------------------------------------------------------------------------------
 Módulos afectados: B1 (Auth/Data/API Pattern Library, v1->v1.1, Patrón D6 + gate +

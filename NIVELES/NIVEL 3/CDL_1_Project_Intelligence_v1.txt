@@ -1,4 +1,4 @@
-CDL-1 — PROJECT INTELLIGENCE (v1.1)
+CDL-1 — PROJECT INTELLIGENCE (v1.2)
 ==================================
 
 OBJETIVO
@@ -186,6 +186,13 @@ IA SPEC OUTPUT
 - Camino de conversión (de dónde entra el usuario a dónde sale):
 - DIFF contra el esqueleto default (hero -> nosotros -> servicios -> testimonios -> CTA):
   qué secciones coinciden y por qué están justificadas en ESTE caso.
+- POSICIÓN NUMÉRICA DE LA SECCIÓN CRÍTICA (verificación obligatoria, no solo
+  descriptiva): identificar cuál es la sección que resuelve el Process Crítico/Alto de
+  este proyecto (ej: reservar, comprar, contactar) y reportar su posición como
+  "N de M secciones totales". Si N cae en el tercio inferior del esqueleto (últimas
+  posiciones), esa sección NO cumple "sin al pie" aunque el texto la describa como
+  prioritaria — corregir la posición o documentar explícitamente por qué la excepción
+  es válida en este caso puntual, antes de dar la IA Spec por cerrada.
 
 TESTS
 -----
@@ -196,6 +203,9 @@ TESTS
 - ¿Si hay híbrido, está documentado qué perfil se eligió?
 - ¿Se derivó un IA Archetype y se completó la IA Spec?
 - ¿El esqueleto difiere del de proyectos de otro arquetipo (no es el esqueleto default genérico)?
+- ¿La sección crítica (Process) tiene su POSICIÓN NUMÉRICA reportada, y esa posición
+  está fuera del tercio inferior o tiene excepción documentada? (verificación
+  cuantitativa, no alcanza con la descripción cualitativa del DIFF)
 
 OUTPUT
 ------

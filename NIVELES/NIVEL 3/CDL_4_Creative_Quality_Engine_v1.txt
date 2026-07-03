@@ -1,4 +1,4 @@
-CDL-4 — CREATIVE QUALITY ENGINE (v1)
+CDL-4 — CREATIVE QUALITY ENGINE (v1.1)
 =====================================
 
 OBJETIVO
@@ -19,6 +19,18 @@ OPCIONALES:
 - Comparables
 - Restricciones
 - Feedback del humano
+
+MAPEO DE DIMENSIONES (CDL-1/CDL-2 vs. este scorecard)
+-------------------------------------------------------
+CDL-1/CDL-2 pesan 8 dimensiones (incluye Process y Brand Translation). El scorecard de
+este módulo tiene 7 filas fijas. Cuando Process o Brand Translation sean dimensiones
+activas (peso Crítico/Alto) en el Project Profile de CDL-1, usar este mapeo fijo —
+no improvisar uno nuevo cada corrida:
+  - Process -> Execution Coherence (proxy: qué tan bien la ejecución sirve al
+    no-negociable operativo que Process representa).
+  - Brand Translation -> distribuida entre Positioning Strength y Perception Clarity
+    (documentar en la nota de cada fila qué parte de Brand Translation cubre cada una).
+Documentar el mapeo aplicado en el reporte, aunque sea el default — no asumirlo implícito.
 
 PROCESO CLAUDE
 --------------
@@ -103,6 +115,10 @@ Sumar al score final:
 - El proyecto es completamente coherente de M0 a M6 (+1)
 - Hay una decisión valiente y defendible (+1)
 - El proyecto se reconoce inmediatamente sin logo (+1)
+
+TECHO DE ESCALA: el score final (base ponderado + bonus - penalizaciones) está capado
+en 10. Si el cálculo crudo supera 10, reportar "10/10 (capado; cálculo crudo: X.XX)" —
+nunca un número fuera de la escala declarada, y nunca omitir el cálculo crudo.
 
 THRESHOLDS
 ----------

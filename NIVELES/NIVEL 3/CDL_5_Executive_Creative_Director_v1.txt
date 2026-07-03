@@ -1,4 +1,4 @@
-CDL-5 — EXECUTIVE CREATIVE DIRECTOR (v1)
+CDL-5 — EXECUTIVE CREATIVE DIRECTOR (v1.1)
 ==========================================
 
 OBJETIVO
@@ -43,6 +43,10 @@ Regla de resolución:
 - Si la dimensión en conflicto es Crítica según CDL-2:
   el veredicto de CDL-3 prevalece sobre el score de CDL-4.
   Un score aceptable con un problema en dimensión Crítica = REVISAR.
+- Si la dimensión en conflicto es Alta según CDL-2:
+  por defecto, el veredicto de CDL-3 prevalece (mismo tratamiento que Crítica) — es la
+  postura conservadora. El score de CDL-4 puede prevalecer Únicamente si se documenta
+  explícitamente el argumento como excepción razonada, no como default silencioso.
 - Si la dimensión en conflicto es Media o Baja:
   el score de CDL-4 puede prevalecer si el argumento es sólido.
   Documentar la discrepancia en el output.
@@ -134,7 +138,7 @@ PROMPT PARA CLAUDE
 Actuá como director creativo ejecutivo.
 Leé todo lo anterior.
 Si CDL-3 y CDL-4 discrepan, aplicá la Regla de Conflicto:
-  dimensión Crítica → CDL-3 prevalece.
+  dimensión Crítica o Alta → CDL-3 prevalece (salvo excepción documentada en Alta).
   dimensión Media o Baja → CDL-4 puede prevalecer, documentar la discrepancia.
 Antes de recomendar, ejecutá la Verificación Comercial:
   ¿la recomendación sirve el objetivo del M0?
