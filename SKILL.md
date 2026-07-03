@@ -77,7 +77,8 @@ CAPA 6 — INTELIGENCIA VISUAL
   M12  Visual Intelligence System (referencias y extracción de patrones)
 
 CAPA DE ADQUISICIÓN — transversal (pre-venta)
-  M15  Site Audit & Diagnosis Engine
+  M18  Demand & Distribution Engine (de dónde salen los prospectos)
+  M15  Site Audit & Diagnosis Engine (diagnostica al prospecto que ya tenés)
 
 CAPA DE NEGOCIO — transversal (pre-proyecto y post-proyecto)
   M13  Business Layer
@@ -99,7 +100,8 @@ CAPA DE INFRAESTRUCTURA — transversal (entre sesiones)
 - M11 (capa 5) gobierna el comportamiento de la IA en todas las capas. Siempre está activo de fondo.
 - M12 (capa 6) alimenta a las capas 1, 2 y 4 con patrones extraídos de referencias. Nunca alimenta con copias.
 - M13 (capa de negocio) opera antes de M0 (calificación, propuesta, precio, cierre) y después de M10 (retainer). No interfiere con el flujo creativo ni técnico.
-- M15 (capa de adquisición) opera antes de M13, sobre el sitio de un prospecto que todavía no es cliente. Produce un diagnóstico de venta y un Audit Handoff que alimenta a M13 (scope, Qualification Score, argumento de valor). No se confunde con M0: M0 audita el sitio de un cliente ya cerrado (discovery interno); M15 audita el de un prospecto (pre-venta).
+- M18 (capa de adquisición, frente del embudo) opera ANTES de M15 y de M13: genera y elige a qué prospecto abordar (nicho + oferta de entrada + canales + loop de referidos). Resuelve el agujero que M15 y M13.1 asumían resuelto (ambos partían de un prospecto que ya existía). Su handoff es un prospecto elegido que entra a M15 (diagnóstico) o directo a M13.1 (referidos). Deliberadamente mínimo: en arranque, la métrica es cuántas conversaciones de venta reales se abren, no la sofisticación del canal.
+- M15 (capa de adquisición) opera antes de M13, sobre el sitio de un prospecto que todavía no es cliente. Produce un diagnóstico de venta y un Audit Handoff que alimenta a M13 (scope, Qualification Score, argumento de valor). No se confunde con M0: M0 audita el sitio de un cliente ya cerrado (discovery interno); M15 audita el de un prospecto (pre-venta). Recibe sus prospectos de M18.
 - M14 (capa de evolución) opera solo después de la entrega (post-GATE 4). Audita el proyecto cerrado y propone mejoras al sistema. No se auto-aplica: el humano aprueba cada cambio (ver secciones 7 y 13). Es el único módulo con alcance transversal sobre toda la arquitectura.
 - M16 (capa de infraestructura) no produce trabajo de proyecto: comprime el estado del proyecto en un punto de corte y lo transfiere a una sesión nueva (handoff). Se usa cuando el contexto se satura, al cerrar una fase, o al retomar tras una pausa. Transfiere decisiones y deudas, no razonamiento.
 - El BACKEND (B0-B6) es una extensión condicional de la Capa 4, no una capa nueva. Solo se activa cuando M8 detecta que el proyecto necesita auth, base de datos, lógica de servidor o pagos (SaaS, ecommerce, apps con login). Un marketing site no lo activa. B0 decide la arquitectura de backend; B1-B6 la implementan. No redeciden lo que las capas 1-3 ni M8 cerraron: lo construyen.
@@ -145,6 +147,7 @@ Base: `NIVELES/` (relativo a la raíz del skill). Nota: `NEGOCIO/` es subcarpeta
 | M13.4 | `NEGOCIO/M13_4_Closing_Onboarding_v1.txt` |
 | M14 | `EVOLUCION/M14_Retrospective_Engine_v1.txt` |
 | M15 | `ADQUISICION/M15_Site_Audit_Engine_v1.txt` |
+| M18 | `ADQUISICION/M18_Demand_Distribution_Engine_v1.txt` |
 | M16 | `INFRAESTRUCTURA/M16_Phase_Handoff_Protocol_v1.txt` |
 
 **BACKEND (B0-B6) — excepción de path:** estos módulos NO viven en `NIVELES/`. Viven en `BACKEND/` (en la raíz del skill, al lado de `NIVELES/`, no dentro). Son extensión condicional de la Capa 4.
@@ -164,6 +167,7 @@ Base: `NIVELES/` (relativo a la raíz del skill). Nota: `NEGOCIO/` es subcarpeta
 **Material de referencia (no son módulos, no se cargan por routing):**
 - `NIVEL 1/Creative_Knowledge_System_Level1_12_Disciplines_v3.txt` — base de conocimiento de las 12 disciplinas creativas. Consultar solo si un módulo de NIVEL 1-2 necesita profundidad conceptual adicional.
 - `Informes/` — research y libros usados para construir el sistema. Archivo histórico. No cargar en sesiones de producción.
+- `Informes/M17.md` — idea DIFERIDA (no es un módulo activo): "M17 — Industry Intelligence System", conocimiento operativo por industria. El propio autor la difirió hasta tener reps reales (5-10 proyectos por nicho): su contenido debe salir de experiencia, no de memoria (Principio 9). Por eso el número M17 queda RESERVADO y la numeración de módulos activos salta de M16 a M18. No construir M17 antes de los reps.
 - `_deprecated/` — versiones reemplazadas de módulos. Nunca cargar.
 
 ---
@@ -184,6 +188,7 @@ Identificá el tipo de tarea ANTES de cargar nada. Cargá solo los módulos de l
 | Fix puntual / iteración menor sobre algo ya aprobado | Solo M8–M9.8 (o el módulo B que corresponda si el fix es de backend) según el caso | Capas 1–3 |
 | Negocio (lead, propuesta, precio, cierre, retainer) | M13 (Business Layer) | Todo lo demás |
 | Retrospectiva post-proyecto (auditar el proyecto cerrado, proponer mejoras al sistema) | M14 (Retrospective Engine) | Todo lo demás |
+| Conseguir clientes / generar demanda (de dónde salen los prospectos, nicho, canales, referidos) | M18 (Demand & Distribution Engine) | Todo lo demás (M15/M13 asumen un prospecto que ya existe) |
 | Auditar el sitio de un PROSPECTO (todavía no cliente) para vender una mejora | M15 (Site Audit Engine) | Todo lo demás (M0 es para clientes ya cerrados, no prospectos) |
 | Cortar la sesión / retomar el proyecto en otra sesión (handoff entre fases) | M16 (Phase Handoff Protocol) | Todo lo demás |
 
@@ -212,7 +217,8 @@ M0 → M1 → M2 → M3 → [GATE 1] → M4 → M4.5 → M5 → M5.5 → [CDL / 
   que perdió la dirección visual sin que nadie lo note — GATE 3 no mide craft visual
   por sí mismo, M8.6 sí. No saltear esta corrida aunque el resto del build esté sano.
 - M14 (retrospectiva) corre DESPUÉS de GATE 4 y de la entrega real, al cierre del proyecto. No es parte del flujo de producción: es post-proyecto. Nunca se dispara a mitad de camino.
-- M15 (auditoría de prospecto) corre ANTES del flujo y fuera de un proyecto: sobre el sitio de alguien que todavía no es cliente. Su salida (Audit Handoff) entra a M13.1. No se confunde con M0, que audita dentro de un proyecto ya cerrado.
+- M18 (generación de demanda) corre AL FRENTE de todo, fuera del proyecto: produce el prospecto que después M15 diagnostica y M13 califica. No tiene lugar fijo en la cadena de un proyecto porque es previo a que exista el proyecto. Es la respuesta a "no tengo a quién venderle", no a "cómo hago este proyecto".
+- M15 (auditoría de prospecto) corre ANTES del flujo y fuera de un proyecto: sobre el sitio de alguien que todavía no es cliente. Recibe el prospecto de M18. Su salida (Audit Handoff) entra a M13.1. No se confunde con M0, que audita dentro de un proyecto ya cerrado.
 - M16 (handoff) no corre en un punto fijo del flujo: se invoca cuando hay que cortar la sesión (contexto saturado, fin de fase, o pausa) y transferir el estado a una sesión nueva.
 - BACKEND (si el proyecto lo activa): B0 corre DENTRO de M8 (resuelve la arquitectura de
   backend junto con la técnica, antes de GATE 3). B1-B4 corren en paralelo a M9 (patrones
@@ -220,9 +226,38 @@ M0 → M1 → M2 → M3 → [GATE 1] → M4 → M4.5 → M5 → M5.5 → [CDL / 
   El backend no agrega gates nuevos: cuelga de GATE 3 (build) y GATE 4 (deploy).
 
 **Reglas:**
-- El orden no se altera ni se comprime salvo instrucción explícita del humano.
+- El orden no se altera ni se comprime salvo instrucción explícita del humano O la REGLA DE PROPORCIONALIDAD de abajo (que ES una instrucción explícita, codificada).
 - "El cliente tiene apuro" no es instrucción explícita de saltear etapas. Es información de contexto.
 - Retroceder está permitido (ej: M5 revela que M1 estaba mal). Saltear hacia adelante, no.
+
+**REGLA DE PROPORCIONALIDAD (el peso del proceso escala con la clase de gobernanza y el ticket):**
+
+El pipeline canónico completo (M0→M16 + CDL 1-5 + B0-B6 + M8.6) está calibrado para
+proyectos de gobernanza Media/Completa y ticket alto. Correrlo entero sobre un sitio
+local de ticket bajo (el Core de USD 700-1.500 de M13.0A, gobernanza Ligera de M10.0)
+pierde plata: el costo de proceso no entra en el precio. La clase de gobernanza de
+M10.0 (Ligera / Media / Completa), fijada en M13.2, define cuánto aparato se activa.
+
+- Gobernanza LIGERA (marketing/local/personal brand, ticket bajo): pipeline colapsado.
+  M0-M3 comprimidos, CDL en pasada única (no las 5 sub-corridas), M8 sin la batería
+  completa de M8.x, backend solo si realmente hay auth/DB/pagos. El objetivo es un
+  sistema de captación instalado y bueno, no una obra de agencia. El reuso por nicho
+  (M18) hace el resto del margen.
+- Gobernanza MEDIA: pipeline estándar, con los pasos que el proyecto justifique.
+- Gobernanza COMPLETA (SaaS, ecommerce, datos NIVEL 3-4): pipeline completo, sin recortes.
+
+PISO INNEGOCIABLE (no se recorta por ticket, nunca):
+  1. GATE 1 — no hay ejecución sobre estrategia abierta, aunque sea barato.
+  2. Derivación de la IA Spec del arquetipo (Principio 10) — es barata y evita el
+     output templated que el sistema existe para prevenir.
+  3. Seguridad de B4 si hay backend — una falla de seguridad es bloqueante absoluto
+     a cualquier precio.
+  4. GATE 13.4-E — baseline de captación al entregar. Vendemos captación; medirla
+     no es un lujo de proyecto caro.
+
+Regla: proporcionalidad REDUCE la masa de proceso, nunca el piso. Un proyecto barato
+se hace con menos pasos, no con menos honestidad. Si un proyecto de ticket bajo
+necesita el pipeline completo, el precio estaba mal (revisar M13.3), no el proceso.
 
 ---
 

@@ -196,6 +196,40 @@ Un gusto trabajar en esto,
 [nombre]
 ---
 
+CHECK-IN DE RESULTADO (¿EL SISTEMA CAPTÓ DE VERDAD?)
+-----------------------------------------------------
+CRÍTICO Y TRANSVERSAL. Webbing vende "sistemas de captación" (M13.0), no páginas.
+Entonces el sistema TIENE que medir si lo entregado efectivamente capta. Sin este
+paso, Webbing mide fidelidad a su propio proceso (gates, craft) pero nunca el
+resultado que promete — y no puede calibrar los precios que M13.0A marca como
+hipótesis.
+
+QUÉ MEDIR (elegir 1-2 métricas de negocio con el cliente ANTES de entregar):
+  - Reservas / turnos / pedidos generados por el sitio.
+  - Consultas por WhatsApp o formulario atribuibles al sitio.
+  - Llamadas / clics de contacto desde Google Business.
+  - Lo que el negocio del cliente cuente como "un cliente nuevo".
+Definir la métrica y de dónde sale el dato (analytics, el propio cliente, el CRM)
+en el kickoff o al entregar. Una métrica que no se puede leer no sirve.
+
+CUÁNDO:
+  - Baseline: al entregar (¿desde qué número arrancamos?).
+  - Check-in a 30 / 60 / 90 días (parte del retainer, no un extra).
+
+PARA QUÉ SIRVE EL NÚMERO:
+  1. Prueba de valor: justifica el retainer con evidencia, no con promesa.
+  2. Combustible de referidos (M18): un cliente con buen número es la mejor
+     máquina de referidos que existe — ahí se pide el referido explícito.
+  3. Calibración de precios: un buen resultado medido habilita subir el ancla
+     del Core y del Recurrente (M13.0A / M13.3) sobre datos, no sobre hipótesis.
+  4. Caso de portfolio: el resultado, no solo el sitio, es lo que se muestra
+     (alimenta el canal orgánico de M18 y la retrospectiva de M14, eje 6).
+
+REGLA: si a los 60-90 días el sistema no está captando, es un problema a
+resolver (mensaje, oferta, tráfico, no solo el sitio), no un dato a esconder.
+Un sistema de captación que no capta es la señal más honesta que existe, y se
+mira de frente — con el cliente, no a sus espaldas.
+
 SEÑALES DE QUE UN CLIENTE ES CANDIDATO A RETAINER
 ---------------------------------------------------
 - Preguntó durante el proyecto cómo actualizar el contenido
@@ -257,6 +291,11 @@ GATE 13.4-C — ¿El deploy ocurrió con el pago final confirmado?
 GATE 13.4-D — ¿Se propuso el retainer en el email de entrega?
   Falla → proponer antes de cerrar el proyecto. La ventana se cierra rápido.
 
+GATE 13.4-E — ¿Se definió la métrica de captación y su baseline al entregar?
+  Falla → definirla con el cliente antes de dar el proyecto por cerrado. Sin
+  baseline no hay forma de probar el resultado, pedir el referido con evidencia,
+  ni calibrar los precios hipótesis de M13.0A. Vendemos captación: hay que medirla.
+
 OUTPUT
 ------
 - Confirmación de cierre por escrito
@@ -272,5 +311,8 @@ No arrancar ningún trabajo sin pago confirmado. (Excepción temporal de fase ar
 No activar M0 sin el Brief Interno completo post-kickoff.
 No hacer deploy sin el pago final confirmado.
 Al entregar el proyecto: proponer el retainer en el mismo mensaje.
+Al entregar: definir también la métrica de captación y su baseline (GATE 13.4-E).
+Hacer el check-in de resultado a 30/60/90 días como parte del retainer, y usar el
+número para probar valor, pedir referidos (M18) y calibrar precios (M13.0A).
 La conversión de proyecto a retainer es más fácil que conseguir un cliente nuevo.
 No dejarlo para después.

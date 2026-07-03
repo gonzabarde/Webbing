@@ -74,6 +74,16 @@ de tres partes). Tras esos casos, los anclas se reescriben con lo que el mercado
 pagó de verdad, no con lo que este anexo supuso. No servir estos números como
 verdad de mercado (M11.0, Principio 9): orientan la conversación, no la cierran.
 
+Dos señales calibran los precios, no una:
+  1. Que un cliente PAGUE el ancla (validación de disposición a pagar).
+  2. Que el sistema entregado CAPTE de verdad — el check-in de resultado de
+     M13.4 (GATE 13.4-E) y el eje 6 de M14. Un Core que se pagó a USD 1.000 y
+     le generó al cliente 15 reservas nuevas por mes justifica —con evidencia—
+     subir el ancla y sostener un Recurrente más alto. El resultado medido, no
+     solo el cobro, es lo que da derecho a subir el precio.
+Sin el segundo dato, "un cliente pagó" solo prueba que cerraste una venta, no
+que instalaste un sistema de captación que funciona. Calibrar sobre ambas.
+
 --------------------------------------------------------------------------------
 NORTH STAR — VISIÓN GHL (STACK DE SOFTWARE PROPIO)
 --------------------------------------------------------------------------------

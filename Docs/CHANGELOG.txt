@@ -8,6 +8,59 @@ Autoridad: los cambios los aprueba y aplica el humano (SKILL.md secciones 7 y 13
 
 --------------------------------------------------------------------------------
 
+2026-07-03 (2) — CRÍTICA DE 6 PERSPECTIVAS: DEMANDA (M18) + GATE DE RESULTADO + PROPORCIONALIDAD PRECIO/PROCESO
+--------------------------------------------------------------------------------------------------------------
+Módulos afectados: M18 (Demand & Distribution Engine — ALTA de módulo, v1),
+M14 (Retrospective Engine — 6º eje: resultado de negocio), M13.4 (Closing &
+Onboarding — check-in de resultado + GATE 13.4-E), M13.0A (Offer Ladder —
+calibración de precio por resultado, no solo por cobro), SKILL.md (arquitectura,
+relaciones, routing, orden de ejecución, FILE MAP, nota M17 diferido, y REGLA DE
+PROPORCIONALIDAD en Sección 5). Estado: ACTIVA. Permanente (salvo la regla de
+proporcionalidad, que convive con la fase arranque).
+
+Origen: crítica honesta del sistema entero (incl. backend) desde 6 perspectivas
+(Contrarian / Expansionist / Principles / Researcher / Buyer / Judge). Tres
+agujeros estructurales confirmados y atacados; NO se agregó nada de craft (la
+crítica advirtió contra seguir engordando la capa de entrega en vez de validar).
+
+Cambios (mapean 1:1 a los 3 cambios críticos del veredicto):
+  1) AGUJERO DE DEMANDA (top-of-funnel inexistente). M15 y M13.1 asumían un
+     prospecto que ya existía; ningún módulo respondía de dónde sale. ALTA de M18
+     — Demand & Distribution Engine (capa de adquisición, al frente de M15): nicho
+     (compounding + credibilidad + referidos), oferta de entrada = diagnóstico de
+     M13.0A, 1-2 canales (referidos + outbound dirigido primero), métricas de
+     funnel, y loop de referidos. DELIBERADAMENTE MÍNIMO y autolimitado: no
+     escalar/automatizar antes de validar la oferta a mano con reps (Principio 2+9).
+  2) LOOP DE RESULTADO ABIERTO. El sistema medía fidelidad a su propio proceso
+     (gates, craft) pero nunca el RESULTADO que vende (captación, M13.0). Se agregó:
+     (a) check-in de resultado en el retainer de M13.4 (baseline al entregar +
+     30/60/90 días) con GATE 13.4-E; (b) 6º eje en M14 (resultado de negocio del
+     sistema entregado — un proyecto que pasó todos los gates y no captó es el
+     hallazgo más grave, causa raíz de sistema); (c) M13.0A ahora calibra precios
+     con DOS señales (que paguen + que capte), no solo con el cobro.
+  3) CONTRADICCIÓN PRECIO/PROCESO. El pipeline completo (M0-M16 + CDL 1-5 + B0-B6
+     + M8.6) está calibrado para ticket alto; correrlo entero sobre un Core de
+     USD 700-1.500 pierde plata. REGLA DE PROPORCIONALIDAD en SKILL.md §5: el peso
+     del proceso escala con la clase de gobernanza de M10.0 (Ligera/Media/Completa)
+     fijada en M13.2. Ligera = pipeline colapsado; Completa = pipeline entero. Con
+     PISO INNEGOCIABLE que no se recorta por ticket: GATE 1, derivación de IA Spec
+     (Principio 10), seguridad B4, y GATE 13.4-E (baseline de captación).
+
+Numeración: se usó M18 (no M17). M17 queda RESERVADO para la idea diferida
+"Industry Intelligence System" (Informes/M17.md), que el propio autor difirió
+hasta tener reps por nicho. Nota agregada al FILE MAP para explicar el salto
+M16→M18. M18 elige el nicho; el M17 diferido acumulará su inteligencia cuando
+los reps existan.
+
+Qué NO cambia: no se tocó el flujo creativo/técnico ni se agregó craft. No se
+construyó M17 (reps primero). La cláusula de fase arranque de M13.4 sigue vigente.
+El veredicto de la crítica (cambio #1: "congelá la construcción del sistema y
+cerrá los 3 casos") queda como advertencia viva: estas tres mejoras cierran
+agujeros estructurales que habilitan cerrar casos; a partir de acá, la prioridad
+es vender, no seguir expandiendo módulos.
+
+--------------------------------------------------------------------------------
+
 2026-07-03 — M13: ESCALERA DE OFERTAS (ANEXO M13.0A) + RETAINER DESARROLLADO + REPOSICIONAMIENTO
 ------------------------------------------------------------------------------------------------
 Módulos afectados: M13.0A (Offer Ladder — ALTA de anexo, v1), M13.0 (Overview —

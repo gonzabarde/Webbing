@@ -1,0 +1,160 @@
+M18 — DEMAND & DISTRIBUTION ENGINE (v1)
+========================================
+
+PROPÓSITO
+---------
+M18 cubre el agujero más grande del sistema: DE DÓNDE SALEN LOS PROSPECTOS.
+
+Todo el embudo de Webbing arrancaba en M15 (auditar el sitio de un prospecto)
+o en M13.1 (calificar un lead) — pero ambos asumen que el prospecto YA EXISTE.
+Ningún módulo respondía cómo aparece ese prospecto en primer lugar. Para un
+negocio en fase de arranque (0-3 casos), esa es LA pregunta, no una secundaria.
+
+M18 es el frente del embudo. No construye, no diagnostica, no cotiza: genera y
+elige a quién abordar, y se lo pasa a M15 (diagnóstico) o directo a M13.1
+(calificación).
+
+LÍMITE Y DISCIPLINA (LEER PRIMERO)
+----------------------------------
+M18 es DELIBERADAMENTE MÍNIMO. Es un checklist de generación de prospectos, no
+un curso de marketing ni un plan de growth. Mientras Webbing no tenga 3 casos
+cerrados, la única métrica que importa es: ¿cuántas conversaciones reales de
+venta abriste esta semana? Todo lo demás es teoría.
+
+Principio 2 + Principio 9: no escalar canales ni automatizar adquisición antes
+de que UNA oferta convierta a mano, repetidamente. Primero los reps de venta a
+mano; después, si duele, se sistematiza (esa es la lógica del North Star de
+M13.0A). No construir un motor de demanda elaborado sobre una oferta no validada.
+
+LÍMITE DE AUTORIDAD: M18 propone a quién abordar y redacta el primer contacto.
+ENVIAR lo decide el humano, siempre (igual que M15). Y nunca inventa datos de un
+prospecto: si no se verificó en vivo, es hipótesis (Principio 9).
+
+LAS CUATRO DECISIONES DE M18
+----------------------------
+En orden. Cada una alimenta la siguiente.
+
+1. NICHO — ¿a quién le vendo?
+   Elegir UN vertical y concentrarse (gastronomía local, clínicas estéticas,
+   estudios/servicios profesionales, etc.). No por gusto: por COMPOUNDING. El
+   mismo "sistema de captación" instalado 10 veces en el mismo rubro reutiliza
+   arquetipo, stack, integraciones y copy — el margen sale del reuso, no de cada
+   proyecto suelto. Un nicho también hace el outbound creíble ("trabajo con
+   [rubro]") y el referido natural (los dueños se conocen entre sí).
+   Regla: en arranque, un solo nicho. Diversificar es un lujo de después de los
+   reps. El conocimiento operativo acumulado por nicho es el activo diferido de
+   M17 (Industry Intelligence, ver Informes/M17.md): sale de los reps, no se
+   escribe de memoria.
+
+2. OFERTA DE ENTRADA — ¿con qué abro la conversación?
+   El anzuelo es el DIAGNÓSTICO DE CAPTACIÓN (producto Entrada de M13.0A = M15
+   productizado). No se abre ofreciendo "una página web": se abre mostrando una
+   pérdida concreta que el prospecto no ve. El diagnóstico es la oferta de
+   entrada porque filtra curiosos, demuestra criterio antes de cobrar, y da a
+   M15 un motivo real de contacto.
+   Regla: la oferta de entrada nunca es el rediseño gratis (eso es spec work,
+   ver M15). Es el diagnóstico — barato o gratis como gancho, pago cuando el
+   prospecto viene solo.
+
+3. CANALES — ¿cómo llego? (elegir 1-2, no todos)
+   En arranque bastan tres, en orden de retorno por esfuerzo:
+   a) REFERIDOS — el canal #1 y el más barato. Cada entrega (y cada caso de
+      portfolio) se cierra pidiendo explícitamente una presentación a 1-2
+      conocidos del mismo rubro. Se codifica como paso, no se deja al azar
+      (ver LOOP DE REFERIDOS abajo). Un referido entra a M13.1 con score alto.
+   b) OUTBOUND DIRIGIDO — elegir prospectos del nicho con sitio mejorable,
+      correr M15 sobre ellos, y abrir con el diagnóstico (2-3 puntos críticos
+      en lenguaje de pérdida de negocio, no lista de quejas). Es el canal que
+      Webbing controla al 100% desde el día 1, sin audiencia previa.
+   c) PRESENCIA ORGÁNICA MÍNIMA — no "hacer contenido": mostrar los casos. Los
+      3 primeros casos de portfolio, con el resultado que produjeron (ver M14
+      eje 6 y el check-in de M13.4), son la prueba social que desbloquea todo
+      lo demás. Sin casos no hay orgánico que funcione; por eso este canal es
+      consecuencia de cerrar los primeros 3, no su reemplazo.
+   Regla: no abrir un cuarto canal hasta que uno de estos produzca cierres de
+   forma repetible. Foco > cobertura en arranque.
+
+4. EL FUNNEL — ¿cómo mido si esto funciona?
+   Medir el embudo entero, no solo el resultado final. Métricas mínimas:
+     Prospectos abordados → diagnósticos entregados → propuestas enviadas
+     (M13.2) → cierres (M13.4).
+   Cada semana: ¿cuántas conversaciones nuevas? ¿dónde se cae el embudo?
+   Si abordás y no entregás diagnósticos → el contacto no engancha (revisar
+   mensaje de M15). Si entregás diagnósticos y no salen propuestas → el
+   diagnóstico no traduce a pérdida de negocio (revisar M15). Si salen
+   propuestas y no cierran → precio/scope/confianza (revisar M13.1/13.2/13.3).
+   El funnel dice QUÉ arreglar; sin medirlo, se optimiza a ciegas.
+
+EL LOOP DE REFERIDOS (el motor que compone)
+-------------------------------------------
+El referido no se "espera": se pide, en el momento de máxima satisfacción.
+  - Se pide al entregar (mismo momento que el retainer, M13.4 Sección C) y otra
+    vez cuando el check-in de resultado (M13.4) muestra un número bueno.
+  - Se pide concreto: "¿conocés a alguien más de [rubro] a quien le sirva esto?
+    Te lo presento yo." No "si sabés de alguien, avisame".
+  - Un cliente con un buen resultado medido es la mejor máquina de referidos que
+    existe. Por eso el eje de resultado (M14 eje 6) no es solo aprendizaje: es
+    combustible de adquisición.
+
+HANDOFF DE M18
+--------------
+M18 entrega a M15 o a M13.1:
+  - PROSPECTO: quién es, rubro, por qué se eligió (encaja el nicho).
+  - CANAL: cómo llegó (referido / outbound / orgánico).
+  - GANCHO: la pérdida de negocio concreta que abre la conversación (si ya se
+    corrió M15) o el motivo para correr M15.
+Un prospecto de referido suele saltear M15 y entrar directo a M13.1 con score
+alto. Un prospecto de outbound casi siempre pasa por M15 primero (el diagnóstico
+ES el motivo de contacto).
+
+CICLO
+-----
+Nicho elegido
+  ↓
+M18 — genera prospecto (referido / outbound / orgánico)
+  ↓
+[EL HUMANO decide abordar / enviar el contacto]
+  ↓
+M15 (diagnóstico, si aplica) → M13.1 (calificación) → M13.2/13.3 → M13.4 (cierre)
+  ↓
+Entrega + check-in de resultado (M13.4) → LOOP DE REFERIDOS → M18 otra vez
+
+GATE
+----
+Sin gate bloqueante nuevo. La disciplina es de modelo:
+  - No escalar canales antes de que una oferta convierta a mano (Principio 2).
+  - No inventar datos de prospecto: verificación viva o es hipótesis (Principio 9).
+  - Enviar el contacto lo decide el humano, siempre.
+
+RELACIÓN CON EL RESTO DEL SISTEMA
+-----------------------------------
+M18 → M15: le entrega prospectos para diagnosticar (M15 asumía que ya existían).
+M18 → M13.1: los referidos entran directo a calificación.
+M18 ← M13.4: cada entrega y cada check-in de resultado realimentan el loop de
+  referidos y la prueba social del canal orgánico.
+M18 ← M14: el eje 6 (resultado de negocio) le da a M18 los casos con número que
+  hacen creíble el outbound y potente el referido.
+M17 (Industry Intelligence, diferido, Informes/M17.md): el nicho de M18 es lo
+  que, con reps, va llenando ese activo. M18 elige el nicho; M17 acumula su
+  inteligencia — pero solo cuando los reps existan.
+M11 gobierna el comportamiento de Claude también en M18.
+
+REGLA CENTRAL
+-------------
+Un sistema que sabe entregar excelente pero no sabe conseguir a quién entregarle
+no es un negocio: es un taller esperando que golpeen la puerta. M18 existe para
+que Webbing genere su propia demanda en vez de esperarla. En arranque, la métrica
+que manda no es la calidad del sistema: es cuántas conversaciones de venta reales
+abriste esta semana.
+
+PROMPT PARA CLAUDE
+------------------
+Cuando el humano necesite conseguir clientes (no atender uno que ya llegó),
+activar M18, no M15 ni M13 directamente.
+Elegir UN nicho y concentrar el esfuerzo ahí (compounding + credibilidad + referidos).
+La oferta de entrada es el diagnóstico de captación (M13.0A / M15), nunca el rediseño gratis.
+Elegir 1-2 canales (referidos y outbound dirigido primero), no todos.
+Medir el funnel entero (abordados → diagnósticos → propuestas → cierres) para saber qué arreglar.
+Pedir el referido explícito y concreto en el momento de máxima satisfacción (entrega + buen check-in de resultado).
+No escalar ni automatizar adquisición antes de validar la oferta a mano con reps (Principio 2 + 9).
+No inventar datos de un prospecto; enviar el contacto lo decide el humano.

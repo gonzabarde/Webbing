@@ -63,9 +63,9 @@ Cambios aprobados → SKILL.md sección 13 (versionado, bump, _deprecated)
   ↓
 Sistema actualizado para el próximo proyecto
 
-LOS CINCO EJES DE ANÁLISIS
+LOS SEIS EJES DE ANÁLISIS
 ---------------------------
-La retrospectiva audita el proyecto cerrado en cinco ejes. Cada hallazgo se
+La retrospectiva audita el proyecto cerrado en seis ejes. Cada hallazgo se
 clasifica y se convierte en propuesta.
 
 1. GATES
@@ -101,6 +101,27 @@ clasifica y se convierte en propuesta.
    cotizado vs esfuerzo entregado.
    Este eje alimenta de vuelta a M13.2 (scope) y M13.3 (pricing): si el
    sistema subestima sistemáticamente, las próximas cotizaciones se ajustan.
+
+6. RESULTADO DE NEGOCIO DEL SISTEMA ENTREGADO
+   El eje que cierra el loop sobre lo que Webbing realmente vende (captación,
+   no páginas — M13.0). Mirar el check-in de resultado de M13.4 (GATE 13.4-E):
+   ¿el sistema entregado captó de verdad (reservas, consultas, contactos) contra
+   su baseline?
+   - Si captó: es un caso de portfolio con NÚMERO (no solo con lindo diseño),
+     combustible de referidos (M18) y evidencia para subir precios (M13.0A).
+   - Si NO captó: es el hallazgo más importante de toda la retrospectiva. Los
+     otros cinco ejes miden si seguimos bien el proceso; este mide si el proceso
+     produjo el resultado prometido. Un proyecto que pasó todos los gates y no
+     captó significa que el sistema optimiza craft y no captación — causa raíz
+     de sistema, no del cliente. Buscar dónde: ¿oferta, mensaje, arquetipo IA,
+     tráfico, el sitio en sí?
+   Este eje realimenta M13.0A (calibración de precios sobre resultado real),
+   M18 (qué nicho/mensaje capta) y, con reps acumulados, el M17 diferido
+   (Industry Intelligence). Sin este eje, el sistema nunca aprende si funciona
+   para el cliente — solo si se ejecutó correctamente.
+   NOTA: en proyectos de práctica/portfolio sin operación real todavía, registrar
+   "sin dato de resultado aún" y agendar el check-in; no dar el eje por N/A por
+   default (esa es justamente la ceguera que este eje corrige).
 
 FORMATO DE OUTPUT — LA PROPUESTA
 ---------------------------------
@@ -147,7 +168,9 @@ proyecto, esta vez con un cliente que paga.
 PROMPT PARA CLAUDE
 ------------------
 Cuando el humano cierra un proyecto entregado y pide retrospectiva, activar M14.
-Recolectar los cinco ejes antes de proponer nada.
+Recolectar los seis ejes antes de proponer nada.
+El eje 6 (resultado de negocio) es obligatorio: Webbing vende captación, no páginas;
+un proyecto que pasó los gates pero no captó es el hallazgo más grave, no un N/A.
 Buscar causa raíz, no síntoma: el FILE MAP roto no era "un path mal", era
 "el mapa no se actualizó al mover la carpeta".
 Entregar propuestas en el formato fijo, priorizadas por severidad.
