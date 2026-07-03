@@ -198,11 +198,18 @@ Identificá el tipo de tarea ANTES de cargar nada. Cargá solo los módulos de l
 Orden canónico para proyectos completos:
 
 ```
-M0 → M1 → M2 → M3 → [GATE 1] → M4 → M4.5 → M5 → M5.5 → [CDL / GATE 2] → M6 → M7 → M8 → M9 → M9.8 → [GATE 3] → M10 → [GATE 4: deploy]
+M0 → M1 → M2 → M3 → [GATE 1] → M4 → M4.5 → M5 → M5.5 → [CDL / GATE 2] → M6 → M7 → M8 → M9 → M9.8 → M8.6 (Production Review, sobre el build ya firmado) → [GATE 3] → M10 → [GATE 4: deploy]
 ```
 
 - M11 corre de fondo durante todo el flujo.
 - M12 se consulta en M0 (research visual), M4–M5.5 (dirección) y nunca en ejecución.
+- **M8.6 (Production Review Engine) corre DESPUÉS de M9.8** (necesita el build con la
+  signature ya aplicada) **y ANTES de GATE 3.** Es la única verificación del build REAL
+  contra la dirección creativa aprobada (M4–M5.5) — concept/perception/direction/
+  signature fidelity + drift genérico contra M5.5. Sin M8.6 corriendo antes de GATE 3,
+  el gate puede pasar (arquitectura, seguridad, performance en verde) sobre un build
+  que perdió la dirección visual sin que nadie lo note — GATE 3 no mide craft visual
+  por sí mismo, M8.6 sí. No saltear esta corrida aunque el resto del build esté sano.
 - M14 (retrospectiva) corre DESPUÉS de GATE 4 y de la entrega real, al cierre del proyecto. No es parte del flujo de producción: es post-proyecto. Nunca se dispara a mitad de camino.
 - M15 (auditoría de prospecto) corre ANTES del flujo y fuera de un proyecto: sobre el sitio de alguien que todavía no es cliente. Su salida (Audit Handoff) entra a M13.1. No se confunde con M0, que audita dentro de un proyecto ya cerrado.
 - M16 (handoff) no corre en un punto fijo del flujo: se invoca cuando hay que cortar la sesión (contexto saturado, fin de fase, o pausa) y transferir el estado a una sesión nueva.
@@ -226,7 +233,7 @@ Cuatro gates frenan el avance. Si un gate falla, Claude se detiene, reporta el f
 |---|---|---|---|
 | GATE 1 — Estrategia cerrada | Después de M3 | Posicionamiento, traducción de marca y sistema tipográfico definidos y aprobados por el humano | Frenar. No generar conceptos sobre estrategia abierta. |
 | GATE 2 — Veto del CDL | Después de M5.5 | La dirección visual pasa la evaluación del CDL **y la IA Spec de CDL-1 está derivada y justificada** (el esqueleto = arquetipo del proyecto, diffeado contra el esqueleto default; ninguna sección presente solo porque "siempre va") | Frenar. Volver a M4–M5.5 con el feedback del CDL. Si el esqueleto es el genérico sin justificar (M11 Principio 10), rehacer la IA Spec. Máximo 2 iteraciones antes de escalar al humano. |
-| GATE 3 — Pre-producción | Después de M9.8 | Build técnico completo, sin TODOs críticos, patterns de M9 aplicados, signature de M9.8 presente, **el build respeta la IA Spec de CDL-1** (secciones y orden derivados del arquetipo, no el esqueleto default). **Si hay backend: gates internos de B0-B5 pasados** (arquitectura aprobada incl. decisiones irreversibles; preámbulo de seguridad de B1 en toda mutación; pagos de B2 si aplica; secrets/observabilidad de B3; QA de seguridad de B4 — bloqueante; mínimo de performance de B5) | Frenar. Listar lo faltante. No pasar a M10 con deuda. Una falla de seguridad de B4 es bloqueante absoluto. |
+| GATE 3 — Pre-producción | Después de M9.8 y M8.6 | Build técnico completo, sin TODOs críticos, patterns de M9 aplicados, signature de M9.8 presente, **el build respeta la IA Spec de CDL-1** (secciones y orden derivados del arquetipo, no el esqueleto default). **M8.6 (Production Review) con veredicto PASA o PASA CON AJUSTES** — ninguna dimensión de fidelidad (Concept/Perception/Direction/Signature) en PERDIDO, drift genérico no CRÍTICO. **Si hay backend: gates internos de B0-B5 pasados** (arquitectura aprobada incl. decisiones irreversibles; preámbulo de seguridad de B1 en toda mutación; pagos de B2 si aplica; secrets/observabilidad de B3; QA de seguridad de B4 — bloqueante; mínimo de performance de B5) | Frenar. Listar lo faltante. No pasar a M10 con deuda. Una falla de seguridad de B4 es bloqueante absoluto. **Un veredicto FALLA de M8.6 vuelve al módulo de destino que M8.6 indica (M4/M4.5/M5/M5.5) — GATE 3 no puede pasar sobre eso.** |
 | GATE 4 — Deploy | Dentro de M10 | Aprobación explícita del humano para publicar. **Si hay backend: launch checklist de B4 completo + plan de recuperación de B6 presente** (migraciones en prod, secrets live, webhooks registrados, backup con restore probado, monitoring activo) | Frenar. El deploy NUNCA es decisión autónoma de Claude. |
 
 **Regla:** un gate fallado que se reporta es proceso. Un gate fallado que se ignora es falla de sistema. Reportar siempre.

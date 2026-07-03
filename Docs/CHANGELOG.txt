@@ -8,6 +8,32 @@ Autoridad: los cambios los aprueba y aplica el humano (SKILL.md secciones 7 y 13
 
 --------------------------------------------------------------------------------
 
+2026-06-29 (5) — M8.6 (PRODUCTION REVIEW) CABLEADO A GATE 3: EL BUILD REAL AHORA SE VERIFICA CONTRA LA DIRECCIÓN CREATIVA
+---------------------------------------------------------------------------------------------------------------------------
+Módulo afectado: SKILL.md (Sección 5 — Execution Order; Sección 6 — GATE 3). Estado: ACTIVA. Permanente.
+
+Cambio: M8.6 (Production Review Engine) existía en el FILE MAP ("M8.1–M8.6") pero NUNCA
+estaba en la cadena de ejecución de la Sección 5 (decía "M8 → M9 → M9.8", sin M8.6) ni
+era condición de GATE 3. Se agregó explícitamente a la cadena (corre después de M9.8,
+sobre el build ya firmado, antes de GATE 3) y como condición dura de GATE 3: veredicto
+PASA o PASA CON AJUSTES, con destino de vuelta a M4/M4.5/M5/M5.5 si FALLA.
+
+Razón: en CUORE, el sitio pasó GATE 3 (arquitectura, seguridad B4, performance B5 en
+verde) con el Sistema de Imágenes de M5 —documentado con detalle: estilo documental,
+luz, encuadres, criterios de rechazo— completamente ausente en el build (solo una
+frase "pendiente de assets", sin tratamiento visual de reemplazo). Nadie lo atrapó
+porque el único módulo diseñado para eso, M8.6, nunca se ejecutó: no estaba en la
+cadena ni era requisito de GATE 3. El humano lo detectó recién mirando el sitio
+desplegado ("es muy pobre en términos de calidad") — es decir, M8.6 corrió, por primera
+vez, como ojo humano en lugar de como módulo.
+
+Qué NO cambia: no se creó ningún módulo nuevo. M8.6 ya existía, bien diseñado (tabla
+de fidelidad Concept/Perception/Direction/Signature + drift genérico contra M5.5 +
+cross-browser). El fix fue exclusivamente de cableado: hacer obligatorio lo que ya
+estaba escrito pero se saltaba en silencio.
+
+--------------------------------------------------------------------------------
+
 2026-06-29 (4) — M9.3: LIBRERÍAS DE COMPONENTES DE ANIMACIÓN COMO ACELERADOR DE IMPLEMENTACIÓN (React Bits y similares)
 ---------------------------------------------------------------------------------------------------------------------
 Módulo afectado: M9.3 (Motion Pattern Library, v2->v2.1). Estado: ACTIVA. Permanente.
