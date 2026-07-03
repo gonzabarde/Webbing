@@ -138,6 +138,7 @@ Base: `NIVELES/` (relativo a la raíz del skill). Nota: `NEGOCIO/` es subcarpeta
 | M12 overview | `NIVEL 6/M12_Overview_Visual_Intelligence_System_v3.txt` |
 | M12.0–M12.9 | `NIVEL 6/M12_[0-9]_*.txt` |
 | M13 overview | `NEGOCIO/M13_0_Business_Layer_Overview_v1.txt` |
+| M13.0A (anexo: escalera de ofertas) | `NEGOCIO/M13_0A_Offer_Ladder_v1.txt` |
 | M13.1 | `NEGOCIO/M13_1_Client_Qualification_Engine_v1.txt` |
 | M13.2 | `NEGOCIO/M13_2_Scope_Proposal_System_v1.txt` |
 | M13.3 | `NEGOCIO/M13_3_Pricing_Engine_v1.txt` |

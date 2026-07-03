@@ -43,6 +43,9 @@ M13.4 — Retainer (¿el cliente sigue?)
 
 ARQUITECTURA DEL BUSINESS LAYER
 --------------------------------
+M13.0A — Escalera de Ofertas (ANEXO de este overview): define los tres productos
+         que Webbing vende (Entrada / Core / Recurrente) y la visión GHL como
+         North Star. Fuente única de la escalera; M13.2 y M13.3 la referencian.
 M13.1 — Client Qualification Engine
 M13.2 — Scope & Proposal System
 M13.3 — Pricing Engine
@@ -77,6 +80,10 @@ Profesionales / marca personal:
 
 REGLA CENTRAL
 -------------
+Webbing no vende páginas: instala y opera sistemas de captación. Todo lo que
+sigue en esta capa (calificar, cotizar, cerrar, retener) se lee desde ese
+framing, no desde "hacer un sitio".
+
 No todo cliente merece un proyecto de Webbing.
 Entrar a un proyecto sin calificar bien al cliente
 es la causa más frecuente de proyectos que no cierran,

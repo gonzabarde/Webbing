@@ -1,0 +1,113 @@
+M13.0A — ESCALERA DE OFERTAS (ANEXO DE M13.0) (v1)
+===================================================
+
+QUÉ ES ESTE DOCUMENTO
+---------------------
+Anexo de M13.0 (Business Layer Overview). Define en una sola página los tres
+productos que Webbing vende y cómo se encadenan. Es la fuente única de la
+escalera: M13.2 (Scope & Proposal) y M13.3 (Pricing) lo referencian en vez de
+redefinir los productos, para no duplicar.
+
+No reemplaza a M13.2 ni a M13.3. Ellos operan el scope y el precio caso por caso;
+este anexo fija QUÉ se ofrece y en qué orden. El reposicionamiento que lo sostiene
+vive en la REGLA CENTRAL de M13.0: Webbing no vende páginas, instala y opera
+sistemas de captación.
+
+LA ESCALERA — TRES PRODUCTOS
+-----------------------------
+
+1. ENTRADA — DIAGNÓSTICO DE CAPTACIÓN (M15 productizado)
+   Qué es: lo que se hizo con CUORE, empaquetado. Auditoría de presencia digital
+   + benchmark competitivo + plan concreto de captación. Es M15 (Site Audit &
+   Diagnosis Engine) convertido en producto vendible, no en trabajo interno.
+   Función: filtra curiosos y financia la conversación. No es el negocio; es el
+   anzuelo que abre el negocio.
+   Precio ancla: gratis como anzuelo en frío (outbound, cuando Webbing va al
+   prospecto), o pago ~USD 80-150 cuando el prospecto viene a Webbing (inbound).
+   Un prospecto que paga el diagnóstico ya se auto-calificó.
+   Cómo se conecta: su salida es el Audit Handoff que entra a M13.1
+   (calificación) y arma el argumento de valor para el Core.
+
+2. CORE — SISTEMA DE CAPTACIÓN INSTALADO
+   Qué es: lo que Webbing ya construye, nombrado como lo que realmente es.
+   Web + reservas/checkout + integraciones (WhatsApp, Mercado Pago, AFIP según
+   el caso) + Google Business vinculado. No "una página web": un sistema que
+   capta y convierte, instalado y funcionando.
+   Función: es el ancla de la oferta y la fuente del ingreso de proyecto.
+   Precio ancla: USD 700-1.500 según complejidad. B0 (Backend Architecture
+   Decision Engine) clasifica la complejidad real; M13.2 fija el scope y M13.3
+   el precio final dentro (o fuera, si el proyecto lo justifica) de este ancla.
+   Regla de framing: nunca más venderlo como "una página web". Se vende el
+   sistema de captación, no el entregable visual.
+
+3. RECURRENTE — OPERACIÓN MENSUAL
+   Qué es: hosting, dominio, ajustes, reportes de leads/conversión y soporte.
+   La operación viva del sistema de captación una vez instalado.
+   Función: es el producto que cambia la economía de Webbing. Convierte cada
+   cierre único (Core) en ingreso repetido. Sin este, cada mes se arranca de
+   cero buscando el próximo Core.
+   Precio ancla: USD 80-200/mes.
+   Cómo se conecta: se propone SIEMPRE al entregar el Core, en el mismo mensaje
+   de entrega (M13.4, Sección C — GATE 13.4-D). El detalle operativo —qué
+   incluye, qué no incluye, condiciones de salida— vive en M13.4. Las
+   estructuras de tiers formales viven en M13.3.
+
+CÓMO SE ENCADENAN
+-----------------
+Entrada (diagnóstico) → califica y financia la conversación
+  ↓
+Core (sistema instalado) → ingreso de proyecto, ancla de la relación
+  ↓
+Recurrente (operación mensual) → ingreso repetido, cambia la economía
+
+El objetivo no es vender un producto: es subir al cliente por la escalera.
+Un diagnóstico que no busca el Core, o un Core que no busca el Recurrente,
+deja la mayor parte del valor sobre la mesa.
+
+ADVERTENCIA — PRINCIPIO 9 (CONOCIMIENTO EMBEBIDO ES HIPÓTESIS, NO DATO)
+-----------------------------------------------------------------------
+Los tres precios ancla de arriba (USD 80-150 / USD 700-1.500 / USD 80-200 mes)
+son HIPÓTESIS, no datos cerrados. Ningún precio está validado hasta que un
+cliente lo paga. Se calibran con los primeros 3 casos reales — que entran igual
+bajo la CLÁUSULA DE FASE ARRANQUE de M13.4 (pago previo O prueba de compromiso
+de tres partes). Tras esos casos, los anclas se reescriben con lo que el mercado
+pagó de verdad, no con lo que este anexo supuso. No servir estos números como
+verdad de mercado (M11.0, Principio 9): orientan la conversación, no la cierran.
+
+--------------------------------------------------------------------------------
+NORTH STAR — VISIÓN GHL (STACK DE SOFTWARE PROPIO)
+--------------------------------------------------------------------------------
+Adónde tiende Webbing a largo plazo: dejar de operar la escalera con
+herramientas de terceros y planillas, y correrla sobre software propio (estilo
+GoHighLevel, pero de Webbing). Esto es una BRÚJULA, no un roadmap ni un
+compromiso. No se construye nada de esto por adelantado.
+
+Regla maestra del North Star (Principio 2 + Principio 9): cada componente se
+desbloquea por REPS, no por entusiasmo. No se construye software hasta haber
+hecho el proceso manual suficientes veces como para saber qué construir. El
+dolor de hacerlo a mano es el permiso para automatizarlo. Los umbrales de reps
+de abajo son hipótesis y los ajusta el humano (Principio 5).
+
+  CRM propio (reemplazar la planilla de leads)
+    Desbloquea cuando: llevar los leads a mano duele de verdad
+    (~10+ leads activos simultáneos o 3+ clientes en Recurrente).
+
+  Proposal generator (armar propuestas de M13.2 solo)
+    Desbloquea cuando: se armaron ≥5 propuestas a mano y el patrón de scope +
+    precio ya es estable y repetible.
+
+  Diagnóstico automatizado (Entrada como herramienta self-serve)
+    Desbloquea cuando: se vendió el diagnóstico manual ≥3 veces y el formato
+    del entregable dejó de cambiar entre casos.
+
+  Dashboard de leads/conversión para el cliente (parte del Recurrente)
+    Desbloquea cuando: ≥3 clientes en Recurrente piden o justifican reportes
+    recurrentes que hoy se arman a mano.
+
+  Portal de cliente + cobro del Recurrente (facturación recurrente propia)
+    Desbloquea cuando: la cantidad de Recurrentes activos hace que cobrar y
+    facturar a mano cada mes sea el cuello de botella.
+
+Regla final del North Star: si un componente todavía no duele a mano, no se
+construye. La escalera de arriba se vende y se opera con lo que ya existe hasta
+que los reps prueben que el software se ganó su lugar.

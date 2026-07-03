@@ -9,6 +9,11 @@ y presentarlo de manera que el cliente entienda el valor antes de ver el precio.
 Un scope mal definido es la causa número uno de retrabajo, scope creep
 y proyectos que terminan sin que nadie esté satisfecho.
 
+NOTA — ESCALERA DE OFERTAS: los tres productos que Webbing vende (Entrada /
+Core / Recurrente) están definidos en M13.0A (anexo de M13.0). El scope de acá
+es el del producto Core (sistema de captación instalado), no "una página web".
+No redefinir los productos en la propuesta: referirse a M13.0A.
+
 CUÁNDO ACTIVAR
 --------------
 Después de M13.1 (cliente calificado).

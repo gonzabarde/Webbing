@@ -8,6 +8,53 @@ Autoridad: los cambios los aprueba y aplica el humano (SKILL.md secciones 7 y 13
 
 --------------------------------------------------------------------------------
 
+2026-07-03 — M13: ESCALERA DE OFERTAS (ANEXO M13.0A) + RETAINER DESARROLLADO + REPOSICIONAMIENTO
+------------------------------------------------------------------------------------------------
+Módulos afectados: M13.0A (Offer Ladder — ALTA de anexo, v1), M13.0 (Overview —
+REGLA CENTRAL + referencia al anexo), M13.2 (Scope & Proposal — nota de referencia),
+M13.3 (Pricing — nota de referencia), M13.4 (Closing & Onboarding — retainer
+desarrollado en Sección C), SKILL.md (FILE MAP — nueva fila M13.0A).
+Estado: ACTIVA. Los precios ancla llevan sunset implícito de calibración (ver abajo).
+
+Cambio (tres mejoras + cableado de mapa):
+  1) ALTA de M13.0A — Escalera de Ofertas: documento corto y único que nombra los
+     tres productos que Webbing vende: ENTRADA (diagnóstico de captación = M15
+     productizado, gratis en frío o ~USD 80-150 inbound), CORE (sistema de captación
+     instalado: web + reservas/checkout + integraciones + Google Business, ancla
+     USD 700-1.500, B0 clasifica), RECURRENTE (operación mensual: hosting, dominio,
+     ajustes, reportes de leads/conversión, soporte, ancla USD 80-200/mes). Incluye
+     advertencia de Principio 9 escrita adentro (los precios son hipótesis hasta que
+     un cliente pague; se calibran con los primeros 3 casos, que entran bajo la
+     cláusula de fase arranque) y la visión GHL como North Star al pie: cada
+     componente de software (CRM, proposal generator, diagnóstico automatizado,
+     dashboard de leads, portal + cobro) con su condición de desbloqueo por reps.
+     Una página, no un roadmap. M13.2 y M13.3 lo referencian en vez de duplicar.
+  2) M13.4 Sección C — el retainer, que antes se nombraba una vez sin definirse,
+     ahora tiene: qué incluye la operación mensual, qué NO incluye (rediseños y
+     features nuevas = proyecto aparte que vuelve a M13.2), y condiciones de salida
+     por escrito (preaviso de 30 días, no reembolso del mes en curso, traspaso de
+     accesos, qué pasa si el cliente deja de pagar, reactivación con posible fee).
+  3) M13.0 REGLA CENTRAL — reposicionamiento codificado: "Webbing no vende páginas:
+     instala y opera sistemas de captación." Toda la capa de negocio se lee desde
+     ese framing.
+
+Razón: la capa de negocio describía el trabajo pero no lo empaquetaba como oferta.
+"Retainer" aparecía una sola vez sin definición, no había una escalera nombrada, y
+el framing seguía siendo "hacer un sitio" en vez del sistema de captación que
+Webbing efectivamente instala (aprendido con CUORE). Se codifica el cambio de
+framing donde vive el negocio, sin duplicar productos entre módulos.
+
+Qué NO cambia: no se creó ningún gate nuevo ni se tocó el orden de ejecución. Los
+tiers de precio de M13.3 y los gates de M13.4 (incluida la cláusula de fase
+arranque y GATE 13.4-D) siguen vigentes tal cual. M13.0A es anexo, no módulo nuevo
+en la cadena de routing: se carga junto con M13 cuando la tarea es de negocio.
+
+SUNSET parcial (calibración de precios): los precios ancla de M13.0A son hipótesis
+(Principio 9). Tras los primeros 3 casos de portfolio cerrados, reescribir los
+anclas con lo que el mercado pagó de verdad y registrar el ajuste acá.
+
+--------------------------------------------------------------------------------
+
 2026-06-29 (5) — M8.6 (PRODUCTION REVIEW) CABLEADO A GATE 3: EL BUILD REAL AHORA SE VERIFICA CONTRA LA DIRECCIÓN CREATIVA
 ---------------------------------------------------------------------------------------------------------------------------
 Módulo afectado: SKILL.md (Sección 5 — Execution Order; Sección 6 — GATE 3). Estado: ACTIVA. Permanente.

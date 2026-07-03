@@ -113,6 +113,50 @@ No activar M0 sin tener este documento completo.
 SECCIÓN C — CONVERSIÓN POST-PROYECTO (RETAINER)
 -------------------------------------------------
 
+QUÉ ES EL RETAINER (OPERACIÓN MENSUAL)
+--------------------------------------
+El retainer es el producto Recurrente de la escalera (ver M13.0A): la operación
+viva del sistema de captación una vez instalado. No es "soporte por las dudas":
+es lo que mantiene el sistema captando y convierte cada cierre único en ingreso
+repetido. Los tiers formales y sus precios viven en M13.3; acá se define qué es,
+qué no es y cómo se sale.
+
+QUÉ INCLUYE LA OPERACIÓN MENSUAL:
+  - Hosting y dominio gestionados (o su supervisión y renovación).
+  - Monitoring, backups y actualizaciones de seguridad/dependencias.
+  - Ajustes menores de contenido dentro de las horas del tier (textos, precios,
+    fotos, horarios) — no rediseño.
+  - Reportes de leads/conversión: qué está entrando por el sistema y cómo rinde.
+  - Soporte, con el canal y el tiempo de respuesta que fije el tier.
+
+QUÉ NO INCLUYE (= PROYECTO APARTE, VUELVE A M13.2):
+  - Rediseños o cambios de dirección visual. Eso es un proyecto nuevo, se cotiza
+    de cero en M13.2/M13.3, no se absorbe en la mensualidad.
+  - Features o secciones nuevas (checkout, reservas, nuevas integraciones,
+    landing adicional). Proyecto aparte.
+  - Producción de contenido (fotos, copy, video) más allá del ajuste menor.
+  - Campañas de ads o SEO avanzado, salvo que el tier lo incluya explícitamente.
+  - Horas por encima del tope del tier: se cotizan aparte o se sube de tier.
+    Nunca se regalan por inercia (es la fuga que convierte el Recurrente en
+    trabajo gratis).
+
+CONDICIONES DE SALIDA (CRÍTICO — DEJARLO POR ESCRITO AL CERRAR EL RETAINER):
+  - El retainer es mensual, sin permanencia forzada. Cualquiera de las dos
+    partes puede terminarlo con 30 días de preaviso.
+  - El mes en curso ya pagado no se reembolsa; cubre hasta fin de período.
+  - Al salir, Webbing traspasa los accesos (dominio, hosting, repositorio) al
+    cliente en un plazo acordado (ej: 15 días). El sitio ya es del cliente: se
+    pagó en el fijo del Core, el retainer nunca fue "alquiler del sitio".
+  - Si el cliente deja de pagar: tras un aviso, se suspende la operación
+    (soporte, ajustes, monitoring, reportes). El sitio no se da de baja por
+    Webbing, pero deja de estar operado y mantenido, con el riesgo que eso
+    implica (seguridad, caídas, dominio sin renovar).
+  - Reactivación posible más adelante; si pasó mucho tiempo puede aplicar un fee
+    de re-onboarding para volver a poner el sistema al día.
+  Regla: estas condiciones se pactan por escrito al activar el retainer, no al
+  momento de la disputa. Un retainer sin condición de salida escrita es la causa
+  más común de la pelea fea al final de la relación.
+
 CUÁNDO ACTIVAR
 Al entregar el sitio en producción. No después.
 En el mismo email o llamada de entrega.

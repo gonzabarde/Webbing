@@ -10,6 +10,13 @@ Modelo: fijo por proyecto + retainer mensual opcional.
 Moneda base: USD para clientes internacionales.
           USD o ARS (equivalente) para clientes locales.
 
+NOTA — ESCALERA DE OFERTAS: los tres productos y sus precios ancla de arranque
+(Entrada ~USD 80-150 / Core USD 700-1.500 / Recurrente USD 80-200/mes) están en
+M13.0A (anexo de M13.0), marcados como HIPÓTESIS a calibrar con los primeros 3
+casos (Principio 9). Los rangos y tiers de abajo son el instrumento de cálculo
+fino por scope real; los anclas de M13.0A son el punto de partida de la
+conversación. Si difieren, prevalece el precio calculado por scope de acá.
+
 PRICING BASE POR TIPO DE PROYECTO
 -----------------------------------
 Basado en la clasificación de M10.0 y el esfuerzo estimado.
