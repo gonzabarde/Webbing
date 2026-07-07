@@ -1,5 +1,15 @@
-M8.6 — PRODUCTION REVIEW ENGINE (v2)
-=====================================
+M8.6 — PRODUCTION REVIEW ENGINE (v2.2)
+=======================================
+
+OPERATIONAL HEADER
+------------------
+WHEN:     Ejecución — después de M9.8, ANTES de GATE 3 (obligatorio).
+INPUTS:   M4-M5.5 aprobados, build en staging, QA M8.5, Frontend_Craft_Standard.md.
+OUTPUT:   Tabla fidelidad (5 dims) + cross-browser + veredicto PASA/AJUSTES/FALLA.
+GATES:    GATE 3 — FALLA si PERDIDO, drift CRÍTICO (3+ tells IA), o QA crítico.
+FAIL:     PASA sin cross-browser; sin checklist tells; FALLA sin destino.
+DEEP:     Leer destinos por dimensión y ejemplos de clichés por categoría.
+REF:      Frontend_Craft_Standard.md §4 (ANTI-AI-SLOP CHECKLIST).
 
 OBJETIVO
 --------
@@ -17,6 +27,7 @@ OBLIGATORIOS:
 - Mapa de Clichés de la categoría (M5.5)
 - Build final desplegado en staging
 - QA report (M8.5)
+- Frontend Craft Standard (Frontend_Craft_Standard.md — checklist §4)
 
 OPCIONALES:
 - Mockups o maquetas originales (para comparación side-by-side)
@@ -33,10 +44,13 @@ PROCESO CLAUDE
    Chrome, Safari/WebKit y Firefox son obligatorios.
    Ver GATE DE CROSS-BROWSER abajo.
 
-3. Verificar drift genérico.
-   Comparar el build contra el Mapa de Clichés de M5.5
-   correspondiente a la categoría del proyecto.
-   ¿La implementación se parece a alguno de los clichés listados?
+3. Verificar drift genérico — CHECKLIST DURO (dos capas, ambas obligatorias):
+   a) Clichés de CATEGORÍA: comparar contra el Mapa de Clichés de M5.5
+      (como hasta ahora). Si la categoría no tiene mapa, esta capa se omite
+      declarándolo — la capa b) NUNCA se omite.
+   b) Tells de IA: correr el ANTI-AI-SLOP CHECKLIST completo
+      (Frontend_Craft_Standard.md §4, tells 1-12) sobre el build REAL
+      (screenshot/staging, no la intención). Registrar el puntaje.
 
 4. Integrar el QA report de M8.5.
    ¿Hay problemas críticos sin resolver?
@@ -73,9 +87,20 @@ Ejemplos:
 - Portfolio con dark mode + cursor custom + palabra grande animada →
   CRÍTICO. Los tres primeros clichés del mapa de estudio creativo.
 
+CAPA 1 — CLICHÉS DE CATEGORÍA (M5.5):
 Si el build replica 2 o más clichés de la categoría: drift genérico CRÍTICO.
 Si replica 1: drift genérico LEVE.
-Si no replica ninguno: AUSENTE.
+Si no replica ninguno: AUSENTE (en esta capa).
+
+CAPA 2 — TELLS DE IA (Frontend_Craft_Standard.md §4) [v2.1]:
+Si el build acumula 3+ tells del checklist: drift genérico CRÍTICO,
+  aunque no replique ningún cliché de categoría. El build huele a IA.
+Si acumula 1-2 tells: drift genérico LEVE como mínimo (no puede ser AUSENTE).
+Si acumula 0: la capa 2 no modifica el resultado de la capa 1.
+El resultado final de Generic Drift es el PEOR de las dos capas.
+Además, verificar el piso técnico del estándar (AA, responsive 375px,
+prefers-reduced-motion, focus visible): cualquier ausencia es problema
+CRÍTICO de QA — bloquea el veredicto PASA por la vía del QA report.
 
 VEREDICTO FINAL
 ----------------
@@ -96,6 +121,9 @@ FALLA
   Problemas críticos del QA sin resolver.
   Falla cross-browser.
   Drift genérico CRÍTICO.
+  (El drift CRÍTICO puede venir de la capa de categoría O de la capa de
+  tells de IA: 3+ tells del ANTI-AI-SLOP CHECKLIST = FALLA, sin excepción.
+  GATE 3 no puede pasar sobre este veredicto — SKILL.md §6.)
 
 DESTINOS EN CASO DE FALLA [obligatorios]
 ------------------------------------------
@@ -116,6 +144,11 @@ Signature Fidelity PERDIDO → volver a M5, sección Signature System.
 Generic Drift CRÍTICO → volver a M5.5 Visual Innovation Engine.
   El build se convirtió en una plantilla de la categoría.
   Necesita una desviación real en al menos una variable.
+  Si el CRÍTICO vino de la capa de tells de IA con la dirección de M5/M5.5
+  intacta en papel: el problema es de ejecución, no de dirección — corregir
+  en el build contra el checklist §4 y re-correr M8.6 (no reabrir M5.5).
+  Si la dirección misma era tibia (sin nombre, sin extremo): volver a M5
+  paso 0 (dirección nombrada) y de ahí a M5.5.
 
 DRIFT sin PERDIDO → no volver a un módulo anterior.
   Ajustar directamente en el build. Documentar los cambios realizados.
@@ -144,10 +177,22 @@ Problemas comunes en Safari/WebKit a verificar específicamente:
 Si cualquier browser presenta problemas: FALLA.
 No emitir veredicto PASA hasta que cross-browser esté limpio.
 
+DIFERIMIENTO POR TOOLING (v2.2 — de la corrida ECOS):
+Si el entorno solo ofrece UN motor (ej. solo Chromium, sin Safari/WebKit ni Firefox
+disponibles), el cross-browser NO se puede ejecutar. En ese caso:
+- NO falsificar un PASA de cross-browser que no se corrió (Principio de honestidad).
+- NO hacer un downgrade silencioso ni dar el gate por cumplido.
+- El veredicto correcto es PASA CON AJUSTES (si todo lo demás está OK), con el
+  cross-browser cargado como BLOQUEANTE EXPLÍCITO de pre-deploy (GATE 4): el gate se
+  difiere, no se salta. Registrar en el output qué motor se verificó y cuáles quedan
+  pendientes, más los riesgos conocidos a chequear en ellos (ej. color-mix, backdrop-
+  filter, render de fuentes variables).
+Un motor único NO habilita un PASA limpio; habilita un diferimiento honesto y trazable.
+
 TESTS
 -----
 - ¿La tabla de fidelidad tiene los 5 campos completados?
-- ¿El drift genérico fue verificado contra M5.5?
+- ¿El drift genérico fue verificado contra M5.5 Y el checklist de tells?
 - ¿El QA report de M8.5 fue integrado al veredicto?
 - ¿Cross-browser fue verificado en Chrome, Safari y Firefox?
 - ¿Si el veredicto es FALLA, hay un destino específico con razón?
@@ -157,7 +202,7 @@ OUTPUT
 ------
 Tabla de fidelidad completa
 Resultado del check cross-browser (browser por browser)
-Resultado de drift genérico con referencia a M5.5
+Resultado de drift genérico (capa categoría + puntaje tells IA)
 Estado del QA report (críticos resueltos / pendientes)
 Veredicto final: PASA / PASA CON AJUSTES / FALLA
 Si FALLA: módulo de destino + razón de una línea por cada dimensión perdida
@@ -169,17 +214,20 @@ FAIL CONDITIONS
 - La percepción objetivo no está presente en ninguna sección.
 - La firma visual no se reconoce sin el logo.
 - El build replica 2 o más clichés de la categoría.
+- El build acumula 3+ tells del ANTI-AI-SLOP CHECKLIST.
 - Hay problemas críticos del QA sin resolver.
 - El veredicto es PASA sin haber hecho cross-browser.
 - FALLA sin destino específico.
+- El veredicto se emitió sin correr el ANTI-AI-SLOP CHECKLIST sobre el
+  build real, o sin registrar el puntaje de tells.
 
 PROMPT PARA CLAUDE
 ------------------
 Actuá como revisor de producción con criterio creativo y técnico.
 Completá la tabla de fidelidad evaluando las 5 dimensiones.
-Verificá drift genérico comparando el build contra el Mapa de Clichés de M5.5.
+Verificá drift genérico: capa categoría (M5.5) + tells de IA (Frontend_Craft_Standard §4).
 Integrá el QA report de M8.5 al veredicto.
 Verificá cross-browser en Chrome, Safari y Firefox antes de emitir cualquier veredicto.
 Si FALLA: indicá el módulo de destino y la razón en una línea.
 Terminá con un veredicto de PASA, PASA CON AJUSTES o FALLA.
-Sin cross-browser limpio no hay PASA.
+Sin cross-browser limpio no hay PASA. Sin checklist de tells no hay veredicto.

@@ -1,5 +1,15 @@
-MÓDULO 3 — TYPOGRAPHY & SEMIOTICS SYSTEM (v3 DEEP)
-===================================================
+MÓDULO 3 — TYPOGRAPHY & SEMIOTICS SYSTEM (v3.1 DEEP)
+====================================================
+
+OPERATIONAL HEADER
+------------------
+WHEN:     Estrategia (GATE 1) — después de M1/M2, antes de M4.
+INPUTS:   Posicionamiento, personalidad, concepto, categoría, restricciones tipográficas.
+OUTPUT:   Sistema tipográfico + escala numérica + semiótica expandida + pairing justificado.
+GATES:    GATE 1 (estrategia cerrada incluye tipografía).
+FAIL:     Body en fuente prohibida sin excepción; pairing sin justificación; escala sin px.
+DEEP:     Leer cuerpo completo para semiótica de familias, pairing por tensión y casos.
+REF:      Frontend_Craft_Standard.md §2 (fuentes prohibidas y pairing distintivo).
 
 OBJETIVO
 --------
@@ -177,6 +187,26 @@ CUÁNDO NO HACER PAIRING
 - Cuando el cliente no tiene fotos ni contenido que haga visible el pairing.
 - Cuando el presupuesto o el timeline no permiten ejecutar bien dos familias.
 - Cuando la categoría es tan conservadora que dos fuentes parecen exceso.
+
+REGLA DE PAIRING DISTINTIVO + FUENTES PROHIBIDAS POR DEFAULT [v3.1]
+--------------------------------------------------------------------
+(Hook del Frontend_Craft_Standard.md §2 — el estándar es la fuente de verdad.)
+
+PROHIBIDAS COMO BODY POR DEFAULT:
+Inter, Roboto, Arial, Helvetica/Helvetica Neue, system-ui / -apple-system,
+Open Sans, Lato, Poppins, Montserrat, Space Grotesk.
+Excepción única: producto UI-denso donde la neutralidad es decisión
+estratégica ESCRITA y la diferenciación está cargada en otra variable
+declarada en el Signature Brief. "Es legible y segura" no es justificación.
+
+PAIRING DISTINTIVO OBLIGATORIO:
+- Display y body se eligen como PAR que produce una tensión útil (arriba).
+- Al menos una familia con carácter identificable: si no se puede nombrar
+  en una línea qué la distingue, no tiene carácter.
+- Justificación escrita: señal semiótica del par + por qué ESTE proyecto
+  + contra qué 2 alternativas perdió cada elección.
+- Fuente única sigue válida (Pairing 5) solo si la familia tiene carácter
+  propio. Fuente única con neo-grotesk neutro = default disfrazado.
 
 SISTEMAS DE ESCALA — VALORES NUMÉRICOS [v3]
 --------------------------------------------
@@ -386,6 +416,9 @@ FAIL CONDITIONS
 - La tipografía contradice la personalidad.
 - La semiótica se limitó a tipografía; no cubre color, espacio ni contraste.
 - La familia elegida está sobreusada en la categoría sin diferenciación.
+- El body usa una fuente de la lista de prohibidas por default sin la
+  excepción escrita (Frontend_Craft_Standard.md §2.1).
+- El pairing no tiene justificación contra alternativas.
 
 PROMPT PARA CLAUDE
 ------------------

@@ -1,6 +1,16 @@
 M13.4 — CLOSING & ONBOARDING (v1)
 ==================================
 
+OPERATIONAL HEADER
+------------------
+WHEN:     Negocio — cierre (pre-M0) y post-entrega (retainer + check-in).
+INPUTS:   Propuesta aprobada M13.2/13.3; proyecto entregado para Sección C.
+OUTPUT:   Contrato, pago, Brief Interno, retainer, Capture_Baseline.
+GATES:    13.4-A a E (ver Docs/GATE_REGISTRY.txt).
+FAIL:     Arrancar sin pago/compromiso; M0 sin Brief; deploy sin pago final.
+DEEP:     Leer kickoff, cláusula arranque, condiciones de salida retainer.
+REF:      Client_Record_Template.md + Capture_Baseline_Template.md.
+
 OBJETIVO
 --------
 Convertir un "sí" en un proyecto que arranca bien.

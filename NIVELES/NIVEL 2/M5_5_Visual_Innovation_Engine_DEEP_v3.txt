@@ -1,5 +1,15 @@
-MÓDULO 5.5 — VISUAL INNOVATION ENGINE (v3 DEEP)
-=================================================
+MÓDULO 5.5 — VISUAL INNOVATION ENGINE (v3.1 DEEP)
+==================================================
+
+OPERATIONAL HEADER
+------------------
+WHEN:     Creatividad — después de M5, antes de CDL / GATE 2.
+INPUTS:   Concepto, dirección M5, categoría, competidores, riesgo aceptable.
+OUTPUT:   Innovación principal + variable elegida + Cost Matrix + Decay Test + R1-R4.
+GATES:    GATE 2; M8.6 Generic Drift si el build pierde la desviación.
+FAIL:     R1-R4 ausentes; innovación sin concepto; no pasó Cost Matrix/Decay.
+DEEP:     Leer mapa de clichés por categoría e innovación por variable.
+REF:      Frontend_Craft_Standard.md §3 (4 requisitos de salida).
 
 OBJETIVO
 --------
@@ -51,6 +61,26 @@ PROCESO CLAUDE
 
 7. Definir cómo sostener la coherencia.
    La innovación debe aparecer en más de un lugar, pero sin volverse ruido.
+
+CONDICIÓN DE SALIDA — 4 REQUISITOS DE CRAFT [v3.1]
+----------------------------------------------------
+(Hook del Frontend_Craft_Standard.md §3.) Ninguna dirección sale de este
+módulo hacia GATE 2 sin verificar los cuatro, ítem por ítem:
+
+R1 ATMÓSFERA: el fondo es una decisión (gradiente con luz, textura/grain,
+   patrón, capas, iluminación — o vacío DELIBERADO declarado). Fondo plano
+   sin declaración = falla.
+R2 MOMENTO MEMORABLE: uno, nombrable. Test: escribir la frase que diría el
+   usuario 24 hs después. Frase genérica = no hay momento.
+R3 ASIMETRÍA / RUPTURA DE GRILLA: al menos una decisión compositiva que
+   rompa la simetría esperada. Hero centrado-simétrico default = falla
+   salvo justificación escrita de M5.
+R4 CONTRASTE BRUTAL DE ESCALA: relación dramática y buscada entre el
+   elemento mayor y el texto base (o su inverso por vacío en minimalismo
+   refinado). Todo del mismo tamaño ±20% = falla.
+
+Los 4 son costo 1-2 del Innovation Cost Matrix: no se recortan por
+proporcionalidad (gobernanza Ligera los ejecuta con medios baratos).
 
 INNOVACIÓN POR VARIABLE [v3]
 ------------------------------
@@ -393,6 +423,8 @@ FAIL CONDITIONS
 - No ayuda a la percepción objetivo.
 - No puede sostenerse en todo el sistema.
 - No pasó el Cost Matrix ni el Decay Test.
+- La dirección sale del módulo con alguno de R1-R4 ausente y sin
+  justificación escrita (Frontend_Craft_Standard.md §3).
 
 PROMPT PARA CLAUDE
 ------------------

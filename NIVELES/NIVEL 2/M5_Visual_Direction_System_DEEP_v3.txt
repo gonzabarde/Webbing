@@ -1,5 +1,15 @@
-MÓDULO 5 — VISUAL DIRECTION SYSTEM (v3 DEEP)
-=============================================
+MÓDULO 5 — VISUAL DIRECTION SYSTEM (v3.1 DEEP)
+===============================================
+
+OPERATIONAL HEADER
+------------------
+WHEN:     Creatividad — después de M4/M4.5, antes de M5.5 y CDL (GATE 2).
+INPUTS:   Concepto, percepción, posicionamiento, categoría, referencias.
+OUTPUT:   Dirección estética NOMBRADA + firma visual + sistemas (color, motion, imagen).
+GATES:    GATE 2 — CDL evalúa dirección; paso 0 obligatorio antes de producir.
+FAIL:     Sin dirección nombrada; nombre genérico; más de un recurso dominante.
+DEEP:     Leer cuerpo para sistemas técnicos, signature y arquitectura por tipo.
+REF:      Frontend_Craft_Standard.md §1 (dirección extrema y nombrada).
 
 OBJETIVO
 --------
@@ -25,6 +35,14 @@ OPCIONALES:
 
 PROCESO CLAUDE
 --------------
+0. Declarar la DIRECCIÓN ESTÉTICA NOMBRADA antes de producir nada.
+   (Hook del Frontend_Craft_Standard.md §1.) Cuatro líneas obligatorias:
+   NOMBRE (2-5 palabras, específico — "moderno y limpio" no es un nombre),
+   MUNDO de referencia (1 línea), QUÉ EXCLUYE (3+ ítems),
+   EL EXTREMO (en qué variable se compromete a fondo).
+   Sin las 4 líneas, este módulo no avanza. GATE 2 las hereda como
+   parte de la dirección visual que el CDL evalúa.
+
 1. Definir una sola firma visual principal.
    Tipográfica / espacial / geométrica / fotográfica / motion / compositiva.
 
@@ -354,6 +372,7 @@ TESTS
 
 OUTPUT
 ------
+0. Dirección estética nombrada (nombre + mundo + exclusiones + extremo).
 1. Firma visual principal.
 2. Firma visual secundaria.
 3. Sistema tipográfico.
@@ -377,6 +396,8 @@ FAIL CONDITIONS
 - El motion no tiene sistema; tiene efectos sueltos.
 - La fotografía no tiene dirección ni criterios de rechazo.
 - La composición se siente genérica o de plantilla.
+- No hay dirección estética nombrada, o el nombre le serviría a cualquier
+  proyecto de cualquier categoría.
 
 PROMPT PARA CLAUDE
 ------------------

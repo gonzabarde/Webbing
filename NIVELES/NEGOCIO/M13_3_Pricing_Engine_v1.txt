@@ -1,6 +1,16 @@
 M13.3 — PRICING ENGINE (v1)
 ============================
 
+OPERATIONAL HEADER
+------------------
+WHEN:     Scope definido (M13.2) — antes de enviar propuesta formal.
+INPUTS:   Clasificación M10.0, scope IN/OUT, esfuerzo, anclas M13.0A.
+OUTPUT:   Precio + estructura de pagos + retainer propuesto.
+GATES:    GATE 13.3-A (margen), 13.3-B (mayoría al inicio), 13.3-C (retainer).
+FAIL:     Precio bajo esfuerzo; 50/50 sin justificación; sin retainer al cierre.
+DEEP:     Leer cuerpo para rangos por tipo, multiplicadores y negociación.
+REF:      M13.0A_Offer_Ladder_v1.txt (anclas de arranque).
+
 OBJETIVO
 --------
 Calcular el precio correcto para cada proyecto y estructurarlo

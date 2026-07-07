@@ -1,0 +1,59 @@
+WEBBING — M14 PROPOSAL LOG (v1)
+================================
+Historial de TODAS las propuestas que salieron de una corrida FORMAL de M14
+(los 6 ejes + formato fijo de propuesta) — aplicadas, rechazadas o pendientes.
+Distinto de Docs/CHANGELOG.txt: el CHANGELOG solo tiene lo APLICADO, con el
+relato completo. Este log es el índice plano de TODO lo que M14 propuso,
+para ver patrones entre proyectos (¿se repite el mismo incidente?).
+
+No incluye: cambios de sistema que NO vinieron de una corrida formal de M14
+(ej. el cableado de M8.6→GATE 3 fue diagnóstico directo, no M14; la Crítica
+de 6 Perspectivas es un mecanismo distinto; el Frontend Craft Standard fue
+"propuesta tipo M14" pero ad hoc, no una corrida de los 6 ejes). Esos quedan
+solo en el CHANGELOG, con su origen real aclarado ahí.
+
+Formato por fila: ID | Severidad | Eje | Módulo/Archivo | Disposición | Nota 1 línea.
+Disposición: Aplicada / Rechazada / Postergada / Pendiente de aprobación.
+
+--------------------------------------------------------------------------------
+CORRIDA — GLOW FACTOR (2026-06-29). Proyecto de aprendizaje/portfolio, entregado.
+--------------------------------------------------------------------------------
+P1 | Crítica | Eje 1 (Gates)              | M10.7                | Aplicada   | Auditoría en vivo post-deploy — único mecanismo que atrapó los 4 bugs reales.
+P2 | Alta     | Eje 2 (Calidad output)     | B1-D6                | Aplicada   | Slugify sin validar diacríticos → slugs rotos/duplicados.
+P3 | Alta     | Eje 3 (Intervención manual)| B1-D6                | Aplicada   | Bug de seed = código Y datos ya persistidos, no solo código.
+P4 | Alta     | Eje 4 (Divergencia)        | B1-D6                | Aplicada   | Provenance real de catálogo — extiende Principio 9 a datos de ejecución.
+P5 | Media    | Eje 2 (Calidad output)     | B1-D6                | Aplicada   | Cobertura de facets — toda opción de filtro necesita ≥1 resultado real.
+P6 | Media    | Eje 5 (Estimación)         | B4                   | Postergada | Tests de pago como gate — diferido hasta activar Mercado Pago real.
+
+--------------------------------------------------------------------------------
+CORRIDA — CUORE (2026-06-29). Prospecto, práctica de sistema.
+--------------------------------------------------------------------------------
+P1 | Alta     | Eje 1 (Gates)              | CDL-1                | Aplicada   | IA Spec sin chequeo numérico de posición — dejó pasar violación real de Principio 10.
+P2 | Media     | Eje 4 (Divergencia)        | CDL-4                | Aplicada   | Scorecard fijo de 7 filas sin mapeo para Process/Brand Translation (8 dimensiones reales).
+P3 | Media     | Eje 4 (Divergencia)        | CDL-5                | Aplicada   | Regla de Conflicto sin caso para dimensión "Alta" (solo Crítica y Media/Baja).
+P4 | Baja      | Eje 2 (Calidad output)     | CDL-4                | Aplicada   | Bonus aditivo sin techo — score podía superar la escala /10.
+P5 | Media     | Eje 4 (Divergencia)        | SKILL.md             | Pendiente de aprobación | Advertir salto de módulo canónico (M2) al recibir el brief, no 4 pasos después.
+P6 | Baja      | Eje 4 (Divergencia)        | SKILL.md             | Rechazada  | Nombrar un checkpoint "pre-build" — descartable, el propio M14 lo marcó opcional.
+
+--------------------------------------------------------------------------------
+CORRIDA — ECOS (2026-07-05). Práctica de sistema, sin operación real.
+--------------------------------------------------------------------------------
+P1 | Alta      | Eje 3 (Intervención manual)| M9.3                 | Aplicada   | Pre-flight del acelerador de librería — de la 1ª ejecución REAL del mecanismo (scaffold React, engine node, path quirk "@"). v2.1->v2.2.
+P2 | Media     | Eje 1 (Gates)              | M8.6                 | Aplicada   | Diferimiento de cross-browser con un solo motor disponible — PASA CON AJUSTES + bloqueante de GATE 4, sin PASA falso. v2.1->v2.2.
+P3 | Media     | Eje 4 (Divergencia)        | M0                   | Aplicada   | Regla de falsabilidad del diferenciador/villano DECLARADOS por el cliente (extensión del Principio 9, no principio nuevo). M0 v3->v3.1.
+P4 | Baja      | Eje 3 (Intervención manual)| M9.3                 | Aplicada   | Pausar animaciones continuas (rAF/canvas) fuera del viewport vía IntersectionObserver. M9.3 v2.2->v2.3.
+
+--------------------------------------------------------------------------------
+PENDIENTES DE PROCESAR (INCIDENTES_M14.md de proyecto, capturados en caliente,
+nunca corridos por M14 formal — no confundir con propuestas ya evaluadas)
+--------------------------------------------------------------------------------
+- ecos-web\_webbing\INCIDENTES_M14.md — PROCESADO: corrida formal de M14 el 2026-07-05
+  (ver bloque CORRIDA — ECOS arriba). Ya no pendiente.
+- runa-web\INCIDENTES_M14.md — incluye INC-7 (dato regulatorio desactualizado).
+  Sin corrida formal de M14 todavía.
+
+--------------------------------------------------------------------------------
+Mantenimiento: cada corrida formal de M14 agrega su bloque acá completo (las
+propuestas rechazadas/postergadas también, no solo las aplicadas) apenas el
+humano decide sobre cada una — no esperar a que se acumulen. Registrar en
+Docs/CHANGELOG.txt solo lo Aplicado, con el relato; este log es el índice de todo.

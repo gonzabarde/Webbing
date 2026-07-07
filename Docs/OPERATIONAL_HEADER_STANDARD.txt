@@ -1,0 +1,43 @@
+OPERATIONAL HEADER STANDARD (v1)
+=================================
+
+PROPÓSITO
+---------
+Reducir el costo de contexto por sesión sin perder profundidad. Cada módulo
+activo lleva un OPERATIONAL HEADER inmediatamente después del título: telegrama
+operativo para routing y gates. El cuerpo DEEP se lee solo cuando la decisión
+lo requiere (SKILL §8: dejar de pensar cuando pensar no cambia la decisión).
+
+FORMATO OBLIGATORIO (7 líneas)
+-------------------------------
+OPERATIONAL HEADER
+------------------
+WHEN:     Cuándo cargar este módulo (tipo de tarea / punto del flujo).
+INPUTS:   Mínimos indispensables (no lista exhaustiva del cuerpo).
+OUTPUT:   Entregable en una línea.
+GATES:    Gates que este módulo alimenta o exige (ver Docs/GATE_REGISTRY.txt).
+FAIL:     Top 3 fail conditions (las más frecuentes en la práctica).
+DEEP:     Cuándo leer el cuerpo completo.
+REF:      (opcional) Archivos transversales: Frontend_Craft_Standard.md,
+          Client_Record_Template.md, Capture_Baseline_Template.md, etc.
+
+REGLAS DE USO
+-------------
+1. Routing (SKILL §4): si la tarea matchea, cargar HEADER primero. Cuerpo solo
+   si FAIL no es obvio, hay gate en juego, o el humano pide profundidad.
+2. No duplicar el cuerpo en el header. El header orienta; el cuerpo decide.
+3. Bump minor del módulo al agregar o cambiar sustancialmente el header.
+4. Módulos sin header aún: cargar OBJETIVO + FAIL CONDITIONS + PROMPT hasta
+   que M14 o mantenimiento complete el header (deuda documentada).
+
+ESTADO DE COBERTURA (2026-07-04)
+---------------------------------
+Headers aplicados: M0, M3, M5, M5.5, CDL-0, M8 overview, M8.6, M9 overview,
+M13.0, M13.1, M13.2, M13.3, M13.4, M14, M15, M16, M18.
+Pendientes: M1, M2, M4, M4.5, M6, M7, M10, M11, M12, CDL-1–5, M8.1–M8.5,
+M9.1–M9.8, B0–B6 — completar por prioridad de routing (deuda documentada).
+
+VERSIONADO
+----------
+La versión del módulo vive en el título del archivo (convención vigente hasta
+que se adopte frontmatter YAML en SKILL §13). Cambio de header = bump minor.

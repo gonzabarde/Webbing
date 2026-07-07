@@ -1,4 +1,4 @@
-M8.1 — TECHNICAL ARCHITECTURE ENGINE (v2)
+M8.1 — TECHNICAL ARCHITECTURE ENGINE (v2.1)
 ==========================================
 
 OBJETIVO
@@ -143,8 +143,16 @@ QUÉ NO USAR Y POR QUÉ
 - WordPress: evitar en proyectos nuevos de performance alta o diseño premium.
   Excepción: cliente tiene equipo de contenido ya entrenado en WP y no puede cambiar.
 - Create React App: deprecated. Usar Next.js o Vite.
-- Stack personalizado sin framework: solo si hay una razón técnica muy específica.
-  Aumenta mantenibilidad y curva de entrada para nuevos devs.
+- Stack personalizado sin framework (HTML/CSS/JS vanilla): NO es un perfil de la
+  tabla de arriba — ningún perfil (ni siquiera "Marketing site estático") lo lista.
+  Astro o Next.js (static export) son el piso incluso para el sitio más simple:
+  el costo de setup es bajo y da margen para crecer (motion real, componentes,
+  eventual backend) sin reescribir. Elegir vanilla exige la MISMA barra que
+  cualquier desvío del default (paso 4): razón técnica específica y documentada
+  (ej. página única sin ningún plan de evolución, entregada como archivo estático
+  fuera de cualquier hosting con build step). "Es más simple" o "no necesita
+  backend" NO son razones válidas por sí solas — Astro/Next static export son
+  igual de simples de deployar y no tienen ese costo de reescritura futura.
 - Dos CMS al mismo tiempo: produce confusión de fuente de verdad.
 
 OUTPUT DEL MÓDULO

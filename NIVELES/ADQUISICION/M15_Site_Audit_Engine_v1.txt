@@ -1,5 +1,15 @@
-M15 — SITE AUDIT & DIAGNOSIS ENGINE (v1)
-========================================
+M15 — SITE AUDIT & DIAGNOSIS ENGINE (v1.1)
+==========================================
+
+OPERATIONAL HEADER
+------------------
+WHEN:     Adquisición — prospecto (no cliente). Antes de M13.1 o como gancho M18.
+INPUTS:   Sitio real inspeccionado en vivo (navegador/fetch). Nunca de memoria.
+OUTPUT:   Diagnóstico 5 capas + Audit Handoff + mensaje de contacto (no enviar).
+GATES:    No spec work; humano envía; trabajo pago vía M13.
+FAIL:     Sin inspección viva; sin benchmark; sin traducción a pérdida de negocio.
+DEEP:     Leer Client Communication Layer y severidad.
+REF:      Capture_Baseline_Template.md (baseline estimada para propuesta).
 
 PROPÓSITO
 ---------
@@ -79,10 +89,10 @@ Si el prospecto pica → M13.1 (califica, con el Handoff como insumo)
   ↓
 Si cierra → M0 (discovery real para construir)
 
-LAS CUATRO CAPAS DE AUDITORÍA
-------------------------------
-El diagnóstico recorre cuatro capas, de lo visible a lo invisible. El ojo no
-entrenado ve solo la primera; el audit que vale las cubre las cuatro.
+LAS CINCO CAPAS DE AUDITORÍA
+-----------------------------
+El diagnóstico recorre cinco capas, de lo visible a lo invisible. El ojo no
+entrenado ve solo la primera; el audit que vale las cubre las cinco.
 
 1. SUPERFICIE (lo que se ve)
    Primera impresión / claridad en 5 segundos.
@@ -112,8 +122,19 @@ entrenado ve solo la primera; el audit que vale las cubre las cuatro.
    mejor? ¿Dónde está el hueco? El insight más vendible suele salir de acá:
    si el prospecto tiene buena sustancia pero peor "vidriera" que un
    competidor que marca el estándar local, ESE es el argumento de venta
-   ("tu competidor se ve así; vos, con mejor producto, te ves peor"). Sin
-   benchmark, el diagnóstico flota sin referencia y pierde su mejor gancho.
+   (     "tu competidor se ve así; vos, con mejor producto, te ves peor"). Sin
+     benchmark, el diagnóstico flota sin referencia y pierde su mejor gancho.
+
+5. CAPTACIÓN (lo que convierte visita en negocio) [v1.1]
+   Path de conversión principal: ¿cuántos clics hasta reservar/comprar/contactar?
+   CTA principal: ¿visible, claro, coherente con la oferta?
+   Integraciones de captura: formulario, WhatsApp, teléfono, GBP, checkout/MP.
+   Medibilidad: ¿el dueño sabe cuántos contactos/reservas entran por el sitio?
+   Fricción vs competidor: ¿reservar acá es más difícil que en el rival?
+   Baseline estimada (si hay dato o proxy): alimenta M13.2 Sección 1.5 y
+   Capture_Baseline_Template.md si cierra.
+   Regla: esta capa traduce el audit a lo que Webbing vende (sistema de
+   captación), no solo a "se ve feo".
 
 Cada hallazgo se registra con:
   QUÉ        — el problema, concreto.
@@ -131,6 +152,9 @@ hace al audit VENDIBLE y lo que alimenta la Sección 1 de la propuesta (M13.2).
   "Sitio sin HTTPS"          → "el navegador le dice 'no seguro' antes de pagar".
   "Foto de mala calidad"     → "tu café premium se ve barato; contradice el precio".
   "Demasiado texto"          → "el visitante no lee, se va".
+  "Sin path claro a reservar"→ "quien quiere comprar no encuentra cómo hacerlo".
+  "WhatsApp oculto"          → "perdés consultas que ya iban a escribirte".
+  "Sin medición de leads"    → "no sabés si el sitio trae negocio o es cartel".
 
 Regla: nunca dejar un hallazgo en lenguaje técnico. El dueño no compra
 "contraste"; compra "dejar de perder clientes".
@@ -204,7 +228,8 @@ suena a crítica cierra la puerta; uno que suena a plata sobre la mesa la abre.
 PROMPT PARA CLAUDE
 ------------------
 Inspección viva siempre: auditar el sitio real, nunca de memoria.
-Recorrer las cuatro capas (superficie, función, técnica, estrategia) antes de concluir.
+Recorrer las cinco capas (superficie, función, técnica, estrategia, captación)
+antes de concluir.
 En la capa de estrategia, el benchmark competitivo es OBLIGATORIO: traer 1-2 competidores reales del prospecto con research vivo y comparar. El mejor argumento de venta suele ser el hueco frente a un competidor que marca el estándar local.
 Traducir cada hallazgo técnico a pérdida de negocio. Sin excepción.
 El mensaje al prospecto abre conversación, no ataca: reconoce lo bueno, marca

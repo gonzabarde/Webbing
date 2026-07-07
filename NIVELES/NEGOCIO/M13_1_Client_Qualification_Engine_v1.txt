@@ -1,6 +1,16 @@
 M13.1 — CLIENT QUALIFICATION ENGINE (v1)
 ==========================================
 
+OPERATIONAL HEADER
+------------------
+WHEN:     Consulta nueva — antes de scope, precio o M0.
+INPUTS:   Datos del lead (brief de calificación mínimo).
+OUTPUT:   Decisión avanzar / condiciones / declinar + score documentado.
+GATES:    GATE 13.1-A (brief completo), GATE 13.1-B (score ≥ 14).
+FAIL:     Responder con precio sin calificar; score < 14 sin declinar; red flags ignoradas.
+DEEP:     Leer cuerpo para brief completo, red flags y criterios de score.
+REF:      M15 Audit Handoff si el lead viene de diagnóstico de prospecto.
+
 OBJETIVO
 --------
 Decidir si un lead merece tiempo y energía antes de hacer nada.

@@ -4,7 +4,214 @@ WEBBING — SYSTEM CHANGELOG
 Propósito: bitácora de cambios de arquitectura del sistema Webbing.
 Registra qué cambió, cuándo y —si aplica— su condición de vencimiento (sunset).
 Entradas de más reciente a más antigua.
-Autoridad: los cambios los aprueba y aplica el humano (SKILL.md secciones 7 y 13).
+Autoridad: los cambios los aprueban y aplica el humano (SKILL.md secciones 7 y 13).
+
+--------------------------------------------------------------------------------
+
+2026-07-06 — STACK: NEXT.JS/ASTRO COMO PISO REAL (no vanilla) + REACT BITS CON SESGO POR ELEMENTO
+-------------------------------------------------------------------------------------------------
+Módulos afectados: M8.1 (Technical Architecture Engine, v2->v2.1), M9.3 (Motion
+Pattern Library, v2.3->v2.4). Estado: ACTIVA. Permanente.
+
+Cambio 1 (M8.1): la tabla de perfiles de stack NUNCA listó "vanilla HTML/CSS/JS"
+como opción — incluso "Marketing site estático" ya decaía "Astro o Next.js (static
+export)". La sección QUÉ NO USAR tenía la regla ("stack sin framework: solo con
+razón técnica específica") pero no se hacía cumplir. Se refuerza explícitamente:
+vanilla no es un perfil válido por default en ningún caso, ni siquiera el sitio más
+simple — exige la misma barra de justificación que cualquier otro desvío.
+
+Cambio 2 (M9.3): se agrega un default explícito según si el elemento es la firma o
+no. Firma: default NO acelerar con librería (como ya estaba). No-firma (hover de
+cards, reveals secundarios): default INVERTIDO — sesgar A FAVOR de acelerar con
+librería (React Bits u equivalente) salvo objeción concreta; el test anti-clonación
+de M12 sigue corriendo siempre, cambia dónde arranca la moneda, no si se aplica.
+
+Razón: el operador pidió que Webbing priorice Next.js + React Bits en vez de
+vanilla. Se verificó contra la evidencia real de la sesión: B0 nunca eligió vanilla
+por mal criterio — Runa y el Ecos original quedaron en vanilla porque el operador
+bloqueó auth/pagos reales en esas corridas (sin esa funcionalidad, un framework
+completo hubiera sido teatro); apenas se destrabó (Ecos vía Cursor), el sistema fue
+directo a Next.js con Server Actions reales. O sea: el criterio ya funcionaba: lo
+que faltaba era que M8.1 hiciera CUMPLIR su propio piso (Astro/Next, no vanilla) en
+vez de permitir el desvío sin barra de justificación — mismo patrón que el agujero
+de M8.6 no cableado a GATE 3. Sobre React Bits: no se fuerza "siempre" porque hay
+un caso real donde SÍ falló el test anti-clonación (la firma de Ecos, efecto de
+onda genérico) — forzarlo ahí reabriría el mismo riesgo de sameness que el
+Principio 10 existe para evitar. El sesgo por defecto en NO-firma preserva la
+única protección verificada (el test) mientras acelera donde no hay riesgo real.
+
+Qué NO cambia: B0 sigue defaulteando a Supabase/Prisma igual que antes (precedente
+ya existía para "default operativo, override con justificación" — este cambio
+aplica la misma lógica al frontend). El test anti-clonación de M12 no se toca.
+
+--------------------------------------------------------------------------------
+
+2026-07-05 (2) — RETROSPECTIVA ECOS (M14), CIERRE: FALSABILIDAD DE CLAIMS DEL CLIENTE (M0) + PAUSA DE rAF FUERA DEL VIEWPORT (M9.3)
+--------------------------------------------------------------------------------------------------------------------------------
+Módulos afectados: M0 (Discovery & Research, v3->v3.1), M9.3 (Motion Pattern Library,
+v2.2->v2.3). Aprobadas por el humano al cerrar el proyecto ECOS: P3 y P4 (las 4 propuestas
+de la corrida ECOS quedan aplicadas). Estado: ACTIVA. Permanente.
+
+P3 (M0): la Regla de Frescura (Principio 9) miraba afuera (competidores/categoría). Se
+agregó la REGLA DE FALSABILIDAD DE LOS CLAIMS DEL CLIENTE, que mira adentro: el
+diferenciador y el villano económico DECLARADOS por el cliente son hipótesis, no datos, y
+deben someterse a falsabilidad en vivo antes de que M1 los use como eje. Extensión del
+Principio 9 ya aplicado, no principio nuevo (en ECOS, "la más fotografiada" era superlativo
+no verificable y "comisión ~10%" era más débil que lo declarado).
+
+P4 (M9.3): nota de PERFORMANCE — toda animación continua (canvas/rAF) pausa vía
+IntersectionObserver cuando su elemento sale del viewport. Complementa el fallback de
+reduced-motion (ese decide SI se anima; esto, CUÁNDO).
+
+Qué NO cambia: no se tocó SKILL.md. Con esto la corrida ECOS queda cerrada: 4 propuestas,
+4 aplicadas (P1 M9.3 v2.2, P2 M8.6 v2.2, P3 M0 v3.1, P4 M9.3 v2.3), 0 pendientes.
+
+--------------------------------------------------------------------------------
+
+2026-07-05 — RETROSPECTIVA ECOS (M14): PRE-FLIGHT DE ACELERADOR (M9.3) + DIFERIMIENTO DE CROSS-BROWSER (M8.6)
+------------------------------------------------------------------------------------------------------------
+Módulos afectados: M9.3 (Motion Pattern Library, v2.1->v2.2), M8.6 (Production Review
+Engine, v2.1->v2.2). Origen: M14 corrido sobre la corrida completa de ECOS (práctica de
+sistema, no cliente; M0->GATE1->M4-M5.5->GATE2->B0/build->M8.6->GATE3 PASA CON AJUSTES;
+6 incidentes + 1 acierto en ecos-web/_webbing/INCIDENTES_M14.md). Estado: ACTIVA. Permanente.
+Aprobadas por el humano: P1 y P2 (P3 y P4 quedaron pendientes).
+
+P1 (M9.3): la regla de "librería de componentes como acelerador vía CLI" (2026-06-29(4))
+estaba documentada pero NUNCA se había ejecutado. Su primera ejecución real (instalar React
+Bits SpotlightCard) reveló que asume un runtime React listo y una toolchain compatible: en un
+prototipo vanilla hubo que scaffoldear React (costo que puede superar codear el efecto a
+mano), el node del entorno chocó con los engines de Vite/shadcn (hubo que fijar versiones), y
+shadcn resolvió el alias "@" a una carpeta literal en Windows. Se agregó a M9.3 una nota
+PRE-FLIGHT de tres chequeos (¿hay runtime? / node vs engines / dónde cayó el componente). No
+re-propone la regla: la endurece con lo aprendido al correrla por primera vez.
+
+P2 (M8.6): el gate de cross-browser exige 3 motores y "sin cross-browser no hay PASA", pero no
+definía conducta cuando el entorno ofrece uno solo (solo Chromium en la corrida). Se agregó la
+cláusula DIFERIMIENTO POR TOOLING: con un motor único, el veredicto correcto es PASA CON
+AJUSTES con cross-browser como bloqueante explícito de GATE 4 — nunca un PASA falsificado ni un
+downgrade silencioso.
+
+Qué NO cambia: no se tocó SKILL.md (ambos cambios cuelgan de gates existentes). No se crearon
+gates ni se alteró el orden de ejecución. P3 (M0, test de falsabilidad de los claims declarados
+del cliente — extensión del Principio 9) y P4 (pausar rAF fuera del viewport) quedaron
+PENDIENTES de aprobación, registradas en M14_PROPOSAL_LOG.txt. Aciertos confirmados sin tocar:
+posición numérica de sección crítica de CDL-1 (CUORE), cableado M8.6->GATE3, Frontend Craft
+Standard (build 0/12 tells) y Principio 9 funcionaron en ECOS — se preservan.
+
+--------------------------------------------------------------------------------
+
+2026-07-04 (3) — M14: MEMORIA HISTÓRICA ENTRE PROYECTOS (Docs/M14_PROPOSAL_LOG.txt)
+----------------------------------------------------------------------------------------
+Módulo afectado: M14 (Retrospective Engine, v1->v1.1). Archivo nuevo: Docs/M14_PROPOSAL_LOG.txt.
+Estado: ACTIVA. Permanente.
+
+Cambio: M14 ahora tiene un registro obligatorio post-decisión. Antes, cada propuesta
+vivía solo en el output de esa sesión (se perdía si no se aplicaba en el momento) o, si
+se aplicaba, quedaba en el CHANGELOG — pero las RECHAZADAS o POSTERGADAS no quedaban
+registradas en ningún lado. Docs/M14_PROPOSAL_LOG.txt es el índice plano de TODAS las
+propuestas de cada corrida formal (aplicada, rechazada o postergada), separado del
+CHANGELOG (que sigue llevando el relato completo, solo de lo aplicado). Poblado
+retroactivamente con las dos corridas formales reales (Glow Factor, CUORE) reconstruidas
+desde esta sesión; ecos-web y runa-web tienen INCIDENTES_M14.md sin corrida formal
+todavía — marcados como pendientes, no inventados.
+
+Razón: el operador preguntó dónde se guardan los resultados de M14 y no había una
+respuesta limpia para lo no-aplicado. Sin este registro, una propuesta rechazada en
+un proyecto podía volver a proponerse idéntica en otro sin que nadie note el patrón —
+exactamente el tipo de agujero de memoria que M14 existe para evitar en el resto del
+sistema, presente en M14 mismo.
+
+Qué NO cambia: no se tocó el límite de autoridad (M14 sigue sin auto-aplicar nada) ni
+los 6 ejes ni el formato de propuesta. Es un registro adicional, no un cambio de proceso.
+
+--------------------------------------------------------------------------------
+
+2026-07-04 (2) — CINCO PRIORIDADES OPERATIVAS: CRAFT, CLIENTES, CAPTACIÓN, GATES, HEADERS
+------------------------------------------------------------------------------------------
+Módulos afectados (bumps): M3 v3.1, M5 v3.1, M5.5 v3.1, M8.6 v2.1, M15 v1.1,
+M13.2 v1.1. Headers operativos (sin bump de versión salvo donde ya hubo bump):
+M0, M13.0, M13.1, M13.3, CDL-0, M8 overview, M9 overview (+ M13.4, M14, M15,
+M16, M18 ya con header). Estado: ACTIVA.
+
+Origen: priorización explícita del humano tras análisis estructural del sistema.
+Cinco entregas en una pasada:
+
+1) FRONTEND CRAFT — diffs de Docs/PROPUESTA_Frontend_Craft_diffs.md APLICADOS en
+   M3/M5/M5.5/M8.6. M8.6 ahora tiene checklist duro de dos capas (clichés de
+   categoría + 12 tells ANTI-AI-SLOP); 3+ tells = CRÍTICO = FALLA GATE 3.
+
+2) OPERACIÓN DE CLIENTES — Client_Record_Template.md y Capture_Baseline_Template.md
+   (raíz del skill). Operación hoy sin esperar GHL.
+
+3) ALINEAR VENTA CON PROMESA — M15 Capa 5 CAPTACIÓN (v1.1); M13.2 Sección 1.5
+   RESULTADO ESPERADO + GATE 13.2-D (v1.1).
+
+4) HIGIENE ESTRUCTURAL — Docs/GATE_REGISTRY.txt (índice único de gates).
+   Webbing_Master_System_Document_v2.txt deprecado → stub redirect; archivo
+   completo archivado en _deprecated/Webbing_Master_System_Document_v2_2026-07-04.txt.
+   Autoridad operativa: SKILL.md + GATE_REGISTRY.
+
+5) HEADERS OPERATIVOS — Docs/OPERATIONAL_HEADER_STANDARD.txt + headers en módulos
+   de routing frecuente (ver estándar para cobertura). Objetivo: sesiones usables
+   sin saturar contexto — leer HEADER primero, cuerpo DEEP solo si la decisión lo exige.
+
+Archivos nuevos: Client_Record_Template.md, Capture_Baseline_Template.md,
+GATE_REGISTRY.txt, OPERATIONAL_HEADER_STANDARD.txt.
+PROPUESTA_Frontend_Craft_diffs.md marcada APLICADO.
+
+Qué NO cambia: SKILL.md §6 gates (GATE_REGISTRY los compila, no los redefine).
+Deuda: headers en M1/M2/M4/M6/M7/M10/M11/M12 y submódulos — completar por routing.
+
+--------------------------------------------------------------------------------
+
+2026-07-04 — FRONTEND CRAFT STANDARD: ANTI-AI-SLOP + HOOKS PROPUESTOS EN M3/M5/M5.5/M8.6 (PENDIENTES DE OK)
+-----------------------------------------------------------------------------------------------------------
+Módulos afectados: NINGUNO todavía (los módulos existentes NO fueron tocados).
+Archivos nuevos (aditivos, reversibles): Frontend_Craft_Standard.md (raíz del
+skill — material de referencia transversal de craft, no módulo de routing) y
+Docs/PROPUESTA_Frontend_Craft_diffs.md (diffs propuestos para M3 v3→v3.1,
+M5 v3→v3.1, M5.5 v3→v3.1, M8.6 v2→v2.1). Estado: ESTÁNDAR ACTIVO como material
+de referencia; HOOKS PENDIENTES de aprobación del humano (SKILL.md §7 y §13:
+Claude propone, el humano aplica).
+
+Origen: propuesta tipo M14 sobre el craft de frontend. El sistema tiene
+disciplina de proceso pero el default del modelo converge a frontend genérico
+con olor a IA: Inter como body, fondo plano, hero centrado simétrico, 3 cards
+iguales, copy hedgey, paleta tibia, sin momento memorable. Evidencia: CUORE
+pasó GATE 3 con el sistema de imágenes ausente (entrada 2026-06-29 (5));
+tres sitios reales con el mismo esqueleto (origen del Principio 10); y M8.6
+solo detecta drift contra el Mapa de Clichés de la CATEGORÍA — los tells de
+IA genérica no figuran en ningún mapa, así que un build tibio da "AUSENTE".
+
+Contenido del estándar: (1) mandato de dirección estética EXTREMA Y NOMBRADA
+(nombre + mundo + exclusiones + extremo) antes de producir; (2) tipografía —
+prohibidas como body por default (Inter/Roboto/Arial/system/etc.), pairing
+display+body con carácter y justificación contra alternativas; (3) los 4
+requisitos de salida de M5.5: atmósfera (fondo plano prohibido como default),
+momento memorable nombrable, asimetría/ruptura de grilla, contraste brutal de
+escala; (4) ANTI-AI-SLOP CHECKLIST de 12 tells — 3+ tells = FALLA; (5) mapa de
+integración de la skill frontend-design (plugin oficial) en M5-M9, subordinada
+al sistema (mismo patrón que M9.3 aplica a librerías de componentes). Piso
+técnico innegociable: WCAG AA, responsive 375px, prefers-reduced-motion, focus
+visible. Regla madre: lo que no sirve es lo TIBIO — minimalismo refinado vale
+tanto como maximalismo brutal.
+
+Hooks propuestos (ver Docs/PROPUESTA_Frontend_Craft_diffs.md): M3 suma la regla
+de pairing distintivo + lista de prohibidas; M5 suma el paso 0 (dirección
+nombrada, GATE 2 la hereda); M5.5 suma los 4 requisitos como condición de
+salida; M8.6 convierte Generic Drift en checklist DURO de dos capas (clichés
+de categoría + tells de IA) donde 3+ tells = drift CRÍTICO = FALLA → bloquea
+GATE 3 sin tocar SKILL.md (el gate ya exige drift no CRÍTICO).
+
+Validación A/B: se generó el hero de un caso ficticio (complejo deportivo
+"Estación Sur") dos veces — versión default del modelo (9/12 tells: FALLA) y
+versión bajo el estándar (dirección "brutalismo atlético nocturno", 0 tells).
+La diferencia es obvia y memorable; el estándar discrimina.
+
+Qué NO cambia: ningún módulo existente fue editado ni movido. El estándar no
+reabre M3/M5/M5.5/M9.8 — fija pisos que esos módulos asumían implícitos. No
+hay gate nuevo ni cambio de arquitectura (no hay bump major). Al aplicarse los
+diffs (si se aprueban): registrar acá la aplicación y bumpear cada módulo.
 
 --------------------------------------------------------------------------------
 

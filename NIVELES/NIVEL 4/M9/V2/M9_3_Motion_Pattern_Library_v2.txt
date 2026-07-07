@@ -1,4 +1,4 @@
-M9.3 — MOTION PATTERN LIBRARY (v2.1)
+M9.3 — MOTION PATTERN LIBRARY (v2.4)
 ====================================
 
 OBJETIVO
@@ -219,6 +219,18 @@ Si una librería sugiere el efecto ANTES de que el patrón esté decidido, el or
 se invirtió y es el mismo riesgo de sameness que el Principio 10 corrige a nivel
 de arquitectura, ahora a nivel de componente.
 
+DEFAULT DE USO según si el elemento ES o NO la firma (v2.4):
+  ELEMENTO DE FIRMA (Signature System de M5/M9.8): el patrón se construye a medida
+  salvo que un componente de librería pase el test anti-clonación de forma explícita
+  y documentada. Default: NO acelerar con librería. La firma es lo más reconocible
+  del proyecto — es donde un efecto genérico de librería se nota más.
+  ELEMENTO NO-FIRMA (hover de cards, reveals secundarios, micro-interacciones sin
+  carga de marca): default INVERSO — sesgar a favor de acelerar con librería salvo
+  objeción concreta (el test anti-clonación sigue corriendo siempre; la diferencia
+  es dónde arranca la moneda: en la firma arranca en "no", en lo secundario arranca
+  en "sí"). No evaluar la librería como último recurso en lo secundario: es el
+  primer candidato legítimo ahí.
+
 CÓMO TRAERLO (evita conocimiento congelado — Principio 9):
   No copiar código de memoria ni mantener un catálogo estático embebido en Webbing
   (se desactualiza). Instalar en el momento de build, vía CLI, que trae la versión
@@ -227,6 +239,20 @@ CÓMO TRAERLO (evita conocimiento congelado — Principio 9):
     npx jsrepo add github/DavidHDev/react-bits/src/ts-tailwind/<Categoria>/<Componente>
   Licencia MIT + Commons Clause: uso comercial permitido, el código queda propio
   del proyecto tras instalarlo — no es bloqueante legal.
+
+PRE-FLIGHT ANTES DE INSTALAR (v2.2 — de la 1ª ejecución real del mecanismo, ECOS):
+  La regla de arriba asume un runtime React listo y una toolchain compatible. En la
+  primera ejecución real eso no se cumplió y el "acelerador" costó más que el efecto.
+  Antes de correr el CLI, verificar tres cosas:
+  1. ¿HAY CONTEXTO REACT/BUILD? Si el proyecto es vanilla (o el efecto es chico y
+     aislado), montar el runtime React ES parte del costo — puede superar codear el
+     efecto a mano. Comparar antes de scaffoldear. "Acelerador" no es gratis por default.
+  2. VERSIÓN DE NODE vs ENGINES DE LA TOOLCHAIN. El scaffolder puede traer versiones
+     (Vite/shadcn) por delante del node disponible (EBADENGINE). Chequear y fijar
+     versiones compatibles ANTES de instalar, no después de que rompa.
+  3. POST-INSTALL, VERIFICAR DÓNDE CAYÓ EL COMPONENTE. El alias de path (ej. "@") puede
+     materializarse como carpeta LITERAL en algunos entornos (Windows). Confirmar la
+     ubicación real de los archivos y moverlos si el CLI los dejó fuera de src/.
 
 TEST ANTI-CLONACIÓN (M12) OBLIGATORIO ANTES DE SHIPPEAR:
   ¿Alguien que conoce esta librería (o librerías similares del mismo estilo)
@@ -238,6 +264,14 @@ TEST ANTI-CLONACIÓN (M12) OBLIGATORIO ANTES DE SHIPPEAR:
 PROHIBIDO: dejar que el catálogo disponible de una librería sea la fuente de
 selección del patrón Narrativo o de la Innovación de M5.5. La librería acelera
 código de un patrón ya elegido por criterio; no elige el patrón ni sustituye a M5.5.
+
+PERFORMANCE — ANIMACIONES CONTINUAS (v2.3 — de la corrida ECOS)
+----------------------------------------------------------------
+Toda animación continua (canvas/requestAnimationFrame, loops de motion) debe PAUSARSE
+cuando su elemento sale del viewport — vía IntersectionObserver que cancela el rAF y lo
+reanuda al reentrar. Un loop que sigue corriendo fuera de pantalla quema CPU/batería sin
+verse. Complementa (no reemplaza) al fallback de reduced-motion: reduced-motion decide
+SI se anima; esto decide CUÁNDO. (Detalle técnico de implementación: ver M8.3.)
 
 FALLBACK PREFERS-REDUCED-MOTION
 ---------------------------------

@@ -1,6 +1,16 @@
 CREATIVE DIRECTOR LAYER — LEVEL 3 (v1)
 =======================================
 
+OPERATIONAL HEADER
+------------------
+WHEN:     Evaluación creativa — concepto/dirección lista para juzgar (pre GATE 2).
+INPUTS:   Output del módulo productor (M4/M5/M5.5) + contexto estratégico M0–M3.
+OUTPUT:   Veto o aprobación con feedback accionable (CDL-1 a CDL-5 según caso).
+GATES:    GATE 2 (veto del CDL + IA Spec derivada).
+FAIL:     Aprobar sin IA Spec; evaluar sin contexto; más de 2 iteraciones sin escalar.
+DEEP:     Leer cuerpo para reglas CDL y routing CDL-1–CDL-5.
+REF:      Frontend_Craft_Standard.md (dirección nombrada en evaluación).
+
 PROPÓSITO
 ---------
 El Nivel 3 convierte el Agency OS en un sistema de criterio.

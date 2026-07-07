@@ -1,6 +1,16 @@
 M13 — BUSINESS LAYER (v1)
 ==========================
 
+OPERATIONAL HEADER
+------------------
+WHEN:     Routing de negocio — lead, propuesta, precio, cierre, retainer.
+INPUTS:   Contexto del lead/cliente; módulo hijo según etapa (M13.1–M13.4).
+OUTPUT:   Decisión de negocio + handoff al módulo M13.x correspondiente.
+GATES:    GATE 13.4-A–E, 13.1-A/B, 13.2-A–D, 13.3-A–C (ver GATE_REGISTRY).
+FAIL:     Mezclar negocio con creativo; saltar calificación; cerrar sin baseline.
+DEEP:     Leer cuerpo para ciclo completo de cliente y mapa de submódulos.
+REF:      Client_Record_Template.md, Capture_Baseline_Template.md, M13.0A.
+
 PROPÓSITO
 ---------
 El Business Layer cubre lo que el sistema no cubre: cómo Webbing consigue trabajo,

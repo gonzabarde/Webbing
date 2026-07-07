@@ -1,5 +1,14 @@
-M14 — RETROSPECTIVE & SYSTEM EVOLUTION ENGINE (v1)
+M14 — RETROSPECTIVE & SYSTEM EVOLUTION ENGINE (v1.1)
 ==================================================
+
+OPERATIONAL HEADER
+------------------
+WHEN:     Post-GATE 4 y entrega real. Disparo: humano pide retrospectiva.
+INPUTS:   Proyecto cerrado + check-in captación (GATE 13.4-E) si existe.
+OUTPUT:   Propuestas de mejora priorizadas (6 ejes). NO auto-aplica.
+GATES:    Solo humano aplica cambios (SKILL §7 y §13).
+FAIL:     Auto-modificar módulos; retrospectiva a mitad de proyecto.
+DEEP:     Leer los 6 ejes y formato de propuesta M14.
 
 PROPÓSITO
 ---------
@@ -137,6 +146,17 @@ La retrospectiva cierra con un resumen: cantidad de propuestas por severidad
 y la recomendación de cuáles aplicar primero. No se aplica nada: se entrega
 para aprobación.
 
+REGISTRO OBLIGATORIO — Docs/M14_PROPOSAL_LOG.txt
+--------------------------------------------------
+Apenas el humano decide sobre cada propuesta (aprueba / rechaza / posterga),
+agregar la fila correspondiente a Docs/M14_PROPOSAL_LOG.txt — TODAS las
+propuestas, no solo las aplicadas. Es el único lugar donde queda memoria
+histórica entre proyectos de qué propuso M14 y qué se decidió; sin este
+registro, una propuesta rechazada en el proyecto 1 puede volver a proponerse
+idéntica en el proyecto 3 sin que nadie note el patrón. El CHANGELOG.txt
+sigue llevando el relato completo de lo APLICADO; este log es el índice
+plano de todo, aplicado o no.
+
 SEVERIDAD Y PRIORIZACIÓN
 -------------------------
 Crítica — rompió o casi rompió el proyecto, o entregó un dato falso al cliente.
@@ -177,5 +197,8 @@ Entregar propuestas en el formato fijo, priorizadas por severidad.
 No aplicar ningún cambio. Proponer y detenerse.
 Si una propuesta toca la arquitectura (SKILL.md), marcarlo explícito: requiere
 aprobación humana antes de tocar nada.
+Una vez que el humano decide sobre cada propuesta, registrar la fila en
+Docs/M14_PROPOSAL_LOG.txt (aplicada, rechazada o postergada) antes de cerrar
+la sesión — no dejarlo para después.
 M14 no es burocracia post-mortem: es lo que separa un sistema que mejora de
 uno que se estanca.

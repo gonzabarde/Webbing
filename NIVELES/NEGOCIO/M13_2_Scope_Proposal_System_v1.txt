@@ -1,5 +1,15 @@
-M13.2 — SCOPE & PROPOSAL SYSTEM (v1)
-=====================================
+M13.2 — SCOPE & PROPOSAL SYSTEM (v1.1)
+=======================================
+
+OPERATIONAL HEADER
+------------------
+WHEN:     Negocio — después de M13.1, antes de M13.3.
+INPUTS:   Cliente calificado, Audit Handoff (M15) si existe, clasificación M10.0.
+OUTPUT:   Scope IN/OUT + propuesta 5 secciones + resultado esperado (1.5).
+GATES:    13.2-A (IN/OUT), 13.2-B (M10.0), 13.2-C (valor→precio), 13.2-D (métrica).
+FAIL:     Scope por páginas sin flujos de captación; precio antes de valor; sin métrica.
+DEEP:     Leer Scope Definition completo y reglas de scope creep.
+REF:      M13.0A (producto Core = sistema de captación, no "página web").
 
 OBJETIVO
 --------
@@ -100,6 +110,15 @@ SECCIÓN 1 — EL PROBLEMA QUE RESOLVEMOS
   Ejemplo: "Tu estudio de pilates tiene una web que no refleja la experiencia
   premium que ofrecés. Los potenciales alumnos llegan y no se quedan."
 
+SECCIÓN 1.5 — RESULTADO ESPERADO (captación, no solo entregable) [v1.1]
+  Qué vamos a medir para saber si el sistema captura (GATE 13.4-E / M13.0).
+  Usar plantilla Capture_Baseline_Template.md al cerrar; en la propuesta:
+  - Métrica acordada (reservas, consultas WA, formularios, etc.)
+  - Baseline estimada (del M15 audit si existe; si no, "desde cero" declarado)
+  - Qué consideramos éxito a 90 días (número o rango, en lenguaje del cliente)
+  Regla: el cliente firma un outcome medible, no solo un scope de páginas.
+  Si no hay métrica posible, documentar por qué y qué proxy se usará.
+
 SECCIÓN 2 — LO QUE VAMOS A CONSTRUIR
   Descripción clara del entregable.
   Listar las secciones o funcionalidades principales.
@@ -150,6 +169,9 @@ GATE 13.2-B — ¿El proyecto está clasificado según M10.0?
 
 GATE 13.2-C — ¿La propuesta sigue el orden valor → precio?
   Falla → reordenar. Presentar precio sin valor reduce la tasa de cierre.
+
+GATE 13.2-D — ¿La propuesta incluye Sección 1.5 (métrica + baseline + éxito 90d)?
+  Falla → completar antes de enviar. Sin outcome medible no es propuesta Core.
 
 OUTPUT
 ------

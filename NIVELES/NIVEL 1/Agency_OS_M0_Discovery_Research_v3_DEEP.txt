@@ -1,5 +1,15 @@
-MÓDULO 0 — DISCOVERY & RESEARCH ENGINE (v3 DEEP)
+MÓDULO 0 — DISCOVERY & RESEARCH ENGINE (v3.1 DEEP)
 =================================================
+
+OPERATIONAL HEADER
+------------------
+WHEN:     Cliente cerrado (post GATE 13.4-B), inicio de proyecto — antes de M1.
+INPUTS:   Brief Interno, acceso al sitio/material del cliente, restricciones conocidas.
+OUTPUT:   Discovery report con hallazgos, gaps, confianza y handoff a M1.
+GATES:    Alimenta GATE 1 (estrategia no arranca sin discovery sólido).
+FAIL:     Diseñar sin evidencia; confundir M0 con M15 (prospecto); saltar a solución.
+DEEP:     Leer cuerpo para frameworks de research, competencia y síntesis.
+REF:      Client_Record_Template.md (sección discovery).
 
 OBJETIVO
 --------
@@ -167,6 +177,16 @@ PROCESO CLAUDE
    entrenamiento. Una lista de competidores de memoria es una hipótesis vencida hasta
    verificarla. Si no se puede verificar en vivo, marcar el hallazgo como confianza
    BAJA, nunca como dato cerrado.
+   REGLA DE FALSABILIDAD DE LOS CLAIMS DEL CLIENTE (v3.1 — extensión del Principio 9,
+   de la corrida ECOS): la Regla de Frescura de arriba mira afuera (competidores/
+   categoría). Esta mira adentro: los dos claims más load-bearing del brief suelen ser
+   del PROPIO cliente — su DIFERENCIADOR declarado ("somos los que/la más...") y su
+   VILLANO económico declarado ("la comisión/el costo X me mata"). Ambos son hipótesis,
+   no datos. Antes de pasar a M1: someter a falsabilidad en vivo el diferenciador y el
+   villano declarados. Si no se verifican, NO pueden ser eje de M1 — se reencuadran
+   (ECOS: "la instalación más fotografiada" era superlativo no verificable → red flag;
+   la "comisión ~10%" era más débil que lo declarado → el dolor real era dato+marca).
+   Un diferenciador superlativo sin evidencia es un red flag de brief débil, no un eje.
 
 6. Detectar patrones del sector.
    Claude debe listar:

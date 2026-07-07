@@ -165,6 +165,12 @@ Base: `NIVELES/` (relativo a la raíz del skill). Nota: `NEGOCIO/` es subcarpeta
 **Regla:** si un módulo no existe en el path exacto indicado, frenar y reportarlo. No inventar su contenido.
 
 **Material de referencia (no son módulos, no se cargan por routing):**
+- `Frontend_Craft_Standard.md` — mandato de craft frontend (dirección nombrada, tipografía, ANTI-AI-SLOP). Referenciado por M3/M5/M5.5/M8.6.
+- `Client_Record_Template.md` — registro vivo por cliente (embudo, gates, captación, producción).
+- `Capture_Baseline_Template.md` — plantilla GATE 13.4-E (métrica, fuente, baseline, check-ins 90d).
+- `Docs/GATE_REGISTRY.txt` — índice único de gates bloqueantes (complemento de §6).
+- `Docs/OPERATIONAL_HEADER_STANDARD.txt` — formato de headers operativos en módulos.
+- `Docs/CHANGELOG.txt` — bitácora de cambios de arquitectura.
 - `NIVEL 1/Creative_Knowledge_System_Level1_12_Disciplines_v3.txt` — base de conocimiento de las 12 disciplinas creativas. Consultar solo si un módulo de NIVEL 1-2 necesita profundidad conceptual adicional.
 - `Informes/` — research y libros usados para construir el sistema. Archivo histórico. No cargar en sesiones de producción.
 - `Informes/M17.md` — idea DIFERIDA (no es un módulo activo): "M17 — Industry Intelligence System", conocimiento operativo por industria. El propio autor la difirió hasta tener reps reales (5-10 proyectos por nicho): su contenido debe salir de experiencia, no de memoria (Principio 9). Por eso el número M17 queda RESERVADO y la numeración de módulos activos salta de M16 a M18. No construir M17 antes de los reps.

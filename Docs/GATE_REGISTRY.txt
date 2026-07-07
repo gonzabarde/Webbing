@@ -1,0 +1,116 @@
+WEBBING — GATE REGISTRY (v1)
+=============================
+Índice único de gates bloqueantes y de disciplina. Fuente operativa junto con
+SKILL.md §6. Si un módulo y este registro difieren, reportar antes de operar.
+
+Leyenda DESTINO: módulo o acción si el gate falla.
+
+--------------------------------------------------------------------------------
+PROYECTO — GATES GLOBALES (SKILL.md §6)
+--------------------------------------------------------------------------------
+
+GATE 1 — Estrategia cerrada
+  CUÁNDO:  Después de M3, antes de M4.
+  PASA SI: Posicionamiento, marca y tipografía definidos y aprobados por humano.
+  FALLA →: No generar conceptos. Volver a M0-M3 según vacío.
+
+GATE 2 — Veto del CDL
+  CUÁNDO:  Después de M5.5.
+  PASA SI: Dirección pasa CDL + IA Spec (CDL-1) derivada del arquetipo, no default.
+  FALLA →: M4-M5.5 con feedback CDL. Máx 2 iteraciones → escalar humano.
+
+GATE 3 — Pre-producción
+  CUÁNDO:  Después de M9.8 y M8.6.
+  PASA SI: Build completo; M9.8 signature; IA Spec respetada; M8.6 PASA o PASA CON
+           AJUSTES (ninguna dimensión PERDIDO; Generic Drift no CRÍTICO — incluye
+           3+ tells ANTI-AI-SLOP); B0-B5 si hay backend.
+  FALLA →: Listar deuda. M8.6 FALLA → destino por dimensión (M4/M4.5/M5/M5.5/build).
+
+GATE 4 — Deploy
+  CUÁNDO:  Dentro de M10, antes de publicar.
+  PASA SI: Aprobación explícita del humano. B4 launch + B6 recovery si backend.
+  FALLA →: No deploy autónomo.
+
+--------------------------------------------------------------------------------
+NEGOCIO — GATE 13.4 (M13.4)
+--------------------------------------------------------------------------------
+
+GATE 13.4-A — Primer pago antes de arrancar
+  PASA SI: Pago previo confirmado.
+  EXCEPCIÓN (fase arranque, sunset tras 3er caso portfolio): pago O prueba de
+  compromiso (acuerdo intercambio + deadline materiales + seña simbólica).
+  FALLA →: No arrancar trabajo.
+
+GATE 13.4-B — Kickoff y Brief Interno
+  PASA SI: Kickoff realizado; Brief Interno completo.
+  FALLA →: No activar M0.
+
+GATE 13.4-C — Deploy con pago final
+  PASA SI: Pago final confirmado antes de deploy.
+  FALLA →: No deploy.
+
+GATE 13.4-D — Retainer en entrega
+  PASA SI: Propuesta de retainer en el mismo mensaje de entrega live.
+  FALLA →: Proponer antes de cerrar proyecto.
+
+GATE 13.4-E — Baseline de captación
+  PASA SI: Métrica + fuente + baseline documentados (Capture_Baseline_Template.md).
+  FALLA →: No dar proyecto por cerrado. Piso innegociable (SKILL §5).
+
+--------------------------------------------------------------------------------
+NEGOCIO — GATES M13.1 / M13.2 / M13.3
+--------------------------------------------------------------------------------
+
+GATE 13.1-A — Brief de calificación completo
+GATE 13.1-B — Score ≥ 14 (o declinar con razón)
+
+GATE 13.2-A — Scope IN y OUT explícitos
+GATE 13.2-B — Clasificación M10.0
+GATE 13.2-C — Propuesta: valor antes de precio
+GATE 13.2-D — Sección 1.5 resultado esperado (métrica + baseline + éxito 90d) [v1.1]
+
+GATE 13.3-A — Precio cubre esfuerzo + margen
+GATE 13.3-B — Estructura de pagos con mayoría al inicio
+GATE 13.3-C — Retainer propuesto al cierre
+
+--------------------------------------------------------------------------------
+M12 — GATES DE REFERENCIA (M12 Overview)
+--------------------------------------------------------------------------------
+
+GATE 12-A Collection | 12-B Classification | 12-C Decomposition (5+ decisiones)
+GATE 12-D Pattern | 12-E Anti-Copy (score <13) | 12-F Scoring (>5.0) | 12-G Evolution
+
+--------------------------------------------------------------------------------
+M9.8 — GATES GLOBALES DE FIRMA (resumen)
+--------------------------------------------------------------------------------
+
+GLOBAL 1: M5 verificado antes de definir firma en M9.8
+GLOBAL 2: Signature Strength ≥ 42/60
+GLOBAL 3: Placement Map ≥ 4 apariciones
+GLOBAL 4: Non-negotiables documentados
+GLOBAL 5: Recognition Test post-build
+GLOBAL 6: Signature Guardian Doc entregado
+
+--------------------------------------------------------------------------------
+M10 — GATES INTERNOS (resumen; detalle en M10)
+--------------------------------------------------------------------------------
+
+Gates 1.A–1.C (estado), 2.A–2.D (intake), 3.A–3.C (cambios), 4.A–4.C (health),
+5.A–5.C (handoff interno), 6.A–6.C (riesgos), GATE FINAL H (lanzamiento M10.7).
+
+--------------------------------------------------------------------------------
+B4 — SEGURIDAD BACKEND (bloqueante absoluto en GATE 3/4 si hay backend)
+--------------------------------------------------------------------------------
+
+QA seguridad B4 debe pasar antes de GATE 3. Una falla de seguridad no se negocia
+por ticket (piso SKILL §5).
+
+--------------------------------------------------------------------------------
+PISOS INNEGOCIABLES (SKILL §5 — no se recortan por gobernanza Ligera)
+--------------------------------------------------------------------------------
+
+GATE 1 | IA Spec derivada (Principio 10) | Seguridad B4 si backend | GATE 13.4-E
+
+--------------------------------------------------------------------------------
+Mantenimiento: agregar fila aquí cuando un módulo nuevo introduzca gate.
+Registrar cambio en Docs/CHANGELOG.txt. Claude propone; humano aplica.

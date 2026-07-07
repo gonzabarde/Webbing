@@ -1,6 +1,16 @@
 M9 — TECHNICAL PATTERN LIBRARY (v2)
 =====================================
 
+OPERATIONAL HEADER
+------------------
+WHEN:     Ejecución — patrones técnicos durante build (post M8 stack decidido).
+INPUTS:   Stack M8, dirección visual, tipo de proyecto (M10.0).
+OUTPUT:   Patrones seleccionados + M9.8 signature para GATE 3.
+GATES:    GATE 3 (M9.8 globals 1–6).
+FAIL:     Improvisar sin M9.0 selector; firma sin M5 verificado; strength < 42/60.
+DEEP:     Leer overview + submódulo M9.x según selector M9.0.
+REF:      Frontend_Craft_Standard.md §5 (integración frontend-design).
+
 PROPÓSITO GENERAL
 -----------------
 M9 convierte la ejecución técnica en una biblioteca de patrones premium.

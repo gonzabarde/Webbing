@@ -7,15 +7,23 @@ Webbing/
 │
 ├── SKILL.md                  ← entry point operativo (bootloader)
 ├── webbing.skill             ← SKILL.md empaquetado para Claude Code
+├── Frontend_Craft_Standard.md
+├── Client_Record_Template.md
+├── Capture_Baseline_Template.md
 │
 ├── Docs/
-│   ├── Webbing_Master_System_Document_v2.txt
+│   ├── Webbing_Master_System_Document_v2.txt  ← REDIRECT (deprecado)
+│   ├── GATE_REGISTRY.txt
+│   ├── OPERATIONAL_HEADER_STANDARD.txt
+│   ├── CHANGELOG.txt
+│   ├── PROPUESTA_Frontend_Craft_diffs.md
 │   └── SYSTEM FILE MAP.txt   ← este archivo
 │
 ├── Informes/                 ← research y libros (archivo histórico, no cargar en producción)
 │
 ├── _deprecated/              ← versiones reemplazadas (nunca cargar)
-│   └── Production_Operating_System_v1.txt
+│   ├── Production_Operating_System_v1.txt
+│   └── Webbing_Master_System_Document_v2_2026-07-04.txt
 │
 └── NIVELES/
     │

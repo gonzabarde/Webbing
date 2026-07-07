@@ -1,6 +1,15 @@
 M16 — PHASE HANDOFF PROTOCOL (v1)
 =================================
 
+OPERATIONAL HEADER
+------------------
+WHEN:     Infraestructura — contexto ~70-75%, fin de fase, o pausa larga.
+INPUTS:   Estado actual del proyecto (decisiones cerradas + deudas).
+OUTPUT:   Handoff Artifact (estructura fija) — decisiones y deudas, NO razonamiento.
+GATES:    Corte en punto estable (módulo cerrado / gate cruzado).
+FAIL:     Handoff que copia chat entero; omitir decisiones de gates.
+DEEP:     Leer estructura completa del Handoff Artifact.
+
 PROPÓSITO
 ---------
 M16 cubre algo que ningún otro módulo cubre: cómo el sistema se transfiere a
