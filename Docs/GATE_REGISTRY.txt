@@ -16,15 +16,20 @@ GATE 1 — Estrategia cerrada
 
 GATE 2 — Veto del CDL
   CUÁNDO:  Después de M5.5.
-  PASA SI: Dirección pasa CDL + IA Spec (CDL-1) derivada del arquetipo, no default.
-  FALLA →: M4-M5.5 con feedback CDL. Máx 2 iteraciones → escalar humano.
+  PASA SI: Dirección pasa CDL + IA Spec (CDL-1) derivada del arquetipo, no default
+           + Experience Spec (CDL-1) completa (≥1 flujo crítico, pasos, mobile-first,
+           estados según gobernanza Ligera/Media/Completa).
+  FALLA →: M4-M5.5 con feedback CDL. IA Spec genérica → rehacer CDL-1 IA Spec.
+           Flujos/estados faltantes → rehacer CDL-1 Experience Spec. Máx 2 iter → humano.
 
 GATE 3 — Pre-producción
   CUÁNDO:  Después de M9.8 y M8.6.
-  PASA SI: Build completo; M9.8 signature; IA Spec respetada; M8.6 PASA o PASA CON
-           AJUSTES (ninguna dimensión PERDIDO; Generic Drift no CRÍTICO — incluye
-           3+ tells ANTI-AI-SLOP); B0-B5 si hay backend.
+  PASA SI: Build completo; M9.8 signature; IA Spec respetada; flujos críticos de
+           Experience Spec implementados (estados documentados, mobile usable);
+           M8.6 PASA o PASA CON AJUSTES (ninguna dimensión PERDIDO; Generic Drift no
+           CRÍTICO — incluye 3+ tells ANTI-AI-SLOP); B0-B5 si hay backend.
   FALLA →: Listar deuda. M8.6 FALLA → destino por dimensión (M4/M4.5/M5/M5.5/build).
+           Flujo crítico roto → M8/M8.2.
 
 GATE 4 — Deploy
   CUÁNDO:  Dentro de M10, antes de publicar.
@@ -109,7 +114,7 @@ por ticket (piso SKILL §5).
 PISOS INNEGOCIABLES (SKILL §5 — no se recortan por gobernanza Ligera)
 --------------------------------------------------------------------------------
 
-GATE 1 | IA Spec derivada (Principio 10) | Seguridad B4 si backend | GATE 13.4-E
+GATE 1 | IA Spec derivada (Principio 10) | Experience Spec mínima (CDL-1) | Seguridad B4 si backend | GATE 13.4-E
 
 --------------------------------------------------------------------------------
 Mantenimiento: agregar fila aquí cuando un módulo nuevo introduzca gate.

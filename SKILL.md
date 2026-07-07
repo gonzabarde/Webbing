@@ -169,6 +169,7 @@ Base: `NIVELES/` (relativo a la raíz del skill). Nota: `NEGOCIO/` es subcarpeta
 - `Client_Record_Template.md` — registro vivo por cliente (embudo, gates, captación, producción).
 - `Capture_Baseline_Template.md` — plantilla GATE 13.4-E (métrica, fuente, baseline, check-ins 90d).
 - `Docs/GATE_REGISTRY.txt` — índice único de gates bloqueantes (complemento de §6).
+- `Docs/SYSTEM FILE MAP.txt` — árbol visual del filesystem (complemento del FILE MAP de §3).
 - `Docs/OPERATIONAL_HEADER_STANDARD.txt` — formato de headers operativos en módulos.
 - `Docs/CHANGELOG.txt` — bitácora de cambios de arquitectura.
 - `NIVEL 1/Creative_Knowledge_System_Level1_12_Disciplines_v3.txt` — base de conocimiento de las 12 disciplinas creativas. Consultar solo si un módulo de NIVEL 1-2 necesita profundidad conceptual adicional.
@@ -256,9 +257,11 @@ PISO INNEGOCIABLE (no se recorta por ticket, nunca):
   1. GATE 1 — no hay ejecución sobre estrategia abierta, aunque sea barato.
   2. Derivación de la IA Spec del arquetipo (Principio 10) — es barata y evita el
      output templated que el sistema existe para prevenir.
-  3. Seguridad de B4 si hay backend — una falla de seguridad es bloqueante absoluto
+  3. Experience Spec mínima (CDL-1) — al menos 1 flujo crítico con pasos y
+     mobile-first; cierra el salto IA Spec → build sin improvisar interacciones.
+  4. Seguridad de B4 si hay backend — una falla de seguridad es bloqueante absoluto
      a cualquier precio.
-  4. GATE 13.4-E — baseline de captación al entregar. Vendemos captación; medirla
+  5. GATE 13.4-E — baseline de captación al entregar. Vendemos captación; medirla
      no es un lujo de proyecto caro.
 
 Regla: proporcionalidad REDUCE la masa de proceso, nunca el piso. Un proyecto barato
@@ -274,8 +277,8 @@ Cuatro gates frenan el avance. Si un gate falla, Claude se detiene, reporta el f
 | Gate | Ubicación | Condición de paso | Si falla |
 |---|---|---|---|
 | GATE 1 — Estrategia cerrada | Después de M3 | Posicionamiento, traducción de marca y sistema tipográfico definidos y aprobados por el humano | Frenar. No generar conceptos sobre estrategia abierta. |
-| GATE 2 — Veto del CDL | Después de M5.5 | La dirección visual pasa la evaluación del CDL **y la IA Spec de CDL-1 está derivada y justificada** (el esqueleto = arquetipo del proyecto, diffeado contra el esqueleto default; ninguna sección presente solo porque "siempre va") | Frenar. Volver a M4–M5.5 con el feedback del CDL. Si el esqueleto es el genérico sin justificar (M11 Principio 10), rehacer la IA Spec. Máximo 2 iteraciones antes de escalar al humano. |
-| GATE 3 — Pre-producción | Después de M9.8 y M8.6 | Build técnico completo, sin TODOs críticos, patterns de M9 aplicados, signature de M9.8 presente, **el build respeta la IA Spec de CDL-1** (secciones y orden derivados del arquetipo, no el esqueleto default). **M8.6 (Production Review) con veredicto PASA o PASA CON AJUSTES** — ninguna dimensión de fidelidad (Concept/Perception/Direction/Signature) en PERDIDO, drift genérico no CRÍTICO. **Si hay backend: gates internos de B0-B5 pasados** (arquitectura aprobada incl. decisiones irreversibles; preámbulo de seguridad de B1 en toda mutación; pagos de B2 si aplica; secrets/observabilidad de B3; QA de seguridad de B4 — bloqueante; mínimo de performance de B5) | Frenar. Listar lo faltante. No pasar a M10 con deuda. Una falla de seguridad de B4 es bloqueante absoluto. **Un veredicto FALLA de M8.6 vuelve al módulo de destino que M8.6 indica (M4/M4.5/M5/M5.5) — GATE 3 no puede pasar sobre eso.** |
+| GATE 2 — Veto del CDL | Después de M5.5 | La dirección visual pasa la evaluación del CDL **y la IA Spec de CDL-1 está derivada y justificada** (el esqueleto = arquetipo del proyecto, diffeado contra el esqueleto default; ninguna sección presente solo porque "siempre va") **y la Experience Spec de CDL-1 está completa** (≥1 flujo crítico con pasos numerados, mobile-first declarado, estados según gobernanza; ver CDL-1) | Frenar. Volver a M4–M5.5 con el feedback del CDL. Si el esqueleto es el genérico sin justificar (M11 Principio 10), rehacer la IA Spec. Si faltan flujos o estados, rehacer la Experience Spec en CDL-1. Máximo 2 iteraciones antes de escalar al humano. |
+| GATE 3 — Pre-producción | Después de M9.8 y M8.6 | Build técnico completo, sin TODOs críticos, patterns de M9 aplicados, signature de M9.8 presente, **el build respeta la IA Spec de CDL-1** (secciones y orden derivados del arquetipo, no el esqueleto default) **y los flujos críticos de la Experience Spec** (pasos implementados, estados documentados presentes, acción principal usable en mobile). **M8.6 (Production Review) con veredicto PASA o PASA CON AJUSTES** — ninguna dimensión de fidelidad (Concept/Perception/Direction/Signature) en PERDIDO, drift genérico no CRÍTICO. **Si hay backend: gates internos de B0-B5 pasados** (arquitectura aprobada incl. decisiones irreversibles; preámbulo de seguridad de B1 en toda mutación; pagos de B2 si aplica; secrets/observabilidad de B3; QA de seguridad de B4 — bloqueante; mínimo de performance de B5) | Frenar. Listar lo faltante. No pasar a M10 con deuda. Una falla de seguridad de B4 es bloqueante absoluto. **Un veredicto FALLA de M8.6 vuelve al módulo de destino que M8.6 indica (M4/M4.5/M5/M5.5) — GATE 3 no puede pasar sobre eso.** **Flujo crítico roto o estados faltantes → volver a M8/M8.2 según capa afectada.** |
 | GATE 4 — Deploy | Dentro de M10 | Aprobación explícita del humano para publicar. **Si hay backend: launch checklist de B4 completo + plan de recuperación de B6 presente** (migraciones en prod, secrets live, webhooks registrados, backup con restore probado, monitoring activo) | Frenar. El deploy NUNCA es decisión autónoma de Claude. |
 
 **Regla:** un gate fallado que se reporta es proceso. Un gate fallado que se ignora es falla de sistema. Reportar siempre.

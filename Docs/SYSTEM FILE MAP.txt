@@ -1,64 +1,161 @@
-WEBBING — SYSTEM FILE MAP
-=========================
-(Estructura real del filesystem. Si difiere del disco, reportar antes de operar.
-La fuente de verdad operativa es el FILE MAP dentro de SKILL.md.)
+WEBBING — SYSTEM FILE MAP (v2)
+================================
+Actualizado: 2026-07-07.
+Estructura real del filesystem. Si difiere del disco, reportar antes de operar.
 
-Webbing/
+Autoridad operativa del mapa de módulos: SKILL.md §3 FILE MAP.
+Este archivo es el árbol visual complementario (misma información, más legible).
+
+NOTA DE PATHS
+-------------
+En SKILL.md, la columna Path de módulos bajo NIVELES/ omite el prefijo `NIVELES/`
+por brevedad (ej. `NIVEL 1/M0_...` = `NIVELES/NIVEL 1/M0_...`).
+BACKEND/ vive en la raíz del skill, NO dentro de NIVELES/.
+
+Webbing/                          ← raíz del skill (~/.claude/skills/webbing/)
 │
-├── SKILL.md                  ← entry point operativo (bootloader)
-├── webbing.skill             ← SKILL.md empaquetado para Claude Code
-├── Frontend_Craft_Standard.md
-├── Client_Record_Template.md
-├── Capture_Baseline_Template.md
+├── SKILL.md                      ← entry point operativo (bootloader)
+├── webbing.skill                 ← SKILL.md empaquetado para Claude Code (si existe)
+├── Frontend_Craft_Standard.md    ← referencia transversal craft (no routing)
+├── Client_Record_Template.md     ← registro vivo por cliente
+├── Capture_Baseline_Template.md  ← plantilla GATE 13.4-E
+│
+├── BACKEND/                      ← extensión condicional Capa 4 (NO en NIVELES/)
+│   ├── B0_Backend_Architecture_Decision_Engine.txt
+│   ├── B1_Auth_Data_API_Pattern_Library.txt
+│   ├── B2_Payments_Commerce_Pattern_Library.txt
+│   ├── B3_Integrations_Ops_Pattern_Library.txt
+│   ├── B4_Backend_Production_Standards.txt
+│   ├── B5_Performance_Scaling_Engine.txt
+│   └── B6_Incident_Recovery_Engine.txt
 │
 ├── Docs/
-│   ├── Webbing_Master_System_Document_v2.txt  ← REDIRECT (deprecado)
-│   ├── GATE_REGISTRY.txt
+│   ├── SYSTEM FILE MAP.txt       ← este archivo
+│   ├── GATE_REGISTRY.txt         ← índice único de gates
+│   ├── CHANGELOG.txt             ← bitácora de arquitectura
 │   ├── OPERATIONAL_HEADER_STANDARD.txt
-│   ├── CHANGELOG.txt
-│   ├── PROPUESTA_Frontend_Craft_diffs.md
-│   └── SYSTEM FILE MAP.txt   ← este archivo
+│   ├── M14_PROPOSAL_LOG.txt      ← índice de propuestas M14 (todas las disposiciones)
+│   ├── PROPUESTA_Frontend_Craft_diffs.md  ← APLICADO (histórico)
+│   ├── Webbing_Master_System_Document_v2.txt  ← REDIRECT (deprecado)
+│   ├── BRIEF_CLIENTE1_VINCA.md   ← brief ficticio corrida VINCA
+│   └── BRIEF_CLIENTE2_LIMA.md    ← brief ficticio corrida LIMA
 │
-├── Informes/                 ← research y libros (archivo histórico, no cargar en producción)
+├── Informes/                     ← research histórico — NO cargar en producción
+│   ├── M17.md                    ← idea DIFERIDA; número M17 RESERVADO (salto M16→M18)
+│   └── (libros, reports, .md)
 │
-├── _deprecated/              ← versiones reemplazadas (nunca cargar)
+├── _deprecated/                  ← versiones reemplazadas — NUNCA cargar
 │   ├── Production_Operating_System_v1.txt
 │   └── Webbing_Master_System_Document_v2_2026-07-04.txt
 │
 └── NIVELES/
     │
-    ├── NIVEL 1/              ← Strategy Layer
-    │   ├── M0  Agency_OS_M0_Discovery_Research_v3_DEEP.txt
-    │   ├── M1  M1_Positioning_System_DEEP_v3.txt
-    │   ├── M2  M2_Brand_Translation_System_DEEP_v3.txt
-    │   ├── M3  M3_Typography_Semiotics_System_DEEP_v3.txt
-    │   └── (ref) Creative_Knowledge_System_Level1_12_Disciplines_v3.txt
+    ├── NIVEL 1/                  ← Capa 1 — Estrategia
+    │   ├── Agency_OS_M0_Discovery_Research_v3_DEEP.txt      (M0)
+    │   ├── M1_Positioning_System_DEEP_v3.txt                (M1)
+    │   ├── M2_Brand_Translation_System_DEEP_v3.txt          (M2)
+    │   ├── M3_Typography_Semiotics_System_DEEP_v3.txt       (M3)
+    │   └── Creative_Knowledge_System_Level1_12_Disciplines_v3.txt  (ref, no routing)
     │
-    ├── NIVEL 2/              ← Creative Layer
-    │   ├── M4    M4_Concept_Generation_Engine_DEEP_v3.txt
-    │   ├── M4.5  M4_5_Perception_Engine_DEEP_v3.txt
-    │   ├── M5    M5_Visual_Direction_System_DEEP_v3.txt
-    │   └── M5.5  M5_5_Visual_Innovation_Engine_DEEP_v3.txt
+    ├── NIVEL 2/                  ← Capa 2 — Creatividad
+    │   ├── M4_Concept_Generation_Engine_DEEP_v3.txt         (M4)
+    │   ├── M4_5_Perception_Engine_DEEP_v3.txt               (M4.5)
+    │   ├── M5_Visual_Direction_System_DEEP_v3.txt           (M5)
+    │   └── M5_5_Visual_Innovation_Engine_DEEP_v3.txt        (M5.5)
     │
-    ├── NIVEL 3/              ← Creative Director Layer
-    │   └── CDL_0 a CDL_5 (6 archivos v1)
+    ├── NIVEL 3/                  ← Capa 3 — CDL (juicio creativo)
+    │   ├── CDL_0_Level_3_Overview_and_Rules_v1.txt
+    │   ├── CDL_1_Project_Intelligence_v1.txt   ← IA Spec + Experience Spec (v1.3)
+    │   ├── CDL_2_Creative_Prioritization_v1.txt
+    │   ├── CDL_3_Creative_Critic_v1.txt
+    │   ├── CDL_4_Creative_Quality_Engine_v1.txt
+    │   └── CDL_5_Executive_Creative_Director_v1.txt
     │
-    ├── NIVEL 4/              ← Execution Layer
-    │   ├── M6   M6_Agency_Process_DEEP_v3.txt
-    │   ├── M7   Agency_OS_M7_Decision_Compression_Engine_DEEP_v3.txt
-    │   ├── M8/  Overview + M8_1 a M8_6 (7 archivos v2)
-    │   ├── M9/V2/  Overview + M9_1 a M9_8 (9 archivos v2)
-    │   └── M10/ M10_Production_Operating_System_v2.txt
+    ├── NIVEL 4/                  ← Capa 4 — Ejecución
+    │   ├── M6_Agency_Process_DEEP_v3.txt                    (M6)
+    │   ├── Agency_OS_M7_Decision_Compression_Engine_DEEP_v3.txt  (M7)
+    │   ├── M8/
+    │   │   ├── M8_Overview_Technical_Execution_System_v2.txt
+    │   │   ├── M8_1_Technical_Architecture_Engine_v2.txt
+    │   │   ├── M8_2_Layout_Component_Engineering_v2.txt
+    │   │   ├── M8_3_Motion_Engineering_v2.txt
+    │   │   ├── M8_4_Frontend_Production_Standards_v2.txt
+    │   │   ├── M8_5_Performance_Accessibility_v2.txt
+    │   │   └── M8_6_Production_Review_Engine_v2.txt
+    │   ├── M9/V2/
+    │   │   ├── M9_Overview_Technical_Pattern_Library_v2.txt
+    │   │   ├── M9_1_Premium_Layout_Patterns_v2.txt
+    │   │   ├── M9_2_Premium_Component_Library_v2.txt
+    │   │   ├── M9_3_Motion_Pattern_Library_v2.txt
+    │   │   ├── M9_4_GSAP_Playbook_v2.txt
+    │   │   ├── M9_5_Nextjs_Playbook_v2.txt
+    │   │   ├── M9_6_Tailwind_Playbook_v2.txt
+    │   │   ├── M9_7_Launch_Patterns_v2.txt
+    │   │   └── M9_8_Signature_Pattern_Library_v2.txt
+    │   └── M10/
+    │       └── M10_Production_Operating_System_v2.txt         (M10)
     │
-    ├── NIVEL 5/              ← AI Operating Layer
-    │   └── M11_00 a M11_10 (11 archivos v2)
+    ├── NIVEL 5/                  ← Capa 5 — Control de IA
+    │   ├── M11_00_Overview_AI_Operating_System_v2.txt
+    │   ├── M11_01_AI_Operating_Principles_v2.txt
+    │   ├── M11_02_Role_Engine_v2.txt
+    │   ├── M11_03_Decision_Authority_System_v2.txt
+    │   ├── M11_04_Reasoning_Depth_Controller_v2.txt
+    │   ├── M11_05_Exploration_vs_Convergence_Engine_v2.txt
+    │   ├── M11_06_Question_System_v2.txt
+    │   ├── M11_07_Critique_Challenge_System_v2.txt
+    │   ├── M11_08_Output_Control_System_v2.txt
+    │   ├── M11_09_AI_Failure_Modes_v2.txt
+    │   └── M11_10_Human_Override_Protocol_v2.txt
     │
-    ├── NIVEL 6/              ← Visual Intelligence Layer
-    │   └── M12 Overview + M12_0 a M12_9 (11 archivos v3)
+    ├── NIVEL 6/                  ← Capa 6 — Inteligencia visual
+    │   ├── M12_Overview_Visual_Intelligence_System_v3.txt
+    │   ├── M12_0_Reference_Philosophy_v3.txt
+    │   ├── M12_1_Reference_Collection_Engine_v3.txt
+    │   ├── M12_2_Reference_Classification_Engine_v3.txt
+    │   ├── M12_3_Decision_Decomposition_Engine_v3.txt
+    │   ├── M12_4_Pattern_Extraction_Engine_v3.txt
+    │   ├── M12_5_Anti_Copy_System_v3.txt
+    │   ├── M12_6_Reference_Scoring_Engine_v3.txt
+    │   ├── M12_7_Pattern_Library_v3.txt
+    │   ├── M12_8_Reference_Retrieval_Engine_v3.txt
+    │   └── M12_9_Reference_Evolution_System_v3.txt
     │
-    └── NEGOCIO/              ← Business Layer (transversal)
-        ├── M13_0_Business_Layer_Overview_v1.txt
-        ├── M13_1_Client_Qualification_Engine_v1.txt
-        ├── M13_2_Scope_Proposal_System_v1.txt
-        ├── M13_3_Pricing_Engine_v1.txt
-        └── M13_4_Closing_Onboarding_v1.txt
+    ├── NEGOCIO/                  ← Capa de negocio (transversal)
+    │   ├── M13_0_Business_Layer_Overview_v1.txt
+    │   ├── M13_0A_Offer_Ladder_v1.txt           ← anexo escalera de ofertas
+    │   ├── M13_1_Client_Qualification_Engine_v1.txt
+    │   ├── M13_2_Scope_Proposal_System_v1.txt
+    │   ├── M13_3_Pricing_Engine_v1.txt
+    │   └── M13_4_Closing_Onboarding_v1.txt
+    │
+    ├── ADQUISICION/              ← Capa de adquisición (transversal)
+    │   ├── M15_Site_Audit_Engine_v1.txt
+    │   └── M18_Demand_Distribution_Engine_v1.txt
+    │
+    ├── EVOLUCION/                ← Capa de evolución (post-proyecto)
+    │   └── M14_Retrospective_Engine_v1.txt
+    │
+    └── INFRAESTRUCTURA/           ← Handoff entre sesiones
+        └── M16_Phase_Handoff_Protocol_v1.txt
+
+MÓDULOS ACTIVOS — RESUMEN POR CAPA
+----------------------------------
+Estrategia:     M0, M1, M2, M3
+Creatividad:    M4, M4.5, M5, M5.5
+CDL:            CDL-0 … CDL-5
+Ejecución:      M6, M7, M8 (M8.1–M8.6), M9 (M9.1–M9.8), M10
+IA:             M11 (M11.00–M11.10)
+Visual intel:   M12 (M12.0–M12.9)
+Negocio:        M13 (+ M13.0A anexo)
+Adquisición:    M15, M18
+Evolución:      M14
+Infraestructura: M16
+Backend (cond): B0–B6
+
+NUMERACIÓN RESERVADA
+--------------------
+M17 — NO activo. Ver Informes/M17.md. Salto intencional M16 → M18.
+
+Mantenimiento: actualizar este archivo cuando cambie la arquitectura del skill.
+Registrar cambio en Docs/CHANGELOG.txt. Claude propone; humano aplica.

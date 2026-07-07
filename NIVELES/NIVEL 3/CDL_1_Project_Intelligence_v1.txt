@@ -1,4 +1,4 @@
-CDL-1 — PROJECT INTELLIGENCE (v1.2)
+CDL-1 — PROJECT INTELLIGENCE (v1.3)
 ==================================
 
 OBJETIVO
@@ -7,7 +7,14 @@ Identificar qué tipo de proyecto es realmente, qué exige y qué variables
 importan más para ese caso.
 Este módulo evita tratar todos los proyectos como si fueran iguales.
 Su clasificación no termina en qué dimensiones pesar: deriva el ESQUELETO de
-arquitectura de información del proyecto (IA Archetype + IA Spec), que alimenta GATE 2 y GATE 3.
+arquitectura de información del proyecto (IA Archetype + IA Spec) y la
+EXPERIENCIA DE USO para completar las tareas críticas (Experience Spec),
+que alimentan GATE 2 y GATE 3.
+
+La IA Spec responde QUÉ secciones existen y en qué orden.
+La Experience Spec responde CÓMO el usuario completa la acción dentro de esas
+secciones — pasos, fricción, estados y mobile-first. No es diseño visual (M5)
+ni percepción emocional (M4.5): es usabilidad y completitud de tarea.
 
 INPUTS
 ------
@@ -70,6 +77,14 @@ PROCESO CLAUDE
    LIBRARY y producir la IA Spec. El esqueleto es una DERIVACIÓN del arquetipo, no una
    plantilla reusable: si coincide con el de un proyecto de otro arquetipo, está mal
    derivado (M11 Principio 10).
+
+9. Derivar la Experience Spec (experiencia de usuario / flujos de tarea).
+   A partir del arquetipo elegido y la IA Spec, documentar cómo el usuario COMPLETA
+   la(s) acción(es) crítica(s). Usar la EXPERIENCE FLOW LIBRARY como piso por arquetipo
+   y diffeear contra el caso concreto (Principio 10 aplicado a interacción, no solo a
+   secciones). La profundidad escala con la clase de gobernanza (ver REGLA DE
+   PROPORCIONALIDAD abajo). M8/M9 implementan estos flujos; no inventan interacciones
+   que no estén aquí o justificadas en el DIFF.
 
 ÁRBOLES DE DECISIÓN
 -------------------
@@ -194,6 +209,76 @@ IA SPEC OUTPUT
   prioritaria — corregir la posición o documentar explícitamente por qué la excepción
   es válida en este caso puntual, antes de dar la IA Spec por cerrada.
 
+EXPERIENCE FLOW LIBRARY (PISO POR ARQUETIPO)
+--------------------------------------------
+Flujos default que CDL-1 adapta al proyecto. No copiar literal: diffeear qué pasos
+aplican, cuáles sobran y dónde está la fricción real de ESTE cliente.
+
+1. TRANSACCIÓN-FIRST — Flujo crítico: descubrir producto → elegir variante → carrito
+   → checkout (mínimos campos) → confirmación. Secundario: búsqueda/filtro → producto.
+2. LEAD ALTA-CONSIDERACIÓN — Flujo crítico: entender problema → ver prueba → CTA
+   → formulario corto o booking de demo → confirmación + expectativa de respuesta.
+3. TURNO / SERVICIO LOCAL — Flujo crítico: elegir servicio → elegir horario/fecha
+   → datos mínimos → confirmar reserva → recordatorio (WhatsApp/email). Mobile-first
+   obligatorio: reservar sin scroll infinito ni menú escondido.
+4. BRAND EXPERIENCE — Flujo crítico: explorar trabajo → profundizar en pieza
+   → contacto o consulta. La conversión es secundaria; el flujo prioriza descubrimiento
+   sin perderse (wayfinding claro, no laberinto aesthetic-only).
+5. AUTORIDAD / CONTENIDO — Flujo crítico: encontrar tema → leer/consumir → siguiente
+   pieza o suscripción. Secundario: búsqueda → artículo → recirculación.
+6. PLATAFORMA / PRODUCTO — Flujo crítico: auth (signup/login) → onboarding mínimo
+   → core loop (la acción que el producto existe para hacer) → feedback de éxito/error.
+   NO usar flujos de landing. DIFF contra app-shell default (auth → onboarding → loop),
+   no contra hero → servicios → testimonios.
+
+REGLA DE PROPORCIONALIDAD (EXPERIENCE SPEC)
+-------------------------------------------
+La masa de la Experience Spec escala con la clase de gobernanza de M10.0 (fijada en
+M13.2 si existe; si el proyecto arrancó sin M13, inferir: Ligera = marketing local /
+ticket bajo; Completa = SaaS/ecommerce/datos NIVEL 3-4).
+
+- LIGERA: 1 flujo crítico documentado. Estados mínimos en ese flujo: éxito + error.
+- MEDIA: todos los flujos críticos del arquetipo (máx. 3). Estados en flujo principal:
+  vacío + loading + error + éxito.
+- COMPLETA: flujos críticos + secundarios justificados. Estados edge en todos los
+  flujos documentados. Fricción auditada paso a paso.
+
+PISO INNEGOCIABLE (cualquier gobernanza): al menos 1 flujo crítico con pasos
+numerados y mobile-first declarado para la acción principal.
+
+EXPERIENCE SPEC OUTPUT
+----------------------
+Anexo obligatorio de la IA Spec. Entregar inmediatamente después de IA SPEC OUTPUT.
+
+- Clase de gobernanza aplicada (Ligera / Media / Completa):
+- Flujos documentados (lista; cuáles son críticos vs secundarios):
+
+Por cada flujo:
+- Nombre del flujo:
+- Crítico (sí/no):
+- Trigger (sección/CTA/entry point desde la IA Spec):
+- Pasos numerados (acción del usuario + respuesta del sistema por paso):
+- Clicks/taps estimados hasta completar (número):
+- Fricción conocida + mitigación (por paso si aplica):
+- Mobile-first (375px): ¿la acción principal es alcanzable sin scroll excesivo?
+  ¿CTA/form accesible con pulgar? (sí/no + nota si no):
+- Estados requeridos según gobernanza:
+  vacío / loading / error / éxito — documentar copy o comportamiento mínimo por estado:
+- DIFF contra el flujo default del arquetipo en EXPERIENCE FLOW LIBRARY:
+  qué pasos se agregaron, quitaron o reordenaron y por qué.
+
+REGLAS DE EXPERIENCE SPEC
+-------------------------
+- Percepción (M4.5) y dirección visual (M5) no reemplazan flujos: un sitio hermoso
+  con reserva imposible falla la Experience Spec.
+- Prohibido paso genérico ("usuario completa formulario") sin listar campos mínimos
+  y qué pasa si falla la validación.
+- Prohibido asumir desktop-first: mobile-first se declara y se verifica en GATE 3.
+- Si hay backend (auth, reservas, pagos), cada paso del flujo indica si es UI-only
+  o requiere mutación/API — alimenta B0/M8 sin redecidir arquitectura.
+- Arquetipo 6: la Experience Spec de la landing (si existe) es aparte; la de la
+  app manda para GATE 3 del producto funcional.
+
 TESTS
 -----
 - ¿El proyecto está clasificado en un tipo específico?
@@ -206,22 +291,29 @@ TESTS
 - ¿La sección crítica (Process) tiene su POSICIÓN NUMÉRICA reportada, y esa posición
   está fuera del tercio inferior o tiene excepción documentada? (verificación
   cuantitativa, no alcanza con la descripción cualitativa del DIFF)
+- ¿Se completó la Experience Spec con al menos 1 flujo crítico y pasos numerados?
+- ¿El flujo crítico arranca desde el trigger correcto de la IA Spec (no flotando)?
+- ¿Mobile-first está declarado para la acción principal?
+- ¿Los estados documentados cumplen el piso de la gobernanza aplicada?
+- ¿Arquetipo 6: DIFF contra app-shell default, no contra esqueleto de landing?
 
 OUTPUT
 ------
 1. Project Profile completo.
 2. Campo DIMENSIONES PRIORITARIAS listo para pasar a CDL-2.
+3. IA Spec + Experience Spec (entregables unidos; GATE 2 no pasa sin ambos).
 
 DEPENDENCIAS
 ------------
 Requiere: Brief, Discovery (M0), Positioning (M1)
-Bloquea: CDL-2, CDL-3, CDL-4
+Bloquea: CDL-2, CDL-3, CDL-4, M8 (implementación de flujos)
 
 DELIVERABLES
 ------------
 - Project Profile
 - Dimensiones Prioritarias para CDL-2
 - IA Spec (arquetipo + orden de secciones + job-to-be-done por sección + camino de conversión + diff contra el default)
+- Experience Spec (flujos de tarea + fricción + estados + mobile-first + diff contra flow library)
 
 PROMPT PARA CLAUDE
 ------------------
@@ -234,4 +326,7 @@ Producí el Project Profile con el campo DIMENSIONES PRIORITARIAS completo.
 Ese campo es el output crítico: CDL-2 no puede funcionar sin él.
 Derivá además el IA Archetype y completá la IA Spec: el esqueleto del sitio sale de acá,
 no de una plantilla por defecto (ver M11 Principio 10).
-No critiques todavía. No propongas diseño visual. Clasificá, pesá y derivá el esqueleto.
+Derivá la Experience Spec desde el arquetipo: flujos de tarea, pasos, fricción, estados
+y mobile-first — profundidad según gobernanza (Ligera/Media/Completa). M8 implementará
+estos flujos; no improvisará interacciones no documentadas.
+No critiques todavía. No propongas diseño visual. Clasificá, pesá, derivá esqueleto y flujos.

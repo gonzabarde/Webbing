@@ -3,11 +3,11 @@ M8 — TECHNICAL EXECUTION SYSTEM (v2)
 
 OPERATIONAL HEADER
 ------------------
-WHEN:     Ejecución — post GATE 2, concepto y dirección aprobados.
-INPUTS:   Outputs M4–M5.5 + CDL; decisión backend si aplica (B0).
+WHEN:     Ejecución — post GATE 2, concepto, dirección e Experience Spec aprobados.
+INPUTS:   Outputs M4–M5.5 + CDL (IA Spec + Experience Spec); decisión backend si aplica (B0).
 OUTPUT:   Build técnico + handoff a M9.8/M8.6 para GATE 3.
-GATES:    GATE 3 (vía M8.6); B4 si hay backend.
-FAIL:     Activar antes de dirección aprobada; improvisar stack; saltar M8.6.
+GATES:    GATE 3 (vía M8.6 + fidelidad a Experience Spec); B4 si hay backend.
+FAIL:     Activar antes de dirección aprobada; improvisar interacciones no en Experience Spec; saltar M8.6.
 DEEP:     Leer overview para routing M8.1–M8.6; submódulo según tarea.
 REF:      Frontend_Craft_Standard.md (craft en build).
 
@@ -79,6 +79,8 @@ detener y completar antes de continuar.
 ENTRADA DE M8
 -------------
 - Project Profile (CDL-1)
+- IA Spec + Experience Spec (CDL-1) — flujos críticos, estados y mobile-first son
+  contrato de implementación; M8.2 traduce cada flujo a componentes con estados
 - Creative Priority Map (CDL-2)
 - Concepto aprobado
 - Percepción objetivo
@@ -122,6 +124,7 @@ FAIL CONDITIONS
 ---------------
 - Stack elegido por costumbre o popularidad.
 - Layout genérico sin firma visual.
+- Interacción que contradice o improvisa fuera de la Experience Spec (CDL-1).
 - Motion decorativo sin propósito o sin fallback accesible.
 - Código sin standards ni convenciones.
 - Performance por debajo de Core Web Vitals umbral "bueno".
@@ -132,8 +135,11 @@ FAIL CONDITIONS
 PROMPT PARA CLAUDE
 ------------------
 Actuá como director técnico creativo.
-Tomá la dirección creativa aprobada y convertila en un producto digital bien construido.
+Tomá la dirección creativa aprobada y la Experience Spec (CDL-1) y convertilas en un
+producto digital bien construido.
 Seguí el orden de los módulos. No avancés al siguiente sin completar el handoff.
+Implementá los flujos críticos documentados — pasos, estados y mobile-first — sin
+inventar interacciones paralelas.
 Elegí la arquitectura correcta, definí componentes con todos sus estados,
 establecé el sistema de motion con fallback accesible, aplicá standards de producción,
 medí performance y accesibilidad con los umbrales del sistema, y revisá fidelidad final.

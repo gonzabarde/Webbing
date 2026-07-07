@@ -1011,6 +1011,8 @@ Contenido:
       placeholders por error de datos), sin estados muertos no señalizados. El código
       puede pasar QA y el sitio en producción igual mostrar datos rotos (slugs,
       duplicados, campos vacíos del seed) — esto solo lo atrapa navegar el sitio real.
+  [ ] Flujos críticos de la Experience Spec (CDL-1) recorridos en mobile (375px):
+      pasos completables, estados error/éxito visibles, sin atajos solo desktop.
 
 Operativo:
   [ ] Backups configurados o deployment anterior disponible
@@ -1034,7 +1036,7 @@ A los 7 días — foco técnico:
 A los 30 días — foco de conversión:
   ¿La tasa de conversión del CTA principal es razonable?
   ¿Hay páginas con bounce rate alto?
-  ¿El flujo de usuario sigue el camino esperado?
+  ¿El flujo de usuario sigue el camino esperado? (comparar contra Experience Spec CDL-1)
 
 A los 90 días — foco de crecimiento:
   ¿Las páginas principales rankean para keywords relevantes?

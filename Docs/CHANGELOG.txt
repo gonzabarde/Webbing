@@ -8,6 +8,51 @@ Autoridad: los cambios los aprueban y aplica el humano (SKILL.md secciones 7 y 1
 
 --------------------------------------------------------------------------------
 
+2026-07-07 (2) — SYSTEM FILE MAP v2: SINCRONIZADO CON SKILL.md + ARQUITECTURA ACTUAL
+---------------------------------------------------------------------------------
+Archivo afectado: Docs/SYSTEM FILE MAP.txt (v1->v2). Estado: ACTIVA.
+
+Cambio: el mapa secundario estaba desactualizado (faltaban BACKEND/, capas
+ADQUISICION/EVOLUCION/INFRAESTRUCTURA, M13.0A, M14-M18, docs M14_PROPOSAL_LOG y
+briefs ficticios). Reescrito alineado a SKILL.md §3, con nota explícita de que
+paths en SKILL omiten prefijo NIVELES/ (cierra VINCA M14-P5 parcialmente).
+
+Qué NO cambia: SKILL.md sigue siendo autoridad del routing; este archivo es
+complemento visual. No redefine gates ni módulos.
+
+--------------------------------------------------------------------------------
+
+2026-07-07 — EXPERIENCE SPEC (OPCIÓN A): UX COMO ANEXO DE CDL-1, GATEADA EN GATE 2/3
+------------------------------------------------------------------------------------
+Módulos afectados: CDL-1 (Project Intelligence, v1.2->v1.3), CDL-0 (header GATE 2),
+M8 overview (entrada + fail condition + prompt), M10.7 (checklist lanzamiento +
+post-launch 30d), SKILL.md (GATE 2, GATE 3, piso innegociable §5), Docs/GATE_REGISTRY.txt.
+Estado: ACTIVA. Permanente.
+
+Cambio: se cierra el hueco entre IA Spec (macro: secciones, arquetipo, conversión) y
+M8 (build) sin crear módulo nuevo. CDL-1 ahora produce EXPERIENCE SPEC — flujos de
+tarea críticos derivados del arquetipo (EXPERIENCE FLOW LIBRARY), con pasos numerados,
+fricción, estados (vacío/loading/error/éxito según gobernanza), mobile-first y DIFF
+contra el flow default. Profundidad escala con gobernanza Ligera/Media/Completa;
+piso innegociable: ≥1 flujo crítico en cualquier ticket.
+
+Cableado: GATE 2 exige IA Spec + Experience Spec. GATE 3 exige build que implemente
+flujos críticos y estados documentados. M8 consume la spec como contrato (prohibido
+improvisar interacciones). M10.7 verifica flujos en mobile al lanzar y compara analytics
+a 30d contra la Experience Spec.
+
+Razón: el sistema cubría percepción (M4.5), dirección visual (M5) e IA (CDL-1) pero
+no cómo el usuario completa la acción — captación = tarea completada. Opción A elegida
+sobre módulo nuevo (M5.7) por Principio 2 y falta de reps que justifiquen expansión.
+
+Qué NO cambia: no hay módulo M5.7 ni capa nueva. M4.5 y M5 no se duplican. Arquetipo
+6: Experience Spec usa DIFF contra app-shell default (cierra parcialmente VINCA M14-P4).
+
+Escalar a Opción B (módulo propio) solo si CDL-1 se satura o los flujos requieren
+exploración divergente en 2-3 proyectos reales.
+
+--------------------------------------------------------------------------------
+
 2026-07-06 — STACK: NEXT.JS/ASTRO COMO PISO REAL (no vanilla) + REACT BITS CON SESGO POR ELEMENTO
 -------------------------------------------------------------------------------------------------
 Módulos afectados: M8.1 (Technical Architecture Engine, v2->v2.1), M9.3 (Motion
