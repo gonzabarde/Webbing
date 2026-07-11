@@ -114,6 +114,12 @@ NOMBRES:
 CÓDIGO:
 - TypeScript estricto. Nada de `any` sin justificación. Los tipos de datos derivan del
   schema de Zod o del ORM, no se escriben dos veces.
+- No fijar versiones específicas de dependencias de memoria (ej. "next@14.2.15") al
+  scaffoldear un proyecto nuevo. Una versión recordada puede tener una vulnerabilidad
+  conocida ya parcheada en una posterior — mismo Principio 9 (conocimiento congelado)
+  aplicado a versiones de paquetes, no solo a hechos de mercado. Instalar la última
+  versión estable del rango mayor elegido, y correr un chequeo de vulnerabilidades
+  apenas se instala — no esperar al QA final de la Sección 3 para enterarse.
 - El preámbulo de toda mutación es fijo y en este orden (B1): verificar sesión → validar
   input (Zod) → verificar autorización y pertenencia → tocar la DB → revalidar cache.
   Este orden no se altera. Es la columna vertebral de la seguridad.
@@ -138,6 +144,20 @@ SEGURIDAD (lo no negociable):
 - ¿Toda query de datos de usuario filtra por pertenencia? (B1-A4 / IDOR)
 - ¿Toda Server Action y Route Handler verifica auth adentro? (B1-P1/P2)
 - ¿Toda entrada se valida con Zod en el backend? (B1-P3)
+- ¿Todo contenido generado por usuarios que se renderiza a OTROS usuarios (reseñas,
+  comentarios, campos de perfil, cualquier texto libre mostrado en la UI) está
+  saneado contra XSS almacenado? Validar con Zod (forma) NO es lo mismo que sanitizar
+  contra HTML/script (contenido) — un string válido para Zod puede seguir siendo un
+  payload de XSS. Verificar: React escapa por default en JSX, pero cualquier uso de
+  dangerouslySetInnerHTML o renderizado fuera de React necesita sanitización explícita
+  (strip/escape de tags) antes de guardar o antes de renderizar.
+- ¿Toda tabla con RLS habilitada tiene los GRANT de base correspondientes al rol
+  que la va a consultar (anon/authenticated)? RLS es la capa 2 (filtra QUÉ filas);
+  el GRANT es la capa 1 (permite operar en la tabla). Habilitar RLS sin GRANT no es
+  "más seguro" — es un bug de disponibilidad (todo insert/select falla) fácil de
+  confundir con "está bien protegido". Verificar EJECUTANDO, no revisando: insert/
+  select real contra la tabla como el rol correspondiente, un caso que debe pasar
+  y uno que debe fallar. Una revisión de schema sin una llamada real no cuenta.
 - ¿Ningún secret en el código, repo o bundle del cliente? (B3-SEC)
 - ¿Webhooks con firma verificada? (B1-P2 / B2 / B3-INT-2)
 - ¿Errores sin filtrar internals al cliente? (B1-P4)

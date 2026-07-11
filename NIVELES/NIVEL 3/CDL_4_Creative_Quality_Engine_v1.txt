@@ -120,6 +120,14 @@ TECHO DE ESCALA: el score final (base ponderado + bonus - penalizaciones) está 
 en 10. Si el cálculo crudo supera 10, reportar "10/10 (capado; cálculo crudo: X.XX)" —
 nunca un número fuera de la escala declarada, y nunca omitir el cálculo crudo.
 
+NOTA — PODER DISCRIMINANTE EN LA FRANJA ALTA: el cap preserva el número declarado,
+no la comparación entre proyectos. Dos proyectos con cálculo crudo 10.4 y 11.5
+reportan ambos "10/10", indistinguibles en el headline. Regla de uso: el score
+capado es para el veredicto individual (¿este proyecto está bien?); el cálculo
+crudo es para comparar ENTRE proyectos (retrospectivas de M14, tendencia de calidad
+del sistema en el tiempo). No usar el capado para comparar dos proyectos que ambos
+tocaron el techo — ahí el crudo es el dato real.
+
 THRESHOLDS
 ----------
 9-10: excelente — avanzar con confianza.

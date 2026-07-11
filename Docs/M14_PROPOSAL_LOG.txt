@@ -16,6 +16,25 @@ Formato por fila: ID | Severidad | Eje | Módulo/Archivo | Disposición | Nota 1
 Disposición: Aplicada / Rechazada / Postergada / Pendiente de aprobación.
 
 --------------------------------------------------------------------------------
+CORRIDA — RUNA (incidentes del 2026-07-04; corrida formal M14 procesada
+retroactivamente el 2026-07-08 vía disparador terciario § M14). Cliente
+ficticio, práctica de sistema. Incluye Runa (marketing/gestión, gobernanza
+MEDIA por instrucción explícita) + Ampliación Runa Dashboard (producto,
+arquetipo 6, gobernanza COMPLETA). 11 incidentes en INCIDENTES_M14.md.
+--------------------------------------------------------------------------------
+P1  | Media    | Eje 2 (Calidad output)     | CDL-4                | Aplicada | Bonus aditivo sin techo real: cap v1.1 evita desborde pero comprime poder discriminante en la franja alta (8.4 y 9.5 base pueden terminar ambos "10 capado"). Agregada regla de uso: el capado es para el veredicto individual, el cálculo crudo (ya se reportaba desde v1.1) es el que se usa para comparar entre proyectos.
+P2  | Baja     | Eje 2 (Calidad output)     | M9 (patrón mobile)   | Postergada | Tabla de dos columnas pareadas colapsa ambigua en mobile sin re-etiquetar; ya corregido en el build de Runa, documentar como patrón reusable.
+P3  | —        | Eje 1 (Gates)              | M8.6                 | Ya resuelto (corrida ECOS, v2.1→v2.2, 2026-07-05) | Mismo hallazgo que ECOS P2, capturado un día antes en Runa; no duplicar, solo referenciar.
+P4  | Baja     | Eje 2 (Calidad output)     | M8.5                 | Pendiente de aprobación | Sin staging real no hay CWV medible; proponer declarar targets explícitos como sustituto documentado cuando no hay staging.
+P5  | Baja     | Eje 4 (Divergencia)        | M10.0                | Pendiente de aprobación | Árbol estricto de M10.0 vs gobernanza fijada por el humano en §0 pre-arranque pueden divergir sin romper nada; aclarar la relación explícitamente en M10.0.
+P6  | Baja     | Eje 4 (Divergencia)        | M10.4                | Pendiente de aprobación | GATE M10-E exige Health Score ≥60 pero "SANO" se define 50-60 y GATE 4.A pasa con ≥40 — inconsistencia interna. Corregir GATE M10-E a ≥50.
+P7  | CRÍTICA  | Eje 2 (Calidad output)     | M10.7                | Aplicada | Dato regulatorio con fecha se verificó en M0 y quedó desactualizado al cierre (dato falso entregado — cumple la definición de Crítica de M14 al pie de la letra). Ubicado en M10.7 (Launch Checklist, sección Contenido), no en M8.6: es la etapa más cercana al deploy real, minimiza la ventana entre verificación y publicación.
+P8  | Alta     | Eje 2 (Calidad output)     | M8.6 / B4            | Aplicada | Input de usuario interpolado sin escapar (XSS real) pese a que B1-P3 documenta el principio; lo agarró un hook externo, no el proceso. Agregado ítem explícito en QA de Seguridad de B4: contenido de usuario renderizado a otros usuarios debe sanearse contra XSS — Zod valida forma, no sanitiza HTML.
+P9  | Media    | Eje 1 (Gates)              | B0 / SKILL.md §7     | Aplicada | Regla NIVEL 4 de B0 exige escalada humana antes de definir arquitectura; en corridas autónomas de práctica esa escalada no puede cumplirse de verdad. Combinado con VINCA-P3: §7 ahora declara estos ítems NO APROBABLES sin humano real presente, en vez de simular aprobación.
+P10 | Baja     | Eje 2 (Calidad output)     | M8.6 (metodología)   | Pendiente de aprobación | Screenshot de preview falla de forma consistente en ciertas páginas; sustituido por eval+inspect sin pérdida de rigor. Documentar como método de verificación válido cuando screenshot falla.
+P11 | Baja     | Eje 2 (Calidad output)     | M8.6 / B4            | Pendiente de aprobación | Distinción entre QA de seguridad por diseño vs pentest real sobre backend desplegado; se declaró bien acá pero depende de que alguien se acuerde. Estandarizar el lenguaje obligatorio en el output de M8.6/B4.
+
+--------------------------------------------------------------------------------
 CORRIDA — GLOW FACTOR (2026-06-29). Proyecto de aprendizaje/portfolio, entregado.
 --------------------------------------------------------------------------------
 P1 | Crítica | Eje 1 (Gates)              | M10.7                | Aplicada   | Auditoría en vivo post-deploy — único mecanismo que atrapó los 4 bugs reales.
@@ -32,7 +51,7 @@ P1 | Alta     | Eje 1 (Gates)              | CDL-1                | Aplicada   |
 P2 | Media     | Eje 4 (Divergencia)        | CDL-4                | Aplicada   | Scorecard fijo de 7 filas sin mapeo para Process/Brand Translation (8 dimensiones reales).
 P3 | Media     | Eje 4 (Divergencia)        | CDL-5                | Aplicada   | Regla de Conflicto sin caso para dimensión "Alta" (solo Crítica y Media/Baja).
 P4 | Baja      | Eje 2 (Calidad output)     | CDL-4                | Aplicada   | Bonus aditivo sin techo — score podía superar la escala /10.
-P5 | Media     | Eje 4 (Divergencia)        | SKILL.md             | Pendiente de aprobación | Advertir salto de módulo canónico (M2) al recibir el brief, no 4 pasos después.
+P5 | Media     | Eje 4 (Divergencia)        | SKILL.md             | Ya cubierto — no requería cambio | Advertir salto de módulo canónico (M2) al recibir el brief, no 4 pasos después. Verificado: §5.1 (agregado 2026-07-08, posterior a esta corrida) ya exige declarar módulo por módulo CORRE COMPLETO/COMPRIMIDO/SE SALTEA antes de correr M0 — cubre exactamente esto.
 P6 | Baja      | Eje 4 (Divergencia)        | SKILL.md             | Rechazada  | Nombrar un checkpoint "pre-build" — descartable, el propio M14 lo marcó opcional.
 
 --------------------------------------------------------------------------------
@@ -44,13 +63,77 @@ P3 | Media     | Eje 4 (Divergencia)        | M0                   | Aplicada   
 P4 | Baja      | Eje 3 (Intervención manual)| M9.3                 | Aplicada   | Pausar animaciones continuas (rAF/canvas) fuera del viewport vía IntersectionObserver. M9.3 v2.2->v2.3.
 
 --------------------------------------------------------------------------------
+CORRIDA — VINCA (2026-07-07). Cliente ficticio 1/5, práctica de sistema. Primer
+arquetipo #6 PURO + backend real (shell del core loop, sin Mercado Pago). Entregado
+build verificado; GATE 4 frenado con handoff (deploy = del humano, sesión no-interactiva).
+--------------------------------------------------------------------------------
+P1 | Alta  | Eje 2 (Calidad output)     | B0                  | Aplicada | Prisma default vs RLS chocan en NIVEL 4 (service-role bypassea RLS) — B0 no lo señala. Agregada advertencia explícita en REGLA DE ACCESO A FILAS: si se elige RLS, cerrar explícitamente cómo Prisma no bypasea (rol no-privilegiado o delegar a cliente Supabase), o declarar filtrado explícito en su lugar.
+P2 | Alta  | Eje 2 (Calidad output)     | B0/B2               | Ya cubierto — no requería cambio | Default de pagos US-céntrico (Stripe); falta patrón regional (Mercado Pago Split para AR/LATAM). Verificado: B2 ya tenía la sección "CONTEXTO ARGENTINA/LATAM" y el patrón PAY-7 (múltiples PSP, ruteo por moneda, Mercado Pago explícito) completos. No se escribió nada para no duplicar contenido ya correcto.
+P3 | Alta  | Eje 1 (Gates)              | SKILL.md §7 / B0     | Aplicada | Declarar reglas no-delegables (escalado NIVEL 4, seguridad B4, deploy GATE 4) aun con aprobador delegado. Agregada "Regla de no-delegación" en §7 (SKILL.md) + referencia cruzada en la regla NIVEL 4 de B0: sin humano real disponible, el ítem queda NO APROBABLE, no se asume respondido. Combinado con Runa-P9 (mismo fix, dos ángulos del mismo hueco).
+P4 | Media | Eje 2 (Calidad output)     | CDL-1               | Aplicada | El campo DIFF de la IA Spec es no-op para arquetipo #6 (app-shell); falta DIFF vs app-shell default. Agregada excepción explícita: arquetipo 6 diffea contra su propio app-shell default, no contra el esqueleto de landing.
+P5 | Baja  | Eje 4 (Divergencia)        | SKILL.md §3          | Pendiente de aprobación | FILE MAP sin prefijo NIVELES/ en la columna Path → MISS en verificación literal.
+P6 | Media | Eje 2 (Calidad output)     | B0                  | Aplicada | Árbol de auth trata proveedores como excluyentes; falta combo Clerk Organizations + Supabase RLS. Agregada sección COMBO explícita en B0 (JWT de Clerk como third-party auth de Supabase, RLS lee sus claims).
+P7 | Media | Eje 5 (Estimación/proceso) | SKILL.md §5          | Aplicada | Sin guía para gobernanza MIXTA (COMPLETA backend + Ligera visual): documentar el eje comprimido. Agregada sección GOBERNANZA MIXTA en §5: declarar clase por eje en §5.1 en vez de forzar una sola clase para todo el proyecto.
+P8 | Media | Eje 6 (Resultado negocio)  | M14 / M13.0          | Aplicada | El eje 6 asume captación; arquetipo #6 (producto) necesita métrica de resultado propia (adopción/uso). Agregada nota explícita en Eje 6 de M14: arquetipo 6 se mide en adopción (onboarding, uso repetido, core loop), no en captación de GATE 13.4-E.
+
+--------------------------------------------------------------------------------
+CORRIDA — ESTUDIO CONTABLE (2026-07-10). Proyecto de práctica / stress-test de
+deadline ("listo para mañana 9am, arrancá directo"). Nunca cruzó GATE 4.
+Gobernanza MEDIA (marketing Ligera + portal con auth/datos fiscales). Next.js 14
++ Supabase (conectado vía MCP y verificado E2E). Disparador terciario de M14
+(cierre de sesión de práctica). SIN _webbing/ persistido — reconstruido del chat
+(eso es exactamente P2). Eje 6: sin dato, proyecto de práctica.
+--------------------------------------------------------------------------------
+P1  | Crítica | Eje 1/2/3 (Gates/Calidad/Intervención) | B4 / M8.6 / SKILL §6 (GATE 3) | Aplicada | RLS habilitada y correcta pero SIN GRANT de tabla a anon/authenticated; la QA de B4/M8.6 "por diseño" lo dio por seguro y solo lo agarró un insert real ("permission denied"). Agregado ítem en QA de Seguridad de B4: RLS es capa 2, el GRANT es capa 1; verificar EJECUTANDO (insert/select real), no revisando. Escala Runa-P8/P11 con mecanismo concreto.
+P2  | Alta    | Eje 3 (Intervención manual)            | SKILL §5/§5.1 / M16 / M14      | Aplicada | La sesión no escribió NADA a disco (_webbing/): ni proporcionalidad, ni CDL-3/4, ni veredictos de gate, ni INCIDENTES_M14.md. Agregado ítem 7 al PISO INNEGOCIABLE de §5: persistencia a disco en `_webbing/<proyecto>/` de todo lo declarado en §5.1/§6.1/CDL — no alcanza con el chat.
+P3  | Alta    | Eje 3 (Intervención manual)            | NIVEL 5/M11                    | Aplicada | Declaré Supabase "no conectable por MCP" (confundí el conector plugin:supabase con el MCP autenticado) sin probar; solo tras el push del humano probé y funcionaba. Agregado noveno failure mode a M11.8: FALSE UNAVAILABILITY (inverso de FALSE CERTAINTY) — no disponible se gana con un intento fallido, no es default.
+P4  | Media   | Eje 4b (Conocimiento congelado)        | NIVEL 4/M8-M9 (scaffolding)    | Aplicada | package.json con next@14.2.15, versión con vuln conocida; lo agarró el warning de npm, no el sistema. Agregado en B4 (Convenciones/Código): no fijar versiones de memoria al scaffoldear, mismo Principio 9 aplicado a paquetes — chequear vulnerabilidades al instalar, no solo en QA final.
+P5  | Baja    | Eje 5 (Estimación/scope)               | M13.2                          | Aplicada | Scope expandido a mitad de sesión (build local → provisioning cloud + testing E2E) tras push del humano, sin nota de re-scope. Agregado a M13.2: expansión de alcance mid-sesión en corridas autónomas dispara nota mínima de re-scope (TIPOS DE CAMBIO de M10.3, versión liviana).
+REF | —       | Eje 4a (Divergencia FILE MAP)          | SKILL §3 FILE MAP              | Ya registrado (Runa-P5, pendiente) | SEGUNDA ocurrencia: volví a hacer MISS del path de M14 por falta de prefijo NIVELES/ en la columna Path. No es propuesta nueva — confirma el patrón de Runa-P5 (sube evidencia, sigue pendiente).
+REF | —       | Eje 3 (Método verificación)            | M8.6 (metodología)            | Ya registrado (Runa-P10, pendiente) | preview_screenshot timeout consistente; sustituido por eval+inspect sin pérdida de rigor. Mismo hallazgo que Runa-P10, no duplicar.
+
+--------------------------------------------------------------------------------
+CORRIDA — VERA ARQUITECTURA (2026-07-11). Cliente de práctica/stress-test: sitio
+de marca bilingüe (ES/EN) + portal de cliente (arquetipo MIXTO 4 + 6) sobre
+Supabase namespaceado (schema `vera`). Backend construido y verificado E2E (RLS
+8/8 ejecutando); brand site y portal corriendo y verificados. NUNCA cruzó GATE 4
+(deploy = del humano). GATE 1 reabierto ×2 (tipografía, paleta) y re-verificado;
+GATE 3 = PASA CON AJUSTES. Disparador terciario (cierre de sesión de práctica con
+INCIDENTES_M14.md abierto). Eje 5: sin dato (práctica). Eje 6: sin dato, proyecto
+de práctica. 4 incidentes → 4 propuestas + 5 wins registrados.
+--------------------------------------------------------------------------------
+P1 | Media | Eje 1/3 (Gates/Intervención)       | M3 árbol#7 / M5 cross-check / SKILL §14 | Aplicada | 2 colisiones Principio 10 (Fraunces house-style ×3; crema+terracota) entraron en 1ª pasada: corrí M3/M5 desde memoria, no releí el módulo actualizado. El humano las detectó; los mecanismos las agarraron al re-correrse. Agregado a M3/M5: el chequeo cross-portfolio es OUTPUT obligatorio y visible (mismo tratamiento que R1-R4). Agregado a SKILL §14: releer el módulo antes de cerrar una decisión gateada, no confiar en la memoria.
+P2 | Alta  | Eje 2 (Calidad output)             | M9 (patrones de motion)                 | Aplicada | Reveal-on-scroll con opacity:0 dependiente de IntersectionObserver → sin JS o IO roto, TODO el contenido invisible. Agregado a M9.3 (v2.5): reveal nunca es requisito de visibilidad (visible por default; oculto solo con clase JS pre-paint; fallback no-io; reduced-motion).
+P3 | Baja  | Eje 2 (Calidad output)             | M9 / B1 (UI de mutación)                | Aplicada | Copy de confirmación de aprobación leía prop mutado por revalidatePath → mensaje invertido. Agregado a B1-P1: la Server Action devuelve el estado elegido explícitamente; el componente lee ese valor, nunca el prop revalidado.
+P4 | Alta  | Eje 2/4b (Calidad/Cong. congelado) | M8.6 / M6 / M9 / SKILL §13              | Aplicada | 4ª OCURRENCIA del patrón (Move On, mismo día): una decisión de M3/M5 cambia por razón técnica real de build y el doc de origen queda con tokens stale; loguear el incidente no sustituye sincronizar la fuente. Agregado a M8.6 (v2.3): condición adicional para marcar Direction/Signature Fidelity OK — grep del token viejo contra el doc de origen, cero coincidencias, ANTES de GATE 3. Backstop centralizado (mismo patrón que CDL-5): agarra la clase entera en el último checkpoint, no depende de que cada módulo se acuerde solo.
+WINS | — | (no genera propuesta)               | varios                                  | —                       | Primeros usos reales exitosos, registrados a pedido: árbol#7 de M3 + cross-check de M5 (agarraron 2 colisiones antes del build); CDL-5 Verif. de Diferenciación de Portfolio (backstop limpio, primer uso); B0 citó VINCA-P1 (Prisma+service_role bypasea RLS) para justificar supabase-js con JWT; B1 verificó RLS+GRANT EJECUTANDO 8/8 (lección Estudio Contable P1); INC-1 citó M11.8/FALSE CERTAINTY contra un claim impreciso propio y lo corrigió con el diagnóstico real.
+
+--------------------------------------------------------------------------------
 PENDIENTES DE PROCESAR (INCIDENTES_M14.md de proyecto, capturados en caliente,
 nunca corridos por M14 formal — no confundir con propuestas ya evaluadas)
 --------------------------------------------------------------------------------
+- estudio-contable-v2 — SIN INCIDENTES_M14.md (no se creó ninguno; es el hallazgo
+  P2 de la corrida ESTUDIO CONTABLE). PROCESADO igual el 2026-07-10 vía disparador
+  terciario, reconstruido del chat. Ya no pendiente.
 - ecos-web\_webbing\INCIDENTES_M14.md — PROCESADO: corrida formal de M14 el 2026-07-05
   (ver bloque CORRIDA — ECOS arriba). Ya no pendiente.
-- runa-web\INCIDENTES_M14.md — incluye INC-7 (dato regulatorio desactualizado).
-  Sin corrida formal de M14 todavía.
+- runa-web\INCIDENTES_M14.md — PROCESADO: corrida formal de M14 el 2026-07-08
+  vía disparador terciario (ver bloque CORRIDA — RUNA arriba). Ya no pendiente.
+  P7 (CRÍTICA) aplicada el 2026-07-09 en M10.7. Quedan P1, P4, P5, P6, P8, P9,
+  P10, P11 pendientes de aprobación; P2 postergada; P3 ya resuelto por ECOS.
+- vinca-web\_webbing\INCIDENTES_M14.md — PROCESADO: corrida formal de M14 el 2026-07-07
+  (ver bloque CORRIDA — VINCA arriba). Ya no pendiente.
+- moveon-web-v2\_webbing\INCIDENTES_M14.md — NUEVO (2026-07-09), 1 incidente
+  (divergencia tipográfica M3 vs build, detectada por auditoría externa). Cliente
+  REAL, sin GATE 4 todavía (deploy pendiente de decisión del humano). Sin corrida
+  formal de M14 aún — se dispara cuando ocurra GATE 4 real (disparador principal)
+  o cierre de sesión sin GATE 4 (disparador terciario).
+  NOTA: el incidente de Move On (divergencia doc M3 vs build) es la MISMA clase que
+  VERA-P4 — es la evidencia de la 3ª/4ª ocurrencia que motiva la propuesta estructural
+  de VERA-P4. Al procesar Move On, cruzar con VERA-P4, no proponer idéntico por separado.
+- vera-arquitectura\_webbing\INCIDENTES_M14.md — PROCESADO: corrida formal de M14 el
+  2026-07-11 vía disparador terciario (ver bloque CORRIDA — VERA ARQUITECTURA arriba).
+  4 propuestas (P1-P4) Aplicadas el mismo día + 5 wins registrados. Ya no pendiente.
 
 --------------------------------------------------------------------------------
 Mantenimiento: cada corrida formal de M14 agrega su bloque acá completo (las

@@ -52,9 +52,21 @@ Disparador secundario — captura en caliente:
   retrospectiva de cierre no dependa de la memoria. No se analiza en el momento:
   se anota y se sigue.
 
+Disparador terciario — cierre de sesión de práctica/portfolio:
+  Si el proyecto es ficticio/de práctica (sin GATE 4 real, construido para
+  stress-testear el sistema) y la sesión termina con un INCIDENTES_M14.md
+  abierto: correr M14 formal igual, en versión liviana. El Eje 6 (resultado
+  de negocio) se marca "sin dato, proyecto de práctica" en vez de bloquear
+  el resto de la retrospectiva. El objetivo de un proyecto de práctica es
+  encontrar huecos del sistema; un hueco encontrado y no procesado es la
+  práctica fallando en su propio propósito. Distinto del "No se usa" de abajo:
+  un proyecto de práctica SÍ se construyó y generó incidentes reales sobre
+  el sistema — no es un lead que nunca cerró.
+
 No se usa:
-  En proyectos que no llegaron a entregarse (un lead que no cerró no genera
-  retrospectiva de sistema; eso es feedback de M13, no de M14).
+  En leads que no llegaron a cerrar (feedback de M13, no de M14) — distinto
+  de un proyecto de práctica ya construido con incidentes capturados, que sí
+  dispara M14 por el disparador terciario de arriba.
 
 EL CICLO DE UNA RETROSPECTIVA
 ------------------------------
@@ -131,6 +143,19 @@ clasifica y se convierte en propuesta.
    NOTA: en proyectos de práctica/portfolio sin operación real todavía, registrar
    "sin dato de resultado aún" y agendar el check-in; no dar el eje por N/A por
    default (esa es justamente la ceguera que este eje corrige).
+
+   NOTA — ARQUETIPO 6 (Plataforma/Producto Funcional): todo lo de arriba mide
+   captación (leads, reservas, contactos) — la métrica correcta para arquetipos
+   1-5 (sitios de marketing/venta, CDL-1). Un arquetipo 6 (SaaS, dashboard,
+   portal) no vende captación en su parte de producto: vende USO. Para
+   arquetipo 6, el resultado de negocio se mide en adopción: ¿el usuario
+   completó el onboarding y llegó al core loop? ¿volvió (uso repetido)?
+   ¿completa la acción que el producto existe para habilitar (el core loop de
+   la Experience Spec de CDL-1)? Si el proyecto tiene AMBAS partes (landing de
+   marketing + producto), Eje 6 mide las dos por separado: captación para la
+   landing (GATE 13.4-E), adopción/uso para el producto (métrica propia,
+   definida en el brief o en el alcance de M13.2). No colapsar ambas en una
+   sola línea de captación cuando el proyecto es o incluye arquetipo 6.
 
 FORMATO DE OUTPUT — LA PROPUESTA
 ---------------------------------

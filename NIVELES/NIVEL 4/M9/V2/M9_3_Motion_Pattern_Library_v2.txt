@@ -1,4 +1,4 @@
-M9.3 — MOTION PATTERN LIBRARY (v2.4)
+M9.3 — MOTION PATTERN LIBRARY (v2.5)
 ====================================
 
 OBJETIVO
@@ -279,6 +279,21 @@ Heredar el fallback definido en M8.3.
 Si M8.3 no lo definió: documentarlo aquí de manera obligatoria.
 (Ver M8.3 para implementación técnica de CSS, GSAP y Framer Motion.)
 
+PATRÓN OBLIGATORIO — REVEAL-ON-SCROLL NUNCA ES REQUISITO DE VISIBILIDAD
+(v2.5, de la corrida Vera): un Entrance Pattern que oculta contenido
+(opacity:0, visibility:hidden) hasta que un IntersectionObserver dispara es
+frágil por diseño: sin JS, o con el IO roto (entornos headless, navegadores
+raros, timing), TODO el contenido queda invisible — el enhancement se
+convirtió en un requisito. Regla dura, sin excepción:
+  1. El contenido es VISIBLE POR DEFAULT en el HTML/CSS base, sin JS.
+  2. El estado oculto-inicial se activa SOLO con una clase que JS agrega
+     antes del primer paint (script inline en el root layout) — nunca el
+     CSS base arranca oculto.
+  3. Fallback explícito si el IO no dispara (timeout o detección de fallo):
+     marcar el contenido visible igual, sin animación.
+  4. prefers-reduced-motion sigue aplicando encima de todo esto.
+El enhancement se degrada a contenido plano. Nunca a pantalla en blanco.
+
 TESTS
 -----
 - ¿El descriptor de motion viene de M8.3 y no fue redefinido aquí?
@@ -287,6 +302,8 @@ TESTS
 - ¿La tabla Motion × Percepción fue consultada?
 - ¿Los límites por categoría fueron verificados?
 - ¿El fallback prefers-reduced-motion está documentado?
+- Si hay Entrance Pattern con estado oculto-inicial: ¿el contenido es visible
+  por default sin JS, y hay fallback si el IO no dispara?
 - Si se usó una librería de componentes de animación: ¿el patrón se eligió ANTES
   de mirar la librería, y pasó el test anti-clonación?
 

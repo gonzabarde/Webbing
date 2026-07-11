@@ -180,7 +180,10 @@ NIVEL 4 — DATOS CRÍTICOS (salud, financieros, legales)
   Rigor: máximo. Encriptación en reposo, auditoría de accesos, jurisdicción de datos,
   posible requisito de compliance específico (HIPAA, etc.).
   REGLA: si el proyecto toca NIVEL 4, no improvisar. Frenar y escalar al humano para
-  validar requisitos legales ANTES de definir arquitectura.
+  validar requisitos legales ANTES de definir arquitectura. Esta escalada es
+  no-delegable (SKILL.md §7): no la resuelve un aprobador delegado del cliente ni
+  se asume respondida en una corrida sin humano presente — sin humano real, el
+  ítem queda NO APROBABLE y el proyecto no avanza en esa decisión.
 
 BORDE NIVEL 2 vs NIVEL 4 — DATOS CUASI-MÉDICOS (criterio para no quedar en la duda):
   Muchos proyectos rozan datos de salud sin ser historias clínicas: turnos de una
@@ -309,6 +312,22 @@ SUPABASE AUTH — recomendado si ya elegiste Supabase como DB
   Contras: te acopla al ecosistema Supabase.
   Cuándo: elegiste Supabase en Paso 2 y no necesitás features de auth muy específicas.
 
+COMBO — CLERK (auth/orgs) + SUPABASE (DB/RLS): NO son mutuamente excluyentes
+  Los proveedores de arriba no son necesariamente "elegir uno": hay un patrón real
+  y usado en producción para B2B que combina los dos.
+  Cuándo: querés la gestión de equipos/Organizations de Clerk (mejor UX de auth e
+  invitaciones que armar eso a mano) PERO querés el aislamiento de RLS de Postgres
+  para los datos (no filtrado explícito).
+  Cómo: configurar Supabase para aceptar el JWT de Clerk como third-party auth
+  (JWT template de Clerk mapeado a lo que Supabase espera). Las políticas de RLS
+  leen los claims del JWT de Clerk (org_id, user_id) en vez de auth.uid() nativo
+  de Supabase Auth.
+  Pros: mejor gestión de equipos (Clerk) + seguridad de RLS real (Postgres).
+  Contras: integración más manual (dos proveedores, no uno), más superficie para
+  que algo quede mal configurado si no se prueba la integración end-to-end.
+  No es el default: elegir solo si de verdad se necesitan ambas fortalezas a la vez
+  (Organizations de Clerk + RLS de Supabase), no por acumular herramientas.
+
 CERRAR EN ESTE PASO:
 - Proveedor de auth.
 - Métodos de login (email/password, magic link, social, SSO).
@@ -357,6 +376,27 @@ REGLA DE ACCESO A FILAS (row-level):
   RLS es más seguro (la DB lo garantiza aunque el código tenga un bug) pero más complejo.
   Filtrado explícito es más simple pero depende de que ningún query se olvide del filtro.
   Decidir cuál y aplicarlo de forma consistente. Documentarlo para B1.
+
+  ADVERTENCIA — RLS + ORM CON CONEXIÓN PRIVILEGIADA (Prisma u otro):
+    Elegir RLS como mecanismo NO garantiza nada si la capa de acceso se conecta con un
+    rol que la bypassea. Prisma (el ORM default del sistema) típicamente se conecta a
+    Postgres con una connection string de servicio/superusuario — y en Supabase, el
+    service_role tiene BYPASSRLS por diseño. Si B0 elige "Prisma + RLS" sin resolver
+    esta interacción, las políticas de RLS quedan de decoración: protegen contra
+    clientes que consultan vía PostgREST (con JWT de usuario), no contra el propio
+    backend, que las bypasea sin que nadie lo note hasta un incidente real.
+    Si se elige RLS como mecanismo de acceso a filas, B0 debe cerrar explícitamente
+    UNA de estas dos rutas, no dejarlo implícito:
+      (a) Prisma se conecta con un rol que RESPETA RLS (no service_role/superusuario) —
+          requiere configurar el rol de conexión y probar que las políticas realmente
+          filtran, no asumirlo.
+      (b) Las operaciones que dependen de RLS para el aislamiento pasan por el cliente
+          de Supabase (que usa el JWT del usuario vía PostgREST, respetando RLS de
+          verdad), reservando Prisma/service_role para operaciones administrativas
+          explícitas que necesitan ver todo a propósito.
+    Si se elige filtrado explícito en cambio, este problema no aplica (Prisma con
+    service_role es la opción correcta ahí) — pero entonces NO se puede marcar "RLS"
+    como el mecanismo de aislamiento en el handoff: sería falso.
 
 
 ÁRBOL DE DECISIÓN DE MULTI-TENANCY

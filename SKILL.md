@@ -1,6 +1,6 @@
 ---
 name: webbing
-description: "Sistema operativo de agencia AI-assisted de Webbing. Punto de entrada obligatorio para cualquier tarea de estrategia, branding, dirección creativa, diseño web, desarrollo, producción o control de IA dentro de proyectos de Webbing. Activar SIEMPRE que el usuario mencione Webbing, un cliente de la agencia, un proyecto web nuevo, dirección visual, módulos M0-M13, el CDL, o pida diseñar/construir/evaluar un sitio o una marca, calificar un lead, armar una propuesta o definir un precio — incluso si no nombra el sistema explícitamente. Este archivo define qué módulos cargar, en qué orden, y qué gates bloquean el avance. No improvisar estructura: leer este archivo primero."
+description: "Sistema operativo de agencia AI-assisted de Webbing. Punto de entrada obligatorio para cualquier tarea de estrategia, branding, dirección creativa, diseño web, desarrollo, producción o control de IA dentro de proyectos de Webbing. Activar SIEMPRE que el usuario mencione Webbing, un cliente de la agencia, un proyecto web nuevo, dirección visual, módulos M0-M13, el CDL, o pida diseñar/construir/evaluar un sitio o una marca, calificar un lead, armar una propuesta o definir un precio — incluso si no nombra el sistema explícitamente, Y AUN SI el pedido viene con presión de tiempo o frases tipo 'urgente', 'sin vueltas', 'arrancá directo', 'no tengo tiempo para X'. La urgencia es una señal para comprimir CUÁNTO proceso corre (ver §5, Regla de Proporcionalidad del propio archivo) — nunca una señal para omitir la activación del sistema. Ausencia de proceso bajo presión es MÁS riesgosa, no menos: es exactamente cuando un gate de seguridad o de marca importa más, no menos. IMPORTANTE — convivencia con otros skills: si para la misma tarea también aplica un skill genérico de criterio visual/frontend (ej. 'frontend-design'), ese skill se activa ADEMÁS de Webbing, nunca EN VEZ DE — un skill de estética no cubre gates, seguridad, Principio 10 (anti house-style entre clientes de la agencia) ni ninguna otra función de sistema de Webbing. Si ambos matchean, activar los dos. Este archivo define qué módulos cargar, en qué orden, y qué gates bloquean el avance. No improvisar estructura: leer este archivo primero."
 ---
 
 # WEBBING — SYSTEM BOOTLOADER
@@ -114,41 +114,41 @@ Base: `NIVELES/` (relativo a la raíz del skill). Nota: `NEGOCIO/` es subcarpeta
 
 | Módulo | Path |
 |--------|------|
-| M0 | `NIVEL 1/Agency_OS_M0_Discovery_Research_v3_DEEP.txt` |
-| M1 | `NIVEL 1/M1_Positioning_System_DEEP_v3.txt` |
-| M2 | `NIVEL 1/M2_Brand_Translation_System_DEEP_v3.txt` |
-| M3 | `NIVEL 1/M3_Typography_Semiotics_System_DEEP_v3.txt` |
-| M4 | `NIVEL 2/M4_Concept_Generation_Engine_DEEP_v3.txt` |
-| M4.5 | `NIVEL 2/M4_5_Perception_Engine_DEEP_v3.txt` |
-| M5 | `NIVEL 2/M5_Visual_Direction_System_DEEP_v3.txt` |
-| M5.5 | `NIVEL 2/M5_5_Visual_Innovation_Engine_DEEP_v3.txt` |
-| CDL-0 | `NIVEL 3/CDL_0_Level_3_Overview_and_Rules_v1.txt` |
-| CDL-1 | `NIVEL 3/CDL_1_Project_Intelligence_v1.txt` |
-| CDL-2 | `NIVEL 3/CDL_2_Creative_Prioritization_v1.txt` |
-| CDL-3 | `NIVEL 3/CDL_3_Creative_Critic_v1.txt` |
-| CDL-4 | `NIVEL 3/CDL_4_Creative_Quality_Engine_v1.txt` |
-| CDL-5 | `NIVEL 3/CDL_5_Executive_Creative_Director_v1.txt` |
-| M6 | `NIVEL 4/M6_Agency_Process_DEEP_v3.txt` |
-| M7 | `NIVEL 4/Agency_OS_M7_Decision_Compression_Engine_DEEP_v3.txt` |
-| M8 overview | `NIVEL 4/M8/M8_Overview_Technical_Execution_System_v2.txt` |
-| M8.1–M8.6 | `NIVEL 4/M8/M8_[1-6]_*.txt` |
-| M9 overview | `NIVEL 4/M9/V2/M9_Overview_Technical_Pattern_Library_v2.txt` |
-| M9.1–M9.8 | `NIVEL 4/M9/V2/M9_[1-8]_*.txt` |
-| M10 | `NIVEL 4/M10/M10_Production_Operating_System_v2.txt` |
-| M11 overview | `NIVEL 5/M11_00_Overview_AI_Operating_System_v2.txt` |
-| M11.1–M11.10 | `NIVEL 5/M11_[01-10]_*.txt` |
-| M12 overview | `NIVEL 6/M12_Overview_Visual_Intelligence_System_v3.txt` |
-| M12.0–M12.9 | `NIVEL 6/M12_[0-9]_*.txt` |
-| M13 overview | `NEGOCIO/M13_0_Business_Layer_Overview_v1.txt` |
-| M13.0A (anexo: escalera de ofertas) | `NEGOCIO/M13_0A_Offer_Ladder_v1.txt` |
-| M13.1 | `NEGOCIO/M13_1_Client_Qualification_Engine_v1.txt` |
-| M13.2 | `NEGOCIO/M13_2_Scope_Proposal_System_v1.txt` |
-| M13.3 | `NEGOCIO/M13_3_Pricing_Engine_v1.txt` |
-| M13.4 | `NEGOCIO/M13_4_Closing_Onboarding_v1.txt` |
-| M14 | `EVOLUCION/M14_Retrospective_Engine_v1.txt` |
-| M15 | `ADQUISICION/M15_Site_Audit_Engine_v1.txt` |
-| M18 | `ADQUISICION/M18_Demand_Distribution_Engine_v1.txt` |
-| M16 | `INFRAESTRUCTURA/M16_Phase_Handoff_Protocol_v1.txt` |
+| M0 | `NIVELES/NIVEL 1/Agency_OS_M0_Discovery_Research_v3_DEEP.txt` |
+| M1 | `NIVELES/NIVEL 1/M1_Positioning_System_DEEP_v3.txt` |
+| M2 | `NIVELES/NIVEL 1/M2_Brand_Translation_System_DEEP_v3.txt` |
+| M3 | `NIVELES/NIVEL 1/M3_Typography_Semiotics_System_DEEP_v3.txt` |
+| M4 | `NIVELES/NIVEL 2/M4_Concept_Generation_Engine_DEEP_v3.txt` |
+| M4.5 | `NIVELES/NIVEL 2/M4_5_Perception_Engine_DEEP_v3.txt` |
+| M5 | `NIVELES/NIVEL 2/M5_Visual_Direction_System_DEEP_v3.txt` |
+| M5.5 | `NIVELES/NIVEL 2/M5_5_Visual_Innovation_Engine_DEEP_v3.txt` |
+| CDL-0 | `NIVELES/NIVEL 3/CDL_0_Level_3_Overview_and_Rules_v1.txt` |
+| CDL-1 | `NIVELES/NIVEL 3/CDL_1_Project_Intelligence_v1.txt` |
+| CDL-2 | `NIVELES/NIVEL 3/CDL_2_Creative_Prioritization_v1.txt` |
+| CDL-3 | `NIVELES/NIVEL 3/CDL_3_Creative_Critic_v1.txt` |
+| CDL-4 | `NIVELES/NIVEL 3/CDL_4_Creative_Quality_Engine_v1.txt` |
+| CDL-5 | `NIVELES/NIVEL 3/CDL_5_Executive_Creative_Director_v1.txt` |
+| M6 | `NIVELES/NIVEL 4/M6_Agency_Process_DEEP_v3.txt` |
+| M7 | `NIVELES/NIVEL 4/Agency_OS_M7_Decision_Compression_Engine_DEEP_v3.txt` |
+| M8 overview | `NIVELES/NIVEL 4/M8/M8_Overview_Technical_Execution_System_v2.txt` |
+| M8.1–M8.6 | `NIVELES/NIVEL 4/M8/M8_[1-6]_*.txt` |
+| M9 overview | `NIVELES/NIVEL 4/M9/V2/M9_Overview_Technical_Pattern_Library_v2.txt` |
+| M9.1–M9.8 | `NIVELES/NIVEL 4/M9/V2/M9_[1-8]_*.txt` |
+| M10 | `NIVELES/NIVEL 4/M10/M10_Production_Operating_System_v2.txt` |
+| M11 overview | `NIVELES/NIVEL 5/M11_00_Overview_AI_Operating_System_v2.txt` |
+| M11.1–M11.10 | `NIVELES/NIVEL 5/M11_[01-10]_*.txt` |
+| M12 overview | `NIVELES/NIVEL 6/M12_Overview_Visual_Intelligence_System_v3.txt` |
+| M12.0–M12.9 | `NIVELES/NIVEL 6/M12_[0-9]_*.txt` |
+| M13 overview | `NIVELES/NEGOCIO/M13_0_Business_Layer_Overview_v1.txt` |
+| M13.0A (anexo: escalera de ofertas) | `NIVELES/NEGOCIO/M13_0A_Offer_Ladder_v1.txt` |
+| M13.1 | `NIVELES/NEGOCIO/M13_1_Client_Qualification_Engine_v1.txt` |
+| M13.2 | `NIVELES/NEGOCIO/M13_2_Scope_Proposal_System_v1.txt` |
+| M13.3 | `NIVELES/NEGOCIO/M13_3_Pricing_Engine_v1.txt` |
+| M13.4 | `NIVELES/NEGOCIO/M13_4_Closing_Onboarding_v1.txt` |
+| M14 | `NIVELES/EVOLUCION/M14_Retrospective_Engine_v1.txt` |
+| M15 | `NIVELES/ADQUISICION/M15_Site_Audit_Engine_v1.txt` |
+| M18 | `NIVELES/ADQUISICION/M18_Demand_Distribution_Engine_v1.txt` |
+| M16 | `NIVELES/INFRAESTRUCTURA/M16_Phase_Handoff_Protocol_v1.txt` |
 
 **BACKEND (B0-B6) — excepción de path:** estos módulos NO viven en `NIVELES/`. Viven en `BACKEND/` (en la raíz del skill, al lado de `NIVELES/`, no dentro). Son extensión condicional de la Capa 4.
 
@@ -253,6 +253,17 @@ M10.0 (Ligera / Media / Completa), fijada en M13.2, define cuánto aparato se ac
 - Gobernanza MEDIA: pipeline estándar, con los pasos que el proyecto justifique.
 - Gobernanza COMPLETA (SaaS, ecommerce, datos NIVEL 3-4): pipeline completo, sin recortes.
 
+GOBERNANZA MIXTA (cuando los ejes del proyecto piden clases distintas):
+  Un proyecto puede tener, legítimamente, rigor distinto en ejes distintos — ej:
+  backend COMPLETO (datos NIVEL 3-4, seguridad no negociable) sobre un producto con
+  dirección visual LIGERA (poco research de mercado, sin abanico de conceptos). No
+  es una cuarta clase nueva: es declarar la clase de CADA eje por separado en vez de
+  forzar una sola clase para todo el proyecto.
+  Declarar en §5.1: "Gobernanza — Backend: [clase] / Visual-Creativo: [clase] /
+  Proceso: [clase]" si divergen; una sola línea si coinciden. El PISO INNEGOCIABLE
+  de abajo sigue aplicando completo, sin importar cuántos ejes tenga la gobernanza —
+  mixta reduce masa de proceso por eje, nunca el piso de ninguno de ellos.
+
 PISO INNEGOCIABLE (no se recorta por ticket, nunca):
   1. GATE 1 — no hay ejecución sobre estrategia abierta, aunque sea barato.
   2. Derivación de la IA Spec del arquetipo (Principio 10) — es barata y evita el
@@ -263,10 +274,47 @@ PISO INNEGOCIABLE (no se recorta por ticket, nunca):
      a cualquier precio.
   5. GATE 13.4-E — baseline de captación al entregar. Vendemos captación; medirla
      no es un lujo de proyecto caro.
+  6. Output estructurado de CDL-3 (Creative Critic) y CDL-4 (Creative Quality
+     Engine) — aunque el CDL corra en pasada única bajo gobernanza Ligera, esa
+     pasada única debe producir igual el formato de crítica de CDL-3 (Fuerte /
+     Debilidades / Riesgo Principal / Qué Salvar / Veredicto) y el scorecard
+     ponderado de CDL-4 (7 dimensiones + score final). Es evaluación, no
+     producción: no agranda el build, evita que el control de calidad se
+     disuelva en un párrafo informal. Sin esto, nadie audita el drift genérico
+     con criterio, con o sin M8.6 corriendo después.
+  7. Persistencia a disco de las decisiones de gates y capas en
+     `_webbing/<carpeta-del-proyecto>/` (declaración de proporcionalidad,
+     veredictos de gate, output de CDL-3/4, INCIDENTES_M14.md si se abre) — no
+     alcanza con declararlo en el chat. Un chat se pierde entre sesiones; un
+     archivo no. Sin esto, una retrospectiva de M14 tiene que reconstruirse de
+     una transcripción en vez de leer la fuente real — exactamente el problema
+     que este sistema existe para evitar en el trabajo del cliente, ahora
+     aplicado al propio sistema.
 
 Regla: proporcionalidad REDUCE la masa de proceso, nunca el piso. Un proyecto barato
 se hace con menos pasos, no con menos honestidad. Si un proyecto de ticket bajo
 necesita el pipeline completo, el precio estaba mal (revisar M13.3), no el proceso.
+
+---
+
+## 5.1 DECLARACIÓN DE PROPORCIONALIDAD (obligatorio, todo proyecto)
+
+Al fijar la clase de gobernanza (M13.2), antes de correr M0, Claude declara
+en el chat, visible:
+
+"📋 Declaración de proporcionalidad — Gobernanza: [Ligera/Media/Completa]"
+
+Cita TEXTUALMENTE los 7 ítems del PISO INNEGOCIABLE de arriba (no "piso
+intacto" como resumen) y marca, para cada uno, PLANIFICADO / NO PLANIFICADO.
+El §6.1 (post-gate) verifica después si lo planificado efectivamente corrió.
+
+Además declara, módulo por módulo de las capas 1-4: CORRE COMPLETO / CORRE
+COMPRIMIDO / SE SALTEA, con razón de una línea cada uno.
+
+FAIL CONDITIONS:
+- Declarar "piso intacto" sin nombrar los 7 ítems uno por uno.
+- Omitir un ítem del piso sin marcarlo NO PLANIFICADO explícitamente.
+- Comprimir el pipeline sin declarar qué clase de gobernanza lo justifica.
 
 ---
 
@@ -282,6 +330,41 @@ Cuatro gates frenan el avance. Si un gate falla, Claude se detiene, reporta el f
 | GATE 4 — Deploy | Dentro de M10 | Aprobación explícita del humano para publicar. **Si hay backend: launch checklist de B4 completo + plan de recuperación de B6 presente** (migraciones en prod, secrets live, webhooks registrados, backup con restore probado, monitoring activo) | Frenar. El deploy NUNCA es decisión autónoma de Claude. |
 
 **Regla:** un gate fallado que se reporta es proceso. Un gate fallado que se ignora es falla de sistema. Reportar siempre.
+
+---
+
+## 6.1 PROTOCOLO POST-GATE (obligatorio, bloqueante, las 4 gates de arriba)
+
+Inmediatamente después de declarar un gate PASA o PASA CON AJUSTES, y ANTES de
+avanzar al módulo siguiente, Claude ejecuta este protocolo como paso separado
+y visible — no como parte del mismo razonamiento que produjo el veredicto.
+
+1. Anunciar en el chat, antes de ejecutar:
+   "🔍 Verificación post-gate — GATE [N]"
+
+2. Citar TEXTUALMENTE (no parafrasear) cada condición de "Condición de paso"
+   de la tabla de arriba para ese gate — o el FAIL CONDITIONS del módulo que
+   el gate delega (ej. GATE 3 delega en M8.6: citar su tabla de fidelidad y
+   ambas capas de drift genérico, no un resumen).
+
+3. Para cada condición citada: marcar CUMPLE / NO CUMPLE contra el artefacto
+   real entregado (build, documento), con evidencia concreta — no "sí, cumple"
+   sin más. Si la condición requiere un check que no se corrió (ej. cross-
+   browser con un solo motor disponible), es NO CUMPLE, no se omite.
+
+4. Si CUALQUIER condición es NO CUMPLE: el veredicto se revisa en el momento.
+   No puede quedar un "PASA" declarado con una condición NO CUMPLE registrada
+   en el mismo post-check.
+
+5. Cerrar con una línea inequívoca (formato de §15): "✅ GATE [N]: PASA" /
+   "⚠️ GATE [N]: PASA CON AJUSTES" / "❌ GATE [N]: FALLA → [destino]".
+
+FAIL CONDITIONS de este protocolo:
+- Declarar un gate PASA sin correr el post-check visible en el chat.
+- Post-check que parafrasea en vez de citar la condición textual.
+- Post-check que concluye "todo cumple" sin evidencia concreta por condición.
+- Post-check corrido en el mismo bloque de razonamiento que el veredicto
+  original (debe ser un paso distinto, releyendo el archivo fuente).
 
 ---
 
@@ -304,6 +387,17 @@ Cuatro gates frenan el avance. Si un gate falla, Claude se detiene, reporta el f
 - Comunicación directa con el cliente.
 - Cambiar la arquitectura del sistema Webbing.
 - Borrar o sobrescribir módulos.
+- Validar requisitos legales/compliance cuando el proyecto toca datos NIVEL 4
+  (B0 — salud, financieros, legales).
+
+**Regla de no-delegación:** los cinco ítems de arriba son no-delegables — ni a un
+aprobador delegado del lado del cliente (alguien distinto del principal, con
+autoridad limitada) ni a una corrida autónoma sin humano presente (sesión de
+práctica, test). Si no hay un humano real disponible para decidir sobre estos
+puntos en el momento en que corresponde, el ítem queda expresamente **NO
+APROBABLE** — se declara así, bloqueante, y no se simula una aprobación ni se
+asume una respuesta razonable para poder seguir. "Nadie dijo que no" no es
+lo mismo que "alguien dijo que sí".
 
 **Regla:** ante duda sobre autoridad, asumir el nivel más restrictivo. Pedir aprobación de más es barato; ejecutar de más es caro.
 
@@ -402,10 +496,53 @@ Si existe conflicto entre un módulo y este archivo, reportar la inconsistencia 
 Protocolo de entrada para toda sesión nueva:
 
 1. **Leer este archivo primero.** Completo. Antes de cualquier respuesta sobre Webbing.
-2. **Clasificar la tarea** según la tabla de la sección 4.
-3. **Cargar solo los módulos necesarios.** Nada preventivo.
-4. **Verificar gates previos:** si la tarea asume decisiones de capas anteriores, confirmar que existen y están aprobadas. Si no existen, la tarea real es la capa anterior.
-5. **Operar respetando orden, gates y autoridad** (secciones 5–7).
-6. **No improvisar estructura.** Si algo no está definido en el sistema, se pregunta o se propone — no se inventa en silencio.
+2. **Revisar Docs/M14_PROPOSAL_LOG.txt.** Si hay entradas en "PENDIENTES DE
+   PROCESAR" (incidentes sin corrida formal de M14) o con disposición
+   "Pendiente de aprobación", anunciarlo en el chat antes de clasificar la
+   tarea nueva: "📋 Hay N asuntos de M14 sin cerrar: [listar en una línea cada
+   uno]." No bloquea el arranque de la tarea nueva — el humano puede decir
+   "seguimos" — pero el aviso es obligatorio, no opcional.
+3. **Clasificar la tarea** según la tabla de la sección 4.
+4. **Cargar solo los módulos necesarios.** Nada preventivo.
+5. **Verificar gates previos:** si la tarea asume decisiones de capas anteriores, confirmar que existen y están aprobadas. Si no existen, la tarea real es la capa anterior.
+6. **Operar respetando orden, gates y autoridad** (secciones 5–7). Antes de
+   cerrar una decisión gateada (GATE 1/2/3), releer el módulo específico que
+   la gobierna si pasó tiempo o mensajes desde que se cargó — no confiar en
+   la versión en memoria de la sesión. Un módulo puede haberse corregido a
+   mitad de la propia sesión (lección Vera-P1: M3/M5 se corrieron desde
+   memoria, no desde el archivo actualizado, y dos colisiones de Principio
+   10 pasaron la primera pasada).
+7. **No improvisar estructura.** Si algo no está definido en el sistema, se pregunta o se propone — no se inventa en silencio.
 
 **Regla final:** la primera respuesta de Claude en una sesión de Webbing ya debe ser una respuesta del sistema: tarea clasificada, módulos identificados, gates verificados. Sin warm-up.
+
+---
+
+## 15. NOTIFICACIONES EN CHAT (calibradas — no por módulo individual)
+
+Avisar en eventos que cambian una decisión o marcan un punto de no-retorno,
+no en cada carga de módulo. Un aviso por cada uno de los ~40 módulos posibles
+es ruido, no señal (M11.8, Framework Addiction: "más secciones en mayúscula
+que párrafos" es la señal de alerta explícita de ese failure mode).
+
+Estas son las ÚNICAS notificaciones proactivas del sistema:
+
+1. TRANSICIÓN DE CAPA (no de módulo individual): al entrar a una capa nueva
+   de la arquitectura (§3 — Estrategia, Creatividad, Juicio/CDL, Ejecución,
+   Inteligencia Visual, Adquisición, Negocio, Evolución, Infraestructura),
+   anunciar una línea: "🔧 Capa [N] — [nombre]". Los módulos individuales
+   dentro de esa capa (M9.1, M9.2, M9.3...) corren en silencio; aparecen solo
+   en el output final de la capa, no uno por uno. M11 (Control de IA) corre
+   de fondo permanentemente y nunca se anuncia como transición propia.
+
+2. VEREDICTO DE GATE: cierre explícito según §6.1 paso 5 — "✅ GATE [N]:
+   PASA" / "⚠️ GATE [N]: PASA CON AJUSTES" / "❌ GATE [N]: FALLA → [destino]".
+
+3. M14 DISPONIBLE: cuando se cumple cualquiera de los tres disparadores de
+   M14 (ver M14, sección CUÁNDO SE USA), anunciar una sola vez por proyecto:
+   "🗂️ M14 disponible — proyecto listo para retrospectiva."
+
+Regla: cualquier otro evento (carga de un módulo individual, decisión interna
+dentro de una capa, sub-corrida de CDL) NO se anuncia — se resuelve en
+silencio. Si un aviso no cambia lo que el humano hace a continuación, no se
+emite.

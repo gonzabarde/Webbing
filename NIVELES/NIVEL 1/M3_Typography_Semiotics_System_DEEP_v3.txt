@@ -361,6 +361,23 @@ E. Framework de Coherencia
    - No: seguir.
    - Sí: evaluar si hay una alternativa con carácter similar y menor saturación.
 
+7. ¿La familia (o el par completo) ya se usó en OTRO proyecto de Webbing?
+   Distinto del árbol 6: ahí se chequea contra el mercado/categoría del cliente;
+   acá se chequea contra el propio portfolio de la agencia, sin importar la
+   categoría del otro cliente (Principio 10 aplicado entre clientes, no solo
+   dentro de una categoría). Un estudio contable y un estudio de arquitectura
+   no compiten entre sí, pero si comparten Fraunces+Hanken Grotesk el problema
+   es idéntico: la agencia se repite a sí misma.
+   - Antes de cerrar la elección: revisar qué tipografías usó Webbing en
+     proyectos recientes (Client_Record_Template.md de cada cliente, o
+     preguntar si no hay registro accesible).
+   - Sí coincide con un cliente activo o reciente: tratarlo como sobreuso —
+     elegir alternativa con señal semótica similar. No alcanza con que la
+     elección esté bien justificada en abstracto si ya es la marca visual
+     de otro cliente.
+   - No hay forma de verificar (sin registro accesible): declararlo
+     explícitamente como riesgo no verificado, no asumir que no hay conflicto.
+
 CASOS REALES
 ------------
 Caso 1 — Wolf & Whale
@@ -393,10 +410,18 @@ TESTS
 - ¿Hay suficiente contraste entre niveles jerárquicos?
 - ¿La tipografía se siente coherente con el concepto?
 - ¿La familia elegida está sobreusada en la categoría?
+- ¿La familia (o el par) ya se usó en otro proyecto de Webbing? (Principio 10
+  entre clientes, no solo dentro de la categoría del cliente actual)
 - ¿La semiótica cubre tipografía + color + espacio + contraste?
 
 OUTPUT
 ------
+**Verificación cross-portfolio (árbol #7) — obligatoria, visible, ANTES de cerrar:**
+Declarar explícitamente el resultado (no asumir del árbol): "Familia [X] vs.
+portfolio real de Webbing: [coincide con Y / sin coincidencia]". Corrida en
+ESTA pasada, contra los builds reales — no heredada de una sesión anterior
+ni asumida por memoria. Mismo tratamiento que R1-R4 en M5.5: es parte del
+deliverable, no un paso interno que se pueda hacer sin dejar rastro.
 1. Intención tipográfica.
 2. Familia principal con clasificación y señal semiótica.
 3. Familia secundaria (si aplica).
@@ -416,6 +441,8 @@ FAIL CONDITIONS
 - La tipografía contradice la personalidad.
 - La semiótica se limitó a tipografía; no cubre color, espacio ni contraste.
 - La familia elegida está sobreusada en la categoría sin diferenciación.
+- La familia (o el par) ya se usaba en otro proyecto de Webbing y no se
+  verificó ni se declaró el riesgo antes de cerrar la elección.
 - El body usa una fuente de la lista de prohibidas por default sin la
   excepción escrita (Frontend_Craft_Standard.md §2.1).
 - El pairing no tiene justificación contra alternativas.

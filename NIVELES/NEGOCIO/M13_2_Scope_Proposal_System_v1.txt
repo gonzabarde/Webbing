@@ -30,6 +30,15 @@ Después de M13.1 (cliente calificado).
 Antes de presentar precio.
 Cuando el cliente existente pide algo nuevo fuera del proyecto actual.
 
+Durante una sesión de ejecución autónoma/delegada, si el alcance se expande a
+mitad de camino (ej.: "solo el build local" → "también provisionar la nube y
+probar end-to-end") a pedido del humano en el momento: no es una renegociación
+comercial completa, pero SÍ dispara una nota de re-scope mínima — usar el TIPOS
+DE CAMBIO y el IMPACT QUANTIFICATION TEMPLATE de M10.3, aunque sea en versión
+liviana (una línea: qué cambió, quién lo pidió, si afecta el scope original).
+Sin esto, el alcance real termina siendo mayor que el declarado sin que nadie
+haya actuado de mala fe — simplemente nadie lo anotó.
+
 PROCESO
 -------
 1. Completar el SCOPE DEFINITION con el cliente.

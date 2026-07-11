@@ -114,7 +114,10 @@ por ticket (piso SKILL §5).
 PISOS INNEGOCIABLES (SKILL §5 — no se recortan por gobernanza Ligera)
 --------------------------------------------------------------------------------
 
-GATE 1 | IA Spec derivada (Principio 10) | Experience Spec mínima (CDL-1) | Seguridad B4 si backend | GATE 13.4-E
+GATE 1 | IA Spec derivada (Principio 10) | Experience Spec mínima (CDL-1) | Seguridad B4 si backend | GATE 13.4-E | Output estructurado CDL-3 + CDL-4 (aun en pasada única)
+
+Ver SKILL.md §5.1 (Declaración de Proporcionalidad, obligatoria por proyecto) y
+§6.1 (Protocolo Post-Gate, obligatorio tras cada gate de la tabla de abajo).
 
 --------------------------------------------------------------------------------
 Mantenimiento: agregar fila aquí cuando un módulo nuevo introduzca gate.

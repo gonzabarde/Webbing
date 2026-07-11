@@ -322,10 +322,20 @@ PATRÓN P1 — SERVER ACTIONS PARA MUTACIONES
       (3) verificar autorización y pertenencia (A4). Recién después tocar la DB.
     - Devolver un resultado tipado y consistente (P4 forma de errores).
     - revalidar el cache de la ruta afectada después de mutar.
+    - Si la UI muestra confirmación de "qué hizo el usuario" (éxito/estado elegido),
+      la Server Action DEVUELVE ese estado explícitamente en su respuesta, y el
+      componente lee ESE valor — nunca el prop que la revalidación de la ruta va a
+      pisar. `revalidatePath` re-renderiza con el dato ya actualizado; si el mensaje
+      de confirmación lee el prop en vez de la respuesta de la acción, corre el
+      riesgo de leer el estado NUEVO cuando quiere describir qué pasó.
   Cómo se rompe:
     - Server Action sin chequeo de auth adentro → se puede invocar igual sin la UI.
       Una Server Action es un endpoint, aunque no lo parezca. Tratarla como tal.
     - Confiar en que "el botón solo aparece para admins" → la acción se llama sin el botón.
+    - UI de confirmación que lee un prop mutable por revalidación en vez del estado
+      devuelto por la acción → el mensaje puede salir invertido o desincronizado
+      (ej: aprobó un render y el copy de éxito lee el status ya actualizado y dice
+      lo contrario de lo que el usuario acaba de hacer).
 
 PATRÓN P2 — ROUTE HANDLERS PARA HTTP EXPLÍCITO
   Problema: webhooks entrantes, endpoints para clientes no-React, descargas, APIs.

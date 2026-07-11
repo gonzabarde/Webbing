@@ -55,9 +55,10 @@ PROCESO CLAUDE
 --------------
 1. Integrar outputs de CDL-1 a CDL-4.
 2. Aplicar la Regla de Conflicto si CDL-3 y CDL-4 discrepan.
-3. Antes de emitir la recomendación, ejecutar la Verificación Comercial.
-4. Decidir: SEGUIR / REVISAR / RETROCEDER.
-5. Definir el output ejecutivo.
+3. Ejecutar la Verificación de Diferenciación de Portfolio (Principio 10).
+4. Antes de emitir la recomendación, ejecutar la Verificación Comercial.
+5. Decidir: SEGUIR / REVISAR / RETROCEDER.
+6. Definir el output ejecutivo.
 
 VERIFICACIÓN COMERCIAL [obligatoria antes de recomendar]
 ---------------------------------------------------------
@@ -66,6 +67,33 @@ Antes de emitir cualquier recomendación, verificar:
 
 Si no: la recomendación tiene un problema estratégico, no creativo.
 Ajustar antes de emitir.
+
+VERIFICACIÓN DE DIFERENCIACIÓN DE PORTFOLIO [obligatoria antes de recomendar,
+Principio 10 entre clientes]
+---------------------------------------------------------
+Antes de emitir cualquier recomendación, verificar en una sola pasada, contra
+los builds reales de otros proyectos de Webbing (CSS/tokens/font-family
+reales, no de memoria ni por nombre de proyecto):
+
+- Tipografía (display + body, la COMBINACIÓN, de M3): ¿coincide con otro cliente?
+- Paleta (combinación color+rol, de M5): ¿coincide con otro cliente?
+- Nombre del concepto rector (de M4): ¿es literalmente el mismo nombre o una
+  variación mínima de un concepto ya usado en otro cliente?
+- Signature System (gesto de firma, de M5/M9.8): ¿es el mismo mecanismo/gesto
+  ya usado en otro cliente, aunque el nombre sea distinto?
+
+Este es el backstop centralizado: cada módulo (M2-M5.5) puede tener su
+propio chequeo de Principio 10 (si lo tiene), pero CDL-5 es el único punto
+que los audita TODOS JUNTOS antes de que el proyecto pase GATE 2 hacia
+construcción. Si un módulo individual no tiene el chequeo propio, o lo tiene
+y falló, esta es la última oportunidad de agarrarlo barato.
+
+Si hay coincidencia en cualquier ítem: tratamiento aparte, automático —
+RETROCEDER al módulo de origen del ítem que colisiona, sin importar cómo
+salió el resto del análisis. Un proyecto puede tener Concept Strength 14/15
+y craft impecable y aun así RETROCEDER si su tipografía o paleta ya es la de
+otro cliente — la diferenciación entre clientes no es una dimensión que se
+compensa con puntaje alto en otra.
 
 DECISIÓN EJECUTIVA
 ------------------
@@ -86,6 +114,9 @@ RETROCEDER
 - Score CDL-4 < 6 en alguna dimensión Crítica.
 - CDL-3 dice débil o no viable.
 - La Verificación Comercial detectó que la recomendación no sirve el objetivo.
+- La Verificación de Diferenciación de Portfolio encontró una colisión con otro
+  cliente (tipografía, paleta, nombre de concepto o gesto de firma) —
+  automático, sin importar el resto del análisis.
 
 RETROCEDER requiere destino obligatorio:
 "Retroceder a [módulo específico]: [razón en una línea]."
@@ -107,6 +138,8 @@ TESTS
 -----
 - ¿La decisión final es SEGUIR, REVISAR o RETROCEDER? ¿Sin ambigüedad?
 - ¿Se aplicó la Regla de Conflicto si CDL-3 y CDL-4 discrepaban?
+- ¿Se ejecutó la Verificación de Diferenciación de Portfolio contra builds
+  reales de otros clientes (no de memoria)?
 - ¿Se ejecutó la Verificación Comercial?
 - ¿Si la decisión es RETROCEDER, hay destino específico?
 - ¿El próximo paso es una acción concreta?
@@ -140,6 +173,10 @@ Leé todo lo anterior.
 Si CDL-3 y CDL-4 discrepan, aplicá la Regla de Conflicto:
   dimensión Crítica o Alta → CDL-3 prevalece (salvo excepción documentada en Alta).
   dimensión Media o Baja → CDL-4 puede prevalecer, documentar la discrepancia.
+Ejecutá la Verificación de Diferenciación de Portfolio: tipografía, paleta,
+  nombre de concepto y gesto de firma, contra los builds reales de otros
+  clientes de Webbing — no de memoria. Una colisión es RETROCEDER automático
+  al módulo de origen, sin importar el resto del score.
 Antes de recomendar, ejecutá la Verificación Comercial:
   ¿la recomendación sirve el objetivo del M0?
 Elegí SEGUIR, REVISAR o RETROCEDER.

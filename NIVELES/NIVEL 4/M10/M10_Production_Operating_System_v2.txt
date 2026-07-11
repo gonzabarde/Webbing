@@ -55,8 +55,12 @@ GATE M10-C — ¿Cada fase tiene aprobación documentada?
 GATE M10-D — ¿El scope está controlado y actualizado?
   Falla → volver a M10.3. Reclasificar y documentar el cambio.
 
-GATE M10-E — ¿El Production Health Score es ≥ 60?
-  Falla → identificar dimensión débil en M10.4 y corregir.
+GATE M10-E — ¿El Production Health Score es ≥ 50?
+  Falla → identificar dimensión débil en M10.4 y corregir. (50 = piso de la banda
+  SANO en la INTERPRETACIÓN de M10.4; alineado con GATE 4.A y GATE FINAL E, que
+  usan ≥40 — ese es el piso de "no está en riesgo", no de "sano". Antes decía ≥60,
+  un umbral que no correspondía a ninguna banda nombrada y era más estricto que
+  "SANO" mismo.)
 
 GATE M10-F — ¿Los riesgos altos y críticos tienen owner y mitigación?
   Falla → volver a M10.6. No avanzar a launch.
@@ -197,6 +201,19 @@ COMPLETA: todos los módulos activos. Production Health Score obligatorio.
   SÍ → Gobernanza MEDIA-COMPLETA con QA accesibilidad obligatorio.
 
 Por defecto si no aplica ninguno → Gobernanza MEDIA.
+
+RELACIÓN CON GOBERNANZA DECLARADA POR EL HUMANO (§5.1 de SKILL.md):
+  Si el humano fija la clase de gobernanza explícitamente desde el pre-arranque
+  (§5.1 la declara antes de M0), esa declaración manda para PROCESO — pero este
+  árbol sigue corriendo igual, como VERIFICACIÓN, nunca se saltea.
+  Si el árbol produce una clase MÁS ALTA que la declarada por el humano
+  (típicamente: el proyecto tiene auth/pagos/datos de usuario y el humano declaró
+  Ligera): no se resuelve solo. Reportar la divergencia explícitamente antes de
+  seguir — el árbol de arriba está atado a riesgo real (seguridad, datos), no es
+  una preferencia de proceso que se pueda bajar sin verla.
+  Si el árbol produce una clase MÁS BAJA que la declarada (el humano pidió más
+  rigor del que el proyecto técnicamente exige): no hay conflicto. Se respeta la
+  declaración del humano — correr de más nunca es una falla de seguridad.
 
 OUTPUT
 ------
@@ -1006,6 +1023,11 @@ Contenido:
   [ ] Links verificados (sin 404s)
   [ ] Metadata y OG images verificadas
   [ ] Analytics configurado y evento de prueba registrado
+  [ ] Todo dato con fecha, número normativo o vigencia específica (resoluciones,
+      tasas, plazos regulatorios, versiones con fecha de corte) re-verificado en
+      ESTA corrida — no heredado del chequeo de M0. Registrar: dato / fuente /
+      fecha de este chequeo. Un dato de este tipo caduca; verificarlo una vez y
+      confiar en que sigue vigente es insuficiente.
   [ ] Sitio deployado recorrido en vivo como usuario real (no solo el build/código):
       cada filtro/facet visible devuelve ≥1 resultado, las imágenes cargan (no
       placeholders por error de datos), sin estados muertos no señalizados. El código

@@ -200,7 +200,12 @@ IA SPEC OUTPUT
 - Job-to-be-done por sección (qué etapa del journey / qué objeción resuelve cada una):
 - Camino de conversión (de dónde entra el usuario a dónde sale):
 - DIFF contra el esqueleto default (hero -> nosotros -> servicios -> testimonios -> CTA):
-  qué secciones coinciden y por qué están justificadas en ESTE caso.
+  qué secciones coinciden y por qué están justificadas en ESTE caso. ARQUETIPO 6
+  (Plataforma/Producto): este default de landing NO aplica — diffear en cambio
+  contra el app-shell default del propio arquetipo 6 (auth -> onboarding -> core
+  loop, ver EXPERIENCE FLOW LIBRARY más abajo). Comparar un arquetipo 6 contra el
+  esqueleto de landing es un DIFF vacío por construcción (todo difiere trivialmente,
+  ninguna sección de landing existe en un app-shell) y no aporta señal real.
 - POSICIÓN NUMÉRICA DE LA SECCIÓN CRÍTICA (verificación obligatoria, no solo
   descriptiva): identificar cuál es la sección que resuelve el Process Crítico/Alto de
   este proyecto (ej: reservar, comprar, contactar) y reportar su posición como

@@ -1,4 +1,4 @@
-M8.6 — PRODUCTION REVIEW ENGINE (v2.2)
+M8.6 — PRODUCTION REVIEW ENGINE (v2.3)
 =======================================
 
 OPERATIONAL HEADER
@@ -73,6 +73,20 @@ OK: la dimensión está intacta en el build.
 DRIFT: la dimensión se desplazó parcialmente pero la intención se puede recuperar
        con ajustes menores.
 PERDIDO: la dimensión no está presente en el build. Requiere corrección mayor.
+
+SINCRONIZACIÓN DE FUENTE DE VERDAD (v2.3, de la corrida Vera) — condición
+adicional para marcar Direction Fidelity o Signature Fidelity como OK:
+Si durante la ejecución (M6-M9) una decisión de M3/M5 cambió por una razón
+técnica real de build (ej. una fuente no está disponible en el proveedor
+elegido), NO alcanza con que el build sea coherente en sí mismo — el
+documento de origen (M3/M5) tiene que reflejar el valor real Y la razón del
+cambio, sin tokens viejos sueltos. Antes de marcar Direction/Signature
+Fidelity como OK: correr un grep del valor original (el que M3/M5 tenían
+ANTES del cambio conocido) contra el propio documento de origen — cero
+coincidencias esperadas. Si aparece el token viejo: Direction Fidelity es
+DRIFT como mínimo, no OK, aunque el BUILD esté perfecto — el problema es que
+la fuente de verdad quedó mintiendo, no que el sitio se vea mal. Loguear un
+incidente sobre el cambio NO sustituye actualizar el documento de origen.
 
 DEFINICIÓN DE GENÉRICO
 ------------------------
@@ -197,6 +211,8 @@ TESTS
 - ¿Cross-browser fue verificado en Chrome, Safari y Firefox?
 - ¿Si el veredicto es FALLA, hay un destino específico con razón?
 - ¿Si el veredicto es PASA CON AJUSTES, los ajustes están documentados?
+- Si hubo un cambio conocido de M3/M5 durante la ejecución: ¿se grepeó el
+  token viejo contra el documento de origen antes de marcar OK?
 
 OUTPUT
 ------
@@ -220,6 +236,9 @@ FAIL CONDITIONS
 - FALLA sin destino específico.
 - El veredicto se emitió sin correr el ANTI-AI-SLOP CHECKLIST sobre el
   build real, o sin registrar el puntaje de tells.
+- Direction/Signature Fidelity marcada OK sin correr el grep de tokens viejos
+  contra el documento de origen (M3/M5), cuando hubo un cambio conocido
+  durante la ejecución.
 
 PROMPT PARA CLAUDE
 ------------------

@@ -1,4 +1,4 @@
-# FRONTEND CRAFT STANDARD (v1.0)
+# FRONTEND CRAFT STANDARD (v1.1)
 
 > Material de referencia transversal de craft visual. NO es un módulo de routing:
 > lo cargan M3, M5, M5.5 y M8.6 vía sus hooks (cuando el humano apruebe los diffs)
@@ -187,6 +187,70 @@ Mapa de uso por módulo:
 
 ---
 
+## 5.1 REACT BITS — PARÁMETROS DE USO (acelerador de craft percibido)
+
+React Bits (reactbits.dev) es una librería de **135 componentes** React animados en
+4 categorías: **Text Animations (23)**, **Backgrounds (45)**, **Components (37)** y
+**Animations (30)**. El catálogo completo, con la lente del sistema (qué recurso sirve a
+R1/R2, qué es trend-risk/Decay, qué cuida performance/a11y) y una shortlist por intención,
+está en `Docs/ReactBits_Catalog.md` — consultarlo al elegir un momento-firma, no listar de
+memoria. Misma categoría y mismo orden de autoridad que la skill frontend-design
+(§5): **ACELERADOR de ejecución, subordinado a
+concepto→percepción→dirección→innovación→este estándar.** React Bits NUNCA decide
+dirección; ejecuta un momento-firma ya decidido.
+
+**Por qué entra al estándar (se recomienda usarlo):** su valor es craft PERCIBIDO
+(R1 atmósfera, R2 momento memorable), no lógica. Eleva la percepción de calidad de
+un proyecto de forma desproporcionada a su costo de código — es el cuadrante
+**costo 1-2 / impacto 4-5** del Innovation Cost Matrix (M5.5). Por eso se usa CON
+parámetros, no a discreción: mal usado, homogeneiza (sus componentes default son
+una tendencia y se vuelven la nueva marca de agua).
+
+**P1 — SUPERFICIE (dónde sí / dónde no).** SÍ: superficies-marca (hero, landing,
+onboarding, auth, empty states, brand moments). NO por default: UI operativa densa
+(dashboards, tablas, formularios, agenda) — ahí manda el Motion Budget de M9.3 y la
+calma del arquetipo. Única excepción en operación: feedback funcional de estado, no decoración.
+
+**P2 — PRESUPUESTO (cuánto).** Máximo UN momento-firma de React Bits por vista (= R2
+"uno, nombrable"). No esparcir varios componentes animados por página. Si hay dos, ninguno es firma.
+
+**P3 — COMPONENTE POR ROL (cuál para qué).**
+- Text animations → el reveal del headline-firma (R2).
+- Backgrounds → atmósfera del fondo (R1), SOLO recoloreados a la paleta y sin romper AA del texto encima.
+- Componentes (carousels/cards con motion) → con cuentagotas; casi nunca en la operación.
+
+**P4 — CUSTOMIZACIÓN OBLIGATORIA (anti-clon).**
+- PROHIBIDO shippear un componente con sus colores/params default. Recolorear a los
+  tokens de M3/M5; retimear al descriptor de motion de 3 palabras de M8.3.
+- Cada proyecto usa un efecto DISTINTO (no el mismo reveal en todos → nueva marca de agua).
+- El efecto debe servir al concepto (M4)/percepción (M4.5): si sacándolo la percepción no
+  cambia, era decoración → se corta. Decay Test (M5.5): los componentes "tendencia del año"
+  (Aurora glassy, gradient text) envejecen; preferir los atemporales o customizar fuerte.
+
+**P5 — PISO TÉCNICO (innegociable, hereda §4).**
+- prefers-reduced-motion: React Bits NO lo respeta por default → envolver para simplificar/desactivar.
+- El contenido NUNCA depende de la animación para ser visible: SSR / sin-JS / motor de animación
+  trabado → fallback a estado VISIBLE. (Los text-reveals arrancan en opacity 0; sin fallback, si
+  el motor no corre el texto queda invisible — falla real y verificada, corrida VINCA 2026-07-07.)
+- WCAG AA del texto sobre background animado. Decorativo = aria-hidden; contenido real en el DOM igual.
+- Performance: backgrounds con canvas/rAF pausan fuera del viewport (IntersectionObserver, M9.3);
+  no degradar LCP/INP.
+
+**P6 — TECNOLOGÍA (React-only).** React Bits necesita React. En sitios vanilla/Astro
+estáticos: portar a React solo si el proyecto lo justifica, o replicar el efecto en CSS/JS.
+No agregar React solo para usar React Bits.
+
+**Mapa de uso por módulo (hook):**
+- **M5.5 (Innovation):** un componente de React Bits puede SER la variable de innovación elegida
+  (texto/motion/atmósfera), evaluado en Cost Matrix + Decay Test como cualquier otra.
+- **M8.3 (Motion):** el efecto hereda el descriptor de 3 palabras y el Motion Budget. No lo expande.
+- **M9.8 (Signature):** el momento-firma de React Bits es candidato natural a la aparición PRIMARIA
+  de la firma (R2). Uno, coherente, no disperso.
+- **M8.6 (Review):** el checklist §4 corre igual sobre el build con React Bits. Un background trendy
+  sin recolorear suma tells (paleta tibia / gradiente default) → se penaliza igual.
+
+---
+
 ## 6. RELACIÓN CON EL RESTO DEL SISTEMA
 
 - **No reabre módulos:** M3 sigue siendo dueño de la semiótica tipográfica;
@@ -206,6 +270,10 @@ Mapa de uso por módulo:
 - Salir de M5.5 con alguno de R1–R4 ausente y sin justificación.
 - Checklist §4 con 3+ tells en cualquier artefacto mostrado al humano o cliente.
 - Cumplir el estándar rompiendo el piso técnico (AA, responsive, reduced-motion).
+- React Bits shippeado con params/colores default (sin recolorear ni retimear) — §5.1 P4.
+- Componente animado de React Bits en UI operativa densa sin justificación funcional — §5.1 P1.
+- Text-reveal (React Bits u otro) sin fallback visible: contenido oculto si el motor no corre — §5.1 P5.
+- Más de un momento-firma de React Bits por vista — §5.1 P2.
 
 ## PROMPT PARA CLAUDE
 Actuá como director de craft frontend. Antes de escribir una línea de código:
@@ -217,3 +285,6 @@ una vez con intención. Llevá el contraste de escala al extremo que la direcci�
 pide. Después ejecutá con precisión: AA, responsive, prefers-reduced-motion.
 Antes de mostrar nada, corré el ANTI-AI-SLOP CHECKLIST sobre el resultado real.
 Si da 3+, no lo muestres: rehacelo. Lo tibio no se entrega.
+Si usás React Bits (§5.1): tratalo como acelerador — un solo momento-firma por
+vista, en superficie-marca, recoloreado a la paleta, con reduced-motion y fallback
+visible. Nunca decide la dirección; ejecuta la ya decidida.

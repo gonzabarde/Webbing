@@ -122,6 +122,18 @@ REGLAS DE PALETA
 - El acento debe tener contraste WCAG AA sobre todos los fondos donde aparezca.
 - La paleta debe funcionar en blanco y negro antes de agregar color.
 - Si quitás el color y la jerarquía desaparece, el sistema tipográfico es débil.
+- **Chequeo cross-portfolio (Principio 10, mismo criterio que árbol #7 de M3):**
+  antes de cerrar la paleta, revisar qué combinaciones de color+rol (no colores
+  sueltos: la COMBINACIÓN con su función — ej. "crema de fondo + terracota de
+  acento") ya están en uso en otros proyectos de Webbing, sin importar la
+  categoría del cliente. Verificar contra el CSS/tokens reales de los builds
+  existentes, no de memoria. Dos clientes de categorías distintas pueden
+  converger en la misma paleta sin que el chequeo de "sobreuso en la
+  categoría" (arriba) lo agarre — la agencia se repite a sí misma, no al
+  mercado. Si hay coincidencia con un cliente activo o reciente: tratarlo
+  como el mismo problema que una firma tipográfica repetida — cambiar el rol
+  dominante o el matiz hasta diferenciarse, no alcanza con que la paleta esté
+  bien justificada en abstracto.
 
 SEMIÓTICA POR CATEGORÍA
 - Tecnología: azul oscuro, grises fríos, negro, verde o violeta como acento.
@@ -365,6 +377,8 @@ TESTS
 - ¿Hay demasiados recursos compitiendo?
 - ¿La composición se siente intencional?
 - ¿El sistema de color tiene roles definidos?
+- ¿La combinación color+rol se verificó contra otros proyectos de Webbing
+  (Principio 10 cross-portfolio), no solo contra la categoría del cliente?
 - ¿El motion tiene descriptor de 3 palabras?
 - ¿El sistema de imágenes tiene grading y criterios de rechazo?
 - ¿La arquitectura de layout corresponde al tipo de proyecto?
@@ -372,6 +386,11 @@ TESTS
 
 OUTPUT
 ------
+**Verificación cross-portfolio de paleta — obligatoria, visible, ANTES de
+cerrar (mismo tratamiento que árbol #7 de M3):** declarar explícitamente
+"Paleta [X] vs. portfolio real de Webbing: [coincide con Y / sin
+coincidencia]". Corrida en ESTA pasada contra tokens/CSS reales, no heredada
+ni asumida por memoria.
 0. Dirección estética nombrada (nombre + mundo + exclusiones + extremo).
 1. Firma visual principal.
 2. Firma visual secundaria.

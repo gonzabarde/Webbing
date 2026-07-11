@@ -8,6 +8,398 @@ Autoridad: los cambios los aprueban y aplica el humano (SKILL.md secciones 7 y 1
 
 --------------------------------------------------------------------------------
 
+2026-07-11 — APLICADAS: CORRIDA M14 — VERA ARQUITECTURA (P1-P4)
+-------------------------------------------------------------------------------
+Primera corrida de M14 que pidió explícitamente registrar también lo que
+funcionó, no solo lo que falló ("así aprende el sistema qué hizo bien y qué
+hizo mal"). 5 wins registrados sin generar propuesta: árbol#7 de M3 +
+cross-check de M5 en su primer uso real (agarraron 2 colisiones antes de
+build); CDL-5 Verificación de Diferenciación de Portfolio en su primer uso
+real (backstop limpio); B0 citando y aplicando VINCA-P1; B1 verificando
+RLS+GRANT EJECUTANDO (lección Estudio Contable P1); un incidente propio del
+proyecto citando M11.8/FALSE CERTAINTY contra un claim impreciso de Claude
+(Anthropic, esta sesión) y corrigiéndolo con el diagnóstico real.
+
+P1 (Media, M3/M5/SKILL§14): los chequeos cross-portfolio existían pero no se
+corrieron proactivamente — se corrió el módulo desde memoria de sesión, no
+desde el archivo actualizado. Elevado a OUTPUT obligatorio y visible en M3
+y M5 (mismo tratamiento que R1-R4 de M5.5); agregado a SKILL §14 releer el
+módulo específico antes de cerrar una decisión gateada.
+
+P2 (Alta, M9.3 v2.5): reveal-on-scroll dependiente de IntersectionObserver
+sin fallback — sin JS o con IO roto, todo el contenido invisible. Agregado
+patrón obligatorio: visible por default, oculto solo vía clase JS pre-paint,
+fallback no-io, reduced-motion.
+
+P3 (Baja, B1-P1): copy de confirmación leía un prop que revalidatePath
+muta, mensaje salía invertido. Agregado: la Server Action devuelve el
+estado elegido explícitamente; el componente lee ese valor, no el prop.
+
+P4 (Alta, M8.6 v2.3) — la más importante, estructural: 4ª ocurrencia del
+patrón "decisión aprobada ≠ build real" (Move On día 1, ahora Vera). Una
+fuente cambió por razón técnica legítima (Mona Sans no disponible en Google
+Fonts), el incidente se loqueó pero el documento de origen (04_M3) quedó
+con tokens viejos sueltos. Agregado a M8.6: condición adicional para marcar
+Direction/Signature Fidelity como OK — grep del token viejo contra el
+documento de origen, cero coincidencias esperadas, ANTES de GATE 3. Mismo
+diseño que el backstop de CDL-5 (creado esta misma sesión, también por un
+patrón recurrente encontrado por el humano): centralizar en el último
+checkpoint antes de cerrar la fase, en vez de depender de que cada módulo
+de ejecución se acuerde de sincronizar por su cuenta.
+
+--------------------------------------------------------------------------------
+
+2026-07-10 — FIX ESTRUCTURAL: BACKSTOP CENTRALIZADO DE PRINCIPIO 10 EN CDL-5 (respuesta al patrón, no a un caso puntual)
+-------------------------------------------------------------------------------
+Origen: el humano señaló el patrón después de ver dos hallazgos en la misma
+tarde (M3 tipografía, M5 color) — "se están repitiendo en bucle las paletas y
+las tipografías". Diagnóstico: correcto, y el problema no eran los dos casos
+puntuales. Principio 10 "entre clientes" nunca fue infraestructura — era un
+principio que el sistema aplicaba cuando el modelo se acordaba (Move On vs.
+VINCA lo aplicó porque estaba fresco en contexto), y hoy se cableó a mano en
+dos módulos (M3, M5) recién porque se encontraron rotos uno por uno. Sin un
+backstop centralizado, quedaban módulos sin auditar (M2, M4, M9.8, dirección
+fotográfica) con la misma probabilidad de tener el mismo hueco.
+
+Fix: agregada VERIFICACIÓN DE DIFERENCIACIÓN DE PORTFOLIO a CDL-5 (veto
+ejecutivo final, último paso antes de GATE 2), mismo formato que la
+Verificación Comercial ya existente. Audita en una sola pasada, contra
+builds reales: tipografía (M3), paleta (M5), nombre de concepto (M4) y gesto
+de firma (M5/M9.8). Una colisión con otro cliente es RETROCEDER automático
+al módulo de origen, sin importar el score de CDL-4 ni el veredicto de CDL-3
+— la diferenciación entre clientes no es una dimensión que se compensa con
+puntaje alto en otra. Actualizado PROCESO CLAUDE (nuevo paso 3), DECISIÓN
+EJECUTIVA (nuevo disparador de RETROCEDER), TESTS y PROMPT PARA CLAUDE.
+
+Diseño deliberado: no reemplaza los chequeos por módulo (M3 árbol #7, M5
+reglas de paleta) — los complementa como última línea de defensa. Si algún
+módulo no tiene chequeo propio todavía (M2, M4, M9.8 no lo tienen aún),
+CDL-5 lo agarra igual antes de GATE 2, que es el punto más barato de todo el
+pipeline para revertir una decisión de marca.
+
+--------------------------------------------------------------------------------
+
+2026-07-10 — FIX: M5 SIN CHEQUEO ANTI HOUSE-STYLE DE COLOR ENTRE CLIENTES (diagnóstico directo, no M14)
+-------------------------------------------------------------------------------
+Origen: diagnóstico directo auditando la dirección visual de Vera Arquitectura
+("Plano Habitado"), no una corrida formal de M14. Paleta elegida: crema
+`#F4F1EC` + ink + terracota `#B4633E`. Comparada contra memoria visual de VINCA
+(papel cálido + panel verde pino + botón terracota) y los hex reales de
+estudio-contable v1 (`#f5efe2`/`#12352f`/`#b9793a`, ya documentado como clon de
+VINCA en el CHANGELOG del 2026-07-09): coincide en dos de tres roles (base
+crema + acento terracota). Tercera aparición de la misma combinación en el
+portfolio.
+
+Causa raíz confirmada leyendo M5: la sección de color técnico tiene REGLAS DE
+PALETA (máx. 2 colores, WCAG AA, funciona en B/N) pero CERO chequeo
+cross-portfolio — ni siquiera tenía el chequeo de sobreuso por categoría que
+M3 sí tenía antes del fix de hoy. Mismo hueco estructural que M3, en el
+módulo hermano, no detectado hasta ahora porque nunca se probó en la misma
+sesión que ya había encontrado el problema de tipografía.
+
+Agregado a M5 (REGLAS DE PALETA): chequeo explícito de combinación color+rol
+(no colores sueltos) contra CSS/tokens reales de otros proyectos de Webbing,
+mismo criterio que el árbol #7 de M3. Agregado a TESTS del módulo.
+
+Pendiente de decisión del humano: si Vera Arquitectura debe re-correr M5
+(sistema de color) antes de M5.5/CDL — GATE 2 todavía no se declaró, es el
+momento más barato para cambiarlo.
+
+--------------------------------------------------------------------------------
+
+2026-07-10 — FIX: M3 SIN CHEQUEO ANTI HOUSE-STYLE ENTRE CLIENTES (diagnóstico directo, no M14)
+-------------------------------------------------------------------------------
+Origen: NO vino de una corrida formal de M14 (los 6 ejes). Fue diagnóstico en
+vivo auditando el arranque de Vera Arquitectura: M3 eligió Fraunces + Hanken
+Grotesk — el mismo par que ya usa Estudio Contable (verificado en esa build
+hoy mismo). Mismo patrón que motivó la IA Archetype Library al principio de
+esta sesión (paleta de VINCA repetida en estudio-contable v1), ahora en
+tipografía, en un cliente nuevo, DESPUÉS de todos los fixes de hoy.
+
+Causa raíz confirmada leyendo el módulo: M3 sí chequea "¿la familia está
+sobreusada en la CATEGORÍA?" (árbol de decisión #6) — pero "categoría" es el
+mercado del cliente (otros estudios de arquitectura), nunca el propio
+portfolio de Webbing. Un estudio contable y uno de arquitectura no compiten,
+así que ese chequeo nunca iba a agarrar la repetición. El Principio 10
+entre-clientes se aplicó antes (Move On vs. VINCA/Runa/LIMA) porque el modelo
+se acordó en ese momento puntual — nunca estuvo cableado como regla del
+módulo, por eso funciona a veces y falla sin patrón predecible.
+
+Agregado árbol de decisión #7 a M3: chequeo explícito contra tipografías ya
+usadas en otros proyectos de Webbing (no la categoría del cliente actual).
+Agregado a TESTS y FAIL CONDITIONS del módulo para que no quede solo en el
+árbol de decisión.
+
+Pendiente de decisión del humano: si Vera Arquitectura debe re-correr M3 con
+el chequeo ya cableado (GATE 1 ya declaró PASA con Fraunces+Hanken sin este
+chequeo) antes de avanzar a Capa 2, dado que tipografía es decisión
+IRREVERSIBLE (M10.2) una vez que Capa 2-4 construyen encima.
+
+--------------------------------------------------------------------------------
+
+2026-07-10 — APLICADAS: CORRIDA M14 — ESTUDIO CONTABLE (P1-P5)
+-------------------------------------------------------------------------------
+Retrospectiva formal sobre el stress test de deadline, reconstruida del chat
+(la sesión no persistió nada a disco — ver P2). 5 propuestas nuevas, las 5
+aplicadas.
+
+P1 (Crítica, B4): RLS habilitada sin GRANT de tabla a anon — bug real que casi
+rompe el proyecto, cazado solo por un insert real, no por la revisión de schema.
+Agregado a QA de Seguridad de B4: RLS es capa 2, el GRANT es capa 1; verificar
+EJECUTANDO (insert/select real), no revisando. Extiende Runa-P8/P11 con un caso
+concreto materializado.
+
+P2 (Alta, SKILL.md §5): la sesión entera corrió sin escribir nada a `_webbing/`
+— ni declaración de proporcionalidad, ni CDL, ni veredictos de gate. Agregado
+ítem 7 al PISO INNEGOCIABLE: persistencia a disco obligatoria, inmune a
+compresión por deadline. §5.1 actualizado de "6 ítems" a "7 ítems" en sus dos
+referencias (declaración + fail conditions).
+
+P3 (Alta, M11.8): Claude Code declaró Supabase "no conectable" sin probarlo
+(confundió dos conectores), corregido solo porque el humano insistió. Agregado
+noveno failure mode: FALSE UNAVAILABILITY, inverso de FALSE CERTAINTY — "no
+disponible" se gana con un intento fallido, no es el default cuando no se sabe.
+
+P4 (Media, B4): next@14.2.15 con vulnerabilidad conocida, pinneado de memoria
+al scaffoldear, cazado por el warning de npm y no por el sistema. Agregado a
+Convenciones de B4: no fijar versiones de memoria, mismo Principio 9 aplicado
+a paquetes.
+
+P5 (Baja, M13.2): expansión de scope a mitad de sesión (build local → cloud +
+testing E2E) sin nota de re-scope. Agregado a M13.2: dispara nota mínima de
+re-scope aun en corridas autónomas/delegadas, usando el mecanismo ya existente
+de M10.3.
+
+Dos hallazgos REF (FILE MAP y método screenshot) confirmaron Runa-P5 y Runa-P10
+sin duplicar — correctamente reconocidos como el mismo patrón, no incidentes
+nuevos, y corresponden a la sesión de build (previa al fix del FILE MAP), no a
+una recurrencia en vivo durante esta retrospectiva.
+
+--------------------------------------------------------------------------------
+
+2026-07-10 — APLICADAS: BLOQUE DE SEVERIDAD MEDIA (Runa-P1, CUORE-P5, VINCA-P4/P6/P7/P8)
+-------------------------------------------------------------------------------
+Continuación del procesamiento en bloque. Bloque Media:
+
+Runa-P1 (Aplicada, CDL-4): el cap de score a 10 (v1.1, ya existía) comprime poder
+discriminante entre proyectos que ambos tocan el techo. Agregada regla de uso: el
+score capado es para el veredicto individual, el cálculo crudo (que ya se reportaba)
+es el dato correcto para comparar proyectos entre sí.
+
+CUORE-P5 (Ya cubierto, sin cambio): verificado que §5.1 (Declaración de
+Proporcionalidad, agregada el 2026-07-08 — posterior a la corrida de CUORE) ya
+exige declarar módulo por módulo qué corre/se comprime/se saltea ANTES de M0.
+Cubre exactamente lo que la propuesta pedia.
+
+VINCA-P4 (Aplicada, CDL-1): el campo DIFF de la IA Spec compara arquetipo 6
+(app-shell) contra un esqueleto de landing — DIFF vacío por construcción. Agregada
+excepción explícita: arquetipo 6 diffea contra su propio default de app-shell.
+
+VINCA-P6 (Aplicada, B0): árbol de auth trataba Clerk/NextAuth/Supabase Auth como
+mutuamente excluyentes. Agregado el patrón COMBO real (Clerk Organizations + RLS
+de Supabase vía JWT de terceros) como opción explícita, no default.
+
+VINCA-P7 (Aplicada, SKILL.md §5): sin guía para gobernanza MIXTA (ejes del proyecto
+con clases distintas, ej. backend Completo + visual Ligera). Agregada sección
+GOBERNANZA MIXTA: declarar la clase por eje en §5.1 en vez de forzar una sola.
+
+VINCA-P8 (Aplicada, M14): Eje 6 asume captación como única métrica de resultado;
+arquetipo 6 (producto) no vende captación, vende uso. Agregada nota explícita:
+arquetipo 6 se mide en adopción (onboarding, uso repetido, core loop).
+
+--------------------------------------------------------------------------------
+
+2026-07-10 — APLICADAS: BLOQUE DE SEVERIDAD ALTA (VINCA-P1/P2/P3, Runa-P8/P9)
+-------------------------------------------------------------------------------
+Procesamiento en bloque de las 17 propuestas pendientes de M14_PROPOSAL_LOG.txt,
+por orden de severidad. Bloque Alta:
+
+VINCA-P1 (Aplicada, B0): Prisma con connection string de servicio bypasea RLS por
+diseño (service_role en Supabase tiene BYPASSRLS) — elegir "Prisma + RLS" sin
+resolver esto deja las políticas de RLS como decoración. Agregada advertencia
+explícita en la REGLA DE ACCESO A FILAS de B0 con dos rutas de cierre válidas.
+
+VINCA-P2 (Ya cubierto, sin cambio): verificado que B2 ya tenía el patrón PAY-7
+(múltiples PSP, Mercado Pago explícito para AR/LATAM) completo antes de esta
+sesión. No se escribió nada — la propuesta original estaba desactualizada o
+apuntaba al módulo equivocado (B0 en vez de B2).
+
+VINCA-P3 + Runa-P9 (Aplicada combinada, SKILL.md §7 + B0): dos ángulos del mismo
+hueco — reglas no-delegables (NIVEL 4, seguridad B4, GATE 4) podían quedar
+resueltas por un aprobador delegado sin autoridad real (VINCA) o simuladas como
+aprobadas en corridas autónomas sin humano presente (Runa). Agregada "Regla de
+no-delegación" en §7: sin humano real, el ítem queda NO APROBABLE explícitamente,
+no se asume respondido. Referenciada desde la regla NIVEL 4 de B0.
+
+Runa-P8 (Aplicada, B4): XSS real en Runa (input interpolado sin escapar) que
+agarró un hook externo, no el proceso — Zod valida forma, no sanitiza HTML.
+Agregado ítem explícito en QA de Seguridad de B4 para contenido de usuario
+renderizado a otros usuarios.
+
+--------------------------------------------------------------------------------
+
+2026-07-09 — FIX: TRIGGER DEL SKILL BAJO PRESIÓN DE DEADLINE (estudio-contable)
+-------------------------------------------------------------------------------
+Hallazgo del stress test extremo: proyecto real (estudio-contable, localhost:3300)
+corrido con un prompt de deadline urgente ("no tengo tiempo para vueltas, arrancá
+directo") NUNCA invocó el skill Webbing — cero carpeta _webbing/, cero GATE, cero
+CDL. Confirmado que no fue un problema de wording: la propia descripción del
+skill ya decía "activar... incluso si no nombra el sistema explícitamente" y el
+prompt calificaba sin ambigüedad ("proyecto web nuevo", "construir un sitio").
+
+Consecuencia real, no solo de proceso: sin el documento M3/M5 que fuerza
+Principio 10 (anti house-style), el resultado clonó casi exacto la paleta de
+VINCA (papel cálido + verde pino + cobre) — el problema estructural original
+de toda esta sesión, reapareciendo específicamente cuando el sistema no se
+activa, no cuando se comprime.
+
+Nota a favor del sistema: el CRAFT de ingeniería (sanitización de input,
+honeypot, rate-limit, flag validado:false bloqueando datos AFIP sin validar,
+separación de fases con justificación legal explícita — Ley 25.326) se mantuvo
+alto pese a la ausencia total de gobernanza. La presión no bajó el estándar de
+código; salteó el sistema que audita y da consistencia de marca entre proyectos.
+
+Fix aplicado: descripción del frontmatter de SKILL.md (único punto que Claude
+Code evalúa ANTES de decidir cargar el archivo completo — nada dentro del
+cuerpo del archivo puede corregir esto, porque el cuerpo nunca se llegó a leer)
+ahora dice explícitamente: activar AÚN SI el pedido trae presión de tiempo o
+frases tipo "urgente"/"sin vueltas"/"arrancá directo" — la urgencia comprime
+CUÁNTO proceso corre (§5, ya delegado a proporcionalidad), nunca si se activa.
+
+Pendiente de confirmar (no aplicado aún, requiere una corrida de control):
+repetir un prompt equivalente sin la frase de presión para confirmar que la
+causa era la presión y no otra variable de la sesión. Sin ese control, este fix
+es la mejor hipótesis disponible, no una causa confirmada al 100%.
+
+ACTUALIZACIÓN (mismo día, con evidencia dura): el humano confirmó que en la
+sesión de estudio-contable apareció el mensaje literal "usando skill:
+frontend-design" — activación real y nombrada de un skill público de Claude
+Code (NO instalado en .claude/skills/ del usuario; es un skill genérico de
+criterio visual, más liviano de cargar que Webbing). Esto cambia el diagnóstico
+de "la presión suprime la activación en general" a algo más preciso: bajo
+presión, un skill más liviano pudo haber ganado la selección en lugar de
+Webbing, que exige leer +700 líneas antes de operar (§14).
+
+Segundo fix aplicado a la misma descripción: declarar explícitamente que un
+skill genérico de frontend/visual (nombrando "frontend-design" como ejemplo
+real, no hipotético) se activa ADEMÁS de Webbing, nunca en su lugar — no cubre
+gates, seguridad, ni Principio 10. Sigue pendiente la corrida de control para
+confirmar si el fix de la descripción alcanza, o si el problema es más
+profundo (mecanismo de selección de skills de Claude Code en sí, fuera del
+alcance de lo que SKILL.md puede corregir).
+
+--------------------------------------------------------------------------------
+
+2026-07-09 — APLICADA: P7 RUNA (CRÍTICA) — re-verificación de datos con fecha en M10.7
+-------------------------------------------------------------------------------
+Decisión del humano: aplicar P7 del bloque CORRIDA — RUNA en M14_PROPOSAL_LOG.txt.
+
+Agregado ítem al Launch Checklist de M10.7 (sección Contenido): todo dato con
+fecha, número normativo o vigencia específica se re-verifica en la corrida de
+lanzamiento, no se hereda del chequeo único de M0. Bloqueante de GATE FINAL 1
+por construcción (es parte del checklist que ese gate exige completo).
+
+Ubicado en M10.7 y no en M8.6 (la propuesta original daba las dos opciones):
+M8.6 corre en Internal Review, etapa 3 de M10.4, con Client Review/QA/Freeze/
+Launch Prep todavía por delante — la misma ventana de tiempo que causó el
+incidente original. M10.7 corre en Launch Prep, etapa 7, la más cercana
+posible al deploy real.
+
+--------------------------------------------------------------------------------
+
+2026-07-08 — NUEVO: §15 NOTIFICACIONES EN CHAT (calibradas)
+-------------------------------------------------------------------------------
+Pedido del humano: visibilidad de gates, disponibilidad de M14 y progreso de
+módulos en el chat, sin quemar tokens ni generar ruido. Evaluado el costo real
+(bajo, ~15-25 tokens por aviso) vs. el costo de señal (alto si es un aviso por
+cada uno de los ~40 módulos posibles — M11.8 Framework Addiction).
+
+Calibración aplicada: notificar por CAPA (6-9 transiciones/proyecto), no por
+módulo individual. Agregado §6.1 paso 5 (cierre explícito de veredicto de
+gate: ✅/⚠️/❌). Agregado §15 completo: transición de capa, veredicto de gate,
+y aviso único de "M14 disponible" cuando se cumple cualquiera de sus tres
+disparadores. Todo lo demás (carga de módulo individual, sub-corridas de CDL)
+sigue en silencio por diseño.
+
+--------------------------------------------------------------------------------
+
+2026-07-08 — FIX: LOOP DE APRENDIZAJE DE M14 (disparador terciario + chequeo de sesión)
+-------------------------------------------------------------------------------
+Hallazgo: runa-web tenía un INCIDENTES_M14.md con 11 incidentes capturados en
+caliente, nunca subidos a Docs/M14_PROPOSAL_LOG.txt porque el proyecto (de
+práctica) nunca llegó al disparador principal de M14 (GATE 4 real). El
+mecanismo central funcionaba (confirmado con Glow Factor, CUORE, ECOS, VINCA);
+el agujero era que un proyecto de práctica sin cierre real podía quedar
+atrapado indefinidamente sin disparar la retrospectiva.
+
+Agregado disparador terciario a M14 (cierre de sesión de práctica/portfolio
+con INCIDENTES_M14.md abierto — corre M14 liviano, Eje 6 marcado "sin dato").
+
+Agregado paso 2 a SKILL.md §14 (protocolo de entrada de sesión): revisar
+M14_PROPOSAL_LOG.txt al arrancar cualquier tarea nueva y anunciar pendientes
+(PENDIENTES DE PROCESAR o Pendiente de aprobación) antes de clasificar la
+tarea. No bloquea; evita que se acumulen en silencio.
+
+Corrida formal de M14 sobre runa-web procesada retroactivamente: 11
+incidentes subidos a M14_PROPOSAL_LOG.txt (bloque CORRIDA — RUNA). Incluye
+P7 (CRÍTICA — dato regulatorio con fecha entregado desactualizado al
+cliente) sin decisión del humano aún. Por regla de severidad de M14 (§
+SEVERIDAD Y PRIORIZACIÓN), una Crítica se resuelve antes del próximo
+proyecto sin excepción — pendiente de aprobación del humano, no aplicada
+automáticamente (M14 propone, el humano aplica: SKILL.md §7 y §13).
+
+--------------------------------------------------------------------------------
+
+2026-07-08 — FIX: DECLARACIÓN DE PROPORCIONALIDAD + PISO DE GOBERNANZA LIGERA
+-------------------------------------------------------------------------------
+Hallazgo (corrida real, Move On Argentina, gobernanza Ligera): el pase declaró
+"piso intacto" como resumen de una línea, sin nombrar los ítems del PISO
+INNEGOCIABLE de §5 uno por uno. Al verificar contra el piso real, faltaba la
+Experience Spec mínima de CDL-1 sin que quedara marcada como omitida.
+
+Agregado §5.1 (Declaración de Proporcionalidad): obligatorio, todo proyecto.
+Antes de M0, citar textualmente los ítems del piso (PLANIFICADO/NO PLANIFICADO)
+y declarar módulo por módulo qué corre completo/comprimido/salteado.
+
+Subido el piso de gobernanza Ligera: agregado ítem 6 al PISO INNEGOCIABLE —
+output estructurado de CDL-3 (Creative Critic) y CDL-4 (Creative Quality Engine)
+obligatorio aunque el CDL corra en pasada única. Decisión del humano, con
+advertencia dada: sube el costo de proceso de la gobernanza Ligera; revisar
+M13.3 si el precio del tier Core deja de cubrir el esfuerzo.
+
+GATE_REGISTRY.txt actualizado en la fila de PISOS INNEGOCIABLES para reflejar
+el ítem 6. §6.1 Protocolo Post-Gate (cita textual de condiciones de gate +
+evidencia, bloqueante, paso separado del veredicto original) escrito y activo
+en SKILL.md — aplicado el mismo día tras confirmación explícita del humano.
+
+--------------------------------------------------------------------------------
+
+2026-07-08 — REACT BITS COMO ACELERADOR DE CRAFT PERCIBIDO (Frontend Craft Standard §5.1)
+----------------------------------------------------------------------------------------
+Archivos: Frontend_Craft_Standard.md (v1.0->v1.1) + Docs/ReactBits_Catalog.md (NUEVO).
+Estado: ACTIVA. Permanente. Aplicado por instrucción explícita del humano (dueño del sistema).
+
+Cambio: nueva sección §5.1 "React Bits — parámetros de uso". React Bits (reactbits.dev)
+entra como ACELERADOR de ejecución subordinado (misma categoría/orden de autoridad que
+la skill frontend-design, §5): concepto→percepción→dirección→innovación→estándar→React
+Bits. Nunca decide dirección; ejecuta un momento-firma decidido. Su valor es craft
+PERCIBIDO (R1 atmósfera / R2 momento memorable) = cuadrante costo 1-2 / impacto 4-5 del
+Innovation Cost Matrix. 6 parámetros: P1 superficie (marca sí / operación no), P2 presupuesto
+(1 momento-firma por vista), P3 componente por rol, P4 customización obligatoria anti-clon
+(recolorear/retimear, efecto distinto por proyecto), P5 piso técnico (reduced-motion +
+fallback visible obligatorio + AA + performance), P6 React-only. Hooks a M5.5/M8.3/M9.8/M8.6.
++4 FAIL conditions y línea en el PROMPT.
+
+Origen: corrida VINCA (2026-07-07/08) — tres frontends convergían a un house style; el
+fallback-visible de P5 nace de un bug real (text-reveal de React Bits dejaba el headline
+invisible cuando el motor de animación no corría).
+
+Qué NO cambia: no reabre módulos (M3/M5/M5.5/M9.8 siguen siendo dueños de su capa); el
+estándar solo fija el piso de uso. No agrega dependencia obligatoria: React Bits es opcional
+y React-only (sitios vanilla portan o replican en CSS/JS).
+
+--------------------------------------------------------------------------------
+
 2026-07-07 (2) — SYSTEM FILE MAP v2: SINCRONIZADO CON SKILL.md + ARQUITECTURA ACTUAL
 ---------------------------------------------------------------------------------
 Archivo afectado: Docs/SYSTEM FILE MAP.txt (v1->v2). Estado: ACTIVA.

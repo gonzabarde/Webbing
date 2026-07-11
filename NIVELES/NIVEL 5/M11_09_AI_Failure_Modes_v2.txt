@@ -121,9 +121,32 @@ QUESTION FLOODING
     3. Hacer solo esa pregunta.
     4. Para el resto: asumir con supuesto declarado.
 
+FALSE UNAVAILABILITY
+  Qué es: declarar una herramienta, tool o capacidad como no disponible sin
+  haberla probado. Es el inverso de FALSE CERTAINTY: esa es sobreconfianza
+  positiva (afirmar lo que no se sabe); esta es sobreconfianza negativa
+  (negar sin haber verificado).
+  Early Warning Signals:
+    - Claude dice "no puedo" o "eso no está disponible" basado en el nombre de
+      una tool/conector, no en un intento real de usarla.
+    - Hay dos herramientas con nombres parecidos y Claude asume que la mera
+      mención de una descarta a la otra, sin verificar cuál es cuál.
+    - El humano pregunta "¿probaste?" y la respuesta revela que no.
+  Síntoma confirmado: una capacidad que sí estaba disponible se declaró como
+  no disponible, y solo se corrigió porque el humano insistió.
+  Recovery Protocol:
+    1. Antes de declarar algo no disponible: ejecutar un intento real mínimo
+       (una lectura idempotente, un list, un ping) — no inferir del nombre.
+    2. Si hay ambigüedad entre dos herramientas parecidas: listar/inspeccionar
+       ambas antes de descartar cualquiera.
+    3. "No disponible" es una conclusión que se GANA con un intento fallido,
+       no un default seguro cuando no se sabe.
+    4. Si el intento falla de verdad: reportar el error real, no una
+       suposición educada de que fallaría.
+
 TESTS
 -----
-- ¿La respuesta muestra alguno de los 8 failure modes?
+- ¿La respuesta muestra alguno de los 9 failure modes?
 - ¿Las Early Warning Signals estaban presentes antes de que el fallo ocurriera?
 - ¿El Recovery Protocol fue aplicado si era necesario?
 - ¿El fallo se corrigió antes de entregar?
@@ -145,7 +168,7 @@ FAIL CONDITIONS
 
 PROMPT PARA CLAUDE
 ------------------
-Antes de entregar una respuesta, verificar los 8 failure modes.
+Antes de entregar una respuesta, verificar los 9 failure modes.
 Para cada uno: ¿hay Early Warning Signals activas?
 Si detectás una: aplicar el Recovery Protocol antes de continuar.
 No entregar una respuesta con un failure mode activo conocido.
