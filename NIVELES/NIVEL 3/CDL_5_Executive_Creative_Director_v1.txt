@@ -71,9 +71,18 @@ Ajustar antes de emitir.
 VERIFICACIÓN DE DIFERENCIACIÓN DE PORTFOLIO [obligatoria antes de recomendar,
 Principio 10 entre clientes]
 ---------------------------------------------------------
-Antes de emitir cualquier recomendación, verificar en una sola pasada, contra
-los builds reales de otros proyectos de Webbing (CSS/tokens/font-family
-reales, no de memoria ni por nombre de proyecto):
+Antes de emitir cualquier recomendación, verificar en una sola pasada:
+
+0. Leer PRIMERO Docs/PORTFOLIO_REGISTRY.md — es la fuente de verdad
+   centralizada, más rápida y confiable que grepear carpetas de proyecto
+   dispersas. Si el proyecto a comparar YA está listado ahí (tipografía,
+   paleta, concepto, firma, esqueleto), usar esos datos directamente.
+   Si un campo dice "NO VERIFICADO" o el proyecto no aparece en el
+   registro: recién ahí hacer fallback a verificar contra el CSS/tokens
+   reales del build (nunca de memoria). Actualizar el registro con lo que
+   se verifique, para que la próxima corrida no repita el trabajo.
+
+Contra ese dato (del registro o verificado en el momento):
 
 - Tipografía (display + body, la COMBINACIÓN, de M3): ¿coincide con otro cliente?
 - Paleta (combinación color+rol, de M5): ¿coincide con otro cliente?
@@ -81,6 +90,12 @@ reales, no de memoria ni por nombre de proyecto):
   variación mínima de un concepto ya usado en otro cliente?
 - Signature System (gesto de firma, de M5/M9.8): ¿es el mismo mecanismo/gesto
   ya usado en otro cliente, aunque el nombre sea distinto?
+- Esqueleto/orden de secciones (IA Spec de CDL-1): distinto del chequeo de
+  Principio 10 de CDL-1 (que compara contra el default de MERCADO) — acá se
+  compara contra OTRO CLIENTE. Dos proyectos del mismo arquetipo pueden
+  derivar esqueletos correctos y no-genéricos contra el mercado, y aun así
+  terminar casi idénticos entre sí. ¿La selección y secuencia de secciones
+  coincide con la de otro cliente activo?
 
 Este es el backstop centralizado: cada módulo (M2-M5.5) puede tener su
 propio chequeo de Principio 10 (si lo tiene), pero CDL-5 es el único punto
@@ -115,8 +130,10 @@ RETROCEDER
 - CDL-3 dice débil o no viable.
 - La Verificación Comercial detectó que la recomendación no sirve el objetivo.
 - La Verificación de Diferenciación de Portfolio encontró una colisión con otro
-  cliente (tipografía, paleta, nombre de concepto o gesto de firma) —
-  automático, sin importar el resto del análisis.
+  cliente (tipografía, paleta, nombre de concepto, gesto de firma, o
+  esqueleto/orden de secciones) — automático, sin importar el resto del
+  análisis. Destino según el ítem que colisiona: tipografía → M3, paleta →
+  M5, concepto → M4, firma → M5/M9.8, esqueleto → CDL-1 (IA Spec).
 
 RETROCEDER requiere destino obligatorio:
 "Retroceder a [módulo específico]: [razón en una línea]."
@@ -174,9 +191,10 @@ Si CDL-3 y CDL-4 discrepan, aplicá la Regla de Conflicto:
   dimensión Crítica o Alta → CDL-3 prevalece (salvo excepción documentada en Alta).
   dimensión Media o Baja → CDL-4 puede prevalecer, documentar la discrepancia.
 Ejecutá la Verificación de Diferenciación de Portfolio: tipografía, paleta,
-  nombre de concepto y gesto de firma, contra los builds reales de otros
-  clientes de Webbing — no de memoria. Una colisión es RETROCEDER automático
-  al módulo de origen, sin importar el resto del score.
+  nombre de concepto, gesto de firma y esqueleto/orden de secciones, contra
+  los builds reales de otros clientes de Webbing — no de memoria. Una
+  colisión es RETROCEDER automático al módulo de origen, sin importar el
+  resto del score.
 Antes de recomendar, ejecutá la Verificación Comercial:
   ¿la recomendación sirve el objetivo del M0?
 Elegí SEGUIR, REVISAR o RETROCEDER.
