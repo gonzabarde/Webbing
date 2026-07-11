@@ -278,6 +278,20 @@ E. Framework de Coherencia
    - Sí: avanzar al M2.
    - No: completar antes de pasar.
 
+8. ¿La categoría mental o el position statement ya se usaron en OTRO cliente
+   de Webbing? Distinto del Competitor Test (que compara contra competidores
+   reales del mercado) — esto compara contra el propio portfolio. El
+   vocabulario de categorías mentales es chico (control, confianza,
+   silencio, claridad...) y se repite entre categorías de mercado distintas
+   sin que el Competitor Test lo vea (un SaaS y un estudio de arquitectura
+   no compiten, pero pueden terminar con la misma categoría mental).
+   Preventivo, no verificado aún contra ningún caso real — revisar
+   Docs/PORTFOLIO_REGISTRY.md o los M1 de proyectos recientes antes de
+   cerrar.
+   - Sin coincidencia real: avanzar.
+   - Con coincidencia: refinar la categoría mental o el position statement
+     hasta diferenciarse, o documentar por qué no genera confusión real.
+
 CASOS REALES
 ------------
 Caso 1 — SaaS

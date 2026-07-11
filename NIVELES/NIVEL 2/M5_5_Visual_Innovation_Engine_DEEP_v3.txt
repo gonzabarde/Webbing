@@ -286,6 +286,19 @@ Eje X — COSTO DE IMPLEMENTACIÓN (1-5)
 4: Requiere desarrollo significativo (motion complejo, interacciones custom).
 5: Requiere tecnología nueva o producción mayor (video, interacción experimental).
 
+CHEQUEO OBLIGATORIO ANTES DE COSTEAR MOTION/EFECTOS VISUALES (Variable 2, o
+cualquier momento-firma con movimiento): consultar Frontend_Craft_Standard.md
+§5.1 / Docs/ReactBits_Catalog.md ANTES de asignar el costo, no después. Si
+existe un componente acelerable que cubra el rol (Text Animation para R2,
+Background para R1, etc.), la ruta acelerada (recolorear + retimear a los
+tokens del proyecto) es costo 1-2 — esa es la opción por defecto a costear,
+no el desarrollo desde cero. Construir a mano se elige de forma explícita,
+con razón escrita (ej. el efecto no existe en el catálogo, o el acelerador no
+pasa el test anti-clonación de M12 ni recoloreado), no por omisión. Sin este
+chequeo, una casilla "3: desarrollo moderado" puede estar escondiendo un
+costo real de 1-2 que nadie comparó (hallazgo Vera: el reveal plano→obra se
+costeó en 3 sin evaluar acelerador, 2026-07-11).
+
 Eje Y — IMPACTO PERCEPTIVO (1-5)
 1: Mejora sutil que solo nota un diseñador.
 2: Mejora visible para un ojo entrenado.
@@ -399,6 +412,9 @@ TESTS
 - ¿El diseño sería menos fuerte sin esa decisión?
 - ¿El recurso innovador puede sostenerse en toda la experiencia?
 - ¿Pasó el Innovation Cost Matrix?
+- Si la innovación es de motion/efecto visual: ¿se chequeó un acelerador
+  (Frontend_Craft_Standard §5.1 / ReactBits_Catalog.md) antes de costearla,
+  o se asumió desarrollo desde cero sin comparar?
 - ¿Pasó el Decay Test?
 - ¿El nivel de riesgo elegido es adecuado para el contexto del proyecto?
 

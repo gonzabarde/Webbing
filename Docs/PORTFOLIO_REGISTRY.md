@@ -5,9 +5,10 @@
 > archivo primero. Si un proyecto no está listado acá todavía, recién ahí
 > hace fallback a grepear `_webbing/<proyecto>/` o el código real.
 
-**Quién escribe acá:** M3 (tipografía), M5 (paleta + firma), M4 (nombre de
-concepto) y CDL-1 (esqueleto/orden de secciones) agregan o actualizan la fila
-de su proyecto AL CERRAR esa decisión — no al final del proyecto. Un
+**Quién escribe acá:** M2 (arquetipo/voz), M3 (tipografía), M5 (paleta + firma),
+M4 (nombre de concepto) y CDL-1 (esqueleto/orden de secciones) agregan o
+actualizan la fila de su proyecto AL CERRAR esa decisión — no al final del
+proyecto. Un
 proyecto puede tener fila parcial mientras está en curso (ej. tipografía
 cerrada, paleta todavía no). Marcar `—` en lo que falte, nunca inventar.
 
@@ -19,16 +20,28 @@ de completarlo. Un campo vacío o marcado es más seguro que uno inventado.
 
 ## REGISTRO
 
-| Cliente | Arquetipo | Tipografía (display / body) | Paleta (rol: hex) | Concepto rector | Firma / gesto | Esqueleto (orden) |
-|---|---|---|---|---|---|---|
-| **Move On Argentina v2** | #2 Lead alta-consideración | Big Shoulders Display / Onest | naranja(acento) `#F07B24` · azul(estructura) `#2B85D4`/`#1A6BBF` · celeste `#5CB1D5` · sol `#FBB915` · tinta `#0D0D0D` | "Cuerpo y cabeza, hecho a mano" | "La línea de amanecer" (diagonal naranja↔azul) | Hero → Diferenciador anti-app → Coaches → Método → Servicios → Caminantes → Planes → Prueba → FAQ → CTA final → Footer |
-| **VINCA** | #6 Producto (app-shell) | Fraunces / Geist | off-white `#F6F3EE` · verde salvia(primario) `#2E4B3F` · terracota(acento, solo acción) `#C4633B` | "Papel y sistema" | Fraunces en momentos de marca + base cálida + acento terracota solo en acción | App-shell: auth → onboarding de tenant → core loop (agenda/ficha/cobro/panel) |
-| **Runa** | #2 Lead alta-consideración (marketing) + #6 (dashboard) | Bricolage Grotesque / Instrument Sans (+ Spline Sans Mono para cifras) | papel `#FAF7F1` · tinta `#1C1B18` · naranja tinta quemada(acento único) `#C24E14` · gris cálido `#6B675F` | NO VERIFICADO (no confirmado contra `docs/M4_Concept.md` en esta pasada) | "El rayado" (línea contable estructural) + "La cifra" (números en mono tabular) | Definido por IA Spec de CDL-1, no fijo en M5 (marketing SaaS estándar: promesa→demostración→prueba→oferta→objeciones→CTA) |
-| **ECOS** | Híbrido (experiencial + transaccional, documentado en M5 como tensión que CDL-1 formaliza) | Fraunces / General Sans | near-black cálido `#161311`/`#1E1A16` · off-white cálido `#EDE6DA` · ámbar(acento único) `#E8853A` | "Penumbra de cemento resonante" | "La reverberación" (ondas concéntricas que decaen) | Dos registros: experiencial (hero atmosférico→obra→espacio→prueba→CTA bajo compromiso) + transaccional (ecommerce: precio/disponibilidad/checkout) |
-| **Estudio Contable v2** | Mixto (marketing Ligera + portal auth Media) | Fraunces / Inter | paper `#f6f4ee` · ink `#1c1b19` · **pine(primario)** `#12513c` · ochre(acento) `#c08a3e` | **NO PERSISTIDO** — sesión no escribió a disco (CHANGELOG 2026-07-10, P2). Reconstruido solo parcialmente vía auditoría externa. | NO VERIFICADO | NO VERIFICADO |
-| **Vera Arquitectura** | Mixto (#4 Brand Experience + #6 Portal cliente) | Newsreader / Schibsted Grotesk (Mona Sans planeado, descartado por buildability — ver `_webbing/INCIDENTES_M14.md` #1 y CHANGELOG P4) | yeso/piedra frío `#E9E8E3` · grafito `#191C1E` · azul de plano(acento) `#2C4A5C` | "Obra Abierta" | "Plano Habitado" (reveal plano técnico → fotografía de materia) | Hero → Work (grid de obras) → Process ("Open work") → Studio (dos arquitectos) → Contact/Footer |
-| **CUORE** | — | NO VERIFICADO (proyecto de práctica anterior a este registro) | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO |
-| **Glow Factor** | — | NO VERIFICADO (proyecto de práctica anterior a este registro) | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO |
+| Cliente | Arquetipo (proyecto) | Arquetipo de marca (M2, principal+secundario) | Tipografía (display / body) | Paleta (rol: hex) | Concepto rector | Firma / gesto | Esqueleto (orden) |
+|---|---|---|---|---|---|---|---|
+| **Move On Argentina v2** | #2 Lead alta-consideración | NO VERIFICADO | Big Shoulders Display / Onest | naranja(acento) `#F07B24` · azul(estructura) `#2B85D4`/`#1A6BBF` · celeste `#5CB1D5` · sol `#FBB915` · tinta `#0D0D0D` | "Cuerpo y cabeza, hecho a mano" | "La línea de amanecer" (diagonal naranja↔azul) | Hero → Diferenciador anti-app → Coaches → Método → Servicios → Caminantes → Planes → Prueba → FAQ → CTA final → Footer |
+| **VINCA** | #6 Producto (app-shell) | **Protector + Guía** | Fraunces / Geist | off-white `#F6F3EE` · verde salvia(primario) `#2E4B3F` · terracota(acento, solo acción) `#C4633B` | "Papel y sistema" | Fraunces en momentos de marca + base cálida + acento terracota solo en acción | App-shell: auth → onboarding de tenant → core loop (agenda/ficha/cobro/panel) |
+| **Runa** | #2 Lead alta-consideración (marketing) + #6 (dashboard) | NO VERIFICADO | Bricolage Grotesque / Instrument Sans (+ Spline Sans Mono para cifras) | papel `#FAF7F1` · tinta `#1C1B18` · naranja tinta quemada(acento único) `#C24E14` · gris cálido `#6B675F` | NO VERIFICADO (no confirmado contra `docs/M4_Concept.md` en esta pasada) | "El rayado" (línea contable estructural) + "La cifra" (números en mono tabular) | Definido por IA Spec de CDL-1, no fijo en M5 (marketing SaaS estándar: promesa→demostración→prueba→oferta→objeciones→CTA) |
+| **ECOS** | Híbrido (experiencial + transaccional, documentado en M5 como tensión que CDL-1 formaliza) | NO VERIFICADO | Fraunces / General Sans | near-black cálido `#161311`/`#1E1A16` · off-white cálido `#EDE6DA` · ámbar(acento único) `#E8853A` | "Penumbra de cemento resonante" | "La reverberación" (ondas concéntricas que decaen) | Dos registros: experiencial (hero atmosférico→obra→espacio→prueba→CTA bajo compromiso) + transaccional (ecommerce: precio/disponibilidad/checkout) |
+| **Estudio Contable v2** | Mixto (marketing Ligera + portal auth Media) | NO PERSISTIDO (P2) | Fraunces / Inter | paper `#f6f4ee` · ink `#1c1b19` · **pine(primario)** `#12513c` · ochre(acento) `#c08a3e` | **NO PERSISTIDO** — sesión no escribió a disco (CHANGELOG 2026-07-10, P2). Reconstruido solo parcialmente vía auditoría externa. | NO VERIFICADO | NO VERIFICADO |
+| **Vera Arquitectura** | Mixto (#4 Brand Experience + #6 Portal cliente) | **Artesano + Protector** (terciario: Editor) | Newsreader / Schibsted Grotesk (Mona Sans planeado, descartado por buildability — ver `_webbing/INCIDENTES_M14.md` #1 y CHANGELOG P4) | yeso/piedra frío `#E9E8E3` · grafito `#191C1E` · azul de plano(acento) `#2C4A5C` | "Obra Abierta" | "Plano Habitado" (reveal plano técnico → fotografía de materia) | Hero → Work (grid de obras) → Process ("Open work") → Studio (dos arquitectos) → Contact/Footer |
+| **CUORE** | — | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO |
+| **Glow Factor** | — | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO |
+
+--------------------------------------------------------------------------------
+
+## HALLAZGO ABIERTO #2 — arquetipo de marca compartido (M2, sin chequeo hasta hoy)
+
+**"Protector" aparece en VINCA (principal) y en Vera Arquitectura (secundario).**
+No es un clón exacto (VINCA = Protector+Guía; Vera = Artesano+Protector+Editor),
+pero es exactamente el tipo de colisión que M2 nunca chequeó hasta que se
+agregó el árbol #8 (2026-07-11). Con solo 8 arquetipos en la guía de M2 y un
+portfolio que crece, la repetición es matemáticamente esperable. No se
+corrige retroactivamente en estos dos proyectos (ambos de práctica, VINCA ya
+cerrado) — queda documentado para que la próxima corrida de M2 lo evite.
 
 --------------------------------------------------------------------------------
 

@@ -504,8 +504,16 @@ Protocolo de entrada para toda sesión nueva:
    PROCESAR" (incidentes sin corrida formal de M14) o con disposición
    "Pendiente de aprobación", anunciarlo en el chat antes de clasificar la
    tarea nueva: "📋 Hay N asuntos de M14 sin cerrar: [listar en una línea cada
-   uno]." No bloquea el arranque de la tarea nueva — el humano puede decir
-   "seguimos" — pero el aviso es obligatorio, no opcional.
+   uno]."
+   - Si NINGUNO es severidad Crítica: no bloquea el arranque — el humano
+     puede decir "seguimos" — pero el aviso es obligatorio, no opcional.
+   - Si HAY alguna Crítica pendiente: la propia regla de M14 ("se resuelve
+     antes del próximo proyecto, sin excepción") no se satisface con un
+     aviso que se puede pasar por alto. Pedir confirmación explícita antes
+     de clasificar la tarea nueva: "Hay una propuesta CRÍTICA sin resolver
+     ([cuál]) — ¿la resolvemos ahora, la posponemos explícitamente asumiendo
+     el riesgo, o seguimos igual?" No asumir "seguimos" por default ni
+     interpretar silencio o un mensaje sobre otro tema como continuar.
 3. **Clasificar la tarea** según la tabla de la sección 4.
 4. **Cargar solo los módulos necesarios.** Nada preventivo.
 5. **Verificar gates previos:** si la tarea asume decisiones de capas anteriores, confirmar que existen y están aprobadas. Si no existen, la tarea real es la capa anterior.

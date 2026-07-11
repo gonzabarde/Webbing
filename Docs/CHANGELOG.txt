@@ -8,6 +8,83 @@ Autoridad: los cambios los aprueban y aplica el humano (SKILL.md secciones 7 y 1
 
 --------------------------------------------------------------------------------
 
+2026-07-11 (4) — ANÁLISIS LÓGICO DE HUECOS: 4 FIXES (M1, M2, §14, CDL-5 a 9 ítems)
+-------------------------------------------------------------------------------
+Origen: pedido explícito del humano de auditoría lógica completa, no solo
+seguir reaccionando a hallazgos puntuales. Se aplicaron 4 fixes:
+
+Fix 1 — M2 (Brand Translation) sin chequeo cross-portfolio, CONFIRMADO con
+evidencia real: VINCA = Protector+Guía; Vera Arquitectura = Artesano+
+Protector+Editor. "Protector" aparece en los dos (distinto peso, no calco
+exacto) y nada lo había chequeado nunca — con solo 8 arquetipos en la guía
+de M2, la colisión es matemáticamente esperable. Agregado árbol #8 a M2
+(chequeo cross-portfolio de arquetipo+voz) y ítem a OUTPUT.
+
+Fix 2 — SKILL.md §14 paso 2 contradecía la propia regla de severidad de
+M14: anunciaba cualquier pendiente por igual ("no bloquea, el humano puede
+decir seguimos"), sin distinguir que M14 exige que una Crítica "se resuelva
+antes del próximo proyecto, sin excepción". Confirmado con el caso real de
+P7 de Runa, que quedó días pendiente sin que el sistema la hiciera
+innegociable. Ahora §14 exige confirmación explícita del humano (resolver /
+posponer explícito / seguir asumiendo el riesgo) cuando hay una Crítica
+pendiente — ya no alcanza con el aviso pasivo.
+
+Fix 3 — CDL-5 ampliado de 5 a 9 ítems: se agregaron dirección fotográfica
+(de M5, sin chequeo propio) y descriptor de motion (definido en M5,
+heredado por M8.3 — aclarado que M8.3 corre en Capa 4, DESPUÉS de GATE 2,
+por lo que CDL-5 solo puede chequear lo que M5 ya definió, no lo que M8.3
+redefina después). Ambos sin evidencia de colisión confirmada aún —
+agregados por el mismo patrón que M2/M3/M5 ya mostraron ser reales.
+
+Fix 4 — M1 (Positioning) sin chequeo cross-portfolio: el Competitor Test
+existente compara contra competidores de MERCADO, nunca contra otros
+clientes de Webbing. La "categoría mental" es un vocabulario chico
+(control, confianza, silencio, claridad...) con el mismo riesgo
+combinatorio que los 8 arquetipos de M2. Sin caso confirmado aún (VINCA usa
+"control", no verificado si se repite). Agregado árbol #8 a M1 y noveno
+ítem a CDL-5 (categoría mental/positioning).
+
+CDL-5 pasó de 5 a 9 ítems en un solo día: categoría mental/positioning
+(M1), arquetipo/voz (M2), tipografía (M3), concepto (M4), paleta+
+fotografía+motion (M5), firma (M5/M9.8), esqueleto (CDL-1). Docs/
+PORTFOLIO_REGISTRY.md actualizado con columna de arquetipo de marca y el
+hallazgo de colisión VINCA/Vera documentado.
+
+Pendiente de verificar (no confirmado, hipotético): si la categoría mental
+de M1 realmente colisiona entre algún par de clientes — requiere leer los
+M1 de VINCA, Runa, ECOS y Move On, no se hizo en esta pasada por alcance.
+
+--------------------------------------------------------------------------------
+
+2026-07-11 (3) — FIX: M5.5 NO COMPARABA ACELERADOR ANTES DE COSTEAR MOTION
+-------------------------------------------------------------------------------
+Origen: pregunta directa del humano ("¿tiene en cuenta cada componente [de
+React Bits]?") llevó a verificar contra la fuente real de Vera Arquitectura,
+no a responder en abstracto. Hallazgo: el Innovation Cost Matrix de Vera
+costeó el reveal plano→obra en "3 (desarrollo CSS/SVG moderado)" sin evaluar
+si un componente de React Bits podía cubrir el rol a costo 1-2 (§5.1 del
+Frontend Craft Standard). No fue un descuido de ejecución (M9) — la decisión
+de construir a mano se tomó antes, en M5.5, sin comparar.
+
+Causa raíz: la escala Eje X (1-5) de Costo de Implementación en M5.5 asume
+desarrollo a medida por default en sus propias categorías ("3: animaciones
+CSS custom"), sin ningún paso que obligue a chequear el catálogo de
+aceleradores antes de asignar ese número.
+
+Fix: agregado a M5.5, Innovation Cost Matrix — chequeo obligatorio de
+Frontend_Craft_Standard.md §5.1 / Docs/ReactBits_Catalog.md ANTES de costear
+cualquier variable de motion/efecto visual. Si hay acelerador aplicable, la
+ruta acelerada (costo 1-2) es la opción por defecto a costear; construir a
+mano requiere razón escrita, no es el default silencioso. Agregado a TESTS.
+
+Conecta con el hallazgo de hoy en M9.3/M8.6 (Vera-P2, Vera-P4): tercera vez
+que una herramienta recomendada por el sistema (Framer Motion, React Bits
+variantes de M8.3/M9.3, y ahora el propio Cost Matrix de M5.5) no se
+consulta en la ejecución real, verificado contra código/documentos reales en
+los dos únicos proyectos auditables (Vera, Estudio Contable v2).
+
+--------------------------------------------------------------------------------
+
 2026-07-11 (2) — DOS FIXES: ESQUELETO EN CDL-5 + REGISTRO CENTRALIZADO DE PORTFOLIO
 -------------------------------------------------------------------------------
 Origen: pregunta directa del humano ("qué herramientas para que no se repitan

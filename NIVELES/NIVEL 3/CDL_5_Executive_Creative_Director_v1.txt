@@ -96,8 +96,27 @@ Contra ese dato (del registro o verificado en el momento):
   derivar esqueletos correctos y no-genéricos contra el mercado, y aun así
   terminar casi idénticos entre sí. ¿La selección y secuencia de secciones
   coincide con la de otro cliente activo?
+- Arquetipo de marca y voz (de M2): ¿el arquetipo principal o secundario
+  (de los 8 de la guía) ya se usó en otro cliente, en cualquier peso? No
+  hace falta que sea idéntico (principal+principal) — un arquetipo
+  compartido en distinto peso ya es señal. Si coincide, verificar si la VOZ
+  real (palabras permitidas/prohibidas, reglas por touchpoint) alcanza para
+  diferenciar, o si también colisiona.
+- Dirección fotográfica (de M5, sistema de imágenes): ¿el estilo + luz +
+  grading coincide con el de otro cliente? Sin chequeo propio en M5 todavía
+  — este es el único punto que lo cubre por ahora.
+- Descriptor de motion (definido en M5, heredado por M8.3 — no en M8.3
+  directamente: eso corre en Capa 4, después de GATE 2, cuando CDL-5 ya
+  terminó): ¿coincide o es prácticamente sinónimo del de otro cliente (ej.
+  "preciso, corto, tranquilo" vs. "preciso, breve, trazado")? Sin chequeo
+  propio en M5 todavía — este es el único punto que lo cubre por ahora.
+- Categoría mental / position statement (de M1): ¿ya se usó en otro
+  cliente? Distinto del Competitor Test de M1 (que compara contra mercado)
+  — esto es entre clientes de la agencia. Preventivo: sin caso confirmado
+  aún, agregado el 2026-07-11 por el mismo patrón que ya se confirmó en
+  tipografía, paleta y arquetipo de marca.
 
-Este es el backstop centralizado: cada módulo (M2-M5.5) puede tener su
+Este es el backstop centralizado: cada módulo (M1-M5.5) puede tener su
 propio chequeo de Principio 10 (si lo tiene), pero CDL-5 es el único punto
 que los audita TODOS JUNTOS antes de que el proyecto pase GATE 2 hacia
 construcción. Si un módulo individual no tiene el chequeo propio, o lo tiene
@@ -130,10 +149,12 @@ RETROCEDER
 - CDL-3 dice débil o no viable.
 - La Verificación Comercial detectó que la recomendación no sirve el objetivo.
 - La Verificación de Diferenciación de Portfolio encontró una colisión con otro
-  cliente (tipografía, paleta, nombre de concepto, gesto de firma, o
-  esqueleto/orden de secciones) — automático, sin importar el resto del
-  análisis. Destino según el ítem que colisiona: tipografía → M3, paleta →
-  M5, concepto → M4, firma → M5/M9.8, esqueleto → CDL-1 (IA Spec).
+  cliente (categoría mental/positioning, arquetipo/voz, tipografía, paleta,
+  nombre de concepto, gesto de firma, esqueleto/orden de secciones,
+  dirección fotográfica, o descriptor de motion) — automático, sin importar
+  el resto del análisis. Destino según el ítem que colisiona: categoría
+  mental → M1, arquetipo/voz → M2, tipografía → M3, concepto → M4, paleta/
+  fotografía/motion → M5, firma → M5/M9.8, esqueleto → CDL-1 (IA Spec).
 
 RETROCEDER requiere destino obligatorio:
 "Retroceder a [módulo específico]: [razón en una línea]."
@@ -190,11 +211,12 @@ Leé todo lo anterior.
 Si CDL-3 y CDL-4 discrepan, aplicá la Regla de Conflicto:
   dimensión Crítica o Alta → CDL-3 prevalece (salvo excepción documentada en Alta).
   dimensión Media o Baja → CDL-4 puede prevalecer, documentar la discrepancia.
-Ejecutá la Verificación de Diferenciación de Portfolio: tipografía, paleta,
-  nombre de concepto, gesto de firma y esqueleto/orden de secciones, contra
-  los builds reales de otros clientes de Webbing — no de memoria. Una
-  colisión es RETROCEDER automático al módulo de origen, sin importar el
-  resto del score.
+Ejecutá la Verificación de Diferenciación de Portfolio: categoría mental/
+  positioning, arquetipo/voz de marca, tipografía, paleta, nombre de
+  concepto, gesto de firma, esqueleto/orden de secciones, dirección
+  fotográfica y descriptor de motion, contra los builds/documentos reales
+  de otros clientes de Webbing — no de memoria. Una colisión es RETROCEDER
+  automático al módulo de origen, sin importar el resto del score.
 Antes de recomendar, ejecutá la Verificación Comercial:
   ¿la recomendación sirve el objetivo del M0?
 Elegí SEGUIR, REVISAR o RETROCEDER.

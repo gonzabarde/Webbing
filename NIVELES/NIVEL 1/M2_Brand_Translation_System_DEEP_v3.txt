@@ -438,6 +438,22 @@ E. Framework de Consistencia
    - Sí: avanzar.
    - No: completar antes de cerrar el módulo.
 
+8. ¿El arquetipo (principal + secundario) o la voz ya se usaron en OTRO
+   cliente de Webbing? Primero revisar Docs/PORTFOLIO_REGISTRY.md; si no
+   está ahí, revisar los M2 de proyectos recientes (Client_Record_Template.md
+   o el archivo real). Con solo 8 arquetipos en la guía y un portfolio que
+   crece, la colisión es matemáticamente probable — no hace falta que sea
+   idéntica (principal+principal) para ser un problema: un arquetipo
+   compartido aunque sea en distinto peso (principal en un cliente,
+   secundario en otro) ya empieza a sonar parecido. No descartar la
+   colisión solo porque no es un calco exacto — evaluarla igual.
+   - Sin coincidencia real: avanzar.
+   - Con coincidencia: no descartar automáticamente el arquetipo — elegir
+     la mezcla secundaria/tercer registro que diferencie la VOZ real
+     (palabras permitidas/prohibidas, reglas por touchpoint), o documentar
+     por qué el arquetipo compartido no genera confusión real (categorías
+     de negocio muy distintas, por ejemplo).
+
 CASOS REALES
 ------------
 Caso 1 — SaaS de productividad
@@ -495,6 +511,8 @@ OUTPUT
 10. Stress scenarios (mínimo 2).
 11. Traducción a tono visual.
 12. Riesgos de inconsistencia.
+13. Verificación cross-portfolio de arquetipo/voz (árbol #8) — coincide o no,
+    y cómo se resolvió si coincidió.
 
 FAIL CONDITIONS
 ---------------
