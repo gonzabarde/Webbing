@@ -123,10 +123,12 @@ REGLAS DE PALETA
 - La paleta debe funcionar en blanco y negro antes de agregar color.
 - Si quitás el color y la jerarquía desaparece, el sistema tipográfico es débil.
 - **Chequeo cross-portfolio (Principio 10, mismo criterio que árbol #7 de M3):**
-  antes de cerrar la paleta, revisar qué combinaciones de color+rol (no colores
-  sueltos: la COMBINACIÓN con su función — ej. "crema de fondo + terracota de
-  acento") ya están en uso en otros proyectos de Webbing, sin importar la
-  categoría del cliente. Verificar contra el CSS/tokens reales de los builds
+  Primero revisar Docs/PORTFOLIO_REGISTRY.md (más rápido y confiable que
+  grepear carpetas). Si el dato no está ahí o dice "NO VERIFICADO": recién
+  ahí revisar qué combinaciones de color+rol (no colores sueltos: la
+  COMBINACIÓN con su función — ej. "crema de fondo + terracota de acento")
+  ya están en uso en otros proyectos de Webbing, sin importar la categoría
+  del cliente. Verificar contra el CSS/tokens reales de los builds
   existentes, no de memoria. Dos clientes de categorías distintas pueden
   converger en la misma paleta sin que el chequeo de "sobreuso en la
   categoría" (arriba) lo agarre — la agencia se repite a sí misma, no al

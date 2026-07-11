@@ -368,9 +368,11 @@ E. Framework de Coherencia
    dentro de una categoría). Un estudio contable y un estudio de arquitectura
    no compiten entre sí, pero si comparten Fraunces+Hanken Grotesk el problema
    es idéntico: la agencia se repite a sí misma.
-   - Antes de cerrar la elección: revisar qué tipografías usó Webbing en
-     proyectos recientes (Client_Record_Template.md de cada cliente, o
-     preguntar si no hay registro accesible).
+   - Primero: revisar Docs/PORTFOLIO_REGISTRY.md (fuente de verdad centralizada,
+     más rápido y confiable que grepear carpetas). Si el dato no está ahí o
+     dice "NO VERIFICADO": recién ahí revisar qué tipografías usó Webbing en
+     proyectos recientes (Client_Record_Template.md de cada cliente, o el
+     código real).
    - Sí coincide con un cliente activo o reciente: tratarlo como sobreuso —
      elegir alternativa con señal semótica similar. No alcanza con que la
      elección esté bien justificada en abstracto si ya es la marca visual

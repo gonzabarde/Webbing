@@ -8,6 +8,37 @@ Autoridad: los cambios los aprueban y aplica el humano (SKILL.md secciones 7 y 1
 
 --------------------------------------------------------------------------------
 
+2026-07-11 (2) — DOS FIXES: ESQUELETO EN CDL-5 + REGISTRO CENTRALIZADO DE PORTFOLIO
+-------------------------------------------------------------------------------
+Origen: pregunta directa del humano ("qué herramientas para que no se repitan
+esqueletos y paletas") expuso un agujero en el backstop de CDL-5 armado horas
+antes: audita tipografía/paleta/concepto/firma, pero nunca esqueleto/orden de
+secciones. Al armar el fix se decidió también resolver la fragilidad del
+mecanismo (grepear carpetas dispersas cada vez, sin memoria entre corridas).
+
+Fix 1 — CDL-5, quinto ítem: Esqueleto/orden de secciones (IA Spec de CDL-1),
+distinto del chequeo de Principio 10 vs. MERCADO que CDL-1 ya tenía — este es
+vs. OTRO CLIENTE. Actualizado RETROCEDER con destino por ítem (tipografía→M3,
+paleta→M5, concepto→M4, firma→M5/M9.8, esqueleto→CDL-1).
+
+Fix 2 — Docs/PORTFOLIO_REGISTRY.md (nuevo): tabla única con tipografía,
+paleta, concepto, firma y esqueleto de cada cliente, poblada verificando
+contra código real (no memoria): Move On v2, VINCA, Runa, ECOS, Estudio
+Contable v2, Vera Arquitectura. CDL-5 y los árboles de M3/M5 ahora leen este
+archivo primero, con fallback a grepear el código solo si el dato falta.
+
+Hallazgo al poblar el registro (no corregido, solo documentado): el
+tailwind.config.ts real de estudio-contable-v2 usa "paper #f6f4ee + pine
+#12513c + ochre #c08a3e" — tercera aparición confirmada de la fórmula
+crema+verde-pino+acento-cálido en el portfolio (VINCA oficial, estudio-
+contable v1 no-Webbing ya documentado, y ahora esta v2 sí-Webbing). Predata
+el chequeo cross-portfolio de M5 (agregado recién hoy procesando Vera) — no
+es falla del mecanismo, es evidencia de antes de que existiera. Queda
+anotado en el propio registro, no se corrige (proyecto de práctica, sin
+GATE 4).
+
+--------------------------------------------------------------------------------
+
 2026-07-11 — APLICADAS: CORRIDA M14 — VERA ARQUITECTURA (P1-P4)
 -------------------------------------------------------------------------------
 Primera corrida de M14 que pidió explícitamente registrar también lo que

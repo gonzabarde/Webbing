@@ -169,6 +169,10 @@ Base: `NIVELES/` (relativo a la raíz del skill). Nota: `NEGOCIO/` es subcarpeta
 - `Client_Record_Template.md` — registro vivo por cliente (embudo, gates, captación, producción).
 - `Capture_Baseline_Template.md` — plantilla GATE 13.4-E (métrica, fuente, baseline, check-ins 90d).
 - `Docs/GATE_REGISTRY.txt` — índice único de gates bloqueantes (complemento de §6).
+- `Docs/PORTFOLIO_REGISTRY.md` — fuente de verdad centralizada de Principio 10
+  entre-clientes (tipografía, paleta, concepto, firma, esqueleto por proyecto).
+  M3/M4/M5/CDL-1 escriben ahí al cerrar su decisión; CDL-5 lo lee primero,
+  antes de grepear carpetas de proyecto.
 - `Docs/SYSTEM FILE MAP.txt` — árbol visual del filesystem (complemento del FILE MAP de §3).
 - `Docs/OPERATIONAL_HEADER_STANDARD.txt` — formato de headers operativos en módulos.
 - `Docs/CHANGELOG.txt` — bitácora de cambios de arquitectura.
