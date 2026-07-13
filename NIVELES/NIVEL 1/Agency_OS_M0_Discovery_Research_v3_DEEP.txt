@@ -211,6 +211,59 @@ PROCESO CLAUDE
    - premios
    - experiencias demostrables
 
+7.1. DECISIÓN DE SOURCING FOTOGRÁFICO (obligatoria si "no hay fotos propias"
+     está activo como red flag). No alcanza con registrar la bandera —
+     bandera sin decisión es exactamente el patrón que dejó pasar CUORE y
+     Vera con bloques de color en vez de fotos reales hasta GATE 3
+     (Frontend_Craft_Standard.md §0; hallazgo 2026-07-11). Antes de avanzar
+     a M1, elegir UNA ruta, con quién la resuelve y para cuándo:
+     (a) CLIENTE PROVEE: fotos reales del cliente, fecha de entrega
+         comprometida.
+     (b) STOCK LICENCIADO: curado a la spec de M5 (grading/estilo/luz)
+         cuando exista — banco con licencia comercial clara. Si tiene
+         costo, sube a M13.
+     (c) GENERADO CON IA: a la spec de M5, cuando M5 ya exista o se defina
+         en paralelo. Sin costo de licencia de terceros, pero con el mismo
+         control de calidad que cualquier imagen (R1/R2 del Craft Standard).
+     (d) FOTÓGRAFO PROFESIONAL: recomendado al cliente, con costo
+         estimado — sube a M13 como línea de presupuesto.
+     (e) SOLO PRÁCTICA (proyectos internos de Gonza/Webbing, nunca un
+         cliente real ni un build que se publique o se muestre como
+         entregable): Pinterest queda habilitado como fuente DIRECTA de
+         archivo, no solo de mood board — decisión explícita del humano
+         2026-07-11, asumiendo el riesgo de derechos de autor sobre archivos
+         de terceros para uso estrictamente privado y no comercial. Curar
+         igual contra los criterios de rechazo de M5 (nada de stock obvio,
+         nada que contradiga el grading). Esta ruta NO aplica a B0/M13
+         (clientes reales pagando) bajo ninguna circunstancia — ahí siguen
+         valiendo únicamente (a)-(d). Si un proyecto de práctica alguna vez
+         se reconvierte en cliente real (pasa a tener GATE 4 real), las
+         imágenes de Pinterest se reemplazan primero por (b)/(c)/(d) — es
+         bloqueante explícito de ese GATE 4, no opcional.
+     NUNCA válido para un cliente real (rutas a-d siguen firmes): extraer
+     archivos directamente
+     de Pinterest, Google Images, redes sociales de terceros o cualquier
+     fuente sin licencia clara de uso comercial — es la obra de otro
+     fotógrafo/marca, sin derecho de uso, y expone al cliente a reclamo de
+     autor.
+
+     PINTEREST COMO HERRAMIENTA DE MOOD BOARD (para clientes reales, rutas
+     b/c/d): Pinterest sigue siendo el punto de partida para definir la
+     dirección fotográfica de M5 aunque el archivo final no salga de ahí —
+     1. Buscar en Pinterest por los términos de estilo del proyecto (ej.
+        "warm editorial architecture photography", "moody product shot").
+     2. De los resultados, extraer los PARÁMETROS observados — no el
+        archivo: dirección de luz, temperatura, contraste, tipo de crop,
+        composición — y completar con eso la sección de grading de M5
+        (Sistema de Imágenes).
+     3. Con esos parámetros ya definidos como spec, recién buscar/generar
+        las imágenes reales: Unsplash/Pexels (b) o IA (c) arriba, filtrando
+        por esa spec, no por parecido visual directo a un pin puntual.
+     Es el mismo tratamiento anti-copy que M12 ya usa para referencias de
+     sitios completos: la fuente de inspiración es legítima y útil; el
+     archivo copiado tal cual no lo es, salvo la excepción explícita de (e)
+     para práctica interna.
+
 8. Detectar restricciones.
    Responder:
    - qué no se puede hacer
@@ -555,6 +608,7 @@ OUTPUT
 5. Patrones de categoría.
 6. Evidencia disponible.
 7. Restricciones críticas.
+7.1. Decisión de sourcing fotográfico (si aplica) — ruta elegida, responsable, fecha.
 8. Red flags activos con su nivel de severidad.
 9. Oportunidades con Opportunity Score completo.
 10. Nivel de confianza por hallazgo.
@@ -592,6 +646,8 @@ FAIL CONDITIONS
 - No se registraron restricciones.
 - El Intake Questionnaire tiene bloques sin completar.
 - Hay red flags activos sin resolver que bloquean el avance.
+- "No hay fotos propias" activo como red flag sin una Decisión de Sourcing
+  Fotográfico explícita (§7.1) antes de pasar a M1.
 
 PROMPT PARA CLAUDE
 ------------------

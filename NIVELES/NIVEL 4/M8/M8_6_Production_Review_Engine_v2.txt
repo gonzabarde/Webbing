@@ -1,4 +1,4 @@
-M8.6 — PRODUCTION REVIEW ENGINE (v2.3)
+M8.6 — PRODUCTION REVIEW ENGINE (v2.4)
 =======================================
 
 OPERATIONAL HEADER
@@ -87,6 +87,27 @@ coincidencias esperadas. Si aparece el token viejo: Direction Fidelity es
 DRIFT como mínimo, no OK, aunque el BUILD esté perfecto — el problema es que
 la fuente de verdad quedó mintiendo, no que el sitio se vea mal. Loguear un
 incidente sobre el cambio NO sustituye actualizar el documento de origen.
+
+VERIFICACIÓN DE SOURCING FOTOGRÁFICO (v2.4, pregunta humana 2026-07-11) —
+segunda condición adicional para marcar Direction Fidelity como OK: revisar
+la Decisión de Sourcing Fotográfico de M0 (§7.1) y verificar EJECUTANDO
+(mirando el build real, no la intención) que se cumplió. Precedente real:
+CUORE y Vera pasaron con bloques de color sólido en vez de fotografía real
+donde M5 definió sistema de imágenes — nadie lo verificó hasta que un
+humano miró el deploy.
+- Si la ruta elegida en M0 fue "cliente provee", "stock licenciado",
+  "generado con IA" o "fotógrafo profesional": el build DEBE tener
+  fotografía real cumpliendo la spec de M5 (estilo/luz/grading). Un bloque
+  de color, un ph genérico o un placeholder = Direction Fidelity DRIFT como
+  mínimo, sin importar qué tan bien esté el resto del build.
+- Si la ruta fue "solo práctica": Pinterest como fuente directa de archivo
+  es válido para esta ruta (decisión explícita del humano, M0 §7.1e) — pero
+  NUNCA un placeholder de color puro en un build que pasa por GATE 3. Si el
+  proyecto se reconvierte en cliente real, verificar que las imágenes de
+  Pinterest ya se reemplazaron por (a)-(d) antes de GATE 4 — bloqueante.
+- Si M0 no dejó una Decisión de Sourcing registrada: eso ya es FAIL CONDITION
+  de M0 (§7.1) — señalarlo como hallazgo de M14, no improvisar una decisión
+  acá con el proyecto ya construido.
 
 DEFINICIÓN DE GENÉRICO
 ------------------------
@@ -213,6 +234,8 @@ TESTS
 - ¿Si el veredicto es PASA CON AJUSTES, los ajustes están documentados?
 - Si hubo un cambio conocido de M3/M5 durante la ejecución: ¿se grepeó el
   token viejo contra el documento de origen antes de marcar OK?
+- ¿Se verificó EJECUTANDO que la Decisión de Sourcing Fotográfico de M0
+  (§7.1) se cumplió en el build real, no solo que exista la spec de M5?
 
 OUTPUT
 ------
@@ -239,6 +262,9 @@ FAIL CONDITIONS
 - Direction/Signature Fidelity marcada OK sin correr el grep de tokens viejos
   contra el documento de origen (M3/M5), cuando hubo un cambio conocido
   durante la ejecución.
+- Direction Fidelity marcada OK con placeholders/bloques de color donde la
+  Decisión de Sourcing Fotográfico de M0 (§7.1) exigía fotografía real, sin
+  marcarlo explícitamente como bloqueante de GATE 4.
 
 PROMPT PARA CLAUDE
 ------------------

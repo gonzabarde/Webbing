@@ -8,6 +8,105 @@ Autoridad: los cambios los aprueban y aplica el humano (SKILL.md secciones 7 y 1
 
 --------------------------------------------------------------------------------
 
+2026-07-11 (6) — FIX: SOURCING FOTOGRÁFICO SIN RESOLVER (M0 → M8.6)
+-------------------------------------------------------------------------------
+Origen: el humano señaló que "la parte visual/fotos" parecía un hueco de
+Webbing. Verificado contra la fuente: M0 ya preguntaba por fotos (Bloque F)
+y ya marcaba "no hay fotos propias" como red flag — pero el protocolo decía
+solo "resolver antes de M1" sin definir CÓMO, y nada aguas abajo (M5, M8/M9,
+M8.6/GATE 3) volvía a chequear si se resolvió de verdad. Resultado real,
+confirmado en dos proyectos: CUORE y Vera Arquitectura pasaron GATE 3 con
+bloques de color sólido en vez de fotografía real — las dos veces lo
+detectó un humano mirando el deploy, no el proceso.
+
+Fix 1 — M0 (§7.1 nuevo): la bandera "no hay fotos propias" ahora exige una
+Decisión de Sourcing Fotográfico explícita antes de M1, con 5 rutas válidas
+(cliente provee / stock licenciado / generado con IA / fotógrafo profesional
+/ solo práctica con bloqueo de GATE 4). Agregado al OUTPUT y FAIL CONDITIONS.
+
+Nota importante del pedido original: el humano propuso Pinterest como fuente
+de fotos de alta calidad. Se rechazó como fuente de ARCHIVO final — Pinterest
+es descubrimiento, no licenciamiento; las imágenes son de terceros sin derecho
+de redistribución comercial, exposición real a reclamo de autor para el
+cliente. Reencuadrado como válido únicamente como MOOD BOARD de referencia,
+mismo tratamiento anti-copy que M12 ya usa para referencias de sitios.
+
+Fix 2 — M8.6 (v2.3→v2.4): nueva condición para marcar Direction Fidelity
+como OK — verificar EJECUTANDO (build real) que la Decisión de Sourcing de
+M0 se cumplió, no solo que la spec de imágenes de M5 exista en papel. Un
+bloque de color donde correspondía foto real = DRIFT mínimo. Mismo patrón
+que el chequeo de sincronización de fuente de verdad (v2.3): centralizar la
+verificación en el último checkpoint antes de GATE 3, no confiar en que cada
+módulo de ejecución recuerde la decisión tomada varios pasos atrás.
+
+Ajuste posterior el mismo día: el humano aclaró que Pinterest era para los
+proyectos de PRÁCTICA (Vera, Estudio Contable), no para vender a clientes
+reales. Igual se mantuvo el rechazo — con licencia comercial limpia
+disponible (Unsplash/Pexels) y sin costo, no hay razón para asumir riesgo
+cero-beneficio. Más importante: si la práctica usa una ruta que un cliente
+real nunca podría usar, la práctica deja de simular condiciones reales —
+exactamente lo que la hacía valiosa toda la sesión. Ajustado M0 §7.1(e):
+práctica ahora también usa stock licenciado (Unsplash/Pexels) por default,
+no placeholder de color — el placeholder puro queda solo para wireframes
+explícitos, nunca para un build que pasa por GATE 3. M8.6 actualizado igual.
+
+Refinamiento final: Pinterest pasó de nota-al-margen a paso explícito y
+nombrado del flujo (M0 §7.1) — procedimiento de 3 pasos: buscar en Pinterest
+por términos de estilo, extraer PARÁMETROS de luz/grading/composición (no
+el archivo), y recién ahí buscar/generar la imagen real en Unsplash/Pexels/
+IA con esa spec. Pinterest manda el criterio; la fuente licenciada entrega
+el archivo.
+
+DECISIÓN FINAL del humano (misma sesión): para proyectos de PRÁCTICA
+específicamente (nunca cliente real), Pinterest queda habilitado como fuente
+DIRECTA de archivo, no solo de mood board — el humano asume explícitamente
+el riesgo de derechos de autor sobre archivos de terceros, acotado a uso
+privado no comercial de sus propios proyectos internos. Resguardo agregado:
+esta ruta queda expresamente prohibida para clientes reales (rutas a-d
+siguen firmes ahí), y si un proyecto de práctica se reconvierte en cliente
+real, reemplazar las imágenes de Pinterest por (b)/(c)/(d) es bloqueante
+explícito de GATE 4 — no puede colarse a producción sin que alguien lo vea.
+M0 §7.1(e) y M8.6 v2.4 actualizados para reflejar esto.
+
+--------------------------------------------------------------------------------
+
+2026-07-11 (5) — FRONTEND CRAFT STANDARD v1.1→v1.2: §2.4 CONSTRUCCIÓN DE PALETA
+-------------------------------------------------------------------------------
+Origen: el humano trajo referencias de gama alta (oryzo.ai de Lusion + posts de
+"luxury palettes" de suraj.dsgn) buscando elevar el craft visual. Se destiló el
+LENGUAJE de esas referencias (reglas de construcción), no los valores puntuales.
+
+Hallazgo importante al analizar las paletas de referencia: varias (crema+verde
+salvia, crema+terracota, arena+vino) son EXACTAMENTE la familia que ya colisiona
+3 veces en el portfolio (VINCA, estudio-contable v1 y v2). Meterlas tal cual
+habría profundizado el problema de sameness, no resuelto. Por eso el fix destila
+estructura (roles, temperatura, ausencia de puro) y remite al chequeo
+cross-portfolio, en vez de listar hex "recomendados".
+
+Agregada §2.4 al Frontend Craft Standard:
+- 2.4.1: nunca #FFFFFF ni #000000 puros — siempre tintados (regla de Oryzo,
+  el tinte ES el sistema). Con ejemplos de claro cálido y oscuro tintado.
+- 2.4.2: paleta como sistema de ROLES (fondo/contrafondo/acento primario/
+  secundario/neutros tintados), no bolsa de colores. Si no podés decir EL
+  color en 1 palabra, no hay acento primario.
+- 2.4.3: el acento fuerte es editorial (escasez), no superficie — un acento
+  en el 40% de la pantalla ya no es acento.
+- 2.4.4: cruzar contra PORTFOLIO_REGISTRY antes de fijar; las paletas de
+  "luxury" de redes son consenso del momento, se usan como estructura no
+  como valores.
+Agregado tell #13 al ANTI-AI-SLOP CHECKLIST (§4): blanco/negro puro. Agregadas
+3 FAIL CONDITIONS de paleta.
+
+Nota: el 3D/WebGL de Oryzo (Three.js, transición 3D→2D, recorridos de cámara)
+se evaluó y se dejó EXPLÍCITAMENTE fuera de este fix — es una decisión de línea
+de negocio (curva de 6-9 meses, <5% de devs la manejan, choca con el piso
+no-JS de Vera-P2), no un ajuste de craft. Pendiente de documentar como línea
+premium diferida en M13 si el humano lo decide.
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+
 2026-07-11 (4) — ANÁLISIS LÓGICO DE HUECOS: 4 FIXES (M1, M2, §14, CDL-5 a 9 ítems)
 -------------------------------------------------------------------------------
 Origen: pedido explícito del humano de auditoría lógica completa, no solo

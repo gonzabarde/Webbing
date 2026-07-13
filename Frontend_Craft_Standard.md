@@ -1,4 +1,4 @@
-# FRONTEND CRAFT STANDARD (v1.1)
+# FRONTEND CRAFT STANDARD (v1.2)
 
 > Material de referencia transversal de craft visual. NO es un módulo de routing:
 > lo cargan M3, M5, M5.5 y M8.6 vía sus hooks (cuando el humano apruebe los diffs)
@@ -83,6 +83,50 @@ otra variable (layout, color, motion) y declarada en el Signature Brief.
 
 ---
 
+## 2.4 CONSTRUCCIÓN DE PALETA — REGLAS DURAS DE COLOR
+
+R1 (atmósfera) y el tell #6 (paleta tibia) del checklist §4 asumen un piso de
+color que hasta ahora no estaba escrito. Acá está, en positivo.
+
+### 2.4.1 NUNCA blanco puro ni negro puro
+Prohibido `#FFFFFF` como fondo/texto claro y `#000000` como fondo/texto oscuro,
+salvo excepción escrita. El blanco y el negro puros son la señal más barata de
+"default sin decisión". Se usan SIEMPRE tintados hacia la temperatura de la
+dirección:
+- Claro cálido: `#F2F1ED`, `#F7F3E9`, `#E9E0CF` (crema/perla/alabastro).
+- Oscuro tintado: `#101211`, `#161616`, `#0D1B2A` (carbón verdoso, obsidiana,
+  azul casi-negro). El oscuro lleva un matiz (verde, azul, vino) según la
+  dirección — nunca gris neutro plano.
+Regla de Oryzo, verificada en referencia de gama alta: el tinte cálido/frío ES el
+sistema; la pureza lee como error.
+
+### 2.4.2 ESTRUCTURA DE PALETA (roles, no lista de colores)
+Una paleta premium es un SISTEMA de roles, no una bolsa de 8 colores lindos:
+- 1 fondo dominante (oscuro tintado o claro cálido — define el registro).
+- 1 contrafondo (el opuesto del anterior, para secciones que respiran distinto).
+- 1 acento primario con carácter (el color que define al sitio en 1 palabra).
+- 0-1 acento secundario, subordinado, para detalle — no compite con el primario.
+- Neutros derivados (2-3 grises tintados hacia la misma temperatura, para texto
+  y bordes) — NO grises puros de Tailwind por default.
+Si no podés decir EL color del sitio en una palabra (tell #6), la paleta no
+tiene acento primario: tiene varios candidatos peleando y ninguno gana.
+
+### 2.4.3 EL ACENTO FUERTE ES EDITORIAL, NO DECORATIVO
+El acento saturado (un vino, un brass, un naranja, un terracota) se gana su
+fuerza por ESCASEZ. Aplicarlo a todos los botones, links y íconos lo degrada a
+ruido. Regla de Oryzo: el color fuerte es crédito editorial — momentos, no
+superficies. Un acento que aparece en el 40% de la pantalla ya no es acento.
+
+### 2.4.4 CHEQUEO CROSS-PORTFOLIO ANTES DE FIJAR (obligatorio)
+Toda paleta se cruza contra `Docs/PORTFOLIO_REGISTRY.md` ANTES de cerrarse
+(es también regla de M5, acá se refuerza a nivel de craft). Las paletas de
+"luxury" que circulan en redes (crema+verde salvia, crema+terracota, arena+
+vino) son el consenso del momento — tomarlas tal cual mete el problema de
+sameness MÁS adentro, no lo resuelve. Se usan como referencia de ESTRUCTURA
+(roles, temperatura, ausencia de puro), nunca de valores hex literales.
+
+---
+
 ## 3. LOS 4 REQUISITOS DE SALIDA (hereda y endurece M5.5)
 
 Ningún frontend sale de M5.5 (ni entra a producción vía M8–M9) sin los cuatro.
@@ -140,6 +184,7 @@ presente = 1 punto. **3+ puntos = el build huele a IA → FALLA.**
 | 10 | Border-radius + sombra suave idénticos en TODOS los contenedores | Ver sistema de componentes |
 | 11 | Escala uniforme: H1 apenas 2-3x el body | Medir |
 | 12 | Ningún elemento sangra, se superpone ni rompe la grilla | Ver layout completo |
+| 13 | Blanco puro `#FFFFFF` o negro puro `#000000` como fondo/texto principal sin excepción escrita (§2.4.1) | Ver CSS computado de fondo y texto |
 
 Los tells 1–12 aplican a CUALQUIER categoría, exista o no Mapa de Clichés de
 M5.5 para ella. Esto cubre el agujero de M8.6 (categorías sin mapa quedaban
@@ -267,6 +312,11 @@ No agregar React solo para usar React Bits.
 ## FAIL CONDITIONS
 - Producir frontend sin dirección nombrada (§1 incompleto).
 - Body en fuente de la lista 2.1 sin excepción escrita.
+- Blanco puro `#FFFFFF` o negro puro `#000000` como fondo/texto principal sin
+  excepción escrita (§2.4.1).
+- Paleta sin acento primario identificable en 1 palabra, o acento fuerte usado
+  como superficie en vez de momento editorial (§2.4.2 / §2.4.3).
+- Paleta fijada sin cruzar contra PORTFOLIO_REGISTRY (§2.4.4).
 - Salir de M5.5 con alguno de R1–R4 ausente y sin justificación.
 - Checklist §4 con 3+ tells en cualquier artefacto mostrado al humano o cliente.
 - Cumplir el estándar rompiendo el piso técnico (AA, responsive, reduced-motion).
