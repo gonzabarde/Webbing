@@ -81,6 +81,12 @@ Antes de emitir cualquier recomendación, verificar en una sola pasada:
    registro: recién ahí hacer fallback a verificar contra el CSS/tokens
    reales del build (nunca de memoria). Actualizar el registro con lo que
    se verifique, para que la próxima corrida no repita el trabajo.
+   EXCLUSIÓN OBLIGATORIA (INC-1, Cursor Café, 2026-07-13): la fila del
+   PROPIO proyecto que se está evaluando NUNCA cuenta como evidencia de
+   comparación — comparar únicamente contra las filas de OTROS clientes.
+   Un registro puede tener datos sin fuente citada de una decisión que el
+   proyecto todavía no tomó; leer la propia fila como si fuera terreno ya
+   decidido permite que el mecanismo se auto-confirme sin verificar nada.
 
 Contra ese dato (del registro o verificado en el momento):
 

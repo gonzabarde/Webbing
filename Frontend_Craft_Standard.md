@@ -1,4 +1,4 @@
-# FRONTEND CRAFT STANDARD (v1.2)
+# FRONTEND CRAFT STANDARD (v1.4)
 
 > Material de referencia transversal de craft visual. NO es un módulo de routing:
 > lo cargan M3, M5, M5.5 y M8.6 vía sus hooks (cuando el humano apruebe los diffs)
@@ -124,6 +124,46 @@ Toda paleta se cruza contra `Docs/PORTFOLIO_REGISTRY.md` ANTES de cerrarse
 vino) son el consenso del momento — tomarlas tal cual mete el problema de
 sameness MÁS adentro, no lo resuelve. Se usan como referencia de ESTRUCTURA
 (roles, temperatura, ausencia de puro), nunca de valores hex literales.
+
+### 2.4.5 MEDICIÓN OBLIGATORIA DE RATIOS ANTES DE CERRAR (agregada 2026-07-13,
+INC-2 de Cursor Café)
+Una paleta NO cierra con el AA "declarado como a verificar después" — eso
+convierte una condición de salida en deuda que se descubre recién en GATE 3
+(o peor, nunca). M5 mide, con script real (no a ojo), el ratio WCAG de cada
+par de rol antes de dar la paleta por cerrada:
+- fondo ↔ texto principal (mínimo 4.5:1 texto normal / 3:1 texto grande).
+- fondo ↔ acento, si el acento lleva texto encima (mismo mínimo según tamaño).
+- acento ↔ texto-sobre-acento (ej. texto de un CTA relleno).
+- fondo ↔ cualquier objeto gráfico SIGNIFICANTE (no decorativo) — si el
+  objeto comunica contenido (una escala, un gráfico, un ícono funcional),
+  aplica WCAG 1.4.11 (3:1) aunque "no sea texto". El error real que motivó
+  esta regla: una escala tratada como "decoración" medía 1.51:1 — era en
+  realidad el elemento que hacía legible el contenido central del sitio.
+Si UN color falla contra dos fondos distintos (ej. debe leerse sobre claro Y
+sobre oscuro), no se fuerza un compromiso mediocre en el medio — se declara
+POR ROL: una variante del color por cada fondo contra el que necesita
+funcionar (`--acento` para un fondo, `--acento-claro`/`--acento-oscuro` para
+el otro), nunca un solo valor promediado que falla contra ambos.
+Costo: 1 (script de ~20 líneas, reusable entre proyectos). Correrlo es más
+barato que descubrir en GATE 3 que el acento del proyecto no se puede usar
+donde el concepto lo necesita.
+
+**Extensión obligatoria (INC-4, Cursor Café): declarar el UMBRAL por token,
+no solo el ratio.** El mismo error de arriba se repite en otro eje si el
+ratio se mide pero no se etiqueta para qué sirve — un token a 3.56:1 es
+válido para un objeto gráfico (umbral 3:1) pero falla si alguien lo reusa
+después para texto (umbral 4.5:1). Pasó dos veces en la misma sesión, con
+dos ejes distintos de la misma clase de error (fondo-claro/fondo-oscuro,
+después gráfico/texto). La tabla de paleta que sale de M5 declara, por cada
+token, el USO al que está habilitado, no solo el hex y el ratio:
+- `4.5` — texto normal.
+- `3.0 (texto grande)` — solo si es ≥24px o ≥18.66px bold.
+- `3.0 (objeto gráfico)` — SOLO para elementos no-textuales que comunican
+  contenido (WCAG 1.4.11) — nunca reusar ese mismo token para texto después.
+- `3.0 (límite de componente)` — bordes/estados de UI interactiva.
+Un token sin uso declarado no se reusa "porque el color pega" — se mide de
+nuevo para el uso nuevo, aunque sea el mismo hex. Costo: 0 (es una columna
+más en la misma tabla que el párrafo anterior ya exige medir).
 
 ---
 
@@ -317,6 +357,12 @@ No agregar React solo para usar React Bits.
 - Paleta sin acento primario identificable en 1 palabra, o acento fuerte usado
   como superficie en vez de momento editorial (§2.4.2 / §2.4.3).
 - Paleta fijada sin cruzar contra PORTFOLIO_REGISTRY (§2.4.4).
+- Paleta cerrada con el AA "declarado como a verificar después" en vez de
+  medido con ratios reales de cada par de rol, incluidos objetos gráficos
+  significantes (§2.4.5).
+- Token de color reusado en un uso (texto/gráfico/borde) sin declarar el
+  umbral que le corresponde a ESE uso, aunque el hex ya tuviera un ratio
+  medido para otro uso (§2.4.5, extensión INC-4).
 - Salir de M5.5 con alguno de R1–R4 ausente y sin justificación.
 - Checklist §4 con 3+ tells en cualquier artefacto mostrado al humano o cliente.
 - Cumplir el estándar rompiendo el piso técnico (AA, responsive, reduced-motion).

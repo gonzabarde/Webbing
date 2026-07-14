@@ -16,6 +16,20 @@ cerrada, paleta todavía no). Marcar `—` en lo que falte, nunca inventar.
 real (código, no memoria ni transcripción), se marca `NO VERIFICADO` en vez
 de completarlo. Un campo vacío o marcado es más seguro que uno inventado.
 
+**Regla de trazabilidad (agregada 2026-07-13, tras INC-1 de Cursor Café):**
+ninguna celda pasa de `—` a un valor sin citar el archivo
+`_webbing/<proyecto>/Mx_*.md` que la cerró. Sin fuente citable, la celda
+queda en `—` / NO VERIFICADO, aunque el dato "parezca" correcto. Un
+registro auto-poblado sin fuente puede auto-validarse a sí mismo — pasó
+una vez, casi no se detecta (CDL-5 lee este archivo ANTES de re-verificar
+contra código). Trazabilidad, no confianza.
+
+**Regla de exclusión propia:** al correr el cross-check de M3/M5/CDL-5 para
+UN proyecto, la fila de ESE MISMO proyecto en este registro NUNCA cuenta
+como evidencia contra la cual comparar — una fila propia no puede validar
+una decisión que el proyecto todavía no tomó. Comparar únicamente contra
+las filas de OTROS clientes.
+
 --------------------------------------------------------------------------------
 
 ## REGISTRO
@@ -30,6 +44,7 @@ de completarlo. Un campo vacío o marcado es más seguro que uno inventado.
 | **Vera Arquitectura** | Mixto (#4 Brand Experience + #6 Portal cliente) | **Artesano + Protector** (terciario: Editor) | Newsreader / Schibsted Grotesk (Mona Sans planeado, descartado por buildability — ver `_webbing/INCIDENTES_M14.md` #1 y CHANGELOG P4) | yeso/piedra frío `#E9E8E3` · grafito `#191C1E` · azul de plano(acento) `#2C4A5C` | "Obra Abierta" | "Plano Habitado" (reveal plano técnico → fotografía de materia) | Hero → Work (grid de obras) → Process ("Open work") → Studio (dos arquitectos) → Contact/Footer |
 | **CUORE** | — | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO |
 | **Glow Factor** | — | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO |
+| **Cursor Café** | #4 Brand Experience (híbrido con conversión real) — fuente: `_webbing/CDL_1_project_intelligence.md` | **Editor + Anfitrión** | Instrument Serif / Familjen Grotesk | vino tostado(fondo dominante, cromático) `#2B161B` · hueso rosado(contrafondo) `#F0E9E6` · ultramar POR ROL (INC-2/INC-4): `--ultramar #3A4FE0` (5.19:1, solo sobre hueso) · `--ultramar-luz #6B84FF` (5.16:1, la marca sobre vino) · `--escala #856C72` (3.56:1, gráfico) · `--escala-texto #997F85` (4.65:1, labels de texto) — fuente: `_webbing/M5_visual_direction.md` + `_webbing/INCIDENTES_M14.md` INC-2/INC-4 | "El Punto Exacto" — fuente: `_webbing/M4_concept.md` | "La Marca" (trazo ultramar que se posa sobre una escala muda — NO la línea: Runa/Move On ya la tienen). Motion: "Aterriza y calla" — fuente: `_webbing/M5_visual_direction.md` | Hero → Origen → Proceso → Catálogo → **El Club (crítica, 5/7)** → El Local → Footer — fuente: `_webbing/CDL_1_project_intelligence.md` |
 
 --------------------------------------------------------------------------------
 

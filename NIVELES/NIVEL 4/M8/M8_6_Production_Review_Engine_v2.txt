@@ -1,4 +1,4 @@
-M8.6 — PRODUCTION REVIEW ENGINE (v2.4)
+M8.6 — PRODUCTION REVIEW ENGINE (v2.7)
 =======================================
 
 OPERATIONAL HEADER
@@ -108,6 +108,46 @@ humano miró el deploy.
 - Si M0 no dejó una Decisión de Sourcing registrada: eso ya es FAIL CONDITION
   de M0 (§7.1) — señalarlo como hallazgo de M14, no improvisar una decisión
   acá con el proyecto ya construido.
+
+VERIFICACIÓN DE CONTRASTE POR ROL EN EL DOM REAL (v2.7, INC-5+INC-6 Cursor
+Café) — tercera condición adicional para marcar Direction Fidelity como OK.
+§2.4.5 del Craft Standard exige declarar el umbral por token — pero es una
+regla de ESCRITURA, y en la corrida de Cursor Café falló TRES veces en una
+sesión, la última después de haber sido escrita y citada en el mismo
+archivo. Confiar en que quién escribe el CSS se acuerde del umbral de cada
+uso NO FUNCIONA — hace falta un verificador que corra sobre el DOM real, no
+sobre la intención:
+1. Para cada token de color usado en el build, detectar su ROL REAL por
+   DÓNDE se aplica (no por lo que dice el comentario que lo declara): ¿es
+   color de texto? ¿borde/outline de un control interactivo? ¿fill/stroke
+   de un SVG que comunica contenido?
+2. CRITERIO DE "DECORATIVO" (corregido, INC-6): NO usar `aria-hidden` como
+   proxy de decorativo — son cosas distintas. `aria-hidden` significa "no lo
+   anuncies al lector de pantalla" (correcto junto a un equivalente
+   `sr-only`, es buena práctica de a11y); NO significa "sin información
+   visual". Un SVG puede tener equivalente textual perfecto para ceguera Y
+   ser crítico de contraste para baja visión — las dos cosas son ejes de
+   accesibilidad distintos, no sustitutos. Test real de decorativo: ¿SI SE
+   BORRA, el usuario pierde información? Si sí, se mide, tenga o no
+   `aria-hidden`. Solo se excluye lo genuinamente ornamental (textura de
+   fondo, línea puramente estética sin contenido).
+3. Medir el contraste real de ese uso contra su fondo real renderizado.
+4. Comparar contra el umbral que corresponde a ESE rol (texto 4.5 / texto
+   grande o gráfico o límite de componente 3.0) — no contra el umbral con el
+   que el token se declaró originalmente en M5.
+5. REPORTE OBLIGATORIO DE COBERTURA (INC-6): el output SIEMPRE declara
+   cuántos elementos se revisaron por rol ("texto: 12 revisados, 0 fallos";
+   "SVG no-decorativo: 2 revisados, 0 fallos"), nunca solo la lista de
+   fallos. "0 fallos" sin conteo de revisados es indistinguible de "el
+   verificador no revisó nada" — verde falso silencioso. Si el conteo de
+   revisados en alguna categoría esperada da 0 (ej. hay SVG en el build
+   pero "SVG revisados: 0"), tratarlo como FALLA del verificador mismo, no
+   como "nada que reportar".
+Un token puede pasar la declaración de M5 y fallar acá si se reutilizó en un
+rol distinto al declarado — ESO es lo que hay que agarrar, y es exactamente
+lo que §2.4.5 sola no puede agarrar. Costo 1 (script reusable, corre sobre
+clases/estilos computados reales). Sin este chequeo, Direction Fidelity no
+puede marcarse OK aunque la tabla de M5 esté impecable en el papel.
 
 DEFINICIÓN DE GENÉRICO
 ------------------------
@@ -224,6 +264,40 @@ disponibles), el cross-browser NO se puede ejecutar. En ese caso:
   filter, render de fuentes variables).
 Un motor único NO habilita un PASA limpio; habilita un diferimiento honesto y trazable.
 
+MÉTODO DE VERIFICACIÓN — CUANDO EL SCREENSHOT FALLA O EL TIMELINE ESTÁ
+CONGELADO (v2.5, INC-3 Cursor Café; screenshot-timeout ya es 3ª ocurrencia
+del patrón Runa-P10):
+Dos fallas distintas del mismo problema — verificar el build REAL sin
+confiar en lo que el preview MUESTRA:
+1. Screenshot con timeout consistente en ciertas páginas/estados: sustituir
+   por eval + inspect (bounding boxes, estilos computados, geometría) sobre
+   el DOM real. No es una pérdida de rigor — es otro método para la misma
+   verificación.
+2. Preview con `document.visibilityState: "hidden"` congela
+   `document.timeline.currentTime` en 0 — las animaciones figuran como
+   `running` pero nunca avanzan. Consecuencia real: "no vi la animación
+   correr" NUNCA es evidencia de que esté rota, y un `getComputedStyle`
+   ingenuo sobre un elemento animado puede devolver el estado `from`
+   (`animation-fill-mode: backwards`) — que se lee como "el reveal está
+   roto" cuando en realidad es el timeline el que está parado (falso
+   positivo de la clase Vera-P2, en la dirección opuesta).
+   Técnica correcta:
+   - Para ver el estado FINAL real: `document.getAnimations().forEach(a =>
+     a.finish())` antes de leer estilos/geometría.
+   - Para el chequeo de Vera-P2 (¿el contenido es visible SIN motor de
+     animación?): clonar el nodo con `style.animation = 'none'` y leer SU
+     estado computado — prueba directa de que el fallback funciona, no una
+     inferencia sobre el nodo animado original.
+   Documentar en el output qué técnica se usó cuando el timeline esté
+   congelado — para que quién audite después no repita el falso positivo.
+3. Trampa de geometría SVG: un test ingenuo de "¿está visible?" con
+   `rect.width > 0 && rect.height > 0` da FALSO NEGATIVO sobre una línea
+   vertical/horizontal (`x1===x2` o `y1===y2` → bounding box de ancho/alto
+   cero por definición; el grosor lo aporta el `stroke`, no el bbox). Test
+   correcto para geometría SVG animada: `height > 0 && visibility ===
+   'visible' && opacity !== '0' && strokeDashoffset === '0px'` — no solo
+   dimensiones del bounding box.
+
 TESTS
 -----
 - ¿La tabla de fidelidad tiene los 5 campos completados?
@@ -236,6 +310,9 @@ TESTS
   token viejo contra el documento de origen antes de marcar OK?
 - ¿Se verificó EJECUTANDO que la Decisión de Sourcing Fotográfico de M0
   (§7.1) se cumplió en el build real, no solo que exista la spec de M5?
+- ¿Se corrió el verificador de contraste por rol sobre el DOM real (no solo
+  la tabla declarada de M5), comparando cada token contra el umbral de SU
+  uso real, no el umbral con el que se declaró originalmente?
 
 OUTPUT
 ------

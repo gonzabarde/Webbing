@@ -8,6 +8,198 @@ Autoridad: los cambios los aprueban y aplica el humano (SKILL.md secciones 7 y 1
 
 --------------------------------------------------------------------------------
 
+2026-07-13 (6) — CIERRE DE SESIÓN: PASADA DE CONSISTENCIA + REGISTRO DESINCRONIZADO
+-------------------------------------------------------------------------------
+Al cerrar la sesión de Cursor Café (INC-1 a INC-6), pasada de consistencia
+sobre M8.6 (5 ediciones, v2.3→v2.7) y Frontend_Craft_Standard.md (3
+ediciones, v1.2→1.4): sin duplicados, sin referencias rotas. Agregado un
+ítem faltante a FAIL CONDITIONS del Craft Standard (umbral por token, INC-4,
+no estaba listado aparte de §2.4.5).
+
+Hallazgo al revisar: Docs/PORTFOLIO_REGISTRY.md tenía la fila de Cursor Café
+con el ultramar ORIGINAL (`#3A4FE0` a secas, el que fallaba AA a 2.74:1) —
+no los valores corregidos por rol de INC-2/INC-4. Es el mismo patrón de
+desincronización de fuente de verdad que M8.6 v2.3 existe para cazar en
+documentos de proyecto, esta vez en el registro central mismo. Corregido:
+fila actualizada con los 4 tokens por rol y sus ratios reales, fuente citada
+(INCIDENTES_M14.md INC-2/INC-4).
+
+Sesión de Cursor Café cerrada por hoy. Total del día: 6 incidentes
+documentados (INC-1 a INC-6), 8 fixes de sistema aplicados (PORTFOLIO_
+REGISTRY trazabilidad+exclusión, CDL-5 exclusión propia, Craft Standard
+§2.4.5+extensión umbral, M8.6 sourcing+timeline+SVG+contraste-por-rol+
+aria-hidden+cobertura). GATE 3 en curso (backend pendiente), GATE 4
+correctamente bloqueado por datos reales de cliente que no existen (proyecto
+de práctica).
+
+--------------------------------------------------------------------------------
+
+2026-07-13 (5) — INC-6: DOS BUGS EN EL VERIFICADOR QUE ESCRIBÍ HACE UNA HORA (M8.6 v2.7)
+-------------------------------------------------------------------------------
+Origen: al usar el verificador de contraste por rol (M8.6 v2.6, aplicado hoy
+mismo), Claude Code encontró dos bugs reales EN LA REGLA QUE YO ACABABA DE
+ESCRIBIR:
+
+1. Usé "sin aria-hidden" como proxy de "no-decorativo". Es incorrecto:
+   aria-hidden significa "no lo anuncies al lector de pantalla" (correcto
+   junto a un `sr-only` equivalente), no "sin información visual". Los 20
+   SVG del build (incluida la firma y la escala — los dos elementos más
+   críticos, los mismos de INC-2) llevan aria-hidden correctamente por
+   accesibilidad, y mi regla los habría saltado a TODOS. Corregido: el
+   criterio real es "¿al borrarlo se pierde información?", no la presencia
+   del atributo.
+2. La primera implementación del verificador dio "svg: 0 revisados" — uso
+   `width>0` como test de visibilidad, que falla en líneas verticales (la
+   trampa documentada en M8.6 §3, escrita por el propio Claude Code DOS
+   incidentes antes). Hallazgo más importante que el bug en sí: "0 fallos"
+   sin reportar cuántos elementos se revisaron es indistinguible de "el
+   verificador no revisó nada" — un verde falso silencioso.
+
+Fix — M8.6 v2.6→2.7: criterio de decorativo corregido (prueba de pérdida de
+información, no atributo de accesibilidad). Agregado reporte obligatorio de
+cobertura: el verificador siempre declara cuántos elementos revisó por rol,
+nunca solo la lista de fallos — un conteo de "0 revisados" en una categoría
+con elementos reales es FALLA del verificador, no ausencia de hallazgos.
+
+Nota honesta: es la segunda vez en un día que un fix propio necesita un fix
+sobre el fix (ver también INC-4 sobre §2.4.5). Confirma, otra vez, que un
+mecanismo recién escrito necesita el mismo escépticismo que uno viejo — esta
+vez aplicado a algo que yo mismo escribí, no solo a lo que escribe Claude
+Code.
+
+--------------------------------------------------------------------------------
+
+2026-07-13 (4) — INC-5: EL VERIFICADOR QUE FALTABA (M8.6 v2.6) + GATE 3 FALLA HONESTO
+-------------------------------------------------------------------------------
+Origen: tercera vez en la sesión que un token de color se usa fuera del
+umbral que le corresponde — esta vez DESPUÉS de que §2.4.5 (INC-2/INC-4) ya
+estuviera escrita y citada en el mismo archivo CSS. Prueba definitiva de que
+una regla de ESCRITURA no alcanza cuando depende de que alguien se acuerde
+del contexto correcto en cada uso — mismo principio que ya aplicamos hoy a
+RLS+GRANT, sincronización de fuente de verdad y sourcing fotográfico, ahora
+aplicado a contraste de color.
+
+Fix — M8.6 v2.5→2.6: nueva condición para Direction Fidelity —
+VERIFICACIÓN DE CONTRASTE POR ROL EN EL DOM REAL. Para cada token de color
+en el build, detecta su rol REAL por dónde se aplica (texto / borde de
+control / SVG no-decorativo), mide el contraste contra su fondo renderizado,
+y compara contra el umbral de ESE rol — no el umbral con el que el token se
+declaró en M5. Un token puede pasar la declaración de M5 y fallar acá si se
+reutilizó en un rol distinto — exactamente lo que pasó tres veces hoy.
+
+GATE 3 de Cursor Café: FALLA, correctamente declarado. El flujo de alta al
+club no persiste (B0/B1 no construidos, `console.warn` sin disimular en vez
+de fingir un submit funcional). Cross-browser diferido honesto (solo
+Chromium disponible, v2.2). Claude Code correctamente NO provisionó Supabase
+por su cuenta — reconoció que es expansión de alcance (M13.2, Vera-P5) y
+escaló la decisión.
+
+--------------------------------------------------------------------------------
+
+2026-07-13 (3) — INC-4: UMBRAL POR TOKEN (Craft §2.4.5) + TRAMPA DE GEOMETRÍA SVG (M8.6)
+-------------------------------------------------------------------------------
+Origen: 20 minutos después de aplicar el fix de INC-2, Claude Code cometió la
+MISMA clase de error en otro eje: reusó `--escala` (3.56:1, válido para
+objeto gráfico) para texto (necesita 4.5:1) sin darse cuenta — el ratio
+medido no decía para qué estaba habilitado. Al investigar encontró dos bugs
+más que ningún chequeo de contraste iba a agarrar nunca: texto dentro de un
+`<svg>` escalando por unidades de viewBox (12px renderizando a ~6px en
+mobile), y un label cayendo fuera del viewport por el sangrado de R3.
+
+Fix — Frontend_Craft_Standard.md v1.3→1.4, extensión de §2.4.5: la tabla de
+paleta de M5 declara, por token, el UMBRAL de uso (texto 4.5 / texto grande 3
+/ objeto gráfico 3 / límite de componente 3), no solo el ratio medido. Un
+token sin uso declarado no se reusa por "el color pega" — se mide de nuevo.
+Costo 0 (una columna más en la tabla que §2.4.5 ya exige).
+
+Además, de INC-3 (mismo día, 4ta ocurrencia del timeout de screenshot):
+Claude Code casi reporta la firma como invisible en mobile por un bug de su
+PROPIO test (`rect.width>0` da falso negativo sobre una línea SVG vertical,
+que tiene bbox de ancho cero por definición — el grosor lo da el stroke). Se
+detectó antes de reportarlo. Agregado a M8.6 v2.5 el test correcto de
+geometría SVG animada.
+
+Nota de proceso: dos incidentes reales en una hora sobre el MISMO módulo
+(§2.4.5) que se acababa de escribir hoy — la regla nueva era necesaria pero
+no suficiente en su primera versión. Queda como recordatorio de que un fix
+recién aplicado necesita el mismo escépticismo que uno viejo.
+
+--------------------------------------------------------------------------------
+
+2026-07-13 (2) — DOS FIXES DE GATE 2: MEDICIÓN DE AA (INC-2) Y MÉTODO DE TIMELINE (INC-3)
+-------------------------------------------------------------------------------
+Origen: primer GATE 2 real bajo el cronograma de testing. Verificación
+independiente del humano (script WCAG propio) confirmó exacto el hallazgo de
+Claude Code: ultramar `#3A4FE0` sobre vino `#2B161B` = 2.74:1, falla AA incluso
+para texto grande. Claude Code había encontrado además, sin que se lo pidieran,
+que la escala muda (elemento funcional, no decorativo) medía 1.51:1 —
+prácticamente invisible — y que el borde del CTA también fallaba.
+
+Fix 1 (INC-2) — Frontend_Craft_Standard.md v1.2→v1.3, nueva §2.4.5: ninguna
+paleta cierra en M5 con el AA "declarado como a verificar después". Se miden
+los ratios reales (script, no a ojo) de cada par de rol — incluidos objetos
+gráficos SIGNIFICANTES además de texto (WCAG 1.4.11), que es exactamente lo
+que se había pasado por alto por tratarse como "decoración". Si un color
+falla contra dos fondos distintos, se declara POR ROL (variantes), no se
+fuerza un compromiso mediocre en el medio.
+
+Fix 2 (INC-3) — M8.6 v2.4→v2.5: nueva sección de método para cuando el
+screenshot falla (3ª ocurrencia del patrón ya visto en Runa) o el timeline de
+animaciones del preview está congelado (`visibilityState: hidden` →
+`timeline.currentTime: 0`). Hallazgo nuevo: un `getComputedStyle` ingenuo
+sobre un elemento animado en esas condiciones puede devolver el estado
+`from` y leerse como "el reveal está roto" cuando es el timeline el que está
+parado — falso positivo de la clase Vera-P2, en dirección opuesta. Técnica
+correcta documentada: `getAnimations().forEach(a=>a.finish())` para el
+estado final, clon con `animation:none` para verificar el fallback real de
+Vera-P2 sin depender del nodo animado.
+
+Ambos fixes resuelven condiciones que M14 habría tardado días en formalizar
+— se aplicaron el mismo día por tratarse de gaps que afectan directamente al
+próximo GATE 3 de este mismo proyecto en curso.
+
+--------------------------------------------------------------------------------
+
+2026-07-13 — FIX CRÍTICO: TRAZABILIDAD DEL PORTFOLIO_REGISTRY (de INC-1, Cursor Café)
+-------------------------------------------------------------------------------
+Origen: primer día de stress test bajo el cronograma nuevo. Durante GATE 1 de
+Cursor Café, el humano encontró que Docs/PORTFOLIO_REGISTRY.md tenía una fila
+COMPLETA para el proyecto (paleta, concepto, firma, esqueleto) escrita ANTES
+de que M4/M5 corrieran. Claude Code verificó contra su propio historial de
+tool calls (no de memoria) y confirmó: los dos únicos writes propios a esa
+fila dejaron todo en `—`. El origen de los datos fantasma quedó sin
+explicación — correctamente no se inventó una (M11.8, FALSE UNAVAILABILITY/
+FALSE CERTAINTY, aplicado por el propio sistema a sí mismo).
+
+Gravedad real: la paleta fantasma (carbón+yeso+cobre+bosque) era
+estructuralmente idéntica a VINCA y Estudio Contable v2 (cuarta ocurrencia
+del house-style ya documentado) — y había sido escrita DESPUÉS de que el M2
+del propio proyecto prohibiera explícitamente esa combinación. Si M5 hubiera
+leído su propia fila como evidencia válida, el cross-check se habría
+auto-confirmado sin detectar nada — el mecanismo central de Principio 10
+habría quedado contaminado en el único lugar donde el sistema no re-verifica
+(CDL-5 lee el registro ANTES de tocar código real). Nadie lo agarró — ni
+gate ni cross-check — hasta que el humano leyó el archivo directamente.
+
+Fix aplicado (dos partes, mismo texto en los dos archivos por redundancia
+deliberada):
+1. Docs/PORTFOLIO_REGISTRY.md: nueva REGLA DE TRAZABILIDAD — ninguna celda
+   pasa de `—` a un valor sin citar el archivo `_webbing/<proyecto>/Mx_*.md`
+   que la cerró. Sin fuente citable, vuelve a `—`/NO VERIFICADO aunque el
+   dato parezca correcto. Trazabilidad, no confianza.
+2. Docs/PORTFOLIO_REGISTRY.md y CDL-5: REGLA DE EXCLUSIÓN PROPIA — la fila
+   del proyecto que se está evaluando NUNCA cuenta como evidencia contra la
+   cual comparar. Solo filas de OTROS clientes.
+
+Mitigación aplicada por Claude Code en el momento (antes de este fix de
+sistema): revirtió la fila a estado honesto, corrió M4/M5 de cero excluyendo
+la propia fila como evidencia, y la nueva paleta (vino tostado+hueso+
+ultramar) pasó el cross-check real, con las dos coincidencias más cercanas
+(ECOS, Vera) evaluadas explícitamente y descartadas por razón específica, no
+por default.
+
+--------------------------------------------------------------------------------
+
 2026-07-11 (6) — FIX: SOURCING FOTOGRÁFICO SIN RESOLVER (M0 → M8.6)
 -------------------------------------------------------------------------------
 Origen: el humano señaló que "la parte visual/fotos" parecía un hueco de
