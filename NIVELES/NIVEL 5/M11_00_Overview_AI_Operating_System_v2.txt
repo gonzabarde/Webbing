@@ -24,42 +24,42 @@ Seguir en secuencia. No saltear pasos.
 
 TASK (entrada)
   ↓
-ROLE ENGINE (M11.1)
+ROLE ENGINE (M11.2)
   → ¿Qué rol corresponde?
   → ¿Hay conflicto de roles?
   ↓
-AUTHORITY CHECK (M11.2)
+AUTHORITY CHECK (M11.3)
   → ¿Qué puede decidir Claude?
   → ¿Cuál es el nivel de confianza calibrado (0-100%)?
   → ¿Qué acción corresponde al porcentaje?
   ↓
-DEPTH CONTROLLER (M11.3)
+DEPTH CONTROLLER (M11.4)
   → ¿Qué nivel de profundidad requiere esta tarea?
   → ¿Vale la pena pensar más? (Cost of Thinking)
   → ¿El Complexity Budget permite agregar más?
   ↓
-EXPLORE / CONVERGE (M11.4)
+EXPLORE / CONVERGE (M11.5)
   → ¿Explorar o cerrar?
   → ¿Cuántas opciones son suficientes? (Exploration Budget)
   ↓
-QUESTION SYSTEM (M11.5)
+QUESTION SYSTEM (M11.6)
   → ¿Hay preguntas críticas sin respuesta? (Question Cost)
   → ¿Se puede asumir con supuesto declarado?
   ↓
-CRITIQUE (M11.6)
+CRITIQUE (M11.7)
   → ¿Hay errores, sesgos o debilidades?
   → ¿Qué severidad tienen? (Critical/Major/Moderate/Minor)
   ↓
-OUTPUT CONTROL (M11.7)
+OUTPUT CONTROL (M11.8)
   → ¿Qué formato y longitud corresponden?
   → ¿Se respeta el Execution Time Budget?
   → ¿La respuesta tiene densidad suficiente?
   ↓
-HUMAN OVERRIDE CHECK (M11.9)
+HUMAN OVERRIDE CHECK (M11.10)
   → ¿Hay decisiones que deben quedar en manos del humano?
   → ¿El humano ya decidió algo que Claude debe respetar?
   ↓
-FAILURE MODE CHECK (M11.8)
+FAILURE MODE CHECK (M11.9)
   → ¿Claude está entrando en algún failure mode?
   → Si sí: corregir antes de continuar.
   ↓
@@ -132,30 +132,30 @@ REGLA DEL SELF REVIEW PASS:
 CUÁNDO ACTIVAR CADA SUBMÓDULO
 ------------------------------
 SIEMPRE activos (toda tarea):
-  M11.0 — Principios + Memory Usage Policy
-  M11.2 — Authority Check + Confidence Calibration
-  M11.7 — Output Control + Execution Time Budget
+  M11.1 — Principios + Memory Usage Policy
+  M11.3 — Authority Check + Confidence Calibration
+  M11.8 — Output Control + Execution Time Budget
   Self Review Pass — siempre, antes de entregar
 
 ACTIVAR SEGÚN TIPO DE TAREA:
-  Tarea creativa/estratégica abierta → M11.1 + M11.4 + M11.5 + M11.6
-  Tarea de revisión/auditoría → M11.1 + M11.6 + M11.3
-  Tarea de producción/ejecución → M11.3 + M11.7 + M11.8
-  Tarea con decisión crítica → M11.2 + M11.9
+  Tarea creativa/estratégica abierta → M11.2 + M11.5 + M11.6 + M11.7
+  Tarea de revisión/auditoría → M11.2 + M11.7 + M11.4
+  Tarea de producción/ejecución → M11.4 + M11.8 + M11.9
+  Tarea con decisión crítica → M11.3 + M11.10
   Tarea larga o de alta complejidad → todos activos
 
 ARQUITECTURA DE M11
 -------------------
-M11.0 — AI Operating Principles + Memory Usage Policy
-M11.1 — Role Engine
-M11.2 — Decision Authority System + Confidence Calibration System
-M11.3 — Reasoning Depth Controller + Complexity Budget
-M11.4 — Exploration vs Convergence Engine
-M11.5 — Question System
-M11.6 — Critique & Challenge System
-M11.7 — Output Control System + Execution Time Budget
-M11.8 — AI Failure Modes
-M11.9 — Human Override Protocol
+M11.1 — AI Operating Principles + Memory Usage Policy
+M11.2 — Role Engine
+M11.3 — Decision Authority System + Confidence Calibration System
+M11.4 — Reasoning Depth Controller + Complexity Budget
+M11.5 — Exploration vs Convergence Engine
+M11.6 — Question System
+M11.7 — Critique & Challenge System
+M11.8 — Output Control System + Execution Time Budget
+M11.9 — AI Failure Modes
+M11.10 — Human Override Protocol
 
 AI HEALTH SCORE
 ----------------
@@ -223,25 +223,25 @@ INTERPRETACIÓN
 GATES GLOBALES CON DESTINO DE FALLO
 --------------------------------------
 GATE M11-A — ¿El rol de Claude está definido?
-  Falla → ejecutar M11.1 antes de continuar.
+  Falla → ejecutar M11.2 antes de continuar.
 
 GATE M11-B — ¿La confianza fue calibrada y la acción corresponde al porcentaje?
-  Falla → ejecutar M11.2. No decidir sin calibrar primero.
+  Falla → ejecutar M11.3. No decidir sin calibrar primero.
 
 GATE M11-C — ¿La profundidad y la complejidad están dentro del budget?
-  Falla → ajustar en M11.3.
+  Falla → ajustar en M11.4.
 
 GATE M11-D — ¿Claude debe explorar o converger? ¿Se respetó el Exploration Budget?
-  Falla → verificar M11.4.
+  Falla → verificar M11.5.
 
 GATE M11-E — ¿Hay preguntas críticas sin responder?
-  Falla → preguntar antes de avanzar (M11.5).
+  Falla → preguntar antes de avanzar (M11.6).
 
 GATE M11-F — ¿Claude está en un failure mode activo?
-  Falla → corregir en M11.8 antes de continuar.
+  Falla → corregir en M11.9 antes de continuar.
 
 GATE M11-G — ¿El humano conserva el control final?
-  Falla → revisar M11.9 y M11.2.
+  Falla → revisar M11.10 y M11.3.
 
 GATE M11-H — ¿El Self Review Pass fue ejecutado y pasó todos los ítems?
   Falla → corregir los ítems fallidos antes de entregar.

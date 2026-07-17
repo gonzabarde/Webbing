@@ -1,4 +1,4 @@
-CDL-5 — EXECUTIVE CREATIVE DIRECTOR (v1.1)
+CDL-5 — EXECUTIVE CREATIVE DIRECTOR (v1.2)
 ==========================================
 
 OBJETIVO
@@ -121,6 +121,11 @@ Contra ese dato (del registro o verificado en el momento):
   — esto es entre clientes de la agencia. Preventivo: sin caso confirmado
   aún, agregado el 2026-07-11 por el mismo patrón que ya se confirmó en
   tipografía, paleta y arquetipo de marca.
+- Combinación de patrones de M9.1/M9.2 (Layout + Componentes elegidos): ¿la
+  MISMA combinación nombrada (ej. "Editorial Split" + "Editorial Hero") ya
+  se usó en otro cliente? M9 solo chequea contra el Mapa de Clíchés de
+  M5.5 (mercado) — nunca contra el propio portfolio. Preventivo, agregado
+  el 2026-07-14 al auditar M9, sin caso confirmado aún.
 
 Este es el backstop centralizado: cada módulo (M1-M5.5) puede tener su
 propio chequeo de Principio 10 (si lo tiene), pero CDL-5 es el único punto
@@ -157,15 +162,17 @@ RETROCEDER
 - La Verificación de Diferenciación de Portfolio encontró una colisión con otro
   cliente (categoría mental/positioning, arquetipo/voz, tipografía, paleta,
   nombre de concepto, gesto de firma, esqueleto/orden de secciones,
-  dirección fotográfica, o descriptor de motion) — automático, sin importar
-  el resto del análisis. Destino según el ítem que colisiona: categoría
-  mental → M1, arquetipo/voz → M2, tipografía → M3, concepto → M4, paleta/
-  fotografía/motion → M5, firma → M5/M9.8, esqueleto → CDL-1 (IA Spec).
+  dirección fotográfica, descriptor de motion, o combinación de patrones
+  M9.1/M9.2) — automático, sin importar el resto del análisis. Destino
+  según el ítem que colisiona: categoría mental → M1, arquetipo/voz → M2,
+  tipografía → M3, concepto → M4, paleta/fotografía/motion → M5, firma →
+  M5/M9.8, esqueleto → CDL-1 (IA Spec), patrones M9.1/M9.2 → M9.
 
 RETROCEDER requiere destino obligatorio:
 "Retroceder a [módulo específico]: [razón en una línea]."
 Módulos posibles: M0 Discovery / M1 Positioning / M2 Brand Translation /
-M4 Concept Generation / M4.5 Perception / M5 Visual Direction / CDL-1 / CDL-2
+M3 Typography / M4 Concept Generation / M4.5 Perception / M5 Visual
+Direction / M9 Technical Pattern Library / M9.8 Signature System / CDL-1 / CDL-2
 
 EXECUTIVE OUTPUT
 ----------------
@@ -220,7 +227,8 @@ Si CDL-3 y CDL-4 discrepan, aplicá la Regla de Conflicto:
 Ejecutá la Verificación de Diferenciación de Portfolio: categoría mental/
   positioning, arquetipo/voz de marca, tipografía, paleta, nombre de
   concepto, gesto de firma, esqueleto/orden de secciones, dirección
-  fotográfica y descriptor de motion, contra los builds/documentos reales
+  fotográfica, descriptor de motion, y combinación de patrones M9.1/M9.2,
+  contra los builds/documentos reales
   de otros clientes de Webbing — no de memoria. Una colisión es RETROCEDER
   automático al módulo de origen, sin importar el resto del score.
 Antes de recomendar, ejecutá la Verificación Comercial:

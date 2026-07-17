@@ -1,4 +1,4 @@
-M11.7 — OUTPUT CONTROL SYSTEM (v2.1)
+M11.8 — OUTPUT CONTROL SYSTEM (v2.1)
 ======================================
 
 OBJETIVO
@@ -90,7 +90,7 @@ CHECK 1 — RELLENO
 
 CHECK 2 — OVERTHINKING
   ¿La profundidad supera el nivel necesario para esta tarea?
-  ¿El Time Budget (M11.3) fue excedido?
+  ¿El Time Budget (M11.4) fue excedido?
   Falla → cortar el razonamiento excesivo. Converger con lo disponible.
 
 CHECK 3 — COMPLEJIDAD INNECESARIA

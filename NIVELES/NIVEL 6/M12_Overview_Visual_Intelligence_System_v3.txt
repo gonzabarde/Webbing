@@ -1,5 +1,10 @@
-M12 — VISUAL INTELLIGENCE SYSTEM (v3)
-=====================================
+M12 — VISUAL INTELLIGENCE SYSTEM (v3.1)
+=======================================
+
+PERSISTENCIA: la biblioteca de referencias vive en Docs/M12_REFERENCE_LIBRARY.md
+(agregado 2026-07-16). M12.1/M12.2/M12.4/M12.6/M12.8/M12.9 leen y escriben ahí —
+sin ese archivo, "validated", "standard" y los gaps de búsqueda son criterios
+cuantificados que nadie puede verificar en ejecución.
 
 PROPÓSITO GENERAL
 -----------------
@@ -120,7 +125,7 @@ GATE 12-E — Anti-Copy Gate
   Falla → bloquear si score ≥ 13. Señalar si hay cliché aunque el score sea bajo.
 
 GATE 12-F — Scoring Gate
-  ¿El score promedio supera 5.0?
+  ¿El score promedio es ≥ 5.0?
   Falla → descartar. No entra a la biblioteca.
 
 GATE 12-G — Evolution Gate

@@ -35,6 +35,7 @@ Webbing/                          ← raíz del skill (~/.claude/skills/webbing/
 │   ├── CHANGELOG.txt             ← bitácora de arquitectura
 │   ├── OPERATIONAL_HEADER_STANDARD.txt
 │   ├── M14_PROPOSAL_LOG.txt      ← índice de propuestas M14 (todas las disposiciones)
+│   ├── M12_REFERENCE_LIBRARY.md  ← persistencia de M12 (referencias, patrones, gaps)
 │   ├── PROPUESTA_Frontend_Craft_diffs.md  ← APLICADO (histórico)
 │   ├── Webbing_Master_System_Document_v2.txt  ← REDIRECT (deprecado)
 │   ├── BRIEF_CLIENTE1_VINCA.md   ← brief ficticio corrida VINCA

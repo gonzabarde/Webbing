@@ -1,4 +1,4 @@
-M8.6 — PRODUCTION REVIEW ENGINE (v2.7)
+M8.6 — PRODUCTION REVIEW ENGINE (v2.9)
 =======================================
 
 OPERATIONAL HEADER
@@ -149,6 +149,45 @@ lo que §2.4.5 sola no puede agarrar. Costo 1 (script reusable, corre sobre
 clases/estilos computados reales). Sin este chequeo, Direction Fidelity no
 puede marcarse OK aunque la tabla de M5 esté impecable en el papel.
 
+VERIFICACIÓN DE RELACIONES ESPACIALES EN EL DOM REAL (v2.9, P1 corrida
+Estudio de Tatuaje) — CUARTA condición adicional para marcar Direction
+Fidelity como OK. Cierra el punto ciego que la v2.8 abrió sin querer.
+EL PROBLEMA: al declarar eval+inspect como MÉTODO PRIMARIO (v2.8, por la
+limitación estructural del screenshot), el sistema perdió sin reemplazo lo
+único que el screenshot verificaba gratis: la COMPOSICIÓN. eval+inspect mide
+PROPIEDADES (contraste, tamaños, overflow horizontal, tells) pero no
+RELACIONES ESPACIALES (¿dos elementos se pisan? ¿el texto respeta el margen
+del sistema?). Mientras el screenshot era el método principal la ceguera no
+importaba; al volverse primario eval+inspect, la ceguera pasa de puntual a
+SISTEMÁTICA en todo proyecto futuro.
+CASO REAL QUE LO MOTIVA (Estudio de Tatuaje, 2026-07-14): el hero pasó GATE 3
+con el wordmark del header ENCIMADO sobre el eyebrow y todo el contenido
+pegado al borde (x=0) — el `.hero` no tenía padding horizontal. Verificador
+de contraste 61 elementos/0 fallos, 0/13 tells, AA y overflow: TODO verde.
+Lo agarró el humano mirando una captura, en segundos. Ningún chequeo
+automático lo vio porque ninguno miraba dónde está una caja respecto de otra.
+QUÉ CORRER (costo 1, mismo eval, sobre el DOM real):
+1. COLISIÓN: para pares de elementos que NO deben solaparse (header/nav vs.
+   contenido del hero, texto vs. texto, label vs. label), medir intersección
+   de `getBoundingClientRect()`. Dos rects que se cruzan y no son
+   deliberadamente superpuestos (R3 declara la superposición intencional en
+   M5) = FALLA.
+2. ALINEACIÓN AL SISTEMA: los bloques de texto respetan el padding del
+   sistema — `left` alineado al token de padding (ej. `var(--pad)`), NUNCA
+   x=0 salvo BLEED DECLARADO en M5. Un texto a x=0 sin declaración es
+   defecto, no asimetría: la asimetría intencional (R3) se declara y se
+   verifica contra esa declaración.
+3. SANGRADO INTENCIONAL: si M5 declara que un elemento sangra fuera del
+   viewport (R3), verificar que sangra el ELEMENTO GRÁFICO y no el TEXTO —
+   texto cortado por el borde es defecto (lección INC-4: el texto nunca
+   cruza el borde).
+REPORTE OBLIGATORIO (misma regla que la cobertura de v2.7): declarar cuántos
+pares se chequearon y cuántas colisiones se encontraron. "0 colisiones" sin
+conteo de pares es indistinguible de "no miré nada".
+Sin este chequeo, Direction Fidelity NO puede marcarse OK: el sistema visual
+puede estar impecable en tokens y estar roto en composición — y desde v2.8
+no hay ningún otro mecanismo que lo agarre.
+
 DEFINICIÓN DE GENÉRICO
 ------------------------
 Para detectar drift genérico, comparar el build contra el Mapa de Clichés
@@ -264,23 +303,46 @@ disponibles), el cross-browser NO se puede ejecutar. En ese caso:
   filter, render de fuentes variables).
 Un motor único NO habilita un PASA limpio; habilita un diferimiento honesto y trazable.
 
-MÉTODO DE VERIFICACIÓN — CUANDO EL SCREENSHOT FALLA O EL TIMELINE ESTÁ
-CONGELADO (v2.5, INC-3 Cursor Café; screenshot-timeout ya es 3ª ocurrencia
-del patrón Runa-P10):
-Dos fallas distintas del mismo problema — verificar el build REAL sin
-confiar en lo que el preview MUESTRA:
-1. Screenshot con timeout consistente en ciertas páginas/estados: sustituir
-   por eval + inspect (bounding boxes, estilos computados, geometría) sobre
-   el DOM real. No es una pérdida de rigor — es otro método para la misma
-   verificación.
-2. Preview con `document.visibilityState: "hidden"` congela
+MÉTODO DE VERIFICACIÓN — CAPTURA DE PANTALLA DEL PANEL DE PREVIEW (v2.8,
+INC-2 Estudio de Tatuaje, causa raíz diagnosticada tras 5 ocurrencias del
+patrón Runa-P10):
+EL SCREENSHOT DEL PANEL DE PREVIEW NO ES UN MÉTODO CONFIABLE — no es "falla
+a veces", es una limitación estructural del entorno. Diagnóstico por
+experimento controlado (no teoría): una página TRIVIAL (blanca, sin
+contenido del proyecto) también cuelga — descarta el código del proyecto
+como causa. El tab del panel nunca es la superficie en foreground
+(`document.hidden`, `document.hasFocus()===false`), y `requestAnimationFrame`
+dispara 0 frames — el compositor de Chrome no pinta un tab oculto.
+`Page.captureScreenshot` (CDP) espera un frame compositeado que nunca
+llega y cuelga hasta el timeout. Por eso `eval`/`inspect`/`read_page`
+funcionan (usan dominios DOM/Runtime de CDP, no necesitan compositor) y el
+screenshot no.
+CONSECUENCIA PRÁCTICA — cambia el orden de método, no solo agrega un
+fallback:
+1. **eval + inspect + clon es el MÉTODO PRIMARIO** de verificación de build,
+   no un sustituto de última instancia. No intentar screenshot del panel
+   primero "por las dudas" — arrancar directo por acá.
+2. Si hace falta una IMAGEN REAL (para que un humano la revise visualmente,
+   no para verificar el build): capturar por el Chrome REAL del humano
+   (herramienta tipo `claude-in-chrome`, no el panel interno), con el
+   server de preview vivo. El Chrome real pinta de verdad porque es una
+   ventana real, no un tab offscreen. Requisitos: confirmar que el server
+   de preview sigue arriba antes de capturar (se reapean solos); usar
+   `http://localhost:<puerto>` con el server levantado, nunca `file://`.
+3. El fix de raíz (`Page.captureScreenshot` con `fromSurface:false`, o
+   `Page.bringToFront` + focus emulation antes de capturar) vive en la
+   implementación de la tool de screenshot del panel — fuera del alcance
+   de un proyecto individual. Si el harness lo expone, resolvería la clase
+   entera de una vez.
+
+Otras dos fallas relacionadas, mismo método primario las resuelve:
+1. Preview con `document.visibilityState: "hidden"` congela
    `document.timeline.currentTime` en 0 — las animaciones figuran como
-   `running` pero nunca avanzan. Consecuencia real: "no vi la animación
-   correr" NUNCA es evidencia de que esté rota, y un `getComputedStyle`
-   ingenuo sobre un elemento animado puede devolver el estado `from`
-   (`animation-fill-mode: backwards`) — que se lee como "el reveal está
-   roto" cuando en realidad es el timeline el que está parado (falso
-   positivo de la clase Vera-P2, en la dirección opuesta).
+   `running` pero nunca avanzan. "No vi la animación correr" NUNCA es
+   evidencia de que esté rota, y un `getComputedStyle` ingenuo sobre un
+   elemento animado puede devolver el estado `from`
+   (`animation-fill-mode: backwards`) — falso positivo de la clase
+   Vera-P2, en dirección opuesta.
    Técnica correcta:
    - Para ver el estado FINAL real: `document.getAnimations().forEach(a =>
      a.finish())` antes de leer estilos/geometría.
@@ -288,15 +350,16 @@ confiar en lo que el preview MUESTRA:
      animación?): clonar el nodo con `style.animation = 'none'` y leer SU
      estado computado — prueba directa de que el fallback funciona, no una
      inferencia sobre el nodo animado original.
-   Documentar en el output qué técnica se usó cuando el timeline esté
-   congelado — para que quién audite después no repita el falso positivo.
-3. Trampa de geometría SVG: un test ingenuo de "¿está visible?" con
+2. Trampa de geometría SVG: un test ingenuo de "¿está visible?" con
    `rect.width > 0 && rect.height > 0` da FALSO NEGATIVO sobre una línea
    vertical/horizontal (`x1===x2` o `y1===y2` → bounding box de ancho/alto
    cero por definición; el grosor lo aporta el `stroke`, no el bbox). Test
    correcto para geometría SVG animada: `height > 0 && visibility ===
    'visible' && opacity !== '0' && strokeDashoffset === '0px'` — no solo
    dimensiones del bounding box.
+Documentar en el output qué técnica se usó en cada caso — para que quién
+audite después no repita el falso positivo ni pierda tiempo reintentando un
+screenshot de panel que estructuralmente no va a funcionar.
 
 TESTS
 -----
@@ -313,6 +376,11 @@ TESTS
 - ¿Se corrió el verificador de contraste por rol sobre el DOM real (no solo
   la tabla declarada de M5), comparando cada token contra el umbral de SU
   uso real, no el umbral con el que se declaró originalmente?
+- ¿Se corrió el chequeo de RELACIONES ESPACIALES (colisión de rects +
+  alineación al padding del sistema + sangrado sin cortar texto) sobre el DOM
+  real, con el conteo de pares chequeados reportado? Desde v2.8 (eval+inspect
+  primario) es el único mecanismo que mira la COMPOSICIÓN — sin él, un hero
+  con el header encimado pasa GATE 3 con todo lo demás en verde.
 
 OUTPUT
 ------
@@ -342,6 +410,13 @@ FAIL CONDITIONS
 - Direction Fidelity marcada OK con placeholders/bloques de color donde la
   Decisión de Sourcing Fotográfico de M0 (§7.1) exigía fotografía real, sin
   marcarlo explícitamente como bloqueante de GATE 4.
+- Direction Fidelity marcada OK sin correr el chequeo de relaciones
+  espaciales (v2.9), o corriéndolo sin reportar el conteo de pares
+  chequeados ("0 colisiones" sin conteo = verde falso, misma clase que
+  "0 revisados" del verificador de contraste).
+- Reintentar el screenshot del panel "por las dudas" antes de eval+inspect:
+  es una limitación estructural (v2.8), no un fallo puntual — el reintento
+  es tiempo perdido, no diligencia.
 
 PROMPT PARA CLAUDE
 ------------------

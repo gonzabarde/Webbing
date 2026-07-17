@@ -1,5 +1,10 @@
-M12.4 — PATTERN EXTRACTION ENGINE (v3)
-=======================================
+M12.4 — PATTERN EXTRACTION ENGINE (v3.1)
+===========================================
+
+REF: Docs/M12_REFERENCE_LIBRARY.md, sección LOG DE PATRONES — el contador de
+apariciones que decide emergent/validated se lee y se actualiza AHÍ, nunca de
+memoria de sesión. Sin esto, "aparece en 2+ referencias" es una frase que
+nadie puede verificar.
 
 OBJETIVO
 --------
@@ -62,9 +67,11 @@ PROCESO DE EXTRACCIÓN
 2. Preguntar: ¿esta decisión produce un efecto por sí sola o en combinación?
    Si sola: extraer el principio de esa variable.
    Si en combinación: identificar qué variables se necesitan juntas.
-3. Buscar si ese mismo patrón aparece en otras referencias de la biblioteca.
-   Si aparece en 2+ referencias: el patrón es validado.
-   Si aparece en 1: el patrón es emergente.
+3. Buscar en Docs/M12_REFERENCE_LIBRARY.md (sección LOG DE PATRONES) si ese
+   mismo patrón ya tiene fila. Si existe, es la fuente del conteo real — no
+   estimar de memoria cuántas veces apareció.
+   Si aparece en 2+ referencias registradas: el patrón es validado.
+   Si aparece en 1 (o es nuevo): el patrón es emergente.
 4. Formular el patrón con la Pattern Formula.
 5. Definir contexto, límites y anti-pattern.
 6. Ejecutar el Pattern Validation Test.
@@ -122,6 +129,10 @@ Para cada patrón extraído:
 - estado: emergent / validated / standard
 - anti-pattern asociado
 - límites de uso
+
+Registrar/actualizar la fila del patrón en Docs/M12_REFERENCE_LIBRARY.md
+(LOG DE PATRONES) con el contador de apariciones actualizado — no queda
+solo en el output de la sesión.
 
 FAIL CONDITIONS
 ---------------

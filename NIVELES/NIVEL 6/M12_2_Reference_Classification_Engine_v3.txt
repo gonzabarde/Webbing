@@ -1,5 +1,8 @@
-M12.2 — REFERENCE CLASSIFICATION ENGINE (v3)
-============================================
+M12.2 — REFERENCE CLASSIFICATION ENGINE (v3.1)
+================================================
+
+REF: Docs/M12_REFERENCE_LIBRARY.md — el formato estándar completado acá es
+lo que se escribe en las columnas de la fila de la referencia en ese archivo.
 
 OBJETIVO
 --------
@@ -117,6 +120,10 @@ GATE 12.2-C — ¿El formato estándar está completo?
 
 GATE 12.2-D — ¿La clasificación es internamente consistente?
   Falla → revisar las combinaciones inconsistentes.
+
+GATE 12.2-E — ¿La clasificación se escribió en la fila real de
+Docs/M12_REFERENCE_LIBRARY.md, no solo en el output de la sesión?
+  Falla → la clasificación se pierde al cerrar la sesión. Escribirla.
 
 OUTPUT
 ------

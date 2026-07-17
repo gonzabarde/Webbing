@@ -8,6 +8,400 @@ Autoridad: los cambios los aprueban y aplica el humano (SKILL.md secciones 7 y 1
 
 --------------------------------------------------------------------------------
 
+2026-07-16 (7) — CIERRE DEL ESCANEO COMPLETO DE WEBBING
+-------------------------------------------------------------------------------
+Alcance cubierto en esta pasada (además de M12→M18 de las entradas previas del
+día): SKILL.md completo, M0–M5.5, CDL 0–5, M6–M10 (incl. M8.1–M8.6 y
+M9.1–M9.8), M11 completo (Overview + 10 submódulos), B0–B6, y
+Frontend_Craft_Standard.md (verificadas las 6 referencias cruzadas de sección
+que otros módulos citan — §1, §2.1, §3, §4, §5, §5.1 — todas resuelven
+correcto).
+
+Hallazgos totales del día (7, todos aplicados): M12 sin persistencia (Alta,
+nuevo archivo), GATE 12-F wording, CDL-5 ítem fantasma (Alta, dentro de un
+solo módulo), GATE_REGISTRY.txt desincronizado del piso de SKILL.md §5, M7 +
+M10.3 con referencias de módulo rotas (cosmético), y la renumeración de M11
+que había quedado a medias desde el 2026-07-14 (Alta — afectaba 10 archivos
+más 4 referencias cruzadas).
+
+No abiertos en esta pasada (menor prioridad, no son módulos de decisión):
+Client_Record_Template.md, Capture_Baseline_Template.md,
+Docs/OPERATIONAL_HEADER_STANDARD.txt, Docs/ReactBits_Catalog.md,
+Docs/BRIEF_CLIENTE1_VINCA.md, Docs/BRIEF_CLIENTE2_LIMA.md,
+Docs/PROPUESTA_Frontend_Craft_diffs.md (ya marcado APLICADO/histórico),
+Webbing_Master_System_Document_v2.txt (deprecado, redirect). Si alguno de
+estos se toca en el futuro, no asumir que ya fue auditado.
+
+Patrón dominante del día, consistente con el resto del sprint: reglas que se
+agregan en un punto del sistema (o de un mismo archivo) sin propagarse a los
+otros puntos que las ejecutan o las citan. Ninguno de los 7 hallazgos fue un
+error de diseño o de criterio — todos fueron de sincronización.
+
+--------------------------------------------------------------------------------
+
+2026-07-16 (6) — ESCANEO COMPLETO: RENUMERACIÓN DE M11 QUEDABA A MEDIAS (completa el fix del 2026-07-14)
+-------------------------------------------------------------------------------
+Origen: escaneo completo de Webbing, capa M11 (Control de IA). El 2026-07-14
+se había corregido que M11_00 (Overview) se numeraba mal a sí mismo — pero
+al releer los 10 archivos de submódulo completos (M11_01 a M11_10), cada uno
+todavía se autotitula con el número VIEJO (uno menos de lo que le
+corresponde por archivo): M11_01 dice "M11.0" en su propio header, M11_02
+dice "M11.1", M11_03 dice "M11.2"... hasta M11_10 que dice "M11.9". El fix
+de hace dos días solo tocó las referencias DENTRO de M11_00; nunca llegó a
+corregir la identidad de los propios archivos que esas referencias apuntan.
+
+Además, dentro de M11_00 mismo quedó una segunda inconsistencia no vista
+antes: la sección AI EXECUTION FLOW (la primera del archivo) todavía usaba
+la numeración vieja para Role Engine/Authority Check/Depth Controller/
+Explore-Converge/Question System/Critique/Output Control (7 referencias),
+mientras que las secciones ARQUITECTURA DE M11 y GATES GLOBALES (más abajo
+en el mismo archivo) ya tenían la numeración correcta — dos convenciones
+contradictorias conviviendo en el mismo documento, exactamente el patrón que
+el fix original decía haber cerrado.
+
+También aparecieron 4 referencias cruzadas rotas entre submódulos, todas
+apuntando al número viejo del módulo citado: M11_04 citaba "Analysis
+Paralysis (M11.8)" cuando Failure Modes es M11.9; M11_08 citaba "Time
+Budget (M11.3)" cuando Reasoning Depth Controller es M11.4; M11_09 citaba
+"Exploration Budget de M11.4" (debería ser M11.5) y "Question Priority
+System de M11.5" (debería ser M11.6).
+
+Causa raíz: el fix de 2026-07-14 corrigió el ÍNDICE (M11_00) pero no la
+fuente que el índice indexa — igual que el bug de M12 encontrado hoy más
+temprano en la sesión (persistencia declarada, nunca conectada), pero acá
+al revés: la conexión se hizo en un solo extremo del cable.
+
+Fix: renumerados M11_01→M11.1 hasta M11_10→M11.10 en su propio header
+(10 archivos). Corregida la sección AI EXECUTION FLOW de M11_00 para que
+coincida con ARQUITECTURA DE M11 y GATES GLOBALES (ya correctas). Corregidas
+las 4 referencias cruzadas rotas (M11_04, M11_08, M11_09 ×2). Sin bump de
+versión de módulo en ninguno de los 10 archivos (corrección de numeración,
+no de lógica).
+
+Qué NO cambia: ningún contenido sustantivo de los módulos, ningún gate,
+ningún proceso. Es exclusivamente consistencia de numeración interna.
+Docs/SYSTEM FILE MAP.txt y el FILE MAP de SKILL.md §3 ya usaban la
+numeración correcta (M11.1–M11.10 = archivos M11_01–M11_10) — no
+requirieron cambio, eran la fuente de verdad contra la que se corrigió todo
+lo demás.
+
+--------------------------------------------------------------------------------
+
+2026-07-16 (5) — ESCANEO COMPLETO: 2 FIXES COSMÉTICOS (M7, M10.3) DURANTE EL BARRIDO M0-M10
+-------------------------------------------------------------------------------
+Origen: continuación del escaneo completo de Webbing (M0→M11, CDL, B0-B6,
+SKILL.md). M0-M5.5 y CDL 0-4 sin hallazgos (ya auditados en sesiones
+previas). Dos fixes menores encontrados en M6-M10:
+
+1. M7 (Decision Compression Engine): la lista DEPENDENCIAS refería a "M3
+Visual Language" — M3 en realidad se llama "Typography & Semiotics System"
+(así en su propio header y en el FILE MAP de SKILL.md). Corregido el nombre.
+
+2. M10.3 (Scope & Change Control), sección Production Economics: refería al
+"Innovation Cost Matrix de M9.5.5" — ese módulo no existe (M9.5 es el
+Next.js Playbook). El Innovation Cost Matrix real vive en M5.5 (Visual
+Innovation Engine). Corregida la referencia.
+
+Severidad: Baja en ambos casos — referencias de nombre/número de módulo
+rotas que no bloquean ningún gate, pero que habrían mandado a Claude a
+buscar un archivo equivocado o inexistente si se seguían al pie de la letra.
+
+Qué NO cambia: ninguna lógica de módulo, solo texto de referencia cruzada.
+
+--------------------------------------------------------------------------------
+
+2026-07-16 (4) — ESCANEO COMPLETO WEBBING: CDL-5 CON ÍTEM FANTASMA (v1.1→v1.2)
+-------------------------------------------------------------------------------
+Origen: pedido explícito del humano de escanear TODO Webbing (M0-M18, CDL,
+B0-B6, SKILL.md), no solo M12-M18. Primeros dos hallazgos: (1) ya corregido
+en la entrada anterior, GATE_REGISTRY.txt desincronizado del PISO
+INNEGOCIABLE real de SKILL.md §5 (le faltaba el ítem 7, persistencia a
+disco, agregado el 2026-07-10 y nunca propagado al registro). (2) este:
+CDL-5 se contradice a sí mismo.
+
+Hallazgo: el cuerpo de la Verificación de Diferenciación de Portfolio (CDL-5)
+lista 10 ítems a chequear — el décimo, "combinación de patrones M9.1/M9.2",
+se agregó el 2026-07-14 al auditar M9. Pero tanto la lista de disparadores
+de RETROCEDER como el PROMPT PARA CLAUDE al final del archivo — las dos
+partes que efectivamente EJECUTAN la verificación — solo enumeraban 9
+ítems. El décimo quedó documentado en el cuerpo pero nunca cableado al gate
+real: un colisión de patrones M9.1/M9.2 entre clientes no habría disparado
+RETROCEDER aunque el chequeo se hiciera, porque no estaba en la lista que
+dispara la acción. Además, la lista de "Módulos posibles" para RETROCEDER
+(dos líneas más abajo) tampoco incluía M3, M9 ni M9.8 como destinos válidos,
+pese a que el mapeo ítem→destino de arriba sí los usa.
+
+Causa raíz: el mismo patrón de todo el sprint — una regla se agrega en un
+lugar del documento (el cuerpo de la verificación) sin actualizar los otros
+dos lugares que la ejecutan (RETROCEDER, PROMPT). Esta vez no cruza
+archivos: pasa DENTRO de un solo módulo.
+
+Fix — CDL-5 v1.1→v1.2: agregado "combinación de patrones M9.1/M9.2" a la
+lista de disparadores de RETROCEDER (con destino → M9) y al PROMPT PARA
+CLAUDE. Completada la lista de "Módulos posibles" con M3, M9 y M9.8.
+
+Qué NO cambia: no se tocó el orden de los 10 ítems ni su definición en el
+cuerpo (ya estaban completos). No se agregaron ítems nuevos a verificar —
+solo se conectó el décimo que ya existía a los mecanismos que lo ejecutan.
+
+--------------------------------------------------------------------------------
+
+2026-07-16 (3) — GATE 12-F: WORDING INCONSISTENTE (">5.0" vs "≥5.0" de M12.6)
+-------------------------------------------------------------------------------
+Origen: pregunta directa del humano ("¿alguna falla aparte?") tras cerrar el
+fix de persistencia de M12. Comparando M12 Overview y GATE_REGISTRY.txt contra
+M12.6: el gate decía "score supera 5.0" (>5.0) pero M12.6 define el umbral
+real como ≥5.0 ("< 5.0: descartar" / "5.0-6.4: referencia menor"). Una
+referencia con score exacto 5.0 pasaba según M12.6 y fallaba según el gate.
+Baja severidad (edge case numérico exacto, sin caso real todavía) pero es un
+bug de correctitud real, no una preferencia de estilo.
+
+Fix: M12 Overview y GATE_REGISTRY.txt corregidos a "≥ 5.0", consistente con
+M12.6. Sin bump de versión de módulo (corrección de wording, no de lógica
+nueva).
+
+Evaluado y descartado (NO es un fix): M13.0A tiene disparadores por conteo
+de reps (North Star, ej. "≥5 propuestas armadas a mano") sin tracking
+formal — superficialmente el mismo patrón que motivó M12_REFERENCE_LIBRARY.
+Diferencia real: M13.0A se declara explícitamente "brújula, no roadmap ni
+compromiso", con umbrales que ajusta el humano (Principio 5), no un gate que
+el sistema deba verificar solo. Construirle persistencia sería sobre-
+ingeniería contra el propio Principio 2 (no automatizar antes de que duela a
+mano). No se aplica cambio.
+
+--------------------------------------------------------------------------------
+
+2026-07-16 (2) — RELECTURA COMPLETA M12→M18: M12 SIN PERSISTENCIA (Docs/M12_REFERENCE_LIBRARY.md, NUEVO)
+-------------------------------------------------------------------------------
+Origen: relectura completa de M12→M18 (21 archivos), pedida explícitamente
+después del skim estructural de la entrada anterior del mismo día. M13-M18
+no mostraron hallazgos nuevos (ya autidados en sesiones previas, consistentes
+contra GATE_REGISTRY.txt y PORTFOLIO_REGISTRY.md). M12 sí: el sistema entero
+de biblioteca de referencias (M12.1→M12.9) define criterios cuantificados
+— "validated" a 2+ apariciones (M12.4), "standard" a 5+ proyectos (M12.9),
+Deprecation Threshold, gaps de búsqueda (M12.8) — sin que exista un archivo
+físico donde esos conteos vivan entre sesiones. Cruzado contra Docs/SYSTEM
+FILE MAP.txt: cada sistema de negocio (M13-M18) tiene su archivo de memoria
+persistente (PORTFOLIO_REGISTRY.md, M14_PROPOSAL_LOG.txt); M12 no tenía el
+equivalente. Exactamente el patrón raíz de todo este sprint: una regla
+cuantificada en el papel, sin nada que la verifique en ejecución.
+
+Fix — ALTA de Docs/M12_REFERENCE_LIBRARY.md (nuevo): tres secciones —
+REGISTRO DE REFERENCIAS (formato estándar de M12.2 + score de M12.6),
+LOG DE PATRONES (Pattern Formula + contador de apariciones, el dato que
+M12.4/M12.9 necesitan para promover/degradar), GAPS DE BÚSQUEDA (protocolo
+"sin resultados" de M12.8). Mismas reglas de honestidad y trazabilidad que
+PORTFOLIO_REGISTRY.md (campo sin dato = `—`, nunca inventado). Nace vacío:
+M12 no corrió de punta a punta en ningún proyecto de práctica todavía, así
+que no hay datos reales que migrar de memoria de sesión — poblarlo con
+estimaciones habría repetido el bug de fila fantasma que PORTFOLIO_REGISTRY
+ya tuvo que corregir dos veces.
+
+Módulos actualizados a v3.1 (referencian el archivo, leen/escriben ahí en
+vez de asumir una "biblioteca" abstracta): M12 Overview, M12.1 (Collection),
+M12.2 (Classification, + GATE 12.2-E), M12.4 (Pattern Extraction, paso 3 del
+proceso reescrito para leer el contador real), M12.6 (Scoring), M12.8
+(Retrieval, paso 4 + protocolo sin resultados), M12.9 (Evolution, proceso
+reescrito para leer/escribir contra el archivo). M12.0, M12.3, M12.5 y M12.7
+no se tocaron: son módulos de criterio/estándar, no tocan persistencia.
+Docs/SYSTEM FILE MAP.txt actualizado con la fila nueva.
+
+Qué NO cambia: no se tocó ningún gate de GATE_REGISTRY.txt (los gates 12-A a
+12-G de M12 Overview siguen igual; el archivo nuevo es infraestructura de
+persistencia, no un gate nuevo). No se migró ningún dato de proyectos
+ficticios anteriores — ninguno completó M12 de punta a punta.
+
+--------------------------------------------------------------------------------
+
+2026-07-16 — DÍA 3, SKIM ESTRUCTURAL M12: PINTEREST/M0 §7.1 SIN CRUCE CON M12.5
+-------------------------------------------------------------------------------
+Origen: skim de M12 (Visual Intelligence System, nunca auditado). M12.5
+(Anti-Copy System) tiene un Similarity Score cuantificado (5 dimensiones,
+/20) y un Transformation Test — mucho más riguroso que el flujo simple de
+Pinterest que se agregó a M0 §7.1 estos últimos días. Hueco: el flujo de M0
+resuelve el riesgo de derechos de autor (no copiar el archivo) pero nunca
+referenciaba M12.5 para el riesgo distinto — producir un resultado
+reconociblemente derivado sin copiar ningún archivo.
+
+Fix — M0 v3.2→v3.3: agregada VERIFICACIÓN REAL DE NO-COPIA en §7.1,
+cruzando explícitamente con M12.5 — correr el Similarity Score contra los
+pines de referencia cuando M5 cierre, y el Transformation Test si supera 9.
+No reemplaza el flujo de 3 pasos existente (parámetros no archivo); lo
+complementa contra un riesgo que ese flujo no cubre.
+
+--------------------------------------------------------------------------------
+
+2026-07-14 (5) — CORRIDA FORMAL M14 (ESTUDIO DE TATUAJE) → M8.6 v2.9 + M0 v3.2
+-------------------------------------------------------------------------------
+Origen: corrida formal de M14 por disparador TERCIARIO (cierre de sesión de
+práctica con INCIDENTES_M14.md abierto; GATE 4 bloqueado por material real del
+cliente que no existe). Eje 5 y Eje 6: sin dato (práctica, nunca publicado).
+La corrida documentó INC-1 e INC-2 como YA APLICADOS ese mismo día (integridad
+de cita del registro; M8.6 v2.8) — no se re-propusieron. Pero encontró DOS
+hallazgos nuevos que el encuadre de "corrida de consolidación, sin hallazgos
+pendientes" no anticipaba. Ambos aprobados y aplicados por el humano.
+
+Fix 1 — M8.6 v2.8→v2.9: VERIFICACIÓN DE RELACIONES ESPACIALES (cuarta condición
+para marcar Direction Fidelity OK).
+Causa raíz: al declarar eval+inspect como MÉTODO PRIMARIO (v2.8, por la
+limitación estructural del screenshot), el sistema perdió SIN REEMPLAZO lo único
+que el screenshot verificaba gratis: la COMPOSICIÓN. eval+inspect mide
+PROPIEDADES (contraste, tamaños, overflow, tells) pero no RELACIONES ESPACIALES
+(¿dos cajas se pisan? ¿el texto respeta el margen del sistema?). Mientras el
+screenshot era el método principal la ceguera no importaba; al volverse primario
+eval+inspect, pasó de puntual a SISTEMÁTICA para todo proyecto futuro.
+Caso real: el hero del estudio de tatuaje pasó GATE 3 con el wordmark del header
+ENCIMADO sobre el eyebrow y todo el contenido pegado al borde (x=0, el `.hero`
+sin padding horizontal). Verificador de contraste 61/0, 0/13 tells, AA y overflow:
+todo verde. Lo agarró el humano mirando una captura, en segundos.
+Qué se agregó: chequeo por bounding boxes de (a) colisión entre elementos que no
+deben solaparse, (b) alineación al padding del sistema (x=0 sin bleed declarado =
+defecto, no asimetría), (c) sangrado que corta gráfico pero nunca texto (INC-4).
+Con reporte obligatorio del conteo de pares chequeados ("0 colisiones" sin conteo
+= verde falso, misma clase que "0 revisados" de INC-6). Sumado a TESTS y a FAIL
+CONDITIONS (incluida: reintentar el screenshot del panel "por las dudas" es fail,
+no diligencia). Nota: v2.9 es la contramedida que v2.8 necesitaba y no traía —
+v2.8 nombró bien la limitación pero no cubrió el agujero que abría.
+
+Fix 2 — M0 v3.1→v3.2: DECLARACIÓN OBLIGATORIA DE RESEARCH VIVO.
+Causa raíz (autoauditoría): la Regla de Frescura existía desde antes pero se
+cumplía "por criterio", y por eso se salteó sin que nada la frenara. En el M0 del
+estudio de tatuaje NO se corrió research vivo (WebSearch estaba disponible; en el
+proyecto anterior sí se había usado), los patrones de categoría se escribieron
+desde conocimiento embebido y se marcaron MEDIA — un grado por encima de lo que
+la regla permite sin verificación ("BAJA, nunca como dato cerrado"). Ningún gate
+verificaba que la regla se hubiera corrido.
+Qué se agregó: campo obligatorio y visible en el output de M0 — RESEARCH VIVO:
+SÍ (herramienta + qué se relevó) / NO (por qué) — y la confianza deja de ser
+criterio y pasa a ser REGLA: si RESEARCH VIVO = NO, competidores y patrones de
+categoría son BAJA obligatoriamente. Aclarado que "no se pudo verificar" solo
+aplica si la herramienta no estaba disponible, NO si simplemente no se corrió.
+Sumado a FAIL CONDITIONS (campo ausente; MEDIA/ALTA sin research vivo; "no se
+pudo" falso). Se implementó DENTRO de M0 (no editando GATE 1 en SKILL.md): las
+FAIL CONDITIONS de M0 ya bloquean M1, así que el efecto de gate se logra sin
+tocar la arquitectura. Si se quiere el chequeo a nivel GATE 1 explícito, es un
+cambio aparte de SKILL.md §6 que requiere decisión propia.
+
+Registro: ambos en Docs/M14_PROPOSAL_LOG.txt, bloque CORRIDA — ESTUDIO DE
+TATUAJE (P1 y P2, Aplicadas 2026-07-14), junto a P3/P4 (INC-1/INC-2, ya
+aplicados), una observación Baja sin cambio y 6 wins registrados.
+También se agregó al índice PENDIENTES el proyecto cursor-cafe-web, que tenía 6
+incidentes abiertos y nunca había sido registrado (varios ya aplicados sueltos —
+Craft §2.4.5 y su extensión, M8.6 v2.6→v2.7 — pero sin corrida formal que los
+consolide).
+
+--------------------------------------------------------------------------------
+
+2026-07-14 (4) — CAUSA RAÍZ DEL SCREENSHOT DIAGNOSTICADA (M8.6 v2.8) + 3ra FILA FANTASMA CONFIRMA FIX YA APLICADO
+-------------------------------------------------------------------------------
+Origen: Claude Code diagnosticó por experimento controlado (no teoría) la
+causa raíz del patrón Runa-P10 (5 ocurrencias: Runa, Vera, Cursor Café ×2,
+Estudio de Tatuaje ×2). El panel de preview renderiza offscreen —
+`document.hidden`, `requestAnimationFrame` da 0 frames, el compositor de
+Chrome no pinta un tab oculto. `Page.captureScreenshot` (CDP) espera un
+frame compositeado que nunca llega. Confirmado con una página TRIVIAL (sin
+contenido del proyecto) que también cuelga — descarta causa en el código.
+
+Fix — M8.6 v2.7→2.8: reescrita la sección de método. Cambio de fondo: no
+es "qué hacer cuando falla", es "el screenshot del panel NO es un método
+confiable, punto" — eval+inspect+clon pasa a ser el MÉTODO PRIMARIO, no un
+fallback. Agregada ruta para cuando hace falta una imagen real (capturar
+por el Chrome real del humano, no el panel interno, con el server de
+preview confirmado vivo). Documentado el fix de raíz posible a nivel
+harness (`fromSurface:false`) para quien mantenga la tool, fuera del
+alcance de un proyecto individual.
+
+Nota aparte: 3ra ocurrencia de fila fantasma en PORTFOLIO_REGISTRY
+(Estudio de Tatuaje INC-1), con la misma propuesta que Cursor Café INC-1 ya
+había hecho y que se aplicó ayer (integridad de cita: path debe resolver +
+contenido debe coincidir). Esta ocurrencia CONFIRMA que el fix ya aplicado
+es el correcto — no requiere cambio nuevo, la detección funcionó (Claude
+Code la agarró él mismo antes de confiar en la fila).
+
+--------------------------------------------------------------------------------
+
+2026-07-14 (3) — SEGUNDA FILA FANTASMA EN EL REGISTRO (Estudio de Tatuaje INC-1) — FIX DE INTEGRIDAD DE CITA
+-------------------------------------------------------------------------------
+Origen: 2da ocurrencia del bug de Cursor Café INC-1 (fila del
+PORTFOLIO_REGISTRY con datos sin origen, escritos antes de que el proyecto
+tomara esa decisión) — pero esta vez más grave: los datos fantasma
+("Penumbra del Taller", acento cálido "óxido") codificaban EXACTO las dos
+colisiones de Principio 10 que el M4/M5 real de ese proyecto había
+diseñado a propósito para evitar ("Penumbra" es la palabra rectora de ECOS;
+el acento cálido es el cluster que toda la paleta "sin acento cromático"
+existía para esquivar). Si el cross-check hubiera leído esa fila como
+terreno propio ya decidido, se habría auto-confirmado con las violaciones
+adentro. Además citaba un path inexistente (`_webbing/estudio-tatuaje/` en
+vez de `estudio-tatuaje-web/_webbing/`).
+
+Dos ocurrencias de la misma clase en dos días sugieren algo más de fondo que
+azar — hipótesis (no confirmada): la misma inestabilidad del conector de
+filesystem que ya demostramos hoy con create_file/str_replace, manifestándose
+como escritura fantasma en vez de fallo de escritura. No se afirma como
+causa probada (M11.8, FALSE CERTAINTY) — queda anotado como sospecha.
+
+Fix — Docs/PORTFOLIO_REGISTRY.md: nueva REGLA DE INTEGRIDAD DE CITA. Citar
+un archivo no alcanza: (1) el path tiene que resolver a un archivo real: un
+path a una carpeta inexistente es señal de celda envenenada; (2) el valor
+de la celda tiene que aparecer en el contenido real del archivo citado —
+grep del valor contra el archivo, cero coincidencias = celda sospechosa,
+tratar como NO VERIFICADO pese a tener "fuente". Complementa (no reemplaza)
+la regla de trazabilidad de INC-1 original.
+
+--------------------------------------------------------------------------------
+
+2026-07-14 (2) — DÍA 2, SKIM ESTRUCTURAL: M11 RENUMERADO + M9 SIN CHEQUEO DE COMBO
+-------------------------------------------------------------------------------
+Origen: skim liviano de M9 y M11 (versión híbrida del brainstorm de Día 2 —
+se salteó M6/M7 por bajo riesgo, se priorizó lo que corre en todo proyecto).
+
+Fix 1 — M11_00 (Overview): el documento se numeraba a sí mismo mal en TODO
+el archivo (flujo de ejecución, arquitectura, activación por tarea, gates) —
+llamaba "M11.0" a Principios, "M11.8" a Failure Modes, etc., corrido en 1
+respecto a los archivos reales (M11_01 a M11_10). SKILL.md (arreglado ayer,
+FILE MAP) ya usa la numeración correcta de archivos — había dos
+convenciones contradictorias conviviendo. Corregido: todas las referencias
+internas de M11_00 ahora coinciden con los archivos reales (M11.1 a M11.10).
+
+Fix 2 — CDL-5, décimo ítem: M9 (Layout+Componentes) solo chequea contra el
+Mapa de Clíchés de M5.5 (mercado), nunca contra el propio portfolio — misma
+clase de hueco que M1/M2 ayer. Preventivo, sin caso confirmado.
+
+Cierre del skim: no se profundizó en M6/M7 ni en los submodulos 1-10 de M11
+individualmente (decisión del brainstorm: bajo riesgo relativo, se deja para
+otro momento si aparece evidencia). El resto del día 2 va a un stress test
+en vivo diseñado para forzar M9 y M11 bajo condiciones reales.
+
+--------------------------------------------------------------------------------
+
+2026-07-14 — FIX #9: ZOD VS. CHECK CONSTRAINTS EN ARQUITECTURA SIN SERVICE_ROLE (B1 v1.1→1.2)
+-------------------------------------------------------------------------------
+Origen: al cerrar GATE 3 de Cursor Café, B0 había resuelto VINCA-P1 (sin
+Prisma/service_role, insert público directo a PostgREST con anon key, para
+que RLS se aplique de verdad) — pero esa arquitectura no tiene JS de
+servidor donde P3 (Zod) pueda correr de forma no-bypasseable. Meter una Edge
+Function reabre el problema: con service_role bypasea RLS (lo que VINCA-P1
+prohíbe); con anon key, el cliente puede saltearla y postear directo — Zod
+queda decorativo. Revocar el insert directo para forzar la Edge Function
+vuelve a exigir service_role.
+
+Resolución aplicada en Cursor Café (capturada, no inventada acá): CHECK
+constraints de Postgres como capa de validación real — imposibles de
+saltear por cualquier camino (API, cliente propio, curl), a diferencia de
+Zod que solo protege el camino que pasa por él.
+
+Fix — B1 v1.1→1.2, nota en PATRÓN P3: cuando B0 cierra la arquitectura
+sin service_role, Zod se reemplaza por CHECK constraints como implementación
+correcta del mismo patrón — no es una omisión silenciosa, es una decisión
+que se declara explícita en el output del módulo. Agregado a FAIL
+CONDITIONS: Zod omitido sin documentar la razón y el reemplazo es falla.
+
+Cierra la sesión de Cursor Café (INC-1 a INC-6 + este fix): 9 fixes de
+sistema en un solo día de stress test, GATE 3 cerrado, GATE 4
+correctamente bloqueado a la espera de datos reales de cliente.
+
+--------------------------------------------------------------------------------
+
 2026-07-13 (6) — CIERRE DE SESIÓN: PASADA DE CONSISTENCIA + REGISTRO DESINCRONIZADO
 -------------------------------------------------------------------------------
 Al cerrar la sesión de Cursor Café (INC-1 a INC-6), pasada de consistencia

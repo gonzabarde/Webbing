@@ -518,7 +518,7 @@ Antes de aceptar un cambio, responder:
   SÍ → continuar.
 
 ¿El costo en horas es proporcional al beneficio esperado?
-  Usar el mismo criterio que el Innovation Cost Matrix de M9.5.5:
+  Usar el mismo criterio que el Innovation Cost Matrix de M5.5:
   Costo 1-2 / Impacto 4-5 → Prioridad máxima.
   Costo 4-5 / Impacto 1-2 → Descartar.
 

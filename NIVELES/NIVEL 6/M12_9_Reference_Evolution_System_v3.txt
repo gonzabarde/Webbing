@@ -1,5 +1,10 @@
-M12.9 — REFERENCE EVOLUTION SYSTEM (v3)
-=======================================
+M12.9 — REFERENCE EVOLUTION SYSTEM (v3.1)
+===========================================
+
+REF: Docs/M12_REFERENCE_LIBRARY.md — las tres secciones de este archivo
+(REGISTRO DE REFERENCIAS, LOG DE PATRONES, GAPS DE BÚSQUEDA) son el input real
+de este módulo. Promotion Criteria y Deprecation Threshold se aplican contra
+esos datos, no contra una estimación de memoria de cuántas veces se usó algo.
 
 OBJETIVO
 --------
@@ -80,12 +85,14 @@ REGLAS DE EVOLUCIÓN
 
 PROCESO CLAUDE
 --------------
-1. Revisar qué referencias fueron usadas en proyectos recientes.
+1. Revisar en Docs/M12_REFERENCE_LIBRARY.md qué referencias y patrones tienen
+   fila real (no de memoria) y cuál es su contador de apariciones/estado actual.
 2. Para cada una, actualizar el estado según Promotion Criteria y Deprecation Threshold.
 3. Revisar si alguna entró en la Anti-Pattern Library de M12.5.
 4. Promover, mantener, degradar o retirar.
-5. Actualizar la biblioteca con los cambios.
-6. Registrar los gaps detectados en búsquedas fallidas (input de M12.1).
+5. Escribir los cambios de estado directamente en Docs/M12_REFERENCE_LIBRARY.md
+   (columna Estado de REGISTRO DE REFERENCIAS y de LOG DE PATRONES).
+6. Revisar la sección GAPS DE BÚSQUEDA de Docs/M12_REFERENCE_LIBRARY.md (input de M12.1).
 
 EVOLUTION REVIEW — CADENCIA
 -----------------------------

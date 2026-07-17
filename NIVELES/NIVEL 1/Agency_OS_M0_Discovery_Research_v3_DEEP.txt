@@ -1,4 +1,4 @@
-MÓDULO 0 — DISCOVERY & RESEARCH ENGINE (v3.1 DEEP)
+MÓDULO 0 — DISCOVERY & RESEARCH ENGINE (v3.3 DEEP)
 =================================================
 
 OPERATIONAL HEADER
@@ -177,6 +177,24 @@ PROCESO CLAUDE
    entrenamiento. Una lista de competidores de memoria es una hipótesis vencida hasta
    verificarla. Si no se puede verificar en vivo, marcar el hallazgo como confianza
    BAJA, nunca como dato cerrado.
+   DECLARACIÓN OBLIGATORIA DE RESEARCH VIVO (v3.2, P2 corrida Estudio de Tatuaje):
+   la regla de arriba se cumplía "por criterio" y por eso se salteó sin que nada la
+   frenara. A partir de acá el output de M0 declara, como campo obligatorio y visible:
+     RESEARCH VIVO: SÍ (herramienta + qué se relevó) / NO (por qué)
+   Y la confianza deja de ser criterio y pasa a ser REGLA:
+     - RESEARCH VIVO = NO  →  competidores y patrones de categoría son confianza
+       BAJA, obligatoriamente. No MEDIA, no "inferido con criterio". BAJA.
+     - RESEARCH VIVO = SÍ  →  la confianza la fija la calidad de lo relevado
+       (ALTA para lo verificado directamente; MEDIA para lo inferido de ello).
+   "No se pudo verificar" solo aplica si la herramienta de búsqueda NO estaba
+   disponible o el dominio no existe — NO si simplemente no se corrió. Que la
+   herramienta esté disponible y no se use es un salteo de la regla, no una
+   imposibilidad.
+   CASO QUE LO MOTIVA (Estudio de Tatuaje, 2026-07-14): el M0 no corrió research vivo
+   (WebSearch estaba disponible; en el proyecto anterior sí se había usado), escribió
+   los patrones de categoría desde conocimiento embebido y los marcó **MEDIA** — un
+   grado por encima de lo que la regla permite sin verificación. Ningún gate lo frenó
+   porque ningún gate verificaba que la regla se hubiera corrido.
    REGLA DE FALSABILIDAD DE LOS CLAIMS DEL CLIENTE (v3.1 — extensión del Principio 9,
    de la corrida ECOS): la Regla de Frescura de arriba mira afuera (competidores/
    categoría). Esta mira adentro: los dos claims más load-bearing del brief suelen ser
@@ -263,6 +281,18 @@ PROCESO CLAUDE
      sitios completos: la fuente de inspiración es legítima y útil; el
      archivo copiado tal cual no lo es, salvo la excepción explícita de (e)
      para práctica interna.
+
+     VERIFICACIÓN REAL DE NO-COPIA (agregada 2026-07-16, cruce con M12.5): los 3
+     pasos de arriba (extraer parámetros, no el archivo) resuelven el riesgo de
+     DERECHOS DE AUTOR — no resuelven el riesgo de que el resultado final sea
+     RECONOCIBLEMENTE DERIVADO del Pinterest de origen. Son riesgos distintos:
+     podés no copiar ningún archivo y aun así producir un clon (mismo layout,
+     misma paleta, mismo tratamiento) sin darte cuenta. Ese riesgo lo mide M12.5
+     (Anti-Copy System), no M0. Cuando la dirección de M5 esté cerrada: correr el
+     Similarity Score (5 dimensiones, /20) contra el/los pines de referencia más
+     cercanos, y si supera 9, el Transformation Test (¿un diseñador que conoce la
+     referencia reconocería esto como derivado?). No asumir que "extraje
+     parámetros, no el archivo" ya te protege de ese riesgo distinto.
 
 8. Detectar restricciones.
    Responder:
@@ -601,6 +631,9 @@ TESTS
 
 OUTPUT
 ------
+0. RESEARCH VIVO: SÍ (herramienta + qué se relevó) / NO (por qué). Campo
+   obligatorio y visible — determina por REGLA la confianza de los puntos 4 y 5
+   (si es NO, ambos son BAJA, sin excepción).
 1. Resumen del negocio en una línea.
 2. Tipo de proyecto.
 3. Audiencia con Customer Reality Layer completo (5 dimensiones).
@@ -648,6 +681,13 @@ FAIL CONDITIONS
 - Hay red flags activos sin resolver que bloquean el avance.
 - "No hay fotos propias" activo como red flag sin una Decisión de Sourcing
   Fotográfico explícita (§7.1) antes de pasar a M1.
+- El campo RESEARCH VIVO (SÍ/NO) no está declarado en el output.
+- Competidores o patrones de categoría marcados con confianza MEDIA o ALTA
+  con RESEARCH VIVO = NO. Sin research vivo la confianza es BAJA por regla,
+  no por criterio. Marcarlos MEDIA "porque la inferencia es buena" es
+  exactamente el salteo que la v3.2 cierra.
+- RESEARCH VIVO = NO justificado como "no se pudo verificar" cuando la
+  herramienta de búsqueda estaba disponible y simplemente no se corrió.
 
 PROMPT PARA CLAUDE
 ------------------

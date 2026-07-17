@@ -195,7 +195,7 @@ Requiere:
 Se puede aplicar a:
 - M1 Positioning
 - M2 Brand Translation
-- M3 Visual Language
+- M3 Typography & Semiotics
 - M4 Concept Generation
 - M4.5 Perception
 - M5 Visual Direction

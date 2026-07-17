@@ -24,6 +24,19 @@ registro auto-poblado sin fuente puede auto-validarse a sí mismo — pasó
 una vez, casi no se detecta (CDL-5 lee este archivo ANTES de re-verificar
 contra código). Trazabilidad, no confianza.
 
+**Regla de integridad de cita (agregada 2026-07-14, tras INC-1 de Estudio de
+Tatuaje — 2da ocurrencia, más grave: la fila fantasma codificaba las DOS
+colisiones exactas que ese proyecto había diseñado para evitar):** citar un
+archivo no alcanza si el archivo no existe o no dice lo que la celda afirma.
+Antes de confiar en una celda con fuente citada: (1) el path tiene que
+resolver a un archivo real — un path a una carpeta inexistente es señal de
+celda envenenada; (2) el valor de la celda tiene que aparecer, aunque sea
+aproximado, en el contenido real de ese archivo — si el M5 real dice "sin
+acento cromático" y la celda dice "acento cálido óxido", es conflicto
+detectable sin criterio humano, no ambigüedad. Grep del valor contra el
+archivo citado; cero coincidencias = celda sospechosa, tratar como NO
+VERIFICADO pese a tener "fuente".
+
 **Regla de exclusión propia:** al correr el cross-check de M3/M5/CDL-5 para
 UN proyecto, la fila de ESE MISMO proyecto en este registro NUNCA cuenta
 como evidencia contra la cual comparar — una fila propia no puede validar
@@ -44,6 +57,7 @@ las filas de OTROS clientes.
 | **Vera Arquitectura** | Mixto (#4 Brand Experience + #6 Portal cliente) | **Artesano + Protector** (terciario: Editor) | Newsreader / Schibsted Grotesk (Mona Sans planeado, descartado por buildability — ver `_webbing/INCIDENTES_M14.md` #1 y CHANGELOG P4) | yeso/piedra frío `#E9E8E3` · grafito `#191C1E` · azul de plano(acento) `#2C4A5C` | "Obra Abierta" | "Plano Habitado" (reveal plano técnico → fotografía de materia) | Hero → Work (grid de obras) → Process ("Open work") → Studio (dos arquitectos) → Contact/Footer |
 | **CUORE** | — | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO |
 | **Glow Factor** | — | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO | NO VERIFICADO |
+| **Estudio Tatuaje (nombre TBD)** | #4 Brand Experience (3er #4 del portfolio — DIFF de esqueleto obligatorio vs Vera/Cursor en CDL-1) — fuente: `estudio-tatuaje-web/_webbing/M0_discovery.md` | **Artesano + Pionero** (Artesano adyacente a Vera-secundario, evaluado; Pionero fresco) — fuente: `estudio-tatuaje-web/_webbing/M2_brand_translation.md` | **Archivo (Expanded/Black) / Hanken Grotesk** — grotesque sin serif: diferenciación vs registro oscuro-serif de ECOS/Cursor — fuente: `estudio-tatuaje-web/_webbing/M3_typography_semiotics.md` | **SIN acento cromático — el acento es LA LUZ.** near-black neutro `#141516` · hueso `#EDECEA` (15.49:1) · sec `#A6A6A3` · borde-ctrl `#666663` (3.17:1) · B&N monocromo + grano — medidos §2.4.5 — fuente: `estudio-tatuaje-web/_webbing/M5_visual_direction.md` | "El Taller a Oscuras" — fuente: `estudio-tatuaje-web/_webbing/M4_concept.md` | "La luz rasante" (gradiente que revela desde el negro — NO marca/línea/onda/plano/superposición). Motion: "La luz recorre" — fuente: `estudio-tatuaje-web/_webbing/M5_visual_direction.md` | Umbral → La Obra (pocas piezas, NO grilla) → El Oficio → El Autor → La Consulta (por referencia, crítica 5/6) → Footer — fuente: `estudio-tatuaje-web/_webbing/CDL_evaluation_GATE2.md` |
 | **Cursor Café** | #4 Brand Experience (híbrido con conversión real) — fuente: `_webbing/CDL_1_project_intelligence.md` | **Editor + Anfitrión** | Instrument Serif / Familjen Grotesk | vino tostado(fondo dominante, cromático) `#2B161B` · hueso rosado(contrafondo) `#F0E9E6` · ultramar POR ROL (INC-2/INC-4): `--ultramar #3A4FE0` (5.19:1, solo sobre hueso) · `--ultramar-luz #6B84FF` (5.16:1, la marca sobre vino) · `--escala #856C72` (3.56:1, gráfico) · `--escala-texto #997F85` (4.65:1, labels de texto) — fuente: `_webbing/M5_visual_direction.md` + `_webbing/INCIDENTES_M14.md` INC-2/INC-4 | "El Punto Exacto" — fuente: `_webbing/M4_concept.md` | "La Marca" (trazo ultramar que se posa sobre una escala muda — NO la línea: Runa/Move On ya la tienen). Motion: "Aterriza y calla" — fuente: `_webbing/M5_visual_direction.md` | Hero → Origen → Proceso → Catálogo → **El Club (crítica, 5/7)** → El Local → Footer — fuente: `_webbing/CDL_1_project_intelligence.md` |
 
 --------------------------------------------------------------------------------

@@ -83,7 +83,7 @@ M12 — GATES DE REFERENCIA (M12 Overview)
 --------------------------------------------------------------------------------
 
 GATE 12-A Collection | 12-B Classification | 12-C Decomposition (5+ decisiones)
-GATE 12-D Pattern | 12-E Anti-Copy (score <13) | 12-F Scoring (>5.0) | 12-G Evolution
+GATE 12-D Pattern | 12-E Anti-Copy (score <13) | 12-F Scoring (≥5.0) | 12-G Evolution
 
 --------------------------------------------------------------------------------
 M9.8 — GATES GLOBALES DE FIRMA (resumen)
@@ -114,7 +114,7 @@ por ticket (piso SKILL §5).
 PISOS INNEGOCIABLES (SKILL §5 — no se recortan por gobernanza Ligera)
 --------------------------------------------------------------------------------
 
-GATE 1 | IA Spec derivada (Principio 10) | Experience Spec mínima (CDL-1) | Seguridad B4 si backend | GATE 13.4-E | Output estructurado CDL-3 + CDL-4 (aun en pasada única)
+GATE 1 | IA Spec derivada (Principio 10) | Experience Spec mínima (CDL-1) | Seguridad B4 si backend | GATE 13.4-E | Output estructurado CDL-3 + CDL-4 (aun en pasada única) | Persistencia a disco en `_webbing/<proyecto>/` (declaración §5.1, veredictos de gate, output CDL-3/4, INCIDENTES_M14.md)
 
 Ver SKILL.md §5.1 (Declaración de Proporcionalidad, obligatoria por proyecto) y
 §6.1 (Protocolo Post-Gate, obligatorio tras cada gate de la tabla de abajo).

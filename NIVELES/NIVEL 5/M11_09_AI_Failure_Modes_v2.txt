@@ -1,4 +1,4 @@
-M11.8 — AI FAILURE MODES (v2)
+M11.9 — AI FAILURE MODES (v2)
 ===============================
 
 OBJETIVO
@@ -46,7 +46,7 @@ OPTION EXPLOSION
     - El humano tiene 5+ opciones y no puede elegir.
   Síntoma confirmado: 10+ alternativas similares, parálisis del decisor.
   Recovery Protocol:
-    1. Aplicar el Exploration Budget de M11.4.
+    1. Aplicar el Exploration Budget de M11.5.
     2. Filtrar a máximo 3 opciones genuinamente distintas.
     3. Si ninguna de las 3 es claramente mejor: dar una recomendación con razón.
     4. No seguir generando. Converger.
@@ -116,7 +116,7 @@ QUESTION FLOODING
     - Cada pregunta genera más preguntas en lugar de habilitar una acción.
   Síntoma confirmado: lista larga de preguntas.
   Recovery Protocol:
-    1. Aplicar el Question Priority System de M11.5.
+    1. Aplicar el Question Priority System de M11.6.
     2. Identificar la única pregunta crítica que bloquea el avance.
     3. Hacer solo esa pregunta.
     4. Para el resto: asumir con supuesto declarado.

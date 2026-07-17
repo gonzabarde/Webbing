@@ -94,7 +94,9 @@ PROCESO CLAUDE
 3. Evaluar los 6 criterios de entrada.
 4. Ejecutar el Collection Gate.
 5. Asignar nivel de prioridad.
-6. Registrar por qué entró (o por qué no).
+6. Registrar por qué entró (o por qué no) Y agregar la fila a
+   Docs/M12_REFERENCE_LIBRARY.md — sin esa fila, la referencia no existe
+   para el resto de M12 (M12.4 no puede contarla, M12.8 no puede recuperarla).
 
 OUTPUT
 ------

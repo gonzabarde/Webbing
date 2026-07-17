@@ -1,4 +1,4 @@
-B1 — AUTH, DATA & API PATTERN LIBRARY (v1.1)
+B1 — AUTH, DATA & API PATTERN LIBRARY (v1.2)
 ==========================================
 
 UBICACIÓN EN EL SISTEMA
@@ -359,8 +359,31 @@ PATRÓN P3 — VALIDACIÓN DE INPUT (Zod)
   Cómo se rompe:
     - Confiar en el tipo de TS como si validara en runtime → llega basura a la DB.
     - Validar en el frontend pero no en el backend → el frontend se saltea trivialmente.
+
+  NOTA — ARQUITECTURA SIN SERVICE_ROLE (RLS pública directa a PostgREST,
+  resolución de VINCA-P1 en B0): cuando B0 cerró "sin Prisma/service_role, el
+  insert público va directo a PostgREST con anon key" para que RLS se aplique
+  de verdad, Zod pierde su lugar de ejecución no-bypasseable. El problema es
+  circular:
+    - Edge Function con service_role para correr Zod → bypasea RLS (exactamente
+      lo que la resolución de VINCA-P1 prohíbe).
+    - Edge Function con anon key para correr Zod → el cliente puede saltear la
+      función y postear directo a PostgREST → Zod queda decorativo.
+    - Revocar el INSERT directo a anon para forzar la Edge Function → vuelve a
+      necesitar service_role → primer punto.
+  En esta arquitectura específica, la validación server-side real vive en CHECK
+  constraints de Postgres (formato de email, longitud, ausencia de HTML/tags en
+  campos de texto libre — B4-XSS) y constraints UNIQUE/FK — imposibles de
+  saltear por cualquier camino (API, cliente propio, curl), a diferencia de Zod
+  que solo valida el camino que pasa por él. No es una excepción al patrón P3:
+  es su implementación correcta cuando no hay JS de servidor disponible.
+  Documentar esta decisión explícitamente en el output del módulo ("Librería
+  de validación") — no como omisión silenciosa de Zod, sino como decisión
+  declarada con la razón arquitectónica. Fuente: Cursor Café, GATE 3, 2026-07-14.
+
   REGLA: validación de frontend es UX. Validación de backend es seguridad. Hacé las dos,
-  pero la del backend no es opcional jamás.
+  pero la del backend no es opcional jamás — sea Zod (si hay JS de servidor) o CHECK
+  constraints de DB (si la arquitectura de B0 no lo tiene).
 
 PATRÓN P4 — FORMA CONSISTENTE DE RESPUESTAS Y ERRORES
   Problema: que el frontend sepa siempre cómo interpretar éxito y error.
@@ -547,6 +570,9 @@ FAIL CONDITIONS
 - Recurso propio de un invitado accesible por id sin token no adivinable (A7).
 - Server Action o Route Handler sin chequeo de auth interno.
 - Validación solo en frontend.
+- Zod omitido sin documentar la razón arquitectónica (ej. sin JS de servidor
+  disponible) ni el mecanismo que lo reemplaza (P3, nota de arquitectura
+  sin service_role).
 - Tipo de TypeScript usado como si validara en runtime.
 - Webhook procesado sin verificar firma.
 - Error interno crudo devuelto al cliente.

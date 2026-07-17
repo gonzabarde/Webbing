@@ -1,4 +1,4 @@
-M11.3 — REASONING DEPTH CONTROLLER (v2.1)
+M11.4 — REASONING DEPTH CONTROLLER (v2.1)
 ==========================================
 
 OBJETIVO
@@ -46,7 +46,7 @@ Quick Answer: 15-30 segundos de razonamiento.
 
 Decision Memo: 1-2 minutos de razonamiento.
   Suficiente para comparar 2-3 opciones y dar una recomendación.
-  Si Claude lleva más de 2 minutos sin cerrar una dirección: Analysis Paralysis (M11.8).
+  Si Claude lleva más de 2 minutos sin cerrar una dirección: Analysis Paralysis (M11.9).
   Corrección: recomendar la mejor opción disponible con nivel de confianza declarado.
 
 Framework: 3-8 minutos de razonamiento.

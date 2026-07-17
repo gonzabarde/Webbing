@@ -1,5 +1,9 @@
-M12.8 — REFERENCE RETRIEVAL ENGINE (v3)
-=======================================
+M12.8 — REFERENCE RETRIEVAL ENGINE (v3.1)
+===========================================
+
+REF: Docs/M12_REFERENCE_LIBRARY.md — la "biblioteca" que este módulo busca ES
+ese archivo (sección REGISTRO DE REFERENCIAS), no la memoria de sesión de
+Claude. Los gaps de búsqueda se registran en su sección GAPS DE BÚSQUEDA.
 
 OBJETIVO
 --------
@@ -96,7 +100,8 @@ PROCESO CLAUDE
 1. Recibir la intención del humano.
 2. Traducirla a criterios usando la Query Translation Matrix.
 3. Si no está en la matriz: proceso de traducción manual (4 pasos).
-4. Verificar si hay referencias en la biblioteca que coincidan.
+4. Verificar en Docs/M12_REFERENCE_LIBRARY.md (REGISTRO DE REFERENCIAS) si hay
+   filas reales que coincidan — no inferir de memoria qué "debería" haber.
 5. Si hay resultados: recuperar las 3 más útiles y distintas entre sí.
 6. Si no hay resultados: aplicar el protocolo de "sin resultados".
 7. Para cada referencia: extraer el patrón aplicable.
@@ -116,7 +121,9 @@ Paso 3: Si todavía no hay resultados → declararlo explícitamente:
   Las más cercanas son: [lista con justificación].
   Recomendación: agregar referencias de [categoría/intención] a la colección."
 
-Paso 4: Registrar el gap para que M12.9 lo tome como input de evolución.
+Paso 4: Registrar el gap en Docs/M12_REFERENCE_LIBRARY.md (sección GAPS DE
+BÚSQUEDA: fecha, intención, criterios, gap, prioridad) para que M12.9 lo tome
+como input de evolución.
 
 No fabricar resultados. Si la biblioteca no tiene lo que se necesita: decirlo y registrar el gap.
 

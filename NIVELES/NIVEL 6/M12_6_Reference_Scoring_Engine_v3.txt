@@ -1,5 +1,8 @@
-M12.6 — REFERENCE SCORING ENGINE (v3)
-=====================================
+M12.6 — REFERENCE SCORING ENGINE (v3.1)
+=========================================
+
+REF: Docs/M12_REFERENCE_LIBRARY.md — el score final se escribe en la columna
+Score de la fila de la referencia, no solo se reporta en el chat.
 
 OBJETIVO
 --------
@@ -123,6 +126,10 @@ OUTPUT
 - dimensión más fuerte y más débil
 - acción: conservar como principal / secundaria / archivar / descartar
 - si riesgo es bajo: aclarar que requiere Transformation Test
+
+Escribir el score total en Docs/M12_REFERENCE_LIBRARY.md, columna Score de la
+fila de esa referencia. Un score que solo existe en el chat no sirve para
+comparar referencias en sesiones futuras.
 
 FAIL CONDITIONS
 ---------------
