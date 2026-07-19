@@ -197,6 +197,61 @@ PATRÓN INC-9 — RUNBOOK POR SEVERIDAD
   reclasificar y cambiar de runbook es correcto, no un error.
 
 
+PATRÓN INC-10 — INCIDENTE DE SEGURIDAD (credencial comprometida o fuga de datos)
+  Problema: un secreto se filtró (commiteado por error, robado por phishing, leak
+  de un tercero) o hay acceso indebido a datos. Es un incidente DISTINTO del
+  outage: el sitio puede estar perfectamente arriba mientras una key comprometida
+  se usa en tu contra. La secuencia de INC-6 (contener→diagnosticar→rollback) NO
+  aplica tal cual: un rollback de código NO revoca una key filtrada. Acá contener
+  = ROTAR y REVOCAR, no volver al deploy anterior.
+  Regla de oro: rotar primero, investigar después. Una key comprometida sigue
+  siendo válida hasta que la rotás; cada minuto que tardás en rotarla, el atacante
+  la tiene. La investigación de alcance viene después de cortar el acceso, no antes.
+
+  ORDEN DE ACCIONES (no se altera):
+    1. ROTAR el secreto comprometido — inmediato, antes de investigar nada:
+       - Supabase service_role / anon: regenerar en Dashboard → Settings → API
+         (o `supabase secrets`), y actualizar la env var en el host. La key vieja
+         deja de valer al regenerar.
+       - Stripe: roll de la secret key en Dashboard → Developers → API keys; y
+         rotar el signing secret del webhook (whsec_) si también se expuso.
+       - Mercado Pago: regenerar el Access Token en el panel de credenciales de
+         la aplicación; rotar la clave secreta de firma del webhook si aplica.
+       - Deploy / infra tokens: Vercel/Netlify token, GitHub PAT o deploy key,
+         token del proveedor de DB → revocar el viejo y emitir uno nuevo.
+       - Regla: si NO sabés con certeza cuál se filtró, rotás TODOS los del
+         servicio afectado. Rotar de más es barato; dejar uno vivo es el incidente.
+    2. REVOCAR sesiones y tokens de usuario activos (si la fuga toca auth o datos
+       de usuario, o si se sospecha toma de cuentas):
+       - Supabase Auth: revocar sesiones (auth.admin — signOut global / invalidar
+         refresh tokens). Un cambio del JWT secret invalida todos los JWT emitidos.
+       - Clerk / NextAuth: revocar sesiones desde el panel / rotar el secret de
+         sesión (fuerza re-login de todos).
+    3. VERIFICAR EL DAÑO (recién ahora, con el acceso ya cortado):
+       - Logs de acceso del período entre la filtración (o la fecha más temprana
+         posible) y la rotación: qué se consultó/mutó con la credencial comprometida.
+       - Logs del PSP (pagos anómalos), de auth (logins desde IPs/UA raros), de la
+         DB (queries fuera de patrón). B3-OBS es la fuente; si no hay logs de ese
+         período, declararlo — es en sí un hallazgo del postmortem.
+    4. CONTENER SECUNDARIO: si la key se filtró en el repo, además de rotarla,
+       recordá que el historial de git la conserva (B3-SEC-1) — la rotación es lo
+       que la vuelve inútil, no borrarla del historial.
+    5. POSTMORTEM (INC-7), obligatorio: cómo se filtró, qué se accedió, qué se
+       rotó/revocó, y la prevención (¿faltaba MFA? ¿un secret sin gitignore? ¿un
+       acceso viejo sin revocar?) que realimenta B3-SEC-1/3/4.
+
+  SEVERIDAD: una fuga confirmada de datos o una credencial de pagos/DB comprometida
+  es SEV-1 por impacto (toca datos/dinero), aunque el sistema siga respondiendo.
+  Clasificar por impacto, no por si el sitio está "caído" (INC-2).
+  Cómo se rompe:
+    - Investigar el alcance con la key todavía viva → el atacante sigue operando
+      mientras leés logs.
+    - Rollback de código creyendo que revoca la key → no revoca nada; la key sigue
+      válida hasta que se rota.
+    - Rotar el secreto pero no revocar las sesiones ya emitidas con él → el acceso
+      indebido persiste en las sesiones activas.
+
+
 =====================================================================
 SECCIÓN 3 — APRENDIZAJE
 =====================================================================
@@ -263,6 +318,8 @@ Un proyecto NO va a producción con usuarios reales sin esto:
 - ¿Está definida la estrategia de rollback de código y quién autoriza el de datos? (INC-4)
 - ¿Está definido qué pasa si cada dependencia externa cae? (INC-5)
 - ¿Existe el playbook de recuperación, escrito antes del incidente? (INC-6)
+- ¿Existe el playbook de credencial comprometida (rotar→revocar→verificar) con
+  el mapa secret→dónde-se-rota llenado para ESTE proyecto? (INC-10)
 
 Falla cualquiera → el proyecto no está listo para producción real. Lanzar sin plan de
 recuperación es operar con la esperanza de que nada falle, y producción siempre falla.
