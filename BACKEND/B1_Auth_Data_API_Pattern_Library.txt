@@ -347,6 +347,15 @@ PATRÓN P2 — ROUTE HANDLERS PARA HTTP EXPLÍCITO
   Cómo se rompe:
     - Webhook sin verificar firma → cualquiera POSTea eventos falsos a tu endpoint.
     - Status codes mentirosos (200 con un error adentro) → el cliente no sabe que falló.
+  CSRF (solo Route Handlers que MUTAN y autentican por cookie):
+    Una Server Action ya trae protección CSRF (Next verifica el Origin). Un Route
+    Handler que muta estado (POST/PUT/DELETE) y se autentica por COOKIE de sesión
+    no la trae: un sitio malicioso puede dispararlo con la cookie del usuario.
+    Cómo se hace bien: verificar el header Origin/Referer contra tu dominio antes
+    de mutar, o exigir un token anti-CSRF. Handlers autenticados por Bearer token
+    (no cookie) no lo necesitan. Los webhooks quedan EXENTOS: su defensa es la
+    firma (P2), no el Origin.
+    Cómo se rompe: handler mutante con cookie y sin chequeo de Origin → CSRF.
 
 PATRÓN P3 — VALIDACIÓN DE INPUT (Zod)
   Problema: nunca confiar en lo que manda el cliente.
@@ -575,6 +584,8 @@ FAIL CONDITIONS
   sin service_role).
 - Tipo de TypeScript usado como si validara en runtime.
 - Webhook procesado sin verificar firma.
+- Route Handler mutante autenticado por cookie sin chequeo de Origin ni token anti-CSRF
+  (no aplica a webhooks, que se defienden por firma).
 - Error interno crudo devuelto al cliente.
 - Catch vacío que traga errores.
 - Token de sesión en localStorage.
