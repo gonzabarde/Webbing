@@ -446,6 +446,9 @@ PATRÓN SEC-5 — HEADERS DE SEGURIDAD HTTP
         X-Content-Type-Options, X-Frame-Options / frame-ancestors: evitan sniffing y
           clickjacking (que tu sitio se embeba en un iframe malicioso).
         Referrer-Policy: controla qué info de tu URL se filtra al navegar afuera.
+        Permissions-Policy: niega por default las APIs del navegador que no usás
+          (camera, microphone, geolocation, etc.) → reduce lo que un script
+          inyectado podría pedir.
     - HTTPS siempre (los hosts modernos como Vercel lo dan por default — confirmarlo).
     - CSP es la más poderosa y la más delicada de configurar: empezar en modo report y
       ajustar antes de hacerla estricta, para no romper recursos legítimos.
