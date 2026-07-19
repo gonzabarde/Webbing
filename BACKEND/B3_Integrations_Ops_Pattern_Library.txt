@@ -264,6 +264,10 @@ PATRÓN OBS-1 — LOGGING ESTRUCTURADO
     - Logs estructurados (con contexto: qué acción, qué usuario, qué request id), no
       console.log sueltos.
     - Nunca loguear datos sensibles (passwords, tarjetas, tokens) — regla de B1-P5.
+    - Nunca loguear process.env ni el objeto de configuración completo. Un
+      console.log(process.env) o un dump de config en un catch filtra TODOS los
+      secretos de una. Loguear solo los campos concretos y no sensibles que hagan
+      falta. Verificar: grep -rn "console.log(process.env\|JSON.stringify(process.env" .
     - Niveles de log (info/warn/error) usados con criterio.
   Cómo se rompe:
     - Logs sin contexto → imposible rastrear un problema.
