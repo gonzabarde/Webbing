@@ -1007,6 +1007,28 @@ Técnico:
   [ ] Build pasa sin errores (npm run build o equivalente)
   [ ] Variables de entorno de producción configuradas
   [ ] SSL activo
+  [ ] PISO DE SEGURIDAD (aplica a TODO deploy, tenga backend o no):
+      Complementa a B3-SEC-5, que "aplica a toda app web" pero vive en la
+      extensión backend condicional que un sitio estático nunca carga. Este piso
+      es barato a propósito (SKILL §5.1: un piso caro se saltea):
+      [ ] Headers de seguridad en next.config (o en la config del host):
+          Strict-Transport-Security, X-Content-Type-Options: nosniff,
+          X-Frame-Options: DENY (o CSP frame-ancestors 'none'), Referrer-Policy,
+          Permissions-Policy negando lo no usado. CSP si el sitio lo tolera sin
+          romper recursos (empezar en report-only). Verificar: curl -sI <URL prod>.
+      [ ] HTTPS forzado (HTTP redirige). Vercel/Netlify lo dan por default —
+          CONFIRMARLO con el curl -sI, no asumirlo.
+      [ ] .env en .gitignore; ningún .env con valores reales commiteado
+          (git log --all -- '*.env*' vacío de archivos con secretos).
+      [ ] npm audit --audit-level=high sin vulnerabilidades high/critical.
+      [ ] Si hay CUALQUIER formulario (incluido contacto): validación server-side
+          del handler (no solo HTML5/cliente) + anti-abuso mínimo (honeypot o
+          rate limit). Un form de contacto sin esto es spam y, si toca PII, un
+          problema de datos. Sin backend propio: el form suele ir a un servicio
+          (Formspree, Netlify Forms) — confirmar que ESE valida y limita.
+      Nota de proporcionalidad: si el proyecto activó la extensión backend, estos
+      ítems ya los cubre B4 (no duplicar). Este piso existe para el tier que NO
+      activa B4.
   [ ] DNS configurado y propagado
   [ ] Rollback plan documentado y probado
 
