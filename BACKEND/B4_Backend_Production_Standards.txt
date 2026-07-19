@@ -157,6 +157,11 @@ SEGURIDAD (lo no negociable):
   payload de XSS. Verificar: React escapa por default en JSX, pero cualquier uso de
   dangerouslySetInnerHTML o renderizado fuera de React necesita sanitización explícita
   (strip/escape de tags) antes de guardar o antes de renderizar.
+  Herramienta default: DOMPurify (o sanitize-html) para sanear HTML rico antes de
+  guardarlo/renderizarlo; escape manual solo con justificación. No escribir un
+  strip de tags a mano con regex (se evade). Verificar con el grep de
+  dangerouslySetInnerHTML de CÓMO SE VERIFICA (XSS almacenado): cada uso pasa por
+  el sanitizador, ninguno recibe input crudo.
 - ¿Toda tabla con RLS habilitada tiene los GRANT de base correspondientes al rol
   que la va a consultar (anon/authenticated)? RLS es la capa 2 (filtra QUÉ filas);
   el GRANT es la capa 1 (permite operar en la tabla). Habilitar RLS sin GRANT no es
