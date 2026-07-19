@@ -158,6 +158,31 @@ SEGURIDAD (lo no negociable):
   confundir con "está bien protegido". Verificar EJECUTANDO, no revisando: insert/
   select real contra la tabla como el rol correspondiente, un caso que debe pasar
   y uno que debe fallar. Una revisión de schema sin una llamada real no cuenta.
+  VERIFICACIÓN POR AUSENCIA (además del insert/select puntual de arriba): el test
+  puntual prueba las tablas que uno se acordó de probar; no atrapa la tabla nueva
+  sin RLS ni la view que bypasea. El criterio de pase es RESULTADO VACÍO en:
+    (a) Tablas base de schemas expuestos sin RLS forzada:
+        SELECT n.nspname AS schema, c.relname AS tabla,
+               c.relrowsecurity AS rls_on, c.relforcerowsecurity AS rls_forzada
+        FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
+        WHERE c.relkind = 'r' AND n.nspname IN ('public')
+          AND NOT c.relrowsecurity;
+        ESPERADO: 0 filas. Cada tabla base en un schema servido por PostgREST
+        debe tener RLS habilitada (y forzada si el owner también la consulta).
+    (b) Views de schemas expuestos que corren con permisos del owner (bypasean la
+        RLS de sus tablas base):
+        SELECT n.nspname, c.relname
+        FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
+        WHERE c.relkind = 'v' AND n.nspname IN ('public')
+          AND COALESCE((c.reloptions::text[] @> ARRAY['security_invoker=true'])
+                       OR (c.reloptions::text[] @> ARRAY['security_invoker=on']), false) = false;
+        ESPERADO: 0 filas, o cada view listada con justificación escrita de por qué
+        expone datos con permisos de owner. Una view sin security_invoker sobre
+        tablas con RLS sirve TODAS las filas — anula la RLS sin que el schema lo grite.
+    (c) Complementario, no sustituto: correr get_advisors (Supabase, type:security)
+        y resolver todo hallazgo de RLS/exposición que reporte. Es la red de
+        seguridad del proveedor sobre lo que las queries (a)/(b) no cubran.
+  Si el proyecto NO usa Postgres/Supabase con PostgREST, este bloque es N/A explícito.
 - ¿Ningún secret en el código, repo o bundle del cliente? (B3-SEC)
 - ¿Webhooks con firma verificada? (B1-P2 / B2 / B3-INT-2)
 - ¿Errores sin filtrar internals al cliente? (B1-P4)
