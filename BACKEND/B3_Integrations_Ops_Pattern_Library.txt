@@ -127,6 +127,10 @@ PATRÓN FILE-2 — SUBIDA SEGURA Y DIRECTA
       y firma, el cliente sube directo al storage. El archivo no pasa por tu servidor.
     - Validar ANTES de firmar: tipo de archivo (allowlist de MIME types), tamaño máximo,
       y que el usuario tenga permiso de subir.
+    - Cuando el archivo se re-sirve a otros usuarios, validar el CONTENIDO real
+      (magic bytes / sniffing del tipo), no solo el Content-Type declarado por el
+      cliente: un ejecutable renombrado .jpg pasa una allowlist que mira solo la
+      extensión o el header declarado.
     - Generar nombres de archivo no adivinables. No confiar en el nombre que manda el cliente.
   Cómo se rompe:
     - Aceptar cualquier tipo/tamaño → subida de ejecutables, archivos gigantes, abuso de storage.
