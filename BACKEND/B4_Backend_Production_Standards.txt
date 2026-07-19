@@ -125,6 +125,12 @@ CÓDIGO:
   Este orden no se altera. Es la columna vertebral de la seguridad.
 - Forma de respuesta/error única en todo el proyecto (B1-P4). No improvisar por endpoint.
 - Sin secrets hardcodeados jamás (B3-SEC-1). Todo secret pasa por /lib/env validado.
+- SQL crudo SOLO parametrizado. Prohibido $queryRawUnsafe / $executeRawUnsafe y
+  toda interpolación de strings dentro de SQL (armar la query con template
+  strings + variables del usuario). Si hace falta SQL crudo, usar el tagged
+  template parametrizado del ORM ($queryRaw`... ${valor}`), que separa query de
+  datos. La interpolación de input de usuario en SQL es inyección directa.
+  Verificar: grep -rn "RawUnsafe" --include="*.ts" --include="*.tsx" . → 0 resultados.
 - Errores manejados en los límites, nunca tragados en silencio (B1-P5).
 
 COMENTARIOS Y DOCUMENTACIÓN:
@@ -401,6 +407,7 @@ FAIL CONDITIONS
 - Cliente de DB instanciado por request (agota conexiones en serverless).
 - Naming arbitrario o inconsistente entre módulos.
 - Preámbulo de seguridad alterado u omitido en alguna mutación.
+- $queryRawUnsafe/$executeRawUnsafe o interpolación de strings de usuario en SQL.
 - Launch con un ítem de seguridad pendiente.
 - Migraciones no aplicadas en prod.
 - Secrets de prod incompletos o mezclados con dev.
