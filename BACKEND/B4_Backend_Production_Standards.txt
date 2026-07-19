@@ -165,6 +165,56 @@ SEGURIDAD (lo no negociable):
 - ¿Headers de seguridad HTTP configurados y HTTPS forzado? (B3-SEC-5)
 - ¿Cuentas críticas con MFA y accesos viejos revocados? (B3-SEC-4 — responsabilidad del operador)
 
+CÓMO SE VERIFICA (SEGURIDAD) — evidencia ejecutable por ítem:
+La regla del ítem RLS de arriba ("verificar EJECUTANDO, no revisando") aplica a
+TODA esta sección: un ítem se marca OK con el OUTPUT de su verificación, no con
+un "sí, cumple". El post-check de GATE 3 (SKILL §6.1) pega estos outputs como
+evidencia. Ítem sin verificación corrida = NO CUMPLE, no "pendiente".
+
+  IDOR / pertenencia (A4) [EJECUTABLE]:
+    Con dos usuarios de prueba (A y B), pedir un recurso de B autenticado como A
+    (curl con la cookie/JWT de A y el id de B, o el flujo real en navegador).
+    ESPERADO: 403/404 o vacío. Un 200 con datos de B = FALLA bloqueante.
+  Auth dentro de cada action/handler (B1-P1/P2) [EJECUTABLE]:
+    curl -X POST a cada Route Handler mutante, sin cookie ni token.
+    ESPERADO: 401/403. Server Actions: ejercitar el flujo en ventana de incógnito
+    sin sesión → la acción devuelve error de auth y NO ejecuta la mutación.
+  Validación server-side (B1-P3) [EJECUTABLE]:
+    curl con payload inválido (campo requerido ausente, tipo incorrecto) a una
+    mutación representativa de cada dominio.
+    ESPERADO: 400/422 con la forma de error de P4. Un 500 = la validación no corrió.
+  XSS almacenado [EJECUTABLE]:
+    (a) grep -rn "dangerouslySetInnerHTML" --include="*.tsx" --include="*.ts" .
+        (fuera de node_modules). ESPERADO: 0 resultados, o cada uno sobre HTML
+        ya pasado por el sanitizador default (DOMPurify/sanitize-html).
+    (b) Guardar <img src=x onerror=alert(1)> en un campo de texto libre que se
+        renderiza a otros y ver el render. ESPERADO: se muestra como texto, no ejecuta.
+  RLS + GRANT (ver ítem de arriba) [EJECUTABLE]:
+    El insert/select real que ya pide ese ítem, MÁS la query de cobertura y
+    get_advisors del bloque VERIFICACIÓN POR AUSENCIA de abajo (verificación por ausencia).
+  Secrets fuera del bundle (B3-SEC-1/2) [EJECUTABLE]:
+    (a) grep -rE "NEXT_PUBLIC_" .env* → ningún nombre de secret real (solo URLs/
+        claves anon/publishable). (b) Por cada secret server-only, grep de su
+        VALOR (o de su nombre de var) en .next/static tras un build.
+    ESPERADO: 0 resultados en el bundle cliente.
+  Webhooks con firma (B1-P2/B2/B3-INT-2) [EJECUTABLE]:
+    curl -X POST al endpoint del webhook con body válido y firma ausente o falsa.
+    ESPERADO: 400/401. Un 200 = la firma no se verifica.
+  Errores sin filtrar internals (B1-P4) [EJECUTABLE]:
+    Forzar un error (payload roto) y leer la respuesta al cliente.
+    ESPERADO: mensaje seguro sin stack trace, nombre de tabla ni query.
+  Dependencias (B3-SEC-3) [EJECUTABLE]:
+    npm audit --audit-level=high. ESPERADO: 0 vulnerabilidades high/critical.
+  Headers HTTP + HTTPS (B3-SEC-5) [EJECUTABLE]:
+    curl -sI <URL de prod>. ESPERADO: presentes Strict-Transport-Security,
+    X-Content-Type-Options, X-Frame-Options (o CSP frame-ancestors), Referrer-
+    Policy, Permissions-Policy y CSP; HTTP redirige a HTTPS.
+  MFA y revocación de accesos (B3-SEC-4) [MANUAL]:
+    Responsable: el operador (vos). Momento: durante el launch checklist, antes
+    de GATE 4. No es ejecutable por código (vive en las consolas de GitHub/host/
+    DB/PSP/auth/DNS/email). Evidencia: enumerar cada cuenta crítica y confirmar
+    MFA activo en su consola. Sin esa enumeración explícita = NO CUMPLE.
+
 CORRECTITUD:
 - ¿Las migraciones corren limpio desde cero en una DB vacía?
 - ¿El borrado (soft/hard) es consistente con el filtrado de queries? (B1-D4)
