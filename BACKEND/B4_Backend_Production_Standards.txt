@@ -311,7 +311,7 @@ DATOS Y PERFORMANCE (B5 + B3-Lifecycle):
 □ Foreign keys usadas en filtros indexadas; sin N+1 en listados. (B5-PERF-3/4)
 □ Trabajo pesado fuera del request. (B5-PERF-7)
 □ Connection pooling configurado si el deploy es serverless. (B5-PERF-8)
-□ Rate limit en endpoints de auth e IA. (B5-PERF-6)
+□ Rate limit en endpoints de auth, IA, formularios públicos y API pública (los que existan). (B5-PERF-6)
 □ Operaciones críticas (stock/saldos/cupos) atómicas. (B1-P7)
 □ TTL definido para logs/eventos; política de retención de datos personales. (B3-LIFE-1)
 □ Costo mensual estimado; features de costo variable (IA) con techo. (B5-PERF-12)

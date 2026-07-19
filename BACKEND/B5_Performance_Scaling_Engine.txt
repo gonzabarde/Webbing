@@ -298,7 +298,8 @@ Mínimo no negociable para CUALQUIER proyecto con backend:
 - ¿Los listados con datos relacionados están libres de N+1? (PERF-4)
 - ¿El trabajo pesado está fuera del request? (PERF-7)
 - ¿Hay connection pooling si el deploy es serverless? (PERF-8)
-- ¿Los endpoints de auth e IA tienen rate limit? (PERF-6)
+- ¿Los endpoints de auth, IA, formularios públicos y API pública (los que existan)
+  tienen rate limit? (PERF-6)
 
 Adicional para proyectos de escala esperada media/alta:
 - ¿La política de cache (si hay cache) tiene invalidación explícita? (PERF-1)
