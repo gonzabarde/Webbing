@@ -196,6 +196,15 @@ PATRÓN A1 — INTEGRACIÓN DEL PROVEEDOR DE AUTH
   Cómo se rompe:
     - Construir hashing/tokens/reset a mano → vulnerabilidades. (Prohibido por B0.)
     - No sincronizar → datos de usuario partidos entre proveedor y DB sin fuente clara.
+  CASO RESIDUAL — hashing propio (credentials provider):
+    La regla es delegar (B0): el proveedor resuelve hashing, reset y tokens. Pero
+    si el flujo obliga credenciales propias (NextAuth credentials provider con
+    email+password en tu DB), los parámetros no son opcionales:
+    - Password: bcrypt con cost ≥ 12, o argon2id. Nunca hash rápido (MD5/SHA sin
+      salt) ni texto plano (B0).
+    - Token de reset/verificación: aleatorio y largo; se guarda HASHEADO en la DB
+      (no en claro), con expiración corta (≤ 1h) y un solo uso (se invalida al usarse).
+    - Esto es superficie de auth escrita a mano: si se puede evitar delegando, se evita.
 
 PATRÓN A2 — GESTIÓN DE SESIÓN
   Problema: mantener al usuario autenticado entre requests de forma segura.
