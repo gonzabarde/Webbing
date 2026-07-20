@@ -1,5 +1,5 @@
-M13.0A — ESCALERA DE OFERTAS (ANEXO DE M13.0) (v1)
-===================================================
+M13.0A — ESCALERA DE OFERTAS (ANEXO DE M13.0) (v1.2)
+=====================================================
 
 QUÉ ES ESTE DOCUMENTO
 ---------------------
@@ -34,11 +34,45 @@ LA ESCALERA — TRES PRODUCTOS
    el caso) + Google Business vinculado. No "una página web": un sistema que
    capta y convierte, instalado y funcionando.
    Función: es el ancla de la oferta y la fuente del ingreso de proyecto.
-   Precio ancla: USD 700-1.500 según complejidad. B0 (Backend Architecture
-   Decision Engine) clasifica la complejidad real; M13.2 fija el scope y M13.3
-   el precio final dentro (o fuera, si el proyecto lo justifica) de este ancla.
+
+   Precio ancla: USD 1.600 - 3.200 (v1.2 — antes 700-1.500, ver RECALIBRACIÓN).
+   B0 clasifica la complejidad real; M13.2 fija el scope y M13.3 el precio final.
+
+   REGLA DE PISO (innegociable fuera de la fase arranque): el Core no baja de
+   USD 1.600. Ese número no es una preferencia: es el piso de esfuerzo del propio
+   sistema. La categoría MÁS LIVIANA de M13.2 (Marketing Site / Startup MVP)
+   arranca en 40 horas; a la tarifa local mínima de M13.3 (USD 35/h) más el
+   margen de imprevistos de cliente nuevo (15%), eso da USD 1.610. Cotizar el
+   Core por debajo de eso es cotizar por debajo del piso de trabajo que el
+   sistema mismo declara para el proyecto más simple que sabe hacer.
+
+   REGLA DE TECHO (a qué categorías aplica este ancla): el Core como ancla cubre
+   las categorías que el producto realmente sirve — Marketing Site, Healthcare/
+   Clínica, Consulting/Marca Personal, Startup MVP. Si el proyecto clasifica
+   (M13.2) como ECOMMERCE, SAAS o LUXURY, este ancla NO aplica: el precio sale
+   del rango de categoría de M13.3, que arranca bastante más arriba (2.500 /
+   5.000 / 3.000 respectivamente). Decir "el Core sale USD 1.600-3.200" frente a
+   un ecommerce es setear una expectativa que la cotización va a desmentir.
+
    Regla de framing: nunca más venderlo como "una página web". Se vende el
    sistema de captación, no el entregable visual.
+
+   RECALIBRACIÓN v1.2 (2026-07-19, de Silvana Dato N-2 — eje 5 de M14):
+   El ancla anterior era USD 700-1.500. A tarifa local implicaba 17-37 horas de
+   trabajo, cuando el piso de esfuerzo de TODAS las categorías de M13.2 es 40
+   horas; y quedaba por debajo del piso de PRECIO de casi todas (Portfolio,
+   Healthcare y Luxury arrancan en 1.500 — el TECHO del ancla vieja; Ecommerce
+   en 2.500; SaaS en 5.000). M13.3 tiene un desempate escrito ("prevalece el
+   precio calculado por scope"), así que nada se rompía — pero ese desempate se
+   disparaba en prácticamente TODO proyecto, lo que volvía decorativa un ancla
+   que este mismo documento presenta como "el ancla de la oferta". Un número que
+   abre la conversación comercial y que el cálculo real desmiente siempre, hacia
+   abajo, no es un ancla: es una expectativa mal seteada en contra de Webbing.
+   Detectado porque el caso Silvana cotizó USD 1.500 contra un crudo por scope
+   de USD 2.760 y la brecha se leyó como "descuento por portfolio" cuando parte
+   era el ancla mal calibrada — el intercambio de fase arranque estaba
+   enmascarando el problema, y con la cláusula vencida habría quedado expuesto
+   en una cotización real.
 
 3. RECURRENTE — OPERACIÓN MENSUAL
    Qué es: hosting, dominio, ajustes, reportes de leads/conversión y soporte.
@@ -46,7 +80,12 @@ LA ESCALERA — TRES PRODUCTOS
    Función: es el producto que cambia la economía de Webbing. Convierte cada
    cierre único (Core) en ingreso repetido. Sin este, cada mes se arranca de
    cero buscando el próximo Core.
-   Precio ancla: USD 80-200/mes.
+   Precio ancla: USD 100-200/mes (v1.2 — antes 80-200).
+   CORRECCIÓN v1.2: el piso decía 80, pero el Tier 1 de M13.3 (el más barato que
+   existe) arranca en USD 100. Mismo defecto que el ancla del Core, en chico: el
+   anexo publicaba un piso por debajo del piso del módulo que fija los tiers.
+   Detectado en la misma pasada (Silvana N-2). Los tiers formales siguen viviendo
+   en M13.3; este número es solo el punto de partida de la conversación.
    Cómo se conecta: se propone SIEMPRE al entregar el Core, en el mismo mensaje
    de entrega (M13.4, Sección C — GATE 13.4-D). El detalle operativo —qué
    incluye, qué no incluye, condiciones de salida— vive en M13.4. Las
@@ -64,10 +103,33 @@ El objetivo no es vender un producto: es subir al cliente por la escalera.
 Un diagnóstico que no busca el Core, o un Core que no busca el Recurrente,
 deja la mayor parte del valor sobre la mesa.
 
+ANCLA ≠ PRECIO DE ARRANQUE (v1.2 — separación obligatoria)
+-----------------------------------------------------------
+El ancla es lo que el Core VALE. El precio de arranque es lo que se COBRA
+durante la fase arranque, a cambio de derechos de portfolio + testimonio.
+Son dos números distintos y se nombran los dos.
+
+Mientras la CLÁUSULA DE FASE ARRANQUE (M13.4) esté ACTIVA, se puede cotizar por
+debajo del ancla — pero SIEMPRE declarando el valor de lista y el motivo:
+  ✅ "El sistema vale USD 2.800. Te lo hago en USD 1.500 porque sos uno de los
+     primeros casos y necesito mostrarlo en portfolio con tu testimonio."
+  ❌ "Sale USD 1.500."  ← el cliente ancla en 1.500 como el precio real; cuando
+     la cláusula venza, subir a 2.800 con ese mismo cliente es imposible.
+
+POR QUÉ ES REGLA: en el caso Silvana Dato la brecha entre el ancla vieja (1.500)
+y el crudo por scope (2.760) se leyó como "descuento por portfolio" cuando parte
+era el ancla mal calibrada. Mezclar los dos números hizo invisible el problema
+durante toda la corrida. Separarlos lo habría expuesto en el primer cálculo.
+Corolario: al vencer la cláusula, el precio de arranque desaparece y queda el
+ancla — sin renegociar nada con nadie, porque el ancla siempre estuvo dicha.
+
 ADVERTENCIA — PRINCIPIO 9 (CONOCIMIENTO EMBEBIDO ES HIPÓTESIS, NO DATO)
 -----------------------------------------------------------------------
-Los tres precios ancla de arriba (USD 80-150 / USD 700-1.500 / USD 80-200 mes)
-son HIPÓTESIS, no datos cerrados. Ningún precio está validado hasta que un
+Los tres precios ancla de arriba (USD 80-150 / USD 1.600-3.200 / USD 100-200 mes)
+son HIPÓTESIS, no datos cerrados. El del Core se RECALIBRÓ el 2026-07-19 contra
+el piso de esfuerzo del propio sistema (ver RECALIBRACIÓN v1.2) — eso lo hace
+coherente hacia adentro, no validado hacia afuera: sigue sin que un cliente lo
+haya pagado. Ningún precio está validado hasta que un
 cliente lo paga. Se calibran con los primeros 3 casos reales — que entran igual
 bajo la CLÁUSULA DE FASE ARRANQUE de M13.4 (pago previo O prueba de compromiso
 de tres partes). Tras esos casos, los anclas se reescriben con lo que el mercado
@@ -81,6 +143,18 @@ Dos señales calibran los precios, no una:
      le generó al cliente 15 reservas nuevas por mes justifica —con evidencia—
      subir el ancla y sostener un Recurrente más alto. El resultado medido, no
      solo el cobro, es lo que da derecho a subir el precio.
+
+     CUIDADO — "NUEVAS" ES LA PALABRA QUE HACE EL TRABAJO (v1.1): esas 15
+     reservas habilitan subir el precio solo si son captación NUEVA, es decir
+     si la demanda TOTAL del negocio creció. Si el total quedó plano y lo único
+     que cambió es que ahora 15 pasan por el sitio en vez de por DM, eso es
+     RE-ATRIBUCIÓN: tiene valor propio y se cobra, pero NO habilita subir el
+     ancla. Distinguirlo requiere haber registrado la demanda total al entregar
+     (el T0 del Capture_Baseline_Template v1.1) y volver a medirla en el
+     check-in — el número atribuible al sitio, solo, no puede distinguirlas.
+     Calibrar el pricing de toda la agencia sobre re-atribución leída como
+     demanda nueva es construirlo sobre una señal falsa (Principio 9: el dato
+     que no se verificó es hipótesis, y acá la hipótesis se disfraza de medición).
 Sin el segundo dato, "un cliente pagó" solo prueba que cerraste una venta, no
 que instalaste un sistema de captación que funciona. Calibrar sobre ambas.
 

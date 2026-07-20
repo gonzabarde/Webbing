@@ -52,7 +52,8 @@ Marcar UNO. Actualizar en cada transición.
 
 | Campo | Valor |
 |-------|-------|
-| Qualification score | /25 — decisión: avanzar / condiciones / declinar |
+| Qualification score | /30 — decisión: avanzar / condiciones / declinar |
+| Dolor percibido (1-5) | — anotar aparte: un 1 obliga a Entrada antes de cotizar (M13.1 v1.2) |
 | Razón si declinó | precio / timing / mala calidad / otro |
 | Producto escalera | Entrada / Core / Recurrente |
 | Scope IN (resumen) | ver propuesta M13.2 |
@@ -70,11 +71,14 @@ Marcar UNO. Actualizar en cada transición.
 |-------|-------|
 | Métrica acordada | reservas / consultas WA / formularios / otro |
 | Fuente del dato | analytics / cliente / CRM / manual |
-| Baseline al entregar | número + fecha |
+| Tipo de punto de partida | (A) sin demanda previa / (B) demanda previa NO atribuida / (C) demanda previa medida |
+| Baseline al entregar (atribuible) | número + fecha |
+| Demanda total T0 (obligatorio si tipo B) | consultas/turnos por semana, todos los canales |
 | Meta 90 días | |
-| Check-in 30d | |
-| Check-in 60d | |
-| Check-in 90d | |
+| Check-in 30d | atribuible / total |
+| Check-in 60d | atribuible / total |
+| Check-in 90d | atribuible / total |
+| Lectura final | captación NUEVA / re-atribución / mixto — solo la nueva habilita subir precio (M13.0A señal 2) |
 
 ## PRODUCCIÓN (si cerró)
 

@@ -1,5 +1,5 @@
-M13 — BUSINESS LAYER (v1)
-==========================
+M13 — BUSINESS LAYER (v1.1)
+============================
 
 OPERATIONAL HEADER
 ------------------
@@ -101,14 +101,25 @@ clientes que no pagan y trabajo que no se puede mostrar en el portfolio.
 
 NOTA — EXCEPCIÓN TEMPORAL DE FASE ARRANQUE (con sunset)
 -------------------------------------------------------
-Durante la fase de arranque de Webbing (hasta cerrar los primeros 3 casos de
-portfolio), GATE 13.4-A admite una excepción temporal: se satisface con pago
-previo O con una PRUEBA DE COMPROMISO de tres partes (acuerdo firmado de
-intercambio con derechos de portfolio + deadline de materiales del cliente +
-seña simbólica). No apaga la regla de cobro: amplía qué la satisface, solo en
-arranque. Vence automáticamente tras el 3er caso de portfolio → GATE 13.4-A
-vuelve a "pago previo, sin excepción". Detalle completo en M13.4 (Closing &
-Onboarding). Registrada en Docs/CHANGELOG.txt.
+Durante la fase de arranque de Webbing, GATE 13.4-A (primer pago antes de
+arrancar) Y GATE 13.3-B (estructura de pagos con mayoría al inicio) admiten una
+excepción temporal común: se satisfacen con pago previo O con una PRUEBA DE
+COMPROMISO de tres partes (acuerdo firmado de intercambio con derechos de
+portfolio + deadline de materiales del cliente + seña simbólica). Los tres o
+ninguno. Los dos gates se relajan juntos, no uno solo: ambos imponen un piso de
+adelanto en efectivo que el modelo de intercambio de arranque todavía no busca.
+No apaga la regla de cobro: amplía qué la satisface, solo en arranque. Y no
+alcanza a GATE 13.4-C — sin pago final confirmado no hay deploy.
+
+Vence automáticamente tras el 3er caso de portfolio REAL → los dos gates vuelven
+a su estándar sin excepción. El contador de sunset computa SOLO casos con cliente
+real + GATE 4 efectivamente cruzado + derechos de portfolio ejercidos; proyectos
+de práctica, clientes ficticios, stress tests y simulaciones NUNCA computan, por
+completo que haya sido el proceso.
+
+Detalle completo —texto de la cláusula, alcance y DEFINICIÓN DEL CONTADOR DE
+SUNSET— en M13.4 (Closing & Onboarding), que es la fuente única; M13.3 y
+Docs/GATE_REGISTRY.txt solo la citan. Registrada en Docs/CHANGELOG.txt.
 
 RELACIÓN CON EL RESTO DEL SISTEMA
 -----------------------------------

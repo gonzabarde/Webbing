@@ -1,5 +1,5 @@
-M13.3 — PRICING ENGINE (v1)
-============================
+M13.3 — PRICING ENGINE (v1.2)
+==============================
 
 OPERATIONAL HEADER
 ------------------
@@ -20,12 +20,34 @@ Modelo: fijo por proyecto + retainer mensual opcional.
 Moneda base: USD para clientes internacionales.
           USD o ARS (equivalente) para clientes locales.
 
-NOTA — ESCALERA DE OFERTAS: los tres productos y sus precios ancla de arranque
-(Entrada ~USD 80-150 / Core USD 700-1.500 / Recurrente USD 80-200/mes) están en
-M13.0A (anexo de M13.0), marcados como HIPÓTESIS a calibrar con los primeros 3
-casos (Principio 9). Los rangos y tiers de abajo son el instrumento de cálculo
-fino por scope real; los anclas de M13.0A son el punto de partida de la
-conversación. Si difieren, prevalece el precio calculado por scope de acá.
+NOTA — ESCALERA DE OFERTAS: los tres productos y sus precios ancla (Entrada
+~USD 80-150 / Core USD 1.600-3.200 / Recurrente USD 100-200/mes) están en M13.0A
+(anexo de M13.0), marcados como HIPÓTESIS a calibrar con los primeros 3 casos
+(Principio 9). Los rangos y tiers de abajo son el instrumento de cálculo fino por
+scope real; los anclas de M13.0A son el punto de partida de la conversación.
+Si difieren, prevalece el precio calculado por scope de acá.
+
+RELACIÓN ENTRE EL ANCLA DEL CORE Y ESTOS RANGOS (v1.2, de Silvana Dato N-2):
+El desempate de arriba existe desde v1, pero hasta el 2026-07-19 el ancla del
+Core (entonces USD 700-1.500) quedaba por debajo del piso de esfuerzo de TODAS
+las categorías de abajo — así que el desempate se disparaba en prácticamente
+TODO proyecto y el ancla era decorativa. Recalibrada a USD 1.600-3.200, el ancla
+ahora cae DENTRO de las categorías que el Core sirve, y el desempate vuelve a ser
+lo que debía: una excepción, no la regla.
+
+  Categorías donde el ancla del Core aplica y es coherente:
+    Marketing Site (800-2.500) · Healthcare/Clínica (1.500-4.000) ·
+    Consulting/Marca Personal (1.000-3.500) · Startup MVP (800-2.500).
+  Categorías donde el ancla del Core NO aplica — usar el rango de acá, sin
+  nombrar el ancla en la conversación:
+    Ecommerce (2.500-8.000) · SaaS (5.000-15.000+) · Luxury (3.000-7.000) ·
+    Portfolio/Agency (1.500-4.000, borde: coherente pero el Core no lo cubre).
+
+  CHEQUEO DE COHERENCIA al cotizar (barato, hacerlo siempre): el precio calculado
+  por scope, ¿cae dentro del rango de su categoría? Si cae MUY por debajo del
+  piso de la categoría, no bajaste el precio: subestimaste el scope. Volver a
+  M13.2 antes de cotizar. Ese es exactamente el error que el ancla vieja
+  institucionalizaba.
 
 PRICING BASE POR TIPO DE PROYECTO
 -----------------------------------
@@ -114,6 +136,13 @@ Fijo por proyecto:
   Regla: nunca arrancar sin el primer pago recibido.
   El deploy a producción no ocurre sin el pago final confirmado.
 
+  EXCEPCIÓN TEMPORAL (fase arranque): mientras la CLÁUSULA DE FASE ARRANQUE de
+  M13.4 esté ACTIVA, la estructura de arriba admite una variante de intercambio —
+  seña simbólica al firmar + saldo a la entrega — siempre que se cumplan las tres
+  partes de la PRUEBA DE COMPROMISO (M13.4). Esa prueba sustituye al 50-60% al
+  inicio (ver GATE 13.3-B). Lo que NO cambia: el deploy a producción sigue sin
+  ocurrir hasta que el pago final esté confirmado (GATE 13.4-C).
+
 Regla de moneda:
   Si el precio está en USD: se cobra en USD (Wise, Payoneer, transferencia).
   Si el precio está en ARS: se cobra en ARS pero el monto se recalcula
@@ -178,6 +207,18 @@ GATE 13.3-A — ¿El precio cubre el esfuerzo estimado con margen de imprevistos
 
 GATE 13.3-B — ¿La estructura de pagos tiene el 50% (o 60%) al inicio?
   Falla → ajustar. No arrancar proyectos con menos del 50% adelantado.
+  EXCEPCIÓN TEMPORAL (fase arranque, con sunset): durante la fase de arranque de
+  Webbing, este gate se RELAJA junto con GATE 13.4-A — no se ignora. Se satisface
+  con el 50-60% al inicio O con la PRUEBA DE COMPROMISO de tres partes definida en
+  M13.4 (acuerdo firmado de intercambio con derechos de portfolio + deadline de
+  materiales del cliente + seña simbólica). Durante esta fase, esa prueba de
+  compromiso ES la condición de "adelanto" que sustituye al 50-60% en efectivo: la
+  seña simbólica es el piso mínimo de compromiso, no el pago real que el modelo de
+  intercambio de arranque explícitamente todavía no busca. Si los tres NO se
+  cumplen, el gate NO se da por satisfecho. Vence junto con la cláusula, tras los
+  primeros 3 casos de portfolio REALES (no práctica — ver definición del contador
+  de sunset en M13.4) → vuelve a "50-60% al inicio, sin excepción".
+  Ver: M13.4, CLÁUSULA DE FASE ARRANQUE (fuente única de la excepción).
 
 GATE 13.3-C — ¿Se propuso el retainer al cierre del proyecto?
   Falla → proponer antes de dar por cerrado el proyecto.

@@ -1,4 +1,4 @@
-M13.2 — SCOPE & PROPOSAL SYSTEM (v1.1)
+M13.2 — SCOPE & PROPOSAL SYSTEM (v1.2)
 =======================================
 
 OPERATIONAL HEADER
@@ -123,7 +123,10 @@ SECCIÓN 1.5 — RESULTADO ESPERADO (captación, no solo entregable) [v1.1]
   Qué vamos a medir para saber si el sistema captura (GATE 13.4-E / M13.0).
   Usar plantilla Capture_Baseline_Template.md al cerrar; en la propuesta:
   - Métrica acordada (reservas, consultas WA, formularios, etc.)
-  - Baseline estimada (del M15 audit si existe; si no, "desde cero" declarado)
+  - Baseline estimada (del M15 audit si existe; si no, "desde cero" declarado).
+    Si el negocio YA capta por canales no medidos (IG, DM, boca en boca), decirlo
+    acá: el baseline es "cero ATRIBUIBLE", no "cero demanda" — son distintos y
+    cambian qué se le puede prometer al cliente (ver Capture_Baseline_Template v1.1).
   - Qué consideramos éxito a 90 días (número o rango, en lenguaje del cliente)
   Regla: el cliente firma un outcome medible, no solo un scope de páginas.
   Si no hay métrica posible, documentar por qué y qué proxy se usará.

@@ -1,12 +1,13 @@
-M13.1 — CLIENT QUALIFICATION ENGINE (v1)
-==========================================
+M13.1 — CLIENT QUALIFICATION ENGINE (v1.2)
+============================================
 
 OPERATIONAL HEADER
 ------------------
-WHEN:     Consulta nueva — antes de scope, precio o M0.
+WHEN:     Prospecto CON ENGAGEMENT REAL — antes de scope, precio o M0.
+          Sin respuesta del prospecto la tarea NO es M13.1 (ver PRECONDICIÓN).
 INPUTS:   Datos del lead (brief de calificación mínimo).
 OUTPUT:   Decisión avanzar / condiciones / declinar + score documentado.
-GATES:    GATE 13.1-A (brief completo), GATE 13.1-B (score ≥ 14).
+GATES:    13.1-0 (engagement real), 13.1-A (brief completo), 13.1-B (score ≥ 17/30).
 FAIL:     Responder con precio sin calificar; score < 14 sin declinar; red flags ignoradas.
 DEEP:     Leer cuerpo para brief completo, red flags y criterios de score.
 REF:      M15 Audit Handoff si el lead viene de diagnóstico de prospecto.
@@ -23,6 +24,38 @@ CUÁNDO ACTIVAR
 Siempre que llegue una consulta nueva, independientemente del canal.
 Antes de responder con detalle, antes de presentar precio, antes de M0.
 
+PRECONDICIÓN DE ENTRADA (v1.1 — BLOQUEANTE)
+--------------------------------------------
+M13.1 se corre cuando hay ENGAGEMENT REAL del prospecto, no cuando el prospecto
+simplemente EXISTE. Engagement real = respondió, pidió información, aceptó o pagó
+el diagnóstico, o llegó por su cuenta. La cadena canónica del embudo es:
+
+  M18 (genera el prospecto) → M15 (diagnostica el sitio) → [el humano envía el
+  contacto] → EL PROSPECTO PICA → M13.1 (califica, con el Audit Handoff)
+
+Si el prospecto todavía NO respondió, la tarea no es M13.1: es M18 (a quién
+abordar y con qué gancho) o M15 (diagnosticar para tener con qué abrir). Correr
+M13.1 antes del engagement produce un score ESTRUCTURALMENTE DEPRIMIDO y no
+válido: CLARIDAD y TIMELINE miden lo que el prospecto expresó, y un prospecto
+que nunca fue contactado no expresó nada — puntúan bajo por construcción, no
+por ser mal prospecto. Un score así puede empujar a declinar al prospecto ideal.
+
+  Excepción legítima: REFERIDOS. M18 puede rutear un referido directo a M13.1
+  sin pasar por M15 — pero el referido igual tiene que haber tenido contacto
+  (aceptó que le escribas, pidió que lo llamen). Un nombre pasado por un tercero
+  sin contacto todavía NO habilita M13.1.
+
+Si se corre igual por alguna razón (ej. simulación, práctica, evaluación previa
+de una lista), declarar explícitamente: "score PRE-ENGAGEMENT — no válido para
+decidir declinar". Se usa para priorizar a quién abordar primero, nunca para
+descartar.
+
+Precedente: en el stress test de Silvana Dato (2026-07-19) se corrió M13.1 sobre
+un prospecto de una lista que nunca había sido contactado. CLARIDAD puntuó 2 —el
+piso— y el score dio 17/25 ("viable con condiciones") para un prospecto que, con
+engagement real, proyecta ~20 ("ideal"). Nada en el módulo advertía el mal uso
+porque la precondición vivía solo en M15 y M18, aguas arriba.
+
 PROCESO
 -------
 1. Completar el BRIEF DE CALIFICACIÓN con la información disponible.
@@ -38,6 +71,11 @@ CLIENTE:
   Nombre / empresa: [dato]
   Tipo: PyME AR / empresa mediana AR / internacional / startup / profesional
   Canal de llegada: referido / redes / web / frío / otro
+  Origen (marcar, cambia cómo se puntúa CLARIDAD):
+    [ ] INBOUND — el prospecto vino solo (llegó una consulta, pidió presupuesto).
+    [ ] OUTBOUND — Webbing lo abordó (vía M18/M15). ¿Hay Audit Handoff de M15?: sí / no
+  Engagement confirmado (precondición): qué hizo exactamente el prospecto
+    (respondió / pidió info / aceptó el diagnóstico / lo pagó / llegó solo): [dato]
 
 PROYECTO:
   Qué necesita: [descripción en 2-3 líneas]
@@ -71,9 +109,34 @@ TIMELINE (1-5)
   1: "lo necesito para la semana que viene" sin justificación real
 
 CLARIDAD DEL PROBLEMA (1-5)
-  5: describe el problema de negocio, no solo el entregable
-  3: sabe lo que quiere pero no por qué
-  1: "quiero una web" sin más contexto
+  Qué mide: cuán nítido está el problema de negocio sobre la mesa. En INBOUND eso
+  se mide por cómo lo articula el prospecto. En OUTBOUND el prospecto no lo
+  articuló —se lo mostramos nosotros—, así que se mide por la nitidez del
+  DIAGNÓSTICO más el RECONOCIMIENTO del prospecto. Usar la escala que corresponda
+  al Origen marcado en el brief. No mezclar las dos.
+
+  ESCALA INBOUND (el prospecto vino solo):
+    5: describe el problema de negocio, no solo el entregable
+    3: sabe lo que quiere pero no por qué
+    1: "quiero una web" sin más contexto
+
+  ESCALA OUTBOUND (v1.1 — Webbing abordó; usar el Audit Handoff de M15):
+    5: el Handoff identifica ≥1 hallazgo Crítico traducido a pérdida de negocio
+       concreta, Y el prospecto lo RECONOCIÓ al responder ("es verdad que…",
+       "eso me pasa", pidió más detalle sobre ese punto puntual).
+    3: el Handoff identifica el problema con claridad, pero el prospecto respondió
+       sin confirmarlo ni negarlo (interés genérico, "contame más").
+    1: no hay Handoff, o el diagnóstico no logra traducir el problema a pérdida de
+       negocio, o el prospecto niega explícitamente que sea un problema.
+
+  Regla: sin Audit Handoff, un lead OUTBOUND no puede puntuar más de 3 en esta
+  dimensión — no porque el prospecto sea malo, sino porque NOSOTROS todavía no
+  sabemos qué le pasa. El remedio es correr M15, no adivinar el puntaje.
+
+  Nota de calibración: la magnitud del problema del Handoff (cuántos hallazgos
+  Críticos, qué tan grande el rebuild) también alimenta la clasificación M10.0 y
+  el scope de M13.2 — es el mismo insumo, leído por tres módulos. Ver M15,
+  sección EL AUDIT HANDOFF.
 
 AUTONOMÍA PARA DECIDIR (1-5)
   5: decide solo o en equipo de 2 personas máximo
@@ -85,13 +148,69 @@ POTENCIAL DE PORTFOLIO (1-5)
   3: es un buen trabajo aunque no sea showcase
   1: el proyecto no suma al portfolio por categoría, calidad esperada o restricciones del cliente
 
-TOTAL: /25
+DOLOR PERCIBIDO / URGENCIA REAL (1-5) [v1.2]
+  Qué mide: cuánto SIENTE el prospecto el problema y cuánto quiere resolverlo ahora.
+  Es una medida de DEMANDA, y es la que mejor predice si la venta se cierra, se
+  estira o muere en la objeción de precio.
 
-INTERPRETACIÓN
-  20-25: cliente ideal. Avanzar con energía.
-  14-19: cliente viable. Avanzar con condiciones claras.
-  8-13: cliente de riesgo. Evaluar si las condiciones lo hacen viable.
-  <8: declinar o derivar.
+  No confundir con dos cosas vecinas:
+    - No es OPORTUNIDAD. Qué tan roto está el sitio / cuánto valor podemos agregar
+      lo mide el diagnóstico de M15 (y, afuera, el "dolor web" de Sistema Clientes).
+      Eso es lo que NOSOTROS vemos. Esta dimensión es lo que ÉL siente.
+    - No es TIMELINE. Timeline mide si el plazo es factible (riesgo de ejecución).
+      Esto mide cuánta necesidad hay (intensidad de demanda). Un prospecto puede
+      tener un plazo comodísimo y cero urgencia: son cosas distintas.
+
+  5: reconoce una pérdida concreta Y hay un disparador temporal real — está
+     perdiendo clientes que puede nombrar, abre local o servicio nuevo, arranca
+     una temporada o campaña, un competidor le está comiendo mercado.
+  3: reconoce el problema pero sin disparador temporal. "Sí, en algún momento
+     habría que hacerlo."
+  1: no siente el problema. El negocio le funciona igual sin resolverlo.
+
+  LA BRECHA OPORTUNIDAD ↔ DOLOR PERCIBIDO (el diagnóstico que más informa):
+    Alta oportunidad + alto dolor percibido → mejor caso. Vender es acompañar.
+    Alta oportunidad + BAJO dolor percibido → vendible pero CARO de vender:
+      objeción de precio casi garantizada, ciclo largo, riesgo de que se estire
+      para siempre. El trabajo previo no es cotizar: es CREAR el dolor percibido
+      con el peldaño Entrada (diagnóstico, M13.0A). No saltear a la propuesta.
+    Baja oportunidad + alto dolor percibido → quiere algo que no le va a mover la
+      aguja. Cuidado con prometer resultado de captación que el caso no da.
+    Baja + baja → declinar.
+
+  Nota de simetría (v1.2): M13.1 ya penalizaba el exceso de urgencia —TIMELINE=1
+  y la red flag "es urgente, lo necesito ya"— pero era CIEGO a la urgencia cero.
+  Los dos extremos son riesgo: el que quiere todo para mañana no planificó; el que
+  no tiene ninguna urgencia no compra. Ahora se ven los dos.
+
+TOTAL: /30
+
+INTERPRETACIÓN (recalibrada a /30 en v1.2 — proporcional a las bandas de /25)
+  24-30: cliente ideal. Avanzar con energía.
+  17-23: cliente viable. Avanzar con condiciones claras.
+  10-16: cliente de riesgo. Evaluar si las condiciones lo hacen viable.
+  <10: declinar o derivar.
+
+  REGLA DE PISO — DOLOR PERCIBIDO = 1 (v1.2): un 1 en dolor percibido NO se
+  compensa con el total. Aunque el score caiga en banda alta, el prospecto no
+  tiene motivo para comprar ahora. No dispara declinar (puede ser un prospecto
+  excelente, como el caso Silvana Dato), pero SÍ obliga a declararlo y a cambiar
+  la jugada: peldaño Entrada primero (diagnóstico), objeción de precio esperada,
+  y nunca saltar directo a la propuesta del Core. Un total alto con dolor 1 es un
+  prospecto bueno en el momento equivocado, no un cierre listo.
+  (Razón de que sea regla y no solo puntaje: un score aditivo deja que cuatro
+  dimensiones fuertes tapen una dimensión que sola decide la venta — misma clase
+  que SAVIA-P5 en CDL-4, donde promediar diluía justo lo que había que castigar.)
+
+  LECTURA SEGÚN ORIGEN (v1.1): estas bandas están calibradas sobre un prospecto
+  que YA se comprometió. Antes de leerlas, verificar que GATE 13.1-0 pasó.
+  En OUTBOUND, un score en la banda baja rara vez significa "mal prospecto":
+  suele significar que falta información nuestra (sin Handoff → CLARIDAD topa en
+  3) o que el prospecto todavía no se comprometió lo suficiente. Antes de
+  declinar un outbound por score bajo, preguntarse qué dimensión lo hunde y si
+  el remedio es correr M15, no descartarlo. Declinar por un score que refleja
+  nuestra propia falta de diagnóstico es tirar un prospecto por un dato que
+  nunca fuimos a buscar.
 
 RED FLAGS — SEÑALES DE PROBLEMA
 ---------------------------------
@@ -115,6 +234,15 @@ Si aparece cualquiera de estas, evaluar con más cuidado antes de seguir.
 "El presupuesto lo definimos después"
   → si lo dice al inicio, en general significa que no tiene o que va a comparar precios.
 
+"La verdad que así como está me está funcionando bien" (v1.2)
+  → ALTA CAPACIDAD + DOLOR CERO. El perfil más engañoso del embudo: puede pagar,
+  el caso luce ideal en la planilla, y no compra — o compra después de meses y
+  regateando. Señales: le va bien por otro canal (Instagram, boca en boca,
+  reseñas), no nombra ninguna pérdida concreta, no hay disparador temporal.
+  No es motivo para declinar: es motivo para NO cotizar todavía. Entrada
+  (diagnóstico) primero, y esperar la objeción de precio como algo previsible,
+  no como una sorpresa. Ver DOLOR PERCIBIDO / URGENCIA REAL en el score.
+
 "Somos muchos los que decidimos"
   → el proceso de aprobación va a ser lento y contradictorio.
 
@@ -122,33 +250,44 @@ DECISIONES POSIBLES
 -------------------
 
 AVANZAR
-  Score ≥ 20, sin red flags críticas.
+  Score ≥ 24, sin red flags críticas.
   Acción: ir directo a M13.2 para definir scope.
 
 AVANZAR CON CONDICIONES
-  Score 14-19 o hay 1-2 red flags menores.
+  Score 17-23 o hay 1-2 red flags menores.
   Condiciones típicas: pago adelantado mayor, timeline no negociable, scope cerrado antes de empezar.
   Acción: comunicar las condiciones antes de continuar. Si el cliente las acepta, ir a M13.2.
 
 EVALUAR MÁS
-  Score 8-13 o hay red flags importantes.
+  Score 10-16 o hay red flags importantes.
   Acción: hacer una llamada de 20-30 minutos para resolver las dudas clave.
-  Si después de la llamada el score sube a ≥14: avanzar con condiciones.
+  Si después de la llamada el score sube a ≥17: avanzar con condiciones.
   Si no: declinar.
 
 DECLINAR
-  Score <8 o hay red flags críticas.
+  Score <10 o hay red flags críticas.
   Cómo declinar: educado, corto, sin excusas elaboradas.
   Ejemplo: "En este momento no tengo disponibilidad para el tipo de proyecto que necesitás,
   pero te puedo recomendar [referido si existe]."
 
 GATES
 -----
+GATE 13.1-0 — ¿Hay ENGAGEMENT REAL del prospecto? (v1.1 — corre PRIMERO)
+  Pasa si: el prospecto respondió, pidió información, aceptó/pagó el diagnóstico,
+  o llegó por su cuenta. El brief lo documenta en "Engagement confirmado".
+  Falla → NO puntuar. La tarea es M18 (a quién abordar) o M15 (diagnosticar).
+  Si se puntúa igual (práctica, priorización de lista), marcar el resultado
+  "PRE-ENGAGEMENT — no válido para declinar". Ver PRECONDICIÓN DE ENTRADA.
+
 GATE 13.1-A — ¿El Brief de Calificación está completo?
   Falla → pedir la información faltante antes de puntuar.
+  Incluye el Origen (inbound/outbound) marcado: sin él no se sabe qué escala de
+  CLARIDAD aplicar, y usar la escala equivocada deprime el score de todo outbound.
 
-GATE 13.1-B — ¿El score supera 14?
+GATE 13.1-B — ¿El score llega a 17 sobre /30? [v1.2 — antes ≥14 sobre /25]
   Falla → evaluar condiciones o declinar. No avanzar a M13.2 sin este gate.
+  Además: si DOLOR PERCIBIDO = 1, declararlo aunque el gate pase. No bloquea el
+  avance, pero obliga a pasar por Entrada (diagnóstico) antes de cotizar el Core.
 
 GATE 13.1-C — ¿Hay red flags críticas sin resolver?
   Falla → resolver antes de avanzar o declinar.
@@ -164,7 +303,9 @@ OUTPUT
 PROMPT PARA CLAUDE
 ------------------
 Cuando llega un lead, completar el Brief de Calificación primero.
-Puntuar las 5 dimensiones del Qualification Score.
+Puntuar las 6 dimensiones del Qualification Score (/30).
+Si DOLOR PERCIBIDO da 1, declararlo aunque el total sea alto: cambia la jugada
+(Entrada primero), no necesariamente la decisión.
 Verificar red flags.
 Dar una recomendación clara: avanzar, avanzar con condiciones, evaluar más o declinar.
 No romantizar el lead. Un cliente difícil que paga poco

@@ -1,5 +1,5 @@
-M13.4 — CLOSING & ONBOARDING (v1)
-==================================
+M13.4 — CLOSING & ONBOARDING (v1.2)
+====================================
 
 OPERATIONAL HEADER
 ------------------
@@ -222,6 +222,27 @@ QUÉ MEDIR (elegir 1-2 métricas de negocio con el cliente ANTES de entregar):
 Definir la métrica y de dónde sale el dato (analytics, el propio cliente, el CRM)
 en el kickoff o al entregar. Una métrica que no se puede leer no sirve.
 
+Y una que se lee mal sirve menos todavía: verificar que la FUENTE pueda medir la
+métrica TAL COMO SE DECLARÓ (v1.2). Si la métrica lleva un calificador
+—"calificadas", "atribuibles", "nuevas", "confirmadas"— ese adjetivo necesita
+definición operativa y un mecanismo real que lo produzca; si no existe el
+mecanismo, se quita el adjetivo del nombre. Un calificador sin mecanismo se
+reporta igual como si se cumpliera. Detalle: PRUEBA DE COHERENCIA MÉTRICA↔FUENTE
+en Capture_Baseline_Template.md.
+
+MEDIR TAMBIÉN LA DEMANDA TOTAL, NO SOLO LA ATRIBUIBLE (v1.1):
+En un negocio que YA opera y capta por canales no medidos (Instagram, DM, boca en
+boca, walk-in) —el caso más común en PyME local— el número atribuible al sitio no
+puede, por sí solo, distinguir dos cosas muy distintas:
+  - CAPTACIÓN NUEVA: el negocio recibe más demanda que antes.
+  - RE-ATRIBUCIÓN: la misma demanda de antes, ahora entrando por el sitio.
+Por eso, al entregar se registra además la DEMANDA TOTAL por todos los canales
+(el T0, aunque sea estimado por el cliente) y se vuelve a medir en cada check-in.
+Total sube = captación nueva. Total plano con atribuible que sube = re-atribución.
+Las dos tienen valor y las dos se reportan — pero solo la primera habilita subir
+el ancla de precio (M13.0A, señal 2). Detalle operativo, tabla de lectura y reglas
+de qué se puede afirmar: Capture_Baseline_Template.md v1.1.
+
 CUÁNDO:
   - Baseline: al entregar (¿desde qué número arrancamos?).
   - Check-in a 30 / 60 / 90 días (parte del retainer, no un extra).
@@ -253,35 +274,72 @@ SEÑALES DE QUE NO VALE LA PENA PROPONER RETAINER
 - El cliente quiere manejar todo solo
 - El sitio es completamente estático y no va a cambiar
 
-CLÁUSULA DE FASE ARRANQUE — EXCEPCIÓN TEMPORAL (v1, con sunset)
----------------------------------------------------------------
+CLÁUSULA DE FASE ARRANQUE — EXCEPCIÓN TEMPORAL (v1.1, con sunset)
+-----------------------------------------------------------------
 ESTADO: ACTIVA. Vigencia: solo durante la fase de arranque de Webbing, hasta
-cerrar los primeros 3 casos de portfolio. Cumplido eso → VENCE, y GATE 13.4-A
-vuelve al estándar de pago previo sin excepción.
+cerrar los primeros 3 casos de portfolio REALES (ver DEFINICIÓN DEL CONTADOR DE
+SUNSET abajo). Cumplido eso → VENCE, y GATE 13.4-A vuelve al estándar de pago
+previo sin excepción, y GATE 13.3-B a "50-60% al inicio, sin excepción".
+
+ALCANCE (v1.1): esta cláusula satisface DOS gates en simultáneo, no uno:
+  - GATE 13.4-A (primer pago antes de arrancar) — M13.4, este módulo.
+  - GATE 13.3-B (estructura de pagos con mayoría al inicio) — M13.3.
+Ambos imponen un piso de adelanto en efectivo que el modelo de intercambio de
+arranque explícitamente todavía no busca. La PRUEBA DE COMPROMISO de tres partes
+es la condición de "adelanto" que sustituye a ese piso durante esta fase: la seña
+simbólica es el mínimo de compromiso, no el pago real. Antes de v1.1 la cláusula
+solo nombraba a 13.4-A, y por eso un cierre de intercambio correcto fallaba
+13.3-B por construcción (hueco H-1, caso Silvana Dato 2026-07-19).
 
 CONTEXTO: en arranque, Webbing necesita cerrar los primeros 2-3 proyectos para
 construir portfolio, casos y prueba social. Exigir el pago previo total bloquea
 el modelo de intercambio (web a cambio de portfolio + testimonio) que esos
 primeros casos requieren.
 
-QUÉ CAMBIA: durante el arranque, GATE 13.4-A se satisface con pago previo O con
+QUÉ CAMBIA: durante el arranque, GATE 13.4-A (pago previo antes de arrancar) y
+GATE 13.3-B (50-60% al inicio) se satisfacen con pago previo O con
 "PRUEBA DE COMPROMISO", definida como TODO esto junto (los tres, no alguno):
   1. Acuerdo firmado de intercambio: alcance fijo + entregables + derechos
      explícitos de uso en portfolio, testimonio y caso.
   2. Deadline del cliente para entregar sus materiales (contenido, accesos,
      fotos). Si no cumple, el proyecto se pausa.
   3. Seña simbólica, aunque sea mínima, para asegurar skin in the game.
-Si los tres NO se cumplen, GATE 13.4-A NO se da por satisfecho y no se arranca
-trabajo.
+Si los tres NO se cumplen, NI GATE 13.4-A NI GATE 13.3-B se dan por satisfechos y
+no se arranca trabajo. No hay cumplimiento parcial: dos de tres no alcanza.
 
 POR QUÉ NO SE APAGA LA REGLA BASE: el pago previo filtra clientes sin compromiso
 y protege del que ghostea, no manda material o mete scope creep. La prueba de
 compromiso preserva ese filtro sin exigir el pago completo. El gate sigue
 existiendo; en arranque solo se amplía QUÉ lo satisface.
 
-SUNSET: tras el 3er caso de portfolio cerrado, esta cláusula vence
-automáticamente. GATE 13.4-A vuelve a "pago previo, sin excepción".
-Registrada en Docs/CHANGELOG.txt.
+SUNSET: tras el 3er caso de portfolio REAL cerrado, esta cláusula vence
+automáticamente. GATE 13.4-A vuelve a "pago previo, sin excepción" y GATE 13.3-B
+a "50-60% al inicio, sin excepción". Registrada en Docs/CHANGELOG.txt.
+
+DEFINICIÓN DEL CONTADOR DE SUNSET (v1.1 — obligatoria, no interpretable):
+Un "caso de portfolio cerrado" incrementa el contador SOLO si cumple las tres:
+  1. Cliente REAL (persona u organización existente, con acuerdo firmado real).
+  2. Entrega live real — GATE 4 efectivamente cruzado, con deploy a producción
+     aprobado por el humano.
+  3. Derechos de portfolio ejercidos (el caso se puede mostrar de verdad).
+
+NO cuentan para el sunset, sin importar cuán completo haya sido el proceso ni
+cuántos gates se hayan corrido: proyectos de práctica, clientes ficticios,
+stress tests y simulaciones de venta. Ejemplos explícitos que NO cuentan:
+SAVIA, Calibre (gmao-web), y la simulación de venta de Silvana Dato
+(2026-07-19). Un cliente real que todavía no cruzó GATE 4 tampoco cuenta
+todavía (caso Move On al 2026-07-19): cuenta recién al deployar.
+
+POR QUÉ ESTA DEFINICIÓN: Webbing ejercita el sistema en modo práctica con mucha
+más frecuencia que en modo real. Si un cierre simulado incrementara el contador,
+la cláusula vencería sin que Webbing haya cerrado un solo cliente real —
+apagando exactamente la excepción que existe para conseguir los primeros reales.
+El contador mide clientes conseguidos, no corridas del proceso.
+
+DÓNDE SE LLEVA LA CUENTA: el estado del contador se mantiene por escrito (no de
+memoria ni por aclaración externa en el chat), con la lista nominal de los casos
+reales que lo incrementaron y la fecha de su GATE 4. Al 2026-07-19 el contador
+está en 0 de 3 → cláusula ACTIVA.
 
 GATES
 -----
@@ -289,8 +347,10 @@ GATE 13.4-A — ¿El primer pago fue recibido antes de arrancar?
   Falla → no arrancar.
   EXCEPCIÓN TEMPORAL (fase arranque, con sunset): durante el arranque se
   satisface con pago previo O con la PRUEBA DE COMPROMISO de tres partes
-  (ver CLÁUSULA DE FASE ARRANQUE arriba). Vence tras los primeros 3 casos
-  de portfolio → vuelve a "sin excepción".
+  (ver CLÁUSULA DE FASE ARRANQUE arriba). La misma prueba satisface en
+  simultáneo a GATE 13.3-B (M13.3, estructura de pagos) — los dos gates se
+  relajan juntos, no uno solo. Vence tras los primeros 3 casos de portfolio
+  REALES (ver DEFINICIÓN DEL CONTADOR DE SUNSET) → vuelve a "sin excepción".
 
 GATE 13.4-B — ¿El kickoff meeting tuvo lugar y el Brief Interno está completo?
   Falla → no activar M0.
@@ -317,7 +377,7 @@ OUTPUT
 
 PROMPT PARA CLAUDE
 ------------------
-No arrancar ningún trabajo sin pago confirmado. (Excepción temporal de fase arranque, con sunset tras los primeros 3 casos de portfolio: se satisface también con la PRUEBA DE COMPROMISO de tres partes — ver CLÁUSULA DE FASE ARRANQUE.)
+No arrancar ningún trabajo sin pago confirmado. (Excepción temporal de fase arranque, con sunset tras los primeros 3 casos de portfolio REALES —práctica y simulaciones no cuentan—: se satisface también con la PRUEBA DE COMPROMISO de tres partes, que releva a la vez GATE 13.4-A y GATE 13.3-B — ver CLÁUSULA DE FASE ARRANQUE.)
 No activar M0 sin el Brief Interno completo post-kickoff.
 No hacer deploy sin el pago final confirmado.
 Al entregar el proyecto: proponer el retainer en el mismo mensaje.
