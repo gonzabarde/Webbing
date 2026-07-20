@@ -3,14 +3,25 @@ WEBBING — SYSTEM FILE MAP (v2)
 Actualizado: 2026-07-07.
 Estructura real del filesystem. Si difiere del disco, reportar antes de operar.
 
-Autoridad operativa del mapa de módulos: SKILL.md §3 FILE MAP.
-Este archivo es el árbol visual complementario (misma información, más legible).
+FUENTE del mapa de módulos: SKILL.md §3 FILE MAP. (R1, 2026-07-19)
+Este archivo es un ÍNDICE — el árbol visual complementario, más legible. Nunca es
+la fuente. Ante divergencia con SKILL.md §3 o con el disco, gana el disco para la
+existencia del archivo y SKILL.md §3 para el path canónico; este árbol se corrige.
 
-NOTA DE PATHS
+NOTA DE PATHS (corregida 2026-07-19)
 -------------
-En SKILL.md, la columna Path de módulos bajo NIVELES/ omite el prefijo `NIVELES/`
-por brevedad (ej. `NIVEL 1/M0_...` = `NIVELES/NIVEL 1/M0_...`).
+En SKILL.md, la columna Path de módulos bajo NIVELES/ INCLUYE el prefijo
+`NIVELES/` completo (ej. `NIVELES/NIVEL 1/Agency_OS_M0_...`). Los paths de
+SKILL.md §3 se copian tal cual: son literales, no relativos a NIVELES/.
 BACKEND/ vive en la raíz del skill, NO dentro de NIVELES/.
+
+  HISTORIA (por qué esta nota existía al revés): SKILL.md §3 originalmente
+  omitía el prefijo, lo que produjo dos MISS reales de verificación literal
+  (VINCA-P5 y su segunda ocurrencia en ESTUDIO CONTABLE). El prefijo se agregó
+  a SKILL.md, pero ESTA NOTA —escrita para explicar la omisión— nunca se
+  actualizó, y quedó afirmando lo contrario de la realidad. Una nota que
+  documenta una divergencia sobrevivió a la divergencia y PASÓ A SER la
+  divergencia. Ver PROPUESTA_Indices_Duplican_Estado.md, regla 3.
 
 Webbing/                          ← raíz del skill (~/.claude/skills/webbing/)
 │
@@ -35,8 +46,11 @@ Webbing/                          ← raíz del skill (~/.claude/skills/webbing/
 │   ├── CHANGELOG.txt             ← bitácora de arquitectura
 │   ├── OPERATIONAL_HEADER_STANDARD.txt
 │   ├── M14_PROPOSAL_LOG.txt      ← índice de propuestas M14 (todas las disposiciones)
+│   ├── PORTFOLIO_REGISTRY.md     ← FUENTE ÚNICA Principio 10 entre-clientes (CDL-5)
 │   ├── M12_REFERENCE_LIBRARY.md  ← persistencia de M12 (referencias, patrones, gaps)
+│   ├── ReactBits_Catalog.md      ← catálogo de componentes de referencia
 │   ├── PROPUESTA_Frontend_Craft_diffs.md  ← APLICADO (histórico)
+│   ├── PROPUESTA_Indices_Duplican_Estado.md ← APLICADO 2026-07-19 (R1-R4 → SKILL §13)
 │   ├── Webbing_Master_System_Document_v2.txt  ← REDIRECT (deprecado)
 │   ├── BRIEF_CLIENTE1_VINCA.md   ← brief ficticio corrida VINCA
 │   └── BRIEF_CLIENTE2_LIMA.md    ← brief ficticio corrida LIMA

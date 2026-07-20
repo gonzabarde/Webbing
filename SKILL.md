@@ -331,7 +331,7 @@ Cuatro gates frenan el avance. Si un gate falla, Claude se detiene, reporta el f
 | GATE 1 — Estrategia cerrada | Después de M3 | Posicionamiento, traducción de marca y sistema tipográfico definidos y aprobados por el humano | Frenar. No generar conceptos sobre estrategia abierta. |
 | GATE 2 — Veto del CDL | Después de M5.5 | La dirección visual pasa la evaluación del CDL **y la IA Spec de CDL-1 está derivada y justificada** (el esqueleto = arquetipo del proyecto, diffeado contra el esqueleto default; ninguna sección presente solo porque "siempre va") **y la Experience Spec de CDL-1 está completa** (≥1 flujo crítico con pasos numerados, mobile-first declarado, estados según gobernanza; ver CDL-1) | Frenar. Volver a M4–M5.5 con el feedback del CDL. Si el esqueleto es el genérico sin justificar (M11 Principio 10), rehacer la IA Spec. Si faltan flujos o estados, rehacer la Experience Spec en CDL-1. Máximo 2 iteraciones antes de escalar al humano. |
 | GATE 3 — Pre-producción | Después de M9.8 y M8.6 | Build técnico completo, sin TODOs críticos, patterns de M9 aplicados, signature de M9.8 presente, **el build respeta la IA Spec de CDL-1** (secciones y orden derivados del arquetipo, no el esqueleto default) **y los flujos críticos de la Experience Spec** (pasos implementados, estados documentados presentes, acción principal usable en mobile). **M8.6 (Production Review) con veredicto PASA o PASA CON AJUSTES** — ninguna dimensión de fidelidad (Concept/Perception/Direction/Signature) en PERDIDO, drift genérico no CRÍTICO. **Si hay backend: gates internos de B0-B5 pasados** (arquitectura aprobada incl. decisiones irreversibles; preámbulo de seguridad de B1 en toda mutación; pagos de B2 si aplica; secrets/observabilidad de B3; QA de seguridad de B4 — bloqueante; mínimo de performance de B5) | Frenar. Listar lo faltante. No pasar a M10 con deuda. Una falla de seguridad de B4 es bloqueante absoluto. **Un veredicto FALLA de M8.6 vuelve al módulo de destino que M8.6 indica (M4/M4.5/M5/M5.5) — GATE 3 no puede pasar sobre eso.** **Flujo crítico roto o estados faltantes → volver a M8/M8.2 según capa afectada.** |
-| GATE 4 — Deploy | Dentro de M10 | Aprobación explícita del humano para publicar. **Si hay backend: launch checklist de B4 completo + plan de recuperación de B6 presente** (migraciones en prod, secrets live, webhooks registrados, backup con restore probado, monitoring activo) | Frenar. El deploy NUNCA es decisión autónoma de Claude. |
+| GATE 4 — Deploy | Dentro de M10 | Aprobación explícita del humano para publicar. **Fotos reales confirmadas** — re-verificación explícita e independiente de la de M8.6/GATE 3: ninguna imagen del build final es bloque de color, placeholder, stock con marca de competidor visible (H-2), ni imagen de Pinterest sin licencia si el proyecto es cliente real (M0 §7.1e no aplica fuera de práctica). Precedente de por qué esto es punto explícito propio y no solo heredado de GATE 3: CUORE y Vera Arquitectura pasaron GATE 3 con bloques de color y nadie lo agarró hasta que un humano miró el deploy — dos veces. **Si hay backend: launch checklist de B4 completo + plan de recuperación de B6 presente** (migraciones en prod, secrets live, webhooks registrados, backup con restore probado, monitoring activo) | Frenar. El deploy NUNCA es decisión autónoma de Claude. Fotos sin confirmar = no se publica, sin importar que el resto del checklist esté en verde. |
 
 **Regla:** un gate fallado que se reporta es proceso. Un gate fallado que se ignora es falla de sistema. Reportar siempre.
 
@@ -483,6 +483,67 @@ M12 alimenta con patrones, no con copias.
 - **Obsolescencia:** un módulo reemplazado se mueve a `_deprecated/` con fecha. No se borra (decisión del humano), no se deja en el directorio activo.
 - **Duplicados:** si dos módulos cubren lo mismo, frenar y reportar. No elegir uno en silencio: el conflicto es del sistema y lo resuelve el humano.
 - Este SKILL.md es la única fuente de verdad del mapa del sistema. Si el filesystem y este archivo difieren, reportar la divergencia antes de operar.
+- **Índices — apuntar, no resumir estado** (2026-07-19). Un índice
+  (`GATE_REGISTRY`, `SYSTEM FILE MAP`, el resumen de `M14_PROPOSAL_LOG`, las
+  notas que un módulo hace sobre otro) puede decir DÓNDE vive algo y resumir
+  contenido ESTABLE. No puede reafirmar **estado mutable** que ya vive en una
+  fila, un módulo o un archivo: disposiciones (`Pendiente`/`Aplicada`),
+  umbrales (`≥50` vs `≥60`), alcances de una cláusula, o conteos ("quedan N").
+  Un conteo es estado derivado: se recalcula al leer, no se escribe.
+    - ❌ "Quedan P1, P4, P5, P6, P8, P9, P10, P11 pendientes"
+    - ✅ "Estado por propuesta: ver la columna Disposición de las filas"
+  Cuando un resumen SÍ tiene que existir, declarar su fuente en el propio
+  bloque (`FUENTE: <archivo/sección>` o `FUENTE ÚNICA: este archivo`) y
+  verificar contra ella antes de actuar sobre lo que dice. Un índice que
+  diverge no queda vacío: queda afirmando algo falso con la misma autoridad
+  de antes, y como es más corto se consulta primero.
+  Precedente: la REGLA DE INTEGRIDAD DE CITA de `PORTFOLIO_REGISTRY` es esta
+  misma regla, ya probada (Cursor Café INC-1 → Estudio de Tatuaje, donde
+  agarró sola una 3ra fila fantasma). Detalle y auditoría completa en
+  `Docs/PROPUESTA_Indices_Duplican_Estado.md`.
+- **Declaración de fuente, obligatoria por bloque** (2026-07-19, regla R1). Todo
+  índice declara —en su cabecera y, si sus bloques tienen fuentes distintas, en
+  cada bloque— `FUENTE: <archivo/sección>` o `FUENTE ÚNICA: este archivo`.
+  Sin esa línea no se sabe si lo que se lee es la verdad o el eco de la verdad,
+  y ante una divergencia no hay forma de saber cuál lado corregir.
+  **Prohibido declarar co-autoridad.** Frases del tipo "fuente operativa junto
+  con X" dejan a dos archivos reclamando autoridad sobre el mismo hecho, que es
+  el estado en el que nadie es la fuente. Un hecho, una fuente.
+  Jerarquía vigente para gates, como referencia del patrón:
+    - GATE 1-4 (globales de proyecto) → **fuente: este SKILL.md §6**.
+    - Gates de módulo (13.x, M10-x, M12-x, M9.8, B4) → **fuente: el módulo**.
+    - `Docs/GATE_REGISTRY.txt` → **índice**. Resume y apunta; nunca es la fuente.
+- **Integridad de cita: verificar contra la fuente antes de actuar** (2026-07-19,
+  regla R4). Antes de actuar sobre lo que dice un índice —aplicar una propuesta,
+  reportar un estado, confiar en una fila— verificar contra el archivo fuente que
+  siga siendo cierto. Un índice que diverge no queda vacío: queda afirmando algo
+  falso con la misma autoridad de antes, y como es más corto se consulta primero.
+  Generaliza a TODO índice la regla que ya tenía `Docs/PORTFOLIO_REGISTRY.md`,
+  donde está probada: nació de la fila fantasma de Cursor Café (INC-1) y en la
+  corrida ESTUDIO DE TATUAJE agarró sola una 3ra fila fantasma antes de que
+  contaminara el proyecto.
+  FAIL CONDITION: reportar pendientes, estados o decisiones leyendo solo el
+  resumen de un índice. Ocurrió el 2026-07-19: se reportaron "8 propuestas
+  pendientes" desde el resumen del M14_PROPOSAL_LOG; verificando fila por fila
+  eran 5, y verificando contra los archivos eran 3 — dos ya estaban aplicadas.
+- **Notas de divergencia: con condición de borrado** (2026-07-19, regla R3). Toda nota
+  escrita para explicar una discrepancia temporal ("X dice A pero en realidad
+  es B", "esto todavía no está aplicado") debe nombrar qué la hace
+  desaparecer: *"borrar esta nota cuando X se aplique."* Sin eso, la nota
+  sobrevive a la discrepancia que explicaba y **pasa a ser** la discrepancia.
+  Caso real: la `NOTA DE PATHS` de `SYSTEM FILE MAP` explicaba que SKILL.md §3
+  omitía el prefijo `NIVELES/`; el prefijo se agregó (VINCA-P5), la nota no se
+  borró, y durante semanas afirmó lo contrario de la realidad. Es el mismo
+  mecanismo de `sunset` que la cláusula de fase arranque ya usa bien —
+  generalizado de las excepciones a las notas explicativas.
+  **Extensión a diagnósticos retractados** (2026-07-19, de Calibre N-1): cuando
+  se retracta o corrige una EXPLICACIÓN CAUSAL —no solo un token—, hay que
+  grepear el proyecto por las afirmaciones que la citaban y corregirlas en el
+  mismo movimiento, incluidas las remisiones a la propuesta retirada. El
+  backstop de tokens viejos (M8.6 v2.3) no alcanza acá: un diagnóstico no tiene
+  token que grepear. Una retractación que vive en un solo archivo no es una
+  retractación — es una nota al pie que el resto del proyecto contradice.
+  Protocolo completo en M14, sección RETRACTACIÓN DE UN HALLAZGO.
 - **Retrospectiva (M14):** la generación estructurada de propuestas de mejora del sistema la opera M14, al cierre de cada proyecto. M14 propone; este principio (solo el humano aplica) sigue rigiendo.
 
 **Regla:** Claude propone cambios al sistema; solo el humano los aplica.

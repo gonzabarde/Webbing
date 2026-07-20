@@ -1,12 +1,33 @@
-WEBBING — GATE REGISTRY (v1)
-=============================
-Índice único de gates bloqueantes y de disciplina. Fuente operativa junto con
-SKILL.md §6. Si un módulo y este registro difieren, reportar antes de operar.
+WEBBING — GATE REGISTRY (v1.1)
+===============================
+Índice de gates bloqueantes y de disciplina. Búsqueda rápida sin cargar módulos.
+
+NATURALEZA DE ESTE ARCHIVO (R1, 2026-07-19) — LEER ANTES DE CITARLO
+--------------------------------------------------------------------
+Este archivo es un ÍNDICE. **Nunca es la fuente.** Resume y apunta.
+
+  FUENTE de GATE 1-4 (globales de proyecto) ....... SKILL.md §6
+  FUENTE de gates de módulo (13.x, M10-x, M12-x,
+    M9.8, B4) .................................... el módulo respectivo
+  FUENTE de la cláusula de fase arranque ......... M13.4 (v1.2)
+  Este registro ................................... índice de todo lo anterior
+
+Antes decía "fuente operativa junto con SKILL.md §6". Esa co-autoridad se retiró:
+dos archivos reclamando autoridad sobre el mismo hecho es el estado en el que
+NINGUNO es la fuente, y fue lo que permitió que la cláusula de fase arranque
+quedara descrita con alcance viejo acá mientras M13.4 ya decía otra cosa
+(2026-07-19). Un hecho, una fuente.
+
+CÓMO USARLO (R4): si vas a ACTUAR sobre lo que dice una entrada —aplicar un fix,
+declarar un gate pasado, reportar un estado— verificá contra la fuente indicada
+antes. Si difieren, la fuente gana y este registro se corrige; reportar la
+divergencia, nunca resolverla en silencio.
 
 Leyenda DESTINO: módulo o acción si el gate falla.
 
 --------------------------------------------------------------------------------
-PROYECTO — GATES GLOBALES (SKILL.md §6)
+PROYECTO — GATES GLOBALES
+FUENTE: SKILL.md §6 (+ §6.1 para el protocolo post-gate). Acá solo el resumen.
 --------------------------------------------------------------------------------
 
 GATE 1 — Estrategia cerrada
@@ -33,17 +54,30 @@ GATE 3 — Pre-producción
 
 GATE 4 — Deploy
   CUÁNDO:  Dentro de M10, antes de publicar.
-  PASA SI: Aprobación explícita del humano. B4 launch + B6 recovery si backend.
-  FALLA →: No deploy autónomo.
+  PASA SI: Aprobación explícita del humano. Fotos reales confirmadas (re-
+           verificación propia de GATE 4, independiente de M8.6/GATE 3 —
+           ninguna imagen es bloque de color/placeholder/stock con marca de
+           competidor visible). B4 launch + B6 recovery si backend.
+  FALLA →: No deploy autónomo. Fotos sin confirmar bloquea igual que
+           seguridad de B4 — no se negocia por el resto del checklist en verde.
 
 --------------------------------------------------------------------------------
-NEGOCIO — GATE 13.4 (M13.4)
+NEGOCIO — GATE 13.4
+FUENTE: M13.4 (Closing & Onboarding), incl. CLÁUSULA DE FASE ARRANQUE y la
+DEFINICIÓN DEL CONTADOR DE SUNSET.
 --------------------------------------------------------------------------------
 
 GATE 13.4-A — Primer pago antes de arrancar
   PASA SI: Pago previo confirmado.
-  EXCEPCIÓN (fase arranque, sunset tras 3er caso portfolio): pago O prueba de
-  compromiso (acuerdo intercambio + deadline materiales + seña simbólica).
+  EXCEPCIÓN (fase arranque, con sunset): pago previo O PRUEBA DE COMPROMISO
+  (acuerdo intercambio con derechos de portfolio + deadline materiales + seña
+  simbólica). Los TRES o ninguno: dos de tres no satisface el gate.
+  ALCANCE: la misma cláusula satisface 13.4-A Y 13.3-B en simultáneo (gate
+  compuesto — los dos se relajan juntos, no uno solo).
+  SUNSET: tras el 3er caso de portfolio REAL (cliente real + GATE 4 cruzado +
+  derechos ejercidos). Práctica, ficticios y simulaciones NO computan.
+  FUENTE ÚNICA: M13.4, CLÁUSULA DE FASE ARRANQUE (texto completo + definición
+  del contador). M13.3 solo la cita; este registro la resume.
   FALLA →: No arrancar trabajo.
 
 GATE 13.4-B — Kickoff y Brief Interno
@@ -59,15 +93,40 @@ GATE 13.4-D — Retainer en entrega
   FALLA →: Proponer antes de cerrar proyecto.
 
 GATE 13.4-E — Baseline de captación
-  PASA SI: Métrica + fuente + baseline documentados (Capture_Baseline_Template.md).
+  PASA SI: Métrica + fuente + baseline + TIPO DE PUNTO DE PARTIDA documentados
+  (Capture_Baseline_Template.md v1.2). Si el tipo es (B) demanda previa NO
+  atribuida —el caso más común en PyME local—, además el T0 de demanda total
+  por todos los canales; sin T0 no se puede afirmar captación nueva, solo
+  atribuible al sitio.
+  ADEMÁS (v1.2, de Calibre N-2): PRUEBA DE COHERENCIA MÉTRICA↔FUENTE. No basta
+  que ambas EXISTAN: hay que declarar que la fuente puede medir la métrica tal
+  como está definida. Si el nombre de la métrica lleva calificador
+  ("calificadas", "atribuibles", "nuevas", "confirmadas"), ese calificador exige
+  definición operativa Y mecanismo que lo produzca — o se retira del nombre.
+  Un calificador sin mecanismo es una promesa que el dato no puede cumplir.
+  FUENTE: Capture_Baseline_Template.md.
   FALLA →: No dar proyecto por cerrado. Piso innegociable (SKILL §5).
 
 --------------------------------------------------------------------------------
 NEGOCIO — GATES M13.1 / M13.2 / M13.3
+FUENTE: cada módulo respectivo (M13.1 v1.2 escala /30; M13.2 v1.2; M13.3 v1.2).
+Nota: no citar números de versión que no vengan de leer el header del módulo —
+esta línea ya quedó stale una vez (2026-07-19) por un bump no reflejado.
 --------------------------------------------------------------------------------
 
-GATE 13.1-A — Brief de calificación completo
-GATE 13.1-B — Score ≥ 14 (o declinar con razón)
+GATE 13.1-0 — Engagement real del prospecto (v1.1, corre PRIMERO)
+  PASA SI: el prospecto respondió / pidió info / aceptó o pagó el diagnóstico /
+  llegó solo. Existir en una lista NO es engagement.
+  FALLA →: no puntuar. La tarea es M18 (a quién abordar) o M15 (diagnosticar).
+  Score corrido igual = marcar "PRE-ENGAGEMENT — no válido para declinar".
+  FUENTE: M13.1, PRECONDICIÓN DE ENTRADA.
+GATE 13.1-A — Brief de calificación completo (incluye Origen inbound/outbound)
+GATE 13.1-B — Score ≥ 17 sobre /30 (o declinar con razón) [v1.2 — antes ≥14/25]
+  Regla de piso: DOLOR PERCIBIDO = 1 se declara siempre, aunque el total sea alto
+  — no dispara declinar, pero obliga a Entrada (diagnóstico) antes de cotizar.
+  Nota: en OUTBOUND sin Audit Handoff de M15, CLARIDAD topa en 3 por regla — un
+  score bajo puede reflejar falta de diagnóstico NUESTRO, no mal prospecto.
+  FUENTE: M13.1, escala OUTBOUND de CLARIDAD DEL PROBLEMA.
 
 GATE 13.2-A — Scope IN y OUT explícitos
 GATE 13.2-B — Clasificación M10.0
@@ -75,18 +134,27 @@ GATE 13.2-C — Propuesta: valor antes de precio
 GATE 13.2-D — Sección 1.5 resultado esperado (métrica + baseline + éxito 90d) [v1.1]
 
 GATE 13.3-A — Precio cubre esfuerzo + margen
-GATE 13.3-B — Estructura de pagos con mayoría al inicio
+GATE 13.3-B — Estructura de pagos con mayoría al inicio (50-60%)
+  EXCEPCIÓN (fase arranque, con sunset): se RELAJA junto con 13.4-A, no se
+  ignora. Se satisface con 50-60% al inicio O con la misma PRUEBA DE COMPROMISO
+  de tres partes de 13.4-A (los tres o ninguno) — la seña simbólica es el piso
+  mínimo de compromiso, no el pago real que el intercambio de arranque todavía
+  no busca. Vence con la cláusula → vuelve a "50-60%, sin excepción".
+  NO se relaja 13.4-C: sin pago final confirmado no hay deploy.
+  FUENTE ÚNICA: M13.4, CLÁUSULA DE FASE ARRANQUE. M13.3 la cita en su GATE 13.3-B.
 GATE 13.3-C — Retainer propuesto al cierre
 
 --------------------------------------------------------------------------------
-M12 — GATES DE REFERENCIA (M12 Overview)
+M12 — GATES DE REFERENCIA
+FUENTE: M12 Overview.
 --------------------------------------------------------------------------------
 
 GATE 12-A Collection | 12-B Classification | 12-C Decomposition (5+ decisiones)
 GATE 12-D Pattern | 12-E Anti-Copy (score <13) | 12-F Scoring (≥5.0) | 12-G Evolution
 
 --------------------------------------------------------------------------------
-M9.8 — GATES GLOBALES DE FIRMA (resumen)
+M9.8 — GATES GLOBALES DE FIRMA
+FUENTE: M9.8 (Signature Operating System).
 --------------------------------------------------------------------------------
 
 GLOBAL 1: M5 verificado antes de definir firma en M9.8
@@ -97,7 +165,9 @@ GLOBAL 5: Recognition Test post-build
 GLOBAL 6: Signature Guardian Doc entregado
 
 --------------------------------------------------------------------------------
-M10 — GATES INTERNOS (resumen; detalle en M10)
+M10 — GATES INTERNOS
+FUENTE: M10 (Production Operating System v2). Nota: GATE M10-E es ≥50, no ≥60
+(corregido en M10; ver Runa-P6).
 --------------------------------------------------------------------------------
 
 Gates 1.A–1.C (estado), 2.A–2.D (intake), 3.A–3.C (cambios), 4.A–4.C (health),

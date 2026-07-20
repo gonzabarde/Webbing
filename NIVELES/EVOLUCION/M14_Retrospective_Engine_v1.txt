@@ -1,4 +1,4 @@
-M14 — RETROSPECTIVE & SYSTEM EVOLUTION ENGINE (v1.1)
+M14 — RETROSPECTIVE & SYSTEM EVOLUTION ENGINE (v1.2)
 ==================================================
 
 OPERATIONAL HEADER
@@ -181,6 +181,38 @@ registro, una propuesta rechazada en el proyecto 1 puede volver a proponerse
 idéntica en el proyecto 3 sin que nadie note el patrón. El CHANGELOG.txt
 sigue llevando el relato completo de lo APLICADO; este log es el índice
 plano de todo, aplicado o no.
+
+RETRACTACIÓN DE UN HALLAZGO (v1.2 — de Calibre N-2/N-1, 2026-07-19)
+--------------------------------------------------------------------
+Un hallazgo de M14 puede resultar mal diagnosticado y retractarse — es sano y ya
+pasó (Calibre H-5: se atribuyó a topología de red lo que era un server caído).
+Pero retractar en el archivo de incidentes NO alcanza.
+
+PROTOCOLO OBLIGATORIO al retirar o corregir el diagnóstico de un hallazgo:
+  1. Registrar la retractación en INCIDENTES_M14.md, con la versión original
+     conservada para trazabilidad (esto ya se hacía).
+  2. GREPEAR el proyecto por las afirmaciones que citaban el diagnóstico falso
+     —y por el ID del hallazgo— y corregirlas EN EL MISMO MOVIMIENTO. Los docs
+     de gate, de review y de handoff suelen repetir la explicación como hecho.
+  3. Si algún doc remite a la propuesta retirada ("ver hallazgo X"), corregir la
+     remisión: apuntar a una propuesta muerta como si estuviera viva es peor que
+     no citarla.
+  4. Si la retractación cambia un veredicto de gate ya emitido, decirlo explícito.
+
+REGLA: una retractación que vive en un solo archivo no es una retractación — es
+una nota al pie que el resto del proyecto contradice. El lector que abra el doc
+técnico va a leer la versión falsa, con la autoridad del registro del gate.
+
+POR QUÉ ES PROTOCOLO Y NO CRITERIO: es la 5ta ocurrencia de la clase VERA-P4 (una
+decisión o diagnóstico cambia y el documento de origen queda stale), con un
+agravante propio: el backstop existente —el grep de tokens viejos de M8.6 v2.3—
+cubre TOKENS (tipografías, colores, nombres de firma) pero no cubre DIAGNÓSTICOS
+ni explicaciones causales, que no tienen token que grepear. Ese hueco necesita un
+paso propio, y el momento correcto de correrlo es la retractación misma.
+
+Relación con SKILL.md §13: es la aplicación específica de la regla R3 (notas de
+divergencia con condición de borrado) al caso en que la condición YA se cumplió
+—el diagnóstico se retractó— y nadie borró lo que la nota corregía.
 
 SEVERIDAD Y PRIORIZACIÓN
 -------------------------

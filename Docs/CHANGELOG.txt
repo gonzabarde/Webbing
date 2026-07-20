@@ -8,6 +8,1377 @@ Autoridad: los cambios los aprueban y aplica el humano (SKILL.md secciones 7 y 1
 
 --------------------------------------------------------------------------------
 
+2026-07-19 (15) — N-1 APLICADA: 01_M13-1_Qualification.md CONGELADO — STRESS TEST CERRADO
+-------------------------------------------------------------------------------
+Origen: el humano pidió cerrar por completo el stress test de Silvana Dato. Único
+pendiente: N-1 (Media), sin aplicar desde la corrida formal de M14.
+
+QUÉ PASÓ: `01_M13-1_Qualification.md` presentaba 17/25 con 5 dimensiones y umbral
+≥14 — el instrumento M13.1 v1, ya retirado (M13.1 es v1.2: 6 dimensiones, /30,
+≥17, GATE 13.1-0). El documento no solo tenía números viejos: describía una
+corrida que la versión actual del módulo no permite — el prospecto nunca fue
+contactado, exactamente lo que GATE 13.1-0 bloquea hoy.
+
+CAMBIO: nota de congelamiento al inicio del documento, mismo patrón que
+`03_M13-3_Pricing.md` (aplicado tras N-2): declara el instrumento vigente al
+calificar, por qué cambió (H-2 y H-6 nacieron de este mismo documento), y cómo
+se leería hoy — se detendría en GATE 13.1-0 (NO CUMPLE, sin engagement real); si
+se puntuara igual por practicidad, el resultado se marcaría "PRE-ENGAGEMENT — no
+válido para declinar", que es justo la clase de dato que el score original
+resultó ser en la práctica: útil para priorizar contacto, nunca para decidir.
+NO SE RECALCULÓ: forzar un número bajo la escala OUTBOUND de v1.2 habría
+inventado un reconocimiento de Audit Handoff que nunca existió — Silvana nunca
+respondió.
+
+M14_PROPOSAL_LOG sincronizado: fila N-1 de PENDIENTE DE DECISIÓN a APLICADA, con
+la resolución; línea de recomendación de orden actualizada (ya no dice "N-2
+primero" como si N-1 siguiera abierta). M14_RETROSPECTIVA.md del proyecto recibió
+un sello de CIERRE al final, sin reescribir el cuerpo — preserva el registro de
+la corrida tal como se emitió, con la resolución agregada aparte.
+
+ESTADO FINAL — STRESS TEST DE SILVANA DATO: CERRADO. 6 hallazgos originales
+(H-1, H-2, H-3, H-5, H-6 aplicados; OBS abierta a propósito, espera 2da
+ocurrencia) + 2 de la corrida formal de M14 (N-1, N-2), todos resueltos. Primer
+stress test de la capa de negocio de Webbing, de punta a punta: calificación →
+scope/propuesta → pricing → cierre → retrospectiva → aplicación de hallazgos,
+incluida una recalibración de precio que afecta a toda cotización futura.
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (14) — N-2 APLICADA: RECALIBRACIÓN DEL ANCLA DEL CORE — M13.0A v1.2, M13.3 v1.2
+-------------------------------------------------------------------------------
+Origen: el humano eligió la salida (a) de N-2 (Silvana Dato) — subir el ancla.
+Decisión de posicionamiento de producto, por eso M14 se había detenido ahí.
+
+QUÉ PASÓ: el ancla del Core era USD 700-1.500. A tarifa local implicaba 17-37
+horas de trabajo, cuando el piso de esfuerzo de TODAS las categorías de M13.2 es
+40 horas, y quedaba por debajo del piso de precio de casi todas. El desempate de
+M13.3 ("prevalece el precio por scope") lo tapaba disparándose en casi todo
+proyecto — lo que volvía decorativa un ancla presentada como "el ancla de la
+oferta".
+
+CAMBIO — ancla recalibrada a USD 1.600-3.200. DERIVADA, no elegida:
+  Piso  = 40hs (categoría más liviana de M13.2) × USD 35/h (tarifa local mínima
+          de M13.3) × 1,15 (margen cliente nuevo) = USD 1.610.
+  Techo = 70hs (Core típico con reservas + integraciones) × USD 40/h × 1,15
+          = USD 3.220.
+Ahora cae DENTRO de las categorías que el Core sirve (Marketing 800-2.500,
+Healthcare 1.500-4.000, Consulting 1.000-3.500) en vez de debajo de todas.
+
+Reglas nuevas en M13.0A v1.2:
+  - REGLA DE PISO: el Core no baja de USD 1.600 fuera de la fase arranque. No es
+    preferencia — es el piso de trabajo que el sistema declara para el proyecto
+    más simple que sabe hacer.
+  - REGLA DE TECHO: el ancla cubre Marketing/Healthcare/Consulting/Startup MVP.
+    Para Ecommerce, SaaS o Luxury NO aplica y no se nombra en la conversación: el
+    precio sale del rango de categoría de M13.3, que arranca mucho más arriba.
+  - **ANCLA ≠ PRECIO DE ARRANQUE** (separación obligatoria): durante la fase
+    arranque se puede cotizar por debajo del ancla, pero SIEMPRE declarando el
+    valor de lista y el motivo ("vale 2.800, te lo hago en 1.500 porque sos uno
+    de los primeros casos y necesito el portfolio con tu testimonio"). Mezclar
+    los dos números fue exactamente lo que hizo invisible el problema durante
+    toda la corrida de Silvana: la brecha 1.500 vs 2.760 se leyó como descuento
+    por portfolio cuando parte era el ancla mal calibrada. Corolario: al vencer
+    la cláusula, el precio de arranque desaparece y queda el ancla, sin
+    renegociar con nadie, porque el ancla siempre estuvo dicha.
+
+M13.3 v1.1→v1.2: nueva sección RELACIÓN ENTRE EL ANCLA DEL CORE Y ESTOS RANGOS,
+con el mapa de a qué categorías aplica el ancla y a cuáles no, más un CHEQUEO DE
+COHERENCIA al cotizar: si el precio por scope cae MUY por debajo del piso de su
+categoría, no bajaste el precio — subestimaste el scope; volver a M13.2 antes de
+cotizar. Ese es el error que el ancla vieja institucionalizaba.
+
+HALLAZGO ADICIONAL DE LA MISMA PASADA (mismo defecto, en chico): el ancla del
+Recurrente decía USD 80-200/mes, pero el Tier 1 de M13.3 —el más barato que
+existe— arranca en USD 100. El anexo publicaba un piso por debajo del piso del
+módulo que fija los tiers. Corregido a USD 100-200.
+
+APLICADO TAMBIÉN AL CASO: silvana-dato-caso/_webbing/03_M13-3_Pricing.md anotado
+como CORRIDA HISTÓRICA con instrumento superado, no recalculado (misma decisión
+que para 01_M13-1_Qualification.md: reescribir el precio de una prospecta que
+nunca respondió sería inventar una negociación que no ocurrió). Se deja escrito
+cómo se cotizaría hoy, para referencia. Nota fina que vale registrar: el
+razonamiento original —"USD 1.500 = techo del ancla Core y piso del rango
+Healthcare"— era correcto con la información del momento, y esa coincidencia es
+justamente lo que delató el problema. Que el techo de un ancla coincida con el
+piso de todas las categorías no es armonía: es que el ancla estaba abajo de todo.
+
+PRINCIPIO 9 — LÍMITE DECLARADO: el ancla nueva es coherente HACIA ADENTRO (contra
+el piso de esfuerzo del propio sistema), no validada HACIA AFUERA. Sigue sin que
+un cliente la haya pagado. La advertencia de hipótesis de M13.0A se mantiene y se
+actualizó para decir exactamente esto.
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (13) — CORRIDA FORMAL M14 SOBRE SILVANA DATO: 2 PROPUESTAS (1 ALTA)
+-------------------------------------------------------------------------------
+Origen: pedido del humano. Última corrida formal pendiente. Documentada en
+`silvana-dato-caso/_webbing/M14_RETROSPECTIVA.md`. **PROPUESTAS, NO APLICADAS.**
+
+RESULTADO POR EJE — 1 Gates: ningún gate fudgeado; los tres imposibles de
+satisfacer en simulación (13.4-A/B/C) declarados NO APROBABLES en vez de
+simulados, y el único que falló de verdad (13.3-B) declarado NO CUMPLE en el
+momento — que es lo que produjo H-1. 2 Calidad: fuerte M13.3, M10.3, M13.0A,
+M13.2; **débil M13.1**, que produjo DOS de los seis hallazgos del caso (H-2, H-6)
+— un módulo que genera un tercio de los hallazgos de un stress test es el eslabón
+a mirar; ya corregido a v1.2. 3 Intervenciones: mínimas y NINGUNA correctiva —
+contraste con Calibre, donde el humano tuvo que cazar un mal diagnóstico; acá la
+capa de negocio corrió sin rescate. 4 Divergencias: sin (a) ni (b); sí una (c) →
+N-1. 5 Estimación: **primer proyecto en seis con datos reales** → N-2. 6
+Resultado: sin dato (simulación), con un win — ver abajo.
+
+Propuesta N-1 (Media) — el artefacto que ORIGINÓ el hallazgo no se actualizó.
+QUÉ PASÓ: `01_M13-1_Qualification.md` presenta 17/25 con 5 dimensiones y umbral
+≥14 — instrumento retirado (M13.1 hoy es v1.2: 6 dimensiones, /30, ≥17, más
+GATE 13.1-0). Peor: bajo v1.2 ese score NO debería haberse calculado, porque el
+prospecto nunca fue contactado y 13.1-0 lo bloquea.
+CAUSA RAÍZ: H-2 y H-6 NACIERON de ese documento, se aplicaron a M13.1, y nadie
+volvió al documento que los originó. 3ra variante de la misma clase en un día: la
+retractación que no se propaga (Calibre N-1), la fila que describe un mecanismo
+retirado (pasada sistemática, hallazgo 3), y ahora el artefacto que produjo el
+cambio. Los protocolos existentes cubren las dos primeras, no la tercera.
+CAMBIO PROPUESTO: 4to paso en el protocolo de M14 — al aplicar un hallazgo,
+actualizar el artefacto que lo originó O marcarlo "corrida histórica con
+instrumento vX", congelado a propósito. Para este caso se recomienda congelar:
+recalcular inventaría el engagement que 13.1-0 exige.
+
+Propuesta N-2 (ALTA) — el ancla del Core está bajo el piso de TODO el sistema.
+QUÉ PASÓ: el caso cotizó USD 1.500 contra un crudo por scope de USD 2.760. Al
+auditar el eje 5 se ve que el intercambio de fase arranque estaba tapando un
+problema estructural: el ancla del Core de M13.0A (USD 700-1.500) implica, a
+tarifa local 35-40/h, **17-37 horas de trabajo** — mientras el piso de esfuerzo
+de M13.2 es 40hs (Marketing Site, Startup MVP) y llega a 250 (SaaS). El ancla
+está por debajo del piso de esfuerzo de TODAS las categorías, y por debajo del
+piso de PRECIO de casi todas (Portfolio/Healthcare/Luxury arrancan en 1.500, que
+es el TECHO del ancla; Ecommerce 2.500; SaaS 5.000).
+CAUSA RAÍZ: M13.3 tiene desempate escrito ("prevalece el precio calculado por
+scope"), así que nada se rompe — pero nadie notó que ese desempate se dispara en
+prácticamente TODO proyecto, lo que vuelve decorativa un ancla que M13.0A
+presenta como "el ancla de la oferta" y "la fuente del ingreso de proyecto". Un
+número que abre la conversación comercial y que el cálculo real desmiente
+siempre, hacia abajo, no es un ancla: es una expectativa mal seteada.
+CAMBIO PROPUESTO: tres salidas, la elección es del humano — (a) subir el ancla a
+un rango coherente con el piso de esfuerzo real; (b) redefinir el Core como
+producto de scope reducido con categoría propia en M13.2 ("sistema de captación
+básico, 20-40hs") diciendo explícitamente que NO es un sitio de categoría
+completa; (c) declararlo precio de arranque exclusivo, con revisión atada al
+sunset de la cláusula. Lo que no es opción es dejarlo. NO es un fix mecánico: es
+una decisión de posicionamiento de producto, y por eso M14 se detiene acá.
+SEVERIDAD: Alta — impacto económico directo y RECURRENTE (encuadre de precio de
+toda cotización futura, no de un proyecto), hoy protegido por una cláusula que
+va a vencer. Es exactamente para lo que existe el eje 5: alimentar de vuelta a
+M13.2/M13.3 cuando el sistema subestima sistemáticamente.
+
+WINS DESTACADOS: (1) el eje 5 produjo su PRIMER hallazgo real en seis proyectos —
+venía "sin dato" desde siempre porque la práctica nunca ejercitaba M13, y el
+stress test de la capa de negocio lo activó dando un Alta a la primera. (2) El
+baseline del caso ya cumplía una regla que todavía no existía: su métrica lleva
+el calificador "atribuibles" Y especifica el mecanismo que lo produce (UTM,
+parámetro en el link de WhatsApp, evento GA4) — la REGLA DEL CALIFICADOR nació
+después, del fallo de Calibre, y encontró a este artefacto ya en cumplimiento.
+Buena señal de que la regla codifica una práctica correcta y no una exigencia
+inventada. (3) Segunda confirmación del día de que la corrida formal encuentra lo
+que los incidentes no: 5 hallazgos ya capturados y resueltos, y los 6 ejes
+sacaron 2 más — uno de ellos el de mayor severidad de todo el caso.
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (12) — PASADA SISTEMÁTICA DE VERIFICACIÓN ÍNDICE-POR-ÍNDICE
+-------------------------------------------------------------------------------
+Origen: las cuatro divergencias índice-vs-fuente del día se encontraron por
+casualidad, al tropezarlas operando. Se propuso y el humano pidió una pasada
+SISTEMÁTICA: verificar cada índice contra su fuente, no esperar a chocarlos.
+Método: establecer ground truth desde el disco primero (listado real de módulos
+con el header de versión de cada uno), y recién después contrastar los índices.
+
+RESULTADO LIMPIO (verificado, sin hallazgo):
+- SKILL.md §3 FILE MAP: los 42 paths declarados resuelven contra disco. Cero
+  MISS. El fix de VINCA-P5 (prefijo NIVELES/) aguanta. Único no-resuelto es el
+  glob `M11_[01-10]_*.txt`, taquigrafía intencional, no un path.
+- PORTFOLIO_REGISTRY: tiene fila para los 12 proyectos con trabajo creativo,
+  incluidos SAVIA, GMAO y Cursor Café. Silvana Dato correctamente SIN fila (es
+  caso de capa de negocio; ningún módulo creativo corrió, nada que registrar).
+- Versiones citadas en CHANGELOG/GATE_REGISTRY para M8.6 v2.13, CDL-4 v2,
+  M13.1 v1.2, M13.3 v1.1, B4 v1.1, M8.5 v2.1, M14 v1.2, Capture_Baseline v1.2:
+  todas coinciden con el header real del archivo.
+
+HALLAZGO 1 (Media) — SYSTEM FILE MAP omitía PORTFOLIO_REGISTRY.md.
+QUÉ PASÓ: el árbol de Docs/ del FILE MAP no listaba PORTFOLIO_REGISTRY.md —
+posiblemente el archivo más importante de Docs/, fuente única del Principio 10
+entre-clientes y primer archivo que lee CDL-5. Tampoco ReactBits_Catalog.md ni
+la PROPUESTA de índices creada hoy.
+CAUSA RAÍZ: el árbol se escribió a mano el 2026-07-07 y no se actualizó al
+agregarse archivos después. Nadie lo notó porque el árbol se lee para orientarse,
+no para verificar existencia — y su ausencia no rompe nada visible.
+CAMBIO: las tres entradas agregadas, con su rol en una línea.
+
+HALLAZGO 2 (Media) — CUATRO BUMPS DE VERSIÓN OMITIDOS, TODOS DE HOY, TODOS MÍOS.
+QUÉ PASÓ: SKILL.md §13 exige "cambio de comportamiento = bump minor". Cuatro
+módulos recibieron cambios de comportamiento reales hoy y no se bumpearon:
+  - M13.0 (v1): se le reescribió la NOTA de excepción de fase arranque (alcance
+    de dos gates + definición del contador de sunset). → v1.1
+  - M13.0A (v1): se le agregó la advertencia de captación nueva vs re-atribución
+    en la señal 2, que gobierna cuándo se puede subir el precio. → v1.1
+  - M13.2 (v1.1): se le agregó la distinción "cero atribuible ≠ cero demanda" en
+    la Sección 1.5. → v1.2
+  - M13.4 (v1.1): bumpeado correctamente para H-1/H-5, pero recibió DOS cambios
+    más después (medir demanda total, H-3; coherencia métrica↔fuente, N-2) sin
+    bump adicional. → v1.2
+CAUSA RAÍZ: el bump se hizo cuando el cambio se sentía "grande" (M13.1, CDL-4,
+M14, B4, M8.5 sí se bumpearon) y se omitió cuando se sentía "una nota". Pero la
+regla de §13 no distingue por tamaño percibido: distingue por si cambia el
+comportamiento. Los cuatro omitidos cambian comportamiento — uno de ellos
+(M13.0A) gobierna cuándo Webbing puede subir precios. Agravante de método: la
+omisión ocurrió en la misma sesión en que se escribieron las reglas R1-R4 sobre
+mantener índices sincronizados; el CHANGELOG y el GATE_REGISTRY quedaron citando
+versiones que el header no respaldaba — exactamente la clase que R4 persigue.
+CAMBIO: los cuatro bumpeados. GATE_REGISTRY sincronizado (M13.2 v1.2, M13.4
+v1.2) más una nota operativa: no citar números de versión sin leer el header del
+módulo, porque esa línea ya quedó stale una vez hoy.
+
+HALLAZGO 3 (Media) — DOS FILAS DEL LOG DESCRIBEN MECANISMOS QUE CDL-4 v2 RETIRÓ.
+QUÉ PASÓ: Runa-P1 y Cursor Café P4 figuran "Aplicada" describiendo el techo de
+escala, la dualidad capado/crudo y la regla "usar el crudo para comparar entre
+proyectos". CDL-4 v2 (aplicado hoy, entrada (9)) retiró los tres. Las filas
+seguían presentando como vigente un mecanismo que ya no existe.
+CAUSA RAÍZ: la supersesión se registró donde se produjo —el módulo y el
+CHANGELOG— pero no se propagó al índice que citaba los fixes superados. Es la
+misma clase que N-1 (retractación que no se propaga), aplicada a una supersesión
+en vez de a una retractación: cuando un fix nuevo vuelve obsoleto a uno viejo,
+la fila del viejo tiene que decirlo.
+CAMBIO: ambas filas marcadas "Aplicada → SUPERADA por CDL-4 v2", con qué se
+retiró y por qué. La de Runa-P1 registra además el reencuadre: CDL-4 es
+instrumento de UMBRAL, no de RANKING, así que el trabajo de comparación entre
+proyectos que esa propuesta le asignó quizá nunca fue su función.
+
+LECCIÓN DE MÉTODO: los tres hallazgos son de HOY y los tres son míos. La pasada
+sistemática los encontró en una corrida; las cuatro divergencias anteriores del
+día habían aparecido de a una, por tropiezo. Confirma lo que motivó la pasada:
+la verificación reactiva encuentra lo que se cruza en el camino, no lo que está
+mal. Nota honesta sobre el alcance: se verificaron exhaustivamente FILE MAP
+(42/42), versiones de módulos (73 archivos) y cobertura del PORTFOLIO_REGISTRY;
+las ~60 filas "Aplicada" del M14_PROPOSAL_LOG se verificaron por MUESTRA (las
+de CDL-4, que era donde había cambio reciente), no una por una. Ese barrido
+completo queda pendiente y se declara como tal — no se da por verificado lo que
+no se verificó.
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (11) — CORRIDA FORMAL M14 SOBRE CALIBRE: N-2 y N-1 APLICADAS
+-------------------------------------------------------------------------------
+Origen: el humano pidió correr la retrospectiva formal de M14 sobre Calibre
+(gmao-web). Antes de correrla, la regla R4 (recién aplicada) atrapó que el
+M14_PROPOSAL_LOG afirmaba "PROCESADO: corrida formal de M14" mientras la fuente
+—INCIDENTES_M14.md línea 6— decía "Pendientes de corrida formal de M14". Lo que
+existía era la transcripción de los incidentes como filas de propuesta, no una
+auditoría de los 6 ejes. 4ta ocurrencia del día del patrón índice-vs-fuente.
+
+LA CORRIDA: 6 ejes auditados, documentada en gmao-web/_webbing/M14_RETROSPECTIVA.md.
+Resultado por eje — 1 Gates: ningún gate fudgeado; GATE 2 con RETROCEDER real
+ejecutado; GATE 4 declarado NO APROBABLE en vez de simulado; los dos gates no
+satisfechos (GATE 4, éxito-90d) declarados explícitamente como bloqueantes.
+2 Calidad: fuerte en M0 (research vivo real), CDL-5, M8.6, B4; débil solo CDL-4
+(ya resuelto ese día con v2). 3 Intervenciones: una, el humano cazando el mal
+diagnóstico de H-5. 4 Divergencias: sin divergencias de FILE MAP ni conocimiento
+congelado; sí una de doc-de-origen (→ N-1). 5 Estimación: sin dato, 6º proyecto
+consecutivo así porque la práctica nunca ejercitaba M13 — hueco cerrado ese mismo
+día por el stress test de Silvana. 6 Resultado: sin dato aún, registrado como tal
+y no como N/A; métrica bien elegida para arquetipo #2 (captación, no adopción)
+pero con defecto de definición (→ N-2).
+
+HALLAZGO DE MÉTODO: los 5 incidentes del proyecto ya estaban capturados Y
+resueltos, y aun así los 6 ejes encontraron 2 hallazgos nuevos, uno sobre un piso
+innegociable. La distinción "incidentes capturados" vs "corrida formal" no es
+burocrática — saltearla porque "los incidentes ya están procesados" habría dejado
+los dos afuera.
+
+Fix N-2 (Media) — Capture_Baseline_Template v1.1→v1.2 + GATE 13.4-E + M13.4.
+QUÉ PASÓ: el baseline declaraba la métrica "solicitudes de demo CALIFICADAS/mes"
+y como fuente la tabla `calibre.leads` filtrada por source='web_demo' — que
+registra TODO envío del formulario. Nada calificaba un lead: sin criterio, sin
+campo, sin paso.
+CAUSA RAÍZ: GATE 13.4-E verificaba que métrica, fuente y baseline EXISTIERAN, no
+que la fuente pudiera MEDIR la métrica declarada. El adjetivo "calificadas" entró
+al nombre sin que nadie lo operacionalizara. Misma familia que Silvana H-3
+(sobre-atribución): un número destinado a ser prueba de valor que mide algo
+distinto de lo que su nombre promete, y que vía M13.0A señal 2 contamina la
+calibración de precios de toda la agencia.
+CAMBIO: PRUEBA DE COHERENCIA MÉTRICA↔FUENTE, obligatoria. Hay que declarar que la
+fuente puede medir la métrica tal como está definida. REGLA DEL CALIFICADOR: si
+el nombre lleva un adjetivo restrictivo ("calificadas", "atribuibles", "nuevas",
+"confirmadas"), ese adjetivo exige definición operativa Y un mecanismo real que
+lo produzca; si no existe, hay dos salidas honestas y ninguna tercera — construir
+el mecanismo, o quitar el adjetivo del nombre. Un calificador sin mecanismo es
+una promesa que el dato no puede cumplir y se reporta igual como si la cumpliera.
+Sincronizado en GATE_REGISTRY (13.4-E) y M13.4.
+APLICADO TAMBIÉN AL CASO: el baseline de Calibre corregido con la salida (b) —
+métrica renombrada a "solicitudes de demo ENVIADAS/mes", definición operativa
+completa (qué cuenta y qué no, incluidos los 429 que nunca llegan a la tabla),
+prueba de coherencia marcada, tipo de punto de partida (A) declarado, y nota de
+que medir leads calificados sería scope adicional, no un cambio de redacción.
+SEVERIDAD: Media.
+
+Fix N-1 (Media) — M14 v1.1→v1.2 + SKILL.md §13 (extensión de R3) + corrección
+puntual de gmao-web/_webbing/M8-6_gate3.md.
+QUÉ PASÓ: H-5 retractó formalmente el diagnóstico "el Chrome real no alcanza el
+dev server (host distinto del sandbox)" — era falso, el server estaba caído. La
+retractación se escribió en INCIDENTES_M14.md, pero M8-6_gate3.md siguió
+afirmando la causa falsa COMO HECHO, y remitiendo al lector a "la propuesta de 3ª
+vía de captura para M8.6" — una propuesta RETIRADA, citada como si estuviera viva.
+CAUSA RAÍZ: 5ta ocurrencia de la clase VERA-P4 (el doc de origen queda stale
+cuando una decisión cambia), con agravante propio: el backstop existente —el grep
+de tokens viejos de M8.6 v2.3— cubre TOKENS (tipografías, colores, nombres de
+firma) pero NO cubre diagnósticos ni explicaciones causales, que no tienen token
+que grepear. Y la retractación de un hallazgo de M14 no tenía ningún paso que la
+propagara a los docs que lo citaban.
+CAMBIO: sección RETRACTACIÓN DE UN HALLAZGO en M14, con protocolo obligatorio de
+4 pasos — registrar en INCIDENTES conservando la versión original; GREPEAR el
+proyecto por las afirmaciones y por el ID del hallazgo y corregirlas en el mismo
+movimiento; corregir las remisiones a la propuesta retirada; declarar si la
+retractación cambia un veredicto de gate ya emitido. Regla: "una retractación que
+vive en un solo archivo no es una retractación — es una nota al pie que el resto
+del proyecto contradice". Extensión paralela de R3 en SKILL.md §13 para cubrir
+explicaciones causales, no solo notas y tokens.
+EL PROTOCOLO SE CORRIÓ SOBRE SU PROPIO CASO: grep del diagnóstico falso en
+gmao-web/_webbing → 1 ocurrencia viva (M8-6_gate3.md), corregida con la
+retractación visible en el propio doc, la remisión muerta arreglada, y la lección
+de disciplina registrada (curl al server ANTES de diagnosticar; "can't be
+reached" casi siempre es server caído, no topología de red).
+SEVERIDAD: Media.
+
+ESTADO DE gmao-web (Calibre): CERRADO. 5 hallazgos originales (H-1 a H-5) + 2 de
+la corrida formal (N-1, N-2), todos resueltos.
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (10) — R1 Y R4 APLICADAS: FUENTE DECLARADA + INTEGRIDAD DE CITA
+-------------------------------------------------------------------------------
+Origen: últimas dos reglas pendientes de la auditoría de índices (entrada (4)),
+que la propia propuesta ubicaba "después" por tocar el formato de varios
+archivos. Con esto, PROPUESTA_Indices_Duplican_Estado.md queda cerrada: las 4
+reglas aplicadas, y el documento pasa a ser el razonamiento — la regla vigente
+vive en SKILL.md §13.
+
+Fix R1 (Media) — SKILL.md §13 + los 4 índices del sistema.
+QUÉ PASÓ: ningún índice declaraba qué era fuente y qué era eco. Ante una
+divergencia no había forma de saber cuál lado corregir, y de hecho hubo que
+decidirlo caso por caso las cuatro veces que apareció el problema hoy.
+CAUSA RAÍZ: la autoridad estaba implícita. Peor: GATE_REGISTRY declaraba
+CO-AUTORIDAD explícita — "fuente operativa junto con SKILL.md §6". Dos archivos
+reclamando autoridad sobre el mismo hecho es exactamente el estado en el que
+NINGUNO es la fuente, y es lo que permitió que la cláusula de fase arranque
+quedara descrita con alcance viejo ahí mientras M13.4 ya decía otra cosa.
+CAMBIO: regla en SKILL.md §13 — todo índice declara `FUENTE: <archivo/sección>`
+o `FUENTE ÚNICA: este archivo`, en cabecera y por bloque si difieren. Prohibida
+la co-autoridad: un hecho, una fuente. Jerarquía fijada como referencia del
+patrón: GATE 1-4 → SKILL.md §6; gates de módulo → el módulo; GATE_REGISTRY →
+índice, nunca fuente. Aplicado en los cuatro índices:
+  - GATE_REGISTRY v1→v1.1: cabecera NATURALEZA DE ESTE ARCHIVO con la jerarquía
+    completa y el retiro explícito de la co-autoridad; FUENTE por bloque en las
+    6 secciones (globales, 13.4, 13.1/2/3, M12, M9.8, M10).
+  - M14_PROPOSAL_LOG: cabecera declarando que la FUENTE del estado de una
+    propuesta es la columna Disposición de su fila, la del contenido es el
+    módulo modificado, y que PENDIENTES DE PROCESAR apunta sin repetir estado.
+  - SYSTEM FILE MAP: "autoridad operativa" reformulado a FUENTE explícita, con
+    la regla de desempate (el disco gana para existencia; SKILL.md §3 para path).
+  - PORTFOLIO_REGISTRY: declarado FUENTE ÚNICA (es registro primario, no índice),
+    con el matiz de que sus CELDAS citan documentos de proyecto — por eso rige la
+    REGLA DE TRAZABILIDAD que ya tenía.
+
+Fix R4 (Media) — SKILL.md §13, generalización de la integridad de cita.
+QUÉ PASÓ: se reportaron al humano "8 propuestas pendientes" de runa-web leyendo
+el RESUMEN del M14_PROPOSAL_LOG. Verificando fila por fila eran 5; verificando
+contra los archivos eran 3 — dos ya estaban aplicadas hacía semanas. Se estuvo a
+punto de re-aplicar fixes existentes.
+CAUSA RAÍZ: la REGLA DE INTEGRIDAD DE CITA existía solo en PORTFOLIO_REGISTRY,
+donde está probada (nació de la fila fantasma de Cursor Café INC-1 y en ESTUDIO
+DE TATUAJE agarró sola una 3ra fila fantasma). Ningún otro índice la tenía, así
+que la verificación dependía de que alguien se acordara — el mismo modo de falla
+que Runa-P11 en seguridad.
+CAMBIO: regla en SKILL.md §13 — antes de ACTUAR sobre lo que dice un índice
+(aplicar una propuesta, reportar un estado, confiar en una fila), verificar
+contra el archivo fuente. FAIL CONDITION explícita: reportar pendientes, estados
+o decisiones leyendo solo un resumen. Con el caso real de hoy como precedente
+citado, incluido el hecho de que lo cometió Claude Code. Reforzado además en la
+cabecera de los dos índices donde falló (GATE_REGISTRY y M14_PROPOSAL_LOG).
+
+SEVERIDAD: Media (ambas). Sin impacto de seguridad, pero el modo de falla es
+silencioso y el costo ya se materializó dos veces hoy: un gate que fallaba por
+construcción y trabajo casi duplicado.
+
+ESTADO DE LA AUDITORÍA DE ÍNDICES: cerrada. R1, R2, R3 y R4 aplicadas; los 4
+casos que la motivaron corregidos; los 4 índices con fuente declarada.
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (9) — CALIBRE H-4: DOBLE CONTEO EN CDL-4 — v1.1 → v2 (retira 3 parches)
+-------------------------------------------------------------------------------
+Origen: último hallazgo pendiente de la corrida CALIBRE, marcado en la entrada (1)
+como "rediseño de fórmula, no fix mecánico, para decisión específica del humano".
+El humano pidió tomarlo. El diagnóstico cambió de forma material al leer el módulo
+— se reporta antes del cambio, igual que en H-2.
+
+QUÉ PASÓ (diagnóstico original): "el bonus aditivo de CDL-4 satura el techo de 10
+en cualquier proyecto competente, y el crudo también se agrupa estrecho (12.44,
+12.44, 12.33 en tres proyectos) — poco poder discriminante en la franja alta".
+Conclusión propuesta: rediseñar la fórmula de bonus (techo propio, multiplicativo,
+o métrica alternativa).
+
+QUÉ PASÓ (diagnóstico real): el defecto no es la falta de techo — es DOBLE CONTEO.
+4 de los 5 bonus y 5 de las 7 penalizaciones son criterios que las dimensiones YA
+puntúan, a veces palabra por palabra:
+  "La firma visual es clara y repetible" (+1)   = ancla 8-10 de Visual Direction
+  "Se reconoce inmediatamente sin logo" (+1)    = ancla 8-10 de Visual Direction
+  "Imagen mental fuerte y es propio" (+1)       = ancla 8-10 de Concept Strength
+  "Coherente de M0 a M6" (+1)                   = ancla 8-10 de Execution Coherence
+  "Es genérico" (-1)                            = Positioning Strength <6
+  "No tiene firma visual" / "no se reconoce sin logo" (-1/-2) = Visual Direction <6
+Un proyecto sacaba 9 en Visual Direction PORQUE tenía firma clara y se reconocía
+sin logo — y después cobraba +2 más por esos mismos dos hechos. El modificador no
+aportaba información nueva: AMPLIFICABA la señal que las dimensiones ya habían
+dado. Por eso todo proyecto competente saturaba: cumplir los anclas 8-10 ERA
+cumplir los bonus.
+
+VENTAJA METODOLÓGICA DEL DIAGNÓSTICO CORREGIDO: es demostrable leyendo el módulo,
+sin depender del tamaño de muestra. El diagnóstico original necesitaba 3 casos
+para sostenerse y quedaba expuesto al confound de anclaje que el propio OBS-A
+había advertido ("los puntué yo").
+
+CAUSA RAÍZ: el scorecard y los modificadores se diseñaron por separado, midiendo
+la misma cosa dos veces, sin que nadie cruzara la lista de bonus contra los anclas
+de las dimensiones. Los parches sucesivos (cap en 10, reporte del crudo, regla de
+uso del crudo) trataron el síntoma —números fuera de escala, franja alta
+comprimida— sin tocar la redundancia que los producía.
+
+CAMBIO — CDL-4 v1.1 → v2 (bump MAJOR: cambia la estructura del cálculo):
+  - Bonus y penalizaciones SALEN de la aritmética. Score final = score base
+    ponderado. Al ser promedio ponderado de scores 1-10, queda acotado a [1,10]
+    POR CONSTRUCCIÓN.
+  - Sobreviven como FLAGS CUALITATIVOS, con la dimensión asociada explícita y una
+    regla de COHERENCIA OBLIGATORIA: flag negativo ⇒ esa dimensión no puede estar
+    en 8-10; flag positivo ⇒ no puede estar bajo 7. Una contradicción significa
+    que el scoring de la dimensión está mal puesto — se corrige la dimensión, no
+    se compensa con el flag. Así los flags hacen el único trabajo honesto que
+    pueden hacer sin duplicar: verificación cruzada del scorecard.
+  - REPORTING, TESTS, OUTPUT y PROMPT actualizados en consecuencia; Σpesos pasa a
+    declararse explícitamente en el reporte.
+
+RETIRA TRES PARCHES que dejan de ser necesarios (no se agregó un cuarto encima):
+  - TECHO DE ESCALA / cap en 10 (Cursor Café P4) — no hay qué capar.
+  - Dualidad "capado vs crudo" (Cursor Café P4 + Runa-P1) — hay un solo número.
+  - Regla "el crudo es para comparar entre proyectos" (Runa-P1) — sin crudo, no
+    aplica.
+QUÉ NO CAMBIA: la ponderación por Σpesos (fix SAVIA-P5) queda intacta y sigue
+siendo el corazón del cálculo. Los números históricos de SAVIA (9.21→8.22) se
+conservan en el módulo marcados como aritmética vieja, porque documentan el bug
+de ponderación que SIGUE vigente.
+
+PREGUNTA ABIERTA, DECLARADA Y NO RESUELTA: los scores BASE de proyectos distintos
+también agrupan estrecho (Cursor Café 8.44, Estudio de Tatuaje 8.44). Quitar el
+bonus NO resuelve eso. Tres causas posibles que hoy no se pueden separar: (1) el
+instrumento no discrimina; (2) ANCLAJE DEL PUNTUADOR — todos los scores hasta hoy
+los produjo el mismo evaluador; (3) son genuinamente parecidos, porque un sistema
+disciplinado DEBERÍA producir calidad consistente, en cuyo caso no hay nada que
+arreglar. Documentado en el módulo con la instrucción explícita de no elegir una
+sin evidencia (M11.8, FALSE CERTAINTY), y con la consecuencia operativa: hasta
+resolver el confound, los scores entre proyectos se tratan como NO comparables y
+se usan solo para el veredicto individual. Reencuadre que lo ordena: CDL-4 es un
+instrumento de UMBRAL (¿esto se puede avanzar?), no de RANKING — Runa-P1 le había
+asignado un trabajo de comparación que quizá nunca fue su función.
+
+CIERRA TAMBIÉN: OBS-A de la corrida Cursor Café (score idéntico en 2 proyectos,
+"señal a vigilar con muestra 3"). Su condición se cumplió y su resolución es ésta.
+
+SEVERIDAD: Media (elevada desde Baja — el doble conteo afecta a todo proyecto que
+pase por CDL-4, no solo a los de franja alta).
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (8) — H-3: CAPTACIÓN NUEVA vs RE-ATRIBUCIÓN — Capture_Baseline v1.1 (+5 archivos)
+-------------------------------------------------------------------------------
+Origen: último hallazgo pendiente del stress test de Silvana Dato. Con esto, la
+corrida silvana-dato-caso queda cerrada salvo la OBS (Baja) de M13.3.
+
+QUÉ PASÓ: la plantilla de baseline ofrecía "desde cero" como período sin distinguir
+dos situaciones que no se parecen en nada — (a) un negocio nuevo sin demanda, donde
+crecer desde 0 ES captación nueva, y (b) un negocio establecido con mucha demanda
+real por canales no medidos, donde crecer desde 0 ATRIBUIBLE no prueba demanda
+nueva. Silvana es el caso (b) en estado puro: 1067 reseñas, Instagram activo,
+demanda alta y CERO de ella medida. Reportar a los 90 días "20 turnos/mes desde el
+sitio, desde baseline 0" como captación nueva le adjudicaría al sitio la demanda
+que ya traía Instagram.
+
+CAUSA RAÍZ: la plantilla asumía implícitamente que baseline 0 = negocio arrancando
+de cero, y no previó el caso más frecuente en PyME local (negocio establecido +
+sitio nuevo), donde el sistema RE-ATRIBUYE demanda existente además de —o en vez
+de— crear demanda nueva. Y hay una imposibilidad estructural detrás: el número
+atribuible al sitio, SOLO, no puede distinguir las dos cosas. Faltaba el segundo
+número.
+
+CAMBIO — Capture_Baseline_Template.md v1→v1.1 (fix principal):
+  - TIPO DE PUNTO DE PARTIDA, sección obligatoria: (A) sin demanda previa / (B)
+    demanda previa NO atribuida / (C) demanda previa medida. Con el caso Silvana
+    como ejemplo canónico del (B) y la advertencia de por qué es el más fácil de
+    reportar mal.
+  - DEMANDA TOTAL (T0) en el baseline, obligatorio si el tipo es (B), con la
+    pregunta literal para obtenerlo ("¿cuántas consultas o turnos por semana
+    manejás hoy, contando todos los canales?") y el límite explícito si el cliente
+    no lo puede dar: sin T0 nunca se afirma captación nueva, solo atribuible.
+  - CHECK-INS con DOS columnas (atribuible + total) y tabla de lectura: total sube
+    = CAPTACIÓN NUEVA; total plano con atribuible que sube = RE-ATRIBUCIÓN; total
+    baja = problema externo, mirar aparte.
+  - QUÉ SE PUEDE Y QUÉ NO SE PUEDE AFIRMAR, con ejemplos ✅/❌.
+
+SINCRONIZADO (radio de impacto enumerado con grep ANTES de editar, 5 archivos más):
+  - M13.0A — EL PUNTO DONDE EL ERROR CAUSABA DAÑO REAL. La señal 2 habilita subir
+    el ancla de precio sobre "15 reservas NUEVAS por mes". Se explicitó que esa
+    palabra hace todo el trabajo: la re-atribución se cobra pero NO habilita subir
+    el ancla, y distinguirlas exige el T0. Sin este fix, el pricing de toda la
+    agencia podía calibrarse sobre re-atribución leída como demanda nueva —
+    Principio 9 en su forma más peligrosa: una hipótesis disfrazada de medición.
+  - M13.4 — QUÉ MEDIR pide ahora demanda total además de atribuible.
+  - GATE_REGISTRY — 13.4-E exige tipo de punto de partida + T0 si es (B).
+  - M13.2 — Sección 1.5: "cero atribuible" ≠ "cero demanda"; cambia qué se promete.
+  - Client_Record_Template — tipo, T0, check-ins duales, lectura final.
+
+MATIZ DELIBERADO DEL FIX: la re-atribución NO es valor falso. Formalizar demanda
+dispersa en DMs tiene valor propio y reportable (menos fricción, menos leads
+perdidos, menos tiempo administrativo, datos por primera vez). Lo único prohibido
+es presentarla como demanda nueva. Sin este matiz, el fix habría empujado a
+subvalorar trabajo legítimo — y a que un cliente con buen resultado real quedara
+registrado como fracaso.
+
+APLICADO TAMBIÉN AL CASO: silvana-dato-caso/_webbing/05_Capture_Baseline.md
+actualizado al formato v1.1 (tipo (B) declarado, T0 pendiente de kickoff, check-ins
+duales) con la lectura anticipada: dado el volumen de Instagram, lo más probable a
+90 días es re-atribución o mixto — buen resultado, reportable, pero sin derecho a
+subir el ancla. Anticiparlo evita el autoengaño a los 90 días.
+
+SEVERIDAD: Media.
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (7) — H-6: DIMENSIÓN DOLOR PERCIBIDO EN M13.1 — v1.1 → v1.2, escala /30
+-------------------------------------------------------------------------------
+Origen: hallazgo adyacente registrado al aplicar H-2 en la entrada (6); el humano
+pidió tomarlo a continuación. Es el segundo hallazgo de la sesión con impacto
+económico directo, no de registro.
+
+QUÉ PASÓ: la señal que gobernó todo el caso Silvana Dato fue "alta capacidad +
+dolor bajo" (pago=24, dolor=8 en Sistema Clientes). Explicó por qué la objeción de
+precio era predecible, por qué la claridad estaba baja, y por qué la jugada
+correcta era Entrada antes que Core. El Qualification Score de M13.1 no la veía en
+ninguna de sus 5 dimensiones: un prospecto que puede pagar pero no siente el
+problema puntuaba igual que uno que puede pagar y está desesperado.
+
+CAUSA RAÍZ: las 5 dimensiones medían CAPACIDAD y VIABILIDAD (presupuesto, timeline,
+claridad, autonomía, portfolio); ninguna medía DEMANDA. Con una asimetría notable:
+M13.1 ya castigaba el EXCESO de urgencia (TIMELINE=1 y la red flag "es urgente, lo
+necesito ya") pero era ciego a la urgencia CERO. Los dos extremos son riesgo —el
+que quiere todo para mañana no planificó; el que no tiene urgencia no compra— y
+solo uno estaba instrumentado. Además, un score aditivo permitía que cuatro
+dimensiones fuertes taparan la única que decide si hay venta.
+
+CAMBIO — M13.1 v1.1→v1.2:
+  - 6ª dimensión DOLOR PERCIBIDO / URGENCIA REAL (1-5), con dos distinciones
+    explícitas para evitar confusión: NO es OPORTUNIDAD (qué tan roto está el
+    sitio = diagnóstico de M15, lo que nosotros vemos; el "dolor web" de Sistema
+    Clientes es esto, no lo otro) y NO es TIMELINE (factibilidad del plazo =
+    riesgo de ejecución, no intensidad de demanda). Ancla 5 exige disparador
+    temporal real; ancla 1 es "el negocio le funciona igual".
+  - LA BRECHA OPORTUNIDAD ↔ DOLOR PERCIBIDO, en cuatro cuadrantes. El cuadrante
+    de Silvana (alta oportunidad + bajo dolor percibido) queda nombrado: vendible
+    pero CARO de vender — objeción de precio casi garantizada, ciclo largo, y el
+    trabajo previo es CREAR el dolor con el peldaño Entrada, no cotizar.
+  - REGLA DE PISO: dolor percibido = 1 no se compensa con el total. No dispara
+    declinar (puede ser un prospecto excelente), pero obliga a declararlo y a
+    cambiar la jugada. Es regla y no solo puntaje por la lección de SAVIA-P5 en
+    CDL-4: promediar/sumar diluye justo la dimensión que hay que castigar.
+  - Red flag nueva: "La verdad que así como está me está funcionando bien" —
+    alta capacidad + dolor cero, "el perfil más engañoso del embudo".
+  - ESCALA /25 → /30. Bandas recalibradas proporcionalmente: 24-30 ideal /
+    17-23 viable / 10-16 riesgo / <10 declinar. GATE 13.1-B de ≥14 a ≥17.
+
+RADIO DE IMPACTO: verificado ANTES de editar (grep de "≥14", "/25" y las bandas
+sobre todo el skill) y sincronizado completo — Docs/GATE_REGISTRY.txt (13.1-B con
+la nueva escala y la regla de piso) y Client_Record_Template.md (/30, más una fila
+propia para el dolor percibido). Verificación posterior sobre M13.1: cero
+referencias remanentes a la escala vieja fuera de la nota histórica del caso
+Silvana, que declara "17/25" nombrando su escala. Esto es la regla R2/R4 de la
+propuesta de índices aplicada en la práctica: enumerar el radio antes de cambiar
+una escala, en vez de descubrir la divergencia después.
+
+NOTA DE MÉTODO: al leer Sistema Clientes 03_Scoring_Engine.md se confirmó que su
+"dolor" es dolor del SITIO (qué tan roto está), no dolor del dueño — dos cosas que
+la dimensión nueva separa a propósito. La banda de dolor=8 es "funcional con
+flaquezas puntuales", consistente con el WordPress 2019 del CSV; refuerza la
+discrepancia marcada al inicio del stress test (el "sin sitio real, solo Instagram"
+del brief habría puntuado 20-25 en esa escala, no 8).
+
+SEVERIDAD: Media-Alta.
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (6) — H-2 APLICADO CON DIAGNÓSTICO CORREGIDO — M13.1 v1.1
+-------------------------------------------------------------------------------
+Origen: el humano pidió mirar H-2 del stress test de Silvana Dato. Al leer M15 y
+M18 para diseñar el fix, el diagnóstico cambió de forma material — se reporta
+antes del cambio, no después.
+
+QUÉ PASÓ (diagnóstico original, PARCIALMENTE ERRADO): se reportó que el
+Qualification Score de M13.1 penaliza CLARIDAD en outbound frío por construcción,
+empujando al prospecto ideal hacia "declinar". Evidencia: Silvana sacó 17/25 con
+CLARIDAD=2.
+
+QUÉ PASÓ (diagnóstico corregido): la secuencia correcta YA EXISTÍA. M15 §88 dice
+"si el prospecto PICA → M13.1 (califica, con el Audit Handoff como insumo)".
+M13.1 nunca estuvo pensado para correr sobre un prospecto no contactado. La
+CLARIDAD=2 de Silvana fue consecuencia de MAL USO —Claude Code corrió M13.1 sobre
+una fila de una lista que jamás fue contactada—, no de un defecto del rubro.
+
+CAUSA RAÍZ (el hueco real, más preciso que el reportado): dos cosas.
+  (1) M13.1 no declaraba su propia PRECONDICIÓN DE ENTRADA. Esa precondición
+      vivía solo aguas arriba (M15, M18), mientras la tabla de routing de
+      SKILL.md §4 permite entrar a "Negocio → M13" por la puerta principal. Se
+      podía correr el módulo en el momento equivocado sin que nada avisara — y
+      eso fue exactamente lo que ocurrió.
+  (2) M15 declara que la magnitud del problema del Audit Handoff es "insumo del
+      Qualification Score (M13.1)", pero las 5 dimensiones del score eran TODAS
+      de articulación del cliente. El diagnóstico —lo único que Webbing sabe en
+      outbound— no tenía por dónde entrar. El REF lo mencionaba; el rubro no lo
+      usaba.
+
+CAMBIO (A+B+C, alcance elegido por el humano) — M13.1 v1→v1.1:
+  A. PRECONDICIÓN DE ENTRADA + GATE 13.1-0 (bloqueante, corre primero): M13.1 se
+     corre con ENGAGEMENT REAL (respondió / pidió info / aceptó o pagó el
+     diagnóstico / llegó solo). Existir en una lista no es engagement. Sin eso, la
+     tarea es M18 o M15. Excepción declarada para referidos (igual requieren
+     contacto). Si se corre igual (práctica, priorización), el score se marca
+     "PRE-ENGAGEMENT — no válido para declinar": sirve para ordenar a quién
+     abordar primero, nunca para descartar. Incluye el precedente de Silvana.
+  B. CLARIDAD DEL PROBLEMA pasa a tener DOS escalas explícitas. INBOUND: mide
+     articulación del prospecto (escala original, intacta). OUTBOUND: mide nitidez
+     del DIAGNÓSTICO (hallazgo Crítico traducido a pérdida de negocio) + el
+     RECONOCIMIENTO del prospecto al responder. Regla dura: sin Audit Handoff un
+     outbound no puede superar 3 — "el remedio es correr M15, no adivinar el
+     puntaje". Nota de calibración: el mismo insumo del Handoff lo leen tres
+     módulos (M13.1 score, M10.0 clasificación, M13.2 scope).
+  C. Brief: campos Origen (INBOUND/OUTBOUND + si hay Handoff) y Engagement
+     confirmado. GATE 13.1-A exige el Origen — sin él se aplica la escala
+     equivocada y se deprime todo el outbound. Nueva LECTURA SEGÚN ORIGEN en
+     INTERPRETACIÓN: en outbound, un score bajo suele reflejar falta de
+     diagnóstico NUESTRO, no un mal prospecto; declinar por eso es tirar un
+     prospecto por un dato que nunca fuimos a buscar.
+  Docs/GATE_REGISTRY.txt sincronizado en el mismo movimiento (13.1-0 nuevo, nota
+  en 13.1-B), con línea FUENTE en ambas — aplicando la regla R2 recién escrita.
+
+EFECTO MEDIDO: corrido en el momento correcto y con Handoff, Silvana proyecta
+~20/25 ("cliente ideal, avanzar con energía") contra los 17 originales ("viable
+con condiciones"). Cambia la banda, no solo el número. Es PROYECCIÓN, no dato:
+nunca respondió porque nunca se la contactó.
+
+SEVERIDAD: Media-Alta. Es el primer hallazgo de la sesión con impacto económico
+directo y no de registro: un embudo outbound (M18) alimentando un score calibrado
+para inbound descarta buenos prospectos de forma sistemática y silenciosa.
+
+HALLAZGO ADYACENTE, NO APLICADO (registrado, distinto de H-2): M13.1 no tiene
+ninguna dimensión de DOLOR/URGENCIA. En el caso Silvana, "alta capacidad + dolor
+bajo" (dolor=8 en Sistema Clientes) fue la señal que gobernó todo —explicó la
+objeción de precio— y el Qualification Score no la ve. Un prospecto que puede
+pagar pero no siente el problema es un perfil de riesgo real que el rubro actual
+no distingue de uno que sí lo siente. Queda para decisión del humano.
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (5) — R2 Y R3 APLICADAS A SKILL.md §13 + BARRIDO DEL ÍNDICE M14
+-------------------------------------------------------------------------------
+Origen: continuación directa de la entrada (4). El humano dio seguir; se aplican
+las dos reglas que la propia propuesta recomendaba primero (R2 y R3: costo de
+escritura ~0, atajan 3 de los 4 casos auditados). R1 (declaración de fuente por
+bloque) y R4 (integridad de cita generalizada) NO se aplican todavía: tocan el
+formato de varios archivos y la propuesta las ubica explícitamente después.
+
+Fix R2 (Media) — SKILL.md §13, nueva regla "Índices — apuntar, no resumir estado".
+QUÉ PASÓ: cuatro divergencias en un día, todas del mismo tipo — un índice
+reafirmando estado mutable que ya vivía en otro lado (disposiciones, umbrales,
+alcance de una cláusula, conteos), divergiendo en silencio y leyéndose como fuente.
+CAUSA RAÍZ: no existía regla sobre qué puede y qué no puede contener un índice.
+CAMBIO: un índice puede decir DÓNDE vive algo y resumir contenido ESTABLE; no puede
+reafirmar estado mutable. Un conteo es estado derivado: se recalcula al leer, no se
+escribe. Cuando un resumen debe existir, declara su fuente en el bloque y se
+verifica contra ella antes de actuar. Con el ejemplo concreto del caso real
+(❌ "quedan P1,P4,P5..." / ✅ "ver la columna Disposición").
+SEVERIDAD: Media.
+
+Fix R3 (Media) — SKILL.md §13, nueva regla "Notas de divergencia: con condición de
+borrado".
+QUÉ PASÓ: la NOTA DE PATHS de SYSTEM FILE MAP explicaba que SKILL.md §3 omitía el
+prefijo NIVELES/; el prefijo se agregó (VINCA-P5) y la nota no se borró, quedando
+semanas afirmando lo contrario de la realidad.
+CAUSA RAÍZ: una nota escrita para explicar algo temporal no declaraba qué la hace
+desaparecer, así que sobrevivió a lo que explicaba y pasó a SER el error.
+CAMBIO: toda nota de divergencia nombra su condición de borrado. Es el mismo
+mecanismo de sunset que la cláusula de fase arranque ya usa bien, generalizado de
+las excepciones a las notas explicativas.
+SEVERIDAD: Media.
+
+BARRIDO DEL ÍNDICE M14 (aplicando R2/R3 de inmediato sobre el archivo que las motivó):
+- HUECO CERRADO: silvana-dato-caso no estaba indexado en PENDIENTES DE PROCESAR. Su
+  INCIDENTES_M14.md se creó hoy y nunca se agregó al índice — un índice incompleto es
+  la misma clase de falla que uno stale. Agregada la entrada con estado PARCIAL: H-1 y
+  H-5 aplicados; H-2, H-3 y OBS pendientes de decisión por instrucción del humano.
+- R3 APLICADA A UNA NOTA REAL: OBS-A (Cursor Café) decía "señal a vigilar — si un 3er
+  proyecto vuelve a dar ~12.44, ahí sí es el instrumento". Esa condición SE CUMPLIÓ el
+  2026-07-18 (Calibre H-4, crudo ~12.3, 3ra ocurrencia) y la fila seguía diciendo
+  "observación, no se propone cambio". Actualizada a CONDICIÓN CUMPLIDA → escaló a
+  Calibre H-4, que ya está marcado para decisión del humano en la entrada (1) de hoy.
+  Es exactamente el caso de uso de R3: una nota con condición explícita cuya condición
+  llegó y nadie volvió a mirarla.
+- Resto de PENDIENTES DE PROCESAR verificado entrada por entrada: correcto. gmao-web
+  (Calibre) sigue legítimamente PENDIENTE DE PROCESAR — sin corrida formal de M14.
+
+ESTADO DEL SISTEMA TRAS ESTA ENTRADA: propuestas pendientes de decisión del humano —
+Calibre H-4 (rediseño de la fórmula de bonus de CDL-4), Silvana H-2 y H-3 + OBS, y las
+reglas R1/R4 de la propuesta de índices. Ningún pendiente de seguridad ni de gate.
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (4) — AUDITORÍA TRANSVERSAL: ÍNDICES QUE DUPLICAN ESTADO (propuesta + 3 fixes)
+-------------------------------------------------------------------------------
+Origen: pedido del humano tras notar que era el tercer caso del día de "el índice
+dice algo que el archivo no respalda". Auditoría transversal de todos los índices
+del sistema. Entregable: Docs/PROPUESTA_Indices_Duplican_Estado.md.
+
+QUÉ PASÓ: cuatro ocurrencias verificadas del mismo patrón en UN día, ninguna
+buscada — todas aparecieron al operar. (1) El resumen PENDIENTES del
+M14_PROPOSAL_LOG afirmaba 8 propuestas pendientes de runa cuando las filas ya
+marcaban 3 como Aplicada y, verificando contra los archivos, las pendientes reales
+eran 3. (2) La cláusula de fase arranque descrita en 4 ubicaciones con alcance
+viejo. (3) La NOTA DE PATHS de SYSTEM FILE MAP afirmaba que SKILL.md §3 OMITE el
+prefijo NIVELES/, cuando lo incluye desde que se aplicó VINCA-P5 — la nota escrita
+para explicar una divergencia sobrevivió a la divergencia y pasó a SER la
+divergencia. (4) La REF de Estudio Contable citaba "Runa-P5" donde correspondía
+"VINCA-P5". Además, TRES filas del log estaban stale (Runa-P5, Runa-P6, VINCA-P5:
+propuestas ya aplicadas figurando "Pendiente de aprobación").
+
+CAUSA RAÍZ: el sistema no distingue tres cosas que trata igual — (a) índice
+PUNTERO, que solo dice dónde está algo y falla ruidosamente si diverge (FILE MAP);
+(b) índice RESUMEN, que reafirma estado mutable que vive en otro lado y diverge en
+SILENCIO leyéndose como fuente; (c) REGISTRO PRIMARIO, donde el estado vive y no
+es duplicación (CHANGELOG, PORTFOLIO_REGISTRY). Los cuatro casos son de tipo (b).
+El problema no es tener índices: es darle a un resumen la autoridad de un registro.
+
+CAMBIO PROPUESTO (NO aplicado — es arquitectura, §7): cuatro reglas.
+  R1. Declaración de fuente obligatoria por bloque (FUENTE: X / FUENTE ÚNICA).
+  R2. Un índice puede APUNTAR a estado mutable, nunca RESUMIRLO. Un conteo es
+      estado derivado: se recalcula al leer, no se escribe. (Ataja casos 1 y 4.)
+  R3. Toda nota de divergencia declara su condición de borrado — generalizar el
+      mecanismo de sunset de las excepciones a las notas explicativas. (Caso 3.)
+  R4. Generalizar a todos los índices la REGLA DE INTEGRIDAD DE CITA que hoy solo
+      tiene PORTFOLIO_REGISTRY — verificar contra la fuente antes de actuar.
+      Probada: nació de Cursor Café INC-1 y en ESTUDIO DE TATUAJE agarró sola una
+      3ra fila fantasma. Falta extenderla.
+Recomendación: R2 y R3 primero (atajan 3 de 4 casos, costo de escritura ~0).
+
+APLICADO HOY (corrección de hechos falsos verificados, no arquitectura):
+  - Docs/SYSTEM FILE MAP.txt — NOTA DE PATHS corregida (afirmaba lo opuesto a
+    SKILL.md §3), con la historia de por qué quedó invertida.
+  - Docs/M14_PROPOSAL_LOG.txt — VINCA-P5 marcada Ya aplicada (verificada contra
+    SKILL.md §3, que ya trae el prefijo completo).
+  - Docs/M14_PROPOSAL_LOG.txt — REF de Estudio Contable: cita corregida de
+    "Runa-P5" a "VINCA-P5".
+
+NO se tocó: los índices en sí (su existencia tiene valor real — se consultan rápido
+y evitan cargar módulos), ni el CHANGELOG histórico (las entradas viejas describen
+el estado de su momento; reescribirlas borra la evidencia). No se propone
+automatizar la verificación: no hay CI donde correrla y construirla antes de que
+duela viola la regla de reps del North Star (M13.0A).
+
+SEVERIDAD: Media. Sin daño irreversible ni impacto de seguridad, pero frecuencia
+alta (4 en un día sin buscarlas), modo de falla SILENCIOSO —la característica que
+el sistema trata como agravante en todos lados (verde falso de M8.6, fila fantasma,
+"0 revisados")— y costo ya materializado dos veces hoy: un gate que fallaba por
+construcción y trabajo casi duplicado sobre fixes ya aplicados.
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (3) — RUNA: LOG SINCRONIZADO + P4/P11 APLICADAS — M8.5 v2.1, B4 v1.1
+-------------------------------------------------------------------------------
+Origen: pedido del humano tras detectarse que el resumen de PENDIENTES DE
+PROCESAR del M14_PROPOSAL_LOG contradecía a la tabla de filas de la propia
+corrida RUNA. Dos partes: sincronizar el log primero, aplicar después.
+
+PARTE 1 — SINCRONIZACIÓN DEL LOG (higiene, sin cambio de sistema).
+QUÉ PASÓ: el resumen decía "quedan P1, P4, P5, P6, P8, P9, P10, P11 pendientes"
+(ocho) cuando las filas ya marcaban P1, P8 y P9 como Aplicada. Claude Code
+reportó los 8 al arrancar la sesión, copiando el resumen sin verificar las filas.
+Al verificar fila por fila: 5. Al verificar CONTRA LOS ARCHIVOS: 3 reales.
+CAUSA RAÍZ: el resumen duplica el estado que ya vive en las filas. Un índice que
+duplica estado se desincroniza y después se lee como fuente — misma clase que la
+fila fantasma del PORTFOLIO_REGISTRY (Cursor Café INC-1), donde el índice
+afirmaba algo que la fuente no respaldaba.
+CAMBIO: filas P6, P10, P5, P4, P11 actualizadas con su estado real y la evidencia
+de verificación; resumen reescrito con la historia de la desincronización y una
+LECCIÓN DE MANTENIMIENTO explícita (verificar fila por fila antes de reportar
+pendientes; verificar contra el archivo antes de aplicar). runa-web queda con
+CERO pendientes.
+SEVERIDAD: Baja (higiene de registro), pero con consecuencia real: se estuvo a
+punto de re-aplicar dos fixes ya aplicados.
+
+PARTE 2 — HALLAZGO AL APLICAR: DOS PROPUESTAS YA ESTABAN HECHAS.
+- P6 (M10.4, GATE M10-E ≥60→≥50): verificada YA APLICADA en el archivo de M10,
+  con la nota del cambio incluida ("antes decía ≥60, un umbral que no correspondía
+  a ninguna banda nombrada"). Fila stale.
+- P5 (M10.0, relación árbol ↔ gobernanza declarada por el humano): verificada YA
+  APLICADA — la sección "RELACIÓN CON GOBERNANZA DECLARADA POR EL HUMANO (§5.1)"
+  existe y cubre las dos direcciones (árbol más alto que lo declarado = reportar
+  divergencia sin resolver solo, porque está atado a riesgo real; árbol más bajo
+  = manda el humano, correr de más nunca es falla de seguridad). No se duplicó.
+- P10 (M8.6, método de verificación): SUPERADA por M8.6 v2.8 — su causa raíz se
+  diagnosticó en la corrida ESTUDIO DE TATUAJE (panel offscreen, rAF=0). Cerrada.
+
+PARTE 3 — FIXES REALMENTE APLICADOS.
+
+Fix P4 (Baja) — M8.5 v2→v2.1, nueva sección SIN STAGING REAL — TARGETS DECLARADOS.
+QUÉ PASÓ: M8.5 exige medir CWV sobre un build desplegado en staging, pero en
+proyectos sin staging real (práctica, deploy que es del humano y no ocurrió,
+cliente que no provee entorno) los CWV no son medibles y el módulo no tenía qué
+hacer con eso.
+CAUSA RAÍZ: los umbrales estaban escritos como criterio de pase asumiendo entorno
+disponible; sin entorno, la opción por defecto es declarar PASA sobre un número
+inexistente o inventar una estimación — las dos malas.
+CAMBIO: no se declara PASA sobre CWV no medidos ni se estima un número. Se marca
+la métrica NO MEDIDA con razón concreta; se declara el target comprometido más el
+presupuesto de recursos que lo sostiene (peso de página, peso por imagen, fuentes,
+JS de cliente — todo medible en local); se registran los proxies locales corridos
+como evidencia parcial real; y la medición de CWV queda como BLOQUEANTE DIFERIDO
+de GATE 4. Mismo criterio que ECOS-P2 para cross-browser con un solo motor: PASA
+CON AJUSTES + bloqueante explícito, nunca un PASA falso.
+SEVERIDAD: Baja.
+
+Fix P11 (Baja) — B4 v1→v1.1, DECLARACIÓN DE ALCANCE DEL QA DE SEGURIDAD.
+QUÉ PASÓ: la distinción entre QA de seguridad POR DISEÑO y pentest real sobre un
+backend desplegado se declaró correctamente en Runa, pero por memoria de quien
+escribía el output. Dependía de que alguien se acordara.
+CAUSA RAÍZ: un ítem que depende de acordarse no es un control. Misma lógica que
+Cursor Café INC-5 (escribir el uso correcto de un token en un comentario no impide
+usarlo mal 30 líneas abajo si nada lo VERIFICA).
+CAMBIO: declaración de alcance OBLIGATORIA y textual al cierre de todo veredicto
+de seguridad — qué está cubierto (ítems ejecutables + entorno contra el que se
+corrió), qué NO (fuerza bruta y rate limiting bajo carga, escalada de privilegios
+encadenada, supply chain en runtime, superficie del proveedor, ataques dedicados)
+y qué significa pasar: "los controles verificados pasaron", nunca "el sistema es
+seguro" (el QA prueba presencia de controles, no ausencia de fallas). FAIL
+CONDITIONS propias, incluida omitir el entorno — un QA corrido en local no dice
+nada sobre headers, TLS ni configuración del host, y esos ítems quedan NO CUMPLE,
+no "cumplen por analogía". Para datos NIVEL 3-4 no sustituye la revisión externa:
+la hace explícitamente necesaria al nombrar lo que queda afuera.
+CORRECCIÓN DE ALCANCE: la fila decía "M8.6 / B4", pero M8.6 (v2.13) no tiene
+ninguna sección de seguridad — es fidelidad creativa y drift genérico; GATE 3
+delega seguridad en B4. Se aplicó solo en B4; no se metió una declaración de
+seguridad en un módulo que no emite veredictos de seguridad.
+SEVERIDAD: Baja.
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (2) — SILVANA DATO (stress test M13): H-1/H-5 APLICADOS — M13.3 v1.1, M13.4 v1.1
+-------------------------------------------------------------------------------
+Origen: stress test de la capa de negocio (M13.1→M13.4 completo) contra un caso
+con datos reales de Sistema Clientes (fila sd-001), corrido como roleplay de
+venta sin contacto real. Expuso 4 hallazgos + 1 observación; el humano aprobó
+aplicar dos de ellos hoy (H-1 y H-5) y dejar H-2 y H-3 pendientes de revisión
+más despaciosa. Los dos aplicados van juntos en esta entrada porque tocan la
+misma pregunta: QUÉ CUENTA como caso de arranque y qué no.
+
+Fix H-1 (Media) — M13.3 v1→v1.1 + M13.4 v1→v1.1.
+QUÉ PASÓ: el cierre correcto de un caso de fase arranque usa la PRUEBA DE
+COMPROMISO de 3 partes (acuerdo firmado con derechos de portfolio + deadline de
+materiales + seña simbólica) para satisfacer GATE 13.4-A. Pero GATE 13.3-B exige
+"50-60% al inicio", y una seña simbólica (~10-13% del total en el caso Silvana:
+USD 150-200 sobre USD 1.500) no lo es. El cierre de intercambio —que es EL modelo
+de la fase arranque— fallaba 13.3-B por construcción. En la corrida quedó marcado
+"NO CUMPLE estricto" sin que ningún módulo resolviera la contradicción.
+CAUSA RAÍZ: la cláusula de fase arranque se escribió como excepción SOLO a
+13.4-A ("arrancar trabajo"), sin advertir que 13.3-B impone su propio piso de
+adelanto sobre el mismo hecho económico. Los dos gates viven en módulos distintos
+(M13.3 y M13.4) y la excepción no cruzó ese límite.
+CAMBIO: la cláusula ahora declara ALCANCE explícito — satisface 13.4-A y 13.3-B
+EN SIMULTÁNEO. Durante el arranque, 13.3-B se RELAJA junto con 13.4-A, no se
+ignora: la prueba de compromiso es la condición de "adelanto" que sustituye al
+50-60% en efectivo, siendo la seña simbólica el piso mínimo de compromiso y no el
+pago real que el modelo de intercambio explícitamente todavía no busca. Aplicado
+en los dos lados del gate: excepción agregada a GATE 13.3-B (M13.3) con remisión
+cruzada a M13.4 como fuente única, más nota en ESTRUCTURA DE PAGOS para que el
+cuerpo del módulo no contradiga a su propio gate; y ALCANCE + "si los tres NO se
+cumplen, NI 13.4-A NI 13.3-B se dan por satisfechos" en M13.4. Lo que NO cambió:
+el deploy sigue sin ocurrir hasta el pago final confirmado (13.4-C).
+SEVERIDAD: Media.
+
+Fix H-5 (Media) — M13.4 v1→v1.1, nueva sección DEFINICIÓN DEL CONTADOR DE SUNSET.
+QUÉ PASÓ: para verificar si GATE 13.4-A aplicaba al caso hubo que determinar
+cuántos casos de portfolio reales cerró Webbing. La cláusula decía "hasta cerrar
+los primeros 3 casos de portfolio" sin definir que los cierres de práctica no
+cuentan — el humano tuvo que aclararlo A MANO, por fuera del sistema, durante la
+propia corrida.
+CAUSA RAÍZ: la cláusula se escribió pensando solo en cierres reales y no anticipó
+que el sistema se ejercita en modo práctica mucho más seguido que en modo real
+(SAVIA, Calibre, Vera, Cursor Café, Estudio de Tatuaje...). Si un cierre simulado
+incrementara el contador, la cláusula vencería sin que Webbing hubiera cerrado un
+solo cliente real — apagando exactamente la excepción que existe para conseguir
+los primeros reales.
+CAMBIO: definición obligatoria y no interpretable del contador. Incrementa SOLO
+con las tres juntas: cliente REAL con acuerdo firmado + GATE 4 real cruzado
+(deploy aprobado por el humano) + derechos de portfolio ejercidos. Práctica,
+clientes ficticios, stress tests y simulaciones NUNCA cuentan, sin importar cuán
+completo haya sido el proceso; SAVIA, Calibre y la simulación de Silvana Dato
+quedan nombrados explícitamente como no-computables. Un cliente real sin GATE 4
+tampoco cuenta todavía (Move On al 2026-07-19). Se agregó además que el contador
+se lleva POR ESCRITO, con lista nominal y fecha de GATE 4 — no de memoria ni por
+aclaración en el chat, que fue el modo de falla real. Estado declarado: 0 de 3,
+cláusula ACTIVA.
+SEVERIDAD: Media.
+
+Pendientes de revisión del humano (NO aplicados, por decisión explícita de hoy):
+- H-2 (Media-Alta, M13.1): el Qualification Score penaliza "Claridad del
+  problema" en outbound frío por construcción — el prospecto frío no articuló
+  dolor porque nadie se lo mostró todavía. Con M18 como front del embudo, el
+  prospecto ideal frío arranca en el piso y es empujado hacia "condiciones/
+  declinar" (Silvana: 17/25, con Claridad=2). El scoring asume inbound.
+- H-3 (Media, Capture_Baseline_Template): el baseline "desde cero" no distingue
+  "negocio sin demanda" de "demanda alta no atribuida" (Silvana: 1067 reseñas e
+  IG activo, con 0 medido). Riesgo de adjudicar al sitio la demanda que ya traía
+  Instagram, inflando la prueba de valor que calibra precios (M13.0A señal 2).
+- OBS (Baja, M13.3): el combo de objeción "más barato Y con más scope" no está
+  nombrado como patrón; se resolvió por criterio (devolver la contradicción).
+  Registrado; formalizar si reaparece.
+
+DIVERGENCIA DETECTADA Y RECONCILIADA (mismo día): al aplicar H-1/H-5 quedaron dos
+archivos describiendo la cláusula con su alcance viejo (solo 13.4-A) y el sunset
+sin la definición de "real". Reportados primero (SKILL.md §13) y sincronizados a
+continuación, por instrucción del humano:
+  - Docs/GATE_REGISTRY.txt — entradas GATE 13.4-A y GATE 13.3-B actualizadas:
+    alcance compuesto (los dos gates juntos), regla "los tres o ninguno", sunset
+    solo con casos REALES, y M13.4 declarado FUENTE ÚNICA. Resumen + remisión,
+    sin duplicar el texto de la cláusula (mismo criterio que el registro ya usa
+    para otros gates compuestos). Se deja explícito que 13.4-C NO se relaja.
+  - NIVELES/NEGOCIO/M13_0_Business_Layer_Overview_v1.txt — NOTA de excepción
+    temporal actualizada: nombra los dos gates y resume la DEFINICIÓN DEL
+    CONTADOR DE SUNSET, remitiendo a M13.4 para el texto completo.
+Estado final: las cuatro ubicaciones que mencionan la cláusula (M13.4 fuente,
+M13.3 cita, GATE_REGISTRY resumen, M13.0 nota) quedan consistentes entre sí.
+
+--------------------------------------------------------------------------------
+
+2026-07-19 (1) — CALIBRE (gmao-web): H-1/H-2/H-3 PROCESADOS — M8.6 v2.13, B0 v1.2, B3-SEC-5
+-------------------------------------------------------------------------------
+Origen: pedido del humano ("hacelos vos los fixes") sobre los 3 asuntos de M14
+sin cerrar que Claude Code reportó al arrancar la sesión de hoy (§14 paso 2).
+De los 3 (runa-web, moveon-web-v2, gmao-web), este bloque cierra gmao-web
+(Calibre, stress test del sábado 07-18) — H-1, H-2 y H-3 aplicados; H-4
+queda marcado aparte para decisión del humano (es rediseo de fórmula, no fix
+mecánico); H-5 ya estaba correctamente retractado por Claude Code, sin acción
+aquí más allá de lo ya resuelto en la entrada 2026-07-17 (6).
+
+Fix H-1 (Alta) — M8.6 v2.12→v2.13, nueva sección VERIFICACIÓN DE
+HIDRATACIÓN/INTERACTIVIDAD FUNCIONAL + B3-SEC-5 (excepción de entorno dev).
+En Calibre, un CSP estricto en dev bloqueaba `eval()` y el cliente de React
+nunca hidrataba — la página pasó TODOS los chequeos estáticos de M8.6
+(contraste, 13 tells, relaciones espaciales) con el JS completamente muerto;
+el formulario caía a submit nativo GET en vez de llamar a su API. Generaliza
+la Verificación de Interacción Real de v2.11 (que solo cubría la FIRMA) a
+CUALQUIER interactividad de cliente crítica (formulario principal, CTA
+primario): disparar un evento real y confirmar en la RED que llamó a la API
+esperada, no un GET nativo. B3-SEC-5 documenta la causa técnica (CSP de
+prod aplicado sin la excepción `'unsafe-eval'` que Next dev necesita para
+HMR). Mismo patrón raíz que P9 de SAVIA (existe ≠ se experimenta), esta vez
+generalizado de la firma a toda la capa de interactividad.
+
+Fix H-2 (Baja-Media) + H-3 (Baja) — B0 v1.1→v1.2, PASO 0 ampliado. Los dos
+tocaban la misma ambigüedad del PASO 0 agregado ayer (H-1 SAVIA), así que se
+resolvieron juntos:
+  - H-3: PASO 0 solo contemplaba "project nuevo y dedicado" para práctica;
+    Calibre reusó un project de práctica existente con schema dedicado
+    (`calibre`) por criterio, sin regla escrita que lo respaldara. Agregada
+    opción (b) explícita: schema dedicado dentro de un project de PRÁCTICA
+    ya existente (nunca de cliente real) es válido cuando crear un project
+    nuevo tiene costo evitable.
+  - H-2: al usar (b) con Supabase, supabase-js/PostgREST solo expone el
+    schema `public` por default — las RPC contra un schema aislado fallan
+    desde la app aunque el SQL directo funcione. Agregada advertencia: si se
+    elige (b), decidir ACÁ cómo se expone (config db-schemas o wrappers
+    security-definer en `public`), no descubrirlo en el build.
+
+Pendiente de decisión del humano (NO aplicado):
+- H-4 (Baja, CDL-4): 3ra ocurrencia de OBS-A (Cursor Café 12.44, Estudio de
+  Tatuaje 12.44, Calibre 12.33) — el propio OBS-A decía que un 3er caso así
+  confirma que es el instrumento, no azar. El bonus aditivo de CDL-4 satura
+  el techo de 10 siempre en proyectos competentes y el CRUDO también se
+  agrupa estrecho (12.3-12.5) — esto es un REDISEÑO de la fórmula de bonus
+  (técho propio, multiplicativo, o métrica alternativa para comparar
+  proyectos fuertes), no un fix mecánico de sincronización como los otros
+  tres. Se marca para decisión específica del humano, mismo criterio que se
+  aplicó con H-5 de SAVIA (fix de fórmula matemática real) — pero ahí había
+  un bug objetivo verificable con cálculo; acá es una elección de diseño
+  entre varias alternativas válidas.
+
+Docs/M14_PROPOSAL_LOG.txt: bloque CORRIDA — CALIBRE agregado (P1-P3
+Aplicadas, P4 pendiente de aprobación, H-5 retirado ya registrado, 7 wins).
+Entrada PENDIENTES DE PROCESAR de gmao-web actualizada a PROCESADO.
+
+Qué NO cambia: no se tocó CDL-4 (H-4 queda pendiente). No se reabrió nada de
+la entrada 2026-07-17 (6) sobre M8.6 v2.12 — esa corrección ya estaba bien
+cerrada, este bloque es trabajo nuevo sobre H-1/H-2/H-3, no una revisita.
+
+--------------------------------------------------------------------------------
+
+2026-07-17 (6) — M8.6: TELLS "12"→"13" (5 lugares) + NOTA HUÉRFANA DE v2.12 CORREGIDA
+-------------------------------------------------------------------------------
+Origen: verificación directa contra Frontend_Craft_Standard.md §4 al revisar
+un reporte de Claude Code que usaba "13 tells" mientras las instrucciones
+(mías) y el propio M8.6 decían "12". El checklist real tiene 13 (el #13,
+blanco/negro puro, conecta con §2.4.1) — Claude Code tenía razón, yo no.
+Corregido en 5 lugares de M8.6 donde yo mismo había escrito "12" el
+2026-07-17 entrada (3): intro de CAPA 2, ejemplo "2/12"→"2/13", TESTS, FAIL
+CONDITIONS, y una quinta mención en el mismo párrafo que las primeras 4
+ediciones no alcanzaron a matchear.
+
+Segundo hallazgo, más importante: M8.6 ya estaba en v2.12 con una sección
+headless-Playwright (método b de captura de imagen) que Claude Code había
+escrito citando un diagnóstico de H-5 ("Chrome real no alcanza el server en
+sandbox") — pero Claude Code después investigó esa misma sesión, encontró
+con `curl` que el server simplemente estaba caído (no un problema de
+topología de red), retractó H-5 como FALSE CERTAINTY (M11.8) en
+INCIDENTES_M14.md y M14_PROPOSAL_LOG.txt, y dijo explícitamente "la
+propuesta de 3ª vía headless queda sin efecto". Pero el archivo M8.6 real
+—verificado leyéndolo, no confiando en el resumen— nunca se revirtió: la
+sección seguía viva, con la historia falsa todavía citada como motivo.
+
+Resolución: el MÉTODO en sí (Playwright headless para entornos sin conector
+al navegador del humano) es válido por mérito propio — esos entornos existen
+realmente, independientemente de si ESTE incidente puntual fue uno de ellos.
+Se mantiene la sección, se reescribe la justificación para no citar el
+diagnóstico falso (ahora dice simplemente "entorno sin acceso a ese Chrome",
+sin la historia de Calibre), y se agrega una NOTA DE PROCESO transparente
+explicando que nació de un diagnóstico incorrecto pero se sostiene solo. Sin
+esto, quien leyera M8.6 después vs. quien leyera INCIDENTES_M14.md habría
+visto dos versiones contradictorias de la misma historia.
+
+Bonus: la fecha de esa sección decía "2026-07-18" — mismo error de fecha de
+todo el sprint, corregido a 17 en la nota nueva.
+
+Severidad: Media — no es un bug de lógica del sistema, es un caso real de
+"la documentación del cambio no se revirtió junto con la decisión de
+retractarlo", que es exactamente la clase de desincronización que este
+CHANGELOG existe para cazar. Casi pasa desapercibido por confiar en el
+resumen de Claude Code en vez de leer el archivo real antes de aceptar el
+reporte de auditoría mobile/Lectura en Fría que lo acompañaba.
+
+Qué NO cambia: el resto del reporte de Claude Code (mobile PASA con medición
+real, Lectura en Fría con frase específica, Generic Drift LEVE con los 13
+tells uno por uno) se acepta tal cual — bien evidenciado, sin objeciones.
+
+--------------------------------------------------------------------------------
+
+2026-07-17 (5) — M10.7 v2.2→v2.3: REFERENCIA MEZCLADA ("M9.7 Signature Guardian Doc")
+-------------------------------------------------------------------------------
+Origen: auditoría preventiva de B4/B6 pedida por el humano ("sigamos con los
+fixes", sin incidente puntual que lo motivara — a diferencia de los hallazgos
+anteriores de hoy). Se verificaron TODAS las referencias cruzadas numéricas de
+B4 y B6 contra B1/B3/B5 reales (decenas de citas: B1-A4, B1-P1 a P9, B1-D1 a
+D6, B3-SEC-1 a 5, B3-EMAIL-1, B3-INT-1/2, B3-JOB-2, B3-FILE, B3-OBS-1 a 3,
+B3-LIFE-1/3, B5-PERF-3/4/5/6/7/8/10/11/12) — todas resuelven correcto, ninguna
+rota. Al ampliar la verificación a M10 (que también cita M9.7/M9.8), apareció
+una sí: el Launch Checklist de M10.7 decía "Client Handoff entregado (M9.7
+Signature Guardian Doc)" — pero el Signature Guardian Doc vive en M9.8
+Sección 6 (con su propio GATE 6A que exige entregarlo), no en M9.7. M9.7 tiene
+su PROPIO documento de handoff (patrón 6, "Client Handoff", 1-2 páginas de qué
+puede/no puede editar el cliente) — son dos documentos distintos con propósito
+distinto, fusionados en una sola cita con el módulo equivocado en el segundo.
+
+Fix: el ítem del checklist ahora cita los dos documentos por separado, con su
+módulo correcto cada uno.
+
+Severidad: Baja — misma clase que M7/M10.3 de la mañana (referencia de nombre/
+módulo rota, no lógica). No bloquea ningún gate; solo manda a buscar un
+documento al archivo equivocado si se sigue la cita literal.
+
+Qué NO se encontró: ninguna referencia rota en B1/B3/B5 pese a ser los módulos
+con más densidad de citas numéricas de todo el sistema (decenas, ver arriba) —
+a diferencia de los hallazgos de la mañana, esta capa estaba bien mantenida.
+Tampoco se encontró nada más en B4/B6 mismos: ambos módulos son extensos,
+bien cruzados entre sí, y sin contradicción interna detectada.
+
+--------------------------------------------------------------------------------
+
+2026-07-17 (4) — M10.7 v2.1→v2.2: CHECKLIST DE LANZAMIENTO SIN ÍTEM DE COMPLIANCE LEGAL
+-------------------------------------------------------------------------------
+Origen: pregunta directa del humano ("¿algún hueco más con esto de la entrega
+del primer producto?") tras cerrar el fix de fotos en GATE 4. Verificado contra
+el Launch Checklist real de M10.7 (no de memoria): la sección Contenido tiene 8
+ítems sólidos (textos finales, formularios probados, links, analytics con evento
+de prueba, hasta un ítem que exige recorrer el sitio deployado como usuario
+real) — pero ninguno sobre compliance legal (privacy policy, términos,
+disclaimers obligatorios por rubro).
+
+Evidencia concreta, no hipotética: el footer de SAVIA tiene "Registro ANMAT en
+trámite — este sitio no afirma propiedades terapéuticas" — agregado por buen
+criterio de Claude Code en esa corrida específica, no porque el sistema lo
+exigiera. SKILL.md §7 ya dice que validar compliance en datos NIVEL 4 (salud/
+financiero/legal) es decisión SOLO del humano — pero esa regla vive en la
+sección de autoridad (QUIÉN decide), sin un gate en el checklist de lanzamiento
+que confirme que la decisión efectivamente se tomó antes de publicar.
+
+Fix: nuevo ítem en la sección Contenido del Launch Checklist de M10.7 —
+requisito legal/compliance del rubro presente y visible si aplica (disclaimer,
+privacy policy, términos, consentimiento de datos), con N/A explícito si el
+rubro no lo requiere (nunca en blanco). Mismo peso bloqueante que el resto del
+checklist (GATE FINAL 1: "¿El launch checklist está completo sin ítems en
+FALLA?").
+
+Severidad: el propio humano lo marcó como menos evidente que el de fotos (sin
+un segundo caso histórico que lo confirme como patrón recurrente) — se le
+preguntó explícitamente antes de aplicar, a diferencia de los fixes de fotos/
+M8.6 de la entrada anterior que venían ya decididos.
+
+Qué NO cambia: no se tocó GATE 4 ni SKILL.md §7 — la autoridad de quién decide
+sigue igual; el cambio es exclusivamente el checklist que confirma que se
+ejerció.
+
+--------------------------------------------------------------------------------
+
+2026-07-17 (3) — M8.6 v2.10→v2.11 (3 fixes decididos por el humano) + GATE 4 CON FOTOS EXPLÍCITAS
+-------------------------------------------------------------------------------
+Origen: pedido explícito del humano tras auditar SAVIA ("para que Webbing no me
+entregue sitios como el primero y me entregue más cosas como el segundo"). Los
+dos hallazgos nuevos de la entrada 2026-07-17 (2) (P9: firma sin trigger real;
+P10: checklist de tells nunca corrido explícito) apuntaban a la misma causa raíz
+de fondo: M8.6 verifica que algo EXISTE (propiedades del DOM/CSS) pero no que se
+EXPERIMENTA, y la capa de tells de IA convive con la de mercado sin que nada
+fuerce correr las dos. Se acordó con el humano cerrar el hueco en tres partes,
+mas una cuarta que el humano pidió aparte: fotos como condición explícita de
+GATE 4, no solo heredada de M8.6/GATE 3.
+
+Fix 1 — M8.6, CAPA 2 (tells de IA): pasa de "si acumula 3+ tells…" implícito a
+reporte OBLIGATORIO de los 12 tells uno por uno (PRESENTE/AUSENTE + evidencia),
+mismo tratamiento que la cobertura de contraste (v2.7) y relaciones espaciales
+(v2.9). Causa raíz confirmada: la capa existía desde 2026-07-04 pero en la
+práctica solo se corría la Capa 1 (clichés de M5.5, mercado) — SAVIA pasó con
+cero clichés de categoría pero varios tells de IA sin reportar (hero simétrico,
+cards uniformes, acento tímido).
+
+Fix 2 — M8.6, nueva sección VERIFICACIÓN DE INTERACCIÓN REAL: cualquier firma
+interactiva documentada (hover/click/scroll/flip) se prueba con el evento REAL en
+navegador real, nunca forzando el estado por JS. Exige affordance visible en
+reposo y confirma que prefers-reduced-motion no CONGELA el contenido (como le
+pasó a "El Giro" de SAVIA: `!important` dejaba la tarjeta trabada de frente).
+Diferencia de fondo nombrada explícita: verificar que algo EXISTE en código no es
+lo mismo que verificar que se EXPERIMENTA — misma clase de hueco que la
+Verificación de Relaciones Espaciales de v2.9.
+
+Fix 3 — M8.6, nueva sección LECTURA EN FRÍO: paso obligatorio antes del
+veredicto final cuando ambas capas de Generic Drift dan verde — mirar la captura
+real SIN releer la spec de M4/M5 primero y nombrar en una frase qué es
+memorable. Ataca el sesgo estructural de que verificar fidelidad contra la
+propia spec es autoconfirmatorio. Si no sale nada nombrable: PASA CON AJUSTES
+mínimo, aunque las dos capas cuantificadas hayan dado verde.
+
+Fix 4 — SKILL.md GATE 4 + Docs/GATE_REGISTRY.txt (pedido aparte del humano,
+mismo espíritu): "fotos reales confirmadas" pasa a ser condición PROPIA y
+EXPLÍCITA de GATE 4 (deploy), no solo heredada implícitamente del veredicto de
+M8.6 en GATE 3. Precedente citado en la condición misma: CUORE y Vera
+Arquitectura pasaron GATE 3 con bloques de color y nadie lo agarró hasta que un
+humano miró el deploy — dos veces. Con esto queda una segunda verificación
+independiente, en el punto más cercano posible a la publicación real, con el
+mismo peso que la seguridad de B4 (no se negocia por el resto del checklist en
+verde).
+
+TESTS y FAIL CONDITIONS de M8.6 actualizados para los tres fixes (no quedan solo
+documentados en el cuerpo). GATE_REGISTRY.txt sincronizado con el nuevo GATE 4.
+
+Qué NO cambia: los umbrales numéricos de Generic Drift (2+ clíchés / 3+ tells =
+CRÍTICO) siguen igual — el fix es de EJECUCIÓN del checklist, no de criterio. No
+se tocó GATE 1/2/3 más allá de lo ya hecho hoy temprano.
+
+--------------------------------------------------------------------------------
+
+2026-07-17 (2) — SAVIA: LOS 4 FIXES PENDIENTES (H-1, H-3, H-4, H-6) — ENFOQUE DECIDIDO POR EL HUMANO
+-------------------------------------------------------------------------------
+Origen: continuación de la entrada (1) de hoy. El humano decidió el enfoque de
+los 4 hallazgos que habían quedado "pendientes de decisión" y los pasó para
+aplicar (no re-decidir). Se aplicaron 3 fixes (H-1, H-3, H-4) y se verificó 1
+sin fix nuevo (H-6). Cada uno re-derivado leyendo el archivo real antes de
+tocar, mismo protocolo que la entrada (1).
+
+QUÉ PASÓ / CAUSA RAÍZ / CAMBIO / SEVERIDAD por hallazgo:
+
+Fix H-1 (Media, B0 v1→v1.1) — Aislamiento de infraestructura.
+  QUÉ PASÓ: en la corrida SAVIA casi se usó glow-factor-backend (backend de un
+  cliente REAL) para el ecommerce ficticio; se resolvió ad hoc con un proyecto
+  dedicado, sin regla escrita que lo bloqueara la próxima vez.
+  CAUSA RAÍZ: B0 arrancaba en PASO 1 (clasificar datos) — no tenía ningún paso
+  previo que separara infraestructura de práctica vs. de cliente real. §11
+  (no-contaminación) hablaba de decisiones/memoria, no de la capa física.
+  CAMBIO: nuevo PASO 0 en B0 (AISLAMIENTO DE INFRAESTRUCTURA), antes de cualquier
+  provisioning/conexión: si el proyecto es de práctica, SIEMPRE un backend nuevo y
+  dedicado, nunca conectar al project ID de un cliente real "para testear rápido".
+  Nueva FAIL CONDITION: "conectar un proyecto de práctica a infraestructura de un
+  cliente real ya existente". Es §11 aplicado a la capa física.
+  SEVERIDAD: Media.
+
+Fix H-3 (Media, M0 v3.4→v3.5, §7.1) — Ruta de sourcing por clase de imagen.
+  QUÉ PASÓ: §7.1 exigía "elegir UNA ruta" de sourcing, pero un ecommerce tiene
+  clases de imagen con necesidades opuestas (producto: solo (a)/(d) sirven;
+  atmósfera: cualquiera) — forzar una sola ruta es incorrecto para el arquetipo #1.
+  CAUSA RAÍZ: §7.1 se escribió pensando en sitios de una sola clase de imagen
+  (marketing/marca); no contempló transacción-first, el primer arquetipo #1 del
+  portfolio.
+  CAMBIO: sin rediseñar las rutas (a)-(e). Párrafo nuevo DECISIÓN POR CLASE DE
+  IMAGEN: si el proyecto tiene >1 clase con necesidades distintas (canónico:
+  ecommerce, producto vs. atmósfera), declarar una ruta separada POR CLASE; cada
+  clase sigue eligiendo entre las mismas 5 rutas. Con el ejemplo real de SAVIA.
+  SEVERIDAD: Media.
+
+Fix H-4 (Media, M2 v3→v3.1 + M5 v3.1→v3.2) — Reescribir ejemplos que siembran la
+  colisión VINCA en cosmética.
+  QUÉ PASÓ: el "Caso 2" de M2 (clínica estética) daba de ejemplo Protector+Guía —
+  el par EXACTO de VINCA — y la tabla SEMIÓTICA POR CATEGORÍA de M5 daba, para
+  "Bienestar", verde salvia + tierras + crema cálido — la paleta de VINCA. Los
+  ejemplos internos sembraban activamente la colisión que CDL-5 después caza.
+  CAUSA RAÍZ: los ejemplos pedagógicos son fijos y "correctos en abstracto", pero
+  al ser los únicos ejemplos trabajados funcionan como defaults gravitatorios hacia
+  lo que ya está en el portfolio.
+  CAMBIO: M2 Caso 2 → arquetipo Experto+Estratega (verificado contra
+  PORTFOLIO_REGISTRY.md: Estratega no lo usa ningún cliente; Experto solo SAVIA,
+  práctica, en pareja distinta). NOTA IMPORTANTE: el ejemplo que la instrucción
+  sugería entre paréntesis (Editor+Experto) NO se usó porque "Editor" es el
+  arquetipo PRINCIPAL de Cursor Café (cliente real) — habría fallado la propia
+  verificación cross-registro que la instrucción exigía. M5 "Bienestar" → familia
+  fría (blancos fríos, grises minerales, malva/lavanda desaturado, azul hielo),
+  verificada sin colisión contra el registro. Ambos con nota de por qué no volver
+  al default viejo.
+  SEVERIDAD: Media.
+
+Verificación H-6 (sin fix, NO cerrado limpio) — Deflación de score por efecto de H-5.
+  QUÉ PASÓ: se pidió re-correr el scorecard de CDL-4 v1.1 sobre el caso SAVIA
+  original y confirmar que da ~7.2 en vez de 9.21.
+  RESULTADO: la BASE ponderada corregida da 7.22 (= Σ(score×peso)/Σ(peso) =
+  65/9), que coincide con el ~7.2 que cita la nota de CDL-4. PERO no cierra limpio:
+  7.22 es la BASE, antes de penalizaciones/bonus. El score FINAL del mismo caso,
+  con sus −2 penal y +3 bonus reales, es 8.22. El 9.21 original era un FINAL, así
+  que la comparación apples-to-apples es 9.21→8.22 (final) u 8.21→7.22 (base): la
+  deflación real del fix H-5 es ~1 punto, consistente en ambos niveles, NO los ~2
+  que sugiere "9.21 → 7.2". La nota del ejemplo en CDL-4 compara base-nueva contra
+  final-vieja (mezcla niveles). NO se editó CDL-4 (H-6 era verify-only por
+  instrucción): se reporta para decisión del humano si conviene aclarar base vs.
+  final en esa nota. El desenlace de SAVIA no cambia (CDL-5 RETROCEDIÓ por colisión
+  de portfolio, no por score); pero un lector que confíe en "el fix lo baja a 7.2"
+  concluiría "aceptable/revisar" cuando el final real es 8.22 ("muy fuerte").
+  SEVERIDAD: Media (no bloqueante; precisión de una nota pedagógica).
+
+Nota de fecha: los 4 fixes de esta entrada volvieron a nacer con "2026-07-18"
+(mismo error que la entrada (1)); corregido a 2026-07-17 en los 4 archivos +
+un straggler que la entrada (1) no había alcanzado en CDL-4 (su nota de H-5
+todavía decía 2026-07-18). Hoy es 17.
+
+Con esto, los 8 hallazgos de SAVIA (H-1 a H-8) quedan cerrados: 7 aplicados
+(H-1,H-2,H-3,H-4,H-5,H-7,H-8) + H-6 verificado y reportado sin fix. H-9 sigue
+como observación de tendencia (sin acción).
+
+--------------------------------------------------------------------------------
+
+2026-07-17 (1) — STRESS TEST COMBINADO SAVIA (viernes del cronograma): 4 FIXES VERIFICADOS
+-------------------------------------------------------------------------------
+Origen: primer stress test combinado (deadline + backend + sin fotos + riesgo
+de colisión, las 4 condiciones apiladas a la vez, no una por vez) corrido en
+Claude Code sobre un proyecto ficticio (SAVIA, cosmética natural D2C). GATE 2
+FALLA→RETROCEDER real (6 colisiones de portfolio armadas a propósito, 3
+agarradas por M3/M5, las otras 4 solo por CDL-5) → iteración → GATE 3 PASA
+CON AJUSTES. Reportó 8 hallazgos de sistema (H-1 a H-8) + 1 observación en
+savia-web/_webbing/INCIDENTES_M14.md, ninguno aplicado por Claude Code (no
+son mecánicos como los de ayer — cada uno toca criterio o lógica, requieren
+decisión humana). De los 8, se verificaron independientemente y se aplicaron
+4 (los de mayor severidad/certeza); H-1, H-3, H-4 y H-6 quedan pendientes de
+decisión (ver abajo). Cada fix se re-derivó leyendo el archivo real antes de
+aplicar — no se confió en el diagnóstico del sub-agente sin verificación
+propia.
+
+Fix H-5 (Alta, CDL-4 v1.1, sin bump de número de versión — corrección de
+fórmula) — bug matemático confirmado con cálculo propio: "multiplicar por
+1.5, luego recalcular promedio" nunca especificaba el denominador del
+promedio ponderado. La lectura natural (dividir por la cantidad de
+dimensiones, 7) en vez de por la suma de pesos (9 con 2 Críticas) infla el
+score exactamente cuando una dimensión Crítica puntúa bajo — el caso que el
+peso doble existe para castigar. Ejemplo verificado: 2 Críticas en 5/10 + 5
+Normales en 9/10 da 9.29/10 con la lectura ambigua vs. 7.22/10 con la
+fórmula correcta — la diferencia entre "excelente, avanzar con confianza" y
+"aceptable, revisar". Coincide con el 9.21/10 real que CDL-4 le dio al
+proyecto semi-clonado de SAVIA antes de que CDL-5 lo frenara. Bonus
+encontrado en la misma verificación (no reportado por Claude Code): el
+archivo se contradecía a sí mismo sobre el multiplicador ("1.5" en una
+línea, "doble" tres líneas abajo). Fix: fórmula explícita Σ(score×peso)/
+Σ(peso) con ejemplo numérico completo, multiplicador unificado a "doble
+(2x)" en los dos lugares.
+
+Fix H-8 (Alta, CDL-5 v1.2→v1.3 + M8.6 v2.9→v2.10) — verificado contra el
+header operativo real de CDL-0: CDL-5 corre "pre GATE 2"; M9 (que produce
+los patrones del ítem 10) corre recién en CAPA 4, después de GATE 2. El fix
+del 2026-07-16 (entrada de esa fecha, #4) cableó el ítem 10 al RETROCEDER de
+CDL-5 sin notar que el dato no existe todavía en ese punto del pipeline —
+estructuralmente inejecutable, no un bug de olvido. Fix: CDL-5 documenta el
+ítem 10 pero ya no lo evalúa ahí; la verificación real se agregó a M8.6
+(que corre después de M9.8, con el dato disponible) como nueva condición
+para Signature Fidelity, cruzando contra PORTFOLIO_REGISTRY.md.
+
+Fix H-7 (Media, Docs/PORTFOLIO_REGISTRY.md) — confirmado leyendo la tabla
+real: 8 columnas, sin "dirección fotográfica" ni "combinación de patrones
+M9.1/M9.2" — los dos ítems que CDL-5/M8.6 necesitaban cruzar no tenían dónde
+vivir. Fix: agregadas las dos columnas (marcadas `—` en las 11 filas
+existentes, honesto — no hay dato real que backfillear). M5 pasa a escribir
+la columna de dirección fotográfica al cerrar; M9.8 la de combinación de
+patrones (única columna que se puebla después de GATE 2, documentado como
+excepción). Nuevo HALLAZGO ABIERTO #3 en el registro explicando la relación
+con H-8. Nota de incidente propio: el primer intento de agregar las columnas
+corrompió las filas de SAVIA y Cursor Café (ambas citan el mismo archivo
+fuente dos veces en la misma fila; el match de texto pegó las columnas
+nuevas en el medio en vez del final) — detectado releyendo el archivo
+después del edit, no asumido correcto, y corregido reconstruyendo las dos
+filas completas.
+
+Fix H-2 (Alta, M0 v3.3→v3.4, §7.1 ruta b) — hallazgo del proyecto real
+(6 de 10 fotos de stock candidatas para SAVIA mostraban el producto de una
+marca competidora con logo visible) generalizado a regla de sistema: ni M5
+(criterio estético) ni §7.1 (elegía la ruta de sourcing, no curaba
+imágenes puntuales) tenían un criterio de rechazo por CONTENIDO de marca de
+terceros. Fix: criterio de rechazo explícito agregado a la ruta STOCK
+LICENCIADO — descartar cualquier foto con producto de competidor
+identificable (logo/packaging), verificado imagen por imagen, no asumido
+cubierto por el filtro estético de M5.
+
+Pendientes de decisión del humano (no aplicados, evaluados y explicados por
+qué no se resolvieron solos):
+- H-1 (Media): sin regla de aislamiento de infraestructura entre proyectos
+  de práctica y clientes reales (casi se mezclan datos ficticios en un
+  backend real de cliente; resuelto en sesión con proyecto dedicado, pero
+  ad hoc). Requiere decidir DÓNDE vive esa regla (¿SKILL.md? ¿B0?).
+- H-3 (Media): §7.1 exige UNA ruta de sourcing, pero un ecommerce necesita
+  rutas distintas por clase de imagen (producto vs. atmósfera) — es un
+  rediseño de la estructura de decisión, no un fix mecánico.
+- H-4 (Media): los ejemplos internos de M2 (Caso 2) y M5 (tabla de
+  categoría) empujan hacia la paleta/arquetipo de VINCA para cosmética —
+  el sistema siembra lo que CDL-5 después caza. Reescribir ejemplos
+  pedagógicos es contenido, no lógica; requiere criterio editorial.
+- H-6 (Media): probablemente resuelto como efecto colateral de H-5 (la
+  inflación de score era la causa más probable del headline engañoso
+  "excelente, avanzar con confianza" sobre un proyecto semi-clonado) — no
+  se aplica fix separado; confirmar en el próximo proyecto real que corra
+  CDL-4 con una Crítica baja.
+
+Autocorrección de fecha: los primeros edits de esta entrada usaron
+"2026-07-18" por error (hoy es 17). Corregido en los 4 archivos antes de
+esta entrada del changelog.
+
+--------------------------------------------------------------------------------
+
 2026-07-16 (7) — CIERRE DEL ESCANEO COMPLETO DE WEBBING
 -------------------------------------------------------------------------------
 Alcance cubierto en esta pasada (además de M12→M18 de las entradas previas del
