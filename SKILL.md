@@ -245,7 +245,7 @@ M0 → M1 → M2 → M3 → [GATE 1] → M4 → M4.5 → M5 → M5.5 → [CDL / 
 
 El pipeline canónico completo (M0→M16 + CDL 1-5 + B0-B6 + M8.6) está calibrado para
 proyectos de gobernanza Media/Completa y ticket alto. Correrlo entero sobre un sitio
-local de ticket bajo (el Core de USD 700-1.500 de M13.0A, gobernanza Ligera de M10.0)
+local de ticket bajo (el Core de USD 1.600-3.200 de M13.0A, gobernanza Ligera de M10.0)
 pierde plata: el costo de proceso no entra en el precio. La clase de gobernanza de
 M10.0 (Ligera / Media / Completa), fijada en M13.2, define cuánto aparato se activa.
 
