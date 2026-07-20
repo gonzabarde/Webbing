@@ -1,4 +1,4 @@
-MÓDULO 5 — VISUAL DIRECTION SYSTEM (v3.1 DEEP)
+MÓDULO 5 — VISUAL DIRECTION SYSTEM (v3.2 DEEP)
 ===============================================
 
 OPERATIONAL HEADER
@@ -139,7 +139,11 @@ REGLAS DE PALETA
 
 SEMIÓTICA POR CATEGORÍA
 - Tecnología: azul oscuro, grises fríos, negro, verde o violeta como acento.
-- Bienestar: verdes apagados, tierras, blancos cálidos, rosas polvos.
+- Bienestar: blancos fríos, grises minerales, malva o lavanda desaturado, azul hielo.
+  (Cambiado 2026-07-17, hallazgo H-4 SAVIA: la fórmula anterior — verde salvia +
+  tierras + crema cálido — es la paleta de VINCA, colisión recurrente ya documentada
+  en PORTFOLIO_REGISTRY.md (HALLAZGO ABIERTO). Esta familia fría no colisiona con
+  ningún cliente del registro. No volver a verde-tierra por default en cosmética/wellness.)
 - Lujo: negro, blanco, crema, dorado apagado, vino.
 - Educación: azules medios, verdes accesibles, neutros cálidos.
 - Creatividad: paleta variable con acento atrevido + neutros como base.

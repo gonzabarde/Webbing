@@ -1,4 +1,4 @@
-MÓDULO 0 — DISCOVERY & RESEARCH ENGINE (v3.3 DEEP)
+MÓDULO 0 — DISCOVERY & RESEARCH ENGINE (v3.5 DEEP)
 =================================================
 
 OPERATIONAL HEADER
@@ -240,6 +240,15 @@ PROCESO CLAUDE
      (b) STOCK LICENCIADO: curado a la spec de M5 (grading/estilo/luz)
          cuando exista — banco con licencia comercial clara. Si tiene
          costo, sube a M13.
+         CRITERIO DE RECHAZO ADICIONAL (agregado 2026-07-17, hallazgo H-2
+         del stress test SAVIA): descartar cualquier foto de stock donde
+         aparezca un producto de una marca competidora IDENTIFICABLE —
+         logo visible, packaging reconocible, o cualquier elemento de marca
+         de terceros. No es solo un criterio estético (M5 mira composición/
+         luz/grading); es un criterio de contenido que M5 no cubre: publicar
+         una foto así muestra el producto de un competidor en el sitio del
+         cliente. Revisar cada imagen candidata específicamente por esto,
+         no asumir que pasar el filtro estético de M5 ya lo descarta.
      (c) GENERADO CON IA: a la spec de M5, cuando M5 ya exista o se defina
          en paralelo. Sin costo de licencia de terceros, pero con el mismo
          control de calidad que cualquier imagen (R1/R2 del Craft Standard).
@@ -258,6 +267,18 @@ PROCESO CLAUDE
          se reconvierte en cliente real (pasa a tener GATE 4 real), las
          imágenes de Pinterest se reemplazan primero por (b)/(c)/(d) — es
          bloqueante explícito de ese GATE 4, no opcional.
+     DECISIÓN POR CLASE DE IMAGEN (agregado 2026-07-17, hallazgo H-3 del
+     stress test SAVIA): "elegir UNA ruta" vale cuando el proyecto tiene una
+     sola clase de imagen. Si el proyecto tiene MÁS DE UNA CLASE con
+     necesidades de sourcing distintas — el caso canónico es ecommerce: fotos
+     de PRODUCTO (el SKU real que el cliente recibe) vs. fotos de ATMÓSFERA/
+     lifestyle/marca — declarar una ruta separada POR CLASE, no una sola para
+     todo el proyecto. Cada clase sigue eligiendo entre las mismas cinco rutas
+     (a)-(e); lo que cambia es que la decisión se toma por clase, no una vez
+     para todo. Ejemplo real (SAVIA): producto → (d) fotógrafo (única honesta:
+     (b) no tiene el SKU en ningún banco y (c) inventaría un frasco que el
+     cliente no recibe = publicidad engañosa); atmósfera → (b) stock licenciado
+     curado a la spec de M5. Registrar responsable y fecha por CADA clase.
      NUNCA válido para un cliente real (rutas a-d siguen firmes): extraer
      archivos directamente
      de Pinterest, Google Images, redes sociales de terceros o cualquier

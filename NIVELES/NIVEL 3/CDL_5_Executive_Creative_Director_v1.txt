@@ -1,4 +1,4 @@
-CDL-5 — EXECUTIVE CREATIVE DIRECTOR (v1.2)
+CDL-5 — EXECUTIVE CREATIVE DIRECTOR (v1.3)
 ==========================================
 
 OBJETIVO
@@ -162,17 +162,24 @@ RETROCEDER
 - La Verificación de Diferenciación de Portfolio encontró una colisión con otro
   cliente (categoría mental/positioning, arquetipo/voz, tipografía, paleta,
   nombre de concepto, gesto de firma, esqueleto/orden de secciones,
-  dirección fotográfica, descriptor de motion, o combinación de patrones
-  M9.1/M9.2) — automático, sin importar el resto del análisis. Destino
-  según el ítem que colisiona: categoría mental → M1, arquetipo/voz → M2,
-  tipografía → M3, concepto → M4, paleta/fotografía/motion → M5, firma →
-  M5/M9.8, esqueleto → CDL-1 (IA Spec), patrones M9.1/M9.2 → M9.
+  dirección fotográfica, o descriptor de motion) — automático, sin importar
+  el resto del análisis. Destino según el ítem que colisiona: categoría
+  mental → M1, arquetipo/voz → M2, tipografía → M3, concepto → M4, paleta/
+  fotografía/motion → M5, firma → M5/M9.8, esqueleto → CDL-1 (IA Spec).
+
+NOTA — ítem 10 (combinación de patrones M9.1/M9.2), agregado al
+cuerpo de la Verificación el 2026-07-14: CDL-5 documenta este ítem pero NO
+lo evalúa acá — corre "pre GATE 2" (CDL-0), antes de que M9 exista. Es
+ESTRUCTURALMENTE inejecutable en este paso. La verificación real corre en
+M8.6 (después de M9.8, con el dato ya disponible), contra la columna
+"Combinación de patrones" de PORTFOLIO_REGISTRY.md. Ver HALLAZGO ABIERTO #3
+de ese registro (bug encontrado y corregido: stress test SAVIA, 2026-07-17).
 
 RETROCEDER requiere destino obligatorio:
 "Retroceder a [módulo específico]: [razón en una línea]."
 Módulos posibles: M0 Discovery / M1 Positioning / M2 Brand Translation /
 M3 Typography / M4 Concept Generation / M4.5 Perception / M5 Visual
-Direction / M9 Technical Pattern Library / M9.8 Signature System / CDL-1 / CDL-2
+Direction / M9.8 Signature System / CDL-1 / CDL-2
 
 EXECUTIVE OUTPUT
 ----------------
@@ -227,8 +234,8 @@ Si CDL-3 y CDL-4 discrepan, aplicá la Regla de Conflicto:
 Ejecutá la Verificación de Diferenciación de Portfolio: categoría mental/
   positioning, arquetipo/voz de marca, tipografía, paleta, nombre de
   concepto, gesto de firma, esqueleto/orden de secciones, dirección
-  fotográfica, descriptor de motion, y combinación de patrones M9.1/M9.2,
-  contra los builds/documentos reales
+  fotográfica y descriptor de motion, contra los builds/documentos reales
+  (el ítem 10, combinación de patrones M9.1/M9.2, se verifica en M8.6, no acá)
   de otros clientes de Webbing — no de memoria. Una colisión es RETROCEDER
   automático al módulo de origen, sin importar el resto del score.
 Antes de recomendar, ejecutá la Verificación Comercial:

@@ -1,5 +1,5 @@
-MÓDULO 2 — BRAND TRANSLATION SYSTEM (v3 DEEP)
-=============================================
+MÓDULO 2 — BRAND TRANSLATION SYSTEM (v3.1 DEEP)
+===============================================
 
 OBJETIVO
 --------
@@ -463,12 +463,16 @@ Caso 1 — SaaS de productividad
 - Stress scenario: error en producción → comunicar inmediatamente con causa y ETA de fix
 - Efecto: sensación de control
 
-Caso 2 — Clínica estética
-- Posicionamiento: cuidado y confianza
-- Arquetipo: Protector + Guía
-- Voz: calmada y empática
-- Stress scenario: resultado diferente al esperado → escuchar, agendar revisión, no defenderse
-- Efecto: sensación de seguridad
+Caso 2 — Clínica estética / skincare
+- Posicionamiento: resultados con criterio
+- Arquetipo: Experto + Estratega
+  (deliberadamente NO Protector+Guía: ese par ya es el de VINCA — ver
+  PORTFOLIO_REGISTRY.md. Arrancar una marca de cuidado/skincare en Protector+Guía
+  siembra la colisión de portfolio que CDL-5 rechaza después. Experto+Estratega no
+  colisiona con ningún cliente del registro. Hallazgo H-4, stress test SAVIA 2026-07-17.)
+- Voz: precisa y fundamentada
+- Stress scenario: resultado diferente al esperado → explicar el porqué con criterio técnico, ajustar el plan, no minimizar
+- Efecto: sensación de competencia
 
 Caso 3 — Marca de lujo
 - Posicionamiento: lujo silencioso

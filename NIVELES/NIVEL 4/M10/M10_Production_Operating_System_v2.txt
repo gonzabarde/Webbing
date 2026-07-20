@@ -1,4 +1,4 @@
-M10 — PRODUCTION OPERATING SYSTEM (v2.1)
+M10 — PRODUCTION OPERATING SYSTEM (v2.3)
 ========================================
 
 PROPÓSITO GENERAL
@@ -1045,6 +1045,18 @@ Contenido:
   [ ] Links verificados (sin 404s)
   [ ] Metadata y OG images verificadas
   [ ] Analytics configurado y evento de prueba registrado
+  [ ] Requisito legal/compliance del rubro presente y visible, si aplica
+      (agregado 2026-07-17, hallazgo del stress test SAVIA): disclaimer
+      obligatorio (ej. salud: "no afirma propiedades terapéuticas"),
+      privacy policy, términos y condiciones, o consentimiento de cookies/
+      datos personales — según lo que el rubro exija. NO asumir que quedó
+      cubierto porque alguien lo agregó por buen criterio en un proyecto
+      anterior: confirmarlo explícito en ESTA corrida. Conecta con SKILL.md
+      §7 (validar compliance en datos NIVEL 4 — salud/financiero/legal —
+      es decisión SOLO del humano): ese §7 dice QUIÉN decide; este ítem es
+      el gate que confirma que la decisión efectivamente se tomó antes de
+      publicar, no que quedó pendiente en silencio. Si el rubro no tiene
+      requisito legal conocido: marcar N/A explícito, no dejar en blanco.
   [ ] Todo dato con fecha, número normativo o vigencia específica (resoluciones,
       tasas, plazos regulatorios, versiones con fecha de corte) re-verificado en
       ESTA corrida — no heredado del chequeo de M0. Registrar: dato / fuente /
@@ -1060,7 +1072,9 @@ Contenido:
 
 Operativo:
   [ ] Backups configurados o deployment anterior disponible
-  [ ] Client Handoff entregado (M9.7 Signature Guardian Doc)
+  [ ] Client Handoff entregado (M9.7 Client Handoff + M9.8 Signature Guardian Doc —
+      son dos documentos distintos, no uno solo: M9.7 es el handoff general de qué
+      puede/no puede editar el cliente; M9.8 protege específicamente la firma visual)
   [ ] Stakeholders notificados del launch
 
 MONITORING WINDOW
