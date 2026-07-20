@@ -1,5 +1,35 @@
-CDL-4 — CREATIVE QUALITY ENGINE (v1.1)
-=====================================
+CDL-4 — CREATIVE QUALITY ENGINE (v2)
+====================================
+
+CAMBIO ESTRUCTURAL v1.1 → v2 (2026-07-19, de Calibre H-4)
+----------------------------------------------------------
+El score final ya NO se calcula con bonus ni penalizaciones aritméticas.
+Score final = score base ponderado. Punto.
+
+POR QUÉ: 4 de los 5 bonus y 5 de las 7 penalizaciones eran criterios que las
+dimensiones YA puntúan. "La firma visual es clara y repetible" (+1) es
+textualmente el ancla 8-10 de Visual Direction; "el proyecto se reconoce sin
+logo" (+1) también; "el concepto tiene imagen mental fuerte y es propio" (+1)
+es el ancla de Concept Strength; "coherente de M0 a M6" (+1) es el de Execution
+Coherence. Un proyecto sacaba 9 en Visual Direction PORQUE tenía firma clara y
+se reconocía sin logo — y después cobraba +2 más por esos mismos dos hechos.
+El modificador no aportaba información nueva: AMPLIFICABA la señal que las
+dimensiones ya habían dado. Por eso todo proyecto competente saturaba el techo
+(Cursor Café 12.44, Estudio de Tatuaje 12.44, Calibre 12.33 en crudo): cumplir
+los anclas 8-10 ERA cumplir los bonus. Las penalizaciones tenían el mismo
+defecto en espejo, comprimiendo la franja baja.
+
+QUÉ RETIRA ESTE CAMBIO (tres parches que dejan de ser necesarios):
+  - TECHO DE ESCALA / cap en 10 (Cursor Café P4): el base ponderado está acotado
+    a [1,10] POR CONSTRUCCIÓN — es un promedio de scores 1-10. No hay qué capar.
+  - Dualidad "capado vs crudo" (Cursor Café P4 + Runa-P1): sin bonus no existen
+    dos números. Hay uno solo y es el real.
+  - Regla de uso "el crudo es para comparar entre proyectos" (Runa-P1): sin
+    crudo, no aplica. Ver además la NOTA SOBRE COMPARAR ENTRE PROYECTOS abajo.
+Se resuelve la clase entera en vez de agregar un cuarto parche encima.
+
+QUÉ NO CAMBIA: la ponderación por Σpesos (fix de SAVIA-P5) queda intacta y sigue
+siendo el corazón del cálculo.
 
 OBJETIVO
 --------
@@ -35,8 +65,12 @@ Documentar el mapeo aplicado en el reporte, aunque sea el default — no asumirl
 PROCESO CLAUDE
 --------------
 Evaluar las 7 dimensiones del scorecard aplicando los pesos de CDL-2.
-Las dimensiones Críticas tienen peso doble en el score final.
-Las dimensiones Bajas tienen peso normal.
+Las dimensiones Críticas tienen peso doble (2x) en el promedio ponderado final
+(ver CÁLCULO DEL SCORE FINAL — el denominador es la suma de pesos, NO la
+cantidad de dimensiones).
+Las dimensiones Bajas tienen peso normal (1x).
+El scorecard es la ÚNICA fuente del número (v2): los flags cualitativos no
+suman ni restan. Todo juicio sobre calidad entra por el score de una dimensión.
 
 SCORECARD CON CRITERIOS DE SCORE
 ----------------------------------
@@ -89,44 +123,94 @@ Criterios:
 
 CÁLCULO DEL SCORE FINAL
 ------------------------
-Score base = promedio de las 7 dimensiones.
+A cada dimensión se le asigna un peso según CDL-2: Crítica = 2, Normal = 1.
 
-Ponderación por CDL-2:
-- Dimensiones Críticas: multiplicar score por 1.5, luego recalcular promedio.
-  (Para reflejar que una dimensión Crítica baja arrastra más el score total)
-- Dimensiones Bajas: peso normal.
+Score base ponderado = Σ(score_i × peso_i) / Σ(peso_i)
 
-PENALIZACIONES CUANTIFICADAS
------------------------------
-Restar del score final:
-- Es genérico (cualquier competidor puede usarlo): -1
-- No tiene firma visual: -1
-- No se reconoce sin logo: -2
-- Contradice la estrategia aprobada en algún módulo: -2
-- Tiene más de 2 ideas compitiendo en el mismo nivel: -1
-- Depende de una tendencia que no pasó el Decay Test: -1
-- No puede sostenerse 3 años: -1
+SCORE FINAL = SCORE BASE PONDERADO (v2). No se le suma bonus ni se le resta
+penalización: ambos pasaron a ser flags cualitativos (ver FLAGS CUALITATIVOS).
+Al ser un promedio ponderado de scores 1-10, el resultado está acotado a [1,10]
+por construcción — no hace falta capar nada ni reportar dos números.
 
-BONUS
------
-Sumar al score final:
-- La firma visual es clara y repetible (+1)
-- El concepto tiene imagen mental fuerte y es propio (+1)
-- El proyecto es completamente coherente de M0 a M6 (+1)
-- Hay una decisión valiente y defendible (+1)
-- El proyecto se reconoce inmediatamente sin logo (+1)
+El denominador es la SUMA DE PESOS, no la cantidad de dimensiones (7). Con 2
+dimensiones Críticas (peso 2 cada una) y 5 Normales (peso 1 cada una),
+Σpeso = 9, no 7. Dividir por 7 en vez de por 9 infla el score exactamente
+cuando una dimensión Crítica puntúa bajo — el caso que este peso existe para
+castigar, no para diluir. (Bug encontrado: stress test combinado SAVIA,
+2026-07-17. CASO REAL, verificado end-to-end el 2026-07-17: el score FINAL
+— que en v1.1 era base ponderado + bonus − penalizaciones — bajaba de
+9.21/10 a 8.22/10 al aplicar esta fórmula: pasa de "excelente, avanzar con
+confianza" a "muy fuerte, avanzar", no a "aceptable".
+NOTA DE LECTURA v2: esos números son de la aritmética VIEJA, cuando el final
+incluía modificadores. Se conservan porque documentan el bug de ponderación que
+sigue vigente —el denominador Σpesos—, no porque el cálculo del final siga
+siendo ése. Bajo v2, el final de ese caso sería su base ponderado, sin los
+±modificadores. El ejemplo de abajo, 7.22, es un SCORE BASE ilustrativo: bajo
+v2 el base ES el final, así que ya no hay dos etapas que confundir — la
+advertencia original sobre no mezclar base con final queda obsoleta por
+construcción.)
 
-TECHO DE ESCALA: el score final (base ponderado + bonus - penalizaciones) está capado
-en 10. Si el cálculo crudo supera 10, reportar "10/10 (capado; cálculo crudo: X.XX)" —
-nunca un número fuera de la escala declarada, y nunca omitir el cálculo crudo.
+Ejemplo completo: dimensiones = [5, 5, 9, 9, 9, 9, 9], las dos primeras
+Críticas (peso 2), el resto Normales (peso 1).
+Σ(score×peso) = 5×2 + 5×2 + 9×1×5 = 10+10+45 = 65
+Σ(peso) = 2+2+1+1+1+1+1 = 9
+Score base ponderado = 65/9 = 7.22
 
-NOTA — PODER DISCRIMINANTE EN LA FRANJA ALTA: el cap preserva el número declarado,
-no la comparación entre proyectos. Dos proyectos con cálculo crudo 10.4 y 11.5
-reportan ambos "10/10", indistinguibles en el headline. Regla de uso: el score
-capado es para el veredicto individual (¿este proyecto está bien?); el cálculo
-crudo es para comparar ENTRE proyectos (retrospectivas de M14, tendencia de calidad
-del sistema en el tiempo). No usar el capado para comparar dos proyectos que ambos
-tocaron el techo — ahí el crudo es el dato real.
+FLAGS CUALITATIVOS (v2 — NO son aritmética)
+--------------------------------------------
+Estos flags NO suman ni restan al score. Se marcan, se citan en el reporte y
+alimentan el veredicto narrativo y a CDL-5. Su función es explicar POR QUÉ el
+score quedó donde quedó y dónde intervenir — no mover el número.
+
+Regla que los gobierna: un flag NUNCA modifica el score, porque todo lo que
+describe ya está puntuado en alguna dimensión. Si un flag te parece que "merece
+puntos", el lugar correcto de arreglarlo es la dimensión: bajá o subí el score de
+la dimensión que lo cubre, con la nota que lo justifica. Doble contarlo fue
+exactamente el bug de v1.1.
+
+FLAGS NEGATIVOS (marcar los que apliquen, con la dimensión que ya lo castiga):
+- [ ] Es genérico, cualquier competidor podría usarlo   → Positioning Strength
+- [ ] No tiene firma visual                              → Visual Direction
+- [ ] No se reconoce sin logo                            → Visual Direction
+- [ ] Contradice la estrategia aprobada en algún módulo  → Strategic Clarity
+- [ ] Más de 2 ideas compitiendo en el mismo nivel       → Concept Strength
+- [ ] Depende de una tendencia que no pasó el Decay Test → Innovation Value
+- [ ] No puede sostenerse 3 años                         → Positioning Strength
+
+FLAGS POSITIVOS (marcar los que apliquen, con la dimensión que ya lo premia):
+- [ ] Firma visual clara y repetible                     → Visual Direction
+- [ ] Concepto con imagen mental fuerte y propio         → Concept Strength
+- [ ] Coherente de M0 a M6                               → Execution Coherence
+- [ ] Se reconoce inmediatamente sin logo                → Visual Direction
+- [ ] Hay una decisión valiente y defendible             → Innovation Value
+
+COHERENCIA OBLIGATORIA: si marcás un flag negativo, la dimensión asociada NO puede
+estar en 8-10; si marcás uno positivo, no puede estar por debajo de 7. Una
+contradicción entre flag y dimensión significa que el scoring de esa dimensión
+está mal puesto — corregir la dimensión, no compensar con el flag. Esto convierte
+a los flags en una verificación cruzada del scorecard, que es el único trabajo
+honesto que pueden hacer sin duplicar el conteo.
+
+NOTA SOBRE COMPARAR ENTRE PROYECTOS (v2 — pregunta abierta, declarada)
+------------------------------------------------------------------------
+CDL-4 es un instrumento de UMBRAL (¿este proyecto está lo bastante bien como para
+avanzar?), no de RANKING (¿cuál de estos dos es mejor?). Los THRESHOLDS de abajo
+son su función real. Runa-P1 le había asignado un trabajo de comparación entre
+proyectos ("usar el crudo para comparar"); con el crudo retirado, esa regla ya no
+aplica — y conviene decir por qué no se reemplazó por otra.
+
+DATO ABIERTO, SIN RESOLVER: los scores BASE de proyectos distintos también
+agrupan estrecho (Cursor Café 8.44, Estudio de Tatuaje 8.44). Quitar el bonus NO
+resuelve eso. Hay tres causas posibles y hoy no se pueden separar:
+  1. el instrumento no discrimina en la franja alta;
+  2. ANCLAJE DEL PUNTUADOR — todos los scores hasta hoy los produjo el mismo
+     evaluador (Claude), que puede estar replicando su propio scoring previo;
+  3. son genuinamente parecidos, porque un sistema disciplinado DEBERÍA producir
+     calidad consistente — en cuyo caso no hay nada que arreglar.
+No elegir una sin evidencia (M11.8, FALSE CERTAINTY). Para usar CDL-4 como medida
+de tendencia de calidad del sistema en el tiempo (M14), primero hay que resolver
+este confound; hasta entonces, tratar los scores entre proyectos como no
+comparables y usarlos solo para su veredicto individual.
 
 THRESHOLDS
 ----------
@@ -150,10 +234,11 @@ Visual Direction      |       |            |
 Innovation Value      |       |            |
 Execution Coherence   |       |            |
 
-Score base: /10
-Penalizaciones: -
-Bonus: +
-Score final: /10
+Score final (= base ponderado, Σpeso como denominador): /10
+Σpesos usado en el denominador: [número] — declararlo, no dejarlo implícito
+Flags negativos marcados: [lista + dimensión asociada, o "ninguno"]
+Flags positivos marcados: [lista + dimensión asociada, o "ninguno"]
+Chequeo de coherencia flag↔dimensión: OK / corregido [qué dimensión se ajustó]
 Threshold status: excelente / muy fuerte / aceptable / débil / no viable
 Razón principal del score: [una línea]
 Qué elevaría el score más rápido: [una acción concreta]
@@ -161,17 +246,19 @@ Módulo débil a revisar si score < 7: [módulo específico]
 
 TESTS
 -----
-- ¿El score está ponderado según los pesos de CDL-2?
-- ¿Las penalizaciones y bonus están aplicados?
+- ¿El score está ponderado según los pesos de CDL-2, dividiendo por Σpesos?
+- ¿Los flags están marcados Y es coherente cada uno con su dimensión?
+  (flag negativo ⇒ esa dimensión no está en 8-10; flag positivo ⇒ no está bajo 7)
+- ¿El score final es el base ponderado, sin sumar ni restar modificadores?
 - ¿Hay una sola acción de mejora prioritaria?
 - ¿El módulo débil está identificado con nombre específico?
 - ¿El veredicto de CDL-3 está integrado al análisis?
 
 OUTPUT
 ------
-1. Scorecard completo con pesos.
-2. Penalizaciones y bonus aplicados.
-3. Score final con threshold status.
+1. Scorecard completo con pesos y Σpesos declarado.
+2. Flags cualitativos marcados, con su dimensión asociada y el chequeo de coherencia.
+3. Score final (= base ponderado) con threshold status.
 4. Razón principal del score.
 5. Qué elevaría el score más rápido.
 6. Módulo a revisar si score < 7.
@@ -193,8 +280,10 @@ Actuá como evaluador creativo.
 Leé el Creative Priority Map de CDL-2 y aplicá los pesos correspondientes.
 Las dimensiones Críticas tienen peso doble en el score final.
 Puntuá cada dimensión usando los criterios del scorecard.
-Aplicá penalizaciones y bonus cuantificados.
-Calculá el score final ponderado.
+Marcá los flags cualitativos que apliquen — NO suman ni restan puntos: verifican
+que el scoring de su dimensión sea coherente. Si un flag contradice a su
+dimensión, corregí la dimensión, no compenses con el flag.
+Calculá el score final = base ponderado (Σ score×peso / Σpesos). Sin modificadores.
 Terminá con un veredicto simple, la razón principal del score,
 la única acción que lo elevaría más rápido y el módulo a revisar si está bajo.
 No diseñes. No te pierdas en matices.
