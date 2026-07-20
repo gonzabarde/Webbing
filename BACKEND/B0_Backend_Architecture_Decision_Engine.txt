@@ -1,5 +1,5 @@
-B0 — BACKEND ARCHITECTURE DECISION ENGINE (v1)
-==============================================
+B0 — BACKEND ARCHITECTURE DECISION ENGINE (v1.2)
+================================================
 
 UBICACIÓN EN EL SISTEMA
 -----------------------
@@ -74,6 +74,38 @@ El dato faltante más peligroso es la naturaleza de los datos: define todo lo de
 PROCESO CLAUDE
 --------------
 Ejecutar en orden. Cada paso cierra una decisión que el siguiente hereda.
+
+PASO 0 — AISLAMIENTO DE INFRAESTRUCTURA (antes de cualquier provisioning o conexión)
+  Antes de crear o conectar cualquier backend (proyecto Supabase/Neon, base de datos,
+  instancia), responder explícitamente: ¿este proyecto es de PRÁCTICA o de CLIENTE REAL?
+  - Si es de PRÁCTICA (stress test, aprendizaje, demo interna): el aislamiento válido es
+    CUALQUIERA de estas dos — nunca la infraestructura de un cliente real:
+      (a) Backend project NUEVO y dedicado.
+      (b) Schema DEDICADO dentro de un project de PRÁCTICA ya existente (nunca dentro
+          del project de un cliente real) — válido cuando crear un project nuevo tiene
+          costo real evitable y el schema aislado alcanza para el propósito del stress
+          test. (Agregado 2026-07-18, hallazgo H-3 Calibre: la redacción original solo
+          contemplaba (a) y no existía por escrito la opción (b), que ya se venía usando
+          por criterio sin regla que lo respaldara.)
+    NUNCA conectar al project ID de un cliente real existente, ni "solo para testear
+    rápido", ni "para aprovechar uno que ya está". Datos de práctica y datos de un
+    cliente real NUNCA comparten infraestructura — es el mismo principio de
+    no-contaminación de SKILL.md §11, aplicado a la capa física, no solo a las
+    decisiones de marca.
+    ADVERTENCIA — AISLAMIENTO POR SCHEMA + SUPABASE-JS (agregado 2026-07-18, hallazgo
+    H-2 Calibre): si se elige (b) con Supabase, ojo — supabase-js/PostgREST solo
+    expone el schema `public` por default. Las RPC/queries contra un schema no-`public`
+    fallan desde la app aunque el mismo SQL corra bien como rol `anon` directo en la DB
+    (se descubre recién en el build, no en B0 si no se anticipa). Si se elige (b),
+    decidir ACÁ cómo se expone: exponer el schema a PostgREST (config db-schemas) o
+    funciones wrapper security-definer en `public` que operen sobre las tablas del
+    schema aislado. No dejarlo para descubrir en el build.
+  - Si es de CLIENTE REAL: usar la infraestructura de ESE cliente, nunca la de otro.
+  Este paso es de una línea de decisión, pero es bloqueante: sin resolverlo, no se
+  provisiona ni se conecta nada. (Origen: stress test SAVIA 2026-07-17, hallazgo H-1 —
+  casi se usó glow-factor-backend, backend de un cliente real, para un ecommerce
+  ficticio; se resolvió ad hoc con un proyecto dedicado, sin regla escrita que lo
+  bloqueara la próxima vez.)
 
 PASO 1 — CLASIFICAR LA FORMA Y LA RESPONSABILIDAD DE LOS DATOS
   Antes de tocar tecnología, responder:
@@ -564,6 +596,8 @@ FAIL CONDITIONS
 - API pública expuesta sin consumidor real, versionado ni rate limiting.
 - Infra preventiva (Redis, colas, microservicios) agregada sin necesidad demostrada.
 - Se avanzó a B1 sin aprobar las decisiones irreversibles.
+- Conectar un proyecto de práctica a infraestructura de un cliente real ya existente
+  (ver PASO 0 — aislamiento de infraestructura).
 
 
 PROMPT PARA CLAUDE

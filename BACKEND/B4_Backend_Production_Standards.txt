@@ -1,5 +1,5 @@
-B4 — BACKEND PRODUCTION STANDARDS (v1)
-======================================
+B4 — BACKEND PRODUCTION STANDARDS (v1.1)
+========================================
 
 UBICACIÓN EN EL SISTEMA
 -----------------------
@@ -268,6 +268,44 @@ RESILIENCIA:
 
 REGLA: una falla de la sección SEGURIDAD es bloqueante. No se "lanza igual y se arregla
 después". Las otras secciones se priorizan, pero seguridad frena el launch.
+
+DECLARACIÓN DE ALCANCE DEL QA DE SEGURIDAD (v1.1, de Runa-P11 — OBLIGATORIA)
+-----------------------------------------------------------------------------
+Todo veredicto de seguridad de B4 (y el de M8.6 que lo cite) cierra con esta
+declaración de alcance, TEXTUAL. No es una nota de cortesía: sin ella, "QA de
+seguridad pasado" se lee como "el sistema es seguro", que es una afirmación que
+este QA no puede sostener.
+
+  ALCANCE DE ESTA VERIFICACIÓN
+  Cubierto: QA de seguridad POR DISEÑO sobre la implementación — los ítems
+  ejecutables de la sección SEGURIDAD, corridos contra [entorno: local / staging /
+  producción], con su output como evidencia.
+  NO cubierto: prueba de penetración real sobre el backend desplegado y expuesto.
+  No se ejercitaron: fuerza bruta y rate limiting bajo carga, escalada de
+  privilegios encadenada, cadena de suministro en runtime, superficie de la
+  infraestructura del proveedor, ni ataques con tiempo y objetivo dedicados.
+  Qué significa: pasar este QA significa que los controles esperados ESTÁN y
+  FUNCIONAN en los casos probados. NO significa que el sistema resista a un
+  atacante real. Un pentest puede encontrar lo que este QA no busca.
+
+FAIL CONDITIONS de esta declaración:
+- Cerrar un veredicto de seguridad sin la declaración de alcance.
+- Escribir "el sistema es seguro" / "sin vulnerabilidades" en vez de "los controles
+  verificados pasaron". El QA prueba presencia de controles, no ausencia de fallas
+  (ausencia de evidencia ≠ evidencia de ausencia).
+- Omitir el entorno contra el que se corrió. Un QA corrido sobre local no dice
+  nada sobre headers, TLS ni configuración del host — esos ítems son NO CUMPLE
+  hasta correrse contra el entorno donde viven, no "cumplen por analogía".
+
+Por qué es obligatorio y no queda a criterio: en Runa la distinción se declaró
+bien, pero por memoria de quien escribía el output — dependía de que alguien se
+acordara. Un ítem que depende de acordarse no es un control (misma lógica que
+Cursor Café INC-5: escribir el uso correcto en un comentario no impide el uso
+incorrecto 30 líneas abajo si nada lo VERIFICA).
+
+Relación con la revisión externa: para datos NIVEL 3-4, esta declaración NO
+sustituye la evaluación de revisión de seguridad externa del launch checklist
+(Sección 4) — la hace explícitamente necesaria al nombrar lo que queda afuera.
 
 
 =====================================================================

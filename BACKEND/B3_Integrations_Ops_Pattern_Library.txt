@@ -460,9 +460,19 @@ PATRÓN SEC-5 — HEADERS DE SEGURIDAD HTTP
     - HTTPS siempre (los hosts modernos como Vercel lo dan por default — confirmarlo).
     - CSP es la más poderosa y la más delicada de configurar: empezar en modo report y
       ajustar antes de hacerla estricta, para no romper recursos legítimos.
+    - EXCEPCIÓN DE ENTORNO DEV (agregada 2026-07-18, hallazgo H-1 Calibre): un CSP
+      estricto en modo desarrollo (`script-src 'self'` sin `'unsafe-eval'`) rompe el
+      Hot Module Replacement / React Refresh de Next.js, que necesita `eval()` para
+      funcionar en dev. El síntoma es engañoso: la página se ve perfecta estáticamente
+      pero el JS del cliente nunca hidrata — sin error de consola visible, un
+      formulario cae a submit nativo GET en vez de llamar a su handler real. `'unsafe-
+      eval'` (o nonces equivalentes) es aceptable SOLO en dev; el CSP de producción
+      nunca debe llevarlo. Declarar el CSP por entorno, no un solo valor para los dos.
   Cómo se rompe:
     - Sin headers de seguridad → XSS y clickjacking que eran evitables quedan abiertos.
     - Servir por HTTP → tráfico interceptable.
+    - CSP de producción aplicado tal cual en dev (o viceversa) → HMR roto en dev con
+      apariencia de sitio funcionando, o `'unsafe-eval'` filtrado a producción por error.
   Conexión: headers configurados es ítem del launch checklist de B4. Complementa, no
   reemplaza, la validación de input de B1-P3 (defensa en capas contra XSS).
 
