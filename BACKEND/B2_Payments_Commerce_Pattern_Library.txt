@@ -1,5 +1,5 @@
-B2 — PAYMENTS & COMMERCE PATTERN LIBRARY (v1)
-=============================================
+B2 — PAYMENTS & COMMERCE PATTERN LIBRARY (v1.1)
+===============================================
 
 UBICACIÓN EN EL SISTEMA
 -----------------------
@@ -417,6 +417,46 @@ Verificar:
 - SI cobro en Argentina: ¿la facturación electrónica AFIP está contemplada y desacoplada?
 
 Falla cualquiera → no construir el cobro. Cada uno de estos es plata real o fraude.
+
+
+CÓMO SE VERIFICA (PAGOS) — evidencia ejecutable por ítem (v1.1, auditoría 2026-07-20)
+--------------------------------------------------------------------------------------
+Mismo principio que B4-G4: un ítem de este gate se marca OK con el OUTPUT de haberlo
+EJECUTADO, no con una lectura de código. "El backend calcula el monto server-side"
+no es lo mismo que "se mandó un monto alterado y el backend lo ignoró de verdad" —
+la misma distinción que en Calibre dejó un formulario con el cliente muerto pasando
+todos los chequeos estáticos (H-1), y en SAVIA solo el oversell ejecutado contra la
+DB real (no la lectura de la lógica) confirmó que el stock no se vendía dos veces.
+En pagos el costo de un falso OK no es un bug cosmético: es dinero real o producto
+entregado gratis.
+
+  Webhook como única fuente de verdad (PAY-3) [EJECUTABLE]:
+    En modo test del PSP, iniciar un checkout y revisar el estado de la orden/acceso
+    JUSTO en el redirect de éxito, antes de que el webhook se haya procesado (demorar
+    el webhook, o mirar el estado en el instante del redirect). ESPERADO: sigue NO
+    confirmado. Recién al procesar el webhook (o reenviarlo manualmente desde el
+    dashboard del PSP en modo test) el estado pasa a confirmado. Acceso ya otorgado
+    en el redirect, antes del webhook = FALLA.
+  Idempotencia (PAY-4) [EJECUTABLE]:
+    Reenviar (replay) el mismo evento de webhook — mismo event id — dos veces
+    seguidas contra el endpoint (el PSP lo permite en modo test, o se replica el
+    payload a mano). ESPERADO: la segunda entrega no duplica cobro, acreditación ni
+    orden; el registro local (PAY-5) muestra una sola operación aplicada.
+  Monto server-side (PAY-2) [EJECUTABLE]:
+    Alterar el payload que sale del cliente (monto o price_id) antes de que llegue
+    al backend y confirmar que la creación de la sesión de checkout usa el precio de
+    la fuente de verdad propia, no el del payload alterado. Un monto manipulado que
+    se cobra = FALLA.
+  Stock atómico bajo concurrencia (ECOM-3, si aplica) [EJECUTABLE]:
+    Con una unidad de stock en 1, disparar 2 o más requests de compra en PARALELO
+    real (no secuencial) contra el mismo producto. ESPERADO: exactamente una tiene
+    éxito; el resto falla por falta de stock. Dos éxitos sobre una unidad = FALLA
+    (mismo patrón que el oversell verificado en SAVIA, acá como método explícito).
+  Firma de webhook por PSP (PAY-7, si hay más de un PSP) [EJECUTABLE]:
+    Por CADA PSP integrado, por separado, enviar un webhook con firma ausente o con
+    la firma de OTRO PSP. ESPERADO: 400/401 en todos. Verificar la firma de uno solo
+    y asumir que el patrón "ya está probado" para el resto es exactamente el error
+    que este ítem existe para evitar.
 
 
 TESTS
