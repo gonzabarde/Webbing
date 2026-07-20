@@ -1,4 +1,4 @@
-M8.6 — PRODUCTION REVIEW ENGINE (v2.9)
+M8.6 — PRODUCTION REVIEW ENGINE (v2.13)
 =======================================
 
 OPERATIONAL HEADER
@@ -49,7 +49,7 @@ PROCESO CLAUDE
       (como hasta ahora). Si la categoría no tiene mapa, esta capa se omite
       declarándolo — la capa b) NUNCA se omite.
    b) Tells de IA: correr el ANTI-AI-SLOP CHECKLIST completo
-      (Frontend_Craft_Standard.md §4, tells 1-12) sobre el build REAL
+      (Frontend_Craft_Standard.md §4, tells 1-13) sobre el build REAL
       (screenshot/staging, no la intención). Registrar el puntaje.
 
 4. Integrar el QA report de M8.5.
@@ -188,6 +188,115 @@ Sin este chequeo, Direction Fidelity NO puede marcarse OK: el sistema visual
 puede estar impecable en tokens y estar roto en composición — y desde v2.8
 no hay ningún otro mecanismo que lo agarre.
 
+VERIFICACIÓN DE COLISIÓN DE PATRONES DE PORTFOLIO (v2.10, hallazgo H-8 del
+stress test combinado SAVIA, 2026-07-17) — condición adicional para marcar
+Signature Fidelity como OK. CDL-5 declara un ítem 10 (combinación de
+patrones M9.1/M9.2) en su Verificación de Diferenciación de Portfolio, pero
+CDL-5 corre pre-GATE 2 — antes de que M9 exista. Acá, después de M9.8, es
+el primer punto del pipeline donde el dato real está disponible:
+1. Leer la combinación de patrones layout+componente+motion que M9.8 cerró
+   para este proyecto (Signature Pattern Library).
+2. Leer PORTFOLIO_REGISTRY.md, columna "Combinación de patrones (M9.1/M9.2)",
+   de TODOS los otros clientes (regla de exclusión propia del registro: la
+   fila de este mismo proyecto nunca cuenta como evidencia).
+3. Si la combinación coincide o es indistinguible de la de otro cliente:
+   Signature Fidelity no puede marcarse OK aunque la firma esté bien
+   ejecutada en sí misma — el problema es que ya existe en el portfolio,
+   no que esté mal hecha acá.
+4. Escribir/actualizar la fila de este proyecto en PORTFOLIO_REGISTRY.md
+   (M9.8 es responsable de esa columna, ver "Quién escribe acá" del registro).
+Si la categoría del proyecto es la primera en usar M9 en el portfolio (sin
+filas previas con esa columna poblada), esta verificación se omite
+declarándolo — no hay contra qué comparar todavía.
+
+VERIFICACIÓN DE INTERACCIÓN REAL (v2.11, hallazgo P9 del re-pase SAVIA,
+2026-07-17) — condición adicional para marcar Signature Fidelity como OK
+cuando la firma documentada (M5/M9.8) es interactiva (hover, click, scroll-
+trigger, flip, reveal). CASO REAL QUE LO MOTIVA: "El Giro" de SAVIA tenía el
+CSS correcto (`rotateY(180deg)`, transición 0.32s) — M8.6 lo marcó PRESENTE
+verificando que la regla existía en el DOM/CSS computado. Pero la firma
+NUNCA se disparaba con una interacción real: `prefers-reduced-motion` la
+congelaba con `!important`, el trigger era hover-only (muerto en mobile) y
+no tenía affordance visible — nadie sabía que había algo para tocar. El
+humano lo encontró abriendo el build en su propio navegador, no M8.6.
+DIFERENCIA DE FONDO: verificar que una firma EXISTE en el código (propiedad
+estática) no es lo mismo que verificar que se EXPERIMENTA (evento real).
+Son la misma clase de hueco que la Verificación de Relaciones Espaciales de
+v2.9 (mide propiedades, no lo que un usuario real encuentra).
+QUÉ CORRER: para cada elemento con firma interactiva documentada:
+1. Disparar el evento REAL (mouseenter/click/scroll-into-view según el
+   trigger declarado) sobre un navegador real — nunca forzando el estado
+   por JS/DOM directamente. Forzar el estado prueba que el CSS es capaz de
+   producir el efecto; no prueba que un usuario lo va a encontrar.
+2. Confirmar que existe una AFFORDANCE visible en estado de reposo (algo que
+   indique "esto es interactivo") — sin affordáncia, una firma correcta en
+   código sigue siendo una firma que nadie descubre.
+3. Confirmar el comportamiento bajo `prefers-reduced-motion`: la información
+   de la firma (no necesariamente el movimiento) tiene que seguir siendo
+   accesible — una regla de reduced-motion mal escrita puede CONGELAR el
+   contenido en vez de solo quitar la animación (exactamente lo que le pasó
+   a SAVIA: el `!important` dejaba la tarjeta trabada de frente, sin acceso
+   al reverso, para cualquiera con reduce-motion activo).
+Sin este chequeo, Signature Fidelity NO puede marcarse OK para firmas
+interactivas por más que el CSS/DOM estético esté impecable.
+
+VERIFICACIÓN DE HIDRATACIÓN/INTERACTIVIDAD FUNCIONAL (v2.13, hallazgo H-1
+Calibre, 2026-07-18) — GENERALIZA la Verificación de Interacción Real de
+arriba de la FIRMA a CUALQUIER interactividad de cliente que el build
+necesite para funcionar (formulario principal, CTA primario, cualquier
+componente client-side crítico). Condición adicional para integrar el QA
+report (paso 4) — un problema acá es CRÍTICO de QA, bloquea PASA.
+CASO REAL QUE LO MOTIVA: en Calibre, un CSP estricto en dev (ver B3-SEC-5)
+bloqueaba `eval()` y el cliente de React nunca hidrataba. La página pasó
+TODOS los chequeos estáticos limpio — contraste, 13 tells, relaciones
+espaciales — con el JavaScript del cliente completamente muerto. El
+formulario de demo caía a un submit nativo GET (`/?name=...`) en vez de
+llamar a su handler real. Sin error de consola visible. Lo agarró recién un
+test que efectivamente ENVIÓ el formulario y miró la red — el mismo patrón
+de v2.11 (existe ≠ se experimenta), esta vez no en la firma sino en TODA la
+capa de interactividad del cliente.
+QUÉ CORRER, sobre el build real, ANTES del veredicto:
+1. Identificar el/los componente(s) client-side CRÍTICO(s) para el propósito
+   del proyecto — casi siempre el formulario principal de conversión o el
+   CTA primario (arquetipo #1/#2: el checkout o el form de demo/lead).
+2. Disparar UN evento real de usuario sobre ese componente (submit con datos
+   reales, click) — nunca asumir por la presencia de un `onSubmit` en el
+   código que corre de verdad.
+3. Confirmar en la red (no solo en el DOM) que el evento disparó lo que
+   tenía que disparar: un `fetch`/XHR a la ruta esperada con el método
+   esperado (POST a una API, no un GET nativo del navegador al mismo path).
+   Un submit que navega a `?campo=valor` en vez de llamar a la API es la
+   señal inequívoca de que el handler de React nunca se enganchó.
+4. Si falla: es un problema de HIDRATACIÓN, no de UI — revisar CSP (B3-SEC-5),
+   errores de consola silenciosos, o mismatch de SSR/CSR antes de tocar nada
+   visual. El build puede estar perfecto en apariencia con el cliente muerto.
+Sin este chequeo, ninguna Fidelity puede marcarse OK basándose solo en
+verificaciones estáticas: todas (contraste, tells, espacial, sourcing)
+asumen que el HTML/CSS renderizado es lo que el usuario experimenta, pero
+ninguna prueba que el JavaScript del cliente esté vivo.
+
+LECTURA EN FRÍO (v2.11, hallazgo P10 del re-pase SAVIA, 2026-07-17) — paso
+obligatorio ANTES de emitir el veredicto final, cuando ambas capas de
+Generic Drift (clíchés + tells) dieron verde. Razón: verificar fidelidad de
+un build contra la spec que uno mismo (M4/M5) escribió es estructuralmente
+autoconfirmatorio — Claude tiende a leer su propia intención en su propia
+ejecución, aunque la ejecución haya sido tibia. Ninguna de las dos capas de
+drift mide esto: una capa compara contra clichés de mercado, la otra contra
+un checklist fijo — ninguna pregunta "¿esto se siente genuino?".
+QUÉ HACER: mirar la captura real del build (hero + al menos una sección más)
+SIN releer la spec de M4/M5 primero — como si fuera la primera vez que se ve
+el proyecto. Escribir en UNA frase qué es memorable ("acá es donde este
+proyecto se distingue de cualquier otro de su categoría: ___"). Si no sale
+nada genuinamente nombrable en esa frase, es Generic Drift — sin importar que
+el mapa de clichés y el checklist de tells hayan dado verde. Esta lectura no
+reemplaza las dos capas cuantificadas; es una tercera verificación cualitativa
+que no puede autoconfirmarse porque deliberadamente no consulta la intención
+original antes de opinar.
+Si la Lectura en Frío no encuentra nada memorable pero ambas capas
+cuantificadas dieron verde: el veredicto no puede ser PASA limpio — como
+mínimo PASA CON AJUSTES, documentando qué faltó hacer memorable y dónde
+(hero, firma, momento del scroll).
+
 DEFINICIÓN DE GENÉRICO
 ------------------------
 Para detectar drift genérico, comparar el build contra el Mapa de Clichés
@@ -206,7 +315,20 @@ Si el build replica 2 o más clichés de la categoría: drift genérico CRÍTICO
 Si replica 1: drift genérico LEVE.
 Si no replica ninguno: AUSENTE (en esta capa).
 
-CAPA 2 — TELLS DE IA (Frontend_Craft_Standard.md §4) [v2.1]:
+CAPA 2 — TELLS DE IA (Frontend_Craft_Standard.md §4) [v2.11 — REPORTE
+OBLIGATORIO POR TELL, no un conteo agregado]:
+Correr los 13 tells UNO POR UNO contra el build real (captura o DOM/CSS
+computado), no contra la intención de M4/M5. Reportar cada uno con veredicto
+PRESENTE/AUSENTE y una línea de evidencia — igual tratamiento que el reporte
+de cobertura de contraste (v2.7) y de relaciones espaciales (v2.9): un número
+agregado ("2/13 tells") sin la lista completa es indistinguible de "no lo
+corrí", mismo verde falso silencioso. **Hallazgo del re-pase SAVIA
+(2026-07-17): esta capa existía desde 2026-07-04 pero en la práctica solo se
+corría la Capa 1 (clichés de M5.5, mercado) — el checklist de 13 tells se
+salteaba en silencio porque nada exigía el reporte item por item.** Un
+build puede tener cero clichés de categoría y seguir siendo genérico por
+tells de IA (hero simétrico, cards uniformes, acento tímido) que el mapa de
+M5.5 no cubre.
 Si el build acumula 3+ tells del checklist: drift genérico CRÍTICO,
   aunque no replique ningún cliché de categoría. El build huele a IA.
 Si acumula 1-2 tells: drift genérico LEVE como mínimo (no puede ser AUSENTE).
@@ -323,12 +445,35 @@ fallback:
    no un sustituto de última instancia. No intentar screenshot del panel
    primero "por las dudas" — arrancar directo por acá.
 2. Si hace falta una IMAGEN REAL (para que un humano la revise visualmente,
-   no para verificar el build): capturar por el Chrome REAL del humano
-   (herramienta tipo `claude-in-chrome`, no el panel interno), con el
-   server de preview vivo. El Chrome real pinta de verdad porque es una
-   ventana real, no un tab offscreen. Requisitos: confirmar que el server
-   de preview sigue arriba antes de capturar (se reapean solos); usar
-   `http://localhost:<puerto>` con el server levantado, nunca `file://`.
+   no para verificar el build): dos vías posibles según qué entorno esté
+   corriendo M8.6 — elegir la que aplique, no asumir que la primera
+   siempre está disponible:
+   a) Si M8.6 corre en el chat, con el navegador del humano conectado
+      (herramienta tipo `claude-in-chrome`): capturar por ahí, con el
+      server de preview vivo. El Chrome real pinta de verdad porque es una
+      ventana real, no un tab offscreen. Requisitos: confirmar que el
+      server de preview sigue arriba antes de capturar (se reapean solos);
+      usar `http://localhost:<puerto>` con el server levantado, nunca
+      `file://`.
+   b) Si M8.6 corre en un entorno sin acceso a ese Chrome (típicamente Claude
+      Code u otro sandbox separado del navegador del humano, donde
+      `http://localhost` del dev server no resuelve porque no hay red
+      compartida con el navegador que sí lo alcanza): capturar vía Chromium
+      headless (Playwright/Puppeteer) corriendo en el MISMO entorno/host que
+      el server de preview — ahí sí hay red compartida. Guardar como PNG y
+      leer con la tool de imágenes. Cubre desktop y 375px (mismo binario, dos
+      viewports) en la misma corrida.
+      NOTA DE PROCESO (2026-07-17, proyecto Calibre): esta vía se agregó
+      inicialmente citando un caso que resultó mal diagnosticado — un
+      "Chrome real no alcanza el server" que en realidad era el dev server
+      caído (confirmado con curl, no con teoría de red — ver
+      INCIDENTES_M14.md H-5, retractado como FALSE CERTAINTY). El método en
+      sí sigue siendo válido para su caso real (entornos sin conector al
+      navegador del humano, que sí existen) — se mantiene por mérito propio,
+      no por el incidente que lo motivó a escribirse.
+   Ninguna de las dos vías es opcional "si se puede" — alguna de las dos
+   tiene que estar disponible en cualquier entorno donde M8.6 corra, o la
+   Lectura en Fría (v2.11) queda estructuralmente sin poder cerrarse.
 3. El fix de raíz (`Page.captureScreenshot` con `fromSurface:false`, o
    `Page.bringToFront` + focus emulation antes de capturar) vive en la
    implementación de la tool de screenshot del panel — fuera del alcance
@@ -381,6 +526,20 @@ TESTS
   real, con el conteo de pares chequeados reportado? Desde v2.8 (eval+inspect
   primario) es el único mecanismo que mira la COMPOSICIÓN — sin él, un hero
   con el header encimado pasa GATE 3 con todo lo demás en verde.
+- ¿Se verificó la combinación de patrones M9.1/M9.2 de este proyecto contra
+  PORTFOLIO_REGISTRY.md antes de marcar Signature Fidelity como OK (ítem 10
+  de CDL-5, que CDL-5 mismo no puede evaluar por orden de pipeline)?
+- ¿Se reportaron los 13 tells del ANTI-AI-SLOP CHECKLIST uno por uno (PRESENTE/
+  AUSENTE + evidencia), no un conteo agregado?
+- Si hay firma interactiva documentada (M5/M9.8): ¿se disparó el evento REAL
+  (hover/click/scroll) en navegador real, se confirmó affordance visible, y
+  se confirmó que prefers-reduced-motion no congela el contenido en vez de
+  solo quitar la animación?
+- ¿Se hizo la Lectura en Frío (mirar la captura sin releer la spec primero) y
+  se pudo nombrar en una frase qué hace memorable al proyecto?
+- ¿Se disparó un evento REAL sobre el componente client-side crítico
+  (formulario principal / CTA primario) y se confirmó en la RED que llamó a
+  la API esperada, no un submit nativo del navegador?
 
 OUTPUT
 ------
@@ -414,6 +573,23 @@ FAIL CONDITIONS
   espaciales (v2.9), o corriéndolo sin reportar el conteo de pares
   chequeados ("0 colisiones" sin conteo = verde falso, misma clase que
   "0 revisados" del verificador de contraste).
+- Signature Fidelity marcada OK sin cruzar la combinación de patrones
+  M9.1/M9.2 del proyecto contra PORTFOLIO_REGISTRY.md (v2.10), cuando el
+  registro ya tiene otras filas pobladas en esa columna.
+- Reportar el checklist de 13 tells como un conteo agregado ("2/13") sin la
+  lista item por item con veredicto y evidencia (v2.11) — mismo verde falso
+  silencioso que "0 revisados" en el verificador de contraste.
+- Marcar Signature Fidelity OK para una firma interactiva sin disparar el
+  evento real en navegador real, o sin confirmar que prefers-reduced-motion
+  no congela el contenido de la firma (v2.11).
+- Emitir el veredicto final sin haber hecho la Lectura en Frío cuando ambas
+  capas de Generic Drift dieron verde (v2.11) — pasar directo de "clichés:
+  ausente, tells: 0" a PASA sin la verificación cualitativa que no puede
+  autoconfirmarse.
+- Marcar cualquier Fidelity OK basado solo en chequeos estáticos (contraste,
+  tells, espacial, sourcing) sin haber disparado un evento real sobre el
+  componente client-side crítico y confirmado en la red que hidrató (v2.13)
+  — un build puede pasar todo lo estático con el cliente completamente muerto.
 - Reintentar el screenshot del panel "por las dudas" antes de eval+inspect:
   es una limitación estructural (v2.8), no un fallo puntual — el reintento
   es tiempo perdido, no diligencia.

@@ -1,5 +1,5 @@
-M8.5 — PERFORMANCE & ACCESSIBILITY (v2)
-========================================
+M8.5 — PERFORMANCE & ACCESSIBILITY (v2.1)
+==========================================
 
 OBJETIVO
 --------
@@ -27,6 +27,34 @@ Accesibilidad: WCAG 2.1 AA como mínimo en todos los proyectos.
   Contraste texto normal: 4.5:1 mínimo.
   Contraste texto grande (18px+ bold o 24px+ normal): 3:1 mínimo.
   Contraste componentes UI e íconos informativos: 3:1 mínimo.
+
+SIN STAGING REAL — TARGETS DECLARADOS (v2.1, de Runa-P4)
+---------------------------------------------------------
+Los umbrales de arriba se MIDEN sobre un build desplegado en staging (ver INPUTS).
+Cuando no hay staging real —proyecto de práctica, deploy que es del humano y todavía
+no ocurrió, cliente que no provee entorno— los CWV no son medibles y el módulo no
+puede dar un número. Qué hacer entonces:
+
+NO se declara PASA sobre CWV no medidos. Un umbral sin medición no es un resultado;
+tratarlo como tal es exactamente el "verde falso" que el sistema persigue en otros
+lados (M8.6 §3, reporte de cobertura). Tampoco se inventa un número estimado.
+
+SÍ se declara un TARGET DOCUMENTADO, como sustituto explícito y trazable:
+  1. Marcar la métrica como NO MEDIDA, con la razón concreta ("sin staging: el
+     deploy es decisión del humano y no ocurrió").
+  2. Declarar el target comprometido para cada CWV (los umbrales "bueno" de arriba,
+     salvo que el proyecto justifique otro) y el presupuesto de recursos que lo
+     sostiene: peso total de página, peso máximo por imagen, cantidad de fuentes
+     self-hosteadas, JS de cliente. Eso SÍ es medible sin staging, sobre el build local.
+  3. Registrar los proxies que sí se corrieron localmente (peso de assets, formato
+     de imágenes, lazy loading, fuentes con font-display, ausencia de layout shift
+     por dimensiones declaradas). Son evidencia parcial real, no la medición.
+  4. Marcar la medición real de CWV como BLOQUEANTE DIFERIDO de GATE 4: se ejecuta
+     Lighthouse contra producción apenas exista, antes de dar el launch por cerrado.
+
+Mismo criterio que ECOS-P2 aplicó al cross-browser con un solo motor disponible:
+el veredicto correcto es PASA CON AJUSTES + bloqueante explícito de GATE 4, nunca
+un PASA falso. La ausencia de entorno es una limitación declarada, no un permiso.
 
 INPUTS
 ------
