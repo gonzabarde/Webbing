@@ -1,5 +1,5 @@
-B5 — PERFORMANCE & SCALING ENGINE (v1)
-======================================
+B5 — PERFORMANCE & SCALING ENGINE (v1.1)
+========================================
 
 UBICACIÓN EN EL SISTEMA
 -----------------------
@@ -309,6 +309,31 @@ Adicional para proyectos de escala esperada media/alta:
 - ¿Cada pieza de infra extra está justificada por una métrica? (PERF-9)
 
 Falla un ítem del mínimo → no lanzar. Los adicionales se priorizan según escala.
+
+
+CÓMO SE VERIFICA (CARGA) — evidencia ejecutable en el mínimo no negociable
+(v1.1, auditoría 2026-07-20)
+--------------------------------------------------------------------------
+Mismo principio que B4-G4: estos dos ítems se marcan OK con el resultado de haberlos
+ejecutado contra volumen o concurrencia real, no con la lectura del código. Un
+endpoint puede verse bien en review y colapsar recién con datos reales — es la
+misma clase de falla silenciosa que un chequeo estático no agarra (Calibre H-1: el
+build pasaba TODOS los chequeos estáticos con el cliente muerto).
+
+  N+1 en listados con relaciones (PERF-4) [EJECUTABLE]:
+    Activar el log de queries del ORM/driver (log de Prisma, pg_stat_statements, o
+    el logger de la DB) durante UNA request a un listado con datos relacionados.
+    Contar las queries emitidas con N ítems (ej. 10) y de nuevo con más ítems (ej.
+    50). ESPERADO: el conteo se mantiene aprox. constante (1-2 queries), NO crece
+    proporcional a N. Un conteo que escala con N = FALLA, aunque el endpoint
+    responda rápido con pocos datos en dev — el propio patrón lo advierte: "funciona
+    con 5 ítems en dev, colapsa con 5000 en prod".
+  Connection pooling bajo concurrencia (PERF-8, si el deploy es serverless)
+  [EJECUTABLE]:
+    Disparar un burst real de requests concurrentes (20-50 en paralelo, no
+    secuenciales) contra un endpoint que toca la DB. ESPERADO: sin errores de "too
+    many connections" ni caídas. Si el proveedor expone conexiones activas (panel
+    de Supabase/Neon/etc.), confirmar que no escalan 1:1 con las requests en vuelo.
 
 
 TESTS
