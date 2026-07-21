@@ -353,6 +353,17 @@ nunca corridos por M14 formal — no confundir con propuestas ya evaluadas)
   1 ocurrencia viva (`M8-6_gate3.md`) corregida, con la remisión a la propuesta
   retirada arreglada. gmao-web queda CERRADO: 5 hallazgos originales + 2 de la
   corrida formal, todos resueltos.
+- baldosa-web\_webbing\INCIDENTES_M14.md — NUEVO (2026-07-20). Stress test final
+  pre-corte 21/7: arquetipo #5 (Autoridad/Contenido, PRIMER #5 — elegido por cero
+  usos), pregunta única = ¿CDL-1 deriva esqueletos de verdad o vuelve al default
+  del audit cruzado? RESULTADO: derivó de verdad (ver baldosa-web/_webbing/
+  10_AUDITORIA_ESQUELETO.md). GATE 1 ✅ · GATE 2 ✅ · GATE 3 ⚠️ PASA CON AJUSTES ·
+  GATE 4 no cruzado (NO APROBABLE, práctica). 4 hallazgos (H-1 Media: clase
+  INC-4 Cursor reaparecida y cazada EN corrida — propuesta de regla SVG-text;
+  H-2 Baja: método panel — scroll/keys; H-3 Baja: freeze Chrome real sin causa
+  confirmada; H-4 Media: LIMA = corrida huérfana sin persistencia, build perdido
+  en scratchpad) + 6 wins. SIN corrida formal de M14 aún — no se abrió ronda 2
+  por instrucción del humano (ningún hallazgo Crítico).
 
 --------------------------------------------------------------------------------
 CORRIDA — SAVIA (2026-07-17). Cliente de práctica: ecommerce de cosmética
