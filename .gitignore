@@ -16,3 +16,7 @@ desktop.ini
 *.tmp
 *.bak
 *.log
+
+# --- Bundles generados ---
+# El .skill empaquetado se genera desde el fuente, no se versiona
+*.skill

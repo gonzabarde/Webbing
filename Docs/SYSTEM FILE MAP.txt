@@ -11,7 +11,7 @@ existencia del archivo y SKILL.md §3 para el path canónico; este árbol se cor
 NOTA DE PATHS (corregida 2026-07-19)
 -------------
 En SKILL.md, la columna Path de módulos bajo NIVELES/ INCLUYE el prefijo
-`NIVELES/` completo (ej. `NIVELES/NIVEL 1/Agency_OS_M0_...`). Los paths de
+`NIVELES/` completo (ej. `NIVELES/NIVEL 1/M0_...`). Los paths de
 SKILL.md §3 se copian tal cual: son literales, no relativos a NIVELES/.
 BACKEND/ vive en la raíz del skill, NO dentro de NIVELES/.
 
@@ -66,7 +66,7 @@ Webbing/                          ← raíz del skill (~/.claude/skills/webbing/
 └── NIVELES/
     │
     ├── NIVEL 1/                  ← Capa 1 — Estrategia
-    │   ├── Agency_OS_M0_Discovery_Research_v3_DEEP.txt      (M0)
+    │   ├── M0_Discovery_Research_v3_DEEP.txt                (M0)
     │   ├── M1_Positioning_System_DEEP_v3.txt                (M1)
     │   ├── M2_Brand_Translation_System_DEEP_v3.txt          (M2)
     │   ├── M3_Typography_Semiotics_System_DEEP_v3.txt       (M3)
@@ -88,7 +88,7 @@ Webbing/                          ← raíz del skill (~/.claude/skills/webbing/
     │
     ├── NIVEL 4/                  ← Capa 4 — Ejecución
     │   ├── M6_Agency_Process_DEEP_v3.txt                    (M6)
-    │   ├── Agency_OS_M7_Decision_Compression_Engine_DEEP_v3.txt  (M7)
+    │   ├── M7_Decision_Compression_Engine_DEEP_v3.txt       (M7)
     │   ├── M8/
     │   │   ├── M8_Overview_Technical_Execution_System_v2.txt
     │   │   ├── M8_1_Technical_Architecture_Engine_v2.txt
@@ -106,7 +106,7 @@ Webbing/                          ← raíz del skill (~/.claude/skills/webbing/
     │   │   ├── M9_5_Nextjs_Playbook_v2.txt
     │   │   ├── M9_6_Tailwind_Playbook_v2.txt
     │   │   ├── M9_7_Launch_Patterns_v2.txt
-    │   │   └── M9_8_Signature_Pattern_Library_v2.txt
+    │   │   └── M9_8_Signature_Operating_System_v2.txt
     │   └── M10/
     │       └── M10_Production_Operating_System_v2.txt         (M10)
     │

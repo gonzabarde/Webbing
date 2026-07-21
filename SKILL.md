@@ -114,7 +114,7 @@ Base: `NIVELES/` (relativo a la raíz del skill). Nota: `NEGOCIO/` es subcarpeta
 
 | Módulo | Path |
 |--------|------|
-| M0 | `NIVELES/NIVEL 1/Agency_OS_M0_Discovery_Research_v3_DEEP.txt` |
+| M0 | `NIVELES/NIVEL 1/M0_Discovery_Research_v3_DEEP.txt` |
 | M1 | `NIVELES/NIVEL 1/M1_Positioning_System_DEEP_v3.txt` |
 | M2 | `NIVELES/NIVEL 1/M2_Brand_Translation_System_DEEP_v3.txt` |
 | M3 | `NIVELES/NIVEL 1/M3_Typography_Semiotics_System_DEEP_v3.txt` |
@@ -129,7 +129,7 @@ Base: `NIVELES/` (relativo a la raíz del skill). Nota: `NEGOCIO/` es subcarpeta
 | CDL-4 | `NIVELES/NIVEL 3/CDL_4_Creative_Quality_Engine_v1.txt` |
 | CDL-5 | `NIVELES/NIVEL 3/CDL_5_Executive_Creative_Director_v1.txt` |
 | M6 | `NIVELES/NIVEL 4/M6_Agency_Process_DEEP_v3.txt` |
-| M7 | `NIVELES/NIVEL 4/Agency_OS_M7_Decision_Compression_Engine_DEEP_v3.txt` |
+| M7 | `NIVELES/NIVEL 4/M7_Decision_Compression_Engine_DEEP_v3.txt` |
 | M8 overview | `NIVELES/NIVEL 4/M8/M8_Overview_Technical_Execution_System_v2.txt` |
 | M8.1–M8.6 | `NIVELES/NIVEL 4/M8/M8_[1-6]_*.txt` |
 | M9 overview | `NIVELES/NIVEL 4/M9/V2/M9_Overview_Technical_Pattern_Library_v2.txt` |
